@@ -7,6 +7,7 @@ const useComponentVisible = () => {
 
   useEffect(() => {
     const handleClick = (e: globalThis.MouseEvent) => {
+      e.stopPropagation()
       if (!ref.current || !e.target) {
         return
       }

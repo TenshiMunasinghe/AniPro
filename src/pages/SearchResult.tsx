@@ -5,7 +5,8 @@ import _ from 'lodash'
 
 import { currentYear } from '../client'
 import Card from '../components/Card'
-import Dropdown from '../components/Dropdown'
+import Select from '../components/Select'
+import ScrollButton from '../components/ScrollButton'
 
 interface Props {
   searchText: string
@@ -19,7 +20,7 @@ const createFilterParam = (filterOption: string, value: string[] | string) => {
 }
 
 const filterOptions = {
-  genre: {
+  genres: {
     options: [
       'Action',
       'Adventure',
@@ -97,7 +98,7 @@ const filterOptions = {
 }
 
 type FilterState = {
-  genre: string[]
+  genres: typeof filterOptions.genres.options
   year: string
   season: string
   format: string[]
@@ -120,7 +121,8 @@ type SortBy =
   | 'START_DATE_DESC'
 
 const initialState: FilterState = {
-  genre: ['fantasy', 'drama'],
+  // first letter of genres must be capital
+  genres: ['Fantasy', 'Drama'],
   year: '2020',
   season: '',
   format: [],
@@ -132,16 +134,15 @@ const initialState: FilterState = {
 const SearchResult = ({ searchText }: Props) => {
   const [filterState, setFilterState] = useState(initialState)
   const [sortBy, setSortBy] = useState('TRENDING_DESC')
-  console.log(filterState)
 
-  const { genre, year, season, format, status, country, source } = filterState
+  const { genres, year, season, format, status, country, source } = filterState
 
   const query = gql`
   {
   Page(page: 1, perPage: 10){
     media
     (
-      ${createFilterParam('genre_in', genre)}
+      ${createFilterParam('genre_in', genres)}
       ${createFilterParam('seasonYear', year)}
       ${createFilterParam('season', season)}
       ${createFilterParam('format', format)}
@@ -192,12 +193,13 @@ const SearchResult = ({ searchText }: Props) => {
     <Wrapper>
       <DropDowns>
         {dropDowns.map(d => (
-          <Dropdown
+          <Select
             key={d.key}
             options={d.options}
             isMulti={d.isMulti}
             onChange={d.onChange}
             selected={filterState[d.key as FilterStateKeys]}
+            name={d.key}
           />
         ))}
       </DropDowns>
@@ -217,6 +219,7 @@ const SearchResult = ({ searchText }: Props) => {
           ))}
         </Slider>
       )}
+      <ScrollButton />
     </Wrapper>
   )
 }
@@ -231,21 +234,9 @@ const DropDowns = styled.div`
   flex-wrap: wrap;
 `
 
-const Heading = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-`
-
 const Slider = styled.div`
   display: Grid;
-  height: 25rem;
-  overflow-y: scroll;
-  white-space: nowrap;
-  /* background: rgba(255, 255, 255, 0.08); */
-  border: solid 2px rgba(255, 255, 255, 0.16);
   padding-top: 1rem;
-  border-radius: 1rem;
 `
 
 export default SearchResult

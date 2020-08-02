@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 export const convertFromSeconds = (seconds: number) => {
   const minutes = Math.floor(seconds / 60)
   const hours = Math.floor(seconds / 3600)
@@ -13,3 +15,5 @@ export const convertFromSeconds = (seconds: number) => {
     return `${seconds} seconds`
   }
 }
+
+export const toStartCase = (str: string) => _.startCase(_.lowerCase(str))

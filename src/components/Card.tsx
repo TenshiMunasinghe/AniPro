@@ -81,8 +81,6 @@ const Wrapper = styled.div`
   grid-template-columns: auto 1fr;
   background: #313131;
   border-radius: 0.8rem;
-  width: 90%;
-  margin: auto;
   margin-bottom: 1rem;
   padding: 1rem;
 `
