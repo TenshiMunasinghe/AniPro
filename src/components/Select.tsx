@@ -6,14 +6,14 @@ import useComponentVisible from '../hooks/useComponentVisible'
 import { toStartCase } from '../helper'
 
 interface Props {
-  onChange: (state: string | string[]) => void
+  onChange: (state: string | string[] | null) => void
   isMulti?: boolean
   options: {
     label: string
     value: string
   }[]
   defaultValue?: string | string[]
-  selected: string | string[]
+  selected: string | string[] | null
   name: string
 }
 
@@ -43,6 +43,10 @@ const Select = ({
 
   const handleChange = (value: string) => {
     if (isMulti) {
+      if (selected === null) {
+        onChange([value])
+        return
+      }
       const next = [...(selected as string[])]
       if (next.includes(value)) {
         const i = next.indexOf(value)
@@ -52,7 +56,7 @@ const Select = ({
       }
       onChange(next)
     } else {
-      onChange(selected === value ? '' : value)
+      onChange(selected === value ? null : value)
     }
   }
 
@@ -67,7 +71,7 @@ const Select = ({
   }
 
   const isSelected = (val: string) =>
-    isMulti ? selected.includes(val) : selected === val
+    selected !== null && isMulti ? selected.includes(val) : selected === val
 
   return (
     <Wrapper>
@@ -77,12 +81,13 @@ const Select = ({
           ref={selectedRef as RefObject<HTMLDivElement>}
           onClick={focusInput}>
           <Input
-            placeholder={selected.length === 0 ? 'Any' : ''}
+            placeholder={selected?.length === 0 ? 'Any' : ''}
             value={inputState}
             onChange={e => setInputState(e.target.value)}
             ref={inputRef}
           />
-          {selected.length !== 0 && (
+
+          {selected !== null && selected.length !== 0 && (
             <SelectedWrapper showSelected={!isSelectedVisible}>
               {isMulti ? (
                 <div>
@@ -96,12 +101,14 @@ const Select = ({
               )}
             </SelectedWrapper>
           )}
-          {selected.length !== 0 ? (
+
+          {selected !== null && selected.length !== 0 ? (
             <AiOutlineClose onClick={resetSelect} />
           ) : (
             <AiOutlineDown />
           )}
         </DropdownHeader>
+
         <Options showOptions={isDropdownVisible}>
           {options
             .filter(

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { useQuery, gql } from '@apollo/client'
 import _ from 'lodash'
@@ -7,16 +7,12 @@ import { currentYear } from '../client'
 import Card from '../components/Card'
 import Select from '../components/Select'
 import ScrollButton from '../components/ScrollButton'
+import CardLoading from '../components/CardLoading'
+import useSkip from '../hooks/useSkip'
+import useInfiniteScroll from '../hooks/useInfiniteScroll'
 
 interface Props {
   searchText: string
-}
-
-const imageSize = 'extraLarge'
-
-const createFilterParam = (filterOption: string, value: string[] | string) => {
-  const val = typeof value === 'object' ? JSON.stringify(value) : value
-  return value.length > 0 ? `${filterOption}: ${val}` : ''
 }
 
 const filterOptions = {
@@ -46,7 +42,7 @@ const filterOptions = {
   },
 
   year: {
-    options: _.range(1970, currentYear + 1).map(num => num.toString()),
+    options: _.range(1970, currentYear + 1).map(y => y.toString()),
     isMulti: false,
   },
 
@@ -97,16 +93,6 @@ const filterOptions = {
   },
 }
 
-type FilterState = {
-  genres: typeof filterOptions.genres.options
-  year: string
-  season: string
-  format: string[]
-  status: string
-  country: string
-  source: string
-}
-
 type FilterStateKeys = keyof FilterState
 
 type SortBy =
@@ -120,35 +106,36 @@ type SortBy =
   | 'START_DATE'
   | 'START_DATE_DESC'
 
+type FilterState = {
+  genres: string[] | null
+  year: string | null
+  season: string | null
+  format: string[] | null
+  status: string | null
+  country: string | null
+  source: string | null
+}
+
 const initialState: FilterState = {
   // first letter of genres must be capital
   genres: ['Fantasy', 'Drama'],
-  year: '2020',
-  season: '',
-  format: [],
-  status: '',
-  country: '',
-  source: '',
+  year: null,
+  season: null,
+  format: null,
+  status: null,
+  country: null,
+  source: null,
 }
 
-const SearchResult = ({ searchText }: Props) => {
-  const [filterState, setFilterState] = useState(initialState)
-  const [sortBy, setSortBy] = useState('TRENDING_DESC')
+const imageSize = 'extraLarge'
 
-  const { genres, year, season, format, status, country, source } = filterState
-
-  const query = gql`
-  {
-  Page(page: 1, perPage: 10){
-    media
-    (
-      ${createFilterParam('genre_in', genres)}
-      ${createFilterParam('seasonYear', year)}
-      ${createFilterParam('season', season)}
-      ${createFilterParam('format', format)}
-      ${createFilterParam('search', searchText)}
-      sort: ${sortBy}
-    ) {
+const animeQuery = gql`
+query animeQuery($pageNumber: Int, $genres: [String], $year: Int, $season: MediaSeason, $format: MediaFormat, $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort]) {
+  Page(page: $pageNumber, perPage: 10) {
+    pageInfo {
+      lastPage
+    }
+    media(genre_in: $genres, seasonYear: $year, season: $season, format: $format, status: $status, countryOfOrigin: $country, source: $source, search: $searchText, sort: $sortBy) {
       id
       title {
         romaji
@@ -169,13 +156,55 @@ const SearchResult = ({ searchText }: Props) => {
 }
 `
 
-  const { loading, data, error } = useQuery(query)
+const SearchResult = ({ searchText }: Props) => {
+  const [filterState, setFilterState] = useState(initialState)
+  const [sortBy, setSortBy] = useState<SortBy>('POPULARITY_DESC')
+  const [animes, setAnimes] = useState<any[]>([])
+  const [pageNumber, setPageNumber] = useState(1)
+  const { loading, data, error } = useQuery(animeQuery, {
+    variables: {
+      ...Object.fromEntries(
+        Object.entries(filterState).filter(([k, v]) => v !== null)
+      ),
+      searchText: searchText ? searchText : null,
+      sortBy,
+      pageNumber,
+    },
+  })
 
+  const lastPage = useRef<null | number>(null)
+  // set lastPage as it's fetched
+  useEffect(() => {
+    if (loading || error) {
+      return
+    }
+    lastPage.current = data.Page.pageInfo.lastPage
+  }, [data, loading, error])
+
+  //add animes to the array as it's fetched while filtering the duplicates by id
+  useSkip(() => {
+    if (loading || error) {
+      return
+    }
+    setAnimes(prev => {
+      const next = [...prev]
+      next.push(...data.Page.media)
+      return _.uniqBy(next, 'id')
+    })
+  }, [data])
+
+  //increment the pageNumber as the user scrolls down to the bottom of the page which triggers new fetching
+  useInfiniteScroll(() => {
+    if ((lastPage.current && pageNumber >= lastPage.current) || loading) return
+    setPageNumber(prev => prev + 1)
+  })
+
+  //generates handy object for mapping to the Select component
   const dropDowns = useMemo(
     () =>
       Object.entries(filterOptions).map(([key, value]) => ({
         key,
-        onChange: (value: string | string[]) =>
+        onChange: (value: string | string[] | null) =>
           setFilterState(prev => ({
             ...prev,
             [key]: value,
@@ -195,30 +224,38 @@ const SearchResult = ({ searchText }: Props) => {
         {dropDowns.map(d => (
           <Select
             key={d.key}
-            options={d.options}
-            isMulti={d.isMulti}
             onChange={d.onChange}
+            isMulti={d.isMulti}
+            options={d.options}
             selected={filterState[d.key as FilterStateKeys]}
             name={d.key}
           />
         ))}
       </DropDowns>
-      {!loading && !error && (
-        <Slider>
-          {data.Page.media.map((m: any) => (
-            <Card
-              key={m.id}
-              id={m.id}
-              image={m.coverImage[imageSize]}
-              title={m.title}
-              genres={m.genres}
-              status={m.status}
-              nextAiring={m.nextAiringEpisode}
-              description={m.description}
-            />
-          ))}
-        </Slider>
-      )}
+      <Slider>
+        <>
+          {animes.length > 0 &&
+            animes.map((m: any) => (
+              <Card
+                key={m.id}
+                id={m.id}
+                image={m.coverImage[imageSize]}
+                title={m.title}
+                genres={m.genres}
+                status={m.status}
+                nextAiring={m.nextAiringEpisode}
+                description={m.description}
+              />
+            ))}
+        </>
+        {loading && lastPage.current && pageNumber <= lastPage.current && (
+          <>
+            <CardLoading />
+            <CardLoading />
+            <CardLoading />
+          </>
+        )}
+      </Slider>
       <ScrollButton />
     </Wrapper>
   )

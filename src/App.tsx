@@ -36,7 +36,7 @@ const App = () => {
 }
 
 const Wrapper = styled.div`
-  margin-top: ${HEADER_HEIGHT}rem;
+  padding-top: ${HEADER_HEIGHT}rem;
 `
 
 export default App
