@@ -6,14 +6,14 @@ import useComponentVisible from '../hooks/useComponentVisible'
 import { toStartCase } from '../helper'
 
 interface Props {
-  onChange: (state: string | string[] | null) => void
+  onChange: (state: string | string[]) => void
   isMulti?: boolean
   options: {
     label: string
     value: string
   }[]
   defaultValue?: string | string[]
-  selected: string | string[] | null
+  selected: string | string[]
   name: string
 }
 
@@ -42,22 +42,19 @@ const Select = ({
   }
 
   const handleChange = (value: string) => {
-    if (isMulti) {
-      if (selected === null) {
-        onChange([value])
-        return
-      }
-      const next = [...(selected as string[])]
-      if (next.includes(value)) {
-        const i = next.indexOf(value)
-        next.splice(i, 1)
-      } else {
-        next.push(value)
-      }
-      onChange(next)
-    } else {
-      onChange(selected === value ? null : value)
+    setInputState('')
+    if (!isMulti) {
+      onChange(value === selected ? '' : value)
+      return
     }
+    const next = [...(selected as string[])]
+    if (next.includes(value)) {
+      const i = next.indexOf(value)
+      next.splice(i, 1)
+    } else {
+      next.push(value)
+    }
+    onChange(next)
   }
 
   const resetSelect = (e: React.MouseEvent) => {
@@ -71,7 +68,7 @@ const Select = ({
   }
 
   const isSelected = (val: string) =>
-    selected !== null && isMulti ? selected.includes(val) : selected === val
+    isMulti ? selected.includes(val) : selected === val
 
   return (
     <Wrapper>
@@ -81,13 +78,13 @@ const Select = ({
           ref={selectedRef as RefObject<HTMLDivElement>}
           onClick={focusInput}>
           <Input
-            placeholder={selected?.length === 0 ? 'Any' : ''}
+            placeholder={selected.length === 0 ? 'Any' : ''}
             value={inputState}
             onChange={e => setInputState(e.target.value)}
             ref={inputRef}
           />
 
-          {selected !== null && selected.length !== 0 && (
+          {selected.length !== 0 && (
             <SelectedWrapper showSelected={!isSelectedVisible}>
               {isMulti ? (
                 <div>
@@ -102,7 +99,7 @@ const Select = ({
             </SelectedWrapper>
           )}
 
-          {selected !== null && selected.length !== 0 ? (
+          {selected.length !== 0 ? (
             <AiOutlineClose onClick={resetSelect} />
           ) : (
             <AiOutlineDown />
@@ -118,7 +115,7 @@ const Select = ({
             )
             .map(o => (
               <Option key={o.value} onClick={() => handleChange(o.value)}>
-                {toStartCase(o.label)}
+                <span>{toStartCase(o.label)}</span>
                 <CheckIconWrapper showIcon={isSelected(o.value)}>
                   <AiOutlineCheck />
                 </CheckIconWrapper>
@@ -140,7 +137,7 @@ const Label = styled.h5`
 `
 
 const Dropdown = styled.div`
-  width: 8rem;
+  width: 10rem;
   position: relative;
 `
 const DropdownHeader = styled.div`
@@ -180,7 +177,7 @@ const SelectedItem = styled.div`
 const Options = styled.div<{ showOptions: boolean }>`
   z-index: 999;
   position: absolute;
-  top: 3rem;
+  top: 2.5rem;
   opacity: 1;
   transition: all 0.2s ease-in-out;
   transform: translateY(0.3rem);
@@ -198,19 +195,25 @@ const Options = styled.div<{ showOptions: boolean }>`
     `}
 `
 const Option = styled.div`
-  width: 100%;
+  min-width: 8rem;
   position: relative;
   z-index: 999;
   padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
 
   &:hover {
     background: #222;
-    color: #99ccff;
+    span {
+      color: #99ccff;
+    }
   }
 `
 
 const CheckIconWrapper = styled.span<{ showIcon: boolean }>`
-  display: ${({ showIcon }) => (showIcon ? 'inline-flex' : 'none')};
+  display: inline-flex;
+  opacity: ${({ showIcon }) => (showIcon ? '1' : '0')};
   vertical-align: middle;
   margin-left: 0.2rem;
   svg {

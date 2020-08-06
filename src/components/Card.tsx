@@ -79,7 +79,7 @@ const Card = ({
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  background: #313131;
+  background: #232323;
   border-radius: 0.8rem;
   margin-bottom: 1rem;
   padding: 1rem;
@@ -160,4 +160,4 @@ const Description = styled.p<{ isHovered: boolean }>`
   }
 `
 
-export default Card
+export default React.memo(Card)
