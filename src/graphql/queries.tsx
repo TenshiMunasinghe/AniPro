@@ -47,20 +47,22 @@ export type QueryVar = {
   status?: string
   country?: string
   source?: string
-  searchText?: string
+  searchText: string | null
   sortBy: string
 }
+
+export const baseUrl = 'https://graphql.anilist.co'
 
 export const imageSize = 'extraLarge'
 
 export const getsearchResult = `
-query animeQuery($page: Int, $genres: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort]) {
+query animeQuery($page: Int, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort]) {
   Page(page: $page, perPage: 10) {
     pageInfo {
       currentPage
       hasNextPage
     }
-    media(genre_in: $genres, seasonYear: $year, season: $season, format_in: $format, status: $status, countryOfOrigin: $country, source: $source, search: $searchText, sort: $sortBy) {
+    media(genre_in: $genres, genre_not_in: ["Hentai"], tag_in: $tags, seasonYear: $year, season: $season, format_in: $format, status: $status, countryOfOrigin: $country, source: $source, search: $searchText, sort: $sortBy, format_not_in: [MANGA, NOVEL, ONE_SHOT]) {
       id
       title {
         romaji

@@ -1,27 +1,31 @@
-import React, { useState, useMemo, useEffect, useRef } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 import ky from 'ky'
+import produce from 'immer'
 
 import {
   QueryData,
   QueryVar,
   getsearchResult,
   imageSize,
+  baseUrl,
 } from '../graphql/queries'
-import Card from '../components/Card'
 import Select from '../components/Select'
+import Result from '../components/Result'
 import ScrollButton from '../components/ScrollButton'
-import CardLoading from '../components/CardLoading'
 import useInfiniteScroll from '../hooks/useInfiniteScroll'
-import { filterOptions, SortBy } from '../filterOptions'
+import { filterOptions, SortBy } from '../filterOptions/index'
+import { toStartCase } from '../helper'
+import { countryCode, Countries } from '../filterOptions/countryCode'
 
 interface Props {
   searchText: string
 }
 
-type FilterState = {
+export type FilterState = {
   genres: string[]
+  tags: string[]
   year: string
   season: string
   format: string[]
@@ -32,9 +36,10 @@ type FilterState = {
 
 type FilterStateKeys = keyof FilterState
 
-const initialState: FilterState = {
+export const initialState: FilterState = {
   // first letter of genres must be capital
   genres: ['Fantasy', 'Drama'],
+  tags: [],
   year: '',
   season: '',
   format: [],
@@ -50,24 +55,28 @@ const SearchResult = ({ searchText }: Props) => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
-  // TODO: add country code logic
-  // TODO: refactor nulls to [] and ''
-  const queryVariables = useMemo(
+  // TODO: add sorting logic
+  // TODO: use recoil
+  const queryVariables: QueryVar = useMemo(
     () => ({
       ...Object.fromEntries(
-        Object.entries(filterState).filter(([key, value]) => value.length > 0)
+        Object.entries(filterState).filter(([_, value]) => value.length > 0)
       ),
       sortBy,
+      searchText: searchText ? searchText : null,
+      country: countryCode[filterState.country as Countries],
     }),
-    [filterState, sortBy]
+    [filterState, sortBy, searchText]
   )
 
   useEffect(() => {
+    setData(null)
+    window.scrollTo(0, 0)
     const fetchData = async () => {
       try {
         setLoading(true)
         const res: { data: QueryData } = await ky
-          .post('https://graphql.anilist.co', {
+          .post(baseUrl, {
             json: {
               query: getsearchResult,
               variables: queryVariables,
@@ -95,7 +104,7 @@ const SearchResult = ({ searchText }: Props) => {
       try {
         setLoading(true)
         const res: { data: QueryData } = await ky
-          .post('https://graphql.anilist.co', {
+          .post(baseUrl, {
             json: {
               query: getsearchResult,
               variables: {
@@ -110,14 +119,13 @@ const SearchResult = ({ searchText }: Props) => {
         }
         setData(prev => {
           if (prev === null) return res.data
-          const next = { ...prev }
-          next.Page.pageInfo.currentPage = res.data.Page.pageInfo.currentPage
-          next.Page.pageInfo.hasNextPage = res.data.Page.pageInfo.hasNextPage
-          next.Page.media = _.uniqBy(
-            [...next.Page.media, ...res.data.Page.media],
-            'id'
-          )
-          return next as QueryData
+          return produce(prev, next => {
+            next.Page.pageInfo = { ...res.data.Page.pageInfo }
+            next.Page.media = _.uniqBy(
+              [...next.Page.media, ...res.data.Page.media],
+              'id'
+            )
+          })
         })
       } catch (e) {
         setError(e)
@@ -134,7 +142,6 @@ const SearchResult = ({ searchText }: Props) => {
       Object.entries(filterOptions).map(([key, value]) => ({
         key,
         onChange: (value: string | string[]) => {
-          setData(null)
           setFilterState(prev => ({
             ...prev,
             [key]: value,
@@ -143,7 +150,7 @@ const SearchResult = ({ searchText }: Props) => {
         isMulti: value.isMulti,
         options: value.options.map(o => ({
           value: o,
-          label: o,
+          label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
         })),
       })),
     []
@@ -163,29 +170,13 @@ const SearchResult = ({ searchText }: Props) => {
           />
         ))}
       </DropDowns>
-      <Slider>
-        {!error &&
-          data &&
-          data.Page.media.map((m: any) => (
-            <Card
-              key={m.id}
-              id={m.id}
-              image={m.coverImage[imageSize]}
-              title={m.title}
-              genres={m.genres}
-              status={m.status}
-              nextAiring={m.nextAiringEpisode}
-              description={m.description}
-            />
-          ))}
-        {loading && (
-          <>
-            <CardLoading />
-            <CardLoading />
-            <CardLoading />
-          </>
-        )}
-      </Slider>
+      {!error && (
+        <Result
+          loading={loading}
+          media={data?.Page.media}
+          setFilterState={setFilterState}
+        />
+      )}
       <ScrollButton />
     </Wrapper>
   )
@@ -200,11 +191,6 @@ const DropDowns = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-`
-
-const Slider = styled.div`
-  display: Grid;
-  padding-top: 1rem;
 `
 
 export default SearchResult

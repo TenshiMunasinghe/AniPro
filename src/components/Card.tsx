@@ -1,7 +1,9 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, Dispatch, SetStateAction } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 import htmlParser from 'react-html-parser'
+
+import { FilterState, initialState } from '../pages/SearchResult'
 
 interface Props {
   id: number
@@ -15,8 +17,9 @@ interface Props {
   nextAiring: {
     timeUntilAiring: number
     episode: number
-  }
+  } | null
   description: string
+  setFilterState: Dispatch<SetStateAction<FilterState>>
 }
 
 const Card = ({
@@ -27,6 +30,7 @@ const Card = ({
   nextAiring,
   id,
   description,
+  setFilterState,
 }: Props) => {
   const [isHovered, setIsHovered] = useState(false)
   const hoverHandler = useRef<number>()
@@ -44,6 +48,10 @@ const Card = ({
     setIsHovered(false)
   }
 
+  const handleSetGenre = (genre: string) => {
+    setFilterState({ ...initialState, genres: [genre] })
+  }
+
   return (
     <Wrapper>
       <Image src={image} alt={title.romaji} />
@@ -58,8 +66,10 @@ const Card = ({
         </div>
 
         <Genres>
-          {genres.map((c: string) => (
-            <Genre key={c}>{c}</Genre>
+          {_.uniq(genres).map(genre => (
+            <Genre key={genre} onClick={() => handleSetGenre(genre)}>
+              {genre}
+            </Genre>
           ))}
         </Genres>
 

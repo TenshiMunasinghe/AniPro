@@ -88,13 +88,17 @@ const Select = ({
             <SelectedWrapper showSelected={!isSelectedVisible}>
               {isMulti ? (
                 <div>
-                  <SelectedItem>{toStartCase(selected[0])}</SelectedItem>
+                  <SelectedItem>
+                    {options.find(o => o.value === selected[0])?.label}
+                  </SelectedItem>
                   {selected.length > 1 && (
                     <SelectedItem>+{selected.length - 1}</SelectedItem>
                   )}
                 </div>
               ) : (
-                <SelectedItem>{toStartCase(selected as string)}</SelectedItem>
+                <SelectedItem>
+                  {options.find(o => o.value === selected)?.label}
+                </SelectedItem>
               )}
             </SelectedWrapper>
           )}
@@ -115,7 +119,7 @@ const Select = ({
             )
             .map(o => (
               <Option key={o.value} onClick={() => handleChange(o.value)}>
-                <span>{toStartCase(o.label)}</span>
+                <span>{o.label}</span>
                 <CheckIconWrapper showIcon={isSelected(o.value)}>
                   <AiOutlineCheck />
                 </CheckIconWrapper>

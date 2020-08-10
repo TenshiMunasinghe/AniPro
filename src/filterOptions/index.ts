@@ -1,5 +1,7 @@
-import { currentYear } from './graphql/queries'
+import { currentYear } from '../graphql/queries'
 import _ from 'lodash'
+
+import { tags } from './tags'
 
 export const filterOptions = {
   genres: {
@@ -10,7 +12,6 @@ export const filterOptions = {
       'Drama',
       'Ecchi',
       'Fantasy',
-      'Hentai',
       'Horror',
       'Mahou Shoujo',
       'Mecha',
@@ -27,8 +28,15 @@ export const filterOptions = {
     isMulti: true,
   },
 
+  tags: {
+    options: tags.map(t => t.name),
+    isMulti: true,
+  },
+
   year: {
-    options: _.range(1970, currentYear + 1).map(y => y.toString()),
+    options: _.range(1970, currentYear + 1)
+      .sort((a, b) => b - a)
+      .map(y => y.toString()),
     isMulti: false,
   },
 
@@ -38,18 +46,7 @@ export const filterOptions = {
   },
 
   format: {
-    options: [
-      'TV',
-      'TV_SHORT',
-      'MOVIE',
-      'SPECIAL',
-      'OVA',
-      'ONA',
-      'MUSIC',
-      'MANGA',
-      'NOVEL',
-      'ONE_SHOT',
-    ],
+    options: ['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA', 'MUSIC'],
     isMulti: true,
   },
 
