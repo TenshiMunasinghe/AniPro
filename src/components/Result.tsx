@@ -1,18 +1,16 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import Card from '../components/Card'
 import CardLoading from './CardLoading'
 import { QueryData, imageSize } from '../graphql/queries'
-import { FilterState } from '../pages/SearchResult'
 
 interface Props {
   loading: boolean
   media?: QueryData['Page']['media']
-  setFilterState: Dispatch<SetStateAction<FilterState>>
 }
 
-const Result = ({ loading, media, setFilterState }: Props) => {
+const Result = ({ loading, media }: Props) => {
   return (
     <Slider>
       {media &&
@@ -26,7 +24,6 @@ const Result = ({ loading, media, setFilterState }: Props) => {
             status={m.status}
             nextAiring={m.nextAiringEpisode}
             description={m.description}
-            setFilterState={setFilterState}
           />
         ))}
       {loading && (

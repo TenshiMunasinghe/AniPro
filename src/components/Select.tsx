@@ -206,6 +206,7 @@ const Option = styled.div`
   font-size: 0.8rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   &:hover {
     background: #222;

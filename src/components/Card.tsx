@@ -1,9 +1,10 @@
-import React, { useState, useRef, Dispatch, SetStateAction } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import _ from 'lodash'
 import htmlParser from 'react-html-parser'
+import { useSetRecoilState } from 'recoil'
 
-import { FilterState, initialState } from '../pages/SearchResult'
+import { filterStateAtom, initialFilterState } from '../recoil/atoms'
 
 interface Props {
   id: number
@@ -19,7 +20,6 @@ interface Props {
     episode: number
   } | null
   description: string
-  setFilterState: Dispatch<SetStateAction<FilterState>>
 }
 
 const Card = ({
@@ -30,8 +30,8 @@ const Card = ({
   nextAiring,
   id,
   description,
-  setFilterState,
 }: Props) => {
+  const setFilterState = useSetRecoilState(filterStateAtom)
   const [isHovered, setIsHovered] = useState(false)
   const hoverHandler = useRef<number>()
   const descriptionWithEllipse =
@@ -49,7 +49,7 @@ const Card = ({
   }
 
   const handleSetGenre = (genre: string) => {
-    setFilterState({ ...initialState, genres: [genre] })
+    setFilterState({ ...initialFilterState, genres: [genre] })
   }
 
   return (

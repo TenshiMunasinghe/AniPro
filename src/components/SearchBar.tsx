@@ -1,13 +1,13 @@
-import React, { useState, Dispatch, SetStateAction } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useForm } from 'react-hook-form'
 import { AiOutlineSearch } from 'react-icons/ai'
+import { useSetRecoilState } from 'recoil'
 
-interface Props {
-  setSearchText: Dispatch<SetStateAction<string>>
-}
+import { searchTextAtom } from '../recoil/atoms'
 
-const SearchBar = ({ setSearchText }: Props) => {
+const SearchBar = () => {
+  const setSearchText = useSetRecoilState(searchTextAtom)
   const { register, handleSubmit } = useForm()
   const onSubmit = handleSubmit(data => {
     setSearchText(data.searchText)

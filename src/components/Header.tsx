@@ -1,18 +1,8 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-  useRef,
-} from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import SearchBar from './SearchBar'
 
-interface Props {
-  setSearchText: Dispatch<SetStateAction<string>>
-}
-
-const Header = ({ setSearchText }: Props) => {
+const Header = () => {
   const [isVisible, setIsVisible] = useState(true)
   const lastScroll = useRef(0)
   const wrapperRef = useRef<HTMLElement>(null)
@@ -43,7 +33,7 @@ const Header = ({ setSearchText }: Props) => {
   return (
     <Wrapper isVisible={isVisible} ref={wrapperRef}>
       <Heading>Anime Project</Heading>
-      <SearchBar setSearchText={setSearchText} />
+      <SearchBar />
     </Wrapper>
   )
 }

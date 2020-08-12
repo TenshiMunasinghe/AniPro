@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
   BrowserRouter as Router,
@@ -6,28 +6,29 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
 
 import { HEADER_HEIGHT } from './components/Header'
 import SearchResult from './pages/SearchResult'
 import Header from './components/Header'
 
 const App = () => {
-  const [searchText, setSearchText] = useState('')
-
   return (
-    <Wrapper>
-      <Header setSearchText={setSearchText} />
-      <Router>
-        <Switch>
-          <Route exact path='/'>
-            <Redirect to='/search' />
-          </Route>
-          <Route exact path='/search'>
-            <SearchResult searchText={searchText} />
-          </Route>
-        </Switch>
-      </Router>
-    </Wrapper>
+    <RecoilRoot>
+      <Wrapper>
+        <Header />
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              <Redirect to='/search' />
+            </Route>
+            <Route exact path='/search'>
+              <SearchResult />
+            </Route>
+          </Switch>
+        </Router>
+      </Wrapper>
+    </RecoilRoot>
   )
 }
 

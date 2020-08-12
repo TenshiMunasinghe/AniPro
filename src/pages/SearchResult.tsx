@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import _ from 'lodash'
 import ky from 'ky'
 import produce from 'immer'
+import { useRecoilState, useRecoilValue } from 'recoil'
 
 import {
   QueryData,
   QueryVar,
   getsearchResult,
-  imageSize,
   baseUrl,
 } from '../graphql/queries'
 import Select from '../components/Select'
@@ -18,45 +18,21 @@ import useInfiniteScroll from '../hooks/useInfiniteScroll'
 import { filterOptions, SortBy } from '../filterOptions/index'
 import { toStartCase } from '../helper'
 import { countryCode, Countries } from '../filterOptions/countryCode'
+import {
+  filterStateAtom,
+  FilterStateKeys,
+  searchTextAtom,
+} from '../recoil/atoms'
 
-interface Props {
-  searchText: string
-}
-
-export type FilterState = {
-  genres: string[]
-  tags: string[]
-  year: string
-  season: string
-  format: string[]
-  status: string
-  country: string
-  source: string
-}
-
-type FilterStateKeys = keyof FilterState
-
-export const initialState: FilterState = {
-  // first letter of genres must be capital
-  genres: ['Fantasy', 'Drama'],
-  tags: [],
-  year: '',
-  season: '',
-  format: [],
-  status: '',
-  country: '',
-  source: '',
-}
-
-const SearchResult = ({ searchText }: Props) => {
-  const [filterState, setFilterState] = useState(initialState)
+const SearchResult = () => {
+  const [filterState, setFilterState] = useRecoilState(filterStateAtom)
+  const searchText = useRecoilValue(searchTextAtom)
   const [sortBy, setSortBy] = useState<SortBy>('POPULARITY_DESC')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
   // TODO: add sorting logic
-  // TODO: use recoil
   const queryVariables: QueryVar = useMemo(
     () => ({
       ...Object.fromEntries(
@@ -153,7 +129,7 @@ const SearchResult = ({ searchText }: Props) => {
           label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
         })),
       })),
-    []
+    [setFilterState]
   )
 
   return (
@@ -170,13 +146,7 @@ const SearchResult = ({ searchText }: Props) => {
           />
         ))}
       </DropDowns>
-      {!error && (
-        <Result
-          loading={loading}
-          media={data?.Page.media}
-          setFilterState={setFilterState}
-        />
-      )}
+      {!error && <Result loading={loading} media={data?.Page.media} />}
       <ScrollButton />
     </Wrapper>
   )
