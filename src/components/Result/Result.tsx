@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 
-import Card from '../components/Card'
-import CardLoading from './CardLoading'
-import { QueryData, imageSize } from '../graphql/queries'
+import styles from './Result.module.scss'
+import Card from '../Card/Card'
+import CardLoading from '../CardLoading/CardLoading'
+import { QueryData, imageSize } from '../../graphql/queries'
 
 interface Props {
   loading: boolean
@@ -12,7 +12,7 @@ interface Props {
 
 const Result = ({ loading, media }: Props) => {
   return (
-    <Slider>
+    <div className={styles.slider}>
       {media &&
         media.map((m: QueryData['Page']['media'][number]) => (
           <Card
@@ -33,13 +33,8 @@ const Result = ({ loading, media }: Props) => {
           <CardLoading />
         </>
       )}
-    </Slider>
+    </div>
   )
 }
-
-const Slider = styled.div`
-  display: Grid;
-  padding-top: 1rem;
-`
 
 export default Result

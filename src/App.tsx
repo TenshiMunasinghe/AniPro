@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,32 +7,25 @@ import {
 } from 'react-router-dom'
 import { RecoilRoot } from 'recoil'
 
-import { HEADER_HEIGHT } from './components/Header'
-import SearchResult from './pages/SearchResult'
-import Header from './components/Header'
+import Search from './pages/search/Search'
+import Header from './components/Header/Header'
 
 const App = () => {
   return (
     <RecoilRoot>
-      <Wrapper>
-        <Header />
-        <Router>
-          <Switch>
-            <Route exact path='/'>
-              <Redirect to='/search' />
-            </Route>
-            <Route exact path='/search'>
-              <SearchResult />
-            </Route>
-          </Switch>
-        </Router>
-      </Wrapper>
+      <Header />
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <Redirect to='/search' />
+          </Route>
+          <Route exact path='/search'>
+            <Search />
+          </Route>
+        </Switch>
+      </Router>
     </RecoilRoot>
   )
 }
-
-const Wrapper = styled.div`
-  padding-top: ${HEADER_HEIGHT}rem;
-`
 
 export default App

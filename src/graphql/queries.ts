@@ -1,3 +1,5 @@
+import { SortBy } from '../filterOptions'
+
 const date = new Date()
 const SEASONS = [
   { name: 'SPRING', months: [3, 4, 5] },
@@ -48,7 +50,7 @@ export type QueryVar = {
   country?: string
   source?: string
   searchText: string | null
-  sortBy: string
+  sortBy: SortBy
 }
 
 export const baseUrl = 'https://graphql.anilist.co'

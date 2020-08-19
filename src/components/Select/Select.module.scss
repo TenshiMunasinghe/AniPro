@@ -1,0 +1,53 @@
+.wrapper {
+  margin: 1rem;
+  display: inline-block;
+}
+
+.label {
+  font-size: 0.8rem;
+  margin-bottom: 0.2rem;
+}
+
+.dropdown {
+  width: 10rem;
+  position: relative;
+}
+
+.dropdownHeader {
+  height: 2.5rem;
+  display: grid;
+  grid-template-columns: 85% 1fr;
+  align-items: center;
+  position: relative;
+  z-index: 998;
+  padding: 0.5rem;
+  background: #323232;
+  width: 100%;
+  border-radius: 0.2rem;
+  cursor: pointer;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: inherit;
+}
+
+.selected {
+  display: block;
+  position: absolute;
+  left: 0.5rem;
+  .hide {
+    display: none;
+  }
+}
+
+.selectedItem {
+  display: inline-block;
+  font-size: 0.8rem;
+  background: #525252;
+  padding: 0.3rem;
+  border-radius: 0.1rem;
+  margin-right: 0.3rem;
+}

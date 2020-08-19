@@ -2,6 +2,7 @@ import { currentYear } from '../graphql/queries'
 import _ from 'lodash'
 
 import { tags } from './tags'
+import { toStartCase } from '../helper'
 
 export const filterOptions = {
   genres: {
@@ -76,13 +77,21 @@ export const filterOptions = {
   },
 }
 
-export type SortBy =
-  | 'TRENDING_DESC'
-  | 'POPULARITY_DESC'
-  | 'SCORE_DESC'
-  | 'TITLE_ROMAJI'
-  | 'FAVOURITES_DESC'
-  | 'EPISODES'
-  | 'EPISODES_DESC'
-  | 'START_DATE'
-  | 'START_DATE_DESC'
+const SORT_BY = [
+  'TRENDING_DESC',
+  'POPULARITY_DESC',
+  'SCORE_DESC',
+  'TITLE_ROMAJI',
+  'FAVOURITES_DESC',
+  'START_DATE_DESC',
+] as const
+
+export const sortByOptions = SORT_BY.map(s => ({
+  value: s,
+  label:
+    s.split('_')?.slice(0, -1).length > 0
+      ? toStartCase(s.split('_')?.slice(0, -1)?.join())
+      : toStartCase(s),
+}))
+
+export type SortBy = typeof SORT_BY[number]

@@ -1,0 +1,24 @@
+@import '../../globalStyles/variables.scss';
+
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  padding: 0 1rem;
+  align-items: center;
+  border-bottom: solid 0.3px #aab5bc;
+  height: $header-height;
+  background: #121212;
+  transition: all 0.2s ease-in-out;
+  z-index: 999;
+  top: -$header-height;
+
+  &.visible {
+    top: 0;
+  }
+}
+
+.heading {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}

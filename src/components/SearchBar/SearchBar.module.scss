@@ -1,0 +1,41 @@
+.form {
+  display: flex;
+  align-items: center;
+  background: #121212;
+  border-left: solid 0.5px #d1d1d1;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  height: 50%;
+  padding: 0 1rem;
+  &.focused {
+    border-color: #99ccff;
+  }
+  * {
+    height: 100%;
+    background: inherit;
+    color: inherit;
+    border: none;
+    font-family: inherit;
+    font-size: 0.9rem;
+  }
+}
+
+.searchField {
+  padding: 0.2rem 0;
+}
+
+.submitButton {
+  background: #313131;
+  padding: 0 0.5rem;
+  * {
+    background: transparent;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.32);
+  }
+
+  &:active {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}

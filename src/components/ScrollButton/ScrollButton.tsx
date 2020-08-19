@@ -1,10 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
-import { AiFillCaretUp } from 'react-icons/ai'
+import { FaCaretUp } from 'react-icons/fa'
+
+import styles from './ScrollButton.module.scss'
 
 const ScrollButton = () => {
   return (
-    <Button
+    <button
+      className={styles.button}
       onClick={() => {
         const onClickHandler = setInterval(() => {
           const pos = window.pageYOffset
@@ -15,22 +17,9 @@ const ScrollButton = () => {
           }
         }, 1)
       }}>
-      <AiFillCaretUp />
-    </Button>
+      <FaCaretUp size='1.2rem' />
+    </button>
   )
 }
-
-const Button = styled.button`
-  background: #222;
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  border: none;
-  padding: 1rem;
-
-  &:hover {
-    background: #323232;
-  }
-`
 
 export default ScrollButton

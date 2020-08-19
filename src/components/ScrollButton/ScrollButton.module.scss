@@ -1,0 +1,12 @@
+.button {
+  background: #232323;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border: none;
+  padding: 1rem;
+
+  &:hover {
+    background: #323232;
+  }
+}

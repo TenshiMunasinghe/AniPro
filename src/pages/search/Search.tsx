@@ -1,38 +1,39 @@
 import React, { useState, useMemo, useEffect } from 'react'
-import styled from 'styled-components'
 import _ from 'lodash'
 import ky from 'ky'
 import produce from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
 
+import styles from './Search.module.scss'
 import {
   QueryData,
   QueryVar,
   getsearchResult,
   baseUrl,
-} from '../graphql/queries'
-import Select from '../components/Select'
-import Result from '../components/Result'
-import ScrollButton from '../components/ScrollButton'
-import useInfiniteScroll from '../hooks/useInfiniteScroll'
-import { filterOptions, SortBy } from '../filterOptions/index'
-import { toStartCase } from '../helper'
-import { countryCode, Countries } from '../filterOptions/countryCode'
+} from '../../graphql/queries'
+import Select from '../../components/Select/Select'
+import Result from '../../components/Result/Result'
+import ScrollButton from '../../components/ScrollButton/ScrollButton'
+import useInfiniteScroll from '../../hooks/useInfiniteScroll'
+import { filterOptions, SortBy, sortByOptions } from '../../filterOptions/index'
+import { toStartCase } from '../../helper'
+import { countryCode, Countries } from '../../filterOptions/countryCode'
+import SimpleSelect from '../../components/SimpleSelect/SimpleSelect'
 import {
   filterStateAtom,
   FilterStateKeys,
   searchTextAtom,
-} from '../recoil/atoms'
+} from '../../recoil/atoms'
+import NotFound from '../../components/NotFound/NotFound'
 
 const SearchResult = () => {
   const [filterState, setFilterState] = useRecoilState(filterStateAtom)
   const searchText = useRecoilValue(searchTextAtom)
-  const [sortBy, setSortBy] = useState<SortBy>('POPULARITY_DESC')
+  const [sortBy, setSortBy] = useState<SortBy>('TRENDING_DESC')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
-  // TODO: add sorting logic
   const queryVariables: QueryVar = useMemo(
     () => ({
       ...Object.fromEntries(
@@ -73,7 +74,7 @@ const SearchResult = () => {
   }, [queryVariables])
 
   useInfiniteScroll(() => {
-    if (!data || !data.Page.pageInfo.hasNextPage || loading) {
+    if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
       return
     }
     const loadMore = async () => {
@@ -132,9 +133,13 @@ const SearchResult = () => {
     [setFilterState]
   )
 
+  const sortByOnChange = (value: string | string[]) => {
+    setSortBy(value as SortBy)
+  }
+
   return (
-    <Wrapper>
-      <DropDowns>
+    <div className={styles.wrapper}>
+      <div className={styles.dropdowns}>
         {dropDowns.map(d => (
           <Select
             key={d.key}
@@ -145,22 +150,25 @@ const SearchResult = () => {
             name={d.key}
           />
         ))}
-      </DropDowns>
-      {!error && <Result loading={loading} media={data?.Page.media} />}
+      </div>
+
+      <div className={styles.sortBy}>
+        <SimpleSelect
+          onChange={sortByOnChange}
+          isMulti={false}
+          options={sortByOptions}
+          selected={sortBy}
+        />
+      </div>
+
+      {loading || (!error && data && data.Page.media.length > 0) ? (
+        <Result loading={loading} media={data?.Page.media} />
+      ) : (
+        <NotFound />
+      )}
       <ScrollButton />
-    </Wrapper>
+    </div>
   )
 }
-
-const Wrapper = styled.div`
-  padding-top: 2rem;
-  padding: 0 8rem;
-`
-
-const DropDowns = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`
 
 export default SearchResult

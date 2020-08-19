@@ -1,0 +1,23 @@
+.wrapper {
+  position: relative;
+  * {
+    font-size: 0.8rem;
+  }
+}
+
+.dropdownHeader {
+  display: flex;
+  cursor: pointer;
+  * {
+    color: #c1c1c1;
+  }
+  &:hover {
+    * {
+      color: #e1e1e1;
+    }
+  }
+}
+
+.selected {
+  padding-left: 0.3rem;
+}
