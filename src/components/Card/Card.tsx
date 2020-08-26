@@ -19,6 +19,7 @@ interface Props {
     timeUntilAiring: number
     episode: number
   } | null
+  meanScore: number
   description: string
 }
 
@@ -29,6 +30,7 @@ const Card = ({
   status,
   nextAiring,
   id,
+  meanScore,
   description,
 }: Props) => {
   const setFilterState = useSetRecoilState(filterStateAtom)
@@ -49,24 +51,30 @@ const Card = ({
   }
 
   const handleSetGenre = (genre: string) => {
-    setFilterState({ ...initialFilterState, genres: [genre] })
+    setFilterState({
+      ...initialFilterState,
+      genres: [genre],
+      sortBy: 'TRENDING_DESC',
+    })
   }
 
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <img src={image} alt={title.romaji} className={styles.image} />
 
-      <div className={styles.cardBody}>
-        <div>
-          <h3 className={styles.heading}>
-            {title.romaji}
-            <span className={styles.status}>
-              - {_.startCase(_.lowerCase(status))}
-            </span>
-          </h3>
-          <h4 className={styles.secondaryTitle}>{title.native}</h4>
+      <div className={styles.content}>
+        <div className={styles.cardHeader}>
+          <div className={styles.title}>
+            <h3 className={styles.romaji}>
+              {title.romaji}
+              <span className={styles.status}>
+                - {_.startCase(_.lowerCase(status))}
+              </span>
+            </h3>
+            <h4 className={styles.native}>{title.native}</h4>
+          </div>
+          <div className={styles.score}>{meanScore}%</div>
         </div>
-
         <div className={styles.genres}>
           {_.uniq(genres).map(genre => (
             <div
@@ -87,7 +95,7 @@ const Card = ({
             : htmlParser(descriptionWithEllipse)}
         </p>
       </div>
-    </div>
+    </section>
   )
 }
 

@@ -1,4 +1,5 @@
 import { atom } from 'recoil'
+import { SortBy } from '../filterOptions'
 
 export type FilterState = {
   genres: string[]
@@ -9,6 +10,7 @@ export type FilterState = {
   status: string
   country: string
   source: string
+  sortBy: SortBy
 }
 
 export type FilterStateKeys = keyof FilterState
@@ -23,6 +25,7 @@ export const initialFilterState: FilterState = {
   status: '',
   country: '',
   source: '',
+  sortBy: 'TRENDING_DESC',
 }
 
 export const filterStateAtom = atom({

@@ -31,6 +31,7 @@ export type QueryData = {
       }
       status: string
       genres: string[]
+      meanScore: number
       description: string
       nextAiringEpisode: {
         timeUntilAiring: number
@@ -50,7 +51,7 @@ export type QueryVar = {
   country?: string
   source?: string
   searchText: string | null
-  sortBy: SortBy
+  sortBy?: SortBy
 }
 
 export const baseUrl = 'https://graphql.anilist.co'
@@ -76,6 +77,7 @@ query animeQuery($page: Int, $genres: [String], $tags: [String], $year: Int, $se
       status
       genres
       description
+      meanScore
       nextAiringEpisode {
         timeUntilAiring
         episode

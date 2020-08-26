@@ -29,7 +29,6 @@ import NotFound from '../../components/NotFound/NotFound'
 const SearchResult = () => {
   const [filterState, setFilterState] = useRecoilState(filterStateAtom)
   const searchText = useRecoilValue(searchTextAtom)
-  const [sortBy, setSortBy] = useState<SortBy>('TRENDING_DESC')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -39,11 +38,10 @@ const SearchResult = () => {
       ...Object.fromEntries(
         Object.entries(filterState).filter(([_, value]) => value.length > 0)
       ),
-      sortBy,
       searchText: searchText ? searchText : null,
       country: countryCode[filterState.country as Countries],
     }),
-    [filterState, sortBy, searchText]
+    [filterState, searchText]
   )
 
   useEffect(() => {
@@ -116,30 +114,35 @@ const SearchResult = () => {
   //generates handy object for mapping to the Select component
   const dropDowns = useMemo(
     () =>
-      Object.entries(filterOptions).map(([key, value]) => ({
-        key,
-        onChange: (value: string | string[]) => {
-          setFilterState(prev => ({
-            ...prev,
-            [key]: value,
-          }))
-        },
-        isMulti: value.isMulti,
-        options: value.options.map(o => ({
-          value: o,
-          label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+      Object.entries(filterOptions)
+        .filter(([key]) => key !== 'sortBy')
+        .map(([key, value]) => ({
+          key,
+          onChange: (value: string | string[]) => {
+            setFilterState(prev => ({
+              ...prev,
+              [key]: value,
+            }))
+          },
+          isMulti: value.isMulti,
+          options: value.options.map(o => ({
+            value: o,
+            label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+          })),
         })),
-      })),
     [setFilterState]
   )
 
   const sortByOnChange = (value: string | string[]) => {
-    setSortBy(value as SortBy)
+    setFilterState(prev => ({
+      ...prev,
+      sortBy: value as SortBy,
+    }))
   }
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.dropdowns}>
+      <section className={styles.dropdowns}>
         {dropDowns.map(d => (
           <Select
             key={d.key}
@@ -150,14 +153,14 @@ const SearchResult = () => {
             name={d.key}
           />
         ))}
-      </div>
+      </section>
 
       <div className={styles.sortBy}>
         <SimpleSelect
           onChange={sortByOnChange}
           isMulti={false}
           options={sortByOptions}
-          selected={sortBy}
+          selected={filterState.sortBy}
         />
       </div>
 

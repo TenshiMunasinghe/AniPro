@@ -1,13 +1,17 @@
 .wrapper {
-  padding-top: 2rem;
-  padding: 0 8rem;
+  padding-top: 1rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .dropdowns {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  & > * {
+    margin: 0.8rem;
+  }
 }
 
 .sortBy {

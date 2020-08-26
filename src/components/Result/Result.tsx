@@ -12,7 +12,7 @@ interface Props {
 
 const Result = ({ loading, media }: Props) => {
   return (
-    <div className={styles.slider}>
+    <main className={styles.slider}>
       {media &&
         media.map((m: QueryData['Page']['media'][number]) => (
           <Card
@@ -24,6 +24,7 @@ const Result = ({ loading, media }: Props) => {
             status={m.status}
             nextAiring={m.nextAiringEpisode}
             description={m.description}
+            meanScore={m.meanScore}
           />
         ))}
       {loading && (
@@ -33,7 +34,7 @@ const Result = ({ loading, media }: Props) => {
           <CardLoading />
         </>
       )}
-    </div>
+    </main>
   )
 }
 
