@@ -1,4 +1,4 @@
-@import '../../globalStyles/variables.scss';
+@import '../../globalStyles/variablesAndMixins.scss';
 
 .wrapper {
   position: fixed;
@@ -6,6 +6,7 @@
   display: flex;
   padding: 0 1rem;
   align-items: center;
+  justify-content: space-between;
   border-bottom: solid 0.3px #7e7e7e;
   height: $header-height;
   background: #121212;
@@ -20,5 +21,5 @@
 
 .heading {
   margin-right: 1rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }

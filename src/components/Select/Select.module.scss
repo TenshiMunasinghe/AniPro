@@ -1,5 +1,5 @@
 .wrapper {
-  display: inline-block;
+  width: 100%;
 }
 
 .label {
@@ -8,7 +8,6 @@
 }
 
 .dropdown {
-  min-width: 10rem;
   position: relative;
 }
 
@@ -21,7 +20,6 @@
   z-index: 998;
   padding: 0.5rem;
   background: #323232;
-  width: 100%;
   border-radius: 0.2rem;
   cursor: pointer;
 }

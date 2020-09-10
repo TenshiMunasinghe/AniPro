@@ -32,12 +32,12 @@ const Header = () => {
   }, [])
 
   return (
-    <div
+    <header
       className={styles.wrapper + (isVisible ? ' ' + styles.visible : '')}
-      ref={wrapperRef as RefObject<HTMLDivElement>}>
+      ref={wrapperRef as RefObject<HTMLElement>}>
       <h1 className={styles.heading}>Anime Project</h1>
       <SearchBar />
-    </div>
+    </header>
   )
 }
 

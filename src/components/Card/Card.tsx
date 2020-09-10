@@ -5,6 +5,9 @@ import { useSetRecoilState } from 'recoil'
 
 import styles from './Card.module.scss'
 import { filterStateAtom, initialFilterState } from '../../recoil/atoms'
+import Image from '../Image/Image'
+import FaceIcon from '../FaceIcon/FaceIcon'
+import { trimText } from '../../helper'
 
 interface Props {
   id: number
@@ -34,21 +37,20 @@ const Card = ({
   description,
 }: Props) => {
   const setFilterState = useSetRecoilState(filterStateAtom)
-  const [isHovered, setIsHovered] = useState(false)
-  const hoverHandler = useRef<number>()
-  const descriptionWithEllipse =
-    description && description.length > 300
-      ? description.substring(0, 297) + '...'
-      : description
+  // const [isHovered, setIsHovered] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
+  // const hoverHandler = useRef<number>()
 
-  const onMouseEnter = () => {
-    hoverHandler.current = window.setTimeout(() => setIsHovered(true), 300)
-  }
+  // const descriptionWithEllipse = trimText(description, 300)
 
-  const onMouseLeave = () => {
-    window.clearTimeout(hoverHandler.current)
-    setIsHovered(false)
-  }
+  // const onMouseEnter = () => {
+  //   hoverHandler.current = window.setTimeout(() => setIsHovered(true), 300)
+  // }
+
+  // const onMouseLeave = () => {
+  //   window.clearTimeout(hoverHandler.current)
+  //   setIsHovered(false)
+  // }
 
   const handleSetGenre = (genre: string) => {
     setFilterState({
@@ -59,23 +61,46 @@ const Card = ({
   }
 
   return (
-    <section className={styles.wrapper}>
-      <img src={image} alt={title.romaji} className={styles.image} />
+    <article className={styles.wrapper}>
+      <Image
+        src={image}
+        alt={title.romaji}
+        className={styles[isLoaded ? 'loaded' : 'loading']}
+        onLoad={() => setIsLoaded(true)}
+      />
 
-      <div className={styles.content}>
-        <div className={styles.cardHeader}>
-          <div className={styles.title}>
-            <h3 className={styles.romaji}>
-              {title.romaji}
+      <section className={styles.content}>
+        <section className={styles.cardBody}>
+          <div className={styles.scrollWrapper}>
+            <header className={styles.cardHeader}>
+              <div className={styles.title}>
+                <h3 className={styles.romaji}>{title.romaji}</h3>
+                <h4 className={styles.native}>{title.native}</h4>
+              </div>
               <span className={styles.status}>
-                - {_.startCase(_.lowerCase(status))}
+                {_.startCase(_.lowerCase(status))}
               </span>
-            </h3>
-            <h4 className={styles.native}>{title.native}</h4>
+              {meanScore && (
+                <div className={styles.score}>
+                  <FaceIcon meanScore={meanScore} />
+                  {meanScore}%
+                </div>
+              )}
+            </header>
+
+            <p
+              className={styles.description}
+              // onMouseEnter={onMouseEnter}
+              // onMouseLeave={onMouseLeave}
+            >
+              {/* {isHovered
+            ? htmlParser(description)
+            : htmlParser(descriptionWithEllipse)} */}
+              {htmlParser(description)}
+            </p>
           </div>
-          <div className={styles.score}>{meanScore}%</div>
-        </div>
-        <div className={styles.genres}>
+        </section>
+        <footer className={styles.genres}>
           {_.uniq(genres).map(genre => (
             <div
               className={styles.genre}
@@ -84,18 +109,9 @@ const Card = ({
               {genre}
             </div>
           ))}
-        </div>
-
-        <p
-          className={styles.description}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}>
-          {isHovered
-            ? htmlParser(description)
-            : htmlParser(descriptionWithEllipse)}
-        </p>
-      </div>
-    </section>
+        </footer>
+      </section>
+    </article>
   )
 }
 

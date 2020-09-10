@@ -1,4 +1,14 @@
 .slider {
-  display: Grid;
-  padding-top: 1rem;
+  display: grid;
+  gap: 1.5rem;
+  justify-items: center;
+  align-items: flex-start;
+
+  &.simple {
+    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  }
+
+  &.default {
+    grid-template-columns: 1fr;
+  }
 }

@@ -3,6 +3,7 @@ import _ from 'lodash'
 import ky from 'ky'
 import produce from 'immer'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import { FaTh, FaThLarge } from 'react-icons/fa'
 
 import styles from './Search.module.scss'
 import {
@@ -26,9 +27,12 @@ import {
 } from '../../recoil/atoms'
 import NotFound from '../../components/NotFound/NotFound'
 
+export type CardType = 'default' | 'simple'
+
 const SearchResult = () => {
   const [filterState, setFilterState] = useRecoilState(filterStateAtom)
   const searchText = useRecoilValue(searchTextAtom)
+  const [cardType, setCardType] = useState<CardType>('default')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -142,30 +146,44 @@ const SearchResult = () => {
 
   return (
     <div className={styles.wrapper}>
-      <section className={styles.dropdowns}>
-        {dropDowns.map(d => (
-          <Select
-            key={d.key}
-            onChange={d.onChange}
-            isMulti={d.isMulti}
-            options={d.options}
-            selected={filterState[d.key as FilterStateKeys]}
-            name={d.key}
+      <section className={styles.filters}>
+        <section className={styles.dropdowns}>
+          {dropDowns.map(d => (
+            <Select
+              key={d.key}
+              onChange={d.onChange}
+              isMulti={d.isMulti}
+              options={d.options}
+              selected={filterState[d.key as FilterStateKeys]}
+              name={d.key}
+            />
+          ))}
+        </section>
+
+        <section className={styles.extraOptions}>
+          <SimpleSelect
+            onChange={sortByOnChange}
+            isMulti={false}
+            options={sortByOptions}
+            selected={filterState.sortBy}
           />
-        ))}
+          <section className={styles.gridType}>
+            <span onClick={() => setCardType('default')}>
+              <FaThLarge />
+            </span>
+            <span>
+              <FaTh onClick={() => setCardType('simple')} />
+            </span>
+          </section>
+        </section>
       </section>
 
-      <div className={styles.sortBy}>
-        <SimpleSelect
-          onChange={sortByOnChange}
-          isMulti={false}
-          options={sortByOptions}
-          selected={filterState.sortBy}
-        />
-      </div>
-
       {loading || (!error && data && data.Page.media.length > 0) ? (
-        <Result loading={loading} media={data?.Page.media} />
+        <Result
+          loading={loading}
+          media={data?.Page.media}
+          cardType={cardType}
+        />
       ) : (
         <NotFound />
       )}

@@ -1,5 +1,7 @@
 import { SortBy } from '../filterOptions'
 
+const _navigator = navigator as any
+
 const date = new Date()
 const SEASONS = [
   { name: 'SPRING', months: [3, 4, 5] },
@@ -56,7 +58,8 @@ export type QueryVar = {
 
 export const baseUrl = 'https://graphql.anilist.co'
 
-export const imageSize = 'extraLarge'
+export const imageSize =
+  _navigator.connection.effectiveType === '4g' ? 'extraLarge' : 'large'
 
 export const getsearchResult = `
 query animeQuery($page: Int, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort]) {

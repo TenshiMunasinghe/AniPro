@@ -35,7 +35,7 @@ export const filterOptions = {
   },
 
   year: {
-    options: _.range(1970, currentYear + 1)
+    options: _.range(1970, currentYear + 2)
       .sort((a, b) => b - a)
       .map(y => y.toString()),
     isMulti: false,

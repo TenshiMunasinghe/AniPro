@@ -1,10 +1,11 @@
 .button {
   background: #232323;
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: calc(1rem + 1vw);
+  right: calc(1rem + 1vw);
   border: none;
-  padding: 1rem;
+  padding: 0.8rem;
+  opacity: 0.8;
 
   &:hover {
     background: #323232;

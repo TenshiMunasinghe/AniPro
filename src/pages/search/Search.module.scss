@@ -1,20 +1,47 @@
+@import '../../globalStyles/variablesAndMixins.scss';
+
 .wrapper {
   padding-top: 1rem;
+}
+
+.filters {
   width: 80%;
   margin: 0 auto;
 }
 
 .dropdowns {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  & > * {
-    margin: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(100px, 1fr));
+  @include for-tablet-portrait-up {
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
   }
+  row-gap: 2rem;
+  column-gap: 2.5rem;
+  place-items: center;
 }
 
-.sortBy {
+.extraOptions {
+  display: flex;
   margin: 0.8rem 0;
-  margin-left: 87%;
+  align-items: center;
+  justify-content: flex-end;
+
+  .gridType {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 0.5rem;
+
+    & > * {
+      margin: 0 0.25rem;
+      color: #c1c1c1;
+
+      // &:hover {
+      //   * {
+      //     color: #e1e1e1;
+      //   }
+      // }
+    }
+  }
 }

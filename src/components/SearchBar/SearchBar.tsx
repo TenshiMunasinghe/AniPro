@@ -9,6 +9,7 @@ import { searchTextAtom } from '../../recoil/atoms'
 const SearchBar = () => {
   const setSearchText = useSetRecoilState(searchTextAtom)
   const { register, handleSubmit } = useForm()
+
   const onSubmit = handleSubmit(data => {
     setSearchText(data.searchText)
   })
@@ -23,11 +24,12 @@ const SearchBar = () => {
         className={styles.input}
         ref={register}
         name='searchText'
+        type='text'
         placeholder='Search'
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />
-      <button className={styles.submitButton}>
+      <button className={styles.submitButton} type='submit'>
         <FaSearch size='1rem' />
       </button>
     </form>

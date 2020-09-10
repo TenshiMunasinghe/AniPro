@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import styles from './SimpleCard.module.scss'
+import { trimText } from '../../helper'
+import Image from '../Image/Image'
 
 interface Props {
   id: number
@@ -17,8 +19,19 @@ interface Props {
   } | null
 }
 
-const SimpleCard = (props: Props) => {
-  return <div></div>
+const SimpleCard = ({ image, title }: Props) => {
+  const [isLoaded, setIsLoaded] = useState(false)
+  return (
+    <article className={styles.wrapper}>
+      <Image
+        className={styles.image + ' ' + styles[isLoaded ? 'loaded' : 'loading']}
+        onLoad={() => setIsLoaded(true)}
+        src={image}
+        alt={title.romaji}
+      />
+      <h5 className={styles.title}>{trimText(title.romaji, 40)}</h5>
+    </article>
+  )
 }
 
-export default SimpleCard
+export default React.memo(SimpleCard)
