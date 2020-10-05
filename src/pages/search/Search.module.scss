@@ -1,28 +1,12 @@
-@import '../../globalStyles/variablesAndMixins.scss';
+@import '../../globalStyles/config.scss';
 
-.wrapper {
-  padding-top: 1rem;
-}
-
-.filters {
-  width: 80%;
-  margin: 0 auto;
-}
-
-.dropdowns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(100px, 1fr));
-  @include for-tablet-portrait-up {
-    grid-template-columns: repeat(4, minmax(100px, 1fr));
-  }
-  row-gap: 2rem;
-  column-gap: 2.5rem;
-  place-items: center;
+.upperSection {
+  margin: 0 auto 1.5rem auto;
 }
 
 .extraOptions {
   display: flex;
-  margin: 0.8rem 0;
+  margin-left: auto;
   align-items: center;
   justify-content: flex-end;
 
@@ -33,15 +17,48 @@
     cursor: pointer;
     margin-left: 0.5rem;
 
-    & > * {
+    & > button {
       margin: 0 0.25rem;
-      color: #c1c1c1;
+      display: flex;
+      align-items: center;
 
-      // &:hover {
-      //   * {
-      //     color: #e1e1e1;
-      //   }
-      // }
+      &:hover,
+      &:focus {
+        * {
+          color: var(--color-text-accent-200);
+        }
+      }
+    }
+  }
+}
+
+.searchDetails {
+  margin-top: 0.5rem;
+  * {
+    color: inherit;
+  }
+
+  .resultsFor {
+    font-weight: normal;
+    word-wrap: break-word;
+    margin-bottom: 0.25rem;
+  }
+
+  .searchText {
+    font-weight: bold;
+  }
+
+  .clearSearch {
+    font-size: 0.8rem;
+    text-decoration: underline;
+    text-decoration-color: var(--gray-600);
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.15s ease-in-out;
+
+    @include on-hoverable-devices {
+      &:hover {
+        text-decoration-color: inherit;
+      }
     }
   }
 }

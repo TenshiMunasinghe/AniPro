@@ -1,23 +1,52 @@
-@import url('https://fonts.googleapis.com/css2?family=B612:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import './variablesAndMixins.scss';
-html {
-  font-size: clamp(14px, 2vw, 22px);
-  font-family: 'Tsukushi A Round Gothic', 'B612', 'Roboto', sans-serif;
-  font-weight: bold;
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+
+@import './config.scss';
+
+:root {
+  --gray-1200: #121212;
+  --gray-1100: #1e1e1e;
+  --gray-1000: #2b2b2b;
+  --gray-900: #373737;
+  --gray-800: #444444;
+  --gray-700: #505050;
+  --gray-600: #656565;
+  --gray-500: #828282;
+  --gray-400: #9f9f9f;
+  --gray-300: #bdbdbd;
+  --gray-200: #dadada;
+  --gray-100: #f7f7f7;
+
+  --cyan-1200: #008c82;
+  --cyan-1100: #10948b;
+  --cyan-1000: #209d94;
+  --cyan-900: #2fa59d;
+  --cyan-800: #3faea6;
+  --cyan-700: #4fb6af;
+  --cyan-600: #76cbc6;
+  --cyan-500: #8ad5d1;
+  --cyan-400: #9ee0dc;
+  --cyan-300: #b2eae7;
+  --cyan-200: #c5f5f3;
+  --cyan-100: #d9fffe;
 }
-// @media screen and (min-width: 320px) {
-//   html {
-//     font-size: calc(16px + 4 * ((100vw - 320px) / 680));
-//   }
-// }
-// @media screen and (min-width: 1000px) {
-//   html {
-//     font-size: 20px;
-//   }
-// }
+
+html {
+  font-family: 'Sora', sans-serif;
+  font-weight: normal;
+}
+@media screen and (min-width: 320px) {
+  html {
+    font-size: calc(16px + 2 * ((100vw - 320px) / 680));
+  }
+}
+@media screen and (min-width: 1000px) {
+  html {
+    font-size: 18px;
+  }
+}
 
 * {
-  color: #d2d2d2;
+  color: var(--color-text-200);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -28,15 +57,51 @@ html {
 
 img {
   object-fit: cover;
+  filter: brightness(0.95);
 }
 
-body,
-#root {
+button {
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+body {
+  --color-background: var(--gray-1200);
+  --color-foreground-50: var(--gray-1100);
+  --color-foreground-100: var(--gray-1000);
+  --color-foreground-200: var(--gray-900);
+  --color-foreground-300: var(--gray-800);
+  --color-text-100: var(--gray-300);
+  --color-text-200: var(--gray-200);
+  --color-text-300: var(--gray-100);
+  --color-text-accent-100: var(--cyan-500);
+  --color-text-accent-200: var(--cyan-400);
+  --color-border-100: var(--gray-100);
+  --color-border-200: var(--gray-400);
+
+  padding-top: $header-height;
   width: 100vw;
   min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--color-background);
 }
 
 #root {
-  background: #121212;
-  padding-top: $header-height;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#container {
+  --image-aspect-ratio: (5/7);
+
+  margin: auto;
+  padding: 2rem 7vw;
+  width: 100%;
+  max-width: 1200px;
+
+  @include for-desktop-up {
+    padding: 0 2rem;
+  }
 }

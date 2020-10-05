@@ -1,30 +1,40 @@
 import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom'
-import { RecoilRoot } from 'recoil'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { useForm, FormProvider } from 'react-hook-form'
 
 import Search from './pages/search/Search'
+import Anime from './pages/anime/Anime'
+import Home from './pages/home/Home'
 import Header from './components/Header/Header'
+import Filters from './components/Filters/Filters'
 
 const App = () => {
+  const methods = useForm({ defaultValues: { searchText: '' } })
+
   return (
-    <RecoilRoot>
+    <>
       <Header />
       <Router>
         <Switch>
-          <Route exact path='/'>
-            <Redirect to='/search' />
+          <Route exact path='/anime/:id'>
+            <Anime />
           </Route>
-          <Route exact path='/search'>
-            <Search />
+          <Route path='/'>
+            <FormProvider {...methods}>
+              <div id='container'>
+                <Filters />
+                <Route exact path='/'>
+                  <Home />
+                </Route>
+                <Route exact path='/search'>
+                  <Search />
+                </Route>
+              </div>
+            </FormProvider>
           </Route>
         </Switch>
       </Router>
-    </RecoilRoot>
+    </>
   )
 }
 

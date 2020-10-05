@@ -1,41 +1,48 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import _ from 'lodash'
-import ky from 'ky'
 import produce from 'immer'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
+import { useFormContext } from 'react-hook-form'
 import { FaTh, FaThLarge } from 'react-icons/fa'
 
 import styles from './Search.module.scss'
 import {
   QueryData,
   QueryVar,
-  getsearchResult,
-  baseUrl,
+  GET_SEARCH_RESULT,
+  ky,
 } from '../../graphql/queries'
-import Select from '../../components/Select/Select'
 import Result from '../../components/Result/Result'
 import ScrollButton from '../../components/ScrollButton/ScrollButton'
 import useInfiniteScroll from '../../hooks/useInfiniteScroll'
-import { filterOptions, SortBy, sortByOptions } from '../../filterOptions/index'
-import { toStartCase } from '../../helper'
+import { SortBy, sortByOptions } from '../../filterOptions/index'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import SimpleSelect from '../../components/SimpleSelect/SimpleSelect'
-import {
-  filterStateAtom,
-  FilterStateKeys,
-  searchTextAtom,
-} from '../../recoil/atoms'
+import { filterStateAtom } from '../../recoil/atoms'
 import NotFound from '../../components/NotFound/NotFound'
 
 export type CardType = 'default' | 'simple'
 
+type FetchNewDataParam = { queryVariables: QueryVar; signal: any }
+
+type LoadMoreParam = {
+  queryVariables: QueryVar
+  data: QueryData | null
+  error: any
+  loading: boolean
+  signal: any
+}
+
 const SearchResult = () => {
+  const { getValues, reset } = useFormContext()
+  const searchText = getValues('searchText')
   const [filterState, setFilterState] = useRecoilState(filterStateAtom)
-  const searchText = useRecoilValue(searchTextAtom)
   const [cardType, setCardType] = useState<CardType>('default')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
+
+  const mountedRef = useRef(true)
 
   const queryVariables: QueryVar = useMemo(
     () => ({
@@ -44,25 +51,26 @@ const SearchResult = () => {
       ),
       searchText: searchText ? searchText : null,
       country: countryCode[filterState.country as Countries],
+      perPage: 10,
     }),
     [filterState, searchText]
   )
 
-  useEffect(() => {
-    setData(null)
-    window.scrollTo(0, 0)
-    const fetchData = async () => {
+  const fetchNewData = useCallback(
+    _.debounce(async ({ queryVariables, signal }: FetchNewDataParam) => {
+      setData(null)
       try {
         setLoading(true)
         const res: { data: QueryData } = await ky
-          .post(baseUrl, {
+          .post('', {
             json: {
-              query: getsearchResult,
+              query: GET_SEARCH_RESULT,
               variables: queryVariables,
+              signal,
             },
           })
           .json()
-        if (!res) {
+        if (!res || !mountedRef.current) {
           return
         }
         setData(res.data)
@@ -71,29 +79,30 @@ const SearchResult = () => {
         console.error(e)
       }
       setLoading(false)
-    }
-    fetchData()
-  }, [queryVariables])
+    }, 800),
+    []
+  )
 
-  useInfiniteScroll(() => {
-    if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
-      return
-    }
-    const loadMore = async () => {
+  const loadMore = useCallback(
+    async ({ data, error, loading, queryVariables, signal }: LoadMoreParam) => {
+      if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
+        return
+      }
       try {
         setLoading(true)
         const res: { data: QueryData } = await ky
-          .post(baseUrl, {
+          .post('', {
             json: {
-              query: getsearchResult,
+              query: GET_SEARCH_RESULT,
               variables: {
                 ...queryVariables,
                 page: data.Page.pageInfo.currentPage + 1,
+                signal,
               },
             },
           })
           .json()
-        if (!res) {
+        if (!res || !mountedRef) {
           return
         }
         setData(prev => {
@@ -111,31 +120,38 @@ const SearchResult = () => {
         console.error(e)
       }
       setLoading(false)
-    }
-    loadMore()
-  })
-
-  //generates handy object for mapping to the Select component
-  const dropDowns = useMemo(
-    () =>
-      Object.entries(filterOptions)
-        .filter(([key]) => key !== 'sortBy')
-        .map(([key, value]) => ({
-          key,
-          onChange: (value: string | string[]) => {
-            setFilterState(prev => ({
-              ...prev,
-              [key]: value,
-            }))
-          },
-          isMulti: value.isMulti,
-          options: value.options.map(o => ({
-            value: o,
-            label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
-          })),
-        })),
-    [setFilterState]
+    },
+    []
   )
+
+  useEffect(() => {
+    return () => {
+      mountedRef.current = false
+    }
+  }, [])
+
+  // requesting on filter state change
+  useEffect(() => {
+    const controller = new AbortController()
+    const { signal } = controller
+    fetchNewData({ signal, queryVariables })
+    window.scrollTo(0, 0)
+
+    return () => {
+      controller.abort()
+    }
+  }, [queryVariables, fetchNewData])
+
+  // pagination
+  useInfiniteScroll(() => {
+    const controller = new AbortController()
+    const { signal } = controller
+    loadMore({ signal, queryVariables, loading, data, error })
+
+    return () => {
+      controller.abort()
+    }
+  })
 
   const sortByOnChange = (value: string | string[]) => {
     setFilterState(prev => ({
@@ -144,22 +160,13 @@ const SearchResult = () => {
     }))
   }
 
-  return (
-    <div className={styles.wrapper}>
-      <section className={styles.filters}>
-        <section className={styles.dropdowns}>
-          {dropDowns.map(d => (
-            <Select
-              key={d.key}
-              onChange={d.onChange}
-              isMulti={d.isMulti}
-              options={d.options}
-              selected={filterState[d.key as FilterStateKeys]}
-              name={d.key}
-            />
-          ))}
-        </section>
+  const clearSearch = () => {
+    reset({ searchText: '' })
+  }
 
+  return (
+    <>
+      <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
             onChange={sortByOnChange}
@@ -168,15 +175,27 @@ const SearchResult = () => {
             selected={filterState.sortBy}
           />
           <section className={styles.gridType}>
-            <span onClick={() => setCardType('default')}>
-              <FaThLarge />
-            </span>
-            <span>
-              <FaTh onClick={() => setCardType('simple')} />
-            </span>
+            <button onClick={() => setCardType('default')}>
+              <FaThLarge aria-label='default card' />
+            </button>
+            <button onClick={() => setCardType('simple')}>
+              <FaTh aria-label='simple card' />
+            </button>
           </section>
         </section>
-      </section>
+
+        {searchText && (
+          <section className={styles.searchDetails}>
+            <div className={styles.resultsFor}>
+              Showing results for:{' '}
+              <span className={styles.searchText}>{searchText}</span>
+            </div>
+            <button onClick={clearSearch} className={styles.clearSearch}>
+              Clear search
+            </button>
+          </section>
+        )}
+      </div>
 
       {loading || (!error && data && data.Page.media.length > 0) ? (
         <Result
@@ -188,7 +207,7 @@ const SearchResult = () => {
         <NotFound />
       )}
       <ScrollButton />
-    </div>
+    </>
   )
 }
 

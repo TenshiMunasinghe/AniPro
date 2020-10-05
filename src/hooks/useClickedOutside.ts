@@ -1,9 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 
-const useComponentVisible = () => {
-  const [isVisible, setIsVisible] = useState(false)
+const useClickedOutside = () => {
+  const [isClickedOut, setIsClickedOut] = useState(true)
 
   const ref = useRef<HTMLElement>(null)
+
+  const handleFocus = () => setIsClickedOut(false)
+
+  const handleBlur = () => setIsClickedOut(true)
 
   useEffect(() => {
     const handleClick = (e: globalThis.MouseEvent) => {
@@ -11,7 +15,7 @@ const useComponentVisible = () => {
       if (!ref.current || !e.target) {
         return
       }
-      setIsVisible(ref.current.contains(e.target as Node))
+      setIsClickedOut(!ref.current.contains(e.target as Node))
     }
 
     document.addEventListener('click', handleClick)
@@ -19,7 +23,7 @@ const useComponentVisible = () => {
     return () => document.removeEventListener('click', handleClick)
   }, [ref])
 
-  return { ref, isVisible }
+  return { ref, isClickedOut, handleFocus, handleBlur, setIsClickedOut }
 }
 
-export default useComponentVisible
+export default useClickedOutside

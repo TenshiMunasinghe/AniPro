@@ -21,7 +21,7 @@ const Image = <T extends Props>({
 }: T) => {
   const [state, setState] = useState<State>({ src: props.src, isError: false })
 
-  const onError = () => {
+  const handleError = () => {
     setState({
       src: fallbackSrc,
       isError: true,
@@ -33,7 +33,7 @@ const Image = <T extends Props>({
     <img
       src={state.src}
       alt={props.alt}
-      onError={onError}
+      onError={handleError}
       loading='lazy'
       {..._props}
     />

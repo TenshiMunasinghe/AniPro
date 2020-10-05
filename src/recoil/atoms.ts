@@ -32,8 +32,3 @@ export const filterStateAtom = atom({
   key: 'filterState',
   default: initialFilterState,
 })
-
-export const searchTextAtom = atom({
-  key: 'searchText',
-  default: '',
-})

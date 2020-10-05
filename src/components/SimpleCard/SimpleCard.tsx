@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './SimpleCard.module.scss'
-import { trimText } from '../../helper'
 import Image from '../Image/Image'
+import Popover from '../Popover/Popover'
+import { imageSize } from '../../graphql/queries'
 
 interface Props {
   id: number
-  image: string
+  image: {
+    [key: string]: string
+    color: string
+  }
   title: {
-    native: string
+    english: string
     romaji: string
   }
   genres: string[]
@@ -19,18 +24,38 @@ interface Props {
   } | null
 }
 
-const SimpleCard = ({ image, title }: Props) => {
+const SimpleCard = ({ image, title, id }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false)
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false)
+  const handleMouseOver = () => setIsPopoverVisible(true)
+  const handleMouseLeave = () => setIsPopoverVisible(false)
+  const url = `/anime/${id}`
   return (
-    <article className={styles.wrapper}>
-      <Image
-        className={styles.image + ' ' + styles[isLoaded ? 'loaded' : 'loading']}
-        onLoad={() => setIsLoaded(true)}
-        src={image}
-        alt={title.romaji}
-      />
-      <h5 className={styles.title}>{trimText(title.romaji, 40)}</h5>
-    </article>
+    <div
+      className={styles.popoverWrapper}
+      onMouseOver={handleMouseOver}
+      onMouseLeave={handleMouseLeave}>
+      <article className={styles.wrapper}>
+        <Link
+          to={url}
+          style={{ background: image.color }}
+          className={
+            styles.imageWrapper + ' ' + styles[isLoaded ? 'loaded' : 'loading']
+          }>
+          <Image
+            className={styles.image}
+            onLoad={() => setIsLoaded(true)}
+            src={image[imageSize]}
+            alt={title.romaji}
+          />
+        </Link>
+        <h5 className={styles.title}>
+          <Link to={url}>{title.romaji}</Link>
+        </h5>
+      </article>
+
+      <Popover isVisible={isPopoverVisible} />
+    </div>
   )
 }
 

@@ -9,18 +9,18 @@ interface Props {
 
 const FaceIcon = ({ meanScore }: Props) => {
   if (meanScore < 50) {
-    return <FaFrown className={styles.frown} />
+    return <FaFrown className={styles.frown} aria-label='frown' />
   }
 
   if (meanScore < 70) {
-    return <FaMeh className={styles.meh} />
+    return <FaMeh className={styles.meh} aria-label='meh' />
   }
 
   if (meanScore < 80) {
-    return <FaSmile className={styles.smile} />
+    return <FaSmile className={styles.smile} aria-label='smile' />
   }
 
-  return <FaSmileBeam className={styles.smileBeam} />
+  return <FaSmileBeam className={styles.smileBeam} aria-label='smile beam' />
 }
 
 export default FaceIcon

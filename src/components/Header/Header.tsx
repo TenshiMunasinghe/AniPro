@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef, RefObject } from 'react'
 
 import styles from './Header.module.scss'
-import SearchBar from '../SearchBar/SearchBar'
 
 const Header = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -36,7 +35,6 @@ const Header = () => {
       className={styles.wrapper + (isVisible ? ' ' + styles.visible : '')}
       ref={wrapperRef as RefObject<HTMLElement>}>
       <h1 className={styles.heading}>Anime Project</h1>
-      <SearchBar />
     </header>
   )
 }

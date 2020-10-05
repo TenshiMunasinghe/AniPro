@@ -2,7 +2,7 @@ import React, { RefObject } from 'react'
 import { FaSort } from 'react-icons/fa'
 
 import styles from './SimpleSelect.module.scss'
-import useComponentVisible from '../../hooks/useComponentVisible'
+import useClickedOutside from '../../hooks/useClickedOutside'
 import Options from '../Options/Options'
 
 interface Props {
@@ -20,7 +20,7 @@ const SimpleSelect = ({
   options,
   selected,
 }: Props) => {
-  const { ref, isVisible } = useComponentVisible()
+  const { ref, isClickedOut, handleBlur, handleFocus } = useClickedOutside()
 
   const handleChange = (value: string) => {
     if (!isMulti) {
@@ -39,15 +39,22 @@ const SimpleSelect = ({
   }
 
   return (
-    <div className={styles.wrapper} ref={ref as RefObject<HTMLDivElement>}>
-      <div className={styles.dropdownHeader}>
-        <FaSort />
+    <div
+      className={styles.wrapper}
+      aria-haspopup='true'
+      aria-expanded={!isClickedOut}>
+      <button
+        className={styles.dropdownHeader}
+        ref={ref as RefObject<HTMLButtonElement>}
+        onFocus={handleFocus}
+        onBlur={handleBlur}>
+        <FaSort aria-label='sort' />
         <div className={styles.selected}>
           {options.find(o => o.value === selected)?.label}
         </div>
-      </div>
+      </button>
       <Options
-        isVisible={isVisible}
+        isVisible={!isClickedOut}
         options={options}
         handleChange={handleChange}
         isMulti={isMulti}

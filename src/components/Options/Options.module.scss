@@ -1,3 +1,5 @@
+@import '../../globalStyles/config.scss';
+
 .wrapper {
   z-index: 999;
   position: absolute;
@@ -5,33 +7,48 @@
   transition: all 0.2s ease-in-out;
   transform: translateY(0.3rem);
   max-height: 15rem;
+  min-width: 8rem;
   overflow-y: scroll;
-  background: #323232;
-  padding: 0.2rem 0;
+  background: var(--color-foreground-50);
   border-radius: 0.2rem;
 
   &.hide {
     opacity: 0;
     pointer-events: none;
-    transform: translateY(0);
   }
 }
 
 .option {
-  min-width: 8rem;
   position: relative;
-  z-index: 999;
-  padding: 0.5rem 1rem;
+  width: 100%;
   font-size: 0.8rem;
+  margin-top: 0.5em;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   cursor: pointer;
+  transition: all 0.05s ease-in-out;
 
-  &:active {
-    background: #424242;
-    span {
-      color: #85c1fd;
+  & > div {
+    flex: 1;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.75em 1.25em;
+  }
+
+  @include on-hoverable-devices {
+    &:hover {
+      background: var(--color-foreground-100);
+      span {
+        color: var(--color-text-accent-100);
+      }
     }
+  }
+
+  &:last-child {
+    margin-bottom: 0.5em;
   }
 }
 
@@ -43,7 +60,7 @@
   svg {
     display: inline-block;
     vertical-align: middle;
-    fill: #99ccff;
+    fill: var(--color-text-accent-100);
   }
   &.hide {
     opacity: 0;

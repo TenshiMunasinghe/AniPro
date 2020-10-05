@@ -1,20 +1,27 @@
 .wrapper {
   position: relative;
+
   * {
     font-size: 0.8rem;
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    .selected {
+      color: var(--color-text-300);
+    }
   }
 }
 
 .dropdownHeader {
   display: flex;
+  align-items: center;
   cursor: pointer;
+  font-weight: inherit;
+
   * {
-    color: #c1c1c1;
-  }
-  &:hover {
-    * {
-      color: #e1e1e1;
-    }
+    color: var(--color-text-200);
   }
 }
 

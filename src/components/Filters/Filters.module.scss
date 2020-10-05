@@ -1,0 +1,13 @@
+@import '../../globalStyles/config.scss';
+
+.dropdowns {
+  margin: 1.5rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(7rem, 1fr));
+  @include for-tablet-landscape-up {
+    grid-template-columns: repeat(4, minmax(7rem, 1fr));
+  }
+  row-gap: 2rem;
+  column-gap: 2.5rem;
+  place-items: center;
+}

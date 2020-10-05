@@ -1,50 +1,72 @@
+@import '../../globalStyles/config.scss';
+
 .wrapper {
+  max-height: 5rem;
   width: 100%;
 }
 
 .label {
-  font-size: 0.8rem;
-  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
 }
 
 .dropdown {
   position: relative;
+  margin-top: 0.7rem;
 }
 
 .dropdownHeader {
-  height: 2.5rem;
-  display: grid;
-  grid-template-columns: 85% 1fr;
-  align-items: center;
   position: relative;
-  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--color-foreground-50);
+  width: 100%;
+  height: 2.5rem;
   padding: 0.5rem;
-  background: #323232;
-  border-radius: 0.2rem;
+  border-radius: 0.15rem;
+  font-weight: inherit;
+  color: inherit;
+  z-index: 998;
   cursor: pointer;
+
+  &:focus-within {
+    box-shadow: 0px 0px 1.5px var(--color-border-100);
+
+    .selected {
+      @include on-hoverable-devices {
+        display: none;
+      }
+    }
+  }
 }
 
 .input {
   background: transparent;
   border: none;
+  font: inherit;
   color: inherit;
-  font-weight: inherit;
+  flex: 1 0 0;
+  min-width: 0;
+
+  @media only screen and (hover: none) and (pointer: coarse) {
+    pointer-events: none;
+    &:focus {
+      display: none;
+    }
+  }
 }
 
 .selected {
   display: block;
   position: absolute;
   left: 0.5rem;
-  .hide {
-    display: none;
-  }
 }
 
 .selectedItem {
   display: inline-block;
   font-size: 0.8rem;
-  background: #525252;
-  padding: 0.3rem;
+  background: var(--color-foreground-200);
+  padding: 0.2rem 0.3rem;
   border-radius: 0.1rem;
   margin-right: 0.3rem;
 }

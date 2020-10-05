@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Result.module.scss'
 import Card from '../Card/Card'
 import CardLoading from '../CardLoading/CardLoading'
-import { QueryData, imageSize } from '../../graphql/queries'
+import { QueryData } from '../../graphql/queries'
 import { CardType } from '../../pages/search/Search'
 import SimpleCard from '../SimpleCard/SimpleCard'
 import _ from 'lodash'
@@ -15,8 +15,8 @@ interface Props {
 }
 
 const loadingSkeletonCount = {
-  default: 3,
-  simple: 10,
+  default: 4,
+  simple: 12,
 }
 
 const Result = ({ loading, media, cardType }: Props) => {
@@ -30,7 +30,7 @@ const Result = ({ loading, media, cardType }: Props) => {
                 <SimpleCard
                   key={m.id}
                   id={m.id}
-                  image={m.coverImage[imageSize]}
+                  image={m.coverImage}
                   title={m.title}
                   genres={m.genres}
                   status={m.status}
@@ -43,7 +43,7 @@ const Result = ({ loading, media, cardType }: Props) => {
                 <Card
                   key={m.id}
                   id={m.id}
-                  image={m.coverImage[imageSize]}
+                  image={m.coverImage}
                   title={m.title}
                   genres={m.genres}
                   status={m.status}

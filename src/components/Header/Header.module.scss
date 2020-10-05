@@ -1,4 +1,4 @@
-@import '../../globalStyles/variablesAndMixins.scss';
+@import '../../globalStyles/config.scss';
 
 .wrapper {
   position: fixed;
@@ -7,11 +7,10 @@
   padding: 0 1rem;
   align-items: center;
   justify-content: space-between;
-  border-bottom: solid 0.3px #7e7e7e;
   height: $header-height;
-  background: #121212;
+  background: $dp-24;
   transition: all 0.2s ease-in-out;
-  z-index: 999;
+  z-index: 9999;
   top: -$header-height;
 
   &.visible {
@@ -20,6 +19,9 @@
 }
 
 .heading {
-  margin-right: 1rem;
-  font-size: 1rem;
+  font-size: 0.95rem;
+
+  @include for-tablet-portrait-up {
+    font-size: 1.15rem;
+  }
 }

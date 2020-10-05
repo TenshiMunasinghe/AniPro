@@ -1,20 +1,26 @@
-import React, { useState, useRef } from 'react'
-import _ from 'lodash'
+import React, { RefObject, useState, useMemo } from 'react'
+import uniq from 'lodash/uniq'
 import htmlParser from 'react-html-parser'
 import { useSetRecoilState } from 'recoil'
+import { Link } from 'react-router-dom'
+import { v4 } from 'uuid'
 
 import styles from './Card.module.scss'
 import { filterStateAtom, initialFilterState } from '../../recoil/atoms'
 import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
-import { trimText } from '../../helper'
+import { imageSize } from '../../graphql/queries'
+import useClickedOutside from '../../hooks/useClickedOutside'
 
 interface Props {
   id: number
-  image: string
+  image: {
+    [key: string]: string
+    color: string
+  }
   title: {
-    native: string
     romaji: string
+    english: string
   }
   genres: string[]
   status: string
@@ -37,22 +43,18 @@ const Card = ({
   description,
 }: Props) => {
   const setFilterState = useSetRecoilState(filterStateAtom)
-  // const [isHovered, setIsHovered] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
-  // const hoverHandler = useRef<number>()
 
-  // const descriptionWithEllipse = trimText(description, 300)
+  const { ref, isClickedOut, handleFocus, handleBlur } = useClickedOutside()
 
-  // const onMouseEnter = () => {
-  //   hoverHandler.current = window.setTimeout(() => setIsHovered(true), 300)
-  // }
-
-  // const onMouseLeave = () => {
-  //   window.clearTimeout(hoverHandler.current)
-  //   setIsHovered(false)
-  // }
+  const cards = useMemo(
+    () => uniq(genres).map(g => ({ genre: g, key: v4() })),
+    [genres]
+  )
 
   const handleSetGenre = (genre: string) => {
+    console.log('y')
+
     setFilterState({
       ...initialFilterState,
       genres: [genre],
@@ -60,26 +62,36 @@ const Card = ({
     })
   }
 
+  const handleImageLoad = () => setIsLoaded(true)
+
+  const pageUrl = `/anime/${id}`
+
   return (
     <article className={styles.wrapper}>
-      <Image
-        src={image}
-        alt={title.romaji}
-        className={styles[isLoaded ? 'loaded' : 'loading']}
-        onLoad={() => setIsLoaded(true)}
-      />
+      <Link
+        to={pageUrl}
+        style={{ background: image.color }}
+        aria-label={title.romaji}>
+        <Image
+          src={image[imageSize]}
+          alt={title.romaji}
+          className={styles[isLoaded ? 'loaded' : 'loading']}
+          onLoad={handleImageLoad}
+        />
+      </Link>
 
       <section className={styles.content}>
         <section className={styles.cardBody}>
           <div className={styles.scrollWrapper}>
             <header className={styles.cardHeader}>
               <div className={styles.title}>
-                <h3 className={styles.romaji}>{title.romaji}</h3>
-                <h4 className={styles.native}>{title.native}</h4>
+                <h3 className={styles.primaryTitle}>
+                  <Link to={pageUrl}>{title.romaji}</Link>
+                </h3>
+                <h4 className={styles.secondaryTitle}>
+                  {title.english || title.romaji}
+                </h4>
               </div>
-              <span className={styles.status}>
-                {_.startCase(_.lowerCase(status))}
-              </span>
               {meanScore && (
                 <div className={styles.score}>
                   <FaceIcon meanScore={meanScore} />
@@ -89,25 +101,24 @@ const Card = ({
             </header>
 
             <p
-              className={styles.description}
-              // onMouseEnter={onMouseEnter}
-              // onMouseLeave={onMouseLeave}
-            >
-              {/* {isHovered
-            ? htmlParser(description)
-            : htmlParser(descriptionWithEllipse)} */}
+              className={
+                styles.description + (isClickedOut ? '' : ' ' + styles.active)
+              }
+              ref={ref as RefObject<HTMLParagraphElement>}
+              onMouseEnter={handleFocus}
+              onMouseLeave={handleBlur}>
               {htmlParser(description)}
             </p>
           </div>
         </section>
         <footer className={styles.genres}>
-          {_.uniq(genres).map(genre => (
-            <div
+          {cards.map(g => (
+            <button
+              key={g.key}
               className={styles.genre}
-              key={genre}
-              onClick={() => handleSetGenre(genre)}>
-              {genre}
-            </div>
+              onClick={() => handleSetGenre(g.genre)}>
+              {g.genre}
+            </button>
           ))}
         </footer>
       </section>

@@ -1,33 +1,67 @@
-// .wrapper {
-//   min-width: 9rem;
-//   min-height: 13rem;
-//   display: grid;
-//   place-items: center;
-//   cursor: pointer;
-// }
+@import '../../globalStyles/config.scss';
+@import './simpleCardConfig.scss';
 
-// .image {
-//   display: block;
-//   width: 100%;
-//   max-width: 100%;
-//   height: 13rem;
-//   width: 9rem;
-//   border-radius: 0.2rem;
-//   transition: all 0.2s ease-in-out;
-//   filter: brightness(95%);
+.popoverWrapper {
+  position: relative;
+}
 
-//   &.loaded {
-//     opacity: 1;
-//     transform: scale(1);
-//   }
+.wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  row-gap: 0.75rem;
+  justify-items: center;
+  align-items: start;
+  cursor: pointer;
+  z-index: 998;
 
-//   &.loading {
-//     opacity: 0;
-//     transform: scale(0.98);
-//   }
-// }
+  .imageWrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    padding-top: calc(100% / var(--image-aspect-ratio));
+    border-radius: 0.15rem;
+    overflow: hidden;
 
-// .title {
-//   margin-top: 0.5rem;
-//   font-size: 0.8rem;
-// }
+    &.loaded {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &.loading {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+
+  .image {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .title {
+    color: var(--color-text-300);
+    align-self: start;
+    font-size: 0.8rem;
+    line-height: 1.2;
+    @include add-ellipsis(2);
+
+    a {
+      color: inherit;
+      text-decoration-color: var(--gray-600);
+      text-underline-offset: 0.2em;
+      transition: text-decoration-color 0.15s ease-in-out;
+
+      @include on-hoverable-devices {
+        &:hover {
+          text-decoration-color: inherit;
+        }
+      }
+    }
+  }
+}

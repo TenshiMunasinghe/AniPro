@@ -1,14 +1,33 @@
+@import '../../globalStyles/config.scss';
+
 .slider {
   display: grid;
-  gap: 1.5rem;
-  justify-items: center;
-  align-items: flex-start;
+  grid-gap: 1rem;
+  margin: 0 auto 2rem auto;
+  place-content: center;
+  justify-content: space-between;
+  width: 100%;
 
   &.simple {
-    grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(5.5rem, 1fr));
+
+    @include for-tablet-portrait-up {
+      grid-gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    }
+
+    @include for-desktop-up {
+      grid-template-columns: repeat(auto-fit, 10rem);
+    }
   }
 
   &.default {
     grid-template-columns: 1fr;
+    grid-auto-rows: 13rem;
+
+    @include for-tablet-portrait-up {
+      grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
+      grid-auto-rows: 15rem;
+    }
   }
 }

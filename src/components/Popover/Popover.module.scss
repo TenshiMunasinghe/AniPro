@@ -1,0 +1,64 @@
+@import '../../globalStyles/config.scss';
+
+.wrapper {
+  display: none;
+
+  @include on-hoverable-devices {
+    display: block;
+    position: absolute;
+    background: var(--color-foreground-300);
+    min-width: 15rem;
+    padding: 1rem;
+    top: 0;
+    z-index: 997;
+    left: 100%;
+    margin-left: 0.5rem;
+    opacity: 1;
+
+    &.left {
+      left: auto;
+      margin-left: 0;
+      right: 100%;
+      margin-right: 0.5rem;
+
+      &:after {
+        z-index: 1000;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        right: -0.5rem;
+        top: 10%;
+        border: solid transparent;
+        border-top-width: 0.4rem;
+        border-bottom-width: 0.4rem;
+        border-left-width: 0.6rem;
+        border-left-color: var(--color-foreground-300);
+      }
+    }
+
+    &.right {
+      &:after {
+        z-index: 1000;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: -0.5rem;
+        top: 10%;
+        border: solid transparent;
+        border-top-width: 0.4rem;
+        border-bottom-width: 0.4rem;
+        border-right-width: 0.6rem;
+        border-right-color: var(--color-foreground-300);
+      }
+    }
+
+    &.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}

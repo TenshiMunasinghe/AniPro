@@ -17,8 +17,3 @@ export const convertFromSeconds = (seconds: number) => {
 }
 
 export const toStartCase = (str: string) => _.startCase(_.lowerCase(str))
-
-export const trimText = (text: string, limit: number) => {
-  if (!text) return ''
-  return text.length > limit ? text.substring(0, limit - 3) + '...' : text
-}

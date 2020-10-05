@@ -1,0 +1,18 @@
+@import '../../globalStyles/config.scss';
+
+@mixin card-wrapper {
+  display: grid;
+  grid-template-columns: 9rem 1fr;
+  background: $dp-04;
+  border-radius: 0.1rem;
+  overflow: hidden;
+  height: 100%;
+
+  @include for-tablet-portrait-up {
+    grid-template-columns: 10rem 1fr;
+  }
+
+  @content;
+}
+
+$genre-height: 2.5em;

@@ -1,9 +1,9 @@
-import React, { useState, RefObject, useRef } from 'react'
+import React, { useState, RefObject, useRef, useEffect } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
 import Options from '../Options/Options'
-import useComponentVisible from '../../hooks/useComponentVisible'
+import useClickedOutside from '../../hooks/useClickedOutside'
 import { toStartCase } from '../../helper'
 
 interface Props {
@@ -24,21 +24,19 @@ const Select = ({
   isMulti = false,
   defaultValue = isMulti ? [] : '',
   selected,
-  name,
+  name: _name,
 }: Props) => {
+  const name = toStartCase(_name)
   const [inputState, setInputState] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const {
-    ref: wrapperRef,
-    isVisible: isDropdownVisible,
-  } = useComponentVisible()
-  const {
-    ref: selectedRef,
-    isVisible: isSelectedVisible,
-  } = useComponentVisible()
+  const { ref, isClickedOut } = useClickedOutside()
 
-  if (!wrapperRef || !selectedRef) {
+  useEffect(() => {
+    console.log('mounted')
+  }, [])
+
+  if (!ref) {
     return <></>
   }
 
@@ -70,27 +68,27 @@ const Select = ({
 
   return (
     <div className={styles.wrapper}>
-      <h5 className={styles.label}>{toStartCase(name)}</h5>
+      <label className={styles.label} htmlFor={name}>
+        {name}
+      </label>
       <div
         className={styles.dropdown}
-        ref={wrapperRef as RefObject<HTMLDivElement>}>
-        <div
-          className={styles.dropdownHeader}
-          ref={selectedRef as RefObject<HTMLDivElement>}
-          onClick={focusInput}>
+        ref={ref as RefObject<HTMLDivElement>}
+        aria-haspopup='true'
+        aria-expanded={!isClickedOut}>
+        <button className={styles.dropdownHeader} onClick={focusInput}>
           <input
             className={styles.input}
             placeholder={selected.length === 0 ? 'Any' : ''}
             value={inputState}
+            id={name}
+            name={name}
             onChange={e => setInputState(e.target.value)}
             ref={inputRef}
           />
 
           {selected.length !== 0 && (
-            <div
-              className={
-                styles.selected + (isSelectedVisible ? '' : ' ' + styles.hide)
-              }>
+            <div className={styles.selected}>
               {isMulti ? (
                 <div>
                   <div className={styles.selectedItem}>
@@ -111,14 +109,14 @@ const Select = ({
           )}
 
           {selected.length !== 0 ? (
-            <FaTimes onClick={resetSelect} />
+            <FaTimes onClick={resetSelect} aria-label='cross' />
           ) : (
-            <FaAngleDown />
+            <FaAngleDown aria-label='angle down' />
           )}
-        </div>
+        </button>
 
         <Options
-          isVisible={isDropdownVisible}
+          isVisible={!isClickedOut}
           options={options.filter(
             o =>
               o.label.toLowerCase().substring(0, inputState.length) ===
