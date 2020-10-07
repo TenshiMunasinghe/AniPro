@@ -10,7 +10,7 @@ import { filterStateAtom, initialFilterState } from '../../recoil/atoms'
 import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import { imageSize } from '../../graphql/queries'
-import useClickedOutside from '../../hooks/useClickedOutside'
+import { useClickedOutside } from '../../hooks/useClickedOutside'
 
 interface Props {
   id: number

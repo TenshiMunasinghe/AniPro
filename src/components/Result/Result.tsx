@@ -6,7 +6,7 @@ import CardLoading from '../CardLoading/CardLoading'
 import { QueryData } from '../../graphql/queries'
 import { CardType } from '../../pages/search/Search'
 import SimpleCard from '../SimpleCard/SimpleCard'
-import _ from 'lodash'
+import range from 'lodash/range'
 
 interface Props {
   loading: boolean
@@ -34,7 +34,12 @@ const Result = ({ loading, media, cardType }: Props) => {
                   title={m.title}
                   genres={m.genres}
                   status={m.status}
-                  nextAiring={m.nextAiringEpisode}
+                  nextAiringEpisode={m.nextAiringEpisode}
+                  format={m.format}
+                  season={m.season}
+                  seasonYear={m.seasonYear}
+                  streamingEpisodes={m.streamingEpisodes}
+                  duration={m.duration}
                 />
               )
 
@@ -55,7 +60,7 @@ const Result = ({ loading, media, cardType }: Props) => {
           }
         })}
       {loading &&
-        _.range(0, loadingSkeletonCount[cardType]).map((_, i) => (
+        range(0, loadingSkeletonCount[cardType]).map((_, i) => (
           <CardLoading type={cardType} key={i} />
         ))}
     </main>

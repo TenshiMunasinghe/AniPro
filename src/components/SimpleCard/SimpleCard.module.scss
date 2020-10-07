@@ -1,5 +1,4 @@
 @import '../../globalStyles/config.scss';
-@import './simpleCardConfig.scss';
 
 .popoverWrapper {
   position: relative;
@@ -24,13 +23,15 @@
     overflow: hidden;
 
     &.loaded {
-      opacity: 1;
-      transform: scale(1);
+      .image {
+        opacity: 1;
+      }
     }
 
     &.loading {
-      opacity: 0;
-      transform: scale(0.98);
+      .image {
+        opacity: 0;
+      }
     }
   }
 

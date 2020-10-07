@@ -5,7 +5,7 @@ import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import styles from './Home.module.scss'
 import { filterStateAtom } from '../../recoil/atoms'
-import useSkip from '../../hooks/useSkip'
+import { useSkip } from '../../hooks/useSkip'
 
 const Home = () => {
   const {

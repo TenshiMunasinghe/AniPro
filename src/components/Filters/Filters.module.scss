@@ -1,7 +1,7 @@
 @import '../../globalStyles/config.scss';
 
 .dropdowns {
-  margin: 1.5rem auto;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(7rem, 1fr));
   @include for-tablet-landscape-up {

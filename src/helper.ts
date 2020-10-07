@@ -1,4 +1,9 @@
-import _ from 'lodash'
+import startCase from 'lodash/startCase'
+import lowerCase from 'lodash/lowerCase'
+
+const pluralize = (num: number, str: string) => {
+  return num === 1 ? `${num} ${str}` : `${num} ${str}s`
+}
 
 export const convertFromSeconds = (seconds: number) => {
   const minutes = Math.floor(seconds / 60)
@@ -6,14 +11,14 @@ export const convertFromSeconds = (seconds: number) => {
   const days = Math.floor(seconds / (3600 * 24))
 
   if (days !== 0) {
-    return `${days} days`
+    return pluralize(days, 'day')
   } else if (hours !== 0) {
-    return `${hours} hours`
+    return pluralize(hours, 'hour')
   } else if (minutes !== 0) {
-    return `${minutes} minutes`
+    return pluralize(minutes, 'minute')
   } else {
-    return `${seconds} seconds`
+    return pluralize(seconds, 'second')
   }
 }
 
-export const toStartCase = (str: string) => _.startCase(_.lowerCase(str))
+export const toStartCase = (str: string) => startCase(lowerCase(str))

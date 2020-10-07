@@ -1,9 +1,9 @@
-import React, { useState, RefObject, useRef, useEffect } from 'react'
+import React, { useState, RefObject, useRef } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
 import Options from '../Options/Options'
-import useClickedOutside from '../../hooks/useClickedOutside'
+import { useClickedOutside } from '../../hooks/useClickedOutside'
 import { toStartCase } from '../../helper'
 
 interface Props {
@@ -31,10 +31,6 @@ const Select = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const { ref, isClickedOut } = useClickedOutside()
-
-  useEffect(() => {
-    console.log('mounted')
-  }, [])
 
   if (!ref) {
     return <></>

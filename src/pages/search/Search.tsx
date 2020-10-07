@@ -1,24 +1,25 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
-import _ from 'lodash'
+import debounce from 'lodash/debounce'
+import uniqBy from 'lodash/uniqBy'
 import produce from 'immer'
 import { useRecoilState } from 'recoil'
 import { useFormContext } from 'react-hook-form'
 import { FaTh, FaThLarge } from 'react-icons/fa'
 
 import styles from './Search.module.scss'
+import { filterStateAtom } from '../../recoil/atoms'
 import {
   QueryData,
   QueryVar,
   GET_SEARCH_RESULT,
   ky,
 } from '../../graphql/queries'
-import Result from '../../components/Result/Result'
-import ScrollButton from '../../components/ScrollButton/ScrollButton'
-import useInfiniteScroll from '../../hooks/useInfiniteScroll'
 import { SortBy, sortByOptions } from '../../filterOptions/index'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
+import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
+import Result from '../../components/Result/Result'
+import ScrollButton from '../../components/ScrollButton/ScrollButton'
 import SimpleSelect from '../../components/SimpleSelect/SimpleSelect'
-import { filterStateAtom } from '../../recoil/atoms'
 import NotFound from '../../components/NotFound/NotFound'
 
 export type CardType = 'default' | 'simple'
@@ -28,8 +29,6 @@ type FetchNewDataParam = { queryVariables: QueryVar; signal: any }
 type LoadMoreParam = {
   queryVariables: QueryVar
   data: QueryData | null
-  error: any
-  loading: boolean
   signal: any
 }
 
@@ -57,7 +56,7 @@ const SearchResult = () => {
   )
 
   const fetchNewData = useCallback(
-    _.debounce(async ({ queryVariables, signal }: FetchNewDataParam) => {
+    debounce(async ({ queryVariables, signal }: FetchNewDataParam) => {
       setData(null)
       try {
         setLoading(true)
@@ -84,10 +83,8 @@ const SearchResult = () => {
   )
 
   const loadMore = useCallback(
-    async ({ data, error, loading, queryVariables, signal }: LoadMoreParam) => {
-      if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
-        return
-      }
+    async ({ data, queryVariables, signal }: LoadMoreParam) => {
+      if (!data) return
       try {
         setLoading(true)
         const res: { data: QueryData } = await ky
@@ -109,7 +106,7 @@ const SearchResult = () => {
           if (prev === null) return res.data
           return produce(prev, next => {
             next.Page.pageInfo = { ...res.data.Page.pageInfo }
-            next.Page.media = _.uniqBy(
+            next.Page.media = uniqBy(
               [...next.Page.media, ...res.data.Page.media],
               'id'
             )
@@ -144,9 +141,12 @@ const SearchResult = () => {
 
   // pagination
   useInfiniteScroll(() => {
+    if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
+      return
+    }
     const controller = new AbortController()
     const { signal } = controller
-    loadMore({ signal, queryVariables, loading, data, error })
+    loadMore({ signal, queryVariables, data })
 
     return () => {
       controller.abort()
@@ -197,14 +197,14 @@ const SearchResult = () => {
         )}
       </div>
 
-      {loading || (!error && data && data.Page.media.length > 0) ? (
+      {error || (data && data.Page.media.length === 0) ? (
+        <NotFound />
+      ) : (
         <Result
           loading={loading}
           media={data?.Page.media}
           cardType={cardType}
         />
-      ) : (
-        <NotFound />
       )}
       <ScrollButton />
     </>

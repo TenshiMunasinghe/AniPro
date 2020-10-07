@@ -32,3 +32,8 @@ export const filterStateAtom = atom({
   key: 'filterState',
   default: initialFilterState,
 })
+
+export const windowSizeAtom = atom({
+  key: 'windowSize',
+  default: { width: 0, height: 0 },
+})

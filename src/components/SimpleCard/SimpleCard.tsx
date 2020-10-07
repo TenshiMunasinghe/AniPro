@@ -16,15 +16,32 @@ interface Props {
     english: string
     romaji: string
   }
+  format: string
+  season?: string
+  seasonYear?: number
+  streamingEpisodes?: number
+  duration?: number
   genres: string[]
   status: string
-  nextAiring: {
+  nextAiringEpisode: {
     timeUntilAiring: number
     episode: number
   } | null
 }
 
-const SimpleCard = ({ image, title, id }: Props) => {
+const SimpleCard = ({
+  image,
+  title,
+  id,
+  format,
+  season,
+  seasonYear,
+  streamingEpisodes,
+  duration,
+  genres,
+  status,
+  nextAiringEpisode,
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const handleMouseOver = () => setIsPopoverVisible(true)
@@ -54,7 +71,16 @@ const SimpleCard = ({ image, title, id }: Props) => {
         </h5>
       </article>
 
-      <Popover isVisible={isPopoverVisible} />
+      <Popover
+        isVisible={isPopoverVisible}
+        genres={genres}
+        nextAiringEpisode={nextAiringEpisode}
+        format={format}
+        season={season}
+        seasonYear={seasonYear}
+        streamingEpisodes={streamingEpisodes}
+        duration={duration}
+      />
     </div>
   )
 }

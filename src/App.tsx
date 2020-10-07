@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useForm, FormProvider } from 'react-hook-form'
 
+import { useWindowResize } from './hooks/useWindowResize'
 import Search from './pages/search/Search'
 import Anime from './pages/anime/Anime'
 import Home from './pages/home/Home'
@@ -10,6 +11,7 @@ import Filters from './components/Filters/Filters'
 
 const App = () => {
   const methods = useForm({ defaultValues: { searchText: '' } })
+  useWindowResize()
 
   return (
     <>

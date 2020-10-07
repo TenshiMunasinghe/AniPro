@@ -1,7 +1,7 @@
 @import '../../globalStyles/config.scss';
 
 .upperSection {
-  margin: 0 auto 1.5rem auto;
+  padding: 1.5rem 0;
 }
 
 .extraOptions {
@@ -11,14 +11,17 @@
   justify-content: flex-end;
 
   .gridType {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 0.5rem;
+    padding-left: 0.5rem;
+    margin-left: 0.4rem;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin-left: 0.5rem;
+    border-left: solid 1px var(--color-border-200);
 
     & > button {
-      margin: 0 0.25rem;
       display: flex;
       align-items: center;
 

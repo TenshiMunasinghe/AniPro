@@ -102,6 +102,6 @@ body {
   max-width: 1200px;
 
   @include for-desktop-up {
-    padding: 0 2rem;
+    padding: 2rem;
   }
 }

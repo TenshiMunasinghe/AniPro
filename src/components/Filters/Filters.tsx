@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
@@ -12,27 +12,27 @@ import { toStartCase } from '../../helper'
 const Filters = () => {
   const [filterState, setFilterState] = useRecoilState(filterStateAtom)
   // an object to map to the Select component
-  const dropDowns = useMemo(() => {
-    console.log('created')
-
-    return Object.entries(filterOptions)
-      .filter(([key]) => key !== 'sortBy')
-      .map(([key, value]) => ({
-        key: v4(),
-        name: key,
-        onChange: (value: string | string[]) => {
-          setFilterState(prev => ({
-            ...prev,
-            [key]: value,
-          }))
-        },
-        isMulti: value.isMulti,
-        options: value.options.map(o => ({
-          value: o,
-          label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+  const dropDowns = useMemo(
+    () =>
+      Object.entries(filterOptions)
+        .filter(([key]) => key !== 'sortBy')
+        .map(([key, value]) => ({
+          key: v4(),
+          name: key,
+          onChange: (value: string | string[]) => {
+            setFilterState(prev => ({
+              ...prev,
+              [key]: value,
+            }))
+          },
+          isMulti: value.isMulti,
+          options: value.options.map(o => ({
+            value: o,
+            label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+          })),
         })),
-      }))
-  }, [setFilterState])
+    [setFilterState]
+  )
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import useSkip from './useSkip'
+import { useSkip } from './useSkip'
 
-const useInfiniteScroll = (callback: () => void) => {
+export const useInfiniteScroll = (callback: () => void) => {
   const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
@@ -28,5 +28,3 @@ const useInfiniteScroll = (callback: () => void) => {
     setIsFetching(false)
   }, [isFetching, callback])
 }
-
-export default useInfiniteScroll

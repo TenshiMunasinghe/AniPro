@@ -2,7 +2,7 @@ import React, { RefObject } from 'react'
 import { FaSort } from 'react-icons/fa'
 
 import styles from './SimpleSelect.module.scss'
-import useClickedOutside from '../../hooks/useClickedOutside'
+import { useClickedOutside } from '../../hooks/useClickedOutside'
 import Options from '../Options/Options'
 
 interface Props {

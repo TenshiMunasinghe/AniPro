@@ -1,11 +1,22 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-
-import useWindowResize from '../../hooks/useWindowResize'
+import { useRecoilValue } from 'recoil'
 
 import styles from './Popover.module.scss'
+import { windowSizeAtom } from '../../recoil/atoms'
+import { convertFromSeconds } from '../../helper'
 
 interface Props {
   isVisible: boolean
+  format: string
+  season?: string
+  seasonYear?: number
+  streamingEpisodes?: number
+  duration?: number
+  genres: string[]
+  nextAiringEpisode: {
+    timeUntilAiring: number
+    episode: number
+  } | null
 }
 
 type Position = {
@@ -13,10 +24,15 @@ type Position = {
   width: number
 }
 
-const Popover = (props: Props) => {
+const Popover = ({
+  nextAiringEpisode,
+  isVisible,
+  season,
+  seasonYear,
+}: Props) => {
   const [position, setPosition] = useState<Position | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const { width: windowWidth } = useWindowResize()
+  const { width: windowWidth } = useRecoilValue(windowSizeAtom)
 
   useLayoutEffect(() => {
     setPosition(() => {
@@ -34,7 +50,7 @@ const Popover = (props: Props) => {
   }, [])
 
   const classNameModifier =
-    position === null || !props.isVisible
+    position === null || !isVisible
       ? 'hide'
       : position.x + position.width > windowWidth
       ? 'left'
@@ -42,14 +58,26 @@ const Popover = (props: Props) => {
 
   // if(    position&& position.x + position.width > windowWidth
   //   ) classNameModifier = 'left'
+  const airingInfo = nextAiringEpisode
+    ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
+        nextAiringEpisode.timeUntilAiring
+      )}`
+    : `${season} ${seasonYear}`
+
+  console.log(nextAiringEpisode)
 
   return (
-    <div
+    <aside
       className={styles.wrapper + ' ' + styles[classNameModifier]}
       ref={wrapperRef}>
-      popover boi
-    </div>
+      <header className={styles.header}>
+        <div className={styles.airingInfo}>{airingInfo}</div>
+      </header>
+      <section className={styles.info}></section>
+
+      <footer className={styles.genres}></footer>
+    </aside>
   )
 }
 
-export default React.memo(Popover)
+export default Popover

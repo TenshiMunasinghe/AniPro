@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 
-const useClickedOutside = () => {
+export const useClickedOutside = () => {
   const [isClickedOut, setIsClickedOut] = useState(true)
 
   const ref = useRef<HTMLElement>(null)
@@ -23,7 +23,5 @@ const useClickedOutside = () => {
     return () => document.removeEventListener('click', handleClick)
   }, [ref])
 
-  return { ref, isClickedOut, handleFocus, handleBlur, setIsClickedOut }
+  return { ref, isClickedOut, handleFocus, handleBlur }
 }
-
-export default useClickedOutside

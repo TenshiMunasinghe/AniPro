@@ -3,7 +3,7 @@
 @mixin card-wrapper {
   display: grid;
   grid-template-columns: 9rem 1fr;
-  background: $dp-04;
+  background: var(--color-foreground-50);
   border-radius: 0.1rem;
   overflow: hidden;
   height: 100%;

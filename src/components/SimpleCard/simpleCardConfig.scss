@@ -1,7 +1,0 @@
-@import '../../globalStyles/config.scss';
-
-$simple-card-height: 9rem;
-
-@include for-tablet-portrait-up {
-  $simple-card-height: 15rem;
-}

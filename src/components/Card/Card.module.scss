@@ -108,7 +108,7 @@
   font-size: 0.65rem;
   padding: 0.5em;
   overflow-x: auto;
-  background: var(--color-foreground-200);
+  background: var(--color-foreground-100);
 
   &::after {
     content: '';
@@ -140,7 +140,7 @@
   padding-right: 1.5em;
   line-height: 1.75;
   font-weight: normal;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--color-text-100);
   @include add-ellipsis(2);
 
