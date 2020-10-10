@@ -21,6 +21,7 @@
     padding-top: calc(100% / var(--image-aspect-ratio));
     border-radius: 0.15rem;
     overflow: hidden;
+    background: var(--color-background);
 
     &.loaded {
       .image {
@@ -56,11 +57,12 @@
       color: inherit;
       text-decoration-color: var(--gray-600);
       text-underline-offset: 0.2em;
-      transition: text-decoration-color 0.15s ease-in-out;
+      transition: all 0.15s ease-in-out;
 
       @include on-hoverable-devices {
         &:hover {
           text-decoration-color: inherit;
+          color: var(--color-text);
         }
       }
     }

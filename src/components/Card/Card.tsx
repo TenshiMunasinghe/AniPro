@@ -11,6 +11,7 @@ import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import { imageSize } from '../../graphql/queries'
 import { useClickedOutside } from '../../hooks/useClickedOutside'
+import { adjustColor } from '../../helper'
 
 interface Props {
   id: number
@@ -66,12 +67,17 @@ const Card = ({
 
   const pageUrl = `/anime/${id}`
 
+  const _style = {
+    '--color-text': adjustColor(image.color, 70),
+    '--color-background': image.color,
+  } as React.CSSProperties
+
   return (
-    <article className={styles.wrapper}>
+    <article className={styles.wrapper} style={_style}>
       <Link
         to={pageUrl}
-        style={{ background: image.color }}
-        aria-label={title.romaji}>
+        aria-label={title.romaji}
+        className={styles.imageWrapper}>
         <Image
           src={image[imageSize]}
           alt={title.romaji}

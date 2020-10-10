@@ -2,8 +2,9 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 
 import styles from './Popover.module.scss'
+import FaceIcon from '../FaceIcon/FaceIcon'
 import { windowSizeAtom } from '../../recoil/atoms'
-import { convertFromSeconds } from '../../helper'
+import { convertFromSeconds, adjustColor } from '../../helper'
 
 interface Props {
   isVisible: boolean
@@ -13,6 +14,9 @@ interface Props {
   streamingEpisodes?: number
   duration?: number
   genres: string[]
+  studio: string
+  color: string
+  meanScore: number
   nextAiringEpisode: {
     timeUntilAiring: number
     episode: number
@@ -29,6 +33,9 @@ const Popover = ({
   isVisible,
   season,
   seasonYear,
+  studio,
+  color,
+  meanScore,
 }: Props) => {
   const [position, setPosition] = useState<Position | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -64,16 +71,27 @@ const Popover = ({
       )}`
     : `${season} ${seasonYear}`
 
-  console.log(nextAiringEpisode)
+  const _style = {
+    '--color-text': adjustColor(color, 70),
+  } as React.CSSProperties
 
   return (
     <aside
       className={styles.wrapper + ' ' + styles[classNameModifier]}
-      ref={wrapperRef}>
+      ref={wrapperRef}
+      style={_style}>
       <header className={styles.header}>
         <div className={styles.airingInfo}>{airingInfo}</div>
       </header>
-      <section className={styles.info}></section>
+      <section className={styles.info}>
+        <div className={styles.studio}>{studio}</div>
+        {meanScore && (
+          <div className={styles.score}>
+            <FaceIcon meanScore={meanScore} />
+            {meanScore}%
+          </div>
+        )}
+      </section>
 
       <footer className={styles.genres}></footer>
     </aside>

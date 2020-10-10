@@ -5,6 +5,7 @@ import styles from './SimpleCard.module.scss'
 import Image from '../Image/Image'
 import Popover from '../Popover/Popover'
 import { imageSize } from '../../graphql/queries'
+import { adjustColor } from '../../helper'
 
 interface Props {
   id: number
@@ -23,6 +24,8 @@ interface Props {
   duration?: number
   genres: string[]
   status: string
+  studio: string
+  meanScore: number
   nextAiringEpisode: {
     timeUntilAiring: number
     episode: number
@@ -40,22 +43,30 @@ const SimpleCard = ({
   duration,
   genres,
   status,
+  studio,
   nextAiringEpisode,
+  meanScore,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const handleMouseOver = () => setIsPopoverVisible(true)
   const handleMouseLeave = () => setIsPopoverVisible(false)
   const url = `/anime/${id}`
+
+  const _style = {
+    '--color-text': adjustColor(image.color, 70),
+    '--color-background': image.color,
+  } as React.CSSProperties
+
   return (
     <div
       className={styles.popoverWrapper}
       onMouseOver={handleMouseOver}
-      onMouseLeave={handleMouseLeave}>
+      onMouseLeave={handleMouseLeave}
+      style={_style}>
       <article className={styles.wrapper}>
         <Link
           to={url}
-          style={{ background: image.color }}
           className={
             styles.imageWrapper + ' ' + styles[isLoaded ? 'loaded' : 'loading']
           }>
@@ -80,6 +91,9 @@ const SimpleCard = ({
         seasonYear={seasonYear}
         streamingEpisodes={streamingEpisodes}
         duration={duration}
+        studio={studio}
+        color={image.color}
+        meanScore={meanScore}
       />
     </div>
   )

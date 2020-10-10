@@ -40,6 +40,8 @@ const Result = ({ loading, media, cardType }: Props) => {
                   seasonYear={m.seasonYear}
                   streamingEpisodes={m.streamingEpisodes}
                   duration={m.duration}
+                  meanScore={m.meanScore}
+                  studio={m.studios.nodes[0].name}
                 />
               )
 
