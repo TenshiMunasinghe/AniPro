@@ -1,27 +1,32 @@
 import { useEffect, useState, useRef } from 'react'
 
 export const useClickedOutside = () => {
+  const ref = useRef<HTMLElement>(null)
   const [isClickedOut, setIsClickedOut] = useState(true)
 
-  const ref = useRef<HTMLElement>(null)
-
-  const handleFocus = () => setIsClickedOut(false)
-
-  const handleBlur = () => setIsClickedOut(true)
-
-  useEffect(() => {
-    const handleClick = (e: globalThis.MouseEvent) => {
-      e.stopPropagation()
-      if (!ref.current || !e.target) {
-        return
-      }
+  const handleEvent = (e: any) => {
+    if (ref.current && e.target) {
       setIsClickedOut(!ref.current.contains(e.target as Node))
     }
+  }
 
-    document.addEventListener('click', handleClick)
+  useEffect(() => {
+    if (window.PointerEvent) {
+      document.addEventListener('pointerdown', handleEvent)
+    } else {
+      document.addEventListener('mousedown', handleEvent)
+      document.addEventListener('touchstart', handleEvent)
+    }
 
-    return () => document.removeEventListener('click', handleClick)
-  }, [ref])
+    return () => {
+      if (window.PointerEvent) {
+        document.removeEventListener('pointerdown', handleEvent)
+      } else {
+        document.removeEventListener('mousedown', handleEvent)
+        document.removeEventListener('touchstart', handleEvent)
+      }
+    }
+  }, [])
 
-  return { ref, isClickedOut, handleFocus, handleBlur }
+  return { ref, isClickedOut }
 }

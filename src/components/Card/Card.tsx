@@ -1,4 +1,4 @@
-import React, { RefObject, useState, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import uniq from 'lodash/uniq'
 import htmlParser from 'react-html-parser'
 import { Link } from 'react-router-dom'
@@ -13,7 +13,6 @@ import {
 import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import { imageSize } from '../../graphql/queries'
-import { useClickedOutside } from '../../hooks/useClickedOutside'
 import { adjustColor } from '../../helper'
 
 interface Props {
@@ -50,8 +49,7 @@ const Card = ({
 }: Props) => {
   const setFilterState = useFilterStateStore(filterStateSelector)
   const [isLoaded, setIsLoaded] = useState(false)
-
-  const { ref, isClickedOut, handleFocus, handleBlur } = useClickedOutside()
+  const [isHovered, setIsHovered] = useState(false)
 
   const cards = useMemo(
     () => uniq(genres).map(g => ({ genre: g, key: v4() })),
@@ -69,6 +67,10 @@ const Card = ({
   }
 
   const handleImageLoad = () => setIsLoaded(true)
+
+  const handleMouseOver = () => setIsHovered(true)
+
+  const handleMouseLeave = () => setIsHovered(false)
 
   const pageUrl = `/anime/${id}`
 
@@ -113,11 +115,10 @@ const Card = ({
 
             <p
               className={
-                styles.description + (isClickedOut ? '' : ' ' + styles.active)
+                styles.description + (isHovered ? ' ' + styles.active : '')
               }
-              ref={ref as RefObject<HTMLParagraphElement>}
-              onMouseEnter={handleFocus}
-              onMouseLeave={handleBlur}>
+              onMouseOver={handleMouseOver}
+              onMouseLeave={handleMouseLeave}>
               {htmlParser(description)}
             </p>
           </div>
