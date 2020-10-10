@@ -20,7 +20,7 @@ const SimpleSelect = ({
   options,
   selected,
 }: Props) => {
-  const { ref, isClickedOut, handleBlur, handleFocus } = useClickedOutside()
+  const { ref, isClickedOut } = useClickedOutside()
 
   const handleChange = (value: string) => {
     if (!isMulti) {
@@ -42,12 +42,9 @@ const SimpleSelect = ({
     <div
       className={styles.wrapper}
       aria-haspopup='true'
-      aria-expanded={!isClickedOut}>
-      <button
-        className={styles.dropdownHeader}
-        ref={ref as RefObject<HTMLButtonElement>}
-        onFocus={handleFocus}
-        onBlur={handleBlur}>
+      aria-expanded={!isClickedOut}
+      ref={ref as RefObject<HTMLDivElement>}>
+      <button className={styles.dropdownHeader}>
         <FaSort aria-label='sort' />
         <div className={styles.selected}>
           {options.find(o => o.value === selected)?.label}
@@ -64,4 +61,4 @@ const SimpleSelect = ({
   )
 }
 
-export default SimpleSelect
+export default React.memo(SimpleSelect)
