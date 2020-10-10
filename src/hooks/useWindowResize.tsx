@@ -1,12 +1,12 @@
-import { useLayoutEffect, useCallback, useRef, useEffect } from 'react'
-import { useRecoilState } from 'recoil'
+import { useLayoutEffect, useCallback } from 'react'
 import debounce from 'lodash/debounce'
 
-import { windowSizeAtom } from '../recoil/atoms'
+import { useWindowSizeStore, WindowSizeStore } from '../zustand/stores'
+
+const selector = (state: WindowSizeStore) => state.set
 
 export const useWindowResize = () => {
-  const [_size, setSize] = useRecoilState(windowSizeAtom)
-  const size = useRef(_size)
+  const setSize = useWindowSizeStore(selector)
 
   const updateSize = useCallback(
     debounce(() => {
@@ -16,10 +16,6 @@ export const useWindowResize = () => {
     }, 250),
     [setSize]
   )
-
-  useEffect(() => {
-    size.current = _size
-  }, [_size])
 
   useLayoutEffect(() => {
     window.addEventListener('resize', updateSize)

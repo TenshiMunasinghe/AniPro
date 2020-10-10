@@ -1,9 +1,8 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
-import { useRecoilValue } from 'recoil'
 
 import styles from './Popover.module.scss'
 import FaceIcon from '../FaceIcon/FaceIcon'
-import { windowSizeAtom } from '../../recoil/atoms'
+import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { convertFromSeconds, adjustColor } from '../../helper'
 
 interface Props {
@@ -28,6 +27,8 @@ type Position = {
   width: number
 }
 
+const windowStateSelector = (state: WindowSizeStore) => state.width
+
 const Popover = ({
   nextAiringEpisode,
   isVisible,
@@ -39,7 +40,7 @@ const Popover = ({
 }: Props) => {
   const [position, setPosition] = useState<Position | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const { width: windowWidth } = useRecoilValue(windowSizeAtom)
+  const windowWidth = useWindowSizeStore(windowStateSelector)
 
   useLayoutEffect(() => {
     setPosition(() => {

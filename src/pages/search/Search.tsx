@@ -2,12 +2,11 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import debounce from 'lodash/debounce'
 import uniqBy from 'lodash/uniqBy'
 import produce from 'immer'
-import { useRecoilState } from 'recoil'
 import { useFormContext } from 'react-hook-form'
 import { FaTh, FaThLarge } from 'react-icons/fa'
 
 import styles from './Search.module.scss'
-import { filterStateAtom } from '../../recoil/atoms'
+import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
 import {
   QueryData,
   QueryVar,
@@ -32,10 +31,17 @@ type LoadMoreParam = {
   signal: any
 }
 
+const filterStateSelector = ({
+  filterState,
+  setFilterState,
+}: FilterStateStore) => ({ filterState, setFilterState })
+
 const SearchResult = () => {
   const { getValues, reset } = useFormContext()
   const searchText = getValues('searchText')
-  const [filterState, setFilterState] = useRecoilState(filterStateAtom)
+  const { filterState, setFilterState } = useFilterStateStore(
+    filterStateSelector
+  )
   const [cardType, setCardType] = useState<CardType>('default')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
@@ -154,10 +160,7 @@ const SearchResult = () => {
   })
 
   const sortByOnChange = (value: string | string[]) => {
-    setFilterState(prev => ({
-      ...prev,
-      sortBy: value as SortBy,
-    }))
+    setFilterState({ sortBy: value as SortBy })
   }
 
   const clearSearch = () => {

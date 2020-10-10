@@ -1,16 +1,26 @@
 import React, { useMemo } from 'react'
-import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
 import styles from './Filters.module.scss'
 import SearchBar from '../SearchBar/SearchBar'
 import Select from '../../components/Select/Select'
 import { filterOptions } from '../../filterOptions/index'
-import { filterStateAtom, FilterStateKeys } from '../../recoil/atoms'
+import {
+  useFilterStateStore,
+  FilterStateKeys,
+  FilterStateStore,
+} from '../../zustand/stores'
 import { toStartCase } from '../../helper'
 
+const filterStateSelector = ({
+  filterState,
+  setFilterState,
+}: FilterStateStore) => ({ filterState, setFilterState })
+
 const Filters = () => {
-  const [filterState, setFilterState] = useRecoilState(filterStateAtom)
+  const { filterState, setFilterState } = useFilterStateStore(
+    filterStateSelector
+  )
   // an object to map to the Select component
   const dropDowns = useMemo(
     () =>
@@ -20,10 +30,7 @@ const Filters = () => {
           key: v4(),
           name: key,
           onChange: (value: string | string[]) => {
-            setFilterState(prev => ({
-              ...prev,
-              [key]: value,
-            }))
+            setFilterState({ [key]: value })
           },
           isMulti: value.isMulti,
           options: value.options.map(o => ({

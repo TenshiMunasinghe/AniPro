@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
 import { useFormContext } from 'react-hook-form'
-import { useRecoilValue, useResetRecoilState } from 'recoil'
 
 import styles from './Home.module.scss'
-import { filterStateAtom } from '../../recoil/atoms'
+import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
 import { useSkip } from '../../hooks/useSkip'
+
+const filterStateSelector = ({
+  filterState,
+  resetFilterState,
+}: FilterStateStore) => ({ filterState, resetFilterState })
 
 const Home = () => {
   const {
     reset: resetSearchText,
     formState: { isSubmitted },
   } = useFormContext()
-  const filterState = useRecoilValue(filterStateAtom)
-  const resetFilterState = useResetRecoilState(filterStateAtom)
+  const { filterState, resetFilterState } = useFilterStateStore(
+    filterStateSelector
+  )
   const [isStateChanged, setIsStateChanged] = useState(false)
 
   useEffect(() => {

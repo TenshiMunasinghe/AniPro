@@ -1,12 +1,15 @@
 import React, { RefObject, useState, useMemo } from 'react'
 import uniq from 'lodash/uniq'
 import htmlParser from 'react-html-parser'
-import { useSetRecoilState } from 'recoil'
 import { Link } from 'react-router-dom'
 import { v4 } from 'uuid'
 
 import styles from './Card.module.scss'
-import { filterStateAtom, initialFilterState } from '../../recoil/atoms'
+import {
+  useFilterStateStore,
+  initialFilterState,
+  FilterStateStore,
+} from '../../zustand/stores'
 import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import { imageSize } from '../../graphql/queries'
@@ -33,6 +36,8 @@ interface Props {
   description: string
 }
 
+const filterStateSelector = (state: FilterStateStore) => state.setFilterState
+
 const Card = ({
   image,
   title,
@@ -43,7 +48,7 @@ const Card = ({
   meanScore,
   description,
 }: Props) => {
-  const setFilterState = useSetRecoilState(filterStateAtom)
+  const setFilterState = useFilterStateStore(filterStateSelector)
   const [isLoaded, setIsLoaded] = useState(false)
 
   const { ref, isClickedOut, handleFocus, handleBlur } = useClickedOutside()
