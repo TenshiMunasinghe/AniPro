@@ -41,12 +41,12 @@ export type QueryData = {
       meanScore: number
       description: string
       format: string
-      season: string
-      seasonYear: number
-      streamingEpisodes: number
+      season: string | null
+      seasonYear: number | null
+      episodes: number | null
       duration: number
       studios: {
-        nodes: { name: string }[]
+        nodes: { name: string }[] | undefined[]
       }
       nextAiringEpisode: {
         timeUntilAiring: number
@@ -55,6 +55,8 @@ export type QueryData = {
     }[]
   }
 }
+
+export type Media = QueryData['Page']['media'][number]
 
 export type QueryVar = {
   page?: number
@@ -105,12 +107,7 @@ query getAnimes($page: Int, $genres: [String], $tags: [String], $year: Int, $sea
       format
       season
       seasonYear
-      streamingEpisodes {
-        title
-        thumbnail
-        url
-        site
-      }
+      episodes
       duration
       studios(isMain: true) {
         nodes{

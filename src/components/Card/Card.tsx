@@ -12,53 +12,32 @@ import {
 } from '../../zustand/stores'
 import Image from '../Image/Image'
 import FaceIcon from '../FaceIcon/FaceIcon'
-import { imageSize } from '../../graphql/queries'
+import { imageSize, Media } from '../../graphql/queries'
 import { adjustColor } from '../../helper'
+import Genre from '../Genre/Genre'
 
 interface Props {
   id: number
-  image: {
-    [key: string]: string
-    color: string
-  }
-  title: {
-    romaji: string
-    english: string
-  }
-  genres: string[]
-  status: string
-  nextAiring: {
-    timeUntilAiring: number
-    episode: number
-  } | null
-  meanScore: number
-  description: string
+  image: Media['coverImage']
+  title: Media['title']
+  genres: Media['genres']
+  meanScore: Media['meanScore']
+  description: Media['description']
 }
 
 const filterStateSelector = (state: FilterStateStore) => state.setFilterState
 
-const Card = ({
-  image,
-  title,
-  genres,
-  status,
-  nextAiring,
-  id,
-  meanScore,
-  description,
-}: Props) => {
+const Card = ({ id, image, title, genres, meanScore, description }: Props) => {
   const setFilterState = useFilterStateStore(filterStateSelector)
   const [isLoaded, setIsLoaded] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
 
-  const cards = useMemo(
+  const _genres = useMemo(
     () => uniq(genres).map(g => ({ genre: g, key: v4() })),
     [genres]
   )
 
   const handleSetGenre = (genre: string) => {
-    console.log('y')
-
     setFilterState({
       ...initialFilterState,
       genres: [genre],
@@ -66,17 +45,11 @@ const Card = ({
     })
   }
 
-  const handleImageLoad = () => setIsLoaded(true)
-
-  const handleMouseOver = () => setIsHovered(true)
-
-  const handleMouseLeave = () => setIsHovered(false)
-
   const pageUrl = `/anime/${id}`
 
   const _style = {
-    '--color-text': adjustColor(image.color, 70),
-    '--color-background': image.color,
+    '--color-light': adjustColor(image.color, 70),
+    '--color-original': image.color,
   } as React.CSSProperties
 
   return (
@@ -89,7 +62,7 @@ const Card = ({
           src={image[imageSize]}
           alt={title.romaji}
           className={styles[isLoaded ? 'loaded' : 'loading']}
-          onLoad={handleImageLoad}
+          onLoad={() => setIsLoaded(true)}
         />
       </Link>
 
@@ -117,20 +90,19 @@ const Card = ({
               className={
                 styles.description + (isHovered ? ' ' + styles.active : '')
               }
-              onMouseOver={handleMouseOver}
-              onMouseLeave={handleMouseLeave}>
+              onMouseOver={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}>
               {htmlParser(description)}
             </p>
           </div>
         </section>
         <footer className={styles.genres}>
-          {cards.map(g => (
-            <button
+          {_genres.map(g => (
+            <Genre
               key={g.key}
-              className={styles.genre}
-              onClick={() => handleSetGenre(g.genre)}>
-              {g.genre}
-            </button>
+              genre={g.genre}
+              onClick={() => handleSetGenre(g.genre)}
+            />
           ))}
         </footer>
       </section>

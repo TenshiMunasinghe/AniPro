@@ -1,7 +1,7 @@
 import startCase from 'lodash/startCase'
 import lowerCase from 'lodash/lowerCase'
 
-const pluralize = (num: number, str: string) => {
+export const pluralize = (num: number, str: string) => {
   return num === 1 ? `${num} ${str}` : `${num} ${str}s`
 }
 

@@ -38,10 +38,10 @@ const Result = ({ loading, media, cardType }: Props) => {
                   format={m.format}
                   season={m.season}
                   seasonYear={m.seasonYear}
-                  streamingEpisodes={m.streamingEpisodes}
+                  episodes={m.episodes}
                   duration={m.duration}
                   meanScore={m.meanScore}
-                  studio={m.studios.nodes[0].name}
+                  studios={m.studios}
                 />
               )
 
@@ -53,8 +53,6 @@ const Result = ({ loading, media, cardType }: Props) => {
                   image={m.coverImage}
                   title={m.title}
                   genres={m.genres}
-                  status={m.status}
-                  nextAiring={m.nextAiringEpisode}
                   description={m.description}
                   meanScore={m.meanScore}
                 />

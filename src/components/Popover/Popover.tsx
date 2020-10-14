@@ -1,25 +1,31 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
+import { v4 } from 'uuid'
+import uniq from 'lodash/uniq'
 
 import styles from './Popover.module.scss'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import { convertFromSeconds, adjustColor } from '../../helper'
+import {
+  convertFromSeconds,
+  adjustColor,
+  pluralize,
+  toStartCase,
+} from '../../helper'
+import Genre from '../Genre/Genre'
+import { Media } from '../../graphql/queries'
 
 interface Props {
   isVisible: boolean
-  format: string
-  season?: string
-  seasonYear?: number
-  streamingEpisodes?: number
-  duration?: number
-  genres: string[]
-  studio: string
-  color: string
-  meanScore: number
-  nextAiringEpisode: {
-    timeUntilAiring: number
-    episode: number
-  } | null
+  format: Media['format']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
+  episodes: Media['episodes']
+  duration: Media['duration']
+  genres: Media['genres']
+  studios: Media['studios']
+  color: Media['coverImage']['color']
+  meanScore: Media['meanScore']
+  nextAiringEpisode: Media['nextAiringEpisode']
 }
 
 type Position = {
@@ -34,13 +40,21 @@ const Popover = ({
   isVisible,
   season,
   seasonYear,
-  studio,
+  studios,
   color,
   meanScore,
+  genres,
+  format,
+  episodes,
 }: Props) => {
   const [position, setPosition] = useState<Position | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const windowWidth = useWindowSizeStore(windowStateSelector)
+
+  const _genres = useMemo(
+    () => uniq(genres).map(g => ({ genre: g, key: v4() })),
+    [genres]
+  )
 
   useLayoutEffect(() => {
     setPosition(() => {
@@ -57,12 +71,14 @@ const Popover = ({
     })
   }, [])
 
-  const classNameModifier =
-    position === null || !isVisible
-      ? 'hide'
+  const positionClass =
+    position === null
+      ? ''
       : position.x + position.width > windowWidth
       ? 'left'
       : 'right'
+
+  const isHidden = position === null || !isVisible
 
   // if(    position&& position.x + position.width > windowWidth
   //   ) classNameModifier = 'left'
@@ -70,31 +86,52 @@ const Popover = ({
     ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
         nextAiringEpisode.timeUntilAiring
       )}`
-    : `${season} ${seasonYear}`
+    : season && seasonYear
+    ? `${toStartCase(season)} ${seasonYear}`
+    : ''
 
   const _style = {
-    '--color-text': adjustColor(color, 70),
+    '--color-light': adjustColor(color, 70),
   } as React.CSSProperties
 
   return (
     <aside
-      className={styles.wrapper + ' ' + styles[classNameModifier]}
+      className={
+        styles.wrapper +
+        ' ' +
+        styles[positionClass] +
+        (isHidden ? ' ' + styles.hide : '')
+      }
       ref={wrapperRef}
       style={_style}>
       <header className={styles.header}>
         <div className={styles.airingInfo}>{airingInfo}</div>
-      </header>
-      <section className={styles.info}>
-        <div className={styles.studio}>{studio}</div>
         {meanScore && (
           <div className={styles.score}>
             <FaceIcon meanScore={meanScore} />
             {meanScore}%
           </div>
         )}
-      </section>
+      </header>
 
-      <footer className={styles.genres}></footer>
+      <div className={styles.studio}>{studios.nodes[0]?.name}</div>
+      <div className={styles.info}>
+        {format}
+        {episodes ? (
+          <>
+            <span className={styles.separator}>•</span>
+            {pluralize(episodes, 'Episode')}
+          </>
+        ) : (
+          ''
+        )}
+      </div>
+
+      <footer className={styles.genres}>
+        {_genres.slice(0, 3).map(g => (
+          <Genre key={g.key} genre={g.genre} />
+        ))}
+      </footer>
     </aside>
   )
 }

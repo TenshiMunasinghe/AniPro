@@ -38,8 +38,8 @@ $dp-24: #353535;
 
 @mixin add-ellipsis($lines: 1) {
   display: -webkit-box;
-  line-clamp: $lines;
   -webkit-line-clamp: $lines;
+  line-clamp: $lines;
   -moz-box-orient: vertical;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;

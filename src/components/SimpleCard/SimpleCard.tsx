@@ -4,32 +4,23 @@ import { Link } from 'react-router-dom'
 import styles from './SimpleCard.module.scss'
 import Image from '../Image/Image'
 import Popover from '../Popover/Popover'
-import { imageSize } from '../../graphql/queries'
+import { imageSize, Media } from '../../graphql/queries'
 import { adjustColor } from '../../helper'
 
 interface Props {
   id: number
-  image: {
-    [key: string]: string
-    color: string
-  }
-  title: {
-    english: string
-    romaji: string
-  }
-  format: string
-  season?: string
-  seasonYear?: number
-  streamingEpisodes?: number
-  duration?: number
-  genres: string[]
-  status: string
-  studio: string
-  meanScore: number
-  nextAiringEpisode: {
-    timeUntilAiring: number
-    episode: number
-  } | null
+  image: Media['coverImage']
+  title: Media['title']
+  format: Media['format']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
+  episodes: Media['episodes']
+  duration: Media['duration']
+  genres: Media['genres']
+  status: Media['status']
+  studios: Media['studios']
+  meanScore: Media['meanScore']
+  nextAiringEpisode: Media['nextAiringEpisode']
 }
 
 const SimpleCard = ({
@@ -39,11 +30,11 @@ const SimpleCard = ({
   format,
   season,
   seasonYear,
-  streamingEpisodes,
+  episodes,
   duration,
   genres,
   status,
-  studio,
+  studios,
   nextAiringEpisode,
   meanScore,
 }: Props) => {
@@ -54,8 +45,8 @@ const SimpleCard = ({
   const url = `/anime/${id}`
 
   const _style = {
-    '--color-text': adjustColor(image.color, 70),
-    '--color-background': image.color,
+    '--color-light': adjustColor(image.color, 70),
+    '--color-original': image.color,
   } as React.CSSProperties
 
   return (
@@ -77,9 +68,9 @@ const SimpleCard = ({
             alt={title.romaji}
           />
         </Link>
-        <h5 className={styles.title}>
-          <Link to={url}>{title.romaji}</Link>
-        </h5>
+        <Link to={url} className={styles.title}>
+          {title.romaji}
+        </Link>
       </article>
 
       <Popover
@@ -89,9 +80,9 @@ const SimpleCard = ({
         format={format}
         season={season}
         seasonYear={seasonYear}
-        streamingEpisodes={streamingEpisodes}
+        episodes={episodes}
         duration={duration}
-        studio={studio}
+        studios={studios}
         color={image.color}
         meanScore={meanScore}
       />
