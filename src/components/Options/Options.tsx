@@ -18,7 +18,7 @@ const Ripple = createRipples({
   during: 500,
 })
 
-const Options = ({
+export const Options = ({
   isVisible,
   options,
   handleChange,
@@ -53,5 +53,3 @@ const Options = ({
     </div>
   )
 }
-
-export default Options

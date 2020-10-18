@@ -11,7 +11,7 @@ const filterStateSelector = ({
   resetFilterState,
 }: FilterStateStore) => ({ filterState, resetFilterState })
 
-const Home = () => {
+export const Home = () => {
   const {
     reset: resetSearchText,
     formState: { isSubmitted },
@@ -36,5 +36,3 @@ const Home = () => {
 
   return <div className={styles.wrapper}>Home boi</div>
 }
-
-export default Home

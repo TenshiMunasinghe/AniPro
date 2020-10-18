@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 import styles from './CardLoading.module.scss'
@@ -11,7 +11,7 @@ interface Props {
 const color = '#454545'
 const highlightColor = '#616161'
 
-const CardLoading = ({ type }: Props) => {
+export const CardLoading = memo(({ type }: Props) => {
   switch (type) {
     case 'simple':
       return (
@@ -53,6 +53,4 @@ const CardLoading = ({ type }: Props) => {
     default:
       return <></>
   }
-}
-
-export default React.memo(CardLoading)
+})

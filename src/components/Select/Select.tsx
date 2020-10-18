@@ -1,8 +1,8 @@
-import React, { useState, RefObject, useRef } from 'react'
+import React, { useState, RefObject, useRef, memo } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
-import Options from '../Options/Options'
+import { Options } from '../Options/Options'
 import { useClickedOutside } from '../../hooks/useClickedOutside'
 import { toStartCase } from '../../helper'
 
@@ -18,113 +18,113 @@ interface Props {
   name: string
 }
 
-const Select = ({
-  onChange,
-  options,
-  isMulti = false,
-  defaultValue = isMulti ? [] : '',
-  selected,
-  name: _name,
-}: Props) => {
-  const name = toStartCase(_name)
-  const [inputState, setInputState] = useState('')
-  const inputRef = useRef<HTMLInputElement>(null)
+export const Select = memo(
+  ({
+    onChange,
+    options,
+    isMulti = false,
+    defaultValue = isMulti ? [] : '',
+    selected,
+    name: _name,
+  }: Props) => {
+    const name = toStartCase(_name)
+    const [inputState, setInputState] = useState('')
+    const inputRef = useRef<HTMLInputElement>(null)
 
-  const { ref, isClickedOut } = useClickedOutside()
+    const { ref, isClickedOut } = useClickedOutside()
 
-  if (!ref) {
-    return <></>
-  }
-
-  const handleChange = (value: string) => {
-    setInputState('')
-    if (!isMulti) {
-      onChange(value === selected ? '' : value)
-      return
+    if (!ref) {
+      return <></>
     }
-    const next = [...(selected as string[])]
-    if (next.includes(value)) {
-      const i = next.indexOf(value)
-      next.splice(i, 1)
-    } else {
-      next.push(value)
+
+    const handleChange = (value: string) => {
+      setInputState('')
+      if (!isMulti) {
+        onChange(value === selected ? '' : value)
+        return
+      }
+      const next = [...(selected as string[])]
+      if (next.includes(value)) {
+        const i = next.indexOf(value)
+        next.splice(i, 1)
+      } else {
+        next.push(value)
+      }
+      onChange(next)
     }
-    onChange(next)
-  }
 
-  const resetSelect = (e: React.MouseEvent) => {
-    e.stopPropagation()
-    onChange(defaultValue)
-    setInputState('')
-  }
+    const resetSelect = (e: React.MouseEvent) => {
+      e.stopPropagation()
+      onChange(defaultValue)
+      setInputState('')
+    }
 
-  const focusInput = () => {
-    inputRef.current && inputRef.current.focus()
-  }
+    const focusInput = () => {
+      inputRef.current && inputRef.current.focus()
+    }
 
-  return (
-    <div className={styles.wrapper}>
-      <label className={styles.label} htmlFor={name}>
-        {name}
-      </label>
-      <div
-        className={styles.dropdown}
-        ref={ref as RefObject<HTMLDivElement>}
-        aria-haspopup='true'
-        aria-expanded={!isClickedOut}>
-        <button className={styles.dropdownHeader} onClick={focusInput}>
-          <input
-            className={styles.input}
-            placeholder={selected.length === 0 ? 'Any' : ''}
-            value={inputState}
-            id={name}
-            name={name}
-            onChange={e => setInputState(e.target.value)}
-            ref={inputRef}
-          />
+    return (
+      <div className={styles.wrapper}>
+        <label className={styles.label} htmlFor={name}>
+          {name}
+        </label>
+        <div
+          className={styles.dropdown}
+          ref={ref as RefObject<HTMLDivElement>}
+          aria-haspopup='true'
+          aria-expanded={!isClickedOut}>
+          <button className={styles.dropdownHeader} onClick={focusInput}>
+            <input
+              className={styles.input}
+              placeholder={selected.length === 0 ? 'Any' : ''}
+              value={inputState}
+              id={name}
+              name={name}
+              onChange={e => setInputState(e.target.value)}
+              ref={inputRef}
+            />
 
-          {selected.length !== 0 && (
-            <div className={styles.selected}>
-              {isMulti ? (
-                <div>
-                  <div className={styles.selectedItem}>
-                    {options.find(o => o.value === selected[0])?.label}
-                  </div>
-                  {selected.length > 1 && (
+            {selected.length !== 0 && (
+              <div className={styles.selected}>
+                {isMulti ? (
+                  <div>
                     <div className={styles.selectedItem}>
-                      +{selected.length - 1}
+                      {options.find(o => o.value === selected[0])?.label}
                     </div>
-                  )}
-                </div>
-              ) : (
-                <div className={styles.selectedItem}>
-                  {options.find(o => o.value === selected)?.label}
-                </div>
-              )}
-            </div>
-          )}
+                    {selected.length > 1 && (
+                      <div className={styles.selectedItem}>
+                        +{selected.length - 1}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className={styles.selectedItem}>
+                    {options.find(o => o.value === selected)?.label}
+                  </div>
+                )}
+              </div>
+            )}
 
-          {selected.length !== 0 ? (
-            <FaTimes onClick={resetSelect} aria-label='cross' />
-          ) : (
-            <FaAngleDown aria-label='angle down' />
-          )}
-        </button>
+            {selected.length !== 0 ? (
+              <FaTimes onClick={resetSelect} aria-label='cross' />
+            ) : (
+              <FaAngleDown aria-label='angle down' />
+            )}
+          </button>
 
-        <Options
-          isVisible={!isClickedOut}
-          options={options.filter(
-            o =>
-              o.label.toLowerCase().substring(0, inputState.length) ===
-              inputState.toLowerCase()
-          )}
-          handleChange={handleChange}
-          isMulti={isMulti}
-          selected={selected}
-        />
+          <Options
+            isVisible={!isClickedOut}
+            options={options.filter(
+              o =>
+                o.label.toLowerCase().substring(0, inputState.length) ===
+                inputState.toLowerCase()
+            )}
+            handleChange={handleChange}
+            isMulti={isMulti}
+            selected={selected}
+          />
+        </div>
       </div>
-    </div>
-  )
-}
-
-export default React.memo(Select)
+    )
+  }
+)

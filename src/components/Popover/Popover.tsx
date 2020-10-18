@@ -3,7 +3,7 @@ import { v4 } from 'uuid'
 import uniq from 'lodash/uniq'
 
 import styles from './Popover.module.scss'
-import FaceIcon from '../FaceIcon/FaceIcon'
+import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import {
   convertFromSeconds,
@@ -11,7 +11,7 @@ import {
   pluralize,
   toStartCase,
 } from '../../helper'
-import Genre from '../Genre/Genre'
+import { Genre } from '../Genre/Genre'
 import { Media } from '../../graphql/queries'
 
 interface Props {
@@ -35,7 +35,7 @@ type Position = {
 
 const windowStateSelector = (state: WindowSizeStore) => state.width
 
-const Popover = ({
+export const Popover = ({
   nextAiringEpisode,
   isVisible,
   season,
@@ -80,8 +80,6 @@ const Popover = ({
 
   const isHidden = position === null || !isVisible
 
-  // if(    position&& position.x + position.width > windowWidth
-  //   ) classNameModifier = 'left'
   const airingInfo = nextAiringEpisode
     ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
         nextAiringEpisode.timeUntilAiring
@@ -135,5 +133,3 @@ const Popover = ({
     </aside>
   )
 }
-
-export default Popover

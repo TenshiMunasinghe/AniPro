@@ -7,12 +7,10 @@ interface Props {
   onClick?: () => void
 }
 
-const Genre = ({ genre, onClick }: Props) => {
+export const Genre = ({ genre, onClick }: Props) => {
   return (
     <button className={styles.genre} onClick={onClick}>
       {genre}
     </button>
   )
 }
-
-export default Genre

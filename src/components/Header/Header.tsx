@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, RefObject } from 'react'
 
 import styles from './Header.module.scss'
 
-const Header = () => {
+export const Header = () => {
   const [isVisible, setIsVisible] = useState(true)
   const lastScroll = useRef(0)
   const wrapperRef = useRef<HTMLElement>(null)
@@ -38,5 +38,3 @@ const Header = () => {
     </header>
   )
 }
-
-export default Header

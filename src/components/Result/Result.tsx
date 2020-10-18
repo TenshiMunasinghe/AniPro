@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import styles from './Result.module.scss'
-import Card from '../Card/Card'
-import CardLoading from '../CardLoading/CardLoading'
+import { CardChart } from '../CardChart/CardChart'
+import { CardCover } from '../CardCover/CardCover'
+import { CardLoading } from '../CardLoading/CardLoading'
 import { QueryData } from '../../graphql/queries'
 import { CardType } from '../../pages/search/Search'
-import SimpleCard from '../SimpleCard/SimpleCard'
 import range from 'lodash/range'
 
 interface Props {
@@ -19,7 +19,7 @@ const loadingSkeletonCount = {
   simple: 12,
 }
 
-const Result = ({ loading, media, cardType }: Props) => {
+export const Result = memo(({ loading, media, cardType }: Props) => {
   return (
     <main className={styles.slider + ' ' + styles[cardType]}>
       {media &&
@@ -27,7 +27,7 @@ const Result = ({ loading, media, cardType }: Props) => {
           switch (cardType) {
             case 'simple':
               return (
-                <SimpleCard
+                <CardCover
                   key={m.id}
                   id={m.id}
                   image={m.coverImage}
@@ -47,7 +47,7 @@ const Result = ({ loading, media, cardType }: Props) => {
 
             default:
               return (
-                <Card
+                <CardChart
                   key={m.id}
                   id={m.id}
                   image={m.coverImage}
@@ -65,6 +65,4 @@ const Result = ({ loading, media, cardType }: Props) => {
         ))}
     </main>
   )
-}
-
-export default React.memo(Result)
+})

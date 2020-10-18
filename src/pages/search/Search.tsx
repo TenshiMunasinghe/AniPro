@@ -16,10 +16,10 @@ import {
 import { SortBy, sortByOptions } from '../../filterOptions/index'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
-import Result from '../../components/Result/Result'
-import ScrollButton from '../../components/ScrollButton/ScrollButton'
-import SimpleSelect from '../../components/SimpleSelect/SimpleSelect'
-import NotFound from '../../components/NotFound/NotFound'
+import { Result } from '../../components/Result/Result'
+import { ScrollButton } from '../../components/ScrollButton/ScrollButton'
+import { SimpleSelect } from '../../components/SimpleSelect/SimpleSelect'
+import { NotFound } from '../../components/NotFound/NotFound'
 
 export type CardType = 'default' | 'simple'
 
@@ -36,7 +36,7 @@ const filterStateSelector = ({
   setFilterState,
 }: FilterStateStore) => ({ filterState, setFilterState })
 
-const SearchResult = () => {
+export const Search = () => {
   const { getValues, reset } = useFormContext()
   const searchText = getValues('searchText')
   const { filterState, setFilterState } = useFilterStateStore(
@@ -213,5 +213,3 @@ const SearchResult = () => {
     </>
   )
 }
-
-export default SearchResult

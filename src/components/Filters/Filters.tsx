@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 import { v4 } from 'uuid'
 
 import styles from './Filters.module.scss'
-import SearchBar from '../SearchBar/SearchBar'
-import Select from '../../components/Select/Select'
+import { SearchBar } from '../SearchBar/SearchBar'
+import { Select } from '../../components/Select/Select'
 import { filterOptions } from '../../filterOptions/index'
 import {
   useFilterStateStore,
@@ -17,7 +17,7 @@ const filterStateSelector = ({
   setFilterState,
 }: FilterStateStore) => ({ filterState, setFilterState })
 
-const Filters = () => {
+export const Filters = () => {
   const { filterState, setFilterState } = useFilterStateStore(
     filterStateSelector
   )
@@ -59,5 +59,3 @@ const Filters = () => {
     </>
   )
 }
-
-export default Filters

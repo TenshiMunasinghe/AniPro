@@ -15,7 +15,7 @@ interface State {
 const defaultFallbackSrc =
   'https://upload.wikimedia.org/wikipedia/commons/4/41/Noimage.svg'
 
-const Image = <T extends Props>({
+export const Image = <T extends Props>({
   fallbackSrc = defaultFallbackSrc,
   ...props
 }: T) => {
@@ -39,5 +39,3 @@ const Image = <T extends Props>({
     />
   )
 }
-
-export default React.memo(Image)

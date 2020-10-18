@@ -4,7 +4,7 @@ import { FaSearch } from 'react-icons/fa'
 
 import styles from './SearchBar.module.scss'
 
-const SearchBar = () => {
+export const SearchBar = () => {
   const {
     register,
     handleSubmit,
@@ -37,5 +37,3 @@ const SearchBar = () => {
     </form>
   )
 }
-
-export default SearchBar

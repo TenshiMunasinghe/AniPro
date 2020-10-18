@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useForm, FormProvider } from 'react-hook-form'
 
 import { useWindowResize } from './hooks/useWindowResize'
-import Search from './pages/search/Search'
-import Anime from './pages/anime/Anime'
-import Home from './pages/home/Home'
-import Header from './components/Header/Header'
-import Filters from './components/Filters/Filters'
+import { Search } from './pages/search/Search'
+import { Anime } from './pages/anime/Anime'
+import { Home } from './pages/home/Home'
+import { Header } from './components/Header/Header'
+import { Filters } from './components/Filters/Filters'
 
-const App = () => {
+export const App = () => {
   const methods = useForm({ defaultValues: { searchText: '' } })
   useWindowResize()
 
@@ -39,5 +39,3 @@ const App = () => {
     </>
   )
 }
-
-export default App
