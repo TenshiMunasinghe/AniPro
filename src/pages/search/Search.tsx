@@ -21,7 +21,7 @@ import { ScrollButton } from '../../components/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/SimpleSelect/SimpleSelect'
 import { NotFound } from '../../components/NotFound/NotFound'
 
-export type CardType = 'default' | 'simple'
+export type CardType = 'default' | 'simple' | 'table'
 
 type FetchNewDataParam = { queryVariables: QueryVar; signal: any }
 
@@ -42,7 +42,7 @@ export const Search = () => {
   const { filterState, setFilterState } = useFilterStateStore(
     filterStateSelector
   )
-  const [cardType, setCardType] = useState<CardType>('default')
+  const [cardType, setCardType] = useState<CardType>('table')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -100,6 +100,7 @@ export const Search = () => {
               variables: {
                 ...queryVariables,
                 page: data.Page.pageInfo.currentPage + 1,
+                perPage: 20,
                 signal,
               },
             },

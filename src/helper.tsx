@@ -1,6 +1,8 @@
 import startCase from 'lodash/startCase'
 import lowerCase from 'lodash/lowerCase'
 
+import { Media } from './graphql/queries'
+
 export const pluralize = (num: number, str: string) => {
   return num === 1 ? `${num} ${str}` : `${num} ${str}s`
 }
@@ -71,3 +73,20 @@ export const adjustColor = (hex: string | null, lightness: number) => {
 }
 
 export const toStartCase = (str: string) => startCase(lowerCase(str))
+
+export const airingInfo = ({
+  nextAiringEpisode,
+  season,
+  seasonYear,
+}: {
+  nextAiringEpisode: Media['nextAiringEpisode']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
+}) =>
+  nextAiringEpisode
+    ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
+        nextAiringEpisode.timeUntilAiring
+      )}`
+    : season && seasonYear
+    ? `${toStartCase(season)} ${seasonYear}`
+    : ''

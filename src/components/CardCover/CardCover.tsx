@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './CardCover.module.scss'
 import { Image } from '../Image/Image'
 import { Popover } from '../Popover/Popover'
-import { imageSize, Media } from '../../graphql/queries'
+import { imageSize, Media, GenreType } from '../../graphql/queries'
 import { adjustColor } from '../../helper'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
   seasonYear: Media['seasonYear']
   episodes: Media['episodes']
   duration: Media['duration']
-  genres: Media['genres']
+  genres: GenreType
   status: Media['status']
   studios: Media['studios']
   meanScore: Media['meanScore']

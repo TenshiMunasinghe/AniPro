@@ -1,8 +1,6 @@
-import React, { useState, useMemo, memo } from 'react'
-import uniq from 'lodash/uniq'
+import React, { useState, memo } from 'react'
 import htmr from 'htmr'
 import { Link } from 'react-router-dom'
-import { v4 } from 'uuid'
 
 import styles from './CardChart.module.scss'
 import {
@@ -12,7 +10,7 @@ import {
 } from '../../zustand/stores'
 import { Image } from '../Image/Image'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
-import { imageSize, Media } from '../../graphql/queries'
+import { imageSize, Media, GenreType } from '../../graphql/queries'
 import { adjustColor } from '../../helper'
 import { Genre } from '../Genre/Genre'
 
@@ -20,7 +18,7 @@ interface Props {
   id: number
   image: Media['coverImage']
   title: Media['title']
-  genres: Media['genres']
+  genres: GenreType
   meanScore: Media['meanScore']
   description: Media['description']
 }
@@ -32,11 +30,6 @@ export const CardChart = memo(
     const setFilterState = useFilterStateStore(filterStateSelector)
     const [isLoaded, setIsLoaded] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
-
-    const _genres = useMemo(
-      () => uniq(genres).map(g => ({ genre: g, key: v4() })),
-      [genres]
-    )
 
     const handleSetGenre = (genre: string) => {
       setFilterState({
@@ -98,7 +91,7 @@ export const CardChart = memo(
             </div>
           </section>
           <footer className={styles.genres}>
-            {_genres.map(g => (
+            {genres.map(g => (
               <Genre
                 key={g.key}
                 genre={g.genre}

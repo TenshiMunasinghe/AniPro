@@ -33,10 +33,11 @@ export type QueryData = {
         romaji: string
       }
       coverImage: {
-        [key: string]: string
+        extraLarge: string
+        large: string
         color: string
       }
-      status: string
+      status: 'FINISHED' | 'RELEASING' | 'NOT_YET_RELEASED' | 'CANCELLED'
       genres: string[]
       meanScore: number
       description: string
@@ -45,6 +46,7 @@ export type QueryData = {
       seasonYear: number | null
       episodes: number | null
       duration: number
+      popularity: number
       studios: {
         nodes: { name: string }[] | undefined[]
       }
@@ -57,6 +59,8 @@ export type QueryData = {
 }
 
 export type Media = QueryData['Page']['media'][number]
+
+export type GenreType = { genre: string; key: string }[]
 
 export type QueryVar = {
   page?: number
@@ -109,6 +113,7 @@ query getAnimes($page: Int, $genres: [String], $tags: [String], $year: Int, $sea
       seasonYear
       episodes
       duration
+      popularity
       studios(isMain: true) {
         nodes{
           name

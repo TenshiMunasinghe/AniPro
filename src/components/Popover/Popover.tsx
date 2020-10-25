@@ -1,6 +1,4 @@
-import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
-import { v4 } from 'uuid'
-import uniq from 'lodash/uniq'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 
 import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
@@ -12,7 +10,8 @@ import {
   toStartCase,
 } from '../../helper'
 import { Genre } from '../Genre/Genre'
-import { Media } from '../../graphql/queries'
+import { Media, GenreType } from '../../graphql/queries'
+import { airingInfo } from '../../helper'
 
 interface Props {
   isVisible: boolean
@@ -21,7 +20,7 @@ interface Props {
   seasonYear: Media['seasonYear']
   episodes: Media['episodes']
   duration: Media['duration']
-  genres: Media['genres']
+  genres: GenreType
   studios: Media['studios']
   color: Media['coverImage']['color']
   meanScore: Media['meanScore']
@@ -51,11 +50,6 @@ export const Popover = ({
   const wrapperRef = useRef<HTMLDivElement | null>(null)
   const windowWidth = useWindowSizeStore(windowStateSelector)
 
-  const _genres = useMemo(
-    () => uniq(genres).map(g => ({ genre: g, key: v4() })),
-    [genres]
-  )
-
   useLayoutEffect(() => {
     setPosition(() => {
       if (!wrapperRef.current) {
@@ -80,14 +74,6 @@ export const Popover = ({
 
   const isHidden = position === null || !isVisible
 
-  const airingInfo = nextAiringEpisode
-    ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
-        nextAiringEpisode.timeUntilAiring
-      )}`
-    : season && seasonYear
-    ? `${toStartCase(season)} ${seasonYear}`
-    : ''
-
   const _style = {
     '--color-light': adjustColor(color, 70),
   } as React.CSSProperties
@@ -103,7 +89,9 @@ export const Popover = ({
       ref={wrapperRef}
       style={_style}>
       <header className={styles.header}>
-        <div className={styles.airingInfo}>{airingInfo}</div>
+        <div className={styles.airingInfo}>
+          {airingInfo({ nextAiringEpisode, season, seasonYear })}
+        </div>
         {meanScore && (
           <div className={styles.score}>
             <FaceIcon meanScore={meanScore} />
@@ -126,7 +114,7 @@ export const Popover = ({
       </div>
 
       <footer className={styles.genres}>
-        {_genres.slice(0, 3).map(g => (
+        {genres.slice(0, 3).map(g => (
           <Genre key={g.key} genre={g.genre} />
         ))}
       </footer>
