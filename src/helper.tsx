@@ -1,10 +1,54 @@
 import startCase from 'lodash/startCase'
 import lowerCase from 'lodash/lowerCase'
 
-import { Media } from './graphql/queries'
+import { SearchResult } from './graphql/queries'
 
 export const pluralize = (num: number, str: string) => {
   return num === 1 ? `${num} ${str}` : `${num} ${str}s`
+}
+
+type TimeUnits =
+  | 'seconds'
+  | 'minutes'
+  | 'hours'
+  | 'days'
+  | 'weeks'
+  | 'months'
+  | 'years'
+
+export const convertTime = ({
+  num,
+  input,
+  output,
+}: {
+  num: number
+  input: TimeUnits
+  output: TimeUnits[]
+}) => {
+  const r = {} as any
+  const s = {
+    years: 31536000,
+    months: 2592000,
+    weeks: 604800,
+    days: 86400,
+    hours: 3600,
+    minutes: 60,
+    seconds: 1,
+  }
+
+  const _output = output.sort((a, b) => s[b] - s[a])
+
+  let d = num * s[input]
+
+  Object.keys(s)
+    .filter(key => _output.includes(key as TimeUnits))
+    .forEach(k => {
+      const key = k as keyof typeof s
+      r[key] = Math.floor(d / s[key])
+      d -= r[key] * s[key]
+    })
+
+  return r
 }
 
 export const convertFromSeconds = (seconds: number) => {
@@ -20,6 +64,19 @@ export const convertFromSeconds = (seconds: number) => {
     return pluralize(minutes, 'minute')
   } else {
     return pluralize(seconds, 'second')
+  }
+}
+
+export const convertFromMinutes = (minutes: number) => {
+  const hours = Math.floor(minutes / 60)
+  const days = Math.floor(minutes / (60 * 24))
+
+  if (days !== 0) {
+    return pluralize(days, 'day')
+  } else if (hours !== 0) {
+    return pluralize(hours, 'hour')
+  } else if (minutes !== 0) {
+    return pluralize(minutes, 'minute')
   }
 }
 
@@ -79,14 +136,30 @@ export const airingInfo = ({
   season,
   seasonYear,
 }: {
-  nextAiringEpisode: Media['nextAiringEpisode']
-  season: Media['season']
-  seasonYear: Media['seasonYear']
-}) =>
-  nextAiringEpisode
-    ? `Ep ${nextAiringEpisode.episode} airing in ${convertFromSeconds(
-        nextAiringEpisode.timeUntilAiring
-      )}`
-    : season && seasonYear
-    ? `${toStartCase(season)} ${seasonYear}`
-    : ''
+  nextAiringEpisode: SearchResult['nextAiringEpisode']
+  season: SearchResult['season']
+  seasonYear: SearchResult['seasonYear']
+}) => {
+  if (!nextAiringEpisode && season && seasonYear) {
+    return `${toStartCase(season)} ${seasonYear}`
+  } else if (nextAiringEpisode) {
+    const timeUntilAiring = Object.entries<number>(
+      convertTime({
+        num: nextAiringEpisode.timeUntilAiring,
+        input: 'seconds',
+        output: ['weeks', 'days', 'hours', 'minutes'],
+      })
+    )
+      .filter(([_, val]) => val !== 0)
+      .shift()
+
+    return timeUntilAiring
+      ? `Episode ${nextAiringEpisode.episode} airing in ${pluralize(
+          timeUntilAiring[1],
+          timeUntilAiring[0].slice(0, -1)
+        )}`
+      : ''
+  }
+
+  return ''
+}

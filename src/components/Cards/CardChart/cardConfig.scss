@@ -1,9 +1,9 @@
-@import '../../globalStyles/config.scss';
+@import '../../../globalStyles/config.scss';
 
 @mixin card-wrapper {
   display: grid;
   grid-template-columns: 9rem 1fr;
-  background: var(--color-foreground-50);
+  background: var(--color-foreground-100);
   border-radius: 0.1rem;
   overflow: hidden;
   height: 100%;

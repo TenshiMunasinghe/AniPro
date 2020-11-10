@@ -87,7 +87,7 @@ export const Select = memo(
             {selected.length !== 0 && (
               <div className={styles.selected}>
                 {isMulti ? (
-                  <div>
+                  <>
                     <div className={styles.selectedItem}>
                       {options.find(o => o.value === selected[0])?.label}
                     </div>
@@ -96,7 +96,7 @@ export const Select = memo(
                         +{selected.length - 1}
                       </div>
                     )}
-                  </div>
+                  </>
                 ) : (
                   <div className={styles.selectedItem}>
                     {options.find(o => o.value === selected)?.label}

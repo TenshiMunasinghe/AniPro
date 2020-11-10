@@ -3,28 +3,23 @@ import React, { useLayoutEffect, useRef, useState } from 'react'
 import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import {
-  convertFromSeconds,
-  adjustColor,
-  pluralize,
-  toStartCase,
-} from '../../helper'
+import { adjustColor, pluralize, convertTime } from '../../helper'
 import { Genre } from '../Genre/Genre'
-import { Media, GenreType } from '../../graphql/queries'
+import { SearchResult, GenreType } from '../../graphql/queries'
 import { airingInfo } from '../../helper'
 
 interface Props {
   isVisible: boolean
-  format: Media['format']
-  season: Media['season']
-  seasonYear: Media['seasonYear']
-  episodes: Media['episodes']
-  duration: Media['duration']
+  format: SearchResult['format']
+  season: SearchResult['season']
+  seasonYear: SearchResult['seasonYear']
+  episodes: SearchResult['episodes']
+  duration: SearchResult['duration']
   genres: GenreType
-  studios: Media['studios']
-  color: Media['coverImage']['color']
-  meanScore: Media['meanScore']
-  nextAiringEpisode: Media['nextAiringEpisode']
+  studios: SearchResult['studios']
+  color: SearchResult['coverImage']['color']
+  meanScore: SearchResult['meanScore']
+  nextAiringEpisode: SearchResult['nextAiringEpisode']
 }
 
 type Position = {
@@ -45,6 +40,7 @@ export const Popover = ({
   genres,
   format,
   episodes,
+  duration,
 }: Props) => {
   const [position, setPosition] = useState<Position | null>(null)
   const wrapperRef = useRef<HTMLDivElement | null>(null)
@@ -106,7 +102,13 @@ export const Popover = ({
         {episodes ? (
           <>
             <span className={styles.separator}>•</span>
-            {pluralize(episodes, 'Episode')}
+            {format === 'MOVIE'
+              ? convertTime({
+                  num: duration,
+                  input: 'minutes',
+                  output: ['hours', 'minutes'],
+                })
+              : pluralize(episodes, 'Episode')}
           </>
         ) : (
           ''

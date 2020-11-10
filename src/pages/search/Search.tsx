@@ -2,8 +2,8 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import debounce from 'lodash/debounce'
 import uniqBy from 'lodash/uniqBy'
 import produce from 'immer'
+import { v4 } from 'uuid'
 import { useFormContext } from 'react-hook-form'
-import { FaTh, FaThLarge } from 'react-icons/fa'
 
 import styles from './Search.module.scss'
 import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
@@ -20,8 +20,13 @@ import { Result } from '../../components/Result/Result'
 import { ScrollButton } from '../../components/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/SimpleSelect/SimpleSelect'
 import { NotFound } from '../../components/NotFound/NotFound'
+import { CardTypeButton } from '../../components/CardTypeButton/CardTypeButton'
 
-export type CardType = 'default' | 'simple' | 'table'
+const _cardTypes = ['chart', 'cover', 'table'] as const
+
+const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
+
+export type CardType = typeof _cardTypes[number]
 
 type FetchNewDataParam = { queryVariables: QueryVar; signal: any }
 
@@ -154,10 +159,6 @@ export const Search = () => {
     const controller = new AbortController()
     const { signal } = controller
     loadMore({ signal, queryVariables, data })
-
-    return () => {
-      controller.abort()
-    }
   })
 
   const sortByOnChange = (value: string | string[]) => {
@@ -179,12 +180,14 @@ export const Search = () => {
             selected={filterState.sortBy}
           />
           <section className={styles.gridType}>
-            <button onClick={() => setCardType('default')}>
-              <FaThLarge aria-label='default card' />
-            </button>
-            <button onClick={() => setCardType('simple')}>
-              <FaTh aria-label='simple card' />
-            </button>
+            {cardTypes.map(c => (
+              <CardTypeButton
+                key={c.key}
+                cardType={c.type}
+                setCardType={setCardType}
+                isActive={c.type === cardType}
+              />
+            ))}
           </section>
         </section>
 
@@ -201,7 +204,7 @@ export const Search = () => {
         )}
       </div>
 
-      {error || (data && data.Page.media.length === 0) ? (
+      {error || (data && data?.Page.media.length === 0) ? (
         <NotFound />
       ) : (
         <Result

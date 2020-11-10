@@ -1,4 +1,4 @@
-@import '../../globalStyles/config.scss';
+@import '../../../globalStyles/config.scss';
 
 .popoverWrapper {
   position: relative;
@@ -21,7 +21,6 @@
 
   .imageWrapper {
     position: relative;
-    display: block;
     width: 100%;
     padding: 0;
     padding-top: calc(100% / var(--image-aspect-ratio));

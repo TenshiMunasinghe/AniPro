@@ -58,7 +58,7 @@ export type QueryData = {
   }
 }
 
-export type Media = QueryData['Page']['media'][number]
+export type SearchResult = QueryData['Page']['media'][number]
 
 export type GenreType = { genre: string; key: string }[]
 

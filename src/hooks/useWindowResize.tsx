@@ -10,8 +10,6 @@ export const useWindowResize = () => {
 
   const updateSize = useCallback(
     debounce(() => {
-      console.log('called')
-
       setSize({ width: window.innerWidth, height: window.innerHeight })
     }, 250),
     [setSize]

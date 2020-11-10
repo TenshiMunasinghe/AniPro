@@ -7,20 +7,21 @@ import {
   useFilterStateStore,
   initialFilterState,
   FilterStateStore,
-} from '../../zustand/stores'
-import { Image } from '../Image/Image'
-import { FaceIcon } from '../FaceIcon/FaceIcon'
-import { imageSize, Media, GenreType } from '../../graphql/queries'
-import { adjustColor } from '../../helper'
-import { Genre } from '../Genre/Genre'
+} from '../../../zustand/stores'
+import { Image } from '../../Image/Image'
+import { FaceIcon } from '../../FaceIcon/FaceIcon'
+import { SearchResult, GenreType } from '../../../graphql/queries'
+import { adjustColor } from '../../../helper'
+import { Genre } from '../../Genre/Genre'
+import { useIsImageLoaded } from '../../../hooks/useIsImageLoaded'
 
 interface Props {
   id: number
-  image: Media['coverImage']
-  title: Media['title']
+  image: SearchResult['coverImage']
+  title: SearchResult['title']
   genres: GenreType
-  meanScore: Media['meanScore']
-  description: Media['description']
+  meanScore: SearchResult['meanScore']
+  description: SearchResult['description']
 }
 
 const filterStateSelector = (state: FilterStateStore) => state.setFilterState
@@ -28,8 +29,8 @@ const filterStateSelector = (state: FilterStateStore) => state.setFilterState
 export const CardChart = memo(
   ({ id, image, title, genres, meanScore, description }: Props) => {
     const setFilterState = useFilterStateStore(filterStateSelector)
-    const [isLoaded, setIsLoaded] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
+    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
 
     const handleSetGenre = (genre: string) => {
       setFilterState({
@@ -53,10 +54,9 @@ export const CardChart = memo(
           aria-label={title.romaji}
           className={styles.imageWrapper}>
           <Image
-            src={image[imageSize]}
+            src={src}
             alt={title.romaji}
-            className={styles[isLoaded ? 'loaded' : 'loading']}
-            onLoad={() => setIsLoaded(true)}
+            className={styles[isImageLoaded ? 'loaded' : 'loading']}
           />
         </Link>
 
@@ -80,14 +80,14 @@ export const CardChart = memo(
                 )}
               </header>
 
-              <p
+              <div
                 className={
                   styles.description + (isHovered ? ' ' + styles.active : '')
                 }
                 onMouseOver={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
-                {htmr(description)}
-              </p>
+                {htmr(`<p>${description}</p>`)}
+              </div>
             </div>
           </section>
           <footer className={styles.genres}>

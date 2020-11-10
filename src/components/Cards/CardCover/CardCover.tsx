@@ -2,25 +2,26 @@ import React, { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './CardCover.module.scss'
-import { Image } from '../Image/Image'
-import { Popover } from '../Popover/Popover'
-import { imageSize, Media, GenreType } from '../../graphql/queries'
-import { adjustColor } from '../../helper'
+import { Image } from '../../Image/Image'
+import { Popover } from '../../Popover/Popover'
+import { SearchResult, GenreType } from '../../../graphql/queries'
+import { adjustColor } from '../../../helper'
+import { useIsImageLoaded } from '../../../hooks/useIsImageLoaded'
 
 interface Props {
   id: number
-  image: Media['coverImage']
-  title: Media['title']
-  format: Media['format']
-  season: Media['season']
-  seasonYear: Media['seasonYear']
-  episodes: Media['episodes']
-  duration: Media['duration']
+  image: SearchResult['coverImage']
+  title: SearchResult['title']
+  format: SearchResult['format']
+  season: SearchResult['season']
+  seasonYear: SearchResult['seasonYear']
+  episodes: SearchResult['episodes']
+  duration: SearchResult['duration']
   genres: GenreType
-  status: Media['status']
-  studios: Media['studios']
-  meanScore: Media['meanScore']
-  nextAiringEpisode: Media['nextAiringEpisode']
+  status: SearchResult['status']
+  studios: SearchResult['studios']
+  meanScore: SearchResult['meanScore']
+  nextAiringEpisode: SearchResult['nextAiringEpisode']
 }
 
 export const CardCover = memo(
@@ -39,10 +40,11 @@ export const CardCover = memo(
     nextAiringEpisode,
     meanScore,
   }: Props) => {
-    const [isLoaded, setIsLoaded] = useState(false)
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
     const handleMouseOver = () => setIsPopoverVisible(true)
     const handleMouseLeave = () => setIsPopoverVisible(false)
+
+    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
     const url = `/anime/${id}`
 
     const _style = {
@@ -62,14 +64,9 @@ export const CardCover = memo(
             className={
               styles.imageWrapper +
               ' ' +
-              styles[isLoaded ? 'loaded' : 'loading']
+              styles[isImageLoaded ? 'loaded' : 'loading']
             }>
-            <Image
-              className={styles.image}
-              onLoad={() => setIsLoaded(true)}
-              src={image[imageSize]}
-              alt={title.romaji}
-            />
+            <Image className={styles.image} src={src} alt={title.romaji} />
           </Link>
           <Link to={url} className={styles.title}>
             {title.romaji}

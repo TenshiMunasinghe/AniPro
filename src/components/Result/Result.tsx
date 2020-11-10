@@ -3,10 +3,10 @@ import uniq from 'lodash/uniq'
 import { v4 } from 'uuid'
 
 import styles from './Result.module.scss'
-import { CardChart } from '../CardChart/CardChart'
-import { CardCover } from '../CardCover/CardCover'
-import { CardTable } from '../CardTable/CardTable'
-import { CardLoading } from '../CardLoading/CardLoading'
+import { CardChart } from '../Cards/CardChart/CardChart'
+import { CardCover } from '../Cards/CardCover/CardCover'
+import { CardTable } from '../Cards/CardTable/CardTable'
+import { CardLoading } from '../Cards/CardLoading/CardLoading'
 import { QueryData, GenreType } from '../../graphql/queries'
 import { CardType } from '../../pages/search/Search'
 import range from 'lodash/range'
@@ -18,8 +18,8 @@ interface Props {
 }
 
 const loadingSkeletonCount = {
-  default: 4,
-  simple: 12,
+  chart: 4,
+  cover: 12,
   table: 6,
 }
 
@@ -34,7 +34,7 @@ export const Result = memo(({ loading, media, cardType }: Props) => {
           }))
 
           switch (cardType) {
-            case 'simple':
+            case 'cover':
               return (
                 <CardCover
                   key={m.id}
@@ -75,7 +75,7 @@ export const Result = memo(({ loading, media, cardType }: Props) => {
                 />
               )
 
-            default:
+            case 'chart':
               return (
                 <CardChart
                   key={m.id}
@@ -87,6 +87,9 @@ export const Result = memo(({ loading, media, cardType }: Props) => {
                   meanScore={m.meanScore}
                 />
               )
+
+            default:
+              return <></>
           }
         })}
       {loading &&

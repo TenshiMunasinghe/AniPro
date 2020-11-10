@@ -17,6 +17,7 @@ const defaultFallbackSrc =
 
 export const Image = <T extends Props>({
   fallbackSrc = defaultFallbackSrc,
+  imageRef,
   ...props
 }: T) => {
   const [state, setState] = useState<State>({ src: props.src, isError: false })

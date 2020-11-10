@@ -1,0 +1,157 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  display: grid;
+  position: relative;
+  grid-template-columns: 3.25rem 1fr;
+  column-gap: 0.8em;
+  padding: 0.8em;
+  font-size: 0.85rem;
+  border-radius: 0.2em;
+  background: var(--color-foreground-100);
+
+  @include on-hoverable-devices {
+    &:hover {
+      background: var(--image-url);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+
+      &:before {
+        display: block;
+        position: absolute;
+        background: var(--color-foreground-100);
+        content: '';
+        inset: 0;
+        opacity: 0.9;
+      }
+    }
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  align-self: center;
+  padding: 0;
+  padding-top: calc(100% / var(--image-aspect-ratio));
+  border-radius: 0.15rem;
+  overflow: hidden;
+  background: var(--color-original);
+  z-index: 999;
+
+  img {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+
+    &.loaded {
+      opacity: 1;
+    }
+
+    &.loading {
+      opacity: 0;
+    }
+  }
+}
+
+.content {
+  overflow: hidden;
+  z-index: 999;
+
+  @include for-tablet-landscape-up {
+    display: grid;
+    grid-template-columns: 1fr 8rem 8rem 10rem;
+    align-items: center;
+    max-width: 100%;
+    padding-right: 2em;
+  }
+
+  .title {
+    margin-bottom: 1em;
+    a {
+      display: block;
+      margin-bottom: 0.5em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      text-decoration-color: var(--gray-600);
+      text-underline-offset: 0.2em;
+      transition: all 0.15s ease-in-out;
+
+      @include on-hoverable-devices {
+        &:hover {
+          text-decoration-color: inherit;
+          color: var(--color-light);
+        }
+      }
+    }
+
+    @include for-tablet-landscape-up {
+      height: min-content;
+      min-width: 0;
+      max-width: calc(100% - 2em);
+      margin: 0;
+      margin-right: auto;
+
+      a {
+        margin-bottom: 1em;
+      }
+    }
+  }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    font-size: 0.7em;
+    height: 2.5em;
+
+    button {
+      margin-right: 0.5em;
+      margin-bottom: 1em;
+    }
+  }
+
+  .row {
+    display: inline-block;
+    margin-right: 1em;
+    line-height: 1.75;
+
+    @include for-tablet-landscape-up {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+    }
+  }
+
+  .review {
+    svg {
+      vertical-align: top;
+      height: 1.75em;
+    }
+
+    @include for-tablet-landscape-up {
+      display: flex;
+    }
+  }
+
+  .score {
+    .percentage {
+      margin-left: 0.2em;
+    }
+  }
+
+  .subRow {
+    display: inline-block;
+
+    @include for-tablet-landscape-up {
+      font-size: 0.9em;
+      color: var(--color-text-100);
+    }
+  }
+}
