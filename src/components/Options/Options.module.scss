@@ -1,7 +1,7 @@
 @import '../../globalStyles/config.scss';
 
 .wrapper {
-  z-index: 999;
+  z-index: 1000;
   position: absolute;
   opacity: 1;
   transition: all 0.2s ease-in-out;
@@ -19,7 +19,6 @@
 }
 
 .option {
-  position: relative;
   width: 100%;
   font-size: 0.8rem;
   margin-top: 0.5em;
@@ -28,6 +27,7 @@
   justify-content: flex-start;
   cursor: pointer;
   transition: all 0.05s ease-in-out;
+  z-index: 1000;
 
   & > div {
     flex: 1;

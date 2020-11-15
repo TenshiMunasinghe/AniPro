@@ -87,7 +87,7 @@ export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 export const imageSize = 'extraLarge'
 
 export const GET_SEARCH_RESULT = `
-query getAnimes($page: Int, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort], $perPage: Int!) {
+query getSearchResult($page: Int, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort], $perPage: Int!) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       currentPage

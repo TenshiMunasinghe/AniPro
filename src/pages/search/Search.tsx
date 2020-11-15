@@ -28,12 +28,11 @@ const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
 
 export type CardType = typeof _cardTypes[number]
 
-type FetchNewDataParam = { queryVariables: QueryVar; signal: any }
+type FetchNewDataParam = { queryVariables: QueryVar }
 
 type LoadMoreParam = {
   queryVariables: QueryVar
   data: QueryData | null
-  signal: any
 }
 
 const filterStateSelector = ({
@@ -67,7 +66,7 @@ export const Search = () => {
   )
 
   const fetchNewData = useCallback(
-    debounce(async ({ queryVariables, signal }: FetchNewDataParam) => {
+    debounce(async ({ queryVariables }: FetchNewDataParam) => {
       setData(null)
       try {
         setLoading(true)
@@ -76,7 +75,6 @@ export const Search = () => {
             json: {
               query: GET_SEARCH_RESULT,
               variables: queryVariables,
-              signal,
             },
           })
           .json()
@@ -94,7 +92,7 @@ export const Search = () => {
   )
 
   const loadMore = useCallback(
-    async ({ data, queryVariables, signal }: LoadMoreParam) => {
+    async ({ data, queryVariables }: LoadMoreParam) => {
       if (!data) return
       try {
         setLoading(true)
@@ -106,7 +104,6 @@ export const Search = () => {
                 ...queryVariables,
                 page: data.Page.pageInfo.currentPage + 1,
                 perPage: 20,
-                signal,
               },
             },
           })
@@ -141,14 +138,8 @@ export const Search = () => {
 
   // requesting on filter state change
   useEffect(() => {
-    const controller = new AbortController()
-    const { signal } = controller
-    fetchNewData({ signal, queryVariables })
+    fetchNewData({ queryVariables })
     window.scrollTo(0, 0)
-
-    return () => {
-      controller.abort()
-    }
   }, [queryVariables, fetchNewData])
 
   // pagination
@@ -156,9 +147,7 @@ export const Search = () => {
     if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
       return
     }
-    const controller = new AbortController()
-    const { signal } = controller
-    loadMore({ signal, queryVariables, data })
+    loadMore({ queryVariables, data })
   })
 
   const sortByOnChange = (value: string | string[]) => {

@@ -9,7 +9,6 @@ type ParamTypes = {
 
 export const Anime = (props: Props) => {
   const { id } = useParams<ParamTypes>()
-  console.log(id)
 
   return <div>yo</div>
 }

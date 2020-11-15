@@ -86,7 +86,11 @@ export const CardChart = memo(
                 }
                 onMouseOver={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}>
-                {htmr(`<p>${description}</p>`)}
+                {description ? (
+                  htmr(`<p>${description}</p>`)
+                ) : (
+                  <i>no description</i>
+                )}
               </div>
             </div>
           </section>
