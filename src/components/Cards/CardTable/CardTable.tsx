@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './CardTable.module.scss'
-import { SearchResult, GenreType, currentYear } from '../../../graphql/queries'
+import { SearchResult, currentYear } from '../../../graphql/queries'
 import {
   useFilterStateStore,
   FilterStateStore,
@@ -18,6 +18,7 @@ import {
   pluralize,
 } from '../../../helper'
 import { useIsImageLoaded } from '../../../hooks/useIsImageLoaded'
+import { addKey } from '../../../helper'
 
 interface Props {
   id: number
@@ -28,7 +29,7 @@ interface Props {
   seasonYear: SearchResult['seasonYear']
   episodes: SearchResult['episodes']
   duration: SearchResult['duration']
-  genres: GenreType
+  genres: SearchResult['genres']
   status: SearchResult['status']
   studios: SearchResult['studios']
   meanScore: SearchResult['meanScore']
@@ -74,6 +75,9 @@ export const CardTable = ({
     '--color-original': image.color,
     '--image-url': `url(${src})`,
   } as React.CSSProperties
+
+  const _genres = useMemo(() => addKey(genres), [genres])
+
   return (
     <article className={styles.wrapper} style={_style}>
       <Link to={url} className={styles.imageWrapper}>
@@ -88,11 +92,11 @@ export const CardTable = ({
         <div className={styles.title}>
           <Link to={url}>{title.romaji}</Link>
           <div className={styles.genres}>
-            {genres.map(g => (
+            {_genres.map(g => (
               <Genre
                 key={g.key}
-                genre={g.genre}
-                onClick={() => handleSetGenre(g.genre)}
+                genre={g.value}
+                onClick={() => handleSetGenre(g.value)}
               />
             ))}
           </div>
@@ -105,7 +109,7 @@ export const CardTable = ({
               {meanScore ? meanScore + '%' : ''}
             </div>
             <div className={styles.subRow}>
-              {popularity !== 0 ? `${popularity} users` : ''}
+              {meanScore && popularity !== 0 ? `${popularity} users` : ''}
             </div>
           </div>
         </div>

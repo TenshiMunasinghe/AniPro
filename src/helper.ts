@@ -2,6 +2,7 @@ import startCase from 'lodash/startCase'
 import lowerCase from 'lodash/lowerCase'
 
 import { SearchResult } from './graphql/queries'
+import { v4 } from 'uuid'
 
 export const pluralize = (num: number, str: string) => {
   return num === 1 ? `${num} ${str}` : `${num} ${str}s`
@@ -16,15 +17,11 @@ type TimeUnits =
   | 'months'
   | 'years'
 
-export const convertTime = ({
-  num,
-  input,
-  output,
-}: {
+export const convertTime: (obj: {
   num: number
   input: TimeUnits
   output: TimeUnits[]
-}) => {
+}) => { [key in TimeUnits]?: number } = ({ num, input, output }) => {
   const r = {} as any
   const s = {
     years: 31536000,
@@ -49,35 +46,6 @@ export const convertTime = ({
     })
 
   return r
-}
-
-export const convertFromSeconds = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60)
-  const hours = Math.floor(seconds / 3600)
-  const days = Math.floor(seconds / (3600 * 24))
-
-  if (days !== 0) {
-    return pluralize(days, 'day')
-  } else if (hours !== 0) {
-    return pluralize(hours, 'hour')
-  } else if (minutes !== 0) {
-    return pluralize(minutes, 'minute')
-  } else {
-    return pluralize(seconds, 'second')
-  }
-}
-
-export const convertFromMinutes = (minutes: number) => {
-  const hours = Math.floor(minutes / 60)
-  const days = Math.floor(minutes / (60 * 24))
-
-  if (days !== 0) {
-    return pluralize(days, 'day')
-  } else if (hours !== 0) {
-    return pluralize(hours, 'hour')
-  } else if (minutes !== 0) {
-    return pluralize(minutes, 'minute')
-  }
 }
 
 const hexToHsl = (H: string) => {
@@ -143,23 +111,28 @@ export const airingInfo = ({
   if (!nextAiringEpisode && season && seasonYear) {
     return `${toStartCase(season)} ${seasonYear}`
   } else if (nextAiringEpisode) {
-    const timeUntilAiring = Object.entries<number>(
+    const timeUntilAiring = timeToArr(
       convertTime({
         num: nextAiringEpisode.timeUntilAiring,
         input: 'seconds',
         output: ['weeks', 'days', 'hours', 'minutes'],
       })
-    )
-      .filter(([_, val]) => val !== 0)
-      .shift()
+    ).shift()
 
-    return timeUntilAiring
+    return timeUntilAiring && timeUntilAiring.num !== undefined
       ? `Episode ${nextAiringEpisode.episode} airing in ${pluralize(
-          timeUntilAiring[1],
-          timeUntilAiring[0].slice(0, -1)
+          timeUntilAiring.num,
+          timeUntilAiring.unit.slice(0, -1)
         )}`
       : ''
   }
 
   return ''
 }
+
+export const timeToArr = (time: { [key in TimeUnits]?: number }) =>
+  Object.entries<number | undefined>(time)
+    .filter(([_, val]) => val !== undefined && val !== 0)
+    .map(([key, val]) => ({ num: val, unit: key }))
+
+export const addKey = <T>(arr: T[]) => arr.map(value => ({ key: v4(), value }))

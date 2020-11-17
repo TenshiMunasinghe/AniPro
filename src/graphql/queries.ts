@@ -2,7 +2,12 @@ import _ky from 'ky'
 
 import { SortBy } from '../filterOptions'
 
-const date = new Date()
+const dateNow = new Date()
+const dateNext = new Date(
+  dateNow.getFullYear(),
+  dateNow.getMonth() + 3,
+  dateNow.getDate()
+)
 
 const SEASONS = [
   { name: 'SPRING', months: [3, 4, 5] },
@@ -10,15 +15,15 @@ const SEASONS = [
   { name: 'FALL', months: [9, 10, 11] },
   { name: 'WINTER', months: [12, 1, 2] },
 ]
-const month = date.getMonth()
-const current = SEASONS.find(({ months }) => months.includes(month))
-const next = SEASONS.find(({ months }) => months.includes(month + 3))
+const current = SEASONS.find(({ months }) =>
+  months.includes(dateNow.getMonth())
+)
+const next = SEASONS.find(({ months }) => months.includes(dateNext.getMonth()))
 
+export const currentYear = dateNow.getFullYear()
 export const currentSeason = current ? current.name : ''
-
 export const nextSeason = next ? next.name : ''
-
-export const currentYear = date.getFullYear()
+export const nextYear = dateNext.getFullYear()
 
 export type QueryData = {
   Page: {
@@ -60,8 +65,6 @@ export type QueryData = {
 
 export type SearchResult = QueryData['Page']['media'][number]
 
-export type GenreType = { genre: string; key: string }[]
-
 export type QueryVar = {
   page?: number
   genres?: string[]
@@ -71,7 +74,7 @@ export type QueryVar = {
   status?: string
   country?: string
   source?: string
-  searchText: string | null
+  searchText?: string | null
   sortBy?: SortBy
   perPage: number
 }

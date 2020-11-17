@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './CardCover.module.scss'
 import { Image } from '../../Image/Image'
 import { Popover } from '../../Popover/Popover'
-import { SearchResult, GenreType } from '../../../graphql/queries'
+import { SearchResult } from '../../../graphql/queries'
 import { adjustColor } from '../../../helper'
 import { useIsImageLoaded } from '../../../hooks/useIsImageLoaded'
 
@@ -17,7 +17,7 @@ interface Props {
   seasonYear: SearchResult['seasonYear']
   episodes: SearchResult['episodes']
   duration: SearchResult['duration']
-  genres: GenreType
+  genres: SearchResult['genres']
   status: SearchResult['status']
   studios: SearchResult['studios']
   meanScore: SearchResult['meanScore']

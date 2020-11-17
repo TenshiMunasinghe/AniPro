@@ -4,10 +4,12 @@ import { FaFrown, FaMeh, FaSmile, FaSmileBeam } from 'react-icons/fa'
 import styles from './FaceIcon.module.scss'
 
 interface Props {
-  meanScore: number
+  meanScore: number | null
 }
 
 export const FaceIcon = ({ meanScore }: Props) => {
+  if (meanScore === null) return <></>
+
   if (meanScore < 50) {
     return <FaFrown className={styles.frown} aria-label='frown' />
   }

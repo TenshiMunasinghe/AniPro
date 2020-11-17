@@ -1,0 +1,26 @@
+@import '../../globalStyles/grid.scss';
+
+.grid {
+  @include grid-template;
+}
+
+.cover {
+  @include grid-cover;
+}
+
+.table {
+  @include grid-table;
+}
+
+.wrapper {
+  margin-top: 3rem;
+}
+
+.content {
+  margin-bottom: 3em;
+}
+
+.contentTitle {
+  margin-bottom: 0.8em;
+  cursor: pointer;
+}

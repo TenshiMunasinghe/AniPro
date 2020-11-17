@@ -1,4 +1,4 @@
-import React, { useState, RefObject, useRef, memo } from 'react'
+import React, { useState, RefObject, useRef, memo, useEffect } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
@@ -32,6 +32,10 @@ export const Select = memo(
     const inputRef = useRef<HTMLInputElement>(null)
 
     const { ref, isClickedOut } = useClickedOutside()
+
+    useEffect(() => {
+      console.log(selected)
+    }, [selected])
 
     if (!ref) {
       return <></>

@@ -1,11 +1,17 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useMemo, useRef, useState } from 'react'
 
 import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import { adjustColor, pluralize, convertTime } from '../../helper'
+import {
+  adjustColor,
+  pluralize,
+  convertTime,
+  addKey,
+  timeToArr,
+} from '../../helper'
 import { Genre } from '../Genre/Genre'
-import { SearchResult, GenreType } from '../../graphql/queries'
+import { SearchResult } from '../../graphql/queries'
 import { airingInfo } from '../../helper'
 
 interface Props {
@@ -15,7 +21,7 @@ interface Props {
   seasonYear: SearchResult['seasonYear']
   episodes: SearchResult['episodes']
   duration: SearchResult['duration']
-  genres: GenreType
+  genres: SearchResult['genres']
   studios: SearchResult['studios']
   color: SearchResult['coverImage']['color']
   meanScore: SearchResult['meanScore']
@@ -74,6 +80,16 @@ export const Popover = ({
     '--color-light': adjustColor(color, 70),
   } as React.CSSProperties
 
+  const _genres = useMemo(() => addKey(genres), [genres])
+
+  const _duration = timeToArr(
+    convertTime({
+      num: duration,
+      input: 'minutes',
+      output: ['hours', 'minutes'],
+    })
+  ).slice(0, 2)
+
   return (
     <aside
       className={
@@ -99,16 +115,21 @@ export const Popover = ({
       <div className={styles.studio}>{studios.nodes[0]?.name}</div>
       <div className={styles.info}>
         {format}
-        {episodes ? (
+        {format === 'MOVIE' && _duration.length > 0 ? (
           <>
             <span className={styles.separator}>•</span>
-            {format === 'MOVIE'
-              ? convertTime({
-                  num: duration,
-                  input: 'minutes',
-                  output: ['hours', 'minutes'],
-                })
-              : pluralize(episodes, 'Episode')}
+            {
+              //eg: outputs 1 hour 20 minutes
+              _duration
+                .map(val => (val ? `${val.num} ${val.unit}` : ''))
+                .filter(str => str !== '')
+                .join(' ')
+            }
+          </>
+        ) : format !== 'MOVIE' && episodes ? (
+          <>
+            <span className={styles.separator}>•</span>
+            {pluralize(episodes, 'Episode')}
           </>
         ) : (
           ''
@@ -116,8 +137,8 @@ export const Popover = ({
       </div>
 
       <footer className={styles.genres}>
-        {genres.slice(0, 3).map(g => (
-          <Genre key={g.key} genre={g.genre} />
+        {_genres.slice(0, 3).map(g => (
+          <Genre key={g.key} genre={g.value} />
         ))}
       </footer>
     </aside>

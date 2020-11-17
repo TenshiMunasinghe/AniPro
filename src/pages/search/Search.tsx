@@ -16,13 +16,19 @@ import {
 import { SortBy, sortByOptions } from '../../filterOptions/index'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
-import { Result } from '../../components/Result/Result'
+import { CardGrid } from '../../components/CardGrid/CardGrid'
 import { ScrollButton } from '../../components/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/SimpleSelect/SimpleSelect'
 import { NotFound } from '../../components/NotFound/NotFound'
 import { CardTypeButton } from '../../components/CardTypeButton/CardTypeButton'
 
 const _cardTypes = ['chart', 'cover', 'table'] as const
+
+const loadingCount = {
+  chart: 4,
+  cover: 12,
+  table: 6,
+}
 
 const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
 
@@ -142,6 +148,10 @@ export const Search = () => {
     window.scrollTo(0, 0)
   }, [queryVariables, fetchNewData])
 
+  useEffect(() => {
+    console.log(filterState)
+  }, [filterState])
+
   // pagination
   useInfiniteScroll(() => {
     if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
@@ -193,15 +203,18 @@ export const Search = () => {
         )}
       </div>
 
-      {error || (data && data?.Page.media.length === 0) ? (
-        <NotFound />
-      ) : (
-        <Result
-          loading={loading}
-          media={data?.Page.media}
-          cardType={cardType}
-        />
-      )}
+      <main>
+        {error || (data && data?.Page.media.length === 0) ? (
+          <NotFound />
+        ) : (
+          <CardGrid
+            loading={loading}
+            media={data?.Page.media}
+            cardType={cardType}
+            loadingCount={loadingCount[cardType]}
+          />
+        )}
+      </main>
       <ScrollButton />
     </>
   )

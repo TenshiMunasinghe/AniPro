@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { useState, memo, useMemo } from 'react'
 import htmr from 'htmr'
 import { Link } from 'react-router-dom'
 
@@ -10,8 +10,8 @@ import {
 } from '../../../zustand/stores'
 import { Image } from '../../Image/Image'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
-import { SearchResult, GenreType } from '../../../graphql/queries'
-import { adjustColor } from '../../../helper'
+import { SearchResult } from '../../../graphql/queries'
+import { adjustColor, addKey } from '../../../helper'
 import { Genre } from '../../Genre/Genre'
 import { useIsImageLoaded } from '../../../hooks/useIsImageLoaded'
 
@@ -19,7 +19,7 @@ interface Props {
   id: number
   image: SearchResult['coverImage']
   title: SearchResult['title']
-  genres: GenreType
+  genres: SearchResult['genres']
   meanScore: SearchResult['meanScore']
   description: SearchResult['description']
 }
@@ -46,6 +46,8 @@ export const CardChart = memo(
       '--color-light': adjustColor(image.color, 70),
       '--color-original': image.color,
     } as React.CSSProperties
+
+    const _genres = useMemo(() => addKey(genres), [genres])
 
     return (
       <article className={styles.wrapper} style={_style}>
@@ -95,11 +97,11 @@ export const CardChart = memo(
             </div>
           </section>
           <footer className={styles.genres}>
-            {genres.map(g => (
+            {_genres.map(g => (
               <Genre
                 key={g.key}
-                genre={g.genre}
-                onClick={() => handleSetGenre(g.genre)}
+                genre={g.value}
+                onClick={() => handleSetGenre(g.value)}
               />
             ))}
           </footer>

@@ -67,6 +67,7 @@
     display: grid;
     grid-template-columns: 1fr 8rem 8rem 10rem;
     align-items: center;
+    justify-content: stretch;
     max-width: 100%;
     padding-right: 2em;
   }
@@ -93,10 +94,9 @@
 
     @include for-tablet-landscape-up {
       height: min-content;
-      min-width: 0;
-      max-width: calc(100% - 2em);
       margin: 0;
       margin-right: auto;
+      width: 100%;
 
       a {
         margin-bottom: 1em;
