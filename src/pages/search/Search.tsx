@@ -148,10 +148,6 @@ export const Search = () => {
     window.scrollTo(0, 0)
   }, [queryVariables, fetchNewData])
 
-  useEffect(() => {
-    console.log(filterState)
-  }, [filterState])
-
   // pagination
   useInfiniteScroll(() => {
     if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
