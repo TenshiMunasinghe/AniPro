@@ -35,6 +35,7 @@ interface Props {
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   popularity: SearchResult['popularity']
+  rank: number | null
 }
 
 const mapStatus = (status: SearchResult['status']) =>
@@ -55,6 +56,7 @@ export const CardTable = ({
   nextAiringEpisode,
   format,
   episodes,
+  rank,
 }: Props) => {
   const setFilterState = useFilterStateStore(filterStateSelector)
   const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
@@ -80,53 +82,56 @@ export const CardTable = ({
 
   return (
     <article className={styles.wrapper} style={_style}>
-      <Link to={url} className={styles.imageWrapper}>
-        <Image
-          className={styles[isImageLoaded ? 'loaded' : 'loading']}
-          src={src}
-          alt={title.romaji}
-        />
-      </Link>
+      {rank && <div className={styles.rank}>{rank}</div>}
+      <div className={styles.card}>
+        <Link to={url} className={styles.imageWrapper}>
+          <Image
+            className={styles[isImageLoaded ? 'loaded' : 'loading']}
+            src={src}
+            alt={title.romaji}
+          />
+        </Link>
 
-      <div className={styles.content}>
-        <div className={styles.title}>
-          <Link to={url}>{title.romaji}</Link>
-          <div className={styles.genres}>
-            {_genres.map(g => (
-              <Genre
-                key={g.key}
-                genre={g.value}
-                onClick={() => handleSetGenre(g.value)}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className={styles.review}>
-          <FaceIcon meanScore={meanScore} />
-          <div className={styles.score + ' ' + styles.row}>
-            <div className={styles.percentage + ' ' + styles.row}>
-              {meanScore ? meanScore + '%' : ''}
+        <div className={styles.content}>
+          <div className={styles.title}>
+            <Link to={url}>{title.romaji}</Link>
+            <div className={styles.genres}>
+              {_genres.map(g => (
+                <Genre
+                  key={g.key}
+                  genre={g.value}
+                  onClick={() => handleSetGenre(g.value)}
+                />
+              ))}
             </div>
+          </div>
+
+          <div className={styles.review}>
+            <FaceIcon meanScore={meanScore} />
+            <div className={styles.score + ' ' + styles.row}>
+              <div className={styles.percentage + ' ' + styles.row}>
+                {meanScore ? meanScore + '%' : ''}
+              </div>
+              <div className={styles.subRow}>
+                {meanScore && popularity !== 0 ? `${popularity} users` : ''}
+              </div>
+            </div>
+          </div>
+
+          <div className={styles.format + ' ' + styles.row}>
+            {toStartCase(format)}
             <div className={styles.subRow}>
-              {meanScore && popularity !== 0 ? `${popularity} users` : ''}
+              {episodes && pluralize(episodes, 'episode')}
             </div>
           </div>
-        </div>
 
-        <div className={styles.format + ' ' + styles.row}>
-          {toStartCase(format)}
-          <div className={styles.subRow}>
-            {episodes && pluralize(episodes, 'episode')}
-          </div>
-        </div>
-
-        <div className={styles.airingInfo + ' ' + styles.row}>
-          {status === 'RELEASING' && seasonYear !== currentYear
-            ? `Airing Since ${seasonYear}`
-            : mapStatus(status)}
-          <div className={styles.subRow}>
-            {airingInfo({ nextAiringEpisode, season, seasonYear })}
+          <div className={styles.airingInfo + ' ' + styles.row}>
+            {status === 'RELEASING' && seasonYear !== currentYear
+              ? `Airing Since ${seasonYear}`
+              : mapStatus(status)}
+            <div className={styles.subRow}>
+              {airingInfo({ nextAiringEpisode, season, seasonYear })}
+            </div>
           </div>
         </div>
       </div>

@@ -86,8 +86,8 @@ export const Home = () => {
 
     const response = await Promise.all(promises)
     const json = await Promise.all(response.map(res => res.json()))
-    const data: SearchResult[][] = json.map(j => j.data.Page.media)
     const keys = Object.keys(queryVars)
+    const data: SearchResult[][] = json.map(j => j.data.Page.media)
     const medias = Object.fromEntries<SearchResult[]>(
       keys.map(key => [key, data[keys.indexOf(key)]])
     )
@@ -116,6 +116,7 @@ export const Home = () => {
     [key in keyof Medias]: {
       text: string
       cardType: CardType
+      hasRank?: boolean
     }
   } = useMemo(
     () => ({
@@ -142,6 +143,7 @@ export const Home = () => {
       topRated: {
         text: 'Top Animes',
         cardType: windowWidth > 1040 ? 'table' : 'cover',
+        hasRank: true,
       },
     }),
     [windowWidth]
@@ -155,6 +157,9 @@ export const Home = () => {
     <main className={styles.wrapper}>
       {Object.keys(contents).map(key => {
         const content = contents[key as keyof Medias]
+        const media = content.hasRank
+          ? medias?.[key as keyof Medias].map((m, i) => ({ ...m, rank: i + 1 }))
+          : medias?.[key as keyof Medias]
         const queryVar = queryVars[key as keyof Medias]
         const filterQuery = Object.fromEntries(
           Object.entries(queryVar)
@@ -164,18 +169,19 @@ export const Home = () => {
               typeof val === 'number' ? val.toString() : val,
             ])
         )
+        const setFilterQuery = () => setFilterState(filterQuery)
         return (
           <section className={styles.content} key={key}>
-            <h3
-              className={styles.contentTitle}
-              onClick={() => setFilterState(filterQuery)}>
-              {content.text}
-            </h3>
+            <button className={styles.button} onClick={setFilterQuery}>
+              <h3 className={styles.contentTitle}>{content.text}</h3>
+              <span className={styles.viewAll}>View All</span>
+            </button>
             <CardGrid
-              media={medias?.[key as keyof Medias]}
+              media={media}
               loading={loading}
               cardType={content.cardType}
               loadingCount={queryVar.perPage}
+              hasRank={content.hasRank}
             />
           </section>
         )

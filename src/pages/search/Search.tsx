@@ -52,7 +52,7 @@ export const Search = () => {
   const { filterState, setFilterState } = useFilterStateStore(
     filterStateSelector
   )
-  const [cardType, setCardType] = useState<CardType>('table')
+  const [cardType, setCardType] = useState<CardType>('chart')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()

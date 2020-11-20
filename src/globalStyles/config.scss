@@ -1,15 +1,5 @@
 $header-height: 3rem;
 
-$dp-01: #1a1a1a;
-$dp-02: #1f1f1f;
-$dp-03: #212121;
-$dp-04: #242424;
-$dp-06: #292929;
-$dp-08: #2b2b2b;
-$dp-12: #303030;
-$dp-16: #323232;
-$dp-24: #353535;
-
 @mixin for-phone-only {
   @media (max-width: 599px) {
     @content;

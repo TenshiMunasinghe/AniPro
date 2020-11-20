@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   height: $header-height;
-  background: $dp-24;
+  background: var(--color-foreground-100);
   transition: all 0.2s ease-in-out;
   z-index: 9999;
   top: -$header-height;

@@ -43,7 +43,7 @@
 .submitButton {
   display: flex;
   width: 4em;
-  background: $dp-12;
+  background: var(--color-foreground-100);
   align-items: center;
   justify-content: center;
 
@@ -58,10 +58,10 @@
   }
 
   &:hover {
-    background: $dp-16;
+    background: var(--color-foreground-200);
   }
 
   &:active {
-    background: $dp-24;
+    background: var(--color-foreground-300);
   }
 }

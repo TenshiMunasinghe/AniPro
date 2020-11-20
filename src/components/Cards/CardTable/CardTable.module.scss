@@ -1,6 +1,6 @@
 @import '../../../globalStyles/config.scss';
 
-.wrapper {
+.card {
   display: grid;
   position: relative;
   grid-template-columns: 3.25rem 1fr;
@@ -75,7 +75,7 @@
   .title {
     margin-bottom: 1em;
     padding-right: 2em;
-    min-width: 100%;
+    max-width: 100%;
 
     a {
       display: block;

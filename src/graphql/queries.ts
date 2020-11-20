@@ -59,6 +59,7 @@ export type QueryData = {
         timeUntilAiring: number
         episode: number
       } | null
+      rank?: number
     }[]
   }
 }

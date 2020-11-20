@@ -14,10 +14,11 @@ interface Props {
   media?: QueryData['Page']['media']
   cardType: CardType
   loadingCount: number
+  hasRank?: boolean
 }
 
 export const CardGrid = memo(
-  ({ loading, media, cardType, loadingCount }: Props) => {
+  ({ loading, media, cardType, loadingCount, hasRank = false }: Props) => {
     return (
       <section className={styles.slider + ' ' + styles[cardType]}>
         {media &&
@@ -61,6 +62,7 @@ export const CardGrid = memo(
                     meanScore={m.meanScore}
                     studios={m.studios}
                     popularity={m.popularity}
+                    rank={hasRank && m.rank ? m.rank : null}
                   />
                 )
 
