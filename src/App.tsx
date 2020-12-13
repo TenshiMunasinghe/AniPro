@@ -15,8 +15,8 @@ export const App = () => {
 
   return (
     <>
-      <Header />
       <Router>
+        <Header />
         <Switch>
           <Route exact path='/anime/:id'>
             <Anime />

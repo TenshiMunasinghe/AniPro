@@ -2,17 +2,17 @@
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: inherit;
+  color: var(--color-text);
   padding: 0.5em 1em;
-  background: var(--color-foreground-100);
+  background: var(--color-background-200);
   border-radius: 0.75em;
-  border: solid 1px var(--color-border-200);
+  border: solid 1px var(--color-border);
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.15s ease-in-out;
 
   &:hover {
-    color: var(--color-text-accent-200);
-    border-color: var(--color-border-100);
+    color: var(--color-foreground-100);
+    background: var(--color-bg);
   }
 }

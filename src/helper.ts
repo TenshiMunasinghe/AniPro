@@ -90,8 +90,11 @@ const hexToHsl = (H: string) => {
   return { h, s, l }
 }
 
-export const adjustColor = (hex: string | null, lightness: number) => {
-  if (hex === null) return 'inherit'
+export const adjustColor = (
+  hex: string | null | undefined,
+  lightness: number
+) => {
+  if (!hex) return ''
 
   const hsl = hexToHsl(hex)
   return `hsl(${hsl.h}, ${hsl.s}%, ${lightness}%)`

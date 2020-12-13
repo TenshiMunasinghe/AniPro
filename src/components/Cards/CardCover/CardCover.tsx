@@ -22,6 +22,7 @@ interface Props {
   studios: SearchResult['studios']
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
+  rank: number | null
 }
 
 export const CardCover = memo(
@@ -35,10 +36,10 @@ export const CardCover = memo(
     episodes,
     duration,
     genres,
-    status,
     studios,
     nextAiringEpisode,
     meanScore,
+    rank,
   }: Props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
     const handleMouseOver = () => setIsPopoverVisible(true)
@@ -49,7 +50,9 @@ export const CardCover = memo(
 
     const _style = {
       '--color-light': adjustColor(image.color, 70),
-      '--color-original': image.color,
+      '--color-original': image.color
+        ? image.color
+        : 'var(--color-foreground-100)',
     } as React.CSSProperties
 
     return (
@@ -59,6 +62,7 @@ export const CardCover = memo(
         onMouseLeave={handleMouseLeave}
         style={_style}>
         <article className={styles.wrapper}>
+          {rank && <div className={styles.rank}>#{rank}</div>}
           <Link
             to={url}
             className={

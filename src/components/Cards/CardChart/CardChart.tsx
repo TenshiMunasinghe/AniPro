@@ -1,4 +1,4 @@
-import React, { useState, memo, useMemo } from 'react'
+import React, { memo, useMemo } from 'react'
 import htmr from 'htmr'
 import { Link } from 'react-router-dom'
 
@@ -29,7 +29,6 @@ const filterStateSelector = (state: FilterStateStore) => state.setFilterState
 export const CardChart = memo(
   ({ id, image, title, genres, meanScore, description }: Props) => {
     const setFilterState = useFilterStateStore(filterStateSelector)
-    const [isHovered, setIsHovered] = useState(false)
     const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
 
     const handleSetGenre = (genre: string) => {
@@ -43,7 +42,7 @@ export const CardChart = memo(
     const pageUrl = `/anime/${id}`
 
     const _style = {
-      '--color-light': adjustColor(image.color, 70),
+      '--color-light': adjustColor(image.color, 40),
       '--color-original': image.color,
     } as React.CSSProperties
 
@@ -82,12 +81,7 @@ export const CardChart = memo(
                 )}
               </header>
 
-              <div
-                className={
-                  styles.description + (isHovered ? ' ' + styles.active : '')
-                }
-                onMouseOver={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}>
+              <div className={styles.description}>
                 {description ? (
                   htmr(`<p>${description}</p>`)
                 ) : (
@@ -102,6 +96,7 @@ export const CardChart = memo(
                 key={g.key}
                 genre={g.value}
                 onClick={() => handleSetGenre(g.value)}
+                color={image.color}
               />
             ))}
           </footer>

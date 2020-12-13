@@ -82,7 +82,14 @@ export const CardTable = ({
 
   return (
     <article className={styles.wrapper} style={_style}>
-      {rank && <div className={styles.rank}>{rank}</div>}
+      {rank && (
+        <div className={styles.rank}>
+          <div>
+            <span className={styles.hash}>#</span>
+            <span className={styles.number}>{rank}</span>
+          </div>
+        </div>
+      )}
       <div className={styles.card}>
         <Link to={url} className={styles.imageWrapper}>
           <Image
@@ -101,6 +108,7 @@ export const CardTable = ({
                   key={g.key}
                   genre={g.value}
                   onClick={() => handleSetGenre(g.value)}
+                  color={image.color}
                 />
               ))}
             </div>

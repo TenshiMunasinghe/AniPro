@@ -9,7 +9,7 @@
   max-height: 15rem;
   min-width: 8rem;
   overflow-y: scroll;
-  background: var(--color-foreground-200);
+  background: var(--color-foreground-100);
   border-radius: 0.2rem;
 
   &.hide {
@@ -41,9 +41,9 @@
 
   @include on-hoverable-devices {
     &:hover {
-      background: var(--color-foreground-100);
+      background: var(--color-foreground-200);
       span {
-        color: var(--color-text-accent-100);
+        color: var(--color-text-accent-200);
       }
     }
   }

@@ -41,6 +41,7 @@ export const CardGrid = memo(
                     duration={m.duration}
                     meanScore={m.meanScore}
                     studios={m.studios}
+                    rank={hasRank && m.rank ? m.rank : null}
                   />
                 )
 

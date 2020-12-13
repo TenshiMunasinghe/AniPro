@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, RefObject } from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './Header.module.scss'
 
@@ -34,7 +35,9 @@ export const Header = () => {
     <header
       className={styles.wrapper + (isVisible ? ' ' + styles.visible : '')}
       ref={wrapperRef as RefObject<HTMLElement>}>
-      <h1 className={styles.heading}>Anime Project</h1>
+      <h1 className={styles.heading}>
+        <Link to='/'>Anime Project</Link>
+      </h1>
     </header>
   )
 }

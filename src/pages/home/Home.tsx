@@ -21,6 +21,8 @@ import {
 } from '../../graphql/queries'
 import { CardType } from '../search/Search'
 import { CardGrid } from '../../components/CardGrid/CardGrid'
+import { NotFound } from '../../components/NotFound/NotFound'
+import { Footer } from '../../components/Footer/Footer'
 
 type Medias = {
   trending: SearchResult[]
@@ -68,30 +70,36 @@ export const Home = () => {
 
   const [medias, setMedias] = useState<Medias | null>(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState()
 
   const fetchData = useCallback(async () => {
-    const promises = Object.values(queryVars).map(queryVar =>
-      ky.post('', {
-        json: {
-          query: GET_SEARCH_RESULT,
-          variables: {
-            page: 1,
-            ...queryVar,
+    try {
+      const promises = Object.values(queryVars).map(queryVar =>
+        ky.post('', {
+          json: {
+            query: GET_SEARCH_RESULT,
+            variables: {
+              page: 1,
+              ...queryVar,
+            },
           },
-        },
-      })
-    )
+        })
+      )
 
-    setLoading(true)
+      setLoading(true)
 
-    const response = await Promise.all(promises)
-    const json = await Promise.all(response.map(res => res.json()))
-    const keys = Object.keys(queryVars)
-    const data: SearchResult[][] = json.map(j => j.data.Page.media)
-    const medias = Object.fromEntries<SearchResult[]>(
-      keys.map(key => [key, data[keys.indexOf(key)]])
-    )
-    setMedias(medias as Medias)
+      const response = await Promise.all(promises)
+      const json = await Promise.all(response.map(res => res.json()))
+      const keys = Object.keys(queryVars)
+      const data: SearchResult[][] = json.map(j => j.data.Page.media)
+      const medias = Object.fromEntries<SearchResult[]>(
+        keys.map(key => [key, data[keys.indexOf(key)]])
+      )
+      setMedias(medias as Medias)
+    } catch (e) {
+      console.error(e)
+      setError(e)
+    }
     setLoading(false)
   }, [])
 
@@ -142,7 +150,7 @@ export const Home = () => {
 
       topRated: {
         text: 'Top Animes',
-        cardType: windowWidth > 1040 ? 'table' : 'cover',
+        cardType: windowWidth > 1200 ? 'table' : 'cover',
         hasRank: true,
       },
     }),
@@ -154,38 +162,50 @@ export const Home = () => {
   }
 
   return (
-    <main className={styles.wrapper}>
-      {Object.keys(contents).map(key => {
-        const content = contents[key as keyof Medias]
-        const media = content.hasRank
-          ? medias?.[key as keyof Medias].map((m, i) => ({ ...m, rank: i + 1 }))
-          : medias?.[key as keyof Medias]
-        const queryVar = queryVars[key as keyof Medias]
-        const filterQuery = Object.fromEntries(
-          Object.entries(queryVar)
-            .filter(([key, _]) => Object.keys(initialFilterState).includes(key))
-            .map(([key, val]) => [
-              key,
-              typeof val === 'number' ? val.toString() : val,
-            ])
-        )
-        const setFilterQuery = () => setFilterState(filterQuery)
-        return (
-          <section className={styles.content} key={key}>
-            <button className={styles.button} onClick={setFilterQuery}>
-              <h3 className={styles.contentTitle}>{content.text}</h3>
-              <span className={styles.viewAll}>View All</span>
-            </button>
-            <CardGrid
-              media={media}
-              loading={loading}
-              cardType={content.cardType}
-              loadingCount={queryVar.perPage}
-              hasRank={content.hasRank}
-            />
-          </section>
-        )
-      })}
-    </main>
+    <>
+      <main className={styles.wrapper}>
+        {!error ? (
+          Object.keys(contents).map(key => {
+            const content = contents[key as keyof Medias]
+            const media = content.hasRank
+              ? medias?.[key as keyof Medias].map((m, i) => ({
+                  ...m,
+                  rank: i + 1,
+                }))
+              : medias?.[key as keyof Medias]
+            const queryVar = queryVars[key as keyof Medias]
+            const filterQuery = Object.fromEntries(
+              Object.entries(queryVar)
+                .filter(([key, _]) =>
+                  Object.keys(initialFilterState).includes(key)
+                )
+                .map(([key, val]) => [
+                  key,
+                  typeof val === 'number' ? val.toString() : val,
+                ])
+            )
+            const setFilterQuery = () => setFilterState(filterQuery)
+            return (
+              <section className={styles.content} key={key}>
+                <button className={styles.button} onClick={setFilterQuery}>
+                  <h3 className={styles.contentTitle}>{content.text}</h3>
+                  <span className={styles.viewAll}>View All</span>
+                </button>
+                <CardGrid
+                  media={media}
+                  loading={loading}
+                  cardType={content.cardType}
+                  loadingCount={queryVar.perPage}
+                  hasRank={content.hasRank}
+                />
+              </section>
+            )
+          })
+        ) : (
+          <NotFound />
+        )}
+      </main>
+      <Footer />
+    </>
   )
 }

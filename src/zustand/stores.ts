@@ -33,7 +33,6 @@ export const useFilterStateStore = create(
   combine({ filterState: { ...initialFilterState } }, set => ({
     setFilterState: (obj: Partial<FilterState>) =>
       set(state => ({ filterState: { ...state.filterState, ...obj } })),
-
     resetFilterState: () => set({ filterState: { ...initialFilterState } }),
   }))
 )

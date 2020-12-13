@@ -14,6 +14,7 @@
 
 .wrapper {
   margin-top: 3rem;
+  position: relative;
 }
 
 .content {
@@ -23,7 +24,7 @@
 .button {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
   margin-bottom: 0.8em;
   cursor: pointer;

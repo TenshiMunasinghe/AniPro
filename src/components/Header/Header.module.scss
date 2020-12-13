@@ -7,11 +7,11 @@
   padding: 0 1rem;
   align-items: center;
   justify-content: space-between;
-  height: $header-height;
+  height: var(--header-height);
   background: var(--color-foreground-100);
   transition: all 0.2s ease-in-out;
   z-index: 9999;
-  top: -$header-height;
+  top: calc(var(--header-height) * -1);
 
   &.visible {
     top: 0;
@@ -23,5 +23,9 @@
 
   @include for-tablet-portrait-up {
     font-size: 1.15rem;
+  }
+
+  a {
+    text-decoration: none;
   }
 }
