@@ -97,6 +97,7 @@ body {
     --color-border-100: var(--w-12);
     --color-border-200: var(--w-11);
     --color-underline-100: var(--b-2);
+    --lightness: 70%;
   }
 
   &.light {
@@ -114,6 +115,7 @@ body {
     --color-border-100: var(--b-2);
     --color-border-200: var(--b-1);
     --color-underline-100: var(--w-8);
+    --lightness: 35%;
   }
 
   --header-height: 3rem;

@@ -78,7 +78,7 @@ export const Popover = memo(
     const isHidden = position === null || !isVisible
 
     const _style = {
-      '--color-light': adjustColor(color, 70),
+      '--color-light': adjustColor(color, 'var(--lightness)'),
     } as React.CSSProperties
 
     const _genres = useMemo(() => addKey(genres), [genres])

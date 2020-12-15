@@ -29,6 +29,8 @@ export const initialFilterState: FilterState = {
   sortBy: 'TRENDING_DESC',
 }
 
+type Theme = 'dark' | 'light'
+
 export const useFilterStateStore = create(
   combine({ filterState: { ...initialFilterState } }, set => ({
     setFilterState: (obj: Partial<FilterState>) =>
@@ -44,3 +46,15 @@ export const useWindowSizeStore = create(
 )
 
 export type WindowSizeStore = ReturnType<typeof useWindowSizeStore.getState>
+
+// export type ThemeStore = {
+//   theme: 'dark' | 'light'
+//   lightness: number
+//   setTheme: (theme: Theme) => void
+// }
+
+// export const useThemeStore = create<ThemeStore>((set, get) => ({
+//   theme: 'dark',
+//   lightness: get().theme === 'dark' ? 70 : 40,
+//   setTheme: (theme: Theme) => set({ theme }),
+// }))

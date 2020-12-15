@@ -89,15 +89,14 @@ const hexToHsl = (H: string) => {
 
   return { h, s, l }
 }
-
 export const adjustColor = (
   hex: string | null | undefined,
-  lightness: number
+  lightness: `${string}%` | `var(--${string})`
 ) => {
   if (!hex) return ''
 
   const hsl = hexToHsl(hex)
-  return `hsl(${hsl.h}, ${hsl.s}%, ${lightness}%)`
+  return `hsl(${hsl.h}, ${hsl.s}%, ${lightness})`
 }
 
 export const toStartCase = (str: string) => startCase(lowerCase(str))

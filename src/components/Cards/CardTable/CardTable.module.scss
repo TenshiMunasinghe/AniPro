@@ -114,7 +114,7 @@
       @include on-hoverable-devices {
         &:hover {
           text-decoration-color: inherit;
-          color: var(--color-light);
+          color: var(--color-text);
         }
       }
     }

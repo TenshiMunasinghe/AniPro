@@ -42,7 +42,7 @@ export const CardChart = memo(
     const pageUrl = `/anime/${id}`
 
     const _style = {
-      '--color-light': adjustColor(image.color, 40),
+      '--color-text': adjustColor(image.color, 'var(--lightness)'),
       '--color-original': image.color,
     } as React.CSSProperties
 

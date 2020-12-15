@@ -72,8 +72,7 @@ export const CardTable = ({
   const url = `/anime/${id}`
 
   const _style = {
-    '--color-light': adjustColor(image.color, 70),
-    '--color-dark': adjustColor(image.color, 30),
+    '--color-text': adjustColor(image.color, 'var(--lightness)'),
     '--color-original': image.color,
     '--image-url': `url(${src})`,
   } as React.CSSProperties
