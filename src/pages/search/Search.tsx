@@ -7,20 +7,15 @@ import { useFormContext } from 'react-hook-form'
 
 import styles from './Search.module.scss'
 import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
-import {
-  QueryData,
-  QueryVar,
-  GET_SEARCH_RESULT,
-  ky,
-} from '../../graphql/queries'
-import { SortBy, sortByOptions } from '../../filterOptions/index'
+import { QueryData, QueryVar, GET_SEARCH_RESULT, ky } from '../../api/queries'
+import { SortBy, sortByOptions } from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
-import { CardGrid } from '../../components/CardGrid/CardGrid'
-import { ScrollButton } from '../../components/ScrollButton/ScrollButton'
-import { SimpleSelect } from '../../components/SimpleSelect/SimpleSelect'
+import { CardGrid } from '../../components/common/CardGrid/CardGrid'
+import { ScrollButton } from '../../components/common/ScrollButton/ScrollButton'
+import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
 import { NotFound } from '../../components/NotFound/NotFound'
-import { CardTypeButton } from '../../components/CardTypeButton/CardTypeButton'
+import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
 
 const _cardTypes = ['chart', 'cover', 'table'] as const
 
@@ -71,29 +66,30 @@ export const Search = () => {
     [filterState, searchText]
   )
 
-  const fetchNewData = useCallback(
-    debounce(async ({ queryVariables }: FetchNewDataParam) => {
-      setData(null)
-      try {
-        setLoading(true)
-        const res: { data: QueryData } = await ky
-          .post('', {
-            json: {
-              query: GET_SEARCH_RESULT,
-              variables: queryVariables,
-            },
-          })
-          .json()
-        if (!res || !mountedRef.current) {
-          return
+  const fetchNewData = useMemo(
+    () =>
+      debounce(async ({ queryVariables }: FetchNewDataParam) => {
+        setData(null)
+        try {
+          setLoading(true)
+          const res: { data: QueryData } = await ky
+            .post('', {
+              json: {
+                query: GET_SEARCH_RESULT,
+                variables: queryVariables,
+              },
+            })
+            .json()
+          if (!res || !mountedRef.current) {
+            return
+          }
+          setData(res.data)
+        } catch (e) {
+          setError(e)
+          console.error(e)
         }
-        setData(res.data)
-      } catch (e) {
-        setError(e)
-        console.error(e)
-      }
-      setLoading(false)
-    }, 800),
+        setLoading(false)
+      }, 800),
     []
   )
 

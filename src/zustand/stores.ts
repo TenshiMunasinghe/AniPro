@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { combine } from 'zustand/middleware'
-import { SortBy } from '../filterOptions'
+import { SortBy } from '../filterOptions/filterOptions'
 
 export type FilterState = {
   genres: string[]
@@ -29,8 +29,6 @@ export const initialFilterState: FilterState = {
   sortBy: 'TRENDING_DESC',
 }
 
-type Theme = 'dark' | 'light'
-
 export const useFilterStateStore = create(
   combine({ filterState: { ...initialFilterState } }, set => ({
     setFilterState: (obj: Partial<FilterState>) =>
@@ -47,14 +45,14 @@ export const useWindowSizeStore = create(
 
 export type WindowSizeStore = ReturnType<typeof useWindowSizeStore.getState>
 
-// export type ThemeStore = {
-//   theme: 'dark' | 'light'
-//   lightness: number
-//   setTheme: (theme: Theme) => void
-// }
+const initialTheme: 'dark' | 'light' = window.matchMedia(
+  '(prefers-color-scheme: dark)'
+).matches
+  ? 'dark'
+  : 'light'
 
-// export const useThemeStore = create<ThemeStore>((set, get) => ({
-//   theme: 'dark',
-//   lightness: get().theme === 'dark' ? 70 : 40,
-//   setTheme: (theme: Theme) => set({ theme }),
-// }))
+export const useThemeStore = create(
+  combine({ theme: initialTheme }, set => ({ set }))
+)
+
+export type ThemeStore = ReturnType<typeof useThemeStore.getState>

@@ -1,0 +1,31 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  display: flex;
+  padding: 0 1rem;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  background: var(--color-foreground-100);
+  transition: all 0.2s ease-in-out;
+  z-index: 9999;
+  top: calc(var(--header-height) * -1);
+
+  &.visible {
+    top: 0;
+  }
+}
+
+.heading {
+  font-size: 0.95rem;
+
+  @include for-tablet-portrait-up {
+    font-size: 1.15rem;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}

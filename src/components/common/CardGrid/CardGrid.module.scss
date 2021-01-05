@@ -1,0 +1,18 @@
+@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/grid.scss';
+
+.slider {
+  @include grid-template;
+
+  &.cover {
+    @include grid-cover;
+  }
+
+  &.chart {
+    @include grid-chart;
+  }
+
+  &.table {
+    @include grid-table;
+  }
+}

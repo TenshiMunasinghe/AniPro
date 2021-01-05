@@ -1,0 +1,87 @@
+@import '../../../../globalStyles/config.scss';
+
+.popoverWrapper {
+  position: relative;
+}
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content auto;
+  cursor: pointer;
+
+  @include on-hoverable-devices {
+    &:hover {
+      .title {
+        text-decoration-color: inherit;
+        color: var(--color-light);
+      }
+    }
+  }
+
+  .rank {
+    position: absolute;
+    left: -0.7em;
+    top: -0.7em;
+    background: var(--color-light);
+    color: var(--color-foreground-300);
+    z-index: 1000;
+    font-size: 0.8em;
+    width: 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
+    text-align: center;
+    border-radius: 1.25em;
+    font-weight: 500;
+  }
+
+  .imageWrapper {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    padding-top: calc(100% / var(--image-aspect-ratio));
+    border-radius: 0.15rem;
+    overflow: hidden;
+    background: var(--color-original);
+
+    &.loaded {
+      .image {
+        opacity: 1;
+      }
+    }
+
+    &.loading {
+      .image {
+        opacity: 0;
+      }
+    }
+  }
+
+  .image {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .title {
+    align-self: stretch;
+    color: var(--color-text-300);
+    font-size: 0.8rem;
+    line-height: 1.2;
+    font-weight: 550;
+    width: 100%;
+    height: min-content;
+    margin-top: 1em;
+    text-align: left;
+    color: inherit;
+    @include add-ellipsis(2);
+    text-decoration-color: inherit;
+    text-underline-offset: 0.2em;
+    transition: all 0.15s ease-in-out;
+    min-height: 0;
+  }
+}

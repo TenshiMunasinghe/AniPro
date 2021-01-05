@@ -1,0 +1,25 @@
+.switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1em;
+  padding: 0.5em;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 1.25em;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-highlight-100);
+  }
+
+  #checkbox {
+    display: none;
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+}

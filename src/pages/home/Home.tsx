@@ -18,11 +18,12 @@ import {
   currentYear,
   currentSeason,
   QueryVar,
-} from '../../graphql/queries'
+} from '../../api/queries'
 import { CardType } from '../search/Search'
-import { CardGrid } from '../../components/CardGrid/CardGrid'
+import { CardGrid } from '../../components/common/CardGrid/CardGrid'
 import { NotFound } from '../../components/NotFound/NotFound'
-import { Footer } from '../../components/Footer/Footer'
+import { Footer } from '../../components/home/Footer/Footer'
+import { nextYear, nextSeason } from '../../api/queries'
 
 type Medias = {
   trending: SearchResult[]
@@ -42,7 +43,12 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
     perPage: 5,
   },
 
-  upComing: { year: 2021, perPage: 5, sortBy: 'TRENDING_DESC' },
+  upComing: {
+    year: nextYear,
+    season: nextSeason,
+    perPage: 5,
+    sortBy: 'TRENDING_DESC',
+  },
 
   popularAllTime: { sortBy: 'POPULARITY_DESC', perPage: 5 },
 
@@ -54,7 +60,6 @@ const filterStateSelector = ({
   setFilterState,
   resetFilterState,
 }: FilterStateStore) => ({ filterState, setFilterState, resetFilterState })
-
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
 export const Home = () => {
@@ -184,7 +189,7 @@ export const Home = () => {
                   typeof val === 'number' ? val.toString() : val,
                 ])
             )
-            const setFilterQuery = () => setFilterState(filterQuery)
+            const setFilterQuery = () => setFilterState({ ...filterQuery })
             return (
               <section className={styles.content} key={key}>
                 <button className={styles.button} onClick={setFilterQuery}>

@@ -1,0 +1,126 @@
+@import '../../../globalStyles/config.scss';
+
+@mixin transition {
+  transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
+}
+
+.wrapper {
+  opacity: 0;
+  pointer-events: none;
+  height: 0;
+
+  @include on-hoverable-devices {
+    position: absolute;
+    background: var(--color-foreground-300);
+    font-size: 0.8rem;
+    min-width: 20.5em;
+    margin-left: 0.5em;
+    padding: 1.75em;
+    border-radius: 0.4em;
+    top: 0;
+    left: 100%;
+    z-index: 997;
+    opacity: 1;
+    height: auto;
+    @include transition;
+
+    --margin: 1rem;
+
+    &.left {
+      left: auto;
+      margin-left: 0;
+      right: 100%;
+      margin-right: var(--margin);
+
+      &:after {
+        @include transition;
+        z-index: 1000;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        right: -0.5rem;
+        top: 12.5%;
+        border: solid transparent;
+        border-top-width: 0.4rem;
+        border-bottom-width: 0.4rem;
+        border-left-width: 0.6rem;
+        border-left-color: var(--color-foreground-300);
+      }
+    }
+
+    &.right {
+      margin-left: var(--margin);
+
+      &:after {
+        @include transition;
+        z-index: 1000;
+        content: '';
+        display: block;
+        position: absolute;
+        width: 0;
+        height: 0;
+        left: -0.5rem;
+        top: 12.5%;
+        border: solid transparent;
+        border-top-width: 0.4rem;
+        border-bottom-width: 0.4rem;
+        border-right-width: 0.6rem;
+        border-right-color: var(--color-foreground-300);
+      }
+    }
+
+    &.hide {
+      transform: scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1em;
+    font-size: 1.1em;
+    margin-bottom: 1em;
+    align-items: center;
+    white-space: nowrap;
+
+    .airingInfo {
+      font-weight: 525;
+    }
+
+    .score {
+      display: grid;
+      column-gap: 0.5em;
+      grid-template-columns: auto auto;
+      align-items: center;
+    }
+  }
+
+  .studio {
+    color: var(--color-light);
+  }
+
+  .info {
+    margin-top: 0.5em;
+
+    .separator {
+      margin: 0.25em;
+    }
+  }
+
+  .genres {
+    display: flex;
+    font-size: 0.85em;
+    margin-top: 1.5em;
+
+    button {
+      margin-right: 0.4em;
+    }
+  }
+}

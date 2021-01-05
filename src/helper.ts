@@ -1,7 +1,7 @@
 import startCase from 'lodash/startCase'
 import lowerCase from 'lodash/lowerCase'
 
-import { SearchResult } from './graphql/queries'
+import { SearchResult } from './api/queries'
 import { v4 } from 'uuid'
 
 export const pluralize = (num: number, str: string) => {

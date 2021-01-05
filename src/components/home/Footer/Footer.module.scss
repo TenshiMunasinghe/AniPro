@@ -1,0 +1,55 @@
+.footer {
+  width: 100%;
+  margin-top: 7rem;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      color: var(--color-text-accent-100);
+      text-decoration-color: var(--color-text-accent-100);
+    }
+  }
+}
+
+.upperSection {
+  display: flex;
+}
+
+.theme {
+  margin-right: auto;
+  display: flex;
+  gap: 1em;
+
+  * {
+    display: flex;
+    align-items: flex-end;
+    width: 2.2em;
+    height: 2.2em;
+    padding: 0.05em 0.15em;
+    border: solid 2px var(--color-border-100);
+    border-radius: 0.2em;
+  }
+
+  .light {
+    background: var(--w-4);
+    color: var(--b-10);
+  }
+
+  .dark {
+    background: var(--b-12);
+    color: var(--w-4);
+  }
+}
+
+.disclaimer {
+  font-size: 0.7em;
+  font-weight: 550;
+  margin-top: 3em;
+  text-align: right;
+
+  a {
+    text-decoration: underline;
+    text-decoration-color: var(--color-underline-100);
+  }
+}

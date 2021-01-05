@@ -1,0 +1,76 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  max-height: 5rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.9rem;
+}
+
+.dropdown {
+  position: relative;
+  margin-top: 0.7rem;
+}
+
+.dropdownHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: var(--color-foreground-100);
+  width: 100%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 0.15rem;
+  font-weight: inherit;
+  color: inherit;
+  z-index: 998;
+  cursor: pointer;
+
+  &:focus-within {
+    box-shadow: 0px 0px 1.5px var(--color-border-100);
+
+    .selected {
+      display: none;
+    }
+  }
+}
+
+.input {
+  background: transparent;
+  border: none;
+  font: inherit;
+  color: inherit;
+  flex: 1 0 0;
+  min-width: 0;
+
+  // @media only screen and (hover: none) and (pointer: coarse) {
+  //   pointer-events: none;
+  //   &:focus {
+  //     display: none;
+  //   }
+  // }
+}
+
+.selected {
+  display: flex;
+  position: absolute;
+  left: 0.5rem;
+  max-width: calc(100% - 2em);
+}
+
+.selectedItem {
+  font-size: 0.8rem;
+  background: var(--color-foreground-200);
+  padding: 0.2rem 0.3rem;
+  border-radius: 0.1rem;
+  margin-right: 0.3rem;
+
+  &:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
