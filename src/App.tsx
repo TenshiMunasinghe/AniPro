@@ -7,7 +7,6 @@ import { Search } from './pages/search/Search'
 import { Anime } from './pages/anime/Anime'
 import { Home } from './pages/home/Home'
 import { Header } from './components/common/Header/Header'
-import { Filters } from './components/common/Filters/Filters'
 import { useThemeStore, ThemeStore } from './zustand/stores'
 
 const themeSelector = (state: ThemeStore) => state.theme
@@ -32,7 +31,6 @@ export const App = () => {
           <Route path='/'>
             <FormProvider {...methods}>
               <div id='container'>
-                <Filters />
                 <Route exact path='/'>
                   <Home />
                 </Route>

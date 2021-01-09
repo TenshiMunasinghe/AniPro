@@ -1,14 +1,23 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
-import debounce from 'lodash/debounce'
+import { useLocation } from 'react-router-dom'
 import uniqBy from 'lodash/uniqBy'
 import produce from 'immer'
 import { v4 } from 'uuid'
 import { useFormContext } from 'react-hook-form'
 
 import styles from './Search.module.scss'
-import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
-import { QueryData, QueryVar, GET_SEARCH_RESULT, ky } from '../../api/queries'
-import { SortBy, sortByOptions } from '../../filterOptions/filterOptions'
+import {
+  QueryData,
+  QueryVar,
+  GET_SEARCH_RESULT,
+  ky,
+  SEARCH_TEXT,
+} from '../../api/queries'
+import {
+  sortByOptions,
+  filterOptions,
+  FilterOptionKeys,
+} from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
@@ -16,6 +25,8 @@ import { ScrollButton } from '../../components/common/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
 import { NotFound } from '../../components/NotFound/NotFound'
 import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
+import { Filters } from '../../components/common/Filters/Filters'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 
 const _cardTypes = ['chart', 'cover', 'table'] as const
 
@@ -36,17 +47,11 @@ type LoadMoreParam = {
   data: QueryData | null
 }
 
-const filterStateSelector = ({
-  filterState,
-  setFilterState,
-}: FilterStateStore) => ({ filterState, setFilterState })
-
 export const Search = () => {
   const { getValues, reset } = useFormContext()
-  const searchText = getValues('searchText')
-  const { filterState, setFilterState } = useFilterStateStore(
-    filterStateSelector
-  )
+  const searchText = getValues(SEARCH_TEXT)
+  const updateUrlParams = useUpdateUrlParam()
+  const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
   const [data, setData] = useState<QueryData | null>(null)
   const [loading, setLoading] = useState(false)
@@ -54,42 +59,56 @@ export const Search = () => {
 
   const mountedRef = useRef(true)
 
-  const queryVariables: QueryVar = useMemo(
-    () => ({
-      ...Object.fromEntries(
-        Object.entries(filterState).filter(([_, value]) => value.length > 0)
-      ),
+  const params = useMemo(() => new URLSearchParams(location.search), [
+    location.search,
+  ])
+
+  const queryVariables: QueryVar = useMemo(() => {
+    const filterParams = Object.fromEntries(
+      Array.from(params.keys()).map(key => {
+        if (
+          filterOptions[key as FilterOptionKeys].isMulti === false ||
+          key === SEARCH_TEXT
+        ) {
+          return [key, params.get(key)]
+        } else {
+          return [key, params.getAll(key)]
+        }
+      })
+    )
+
+    return {
+      ...filterParams,
+      sortBy: filterParams.sortBy ? filterParams.sortBy : 'TRENDING_DESC',
       searchText: searchText ? searchText : null,
-      country: countryCode[filterState.country as Countries],
+      country: countryCode[params.get('country') as Countries],
       perPage: 10,
-    }),
-    [filterState, searchText]
-  )
+    }
+  }, [searchText, params])
 
   const fetchNewData = useMemo(
-    () =>
-      debounce(async ({ queryVariables }: FetchNewDataParam) => {
-        setData(null)
-        try {
-          setLoading(true)
-          const res: { data: QueryData } = await ky
-            .post('', {
-              json: {
-                query: GET_SEARCH_RESULT,
-                variables: queryVariables,
-              },
-            })
-            .json()
-          if (!res || !mountedRef.current) {
-            return
-          }
-          setData(res.data)
-        } catch (e) {
-          setError(e)
-          console.error(e)
+    () => async ({ queryVariables }: FetchNewDataParam) => {
+      setData(null)
+      try {
+        setLoading(true)
+        const res: { data: QueryData } = await ky
+          .post('', {
+            json: {
+              query: GET_SEARCH_RESULT,
+              variables: queryVariables,
+            },
+          })
+          .json()
+        if (!res || !mountedRef.current) {
+          return
         }
-        setLoading(false)
-      }, 800),
+        setData(res.data)
+      } catch (e) {
+        setError(e)
+        console.error(e)
+      }
+      setLoading(false)
+    },
     []
   )
 
@@ -153,22 +172,25 @@ export const Search = () => {
   })
 
   const sortByOnChange = (value: string | string[]) => {
-    setFilterState({ sortBy: value as SortBy })
+    updateUrlParams(params, { value, key: 'sortBy' })
   }
 
   const clearSearch = () => {
     reset({ searchText: '' })
   }
 
+  const sortBy = params.get('sortBy')
+
   return (
     <>
+      <Filters filterQuery={location.search} />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
             onChange={sortByOnChange}
             isMulti={false}
             options={sortByOptions}
-            selected={filterState.sortBy}
+            selected={sortBy ? sortBy : 'TRENDING_DESC'}
           />
           <section className={styles.gridType}>
             {cardTypes.map(c => (

@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  RefObject,
-  useContext,
-} from 'react'
+import React, { useEffect, useState, useRef, RefObject } from 'react'
 import { Link } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
 

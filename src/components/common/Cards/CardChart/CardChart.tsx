@@ -3,17 +3,13 @@ import htmr from 'htmr'
 import { Link } from 'react-router-dom'
 
 import styles from './CardChart.module.scss'
-import {
-  useFilterStateStore,
-  initialFilterState,
-  FilterStateStore,
-} from '../../../../zustand/stores'
 import { Image } from '../../Image/Image'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
 import { SearchResult } from '../../../../api/queries'
 import { adjustColor, addKey } from '../../../../helper'
 import { Genre } from '../../Genre/Genre'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
+import { useSetGenre } from '../../../../hooks/useSetGenre'
 
 interface Props {
   id: number
@@ -24,20 +20,11 @@ interface Props {
   description: SearchResult['description']
 }
 
-const filterStateSelector = (state: FilterStateStore) => state.setFilterState
-
 export const CardChart = memo(
   ({ id, image, title, genres, meanScore, description }: Props) => {
-    const setFilterState = useFilterStateStore(filterStateSelector)
     const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
 
-    const handleSetGenre = (genre: string) => {
-      setFilterState({
-        ...initialFilterState,
-        genres: [genre],
-        sortBy: 'TRENDING_DESC',
-      })
-    }
+    const handleSetGenre = useSetGenre()
 
     const pageUrl = `/anime/${id}`
 
