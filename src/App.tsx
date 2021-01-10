@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useForm, FormProvider } from 'react-hook-form'
 
 import { useWindowResize } from './hooks/useWindowResize'
 import { Search } from './pages/search/Search'
@@ -12,7 +11,6 @@ import { useThemeStore, ThemeStore } from './zustand/stores'
 const themeSelector = (state: ThemeStore) => state.theme
 
 export const App = () => {
-  const methods = useForm({ defaultValues: { searchText: '' } })
   const theme = useThemeStore(themeSelector)
   useWindowResize()
 
@@ -29,16 +27,14 @@ export const App = () => {
             <Anime />
           </Route>
           <Route path='/'>
-            <FormProvider {...methods}>
-              <div id='container'>
-                <Route exact path='/'>
-                  <Home />
-                </Route>
-                <Route exact path='/search'>
-                  <Search />
-                </Route>
-              </div>
-            </FormProvider>
+            <div id='container'>
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/search'>
+                <Search />
+              </Route>
+            </div>
           </Route>
         </Switch>
       </Router>

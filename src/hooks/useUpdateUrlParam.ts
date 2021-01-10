@@ -31,7 +31,7 @@ export const useUpdateUrlParam = () => {
 
   return (
     params: URLSearchParams,
-    obj: { value: Value; key: string } | QueryVar
+    obj: { value: Value; key: string } | Partial<QueryVar>
   ) => {
     if ('key' in obj && 'value' in obj) {
       setParam({ value: obj.value, key: obj.key, params })

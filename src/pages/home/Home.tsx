@@ -21,6 +21,7 @@ import { NotFound } from '../../components/NotFound/NotFound'
 import { Footer } from '../../components/home/Footer/Footer'
 import { Filters } from '../../components/common/Filters/Filters'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { filterOptions } from '../../filterOptions/filterOptions'
 
 type Medias = {
   trending: SearchResult[]
@@ -168,9 +169,19 @@ export const Home = () => {
                   rank: i + 1,
                 }))
               : medias?.[key as keyof Medias]
-            const queryVar = queryVars[key as keyof Medias]
+            const { perPage } = queryVars[key as keyof Medias]
+            const queryVar = Object.fromEntries(
+              Object.entries(queryVars[key as keyof Medias]).filter(([k, _]) =>
+                //filter out the query variable which is not a filter option(eg:perPage)
+                Object.keys(filterOptions).includes(k)
+              )
+            )
             const setFilterQuery = () =>
-              updateUrLParam(new URLSearchParams(), queryVar)
+              updateUrLParam(
+                new URLSearchParams(),
+                queryVar as Partial<QueryVar>
+              )
+
             return (
               <section className={styles.content} key={key}>
                 <button className={styles.button} onClick={setFilterQuery}>
@@ -181,7 +192,7 @@ export const Home = () => {
                   media={media}
                   loading={loading}
                   cardType={content.cardType}
-                  loadingCount={queryVar.perPage}
+                  loadingCount={perPage}
                   hasRank={content.hasRank}
                 />
               </section>
