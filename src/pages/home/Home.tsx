@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react'
-import { Redirect } from 'react-router-dom'
-import { useFormContext } from 'react-hook-form'
 
 import styles from './Home.module.scss'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import { useSkip } from '../../hooks/useSkip'
 import {
   ky,
   GET_SEARCH_RESULT,
@@ -56,13 +53,8 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
 export const Home = () => {
-  const {
-    reset: resetSearchText,
-    formState: { isSubmitted },
-  } = useFormContext()
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
   const updateUrLParam = useUpdateUrlParam()
-  const [isStateChanged, setIsStateChanged] = useState(false)
 
   const [medias, setMedias] = useState<Medias | null>(null)
   const [loading, setLoading] = useState(false)
@@ -98,18 +90,6 @@ export const Home = () => {
     }
     setLoading(false)
   }, [])
-
-  useEffect(() => {
-    resetSearchText({ searchText: '' })
-  }, [resetSearchText])
-
-  useSkip(
-    () => {
-      setIsStateChanged(true)
-    },
-    [setIsStateChanged],
-    2
-  )
 
   useEffect(() => {
     fetchData()
@@ -151,10 +131,6 @@ export const Home = () => {
     }),
     [windowWidth]
   )
-
-  if (isSubmitted || isStateChanged) {
-    return <Redirect push={true} to='/search' />
-  }
 
   return (
     <>

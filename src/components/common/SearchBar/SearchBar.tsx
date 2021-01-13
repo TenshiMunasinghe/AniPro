@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 
@@ -8,13 +8,16 @@ import { SEARCH_TEXT } from '../../../api/queries'
 
 export const SearchBar = () => {
   const history = useHistory()
-  const { handleSubmit, register, formState } = useForm()
+  const { handleSubmit, register, formState } = useForm<{
+    [SEARCH_TEXT]: string
+  }>()
 
   const onSubmit = useCallback(
-    () =>
-      handleSubmit(() => {
-        history.push('/search?searchText=lol')
-      })(),
+    e => {
+      handleSubmit(e => {
+        history.push(`/search?${SEARCH_TEXT}=${e[SEARCH_TEXT]}`)
+      })()
+    },
     [history, handleSubmit]
   )
 
