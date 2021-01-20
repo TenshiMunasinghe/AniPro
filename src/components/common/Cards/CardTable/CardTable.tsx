@@ -13,7 +13,7 @@ import {
   pluralize,
 } from '../../../../helper'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
-import { addKey } from '../../../../helper'
+import { addKey, formatLabel } from '../../../../helper'
 import { useSetGenre } from '../../../../hooks/useSetGenre'
 
 interface Props {
@@ -113,7 +113,7 @@ export const CardTable = ({
           </div>
 
           <div className={styles.format + ' ' + styles.row}>
-            {toStartCase(format)}
+            {formatLabel(format)}
             <div className={styles.subRow}>
               {episodes && pluralize(episodes, 'episode')}
             </div>

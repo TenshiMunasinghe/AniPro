@@ -14,7 +14,7 @@ import {
 } from '../../api/queries'
 import { CardType } from '../search/Search'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
-import { NotFound } from '../../components/NotFound/NotFound'
+import { NotFound } from '../../components/common/NotFound/NotFound'
 import { Footer } from '../../components/home/Footer/Footer'
 import { Filters } from '../../components/common/Filters/Filters'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'

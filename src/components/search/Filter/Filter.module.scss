@@ -1,0 +1,51 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  padding: 0.6em;
+  border-radius: 0.2em;
+  text-align: center;
+  transition: all 0.075s ease-in-out;
+
+  svg {
+    transition: all 0.075s ease-in-out;
+    width: 0.75em;
+    height: 0.75em;
+  }
+
+  &.primary {
+    background: var(--color-foreground-accent-100);
+
+    @include on-hoverable-devices {
+      svg {
+        width: 0;
+      }
+
+      &:hover {
+        background: var(--color-foreground-accent-200);
+
+        svg {
+          margin-left: 0.5em;
+          width: 0.75em;
+        }
+      }
+    }
+  }
+
+  &.secondary {
+    background: var(--color-foreground-200);
+    color: var(--color-text-300);
+
+    svg {
+      margin-left: 0.5em;
+    }
+
+    @include on-hoverable-devices {
+      &:hover {
+        background: var(--color-highlight-100);
+      }
+    }
+  }
+}

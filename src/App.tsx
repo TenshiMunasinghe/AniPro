@@ -1,18 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useCallback } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import debounce from 'lodash/debounce'
 
-import { useWindowResize } from './hooks/useWindowResize'
 import { Search } from './pages/search/Search'
 import { Anime } from './pages/anime/Anime'
 import { Home } from './pages/home/Home'
 import { Header } from './components/common/Header/Header'
-import { useThemeStore, ThemeStore } from './zustand/stores'
+import {
+  useThemeStore,
+  ThemeStore,
+  useWindowSizeStore,
+  WindowSizeStore,
+} from './zustand/stores'
 
 const themeSelector = (state: ThemeStore) => state.theme
+const selector = (state: WindowSizeStore) => state.set
 
 export const App = () => {
   const theme = useThemeStore(themeSelector)
-  useWindowResize()
+  const setSize = useWindowSizeStore(selector)
+
+  const updateSize = useCallback(
+    () =>
+      debounce(() => {
+        setSize({ width: window.innerWidth, height: window.innerHeight })
+      }, 250),
+    [setSize]
+  )
+
+  useLayoutEffect(() => {
+    window.addEventListener('resize', updateSize)
+    updateSize()
+
+    return () => window.removeEventListener('resize', updateSize)
+  }, [updateSize])
 
   useEffect(() => {
     document.body.className = theme

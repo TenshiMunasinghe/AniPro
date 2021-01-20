@@ -5,7 +5,7 @@ import styles from './Filters.module.scss'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { Select } from '../Select/Select'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
-import { toStartCase } from '../../../helper'
+import { toStartCase, formatLabel } from '../../../helper'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 
 interface Props {
@@ -30,7 +30,7 @@ export const Filters = ({ filterQuery = '' }: Props) => {
           isMulti: value.isMulti,
           options: value.options.map(o => ({
             value: o,
-            label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+            label: formatLabel(o),
           })),
         })),
     [params, updateUrlParams]

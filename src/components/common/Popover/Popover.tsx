@@ -12,7 +12,7 @@ import {
 } from '../../../helper'
 import { Genre } from '../Genre/Genre'
 import { SearchResult } from '../../../api/queries'
-import { airingInfo } from '../../../helper'
+import { airingInfo, formatLabel } from '../../../helper'
 
 interface Props {
   isVisible: boolean
@@ -115,7 +115,7 @@ export const Popover = memo(
 
         <div className={styles.studio}>{studios.nodes[0]?.name}</div>
         <div className={styles.info}>
-          {format}
+          {formatLabel(format)}
           {format === 'MOVIE' && _duration.length > 0 ? (
             <>
               <span className={styles.separator}>•</span>

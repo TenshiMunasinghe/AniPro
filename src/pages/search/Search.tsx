@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 import { v4 } from 'uuid'
 
@@ -11,14 +11,15 @@ import {
 } from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
-import { CardGrid } from '../../components/common/CardGrid/CardGrid'
-import { ScrollButton } from '../../components/common/ScrollButton/ScrollButton'
-import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
-import { NotFound } from '../../components/NotFound/NotFound'
-import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
-import { Filters } from '../../components/common/Filters/Filters'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { useFetchAnimes } from '../../hooks/useFetchAnimes'
+import { CardGrid } from '../../components/common/CardGrid/CardGrid'
+import { ScrollButton } from '../../components/search/ScrollButton/ScrollButton'
+import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
+import { NotFound } from '../../components/common/NotFound/NotFound'
+import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
+import { Filters } from '../../components/common/Filters/Filters'
+import { ActiveFilters } from '../../components/search/ActiveFilters/ActiveFilters'
 
 const _cardTypes = ['chart', 'cover', 'table'] as const
 
@@ -33,41 +34,48 @@ const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
 export type CardType = typeof _cardTypes[number]
 
 export const Search = () => {
-  const updateUrlParams = useUpdateUrlParam()
   const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
   const { data, loading, error, fetchData } = useFetchAnimes()
+  const updateUrlParams = useUpdateUrlParam()
 
   const params = useMemo(() => new URLSearchParams(location.search), [
     location.search,
   ])
 
+  const paramsObj = useMemo(
+    () =>
+      Object.fromEntries(
+        Array.from(params.keys()).map(key => {
+          if (key === SEARCH_TEXT) {
+            return [SEARCH_TEXT, params.get(SEARCH_TEXT)]
+          }
+          if (!Object.keys(filterOptions).includes(key)) {
+            return []
+          }
+
+          if (
+            !filterOptions[key as FilterOptionKeys].isMulti ||
+            key === SEARCH_TEXT
+          ) {
+            return [key, params.get(key)]
+          } else {
+            return [key, params.getAll(key)]
+          }
+        })
+      ),
+    [params]
+  )
+
   const queryVariables: QueryVar = useMemo(() => {
-    const filterParams = Object.fromEntries(
-      Array.from(params.keys()).map(key => {
-        if (!Object.keys(filterOptions).includes(key)) {
-          return []
-        }
-
-        if (
-          !filterOptions[key as FilterOptionKeys].isMulti ||
-          key === SEARCH_TEXT
-        ) {
-          return [key, params.get(key)]
-        } else {
-          return [key, params.getAll(key)]
-        }
-      })
-    )
-
     return {
-      ...filterParams,
-      sortBy: filterParams.sortBy ? filterParams.sortBy : 'TRENDING_DESC',
-      searchText: params.get(SEARCH_TEXT) ? params.get(SEARCH_TEXT) : null,
-      country: countryCode[params.get('country') as Countries],
+      ...paramsObj,
+      sortBy: paramsObj.sortBy ? paramsObj.sortBy : 'TRENDING_DESC',
+      searchText: paramsObj[SEARCH_TEXT] ? paramsObj[SEARCH_TEXT] : null,
+      country: countryCode[paramsObj.country as Countries],
       perPage: 10,
     }
-  }, [params])
+  }, [paramsObj])
 
   // requesting on filter state change
   useEffect(() => {
@@ -83,13 +91,12 @@ export const Search = () => {
     fetchData({ queryVariables, paginate: true })
   })
 
-  const sortByOnChange = (value: string | string[]) => {
-    updateUrlParams(params, { value, key: 'sortBy' })
-  }
-
-  const clearSearch = () => {
-    updateUrlParams(params, { key: SEARCH_TEXT, value: '' })
-  }
+  const sortByOnChange = useCallback(
+    (value: string | string[]) => {
+      updateUrlParams(params, { value, key: 'sortBy' })
+    },
+    [params, updateUrlParams]
+  )
 
   const sortBy = params.get('sortBy')
 
@@ -116,19 +123,7 @@ export const Search = () => {
           </section>
         </section>
 
-        {params.get(SEARCH_TEXT) && (
-          <section className={styles.searchDetails}>
-            <div className={styles.resultsFor}>
-              Showing results for:{' '}
-              <span className={styles.searchText}>
-                {params.get(SEARCH_TEXT)}
-              </span>
-            </div>
-            <button onClick={clearSearch} className={styles.clearSearch}>
-              Clear search
-            </button>
-          </section>
-        )}
+        <ActiveFilters />
       </div>
 
       <main>
