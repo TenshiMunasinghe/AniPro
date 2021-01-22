@@ -1,21 +1,25 @@
-import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
-import debounce from 'lodash/debounce'
-import uniqBy from 'lodash/uniqBy'
-import produce from 'immer'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 import { v4 } from 'uuid'
-import { useFormContext } from 'react-hook-form'
 
 import styles from './Search.module.scss'
-import { useFilterStateStore, FilterStateStore } from '../../zustand/stores'
-import { QueryData, QueryVar, GET_SEARCH_RESULT, ky } from '../../api/queries'
-import { SortBy, sortByOptions } from '../../filterOptions/filterOptions'
+import { QueryVar, SEARCH_TEXT } from '../../api/queries'
+import {
+  sortByOptions,
+  filterOptions,
+  FilterOptionKeys,
+} from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { useFetchAnimes } from '../../hooks/useFetchAnimes'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
-import { ScrollButton } from '../../components/common/ScrollButton/ScrollButton'
+import { ScrollButton } from '../../components/search/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
-import { NotFound } from '../../components/NotFound/NotFound'
+import { NotFound } from '../../components/common/NotFound/NotFound'
 import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
+import { Filters } from '../../components/common/Filters/Filters'
+import { ActiveFilters } from '../../components/search/ActiveFilters/ActiveFilters'
 
 const _cardTypes = ['chart', 'cover', 'table'] as const
 
@@ -29,146 +33,83 @@ const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
 
 export type CardType = typeof _cardTypes[number]
 
-type FetchNewDataParam = { queryVariables: QueryVar }
-
-type LoadMoreParam = {
-  queryVariables: QueryVar
-  data: QueryData | null
-}
-
-const filterStateSelector = ({
-  filterState,
-  setFilterState,
-}: FilterStateStore) => ({ filterState, setFilterState })
-
 export const Search = () => {
-  const { getValues, reset } = useFormContext()
-  const searchText = getValues('searchText')
-  const { filterState, setFilterState } = useFilterStateStore(
-    filterStateSelector
-  )
+  const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
-  const [data, setData] = useState<QueryData | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState()
+  const { data, loading, error, fetchData } = useFetchAnimes()
+  const updateUrlParams = useUpdateUrlParam()
 
-  const mountedRef = useRef(true)
+  const params = useMemo(() => new URLSearchParams(location.search), [
+    location.search,
+  ])
 
-  const queryVariables: QueryVar = useMemo(
-    () => ({
-      ...Object.fromEntries(
-        Object.entries(filterState).filter(([_, value]) => value.length > 0)
-      ),
-      searchText: searchText ? searchText : null,
-      country: countryCode[filterState.country as Countries],
-      perPage: 10,
-    }),
-    [filterState, searchText]
-  )
-
-  const fetchNewData = useMemo(
+  const paramsObj = useMemo(
     () =>
-      debounce(async ({ queryVariables }: FetchNewDataParam) => {
-        setData(null)
-        try {
-          setLoading(true)
-          const res: { data: QueryData } = await ky
-            .post('', {
-              json: {
-                query: GET_SEARCH_RESULT,
-                variables: queryVariables,
-              },
-            })
-            .json()
-          if (!res || !mountedRef.current) {
-            return
+      Object.fromEntries(
+        Array.from(params.keys()).map(key => {
+          if (key === SEARCH_TEXT) {
+            return [SEARCH_TEXT, params.get(SEARCH_TEXT)]
           }
-          setData(res.data)
-        } catch (e) {
-          setError(e)
-          console.error(e)
-        }
-        setLoading(false)
-      }, 800),
-    []
-  )
+          if (!Object.keys(filterOptions).includes(key)) {
+            return []
+          }
 
-  const loadMore = useCallback(
-    async ({ data, queryVariables }: LoadMoreParam) => {
-      if (!data) return
-      try {
-        setLoading(true)
-        const res: { data: QueryData } = await ky
-          .post('', {
-            json: {
-              query: GET_SEARCH_RESULT,
-              variables: {
-                ...queryVariables,
-                page: data.Page.pageInfo.currentPage + 1,
-                perPage: 20,
-              },
-            },
-          })
-          .json()
-        if (!res || !mountedRef) {
-          return
-        }
-        setData(prev => {
-          if (prev === null) return res.data
-          return produce(prev, next => {
-            next.Page.pageInfo = { ...res.data.Page.pageInfo }
-            next.Page.media = uniqBy(
-              [...next.Page.media, ...res.data.Page.media],
-              'id'
-            )
-          })
+          if (
+            !filterOptions[key as FilterOptionKeys].isMulti ||
+            key === SEARCH_TEXT
+          ) {
+            return [key, params.get(key)]
+          } else {
+            return [key, params.getAll(key)]
+          }
         })
-      } catch (e) {
-        setError(e)
-        console.error(e)
-      }
-      setLoading(false)
-    },
-    []
+      ),
+    [params]
   )
 
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false
+  const queryVariables: QueryVar = useMemo(() => {
+    return {
+      ...paramsObj,
+      sortBy: paramsObj.sortBy ? paramsObj.sortBy : 'TRENDING_DESC',
+      searchText: paramsObj[SEARCH_TEXT] ? paramsObj[SEARCH_TEXT] : null,
+      country: countryCode[paramsObj.country as Countries],
+      perPage: 10,
     }
-  }, [])
+  }, [paramsObj])
 
   // requesting on filter state change
   useEffect(() => {
-    fetchNewData({ queryVariables })
-    window.scrollTo(0, 0)
-  }, [queryVariables, fetchNewData])
+    fetchData({ queryVariables, paginate: false })
+    // eslint-disable-next-line
+  }, [queryVariables])
 
   // pagination
   useInfiniteScroll(() => {
     if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
       return
     }
-    loadMore({ queryVariables, data })
+    fetchData({ queryVariables, paginate: true })
   })
 
-  const sortByOnChange = (value: string | string[]) => {
-    setFilterState({ sortBy: value as SortBy })
-  }
+  const sortByOnChange = useCallback(
+    (value: string | string[]) => {
+      updateUrlParams(params, { value, key: 'sortBy' })
+    },
+    [params, updateUrlParams]
+  )
 
-  const clearSearch = () => {
-    reset({ searchText: '' })
-  }
+  const sortBy = params.get('sortBy')
 
   return (
     <>
+      <Filters filterQuery={location.search} />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
             onChange={sortByOnChange}
             isMulti={false}
             options={sortByOptions}
-            selected={filterState.sortBy}
+            selected={sortBy ? sortBy : 'TRENDING_DESC'}
           />
           <section className={styles.gridType}>
             {cardTypes.map(c => (
@@ -182,17 +123,7 @@ export const Search = () => {
           </section>
         </section>
 
-        {searchText && (
-          <section className={styles.searchDetails}>
-            <div className={styles.resultsFor}>
-              Showing results for:{' '}
-              <span className={styles.searchText}>{searchText}</span>
-            </div>
-            <button onClick={clearSearch} className={styles.clearSearch}>
-              Clear search
-            </button>
-          </section>
-        )}
+        <ActiveFilters />
       </div>
 
       <main>

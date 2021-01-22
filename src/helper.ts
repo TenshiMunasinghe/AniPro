@@ -138,3 +138,14 @@ export const timeToArr = (time: { [key in TimeUnits]?: number }) =>
     .map(([key, val]) => ({ num: val, unit: key }))
 
 export const addKey = <T>(arr: T[]) => arr.map(value => ({ key: v4(), value }))
+
+export const formatLabel = (str: string) => {
+  const specialCase: { [key: string]: string } = {
+    OVA: 'OVA',
+    ONA: 'ONA',
+    TV_SHORTS: 'TV Shorts',
+    TV: 'TV Show',
+  }
+
+  return specialCase[str] ? specialCase[str] : toStartCase(str)
+}

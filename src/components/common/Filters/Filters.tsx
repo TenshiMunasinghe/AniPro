@@ -4,57 +4,57 @@ import { v4 } from 'uuid'
 import styles from './Filters.module.scss'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { Select } from '../Select/Select'
-import { filterOptions } from '../../../filterOptions/filterOptions'
-import {
-  useFilterStateStore,
-  FilterStateKeys,
-  FilterStateStore,
-} from '../../../zustand/stores'
-import { toStartCase } from '../../../helper'
+import { filterOptionTypes } from '../../../filterOptions/filterOptions'
+import { toStartCase, formatLabel } from '../../../helper'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 
-const filterStateSelector = ({
-  filterState,
-  setFilterState,
-}: FilterStateStore) => ({ filterState, setFilterState })
+interface Props {
+  filterQuery?: string
+}
 
-export const Filters = () => {
-  const { filterState, setFilterState } = useFilterStateStore(
-    filterStateSelector
-  )
+export const Filters = ({ filterQuery = '' }: Props) => {
+  const updateUrlParams = useUpdateUrlParam()
+  const params = useMemo(() => new URLSearchParams(filterQuery), [filterQuery])
+
   // an object to map to the Select component
   const dropDowns = useMemo(
     () =>
-      Object.entries(filterOptions)
+      Object.entries(filterOptionTypes.default)
         .filter(([key]) => key !== 'sortBy')
         .map(([key, value]) => ({
           key: v4(),
           name: key,
           onChange: (value: string | string[]) => {
-            setFilterState({ [key]: value })
+            updateUrlParams(params, { value, key })
           },
           isMulti: value.isMulti,
           options: value.options.map(o => ({
             value: o,
-            label: ['OVA', 'ONA'].includes(o) ? o : toStartCase(o),
+            label: formatLabel(o),
           })),
         })),
-    [setFilterState]
+    [params, updateUrlParams]
   )
 
   return (
     <>
       <SearchBar />
       <section className={styles.dropdowns}>
-        {dropDowns.map(d => (
-          <Select
-            key={d.key}
-            onChange={d.onChange}
-            isMulti={d.isMulti}
-            options={d.options}
-            selected={filterState[d.name as FilterStateKeys]}
-            name={d.name}
-          />
-        ))}
+        {dropDowns.map(d => {
+          const selected = d.isMulti
+            ? params.getAll(d.name)
+            : params.get(d.name)
+          return (
+            <Select
+              key={d.key}
+              onChange={d.onChange}
+              isMulti={d.isMulti}
+              options={d.options}
+              selected={selected ? selected : undefined}
+              name={d.name}
+            />
+          )
+        })}
       </section>
     </>
   )

@@ -1,21 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useForm, FormProvider } from 'react-hook-form'
+import debounce from 'lodash/debounce'
 
-import { useWindowResize } from './hooks/useWindowResize'
 import { Search } from './pages/search/Search'
 import { Anime } from './pages/anime/Anime'
 import { Home } from './pages/home/Home'
 import { Header } from './components/common/Header/Header'
-import { Filters } from './components/common/Filters/Filters'
-import { useThemeStore, ThemeStore } from './zustand/stores'
+import {
+  useThemeStore,
+  ThemeStore,
+  useWindowSizeStore,
+  WindowSizeStore,
+} from './zustand/stores'
 
 const themeSelector = (state: ThemeStore) => state.theme
+const selector = (state: WindowSizeStore) => state.set
 
 export const App = () => {
-  const methods = useForm({ defaultValues: { searchText: '' } })
   const theme = useThemeStore(themeSelector)
-  useWindowResize()
+  const setSize = useWindowSizeStore(selector)
+
+  const updateSize = useMemo(
+    () =>
+      debounce(() => {
+        setSize({ width: window.innerWidth, height: window.innerHeight })
+      }, 250),
+    [setSize]
+  )
+
+  useLayoutEffect(() => {
+    window.addEventListener('resize', updateSize)
+    updateSize()
+
+    return () => window.removeEventListener('resize', updateSize)
+  }, [updateSize])
 
   useEffect(() => {
     document.body.className = theme
@@ -30,17 +48,14 @@ export const App = () => {
             <Anime />
           </Route>
           <Route path='/'>
-            <FormProvider {...methods}>
-              <div id='container'>
-                <Filters />
-                <Route exact path='/'>
-                  <Home />
-                </Route>
-                <Route exact path='/search'>
-                  <Search />
-                </Route>
-              </div>
-            </FormProvider>
+            <div id='container'>
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/search'>
+                <Search />
+              </Route>
+            </div>
           </Route>
         </Switch>
       </Router>

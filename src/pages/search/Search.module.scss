@@ -21,34 +21,3 @@
     border-left: solid 1px var(--color-border-200);
   }
 }
-
-.searchDetails {
-  margin-top: 0.5rem;
-  * {
-    color: inherit;
-  }
-
-  .resultsFor {
-    font-weight: normal;
-    word-wrap: break-word;
-    margin-bottom: 0.25rem;
-  }
-
-  .searchText {
-    font-weight: bold;
-  }
-
-  .clearSearch {
-    font-size: 0.8rem;
-    text-decoration: underline;
-    text-decoration-color: var(--b-6);
-    text-underline-offset: 0.2em;
-    transition: text-decoration-color 0.15s ease-in-out;
-
-    @include on-hoverable-devices {
-      &:hover {
-        text-decoration-color: inherit;
-      }
-    }
-  }
-}

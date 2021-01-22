@@ -1,29 +1,24 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react'
-import { Redirect } from 'react-router-dom'
-import { useFormContext } from 'react-hook-form'
 
 import styles from './Home.module.scss'
-import {
-  useFilterStateStore,
-  FilterStateStore,
-  initialFilterState,
-  useWindowSizeStore,
-  WindowSizeStore,
-} from '../../zustand/stores'
-import { useSkip } from '../../hooks/useSkip'
+import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import {
   ky,
   GET_SEARCH_RESULT,
   SearchResult,
   currentYear,
   currentSeason,
+  nextYear,
+  nextSeason,
   QueryVar,
 } from '../../api/queries'
 import { CardType } from '../search/Search'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
-import { NotFound } from '../../components/NotFound/NotFound'
+import { NotFound } from '../../components/common/NotFound/NotFound'
 import { Footer } from '../../components/home/Footer/Footer'
-import { nextYear, nextSeason } from '../../api/queries'
+import { Filters } from '../../components/common/Filters/Filters'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { filterOptions } from '../../filterOptions/filterOptions'
 
 type Medias = {
   trending: SearchResult[]
@@ -38,13 +33,13 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
 
   popularNow: {
     sortBy: 'POPULARITY_DESC',
-    year: currentYear,
+    year: currentYear.toString(),
     season: currentSeason,
     perPage: 5,
   },
 
   upComing: {
-    year: nextYear,
+    year: nextYear.toString(),
     season: nextSeason,
     perPage: 5,
     sortBy: 'TRENDING_DESC',
@@ -55,23 +50,11 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
   topRated: { sortBy: 'SCORE_DESC', perPage: 10 },
 }
 
-const filterStateSelector = ({
-  filterState,
-  setFilterState,
-  resetFilterState,
-}: FilterStateStore) => ({ filterState, setFilterState, resetFilterState })
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
 export const Home = () => {
-  const {
-    reset: resetSearchText,
-    formState: { isSubmitted },
-  } = useFormContext()
-  const { filterState, setFilterState, resetFilterState } = useFilterStateStore(
-    filterStateSelector
-  )
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
-  const [isStateChanged, setIsStateChanged] = useState(false)
+  const updateUrLParam = useUpdateUrlParam()
 
   const [medias, setMedias] = useState<Medias | null>(null)
   const [loading, setLoading] = useState(false)
@@ -107,19 +90,6 @@ export const Home = () => {
     }
     setLoading(false)
   }, [])
-
-  useEffect(() => {
-    resetSearchText({ searchText: '' })
-    resetFilterState()
-  }, [resetSearchText, resetFilterState])
-
-  useSkip(
-    () => {
-      setIsStateChanged(true)
-    },
-    [filterState, setIsStateChanged],
-    2
-  )
 
   useEffect(() => {
     fetchData()
@@ -162,12 +132,9 @@ export const Home = () => {
     [windowWidth]
   )
 
-  if (isSubmitted || isStateChanged) {
-    return <Redirect push={true} to='/search' />
-  }
-
   return (
     <>
+      <Filters />
       <main className={styles.wrapper}>
         {!error ? (
           Object.keys(contents).map(key => {
@@ -178,18 +145,19 @@ export const Home = () => {
                   rank: i + 1,
                 }))
               : medias?.[key as keyof Medias]
-            const queryVar = queryVars[key as keyof Medias]
-            const filterQuery = Object.fromEntries(
-              Object.entries(queryVar)
-                .filter(([key, _]) =>
-                  Object.keys(initialFilterState).includes(key)
-                )
-                .map(([key, val]) => [
-                  key,
-                  typeof val === 'number' ? val.toString() : val,
-                ])
+            const { perPage } = queryVars[key as keyof Medias]
+            const queryVar = Object.fromEntries(
+              Object.entries(queryVars[key as keyof Medias]).filter(([k, _]) =>
+                //filter out the query variable which is not a filter option(eg:perPage)
+                Object.keys(filterOptions).includes(k)
+              )
             )
-            const setFilterQuery = () => setFilterState({ ...filterQuery })
+            const setFilterQuery = () =>
+              updateUrLParam(
+                new URLSearchParams(),
+                queryVar as Partial<QueryVar>
+              )
+
             return (
               <section className={styles.content} key={key}>
                 <button className={styles.button} onClick={setFilterQuery}>
@@ -200,7 +168,7 @@ export const Home = () => {
                   media={media}
                   loading={loading}
                   cardType={content.cardType}
-                  loadingCount={queryVar.perPage}
+                  loadingCount={perPage}
                   hasRank={content.hasRank}
                 />
               </section>

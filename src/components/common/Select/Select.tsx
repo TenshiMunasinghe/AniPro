@@ -14,7 +14,7 @@ interface Props {
     value: string
   }[]
   defaultValue?: string | string[]
-  selected: string | string[]
+  selected?: string | string[]
   name: string
 }
 
@@ -24,7 +24,7 @@ export const Select = memo(
     options,
     isMulti = false,
     defaultValue = isMulti ? [] : '',
-    selected,
+    selected = defaultValue,
     name: _name,
   }: Props) => {
     const name = toStartCase(_name)
@@ -106,9 +106,9 @@ export const Select = memo(
             )}
 
             {selected.length !== 0 ? (
-              <FaTimes onClick={resetSelect} aria-label='cross' />
+              <FaTimes onClick={resetSelect} aria-label='reset select' />
             ) : (
-              <FaAngleDown aria-label='angle down' />
+              <FaAngleDown aria-label='open select' />
             )}
           </button>
 

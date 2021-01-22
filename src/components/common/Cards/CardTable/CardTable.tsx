@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom'
 
 import styles from './CardTable.module.scss'
 import { SearchResult, currentYear } from '../../../../api/queries'
-import {
-  useFilterStateStore,
-  FilterStateStore,
-  initialFilterState,
-} from '../../../../zustand/stores'
 import { Image } from '../../Image/Image'
 import { Genre } from '../../Genre/Genre'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
@@ -18,7 +13,8 @@ import {
   pluralize,
 } from '../../../../helper'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
-import { addKey } from '../../../../helper'
+import { addKey, formatLabel } from '../../../../helper'
+import { useSetGenre } from '../../../../hooks/useSetGenre'
 
 interface Props {
   id: number
@@ -41,8 +37,6 @@ interface Props {
 const mapStatus = (status: SearchResult['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
-const filterStateSelector = (state: FilterStateStore) => state.setFilterState
-
 export const CardTable = ({
   image,
   title,
@@ -58,16 +52,9 @@ export const CardTable = ({
   episodes,
   rank,
 }: Props) => {
-  const setFilterState = useFilterStateStore(filterStateSelector)
   const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
 
-  const handleSetGenre = (genre: string) => {
-    setFilterState({
-      ...initialFilterState,
-      genres: [genre],
-      sortBy: 'TRENDING_DESC',
-    })
-  }
+  const handleSetGenre = useSetGenre()
 
   const url = `/anime/${id}`
 
@@ -126,7 +113,7 @@ export const CardTable = ({
           </div>
 
           <div className={styles.format + ' ' + styles.row}>
-            {toStartCase(format)}
+            {formatLabel(format)}
             <div className={styles.subRow}>
               {episodes && pluralize(episodes, 'episode')}
             </div>

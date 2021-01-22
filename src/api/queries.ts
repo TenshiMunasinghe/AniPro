@@ -26,6 +26,8 @@ export const nextSeason = next ? next.name : ''
 
 export const nextYear = dateNext.getFullYear()
 
+export const SEARCH_TEXT = 'search'
+
 export type QueryData = {
   Page: {
     pageInfo: {
@@ -70,7 +72,7 @@ export type SearchResult = QueryData['Page']['media'][number]
 export type QueryVar = {
   page?: number
   genres?: string[]
-  year?: number
+  year?: string
   season?: string
   format?: string
   status?: string
