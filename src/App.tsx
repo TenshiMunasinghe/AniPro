@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useCallback } from 'react'
+import React, { useEffect, useLayoutEffect, useMemo } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 
@@ -20,7 +20,7 @@ export const App = () => {
   const theme = useThemeStore(themeSelector)
   const setSize = useWindowSizeStore(selector)
 
-  const updateSize = useCallback(
+  const updateSize = useMemo(
     () =>
       debounce(() => {
         setSize({ width: window.innerWidth, height: window.innerHeight })
