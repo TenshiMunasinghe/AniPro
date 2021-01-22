@@ -3,6 +3,7 @@ import lowerCase from 'lodash/lowerCase'
 
 import { SearchResult } from './api/queries'
 import { v4 } from 'uuid'
+import { sortByOptions } from './filterOptions/filterOptions'
 
 export const pluralize = (num: number, str: string) => {
   return num === 1 ? `${num} ${str}` : `${num} ${str}s`
@@ -140,11 +141,16 @@ export const timeToArr = (time: { [key in TimeUnits]?: number }) =>
 export const addKey = <T>(arr: T[]) => arr.map(value => ({ key: v4(), value }))
 
 export const formatLabel = (str: string) => {
+  const _sortByOptions = Object.fromEntries(
+    sortByOptions.map(({ value, label }) => [value, label])
+  )
+
   const specialCase: { [key: string]: string } = {
     OVA: 'OVA',
     ONA: 'ONA',
     TV_SHORTS: 'TV Shorts',
     TV: 'TV Show',
+    ..._sortByOptions,
   }
 
   return specialCase[str] ? specialCase[str] : toStartCase(str)
