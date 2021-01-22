@@ -5,7 +5,7 @@ import styles from './Filters.module.scss'
 import { SearchBar } from '../SearchBar/SearchBar'
 import { Select } from '../Select/Select'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
-import { toStartCase, formatLabel } from '../../../helper'
+import { formatLabel } from '../../../helper'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 
 interface Props {
