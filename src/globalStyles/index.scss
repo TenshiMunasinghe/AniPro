@@ -48,6 +48,7 @@
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
+  overflow-x: hidden;
 }
 @media screen and (min-width: 320px) {
   html {
@@ -82,6 +83,7 @@ button {
 }
 
 body {
+  overflow-x: hidden;
   &.dark {
     --color-background: var(--b-12);
     --color-foreground-50: var(--b-11);

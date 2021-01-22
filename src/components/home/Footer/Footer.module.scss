@@ -19,7 +19,6 @@
 .theme {
   margin-right: auto;
   display: flex;
-  gap: 1em;
 
   * {
     display: flex;
@@ -39,6 +38,7 @@
   .dark {
     background: var(--b-12);
     color: var(--w-4);
+    margin-left: 1em;
   }
 }
 

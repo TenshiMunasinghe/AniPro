@@ -1,4 +1,4 @@
-import React, { useState, RefObject, useRef, memo } from 'react'
+import React, { useState, RefObject, memo } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
@@ -29,7 +29,6 @@ export const Select = memo(
   }: Props) => {
     const name = toStartCase(_name)
     const [inputState, setInputState] = useState('')
-    const inputRef = useRef<HTMLInputElement>(null)
 
     const { ref, isClickedOut } = useClickedOutside()
 
@@ -59,10 +58,6 @@ export const Select = memo(
       setInputState('')
     }
 
-    const focusInput = () => {
-      inputRef.current && inputRef.current.focus()
-    }
-
     return (
       <div className={styles.wrapper}>
         <label className={styles.label} htmlFor={name}>
@@ -73,7 +68,7 @@ export const Select = memo(
           ref={ref as RefObject<HTMLDivElement>}
           aria-haspopup='true'
           aria-expanded={!isClickedOut}>
-          <button className={styles.dropdownHeader} onClick={focusInput}>
+          <div className={styles.dropdownHeader}>
             <input
               className={styles.input}
               placeholder={selected.length === 0 ? 'Any' : ''}
@@ -81,7 +76,6 @@ export const Select = memo(
               id={name}
               name={name}
               onChange={e => setInputState(e.target.value)}
-              ref={inputRef}
             />
 
             {selected.length !== 0 && (
@@ -110,7 +104,7 @@ export const Select = memo(
             ) : (
               <FaAngleDown aria-label='open select' />
             )}
-          </button>
+          </div>
 
           <Options
             isVisible={!isClickedOut}
