@@ -1,8 +1,10 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 1.5em;
 
   & > * {
     margin-right: 2em;
+    margin-bottom: 1em;
   }
 }
