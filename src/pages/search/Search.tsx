@@ -36,7 +36,7 @@ export type CardType = typeof _cardTypes[number]
 export const Search = () => {
   const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
-  const { data, loading, error, fetchData } = useFetchAnimes()
+  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes()
   const updateUrlParams = useUpdateUrlParam()
 
   const params = useMemo(() => new URLSearchParams(location.search), [
@@ -80,14 +80,12 @@ export const Search = () => {
   // requesting on filter state change
   useEffect(() => {
     fetchData({ queryVariables, paginate: false })
-    // eslint-disable-next-line
-  }, [queryVariables])
+  }, [queryVariables, fetchData])
 
   // pagination
   useInfiniteScroll(() => {
-    if (error || !data || !data.Page.pageInfo.hasNextPage || loading) {
-      return
-    }
+    if (error || !medias || !nextPageInfo.hasNextPage || loading) return
+
     fetchData({ queryVariables, paginate: true })
   })
 
@@ -127,12 +125,12 @@ export const Search = () => {
       </div>
 
       <main>
-        {error || (data && data?.Page.media.length === 0) ? (
+        {error || (medias && medias.length === 0) ? (
           <NotFound />
         ) : (
           <CardGrid
             loading={loading}
-            media={data?.Page.media}
+            media={medias || []}
             cardType={cardType}
             loadingCount={loadingCount[cardType]}
           />
