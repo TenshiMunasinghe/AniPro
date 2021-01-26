@@ -21,7 +21,6 @@ export const CardGrid = memo(
   ({ loading, media, cardType, loadingCount, hasRank = false }: Props) => {
     return (
       <section className={styles.slider + ' ' + styles[cardType]}>
-        {/* <CardLoading type={cardType} /> */}
         {media &&
           media.map((m: QueryData['Page']['media'][number]) => {
             switch (cardType) {

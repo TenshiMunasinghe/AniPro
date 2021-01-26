@@ -67,6 +67,8 @@ export type QueryData = {
   }
 }
 
+export type NextPageInfo = QueryData['Page']['pageInfo']
+
 export type SearchResult = QueryData['Page']['media'][number]
 
 export type QueryVar = {

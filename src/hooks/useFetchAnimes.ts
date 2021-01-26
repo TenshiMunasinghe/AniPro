@@ -1,16 +1,26 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import produce from 'immer'
 import uniqBy from 'lodash/uniqBy'
+import { NextPageInfo } from '../api/queries'
 
-import { QueryData, QueryVar, ky, GET_SEARCH_RESULT } from '../api/queries'
+import {
+  QueryData,
+  QueryVar,
+  ky,
+  GET_SEARCH_RESULT,
+  SearchResult,
+} from '../api/queries'
 
 type FetchDataParam = { queryVariables: QueryVar; paginate: boolean }
 
 export const useFetchAnimes = () => {
-  const [data, setData] = useState<QueryData | null>(null)
+  const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
+  const nextPageInfo = useRef<NextPageInfo>({
+    currentPage: 1,
+    hasNextPage: false,
+  })
   const mountedRef = useRef(true)
 
   useEffect(() => {
@@ -21,14 +31,10 @@ export const useFetchAnimes = () => {
 
   const fetchData = useCallback(
     async ({ queryVariables, paginate }: FetchDataParam) => {
-      const page =
-        paginate && data?.Page.pageInfo.currentPage
-          ? data?.Page.pageInfo.currentPage + 1
-          : 1
-      if (!paginate) {
-        setData(null)
-      }
+      const page = paginate ? nextPageInfo.current.currentPage + 1 : 1
       try {
+        if (!paginate) setMedias(null)
+
         setLoading(true)
 
         const res: { data: QueryData } = await ky
@@ -44,27 +50,32 @@ export const useFetchAnimes = () => {
           return
         }
 
-        setData(prev => {
+        const {
+          data: { Page },
+        } = res
+
+        setMedias(prev => {
           if (paginate && prev) {
-            return produce(prev, next => {
-              next.Page.pageInfo = { ...res.data.Page.pageInfo }
-              next.Page.media = uniqBy(
-                [...next.Page.media, ...res.data.Page.media],
-                'id'
-              )
-            })
+            return uniqBy([...prev, ...Page.media], 'id')
           } else {
-            return res.data
+            return res.data.Page.media
           }
         })
+        nextPageInfo.current = { ...Page.pageInfo }
       } catch (e) {
         setError(e)
         console.error(e)
       }
       setLoading(false)
     },
-    [data?.Page.pageInfo.currentPage]
+    []
   )
 
-  return { data, loading, error, fetchData }
+  return {
+    medias,
+    loading,
+    error,
+    fetchData,
+    nextPageInfo: nextPageInfo.current,
+  }
 }
