@@ -10,7 +10,6 @@ import {
   FilterOptionKeys,
 } from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
-import { useInfiniteScroll } from '../../hooks/useInfiniteScroll'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { useFetchAnimes } from '../../hooks/useFetchAnimes'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
@@ -77,17 +76,11 @@ export const Search = () => {
     }
   }, [paramsObj])
 
-  // requesting on filter state change
+  const fetchMore = () => fetchData({ queryVariables, paginate: true })
+
   useEffect(() => {
     fetchData({ queryVariables, paginate: false })
   }, [queryVariables, fetchData])
-
-  // pagination
-  useInfiniteScroll(() => {
-    if (error || !medias || !nextPageInfo.hasNextPage || loading) return
-
-    fetchData({ queryVariables, paginate: true })
-  })
 
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
@@ -124,16 +117,23 @@ export const Search = () => {
         <ActiveFilters />
       </div>
 
-      <main>
+      <main className={styles.main}>
         {error || (medias && medias.length === 0) ? (
           <NotFound />
         ) : (
-          <CardGrid
-            loading={loading}
-            media={medias || []}
-            cardType={cardType}
-            loadingCount={loadingCount[cardType]}
-          />
+          <>
+            <CardGrid
+              loading={loading}
+              media={medias || []}
+              cardType={cardType}
+              loadingCount={loadingCount[cardType]}
+            />
+            {!loading && !error && nextPageInfo.hasNextPage && (
+              <button className={styles.loadMore} onClick={fetchMore}>
+                Load More! щ(ﾟДﾟщ)
+              </button>
+            )}
+          </>
         )}
       </main>
       <ScrollButton />
