@@ -39,3 +39,14 @@
     @content;
   }
 }
+
+@mixin mouse-effects {
+  @include on-hoverable-devices {
+    &:hover {
+      background: var(--color-highlight-100);
+    }
+  }
+  &:active {
+    background: var(--color-highlight-200);
+  }
+}
