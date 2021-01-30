@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { QueryVar } from '../api/queries'
 
@@ -32,15 +33,18 @@ const setParam = ({ params, value, key }: setParamArg) => {
 export const useUpdateUrlParam = () => {
   const history = useHistory()
 
-  return (params: URLSearchParams, obj: KeyValue | Partial<QueryVar>) => {
-    if ('key' in obj && 'value' in obj) {
-      setParam({ value: obj.value, key: obj.key, params })
-    } else {
-      Object.entries(obj).forEach(
-        ([key, value]) =>
-          value && setParam({ value: String(value), key, params })
-      )
-    }
-    history.push(`/search${params ? `/?${params}` : ''}`)
-  }
+  return useCallback(
+    (params: URLSearchParams, obj: KeyValue | Partial<QueryVar>) => {
+      if ('key' in obj && 'value' in obj) {
+        setParam({ value: obj.value, key: obj.key, params })
+      } else {
+        Object.entries(obj).forEach(
+          ([key, value]) =>
+            value && setParam({ value: String(value), key, params })
+        )
+      }
+      history.push(`/search${params ? `/?${params}` : ''}`)
+    },
+    [history]
+  )
 }
