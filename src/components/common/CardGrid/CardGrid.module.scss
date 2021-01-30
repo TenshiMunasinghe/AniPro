@@ -16,3 +16,17 @@
     @include grid-table;
   }
 }
+
+.loadMore {
+  background: var(--color-foreground-200);
+  color: var(--color-text-300);
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  padding: 0.75em 1.2em;
+  width: fit-content;
+  margin: 2em 0;
+  transition: 0.05s all ease-in-out;
+  border-radius: 0.1em;
+
+  @include mouse-effects;
+}
