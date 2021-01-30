@@ -24,7 +24,7 @@ export const SearchBar = () => {
 
   return (
     <form onSubmit={onSubmit} autoComplete='off' className={styles.form}>
-      <label htmlFor={SEARCH_TEXT}>Search</label>
+      <label htmlFor={SEARCH_TEXT}>Search (･ω･≡･ω･)</label>
       <div className={styles.searchBar}>
         <input
           className={styles.input}
@@ -32,7 +32,7 @@ export const SearchBar = () => {
           id={SEARCH_TEXT}
           ref={register}
           type='text'
-          placeholder='Type here'
+          placeholder='Type here ＼_( ﾟﾛﾟ)'
           aria-label='searchbar'
         />
         <button
