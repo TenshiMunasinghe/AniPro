@@ -41,7 +41,11 @@ export const useFetchAnimes = () => {
           .post('', {
             json: {
               query: GET_SEARCH_RESULT,
-              variables: { ...queryVariables, perPage: 20, page },
+              variables: {
+                ...queryVariables,
+                perPage: queryVariables.perPage ? queryVariables.perPage : 20,
+                page,
+              },
             },
           })
           .json()
