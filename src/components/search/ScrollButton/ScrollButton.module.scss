@@ -1,3 +1,5 @@
+@import '../../../globalStyles/config.scss';
+
 .button {
   background: var(--color-foreground-200);
   position: fixed;
@@ -9,10 +11,7 @@
   padding: 0.8rem;
   width: fit-content;
   height: fit-content;
-
-  &:hover {
-    background: var(--color-foreground-300);
-  }
+  @include mouse-effects;
 
   svg {
     width: 1.3rem;

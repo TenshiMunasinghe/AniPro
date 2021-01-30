@@ -19,10 +19,13 @@
 }
 
 .heading {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
+  margin-left: 1em;
 
-  @include for-tablet-portrait-up {
-    font-size: 1.15rem;
+  &:hover {
+    a {
+      color: var(--color-text-accent-200);
+    }
   }
 
   a {

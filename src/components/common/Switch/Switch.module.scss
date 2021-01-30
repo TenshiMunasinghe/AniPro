@@ -1,3 +1,5 @@
+@import '../../../globalStyles/config.scss';
+
 .switch {
   display: flex;
   justify-content: center;
@@ -8,10 +10,7 @@
   height: 2.5em;
   border-radius: 1.25em;
   cursor: pointer;
-
-  &:hover {
-    background: var(--color-highlight-100);
-  }
+  @include mouse-effects;
 
   #checkbox {
     display: none;

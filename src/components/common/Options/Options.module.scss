@@ -42,9 +42,9 @@
     line-height: 1.5;
   }
 
+  @include mouse-effects;
   @include on-hoverable-devices {
     &:hover {
-      background: var(--color-highlight-100);
       span {
         color: var(--color-text-accent-200);
       }

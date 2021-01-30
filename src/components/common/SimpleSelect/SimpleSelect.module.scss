@@ -9,7 +9,7 @@
   &:focus,
   &:active {
     .selected {
-      color: var(--color-text-300);
+      color: var(--color-text-200);
     }
   }
 }
@@ -21,7 +21,7 @@
   font-weight: inherit;
 
   * {
-    color: var(--color-text-200);
+    color: var(--color-text-300);
   }
 }
 

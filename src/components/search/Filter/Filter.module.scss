@@ -41,11 +41,6 @@
     svg {
       margin-left: 0.5em;
     }
-
-    @include on-hoverable-devices {
-      &:hover {
-        background: var(--color-highlight-100);
-      }
-    }
+    @include mouse-effects;
   }
 }
