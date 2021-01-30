@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom'
 import styles from './ActiveFilters.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { Filter } from '../Filter/Filter'
-import { formatLabel } from '../../../helper'
+import { formatLabel } from '../../../utils/formatLabel'
 
 export const ActiveFilters = () => {
   const location = useLocation()

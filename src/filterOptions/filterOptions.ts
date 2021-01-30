@@ -2,7 +2,7 @@ import { currentYear } from '../api/queries'
 import range from 'lodash/range'
 
 import { tags } from './tags'
-import { toStartCase } from '../helper'
+import { toStartCase } from '../utils/toStartCase'
 
 export const filterOptionTypes = {
   default: {

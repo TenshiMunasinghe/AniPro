@@ -4,7 +4,7 @@ import { FaAngleDown, FaTimes } from 'react-icons/fa'
 import styles from './Select.module.scss'
 import { Options } from '../Options/Options'
 import { useClickedOutside } from '../../../hooks/useClickedOutside'
-import { toStartCase } from '../../../helper'
+import { toStartCase } from '../../../utils/toStartCase'
 
 interface Props {
   onChange: (state: string | string[]) => void
