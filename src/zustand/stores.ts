@@ -7,9 +7,7 @@ export const useWindowSizeStore = create(
 
 export type WindowSizeStore = ReturnType<typeof useWindowSizeStore.getState>
 
-const initialTheme: 'dark' | 'light' = window.matchMedia(
-  '(prefers-color-scheme: dark)'
-).matches
+const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
   ? 'dark'
   : 'light'
 
