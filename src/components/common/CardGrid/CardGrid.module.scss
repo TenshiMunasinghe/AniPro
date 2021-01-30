@@ -1,6 +1,11 @@
 @import '../../../globalStyles/config.scss';
 @import '../../../globalStyles/grid.scss';
 
+.wrapper {
+  display: grid;
+  justify-items: center;
+}
+
 .slider {
   @include grid-template;
 
