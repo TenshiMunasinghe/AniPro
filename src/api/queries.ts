@@ -95,44 +95,70 @@ export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 
 export const imageSize = 'extraLarge'
 
-export const GET_SEARCH_RESULT = `
-query getSearchResult($page: Int, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort], $perPage: Int!) {
-  Page(page: $page, perPage: $perPage) {
-    pageInfo {
-      currentPage
-      hasNextPage
-    }
-    media(genre_in: $genres, genre_not_in: ["Hentai"], tag_in: $tags, seasonYear: $year, season: $season, format_in: $format, status: $status, countryOfOrigin: $country, source: $source, search: $searchText, sort: $sortBy, format_not_in: [MANGA, NOVEL, ONE_SHOT, MUSIC]) {
-      id
-      title {
-        romaji
-        english
+export const GET_SEARCH_RESULT = /* GraphQL */ `
+  query getSearchResult(
+    $page: Int
+    $genres: [String]
+    $tags: [String]
+    $year: Int
+    $season: MediaSeason
+    $format: [MediaFormat]
+    $status: MediaStatus
+    $country: CountryCode
+    $source: MediaSource
+    $searchText: String
+    $sortBy: [MediaSort]
+    $perPage: Int!
+  ) {
+    Page(page: $page, perPage: $perPage) {
+      pageInfo {
+        currentPage
+        hasNextPage
       }
-      coverImage {
-        large
-        extraLarge
-        color
-      }
-      status
-      genres
-      description
-      meanScore
-      format
-      season
-      seasonYear
-      episodes
-      duration
-      popularity
-      studios(isMain: true) {
-        nodes{
-          name
+      media(
+        genre_in: $genres
+        genre_not_in: ["Hentai"]
+        tag_in: $tags
+        seasonYear: $year
+        season: $season
+        format_in: $format
+        status: $status
+        countryOfOrigin: $country
+        source: $source
+        search: $searchText
+        sort: $sortBy
+        format_not_in: [MANGA, NOVEL, ONE_SHOT, MUSIC]
+      ) {
+        id
+        title {
+          romaji
+          english
         }
-      }
-      nextAiringEpisode {
-        timeUntilAiring
-        episode
+        coverImage {
+          large
+          extraLarge
+          color
+        }
+        status
+        genres
+        description
+        meanScore
+        format
+        season
+        seasonYear
+        episodes
+        duration
+        popularity
+        studios(isMain: true) {
+          nodes {
+            name
+          }
+        }
+        nextAiringEpisode {
+          timeUntilAiring
+          episode
+        }
       }
     }
   }
-}
 `
