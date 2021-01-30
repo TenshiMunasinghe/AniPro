@@ -10,7 +10,7 @@ import {
   SearchResult,
 } from '../api/queries'
 
-type FetchDataParam = { queryVariables: QueryVar; paginate: boolean }
+type FetchDataParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
 
 export const useFetchAnimes = () => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
