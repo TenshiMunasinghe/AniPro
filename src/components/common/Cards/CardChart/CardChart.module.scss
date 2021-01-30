@@ -1,5 +1,5 @@
 @import '../../../../globalStyles/config.scss';
-@import './cardConfig.scss';
+@import './cardChartConfig.scss';
 
 .wrapper {
   @include card-wrapper;
@@ -68,7 +68,7 @@
     .score {
       display: grid;
       font-size: 0.9rem;
-      column-gap: 0.1em;
+      column-gap: 0.25em;
       grid-template-columns: auto auto;
       place-items: center;
     }
