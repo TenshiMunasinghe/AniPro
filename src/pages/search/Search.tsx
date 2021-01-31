@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useEffect, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, memo } from 'react'
 import { useLocation } from 'react-router-dom'
-import { v4 } from 'uuid'
 
 import styles from './Search.module.scss'
 import { QueryVar, SEARCH_TEXT } from '../../api/queries'
@@ -11,36 +10,34 @@ import {
 } from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { useFetchAnimes } from '../../hooks/useFetchAnimes'
 import { CardGrid } from '../../components/common/CardGrid/CardGrid'
 import { ScrollButton } from '../../components/search/ScrollButton/ScrollButton'
 import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
-import { NotFound } from '../../components/common/NotFound/NotFound'
 import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
 import { Filters } from '../../components/common/Filters/Filters'
 import { ActiveFilters } from '../../components/search/ActiveFilters/ActiveFilters'
-
-const _cardTypes = ['chart', 'cover', 'table'] as const
+import { addKey } from '../../utils/addKey'
 
 const loadingCount = {
   chart: 4,
   cover: 12,
   table: 6,
-}
+} as const
 
-const cardTypes = _cardTypes.map(c => ({ key: v4(), type: c }))
+const cardTypes = addKey(Object.keys(loadingCount))
 
-export type CardType = typeof _cardTypes[number]
+export type CardType = keyof typeof loadingCount
 
 export const Search = () => {
+  console.log('')
+
   const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
-  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes()
   const updateUrlParams = useUpdateUrlParam()
 
-  const params = useMemo(() => new URLSearchParams(location.search), [
-    location.search,
-  ])
+  const search = useMemo(() => location.search, [location.search])
+
+  const params = useMemo(() => new URLSearchParams(search), [search])
 
   const paramsObj = useMemo(
     () =>
@@ -76,39 +73,31 @@ export const Search = () => {
     }
   }, [paramsObj])
 
-  const fetchMore = () => fetchData({ queryVariables, paginate: true })
-
-  useEffect(() => {
-    fetchData({ queryVariables, paginate: false })
-  }, [queryVariables, fetchData])
-
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
       updateUrlParams(params, { value, key: 'sortBy' })
     },
-    [params, updateUrlParams]
+    [updateUrlParams, params]
   )
-
-  const sortBy = params.get('sortBy')
 
   return (
     <>
-      <Filters filterQuery={location.search} />
+      <Filters filterQuery={search} />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
             onChange={sortByOnChange}
             isMulti={false}
             options={sortByOptions}
-            selected={sortBy ? sortBy : 'TRENDING_DESC'}
+            selected={params.get('sortBy') || 'TRENDING_DESC'}
           />
           <section className={styles.gridType}>
             {cardTypes.map(c => (
               <CardTypeButton
                 key={c.key}
-                cardType={c.type}
+                cardType={c.value as CardType}
                 setCardType={setCardType}
-                isActive={c.type === cardType}
+                isActive={c.value === cardType}
               />
             ))}
           </section>
@@ -117,24 +106,13 @@ export const Search = () => {
         <ActiveFilters />
       </div>
 
-      <main className={styles.main}>
-        {error || (medias && medias.length === 0) ? (
-          <NotFound />
-        ) : (
-          <>
-            <CardGrid
-              loading={loading}
-              media={medias || []}
-              cardType={cardType}
-              loadingCount={loadingCount[cardType]}
-            />
-            {!loading && !error && nextPageInfo.hasNextPage && (
-              <button className={styles.loadMore} onClick={fetchMore}>
-                Load More! щ(ﾟДﾟщ)
-              </button>
-            )}
-          </>
-        )}
+      <main>
+        <CardGrid
+          queryVariables={queryVariables}
+          cardType={cardType}
+          loadingCount={loadingCount[cardType]}
+          allowLoadMore={true}
+        />
       </main>
       <ScrollButton />
     </>

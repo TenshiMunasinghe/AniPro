@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { useEffect } from 'react'
 import range from 'lodash/range'
 
 import styles from './CardGrid.module.scss'
@@ -6,23 +6,46 @@ import { CardChart } from '../Cards/CardChart/CardChart'
 import { CardCover } from '../Cards/CardCover/CardCover'
 import { CardTable } from '../Cards/CardTable/CardTable'
 import { CardLoading } from '../Cards/CardLoading/CardLoading'
-import { QueryData } from '../../../api/queries'
+import { QueryData, QueryVar } from '../../../api/queries'
 import { CardType } from '../../../pages/search/Search'
+import { useFetchAnimes } from '../../../hooks/useFetchAnimes'
+import { NotFound } from '../NotFound/NotFound'
 
 interface Props {
-  loading: boolean
-  media?: QueryData['Page']['media']
+  queryVariables: Partial<QueryVar>
   cardType: CardType
   loadingCount: number
   hasRank?: boolean
+  allowLoadMore: boolean
 }
 
-export const CardGrid = memo(
-  ({ loading, media, cardType, loadingCount, hasRank = false }: Props) => {
-    return (
+export const CardGrid = ({
+  queryVariables,
+  cardType,
+  loadingCount,
+  hasRank = false,
+  allowLoadMore,
+}: Props) => {
+  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes()
+
+  const fetchMore = () => {
+    allowLoadMore && fetchData({ queryVariables, paginate: true })
+  }
+
+  useEffect(() => {
+    fetchData({ queryVariables, paginate: false })
+  }, [queryVariables, fetchData])
+
+  if (error || medias?.length === 0) {
+    return <NotFound />
+  }
+
+  return (
+    <div className={styles.wrapper}>
       <section className={styles.slider + ' ' + styles[cardType]}>
-        {media &&
-          media.map((m: QueryData['Page']['media'][number]) => {
+        <CardLoading type={cardType} />
+        {medias &&
+          medias.map((m: QueryData['Page']['media'][number]) => {
             switch (cardType) {
               case 'cover':
                 return (
@@ -89,6 +112,11 @@ export const CardGrid = memo(
             <CardLoading type={cardType} key={i} />
           ))}
       </section>
-    )
-  }
-)
+      {!loading && !error && nextPageInfo.hasNextPage && allowLoadMore && (
+        <button className={styles.loadMore} onClick={fetchMore}>
+          Load More! щ(ﾟДﾟщ)
+        </button>
+      )}
+    </div>
+  )
+}
