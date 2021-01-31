@@ -11,11 +11,9 @@ import {
   QueryVar,
 } from '../../api/queries'
 import { CardType } from '../search/Search'
-import { CardGrid } from '../../components/common/CardGrid/CardGrid'
 import { Footer } from '../../components/home/Footer/Footer'
 import { Filters } from '../../components/common/Filters/Filters'
-import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { filterOptions } from '../../filterOptions/filterOptions'
+import { Section } from '../../components/home/Content/Content'
 
 type Medias = {
   trending: SearchResult[]
@@ -51,7 +49,6 @@ const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
 export const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
-  const updateUrLParam = useUpdateUrlParam()
 
   const contents: {
     [key in keyof Medias]: {
@@ -91,34 +88,15 @@ export const Home = () => {
     <>
       <Filters />
       <main className={styles.wrapper}>
-        {Object.keys(queryVars).map(key => {
-          const content = contents[key as keyof Medias]
-
-          const { perPage } = queryVars[key as keyof Medias]
-
-          const queryVar = Object.fromEntries(
-            Object.entries(queryVars[key as keyof Medias]).filter(([k, _]) =>
-              //filter out the query variable which is not a filter option(eg:perPage)
-              Object.keys(filterOptions).includes(k)
-            )
-          )
-          const setFilterQuery = () =>
-            updateUrLParam(new URLSearchParams(), queryVar as Partial<QueryVar>)
+        {Object.keys(queryVars).map(k => {
+          const key = k as keyof Medias
 
           return (
-            <section className={styles.content} key={key}>
-              <button className={styles.button} onClick={setFilterQuery}>
-                <h3 className={styles.contentTitle}>{content.text}</h3>
-                <span className={styles.viewAll}>View All</span>
-              </button>
-              <CardGrid
-                queryVariables={queryVars[key as keyof Medias]}
-                cardType={content.cardType}
-                loadingCount={perPage}
-                hasRank={content.hasRank}
-                allowLoadMore={false}
-              />
-            </section>
+            <Section
+              key={key}
+              content={contents[key]}
+              queryVar={queryVars[key]}
+            />
           )
         })}
       </main>
