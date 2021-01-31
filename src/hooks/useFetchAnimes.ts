@@ -43,7 +43,7 @@ export const useFetchAnimes = () => {
               query: GET_SEARCH_RESULT,
               variables: {
                 ...queryVariables,
-                perPage: queryVariables.perPage ? queryVariables.perPage : 20,
+                perPage: queryVariables.perPage || 20,
                 page,
               },
             },
