@@ -29,8 +29,6 @@ const cardTypes = addKey(Object.keys(loadingCount))
 export type CardType = keyof typeof loadingCount
 
 export const Search = () => {
-  console.log('')
-
   const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
   const updateUrlParams = useUpdateUrlParam()
