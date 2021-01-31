@@ -37,6 +37,7 @@
   &.secondary {
     background: var(--color-foreground-200);
     color: var(--color-text-300);
+    transition: all 0.075s ease-in-out;
 
     svg {
       margin-left: 0.5em;
