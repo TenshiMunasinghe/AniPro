@@ -67,7 +67,9 @@ export const useFetchAnimes = () => {
         })
         nextPageInfo.current = { ...Page.pageInfo }
       } catch (e) {
-        setError(e)
+        if (mountedRef.current) {
+          setError(e)
+        }
         console.error(e)
       }
       setLoading(false)
