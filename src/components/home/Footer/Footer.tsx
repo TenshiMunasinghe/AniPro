@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Footer.module.scss'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
-const themeSelector = (state: ThemeStore) => state.set
+const themeSelector = (state: ThemeStore) => state.setTheme
 
 export const Footer = () => {
   const setTheme = useThemeStore(themeSelector)
@@ -16,14 +16,14 @@ export const Footer = () => {
             className={styles.light}
             aria-label='light theme'
             title='light'
-            onClick={() => setTheme({ theme: 'light' })}>
+            onClick={() => setTheme('light')}>
             A
           </button>
           <button
             className={styles.dark}
             aria-label='dark theme'
             title='dark'
-            onClick={() => setTheme({ theme: 'dark' })}>
+            onClick={() => setTheme('dark')}>
             A
           </button>
         </section>

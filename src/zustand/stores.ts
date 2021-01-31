@@ -12,7 +12,12 @@ const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
   : 'light'
 
 export const useThemeStore = create(
-  combine({ theme: initialTheme }, set => ({ set }))
+  combine({ theme: initialTheme }, set => ({
+    setTheme: (theme: typeof initialTheme) => {
+      document.body.className = theme
+      set({ theme })
+    },
+  }))
 )
 
 export type ThemeStore = ReturnType<typeof useThemeStore.getState>
