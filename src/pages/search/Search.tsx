@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, memo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import styles from './Search.module.scss'
