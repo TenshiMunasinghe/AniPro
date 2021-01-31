@@ -12,7 +12,7 @@ import styles from './Header.module.scss'
 import { Switch } from '../Switch/Switch'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
-const themeSelector = ({ theme, setTheme }: ThemeStore) => ({ theme, setTheme })
+const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
 export const Header = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -21,8 +21,11 @@ export const Header = () => {
   const wrapperRef = useRef<HTMLElement>(null)
 
   const onChange = useCallback(
-    () => setTheme(theme === 'dark' ? 'light' : 'dark'),
-    [theme, setTheme]
+    () =>
+      setTheme(({ theme }) =>
+        theme === 'dark' ? { theme: 'light' } : { theme: 'dark' }
+      ),
+    [setTheme]
   )
 
   useEffect(() => {
