@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, memo } from 'react'
 import { v4 } from 'uuid'
 
 import styles from './Filters.module.scss'
@@ -12,7 +12,7 @@ interface Props {
   filterQuery?: string
 }
 
-export const Filters = ({ filterQuery = '' }: Props) => {
+export const Filters = memo(({ filterQuery = '' }: Props) => {
   const updateUrlParams = useUpdateUrlParam()
   const params = useMemo(() => new URLSearchParams(filterQuery), [filterQuery])
 
@@ -58,4 +58,4 @@ export const Filters = ({ filterQuery = '' }: Props) => {
       </section>
     </>
   )
-}
+})
