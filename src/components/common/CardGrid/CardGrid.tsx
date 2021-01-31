@@ -43,7 +43,6 @@ export const CardGrid = ({
   return (
     <div className={styles.wrapper}>
       <section className={styles.slider + ' ' + styles[cardType]}>
-        <CardLoading type={cardType} />
         {medias &&
           medias.map((m: QueryData['Page']['media'][number]) => {
             switch (cardType) {
