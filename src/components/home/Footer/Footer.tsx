@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './Footer.module.scss'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
-const themeSelector = (state: ThemeStore) => state.set
+const themeSelector = ({ set }: ThemeStore) => set
 
 export const Footer = () => {
   const setTheme = useThemeStore(themeSelector)

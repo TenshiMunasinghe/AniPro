@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, RefObject } from 'react'
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  RefObject,
+  useCallback,
+} from 'react'
 import { Link } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
 
@@ -13,6 +19,14 @@ export const Header = () => {
   const { theme, setTheme } = useThemeStore(themeSelector)
   const lastScroll = useRef(0)
   const wrapperRef = useRef<HTMLElement>(null)
+
+  const onChange = useCallback(
+    () =>
+      setTheme(({ theme }) =>
+        theme === 'dark' ? { theme: 'light' } : { theme: 'dark' }
+      ),
+    [setTheme]
+  )
 
   useEffect(() => {
     const onScroll = () => {
@@ -45,11 +59,7 @@ export const Header = () => {
         <Link to='/'>AniPro</Link>
       </h1>
       <Switch
-        onChange={() =>
-          setTheme(prev => ({
-            theme: prev.theme === 'dark' ? 'light' : 'dark',
-          }))
-        }
+        onChange={onChange}
         On={FaSun}
         Off={FaMoon}
         isOn={theme === 'dark'}

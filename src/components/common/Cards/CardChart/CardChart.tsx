@@ -6,10 +6,11 @@ import styles from './CardChart.module.scss'
 import { Image } from '../../Image/Image'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
 import { SearchResult } from '../../../../api/queries'
-import { adjustColor, addKey } from '../../../../helper'
 import { Genre } from '../../Genre/Genre'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { useSetGenre } from '../../../../hooks/useSetGenre'
+import { adjustColor } from '../../../../utils/adjustColor'
+import { addKey } from '../../../../utils/addKey'
 
 interface Props {
   id: number

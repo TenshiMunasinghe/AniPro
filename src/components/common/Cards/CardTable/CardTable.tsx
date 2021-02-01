@@ -6,15 +6,14 @@ import { SearchResult, currentYear } from '../../../../api/queries'
 import { Image } from '../../Image/Image'
 import { Genre } from '../../Genre/Genre'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
-import {
-  toStartCase,
-  airingInfo,
-  adjustColor,
-  pluralize,
-} from '../../../../helper'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
-import { addKey, formatLabel } from '../../../../helper'
 import { useSetGenre } from '../../../../hooks/useSetGenre'
+import { toStartCase } from '../../../../utils/toStartCase'
+import { adjustColor } from '../../../../utils/adjustColor'
+import { addKey } from '../../../../utils/addKey'
+import { formatLabel } from '../../../../utils/formatLabel'
+import { pluralize } from '../../../../utils/pluralize'
+import { airingInfo } from '../../../../utils/airingInfo'
 
 interface Props {
   id: number

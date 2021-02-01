@@ -24,6 +24,7 @@
   background: var(--color-foreground-50);
   border-radius: 1.5em;
   overflow: hidden;
+  margin-top: 0.75em;
 
   &:focus-within {
     box-shadow: 0 0 1.5px var(--color-border-100);
@@ -57,11 +58,5 @@
     background: transparent;
   }
 
-  &:hover {
-    background: var(--color-highlight-100);
-  }
-
-  &:active {
-    background: var(--color-highlight-200);
-  }
+  @include mouse-effects;
 }

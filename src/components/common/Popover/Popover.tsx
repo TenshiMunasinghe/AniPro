@@ -3,16 +3,15 @@ import React, { memo, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
-import {
-  adjustColor,
-  pluralize,
-  convertTime,
-  addKey,
-  timeToArr,
-} from '../../../helper'
 import { Genre } from '../Genre/Genre'
 import { SearchResult } from '../../../api/queries'
-import { airingInfo, formatLabel } from '../../../helper'
+import { adjustColor } from '../../../utils/adjustColor'
+import { addKey } from '../../../utils/addKey'
+import { timeToArr } from '../../../utils/timeToArr'
+import { convertTime } from '../../../utils/convertTIme'
+import { airingInfo } from '../../../utils/airingInfo'
+import { formatLabel } from '../../../utils/formatLabel'
+import { pluralize } from '../../../utils/pluralize'
 
 interface Props {
   isVisible: boolean

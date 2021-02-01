@@ -7,17 +7,15 @@ import { Anime } from './pages/anime/Anime'
 import { Home } from './pages/home/Home'
 import { Header } from './components/common/Header/Header'
 import {
-  useThemeStore,
-  ThemeStore,
   useWindowSizeStore,
   WindowSizeStore,
+  useThemeStore,
+  Theme,
 } from './zustand/stores'
 
-const themeSelector = (state: ThemeStore) => state.theme
 const selector = (state: WindowSizeStore) => state.set
 
 export const App = () => {
-  const theme = useThemeStore(themeSelector)
   const setSize = useWindowSizeStore(selector)
 
   const updateSize = useMemo(
@@ -36,8 +34,11 @@ export const App = () => {
   }, [updateSize])
 
   useEffect(() => {
-    document.body.className = theme
-  }, [theme])
+    useThemeStore.subscribe(
+      (state: Theme) => (document.body.className = state),
+      state => state.theme
+    )
+  }, [])
 
   return (
     <>

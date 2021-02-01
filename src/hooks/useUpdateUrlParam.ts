@@ -1,17 +1,21 @@
+import { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import { QueryVar } from '../api/queries'
 
 type Value = string | string[]
 
-const setParam = ({
-  params,
-  value,
-  key,
-}: {
+type setParamArg = {
   params: URLSearchParams
   value: Value
   key: string
-}) => {
+}
+
+type KeyValue = {
+  value: Value
+  key: string
+}
+
+const setParam = ({ params, value, key }: setParamArg) => {
   if (value.length === 0) {
     params.delete(key)
     return
@@ -29,18 +33,18 @@ const setParam = ({
 export const useUpdateUrlParam = () => {
   const history = useHistory()
 
-  return (
-    params: URLSearchParams,
-    obj: { value: Value; key: string } | Partial<QueryVar>
-  ) => {
-    if ('key' in obj && 'value' in obj) {
-      setParam({ value: obj.value, key: obj.key, params })
-    } else {
-      Object.entries(obj).forEach(
-        ([key, value]) =>
-          value && setParam({ value: String(value), key, params })
-      )
-    }
-    history.push(`/search${params ? `/?${params}` : ''}`)
-  }
+  return useCallback(
+    (params: URLSearchParams, obj: KeyValue | Partial<QueryVar>) => {
+      if ('key' in obj && 'value' in obj) {
+        setParam({ value: obj.value, key: obj.key, params })
+      } else {
+        Object.entries(obj).forEach(
+          ([key, value]) =>
+            value && setParam({ value: String(value), key, params })
+        )
+      }
+      history.push(`/search${params ? `/?${params}` : ''}`)
+    },
+    [history]
+  )
 }

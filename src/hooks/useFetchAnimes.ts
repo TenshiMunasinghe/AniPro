@@ -10,7 +10,7 @@ import {
   SearchResult,
 } from '../api/queries'
 
-type FetchDataParam = { queryVariables: QueryVar; paginate: boolean }
+type FetchDataParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
 
 export const useFetchAnimes = () => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
@@ -41,7 +41,11 @@ export const useFetchAnimes = () => {
           .post('', {
             json: {
               query: GET_SEARCH_RESULT,
-              variables: { ...queryVariables, perPage: 20, page },
+              variables: {
+                ...queryVariables,
+                perPage: queryVariables.perPage || 20,
+                page,
+              },
             },
           })
           .json()
@@ -63,7 +67,9 @@ export const useFetchAnimes = () => {
         })
         nextPageInfo.current = { ...Page.pageInfo }
       } catch (e) {
-        setError(e)
+        if (mountedRef.current) {
+          setError(e)
+        }
         console.error(e)
       }
       setLoading(false)

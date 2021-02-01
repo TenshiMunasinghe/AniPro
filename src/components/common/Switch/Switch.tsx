@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, memo } from 'react'
 import { IconType } from 'react-icons'
 
 import styles from './Switch.module.scss'
@@ -11,7 +11,7 @@ interface Props {
   label: string
 }
 
-export const Switch = ({ onChange, On, Off, isOn, label }: Props) => {
+export const Switch = memo(({ onChange, On, Off, isOn, label }: Props) => {
   return (
     <label
       htmlFor={styles.checkbox}
@@ -26,4 +26,4 @@ export const Switch = ({ onChange, On, Off, isOn, label }: Props) => {
       {isOn ? <On /> : <Off />}
     </label>
   )
-}
+})

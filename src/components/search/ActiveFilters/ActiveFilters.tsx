@@ -1,12 +1,12 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, memo } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 
 import styles from './ActiveFilters.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { Filter } from '../Filter/Filter'
-import { formatLabel } from '../../../helper'
+import { formatLabel } from '../../../utils/formatLabel'
 
-export const ActiveFilters = () => {
+export const ActiveFilters = memo(() => {
   const location = useLocation()
   const history = useHistory()
   const params = useMemo(() => new URLSearchParams(location.search), [
@@ -44,4 +44,4 @@ export const ActiveFilters = () => {
       )}
     </section>
   )
-}
+})

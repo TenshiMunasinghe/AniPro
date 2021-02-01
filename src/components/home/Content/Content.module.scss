@@ -1,0 +1,22 @@
+.content {
+  margin-bottom: 3.5em;
+}
+
+.button {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-bottom: 0.8em;
+  cursor: pointer;
+
+  .viewAll {
+    font-size: 0.7em;
+    color: var(--color-text-200);
+
+    &:hover {
+      color: var(--color-text-100);
+      font-weight: 500;
+    }
+  }
+}
