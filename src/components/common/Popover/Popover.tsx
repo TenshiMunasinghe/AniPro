@@ -27,9 +27,9 @@ interface Props {
   nextAiringEpisode: SearchResult['nextAiringEpisode']
 }
 
-type Position = {
-  x: number
-  width: number
+type DisplayState = {
+  isLeft: boolean
+  isRight: boolean
 }
 
 const windowStateSelector = (state: WindowSizeStore) => state.width
@@ -48,33 +48,36 @@ export const Popover = memo(
     episodes,
     duration,
   }: Props) => {
-    const [position, setPosition] = useState<Position | null>(null)
+    const [{ isLeft, isRight }, setDisplay] = useState<DisplayState>({
+      isLeft: false,
+      isRight: false,
+    })
     const wrapperRef = useRef<HTMLDivElement | null>(null)
     const windowWidth = useWindowSizeStore(windowStateSelector)
 
     useLayoutEffect(() => {
-      setPosition(() => {
-        if (!wrapperRef.current) {
-          return null
-        }
+      setDisplay(prev => {
+        if (!wrapperRef.current || !wrapperRef.current.parentElement)
+          return prev
+
         const rect = wrapperRef.current.getBoundingClientRect()
-        const x = rect.x + wrapperRef.current.offsetLeft
+        const parentRect = wrapperRef.current.parentElement?.getBoundingClientRect()
+        const { offsetLeft } = wrapperRef.current
 
-        return {
-          x,
-          width: rect.width,
-        }
+        console.log(parentRect.left, offsetLeft, windowWidth)
+
+        const isRight =
+          (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||
+          (offsetLeft < 0 && parentRect.right - offsetLeft < windowWidth * 0.9)
+        const isLeft =
+          !isRight &&
+          ((offsetLeft > 0 &&
+            parentRect.left > rect.right - parentRect.right) ||
+            (offsetLeft < 0 && rect.left > 0))
+
+        return { isLeft, isRight }
       })
-    }, [])
-
-    const positionClass =
-      position === null
-        ? ''
-        : position.x + position.width > windowWidth
-        ? 'left'
-        : 'right'
-
-    const isHidden = position === null || !isVisible
+    }, [windowWidth])
 
     const _style = {
       '--color-light': adjustColor(color, 'var(--lightness)'),
@@ -90,13 +93,17 @@ export const Popover = memo(
       })
     ).slice(0, 2)
 
+    const isHidden = (!isLeft && !isRight) || !isVisible
+
+    const className = isLeft ? 'left' : 'right'
+
     return (
       <aside
         className={
           styles.wrapper +
           ' ' +
-          styles[positionClass] +
-          (isHidden ? ' ' + styles.hide : '')
+          styles[className] +
+          (isHidden ? ` ${styles.hide}` : '')
         }
         ref={wrapperRef}
         style={_style}>
