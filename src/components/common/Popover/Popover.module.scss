@@ -5,12 +5,15 @@
 }
 
 .wrapper {
-  opacity: 0;
   pointer-events: none;
-  width: 0;
+  opacity: 0;
   height: 0;
 
   @include on-hoverable-devices {
+    right: auto;
+    left: 100%;
+    margin-right: 0;
+    margin-left: var(--margin);
     position: absolute;
     background: var(--color-foreground-300);
     font-size: 0.8rem;
@@ -20,7 +23,6 @@
     padding: 1.75em;
     border-radius: 0.4em;
     top: 0;
-    left: 100%;
     z-index: 997;
     opacity: 1;
     height: auto;
@@ -30,8 +32,8 @@
 
     &.left {
       left: auto;
-      margin-left: 0;
       right: 100%;
+      margin-left: 0;
       margin-right: var(--margin);
 
       &:after {
@@ -53,8 +55,6 @@
     }
 
     &.right {
-      margin-left: var(--margin);
-
       &:after {
         @include transition;
         z-index: 1000;
@@ -76,7 +76,6 @@
     &.hide {
       transform: scale(0.95);
       opacity: 0;
-      pointer-events: none;
       &:after {
         opacity: 0;
       }
