@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce'
 import { Search } from './pages/search/Search'
 import { Anime } from './pages/anime/Anime'
 import { Home } from './pages/home/Home'
-import { Header } from './components/common/Header/Header'
+import { NavBar } from './components/common/NavBar/NavBar'
 import {
   useWindowSizeStore,
   WindowSizeStore,
@@ -43,7 +43,7 @@ export const App = () => {
   return (
     <>
       <Router>
-        <Header />
+        <NavBar />
         <Switch>
           <Route exact path='/anime/:id'>
             <Anime />
