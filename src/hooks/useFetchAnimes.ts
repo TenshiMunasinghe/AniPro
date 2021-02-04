@@ -10,9 +10,12 @@ import {
   SearchResult,
 } from '../api/queries'
 
-type FetchDataParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
+type FetchAnimesParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
 
-export const useFetchAnimes = () => {
+export const useFetchAnimes = ({
+  queryVariables,
+  paginate,
+}: FetchAnimesParam) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -21,16 +24,11 @@ export const useFetchAnimes = () => {
     currentPage: 1,
     hasNextPage: false,
   })
-  const mountedRef = useRef(true)
 
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
+  const isMounted = useRef(false)
 
   const fetchData = useCallback(
-    async ({ queryVariables, paginate }: FetchDataParam) => {
+    async ({ queryVariables, paginate }: FetchAnimesParam) => {
       const page = paginate ? nextPageInfo.current.currentPage + 1 : 1
       try {
         if (!paginate) setMedias(null)
@@ -50,7 +48,7 @@ export const useFetchAnimes = () => {
           })
           .json()
 
-        if (!res || !mountedRef.current) {
+        if (!res || !isMounted.current) {
           return
         }
 
@@ -67,7 +65,7 @@ export const useFetchAnimes = () => {
         })
         nextPageInfo.current = { ...Page.pageInfo }
       } catch (e) {
-        if (mountedRef.current) {
+        if (isMounted.current) {
           setError(e)
         }
         console.error(e)
@@ -76,6 +74,17 @@ export const useFetchAnimes = () => {
     },
     []
   )
+
+  useEffect(() => {
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchData({ queryVariables, paginate: false })
+  }, [queryVariables, fetchData])
 
   return {
     medias,

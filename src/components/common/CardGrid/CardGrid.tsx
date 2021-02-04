@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import range from 'lodash/range'
 
 import styles from './CardGrid.module.scss'
@@ -26,15 +26,14 @@ export const CardGrid = ({
   hasRank = false,
   allowLoadMore,
 }: Props) => {
-  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes()
+  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes({
+    queryVariables,
+    paginate: false,
+  })
 
   const fetchMore = () => {
     allowLoadMore && fetchData({ queryVariables, paginate: true })
   }
-
-  useEffect(() => {
-    fetchData({ queryVariables, paginate: false })
-  }, [queryVariables, fetchData])
 
   if (error || medias?.length === 0) {
     return <NotFound />
