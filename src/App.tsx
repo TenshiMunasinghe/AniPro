@@ -45,7 +45,7 @@ export const App = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path='/anime/:id/:tab'>
+          <Route exact path='/anime/:id/:tab?'>
             <Anime />
           </Route>
           <Route path='/'>
