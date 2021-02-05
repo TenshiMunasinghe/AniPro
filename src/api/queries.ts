@@ -85,6 +85,49 @@ export type QueryVar = {
   perPage: number
 }
 
+export type Common = {
+  title: {
+    romaji: string
+    english: string
+    native: string
+  }
+  coverImage: {
+    extraLarge: string
+  }
+  bannerImage: string
+  description: string
+  nextAiringEpisode: {
+    episode: number
+    timeUntilAiring: number
+  }
+  format: string
+  episodes: number
+  duration: number
+  status: string
+  startDate: {
+    year: number
+    month: number
+    date: number
+  }
+  season: string
+  seasonYear: number
+  averageScore: number
+  meanScore: number
+  popularity: number
+  favourites: number
+  studios: {
+    nodes: {
+      name: string
+    }
+  }
+  source: string
+  hashtag: string
+  genres: string[]
+  synonyms: string[]
+}
+
+export type AnimeDetails<T> = T extends 'common' ? Common : never
+
 export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 
 // const connection =
@@ -162,3 +205,50 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
     }
   }
 `
+
+export const GET_ANIME_PAGE = {
+  common: /* GraphQL */ `
+    query getAnimeDetail($id: Int!) {
+      Media(id: $id) {
+        title {
+          romaji
+          english
+          native
+        }
+        coverImage {
+          extraLarge
+        }
+        bannerImage
+        description
+        nextAiringEpisode {
+          episode
+          timeUntilAiring
+        }
+        format
+        episodes
+        duration
+        status
+        startDate {
+          year
+          month
+          day
+        }
+        season
+        seasonYear
+        averageScore
+        meanScore
+        popularity
+        favourites
+        studios {
+          edges {
+            id
+          }
+        }
+        source
+        hashtag
+        genres
+        synonyms
+      }
+    }
+  `,
+}
