@@ -1,0 +1,63 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { ky, GET_ANIME_PAGE, AnimeDetails } from '../api/queries'
+import { Tabs } from '../pages/anime/Anime'
+
+export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
+  tab: T,
+  id: string
+) => {
+  const [data, setData] = useState<AnimeDetails<typeof tab>>()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState()
+
+  const isMounted = useRef(false)
+
+  useEffect(() => {
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  const fetchAnimeDetail = useCallback(
+    async (tab: T) => {
+      setLoading(true)
+      try {
+        const res: { data: { Media: AnimeDetails<typeof tab> } } = await ky
+          .post('', {
+            json: {
+              query: GET_ANIME_PAGE['common'],
+              variables: {
+                id: parseInt(id),
+              },
+            },
+          })
+          .json()
+
+        if (!isMounted || !res) return
+
+        console.log(res)
+
+        setData(res.data.Media)
+      } catch (e) {
+        if (isMounted.current) setError(e)
+
+        console.error(e)
+      }
+      setLoading(false)
+    },
+    [id]
+  )
+
+  useEffect(() => {
+    fetchAnimeDetail(tab)
+  }, [fetchAnimeDetail, tab])
+
+  return {
+    data,
+    loading,
+    error,
+    fetchAnimeDetail,
+  }
+}
