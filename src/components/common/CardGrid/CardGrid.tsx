@@ -28,7 +28,6 @@ export const CardGrid = ({
 }: Props) => {
   const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes({
     queryVariables,
-    paginate: false,
   })
 
   const fetchMore = () => {

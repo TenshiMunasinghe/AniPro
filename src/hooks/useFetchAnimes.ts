@@ -10,12 +10,12 @@ import {
   SearchResult,
 } from '../api/queries'
 
-type FetchAnimesParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
+type FetchAnimesParam = { queryVariables: Partial<QueryVar> }
+interface FetchDataParam extends FetchAnimesParam {
+  paginate: boolean
+}
 
-export const useFetchAnimes = ({
-  queryVariables,
-  paginate,
-}: FetchAnimesParam) => {
+export const useFetchAnimes = ({ queryVariables }: FetchAnimesParam) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -28,7 +28,7 @@ export const useFetchAnimes = ({
   const isMounted = useRef(false)
 
   const fetchData = useCallback(
-    async ({ queryVariables, paginate }: FetchAnimesParam) => {
+    async ({ queryVariables, paginate }: FetchDataParam) => {
       const page = paginate ? nextPageInfo.current.currentPage + 1 : 1
       try {
         if (!paginate) setMedias(null)
