@@ -15,7 +15,7 @@ interface FetchDataParam extends FetchAnimesParam {
   paginate: boolean
 }
 
-export const useFetchAnimes = ({ queryVariables }: FetchAnimesParam) => {
+export const useFetchSearchResult = ({ queryVariables }: FetchAnimesParam) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()

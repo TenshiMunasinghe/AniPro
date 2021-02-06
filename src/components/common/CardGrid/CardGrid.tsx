@@ -8,7 +8,7 @@ import { CardTable } from '../Cards/CardTable/CardTable'
 import { CardLoading } from '../Cards/CardLoading/CardLoading'
 import { QueryData, QueryVar } from '../../../api/queries'
 import { CardType } from '../../../pages/search/Search'
-import { useFetchAnimes } from '../../../hooks/useFetchAnimes'
+import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { NotFound } from '../NotFound/NotFound'
 
 interface Props {
@@ -26,7 +26,13 @@ export const CardGrid = ({
   hasRank = false,
   allowLoadMore,
 }: Props) => {
-  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes({
+  const {
+    medias,
+    loading,
+    error,
+    fetchData,
+    nextPageInfo,
+  } = useFetchSearchResult({
     queryVariables,
   })
 
