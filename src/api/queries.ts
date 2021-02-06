@@ -28,7 +28,21 @@ export const nextYear = dateNext.getFullYear()
 
 export const SEARCH_TEXT = 'search'
 
-export type QueryData = {
+export interface QueryVar {
+  page?: number
+  genres?: string[]
+  year?: string
+  season?: string
+  format?: string
+  status?: string
+  country?: string
+  source?: string
+  searchText?: string | null
+  sortBy?: SortBy
+  perPage: number
+}
+
+export interface QueryData {
   Page: {
     pageInfo: {
       currentPage: number
@@ -71,21 +85,7 @@ export type NextPageInfo = QueryData['Page']['pageInfo']
 
 export type SearchResult = QueryData['Page']['media'][number]
 
-export type QueryVar = {
-  page?: number
-  genres?: string[]
-  year?: string
-  season?: string
-  format?: string
-  status?: string
-  country?: string
-  source?: string
-  searchText?: string | null
-  sortBy?: SortBy
-  perPage: number
-}
-
-export type Common = {
+export interface Common {
   title: {
     romaji: string
     english: string
@@ -124,6 +124,130 @@ export type Common = {
   hashtag: string
   genres: string[]
   synonyms: string[]
+}
+
+export interface Watch {
+  streamingEpisodes: {
+    site: string
+    title: string
+    thumbnail: string
+  }
+}
+
+export interface Characters {
+  characters: {
+    edges: {
+      node: {
+        id: number
+        name: {
+          full: string
+        }
+      }
+      role: string
+      voiceActors: {
+        id: number
+        name: {
+          full: string
+        }
+        image: {
+          large: string
+        }
+      }
+    }
+  }
+}
+
+export interface Staff {
+  staff: {
+    edges: {
+      node: {
+        id: number
+        name: {
+          full: string
+        }
+        image: {
+          large: string
+        }
+      }
+      role: string
+    }
+  }
+}
+
+export interface Stats {
+  rankings: {
+    rank: number
+    context: string
+    year: number | null
+    season: string | null
+    allTime: boolean
+  }
+  trends: {
+    nodes: {
+      date: number
+      trending: number
+      averageScore: number
+      inProgress: number
+    }
+  }
+  stats: {
+    scoreDistribution: {
+      score: number
+      amount: number
+    }
+    statusDistribution: {
+      status: number
+      amount: number
+    }
+  }
+}
+
+export interface Overview extends Watch, Characters, Staff {
+  description: string
+  relations: {
+    edges: {
+      node: {
+        id: number
+        title: {
+          romaji: string
+        }
+        coverImage: {
+          extraLarge: string
+        }
+        format: string
+        status: string
+      }
+      relationType: string
+    }
+  }
+  stats: {
+    scoreDistribution: {
+      score: number
+      amount: number
+    }
+    statusDistribution: {
+      status: string
+      amount: number
+    }
+  }
+  trailer: {
+    id: number
+    site: string
+    thumbnail: string
+  }
+  recommendations: {
+    nodes: {
+      mediaRecommendation: {
+        id: number
+        title: {
+          romaji: string
+        }
+        coverImage: {
+          extraLarge: string
+        }
+      }
+    }
+  }
 }
 
 export type AnimeDetails<T> = T extends 'common' ? Common : never
@@ -208,7 +332,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
 
 export const GET_ANIME_PAGE = {
   common: /* GraphQL */ `
-    query getAnimeDetail($id: Int!) {
+    query common($id: Int!) {
       Media(id: $id) {
         title {
           romaji
@@ -248,6 +372,182 @@ export const GET_ANIME_PAGE = {
         hashtag
         genres
         synonyms
+      }
+    }
+  `,
+
+  overview: /* GraphQL */ `
+    query overview($id: Int!) {
+      Media(id: $id) {
+        description
+        relations {
+          edges {
+            node {
+              id
+              title {
+                romaji
+              }
+              coverImage {
+                extraLarge
+              }
+              format
+              status
+            }
+            id
+            relationType
+          }
+        }
+        characters(sort: ROLE, page: 1, perPage: 6) {
+          edges {
+            node {
+              id
+              name {
+                full
+              }
+            }
+            role
+            voiceActors(language: JAPANESE) {
+              id
+              name {
+                full
+              }
+              image {
+                large
+              }
+            }
+          }
+        }
+        staff(page: 1, perPage: 4) {
+          edges {
+            node {
+              id
+              name {
+                full
+              }
+              image {
+                large
+              }
+            }
+            role
+          }
+        }
+        stats {
+          scoreDistribution {
+            score
+            amount
+          }
+          statusDistribution {
+            status
+            amount
+          }
+        }
+        streamingEpisodes {
+          title
+          thumbnail
+          url
+        }
+        trailer {
+          id
+          site
+          thumbnail
+        }
+        recommendations {
+          nodes {
+            mediaRecommendation {
+              id
+              title {
+                romaji
+              }
+              coverImage {
+                extraLarge
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+  watch: /* GraphQL */ `
+    query watch($id: Int!) {
+      Media(id: $id) {
+        streamingEpisodes {
+          site
+          title
+          thumbnail
+        }
+      }
+    }
+  `,
+  characters: /* GraphQL */ `
+    query characters($id: Int!) {
+      characters(sort: ROLE, page: 1, perPage: 6) {
+        edges {
+          node {
+            id
+            name {
+              full
+            }
+          }
+          role
+          voiceActors(language: JAPANESE) {
+            id
+            name {
+              full
+            }
+            image {
+              large
+            }
+          }
+        }
+      }
+    }
+  `,
+  staff: /* GraphQL */ `
+    query characters($id: Int!) {
+      staff(page: 1, perPage: 4) {
+        edges {
+          node {
+            id
+            name {
+              full
+            }
+            image {
+              large
+            }
+          }
+          role
+        }
+      }
+    }
+  `,
+  stats: /* GraphQL */ `
+    query stats($id: Int!) {
+      Media(id: $id) {
+        rankings {
+          rank
+          context
+          year
+          season
+          allTime
+        }
+        trends(sort: DATE_DESC) {
+          nodes {
+            date
+            trending
+            averageScore
+            inProgress
+          }
+        }
+        stats {
+          scoreDistribution {
+            score
+            amount
+          }
+          statusDistribution {
+            status
+            amount
+          }
+        }
       }
     }
   `,
