@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styles from './Content.module.scss'
-import { QueryVar } from '../../../api/queries'
+import { QueryVar } from '../../../api/types'
 import { CardType } from '../../../pages/search/Search'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { filterOptions } from '../../../filterOptions/filterOptions'

@@ -1,4 +1,4 @@
-import { SearchResult } from '../api/queries'
+import { SearchResult } from '../api/types'
 import { toStartCase } from './toStartCase'
 import { convertTime } from './convertTIme'
 import { pluralize } from './pluralize'

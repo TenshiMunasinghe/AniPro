@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { ky, GET_ANIME_PAGE, AnimeDetails } from '../api/queries'
+import { AnimeDetails } from '../api/types'
+import { ky, GET_ANIME_PAGE } from '../api/queries'
 import { Tabs } from '../pages/anime/Anime'
 
 export const useFetchAnimeDetails = <T extends Tabs | 'common'>(

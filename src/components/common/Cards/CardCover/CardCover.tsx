@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './CardCover.module.scss'
 import { Image } from '../../Image/Image'
 import { Popover } from '../../Popover/Popover'
-import { SearchResult } from '../../../../api/queries'
+import { SearchResult } from '../../../../api/types'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
 

@@ -3,13 +3,12 @@ import React from 'react'
 import styles from './Home.module.scss'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import {
-  SearchResult,
   currentYear,
   currentSeason,
   nextYear,
   nextSeason,
-  QueryVar,
 } from '../../api/queries'
+import { SearchResult, QueryVar } from '../../api/types'
 import { CardType } from '../search/Search'
 import { Footer } from '../../components/home/Footer/Footer'
 import { Filters } from '../../components/common/Filters/Filters'

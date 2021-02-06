@@ -1,14 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import uniqBy from 'lodash/uniqBy'
-import { NextPageInfo } from '../api/queries'
 
-import {
-  QueryData,
-  QueryVar,
-  ky,
-  GET_SEARCH_RESULT,
-  SearchResult,
-} from '../api/queries'
+import { NextPageInfo, QueryData, QueryVar, SearchResult } from '../api/types'
+import { ky, GET_SEARCH_RESULT } from '../api/queries'
 
 type FetchAnimesParam = { queryVariables: Partial<QueryVar> }
 interface FetchDataParam extends FetchAnimesParam {
