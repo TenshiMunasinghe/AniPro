@@ -36,12 +36,8 @@
   }
 
   .imageWrapper {
-    position: relative;
-    width: 100%;
-    padding: 0;
-    padding-top: calc(100% / var(--image-aspect-ratio));
+    @include image-with-aspect-ratio;
     border-radius: 0.15rem;
-    overflow: hidden;
     background: var(--color-original);
 
     &.loaded {
@@ -58,12 +54,6 @@
   }
 
   .image {
-    position: absolute;
-    display: block;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
     transition: all 0.3s ease-in-out;
   }
 

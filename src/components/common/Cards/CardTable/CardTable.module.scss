@@ -79,23 +79,13 @@
 }
 
 .imageWrapper {
-  position: relative;
-  width: 100%;
   align-self: center;
-  padding: 0;
-  padding-top: calc(100% / var(--image-aspect-ratio));
   border-radius: 0.15rem;
-  overflow: hidden;
   background: var(--color-original);
   z-index: 999;
+  @include image-with-aspect-ratio;
 
   img {
-    position: absolute;
-    display: block;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
     transition: all 0.3s ease-in-out;
 
     &.loaded {

@@ -50,3 +50,20 @@
     background: var(--color-highlight-200);
   }
 }
+
+@mixin image-with-aspect-ratio {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  padding-top: calc(100% / var(--image-aspect-ratio));
+  overflow: hidden;
+
+  & img {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
