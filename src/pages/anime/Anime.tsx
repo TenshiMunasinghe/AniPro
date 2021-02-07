@@ -1,15 +1,33 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
+import { Header } from '../../components/anime/Header/Header'
+import styles from './Anime.module.scss'
+import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
+
 interface Props {}
+
+export type Tabs = 'overview' | 'watch' | 'characters' | 'staff' | 'stats'
 
 type ParamTypes = {
   id: string
+  tab: Tabs
 }
 
 export const Anime = (props: Props) => {
-  const { id } = useParams<ParamTypes>()
-  console.log(id)
+  const { id, tab = 'overview' } = useParams<ParamTypes>()
+  const { data } = useFetchAnimeDetails(id, 'common')
 
-  return <div>yo</div>
+  if (!data) return <></>
+
+  return (
+    <section className={styles.wrapper}>
+      <Header
+        bannerImg={data.bannerImage}
+        coverImg={data.coverImage.extraLarge}
+        title={data.title.romaji}
+        description={data.description}
+      />
+    </section>
+  )
 }
