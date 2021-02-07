@@ -1,0 +1,53 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  background: var(--color-foreground-50);
+  .banner {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 10em;
+    }
+
+    &:after {
+      position: absolute;
+      content: '';
+      display: block;
+      height: 100%;
+      width: 100%;
+      opacity: 0.9;
+      background: linear-gradient(180deg, transparent 40%, var(--b-11));
+    }
+  }
+
+  .details {
+    display: grid;
+    grid-template-columns: 6em 1fr;
+    grid-template-rows: auto auto;
+    align-items: flex-end;
+    column-gap: 2em;
+    row-gap: 1.5em;
+    padding: 2em;
+    margin-top: -6em;
+
+    .cover {
+      @include image-with-aspect-ratio;
+      border-radius: 0.2em;
+    }
+
+    .title {
+      font-weight: 600;
+    }
+  }
+
+  .description {
+    border-top: solid 0.125em var(--color-foreground-400);
+    font-size: 0.85em;
+    padding-top: 1.5em;
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
