@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import htmr from 'htmr'
 
 import styles from './Header.module.scss'
@@ -13,18 +13,16 @@ interface Props {
 }
 
 export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
+  const style = { '--banner-image': `url(${bannerImg})` } as CSSProperties
   return (
-    <header className={styles.wrapper}>
-      <figure className={styles.banner}>
-        <Image src={bannerImg} alt={title} />
-      </figure>
+    <header className={styles.wrapper} style={style}>
       <div className={styles.details}>
         <figure className={styles.cover}>
-          <img src={coverImg} alt={title} />
+          <Image src={coverImg} alt={title} />
         </figure>
         <h1 className={styles.title}>{title}</h1>
-        <p className={styles.description}>{htmr(description)}</p>
       </div>
+      <p className={styles.description}>{htmr(description)}</p>
     </header>
   )
 }
