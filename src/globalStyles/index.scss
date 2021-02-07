@@ -43,8 +43,6 @@
   --cyan-3: #b2eae7;
   --cyan-2: #c5f5f3;
   --cyan-1: #d9fffe;
-
-  --image-aspect-ratio: (2/3);
 }
 
 html {
@@ -131,6 +129,7 @@ body {
   }
 
   --header-height: 3rem;
+  --image-aspect-ratio: (2/3);
 
   padding-top: var(--header-height);
   width: 100vw;
