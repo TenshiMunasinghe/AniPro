@@ -5,8 +5,8 @@ import { ky, GET_ANIME_PAGE } from '../api/queries'
 import { Tabs } from '../pages/anime/Anime'
 
 export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
-  tab: T,
-  id: string
+  id: string,
+  tab: T
 ) => {
   const [data, setData] = useState<AnimeDetails<typeof tab>>()
   const [loading, setLoading] = useState(false)
@@ -28,7 +28,7 @@ export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
         const res: { data: { Media: AnimeDetails<typeof tab> } } = await ky
           .post('', {
             json: {
-              query: GET_ANIME_PAGE['common'],
+              query: GET_ANIME_PAGE[tab],
               variables: {
                 id: parseInt(id),
               },
