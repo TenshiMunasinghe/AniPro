@@ -64,8 +64,6 @@ export const Popover = memo(
         const parentRect = wrapperRef.current.parentElement.getBoundingClientRect()
         const { offsetLeft } = wrapperRef.current
 
-        console.log(parentRect.left, offsetLeft, windowWidth)
-
         const isRight =
           (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||
           (offsetLeft < 0 && parentRect.right - offsetLeft < windowWidth * 0.9)
