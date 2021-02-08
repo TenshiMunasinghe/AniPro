@@ -37,14 +37,40 @@
       padding: 1em;
       margin-left: 1em;
       border-radius: 0.15em;
-      backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg);
+      @supports (
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
+      ) {
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg);
+      }
+
+      @supports not (
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
+      ) {
+        position: relative;
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-radius: 0.15em;
+          background: var(--b-12);
+          opacity: 0.6;
+          z-index: -999;
+        }
+      }
     }
   }
 
   .description {
     font-size: 0.85em;
-    padding-top: 1.5em;
+    padding: 2em;
+    margin: 1em 2em;
+    line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;
+    background: var(--color-foreground-50);
   }
 }
