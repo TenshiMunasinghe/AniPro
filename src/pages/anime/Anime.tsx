@@ -5,8 +5,6 @@ import { Header } from '../../components/anime/Header/Header'
 import styles from './Anime.module.scss'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 
-interface Props {}
-
 export type Tabs = 'overview' | 'watch' | 'characters' | 'staff' | 'stats'
 
 type ParamTypes = {
@@ -14,10 +12,9 @@ type ParamTypes = {
   tab: Tabs
 }
 
-export const Anime = (props: Props) => {
+export const Anime = () => {
   const { id, tab = 'overview' } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'common')
-
   if (!data) return <></>
 
   return (
