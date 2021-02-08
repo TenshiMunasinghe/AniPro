@@ -38,8 +38,6 @@ export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
 
         if (!isMounted || !res) return
 
-        console.log(res)
-
         setData(res.data.Media)
       } catch (e) {
         if (isMounted.current) setError(e)
