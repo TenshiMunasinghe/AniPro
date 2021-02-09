@@ -10,7 +10,7 @@ export const checkElementOverflow = (element?: HTMLElement) => {
 
   if (!parent.rect || !childRect) return
 
-  const overFlow = {
+  const overflow = {
     top: childRect.top < parent.rect.top + parseFloat(parent.style.paddingTop),
     bottom:
       childRect.bottom >
@@ -22,5 +22,5 @@ export const checkElementOverflow = (element?: HTMLElement) => {
       parent.rect.right - parseFloat(parent.style.paddingRight),
   }
 
-  return Object.values(overFlow).some(val => val === true)
+  return Object.values(overflow).some(val => val === true)
 }
