@@ -21,7 +21,7 @@ export const FluidText: FC<Props> = memo(
       children,
       className: styles.fluidText + (className ? ` ${className}` : ''),
       style,
-      ref: ref,
+      ref,
     })
   }
 )
