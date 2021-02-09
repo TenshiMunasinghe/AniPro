@@ -4,6 +4,7 @@ import htmr from 'htmr'
 import styles from './Header.module.scss'
 import { Common } from '../../../api/types'
 import { Image } from '../../common/Image/Image'
+import { FluidText } from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
@@ -13,14 +14,23 @@ interface Props {
 }
 
 export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
-  const style = { '--banner-image': `url(${bannerImg})` } as CSSProperties
+  const style = {
+    '--banner-image': `url(${bannerImg})`,
+  } as CSSProperties
   return (
     <header className={styles.wrapper} style={style}>
       <div className={styles.details}>
         <figure className={styles.cover}>
           <Image src={coverImg} alt={title} />
         </figure>
-        <h1 className={styles.title}>{title}</h1>
+        <FluidText
+          as='h1'
+          min={1}
+          max={1.5}
+          resolution={0.1}
+          className={styles.title}>
+          {title}
+        </FluidText>
       </div>
       <p className={styles.description}>{htmr(description)}</p>
     </header>

@@ -6,6 +6,7 @@
 
 .wrapper {
   height: 100%;
+  width: 100%;
   display: grid;
   grid-template-rows: min-content auto;
   cursor: pointer;
@@ -37,7 +38,7 @@
 
   .imageWrapper {
     @include image-with-aspect-ratio;
-    border-radius: 0.15rem;
+    border-radius: 0.15em;
     background: var(--color-original);
 
     &.loaded {
@@ -60,10 +61,10 @@
   .title {
     align-self: stretch;
     color: var(--color-text-300);
-    font-size: 0.8rem;
     line-height: 1.2;
     font-weight: 550;
     width: 100%;
+    max-width: 100%;
     height: min-content;
     margin-top: 1em;
     text-align: left;

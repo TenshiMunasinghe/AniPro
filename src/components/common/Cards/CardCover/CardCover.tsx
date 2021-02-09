@@ -7,6 +7,7 @@ import { Popover } from '../../Popover/Popover'
 import { SearchResult } from '../../../../api/types'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
+import { FluidText } from '../../FluidText/FluidText'
 
 interface Props {
   id: number
@@ -73,7 +74,9 @@ export const CardCover = memo(
             <Image className={styles.image} src={src} alt={title.romaji} />
           </Link>
           <Link to={url} className={styles.title}>
-            {title.romaji}
+            <FluidText as='h3' min={0.5} max={0.8} resolution={0.1}>
+              {title.romaji}
+            </FluidText>
           </Link>
         </article>
 
