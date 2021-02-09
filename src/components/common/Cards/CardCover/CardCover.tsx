@@ -73,10 +73,8 @@ export const CardCover = memo(
             }>
             <Image className={styles.image} src={src} alt={title.romaji} />
           </Link>
-          <Link to={url} className={styles.title}>
-            <FluidText as='h3' min={0.5} max={0.8} resolution={0.1}>
-              {title.romaji}
-            </FluidText>
+          <Link to={url} className={styles.titleWrapper}>
+            <h3 className={styles.title}>{title.romaji}</h3>
           </Link>
         </article>
 
