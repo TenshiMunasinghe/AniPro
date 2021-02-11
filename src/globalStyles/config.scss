@@ -68,3 +68,12 @@
     width: 100%;
   }
 }
+
+@mixin circle($size: 1) {
+  $size-em: $size * 1em;
+  width: $size-em;
+  height: $size-em;
+  line-height: $size-em;
+  text-align: center;
+  border-radius: ($size / 2) * 1em;
+}

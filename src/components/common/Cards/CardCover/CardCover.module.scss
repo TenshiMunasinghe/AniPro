@@ -26,14 +26,10 @@
     top: -0.7em;
     background: var(--color-light);
     color: var(--color-foreground-300);
-    z-index: 1000;
+    z-index: 999;
     font-size: 0.8em;
-    width: 2.5em;
-    height: 2.5em;
-    line-height: 2.5em;
-    text-align: center;
-    border-radius: 1.25em;
     font-weight: 500;
+    @include circle(2.5);
   }
 
   .imageWrapper {
