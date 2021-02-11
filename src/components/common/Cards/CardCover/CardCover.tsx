@@ -7,7 +7,6 @@ import { Popover } from '../../Popover/Popover'
 import { SearchResult } from '../../../../api/types'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
-import { FluidText } from '../../FluidText/FluidText'
 
 interface Props {
   id: number
@@ -23,7 +22,7 @@ interface Props {
   studios: SearchResult['studios']
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
-  rank: number | null
+  rank?: number | null
 }
 
 export const CardCover = memo(

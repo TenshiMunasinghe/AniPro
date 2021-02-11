@@ -31,7 +31,7 @@ interface Props {
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   popularity: SearchResult['popularity']
-  rank: number | null
+  rank?: number | null
 }
 
 const mapStatus = (status: SearchResult['status']) =>

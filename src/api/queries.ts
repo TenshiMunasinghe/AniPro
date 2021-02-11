@@ -99,6 +99,13 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
           timeUntilAiring
           episode
         }
+        rankings {
+          rank
+          context
+          year
+          season
+          allTime
+        }
       }
     }
   }
