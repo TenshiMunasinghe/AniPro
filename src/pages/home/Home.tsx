@@ -3,17 +3,16 @@ import React from 'react'
 import styles from './Home.module.scss'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import {
-  SearchResult,
   currentYear,
   currentSeason,
   nextYear,
   nextSeason,
-  QueryVar,
 } from '../../api/queries'
+import { SearchResult, QueryVar } from '../../api/types'
 import { CardType } from '../search/Search'
 import { Footer } from '../../components/home/Footer/Footer'
 import { Filters } from '../../components/common/Filters/Filters'
-import { Section } from '../../components/home/Content/Content'
+import { Content } from '../../components/home/Content/Content'
 
 type Medias = {
   trending: SearchResult[]
@@ -92,7 +91,7 @@ export const Home = () => {
           const key = k as keyof Medias
 
           return (
-            <Section
+            <Content
               key={key}
               content={contents[key]}
               queryVar={queryVars[key]}

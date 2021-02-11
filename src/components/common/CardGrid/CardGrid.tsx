@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useMemo } from 'react'
 import range from 'lodash/range'
 
 import styles from './CardGrid.module.scss'
@@ -6,10 +6,14 @@ import { CardChart } from '../Cards/CardChart/CardChart'
 import { CardCover } from '../Cards/CardCover/CardCover'
 import { CardTable } from '../Cards/CardTable/CardTable'
 import { CardLoading } from '../Cards/CardLoading/CardLoading'
-import { QueryData, QueryVar } from '../../../api/queries'
+import { QueryVar, SearchResult } from '../../../api/types'
 import { CardType } from '../../../pages/search/Search'
-import { useFetchAnimes } from '../../../hooks/useFetchAnimes'
+import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { NotFound } from '../NotFound/NotFound'
+
+interface Medias extends SearchResult {
+  rank?: number | null
+}
 
 interface Props {
   queryVariables: Partial<QueryVar>
@@ -26,25 +30,55 @@ export const CardGrid = ({
   hasRank = false,
   allowLoadMore,
 }: Props) => {
-  const { medias, loading, error, fetchData, nextPageInfo } = useFetchAnimes()
+  const {
+    medias,
+    loading,
+    error,
+    fetchData,
+    nextPageInfo,
+  } = useFetchSearchResult({
+    queryVariables,
+  })
+
+  if (hasRank)
+    medias?.forEach(m =>
+      console.log(
+        m.title.romaji,
+        m.rankings.filter(r => r.allTime)
+      )
+    )
+
+  const _medias: Medias[] | null = useMemo(() => {
+    if (!medias) return null
+
+    if (hasRank) {
+      return medias
+        .map(m => {
+          const _ranking = m.rankings.find(
+            r => (r.context = 'highest rated all time')
+          )
+          const rank = _ranking ? _ranking.rank : null
+          return { ...m, rank }
+        })
+        .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
+    } else {
+      return medias
+    }
+  }, [hasRank, medias])
 
   const fetchMore = () => {
     allowLoadMore && fetchData({ queryVariables, paginate: true })
   }
 
-  useEffect(() => {
-    fetchData({ queryVariables, paginate: false })
-  }, [queryVariables, fetchData])
-
-  if (error || medias?.length === 0) {
+  if (error || _medias?.length === 0) {
     return <NotFound />
   }
 
   return (
     <div className={styles.wrapper}>
       <section className={styles.slider + ' ' + styles[cardType]}>
-        {medias &&
-          medias.map((m: QueryData['Page']['media'][number]) => {
+        {_medias &&
+          _medias.map(m => {
             switch (cardType) {
               case 'cover':
                 return (
@@ -63,7 +97,7 @@ export const CardGrid = ({
                     duration={m.duration}
                     meanScore={m.meanScore}
                     studios={m.studios}
-                    rank={hasRank && m.rank ? m.rank : null}
+                    rank={m.rank}
                   />
                 )
 
@@ -85,7 +119,7 @@ export const CardGrid = ({
                     meanScore={m.meanScore}
                     studios={m.studios}
                     popularity={m.popularity}
-                    rank={hasRank && m.rank ? m.rank : null}
+                    rank={m.rank}
                   />
                 )
 

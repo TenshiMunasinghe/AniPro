@@ -4,7 +4,7 @@ import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import { Genre } from '../Genre/Genre'
-import { SearchResult } from '../../../api/queries'
+import { SearchResult } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
 import { addKey } from '../../../utils/addKey'
 import { timeToArr } from '../../../utils/timeToArr'
@@ -63,8 +63,6 @@ export const Popover = memo(
         const rect = wrapperRef.current.getBoundingClientRect()
         const parentRect = wrapperRef.current.parentElement.getBoundingClientRect()
         const { offsetLeft } = wrapperRef.current
-
-        console.log(parentRect.left, offsetLeft, windowWidth)
 
         const isRight =
           (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||

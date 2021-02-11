@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styles from './CardCover.module.scss'
 import { Image } from '../../Image/Image'
 import { Popover } from '../../Popover/Popover'
-import { SearchResult } from '../../../../api/queries'
+import { SearchResult } from '../../../../api/types'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
 
@@ -22,7 +22,7 @@ interface Props {
   studios: SearchResult['studios']
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
-  rank: number | null
+  rank?: number | null
 }
 
 export const CardCover = memo(
@@ -72,8 +72,8 @@ export const CardCover = memo(
             }>
             <Image className={styles.image} src={src} alt={title.romaji} />
           </Link>
-          <Link to={url} className={styles.title}>
-            {title.romaji}
+          <Link to={url} className={styles.titleWrapper}>
+            <h3 className={styles.title}>{title.romaji}</h3>
           </Link>
         </article>
 

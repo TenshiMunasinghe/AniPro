@@ -53,7 +53,7 @@
 }
 
 .cardHeader {
-  padding: 1.5rem 1.5rem 1.5rem 0;
+  padding: 1.5em 1.5rem 1.5em 0;
 
   .score {
     display: none;
@@ -67,7 +67,7 @@
 
     .score {
       display: grid;
-      font-size: 0.9rem;
+      font-size: 0.9em;
       column-gap: 0.25em;
       grid-template-columns: auto auto;
       place-items: center;
@@ -76,7 +76,7 @@
 
   .title {
     .primaryTitle {
-      font-size: 0.9rem;
+      font-size: 0.9em;
       color: var(--color-text-100);
       @include add-ellipsis(2);
       font-weight: 550;
@@ -128,7 +128,7 @@
   margin-bottom: 1em;
   padding-right: 1.5em;
   line-height: 1.75;
-  font-size: 0.75rem;
+  font-size: 0.75em;
   color: var(--color-text-300);
   @include add-ellipsis(2);
 

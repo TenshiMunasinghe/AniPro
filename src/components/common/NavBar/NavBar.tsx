@@ -8,13 +8,13 @@ import React, {
 import { Link } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
 
-import styles from './Header.module.scss'
+import styles from './NavBar.module.scss'
 import { Switch } from '../Switch/Switch'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
-export const Header = () => {
+export const NavBar = () => {
   const [isVisible, setIsVisible] = useState(true)
   const { theme, setTheme } = useThemeStore(themeSelector)
   const lastScroll = useRef(0)
@@ -52,7 +52,7 @@ export const Header = () => {
   }, [])
 
   return (
-    <header
+    <nav
       className={styles.wrapper + (isVisible ? ' ' + styles.visible : '')}
       ref={wrapperRef as RefObject<HTMLElement>}>
       <h1 className={styles.heading}>
@@ -65,6 +65,6 @@ export const Header = () => {
         isOn={theme === 'dark'}
         label='switch theme'
       />
-    </header>
+    </nav>
   )
 }

@@ -1,0 +1,79 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  .details {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7em 1fr;
+    column-gap: 2em;
+    place-items: center;
+    padding: 1.5em 2.5em;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: var(--banner-image);
+      background-position: 50% 35%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -999;
+      filter: blur(0.35em) saturate(1.5) brightness(0.7);
+    }
+
+    .cover {
+      @include image-with-aspect-ratio;
+      border-radius: 0.2em;
+    }
+
+    .title {
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+      color: var(--w-4);
+      text-align: center;
+      padding: 1em;
+      border-radius: 0.15em;
+      max-width: 100%;
+
+      @supports (
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
+      ) {
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg);
+      }
+
+      @supports not (
+        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
+      ) {
+        position: relative;
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          border-radius: 0.15em;
+          background: var(--b-12);
+          opacity: 0.6;
+          z-index: -999;
+        }
+      }
+    }
+  }
+
+  .description {
+    font-size: 0.85em;
+    padding: 2em;
+    margin: 1em 2em;
+    line-height: 1.7;
+    grid-column-start: 1;
+    grid-column-end: -1;
+    background: var(--color-foreground-50);
+  }
+}

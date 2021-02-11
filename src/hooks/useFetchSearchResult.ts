@@ -1,18 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import uniqBy from 'lodash/uniqBy'
-import { NextPageInfo } from '../api/queries'
 
-import {
-  QueryData,
-  QueryVar,
-  ky,
-  GET_SEARCH_RESULT,
-  SearchResult,
-} from '../api/queries'
+import { NextPageInfo, QueryData, QueryVar, SearchResult } from '../api/types'
+import { ky, GET_SEARCH_RESULT } from '../api/queries'
 
-type FetchDataParam = { queryVariables: Partial<QueryVar>; paginate: boolean }
+type FetchAnimesParam = { queryVariables: Partial<QueryVar> }
+interface FetchDataParam extends FetchAnimesParam {
+  paginate: boolean
+}
 
-export const useFetchAnimes = () => {
+export const useFetchSearchResult = ({ queryVariables }: FetchAnimesParam) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -21,13 +18,8 @@ export const useFetchAnimes = () => {
     currentPage: 1,
     hasNextPage: false,
   })
-  const mountedRef = useRef(true)
 
-  useEffect(() => {
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
+  const isMounted = useRef(false)
 
   const fetchData = useCallback(
     async ({ queryVariables, paginate }: FetchDataParam) => {
@@ -50,7 +42,7 @@ export const useFetchAnimes = () => {
           })
           .json()
 
-        if (!res || !mountedRef.current) {
+        if (!res || !isMounted.current) {
           return
         }
 
@@ -67,7 +59,7 @@ export const useFetchAnimes = () => {
         })
         nextPageInfo.current = { ...Page.pageInfo }
       } catch (e) {
-        if (mountedRef.current) {
+        if (isMounted.current) {
           setError(e)
         }
         console.error(e)
@@ -76,6 +68,17 @@ export const useFetchAnimes = () => {
     },
     []
   )
+
+  useEffect(() => {
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
+
+  useEffect(() => {
+    fetchData({ queryVariables, paginate: false })
+  }, [queryVariables, fetchData])
 
   return {
     medias,

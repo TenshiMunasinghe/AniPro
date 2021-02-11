@@ -2,7 +2,8 @@ import React, { useState, useMemo, useCallback } from 'react'
 import { useLocation } from 'react-router-dom'
 
 import styles from './Search.module.scss'
-import { QueryVar, SEARCH_TEXT } from '../../api/queries'
+import { SEARCH_TEXT } from '../../api/queries'
+import { QueryVar } from '../../api/types'
 import {
   sortByOptions,
   filterOptions,

@@ -129,6 +129,7 @@ body {
   }
 
   --header-height: 3rem;
+  --image-aspect-ratio: (2/3);
 
   padding-top: var(--header-height);
   width: 100vw;
@@ -145,8 +146,6 @@ body {
 }
 
 #container {
-  --image-aspect-ratio: (2/3);
-
   margin: auto;
   padding: 2rem 7vw;
   width: 100%;
