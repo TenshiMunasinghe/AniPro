@@ -48,7 +48,14 @@ export interface QueryData {
         timeUntilAiring: number
         episode: number
       } | null
-      rank?: number
+
+      rankings: {
+        rank: number
+        context: string
+        year: number
+        season: string
+        allTime: boolean
+      }[]
     }[]
   }
 }
