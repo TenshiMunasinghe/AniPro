@@ -73,11 +73,14 @@
   }
 
   .title {
+    width: 100%;
     .primaryTitle {
       font-size: 1rem;
       color: var(--color-text-100);
       @include add-ellipsis(2);
       font-weight: 550;
+      cursor: pointer;
+
       @include on-hoverable-devices {
         &:hover {
           a {
