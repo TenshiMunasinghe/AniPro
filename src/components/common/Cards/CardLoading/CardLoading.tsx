@@ -36,7 +36,7 @@ export const CardLoading = memo(({ type }: Props) => {
                   <Skeleton className={styles.title} />
                   <Skeleton className={styles.secondaryTitle} />
                 </div>
-                <Skeleton className={styles.description} count={3} />
+                <Skeleton className={styles.description} count={4} />
               </div>
 
               <div className={styles.footer}>
