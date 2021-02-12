@@ -3,16 +3,8 @@
 @mixin card-wrapper {
   --genre-height: 2.5em;
 
-  @include for-phone-only {
-    --image-width: 45%;
-  }
-
-  @include for-tablet-portrait-up {
-    --image-width: 12rem;
-  }
-
   display: grid;
-  grid-template-columns: var(--image-width) 1fr;
+  grid-template-columns: minmax(11rem, 37.5%) 1fr;
   background: var(--color-foreground-100);
   border-radius: 0.1rem;
   overflow: hidden;
