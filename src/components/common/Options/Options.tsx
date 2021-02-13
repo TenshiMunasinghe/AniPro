@@ -27,10 +27,12 @@ export const Options = ({
   ])
 
   return (
-    <div className={styles.wrapper + (isVisible ? '' : ' ' + styles.hide)}>
+    <div
+      className={styles.wrapper + (isVisible ? '' : ' ' + styles.hide)}
+      tabIndex={0}>
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
-          <button onClick={() => handleChange(o.value)}>
+          <button onClick={() => handleChange(o.value)} tabIndex={-1}>
             <span>{o.label}</span>
             <div
               className={

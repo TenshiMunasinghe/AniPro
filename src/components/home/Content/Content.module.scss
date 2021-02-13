@@ -10,10 +10,16 @@
   margin-bottom: 0.8em;
   cursor: pointer;
 
+  &:hover,
+  &:focus {
+    .contentTitle {
+      color: var(--color-text-accent-100);
+    }
+  }
+
   .viewAll {
     font-size: 0.7em;
     color: var(--color-text-200);
-
     &:hover {
       color: var(--color-text-100);
       font-weight: 500;

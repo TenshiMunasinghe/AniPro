@@ -11,12 +11,11 @@
   grid-template-rows: min-content auto;
   cursor: pointer;
 
-  @include on-hoverable-devices {
-    &:hover {
-      .title {
-        text-decoration-color: inherit;
-        color: var(--color-light);
-      }
+  &:hover,
+  &:focus-within {
+    .title {
+      text-decoration-color: inherit;
+      color: var(--color-light);
     }
   }
 

@@ -11,7 +11,8 @@
   white-space: nowrap;
   transition: all 0.15s ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:focus {
     color: var(--color-foreground-100);
     background: var(--color-bg);
   }

@@ -11,6 +11,7 @@
   .imageWrapper {
     background: var(--color-original);
     @include image-with-aspect-ratio;
+    @include zoom-image;
   }
 
   img {
@@ -30,12 +31,6 @@
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 0;
-
-  * {
-    word-wrap: break-word;
-    white-space: normal;
-    line-height: 1.5;
-  }
 }
 
 .cardBody {
@@ -81,12 +76,11 @@
       font-weight: 550;
       cursor: pointer;
 
-      @include on-hoverable-devices {
-        &:hover {
-          a {
-            text-decoration-color: inherit;
-            color: var(--color-text);
-          }
+      &:hover,
+      &:focus-within {
+        a {
+          text-decoration-color: inherit;
+          color: var(--color-text);
         }
       }
       a {
@@ -146,7 +140,8 @@
   @include for-tablet-portrait-up {
     @include add-ellipsis(4);
 
-    &:hover {
+    &:hover,
+    &:focus {
       display: block;
       color: var(--color-text-200);
 

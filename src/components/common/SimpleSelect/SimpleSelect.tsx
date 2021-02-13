@@ -2,7 +2,7 @@ import React, { RefObject, memo } from 'react'
 import { FaSort } from 'react-icons/fa'
 
 import styles from './SimpleSelect.module.scss'
-import { useClickedOutside } from '../../../hooks/useClickedOutside'
+import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
 import { Options } from '../Options/Options'
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
 }
 export const SimpleSelect = memo(
   ({ onChange, isMulti = false, options, selected }: Props) => {
-    const { ref, isClickedOut } = useClickedOutside()
+    const { ref, isFocused } = useFocusedWithin()
 
     const handleChange = (value: string) => {
       if (!isMulti) {
@@ -38,16 +38,17 @@ export const SimpleSelect = memo(
       <div
         className={styles.wrapper}
         aria-haspopup='true'
-        aria-expanded={!isClickedOut}
-        ref={ref as RefObject<HTMLDivElement>}>
-        <button className={styles.dropdownHeader}>
+        aria-expanded={isFocused}
+        ref={ref as RefObject<HTMLDivElement>}
+        tabIndex={0}>
+        <button className={styles.dropdownHeader} tabIndex={-1}>
           <FaSort aria-label='sort' />
           <div className={styles.selected}>
             {options.find(o => o.value === selected)?.label}
           </div>
         </button>
         <Options
-          isVisible={!isClickedOut}
+          isVisible={isFocused}
           options={options}
           handleChange={handleChange}
           isMulti={isMulti}
