@@ -9,6 +9,8 @@
   }
 
   .imageWrapper {
+    flex-basis: 80%;
+    max-width: 11rem;
     background: var(--color-original);
     @include image-with-aspect-ratio;
     @include zoom-image;
@@ -28,6 +30,7 @@
 }
 
 .content {
+  flex-basis: 100%;
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 0;
@@ -140,8 +143,7 @@
   @include for-tablet-portrait-up {
     @include add-ellipsis(4);
 
-    &:hover,
-    &:focus {
+    &:hover {
       display: block;
       color: var(--color-text-200);
 
