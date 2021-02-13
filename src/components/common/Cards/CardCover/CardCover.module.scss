@@ -53,6 +53,7 @@
   }
 
   .titleWrapper {
+    color: var(--color-text-300);
     align-self: stretch;
     text-align: left;
     width: 100%;
@@ -63,7 +64,6 @@
   }
 
   .title {
-    color: var(--color-text-300);
     font-size: 0.7em;
     line-height: 1.2;
     font-weight: 550;
