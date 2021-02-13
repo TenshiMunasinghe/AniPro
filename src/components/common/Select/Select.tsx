@@ -3,7 +3,7 @@ import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
 import { Options } from '../Options/Options'
-import { useClickedOutside } from '../../../hooks/useClickedOutside'
+import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
 import { toStartCase } from '../../../utils/toStartCase'
 
 interface Props {
@@ -29,12 +29,7 @@ export const Select = memo(
   }: Props) => {
     const name = toStartCase(_name)
     const [inputState, setInputState] = useState('')
-
-    const { ref, isClickedOut } = useClickedOutside()
-
-    if (!ref) {
-      return <></>
-    }
+    const { ref, isFocused } = useFocusedWithin()
 
     const handleChange = (value: string) => {
       setInputState('')
@@ -67,7 +62,7 @@ export const Select = memo(
           className={styles.dropdown}
           ref={ref as RefObject<HTMLDivElement>}
           aria-haspopup='true'
-          aria-expanded={!isClickedOut}>
+          aria-expanded={isFocused}>
           <div className={styles.dropdownHeader}>
             <input
               className={styles.input}
@@ -107,7 +102,7 @@ export const Select = memo(
           </div>
 
           <Options
-            isVisible={!isClickedOut}
+            isVisible={isFocused}
             options={options.filter(
               o =>
                 o.label.toLowerCase().substring(0, inputState.length) ===

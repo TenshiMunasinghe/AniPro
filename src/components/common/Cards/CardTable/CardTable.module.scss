@@ -37,24 +37,23 @@
     grid-template-columns: 3.25rem 1fr;
   }
 
-  @include on-hoverable-devices {
-    &:hover {
-      background: var(--image-url);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: 50% 50%;
+  &:hover,
+  &:focus-within {
+    background: var(--image-url);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
 
-      &:before {
-        display: block;
-        position: absolute;
-        background: var(--color-foreground-100);
-        content: '';
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        opacity: 0.9;
-      }
+    &:before {
+      display: block;
+      position: absolute;
+      background: var(--color-foreground-100);
+      content: '';
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.9;
     }
   }
 
@@ -79,26 +78,27 @@
 }
 
 .imageWrapper {
-  align-self: center;
-  border-radius: 0.15rem;
-  background: var(--color-original);
-  z-index: 999;
-  @include image-with-aspect-ratio;
+  display: none;
 
-  img {
-    transition: all 0.3s ease-in-out;
+  @include for-tablet-landscape-up {
+    align-self: center;
+    border-radius: 0.15rem;
+    background: var(--color-original);
+    z-index: 999;
+    @include image-with-aspect-ratio;
+    @include zoom-image;
 
-    &.loaded {
-      opacity: 1;
+    img {
+      transition: all 0.3s ease-in-out;
+
+      &.loaded {
+        opacity: 1;
+      }
+
+      &.loading {
+        opacity: 0;
+      }
     }
-
-    &.loading {
-      opacity: 0;
-    }
-  }
-
-  @include for-phone-only {
-    display: none;
   }
 }
 
@@ -140,11 +140,10 @@
       margin-bottom: 1em;
       max-width: 100%;
 
-      @include on-hoverable-devices {
-        &:hover {
-          text-decoration-color: inherit;
-          color: var(--color-text);
-        }
+      &:hover,
+      &:focus {
+        text-decoration-color: inherit;
+        color: var(--color-text);
       }
     }
 

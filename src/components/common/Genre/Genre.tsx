@@ -7,9 +7,10 @@ interface Props {
   genre: string
   onClick?: () => void
   color?: string
+  canInteract?: boolean
 }
 
-export const Genre = ({ genre, onClick, color }: Props) => {
+export const Genre = ({ genre, onClick, color, canInteract = true }: Props) => {
   const _color = adjustColor(color, 'var(--lightness)')
   const style = {
     '--color-text': _color ? _color : 'var(--color-text-200)',
@@ -18,7 +19,11 @@ export const Genre = ({ genre, onClick, color }: Props) => {
   } as CSSProperties
 
   return (
-    <button className={styles.genre} onClick={onClick} style={style}>
+    <button
+      className={styles.genre}
+      onClick={onClick}
+      style={style}
+      tabIndex={canInteract ? 0 : -1}>
       {genre}
     </button>
   )

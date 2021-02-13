@@ -143,7 +143,12 @@ export const Popover = memo(
 
         <footer className={styles.genres}>
           {_genres.slice(0, 3).map(g => (
-            <Genre key={g.key} genre={g.value} color={color} />
+            <Genre
+              key={g.key}
+              genre={g.value}
+              color={color}
+              canInteract={false}
+            />
           ))}
         </footer>
       </aside>

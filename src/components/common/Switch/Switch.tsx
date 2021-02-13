@@ -23,7 +23,7 @@ export const Switch = memo(({ onChange, On, Off, isOn, label }: Props) => {
         id={styles.checkbox}
         checked={isOn}
       />
-      {isOn ? <On /> : <Off />}
+      {isOn ? <On aria-label='off switch' /> : <Off aria-label='on switch' />}
     </label>
   )
 })

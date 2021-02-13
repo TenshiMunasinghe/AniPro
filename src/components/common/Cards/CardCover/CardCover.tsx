@@ -42,8 +42,8 @@ export const CardCover = memo(
     rank,
   }: Props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
-    const handleMouseOver = () => setIsPopoverVisible(true)
-    const handleMouseLeave = () => setIsPopoverVisible(false)
+    const showPopover = () => setIsPopoverVisible(true)
+    const hidePopover = () => setIsPopoverVisible(false)
 
     const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
     const url = `/anime/${id}`
@@ -58,13 +58,16 @@ export const CardCover = memo(
     return (
       <div
         className={styles.popoverWrapper}
-        onMouseOver={handleMouseOver}
-        onMouseLeave={handleMouseLeave}
+        onMouseOver={showPopover}
+        onMouseLeave={hidePopover}
+        onFocus={showPopover}
+        onBlur={hidePopover}
         style={_style}>
         <article className={styles.wrapper}>
           {rank && <div className={styles.rank}>#{rank}</div>}
           <Link
             to={url}
+            tabIndex={-1}
             className={
               styles.imageWrapper +
               ' ' +
