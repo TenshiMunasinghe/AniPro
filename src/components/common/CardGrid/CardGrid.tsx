@@ -40,14 +40,6 @@ export const CardGrid = ({
     queryVariables,
   })
 
-  if (hasRank)
-    medias?.forEach(m =>
-      console.log(
-        m.title.romaji,
-        m.rankings.filter(r => r.allTime)
-      )
-    )
-
   const _medias: Medias[] | null = useMemo(() => {
     if (!medias) return null
 
