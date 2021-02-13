@@ -13,8 +13,7 @@
 
   &:hover,
   &:focus-within {
-    .title {
-      text-decoration-color: inherit;
+    .titleWrapper {
       color: var(--color-light);
     }
   }
