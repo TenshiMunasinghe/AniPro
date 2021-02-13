@@ -81,8 +81,9 @@
   display: none;
 
   @include for-tablet-landscape-up {
+    display: block;
     align-self: center;
-    border-radius: 0.15rem;
+    border-radius: 0.1rem;
     background: var(--color-original);
     z-index: 999;
     @include image-with-aspect-ratio;
