@@ -9,8 +9,8 @@
   }
 
   .imageWrapper {
-    flex-basis: 80%;
     max-width: 11rem;
+    flex: 1 0 80%;
     background: var(--color-original);
     @include image-with-aspect-ratio;
     @include zoom-image;
@@ -30,7 +30,7 @@
 }
 
 .content {
-  flex-basis: 100%;
+  flex: 1 1 auto;
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 0;
@@ -109,13 +109,8 @@
   display: flex;
   font-size: var(--text-size-100);
   padding: var(--space-300);
-  overflow-x: auto;
   background: var(--color-foreground-200);
-
-  &::after {
-    content: '';
-    flex: 0 0 var(--space-300);
-  }
+  overflow: hidden;
 
   button {
     margin: 0 var(--space-200);

@@ -132,7 +132,7 @@
 
     a {
       display: block;
-      margin-bottom: var(--space-300);
+      margin-bottom: var(--space-400);
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -159,14 +159,11 @@
 
   .genres {
     display: flex;
-    flex-wrap: wrap;
     overflow: hidden;
     font-size: var(--text-size-200);
-    height: 2.7em;
 
     button {
-      margin-right: 0.5em;
-      margin-bottom: 1em;
+      margin-right: var(--space-300);
     }
   }
 
@@ -182,7 +179,7 @@
 
   .subRow {
     display: inline-block;
-    font-size: 0.9em;
+    font-size: var(--text-size-300);
     font-weight: 375;
     color: var(--color-text-200);
   }
