@@ -21,7 +21,7 @@ export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
   useLayoutEffect(() => {
     const isDone = Math.abs(fontSize - fontSizePrev) <= resolution
 
-    const isOverflow = checkElementOverflow(ref.current as HTMLElement)
+    const isOverflow = checkElementOverflow(ref.current as HTMLElement)?.any
 
     const isAsc = fontSize > fontSizePrev
 
