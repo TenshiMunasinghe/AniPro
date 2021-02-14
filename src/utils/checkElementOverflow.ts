@@ -1,26 +1,37 @@
-export const checkElementOverflow = (element?: HTMLElement) => {
-  if (!element) return
+import { toStartCase } from './toStartCase'
 
-  const _parent = element.parentElement
+const directions = ['top', 'bottom', 'left', 'right'] as const
+
+export const checkElementOverflow = (element: HTMLElement) => {
+  const parentElm = element.parentElement
+  if (!parentElm) return
+
   const parent = {
-    rect: _parent?.getBoundingClientRect(),
-    style: getComputedStyle(_parent as HTMLElement),
+    rect: parentElm.getBoundingClientRect(),
+    style: getComputedStyle(parentElm as HTMLElement),
   }
   const childRect = element.getBoundingClientRect()
 
-  if (!parent.rect || !childRect) return
+  const overflow = Object.fromEntries(
+    directions.map(direction => {
+      const childVal = childRect[direction]
+      const parentVal = parent.rect[direction]
+      const key = ('padding' +
+        toStartCase(direction)) as keyof typeof parent.style
+      const padding = parseFloat(parent.style[key] as string)
 
-  const overflow = {
-    top: childRect.top < parent.rect.top + parseFloat(parent.style.paddingTop),
-    bottom:
-      childRect.bottom >
-      parent.rect.bottom - parseFloat(parent.style.paddingBottom),
-    left:
-      childRect.left < parent.rect.left + parseFloat(parent.style.paddingLeft),
-    right:
-      childRect.right >
-      parent.rect.right - parseFloat(parent.style.paddingRight),
-  }
+      const difference =
+        direction === 'top' || direction === 'left'
+          ? childVal - parentVal - padding
+          : parentVal - padding - childVal
 
-  return Object.values(overflow).some(val => val === true)
+      const isOverflow = difference < 0
+
+      const isSignificant = Math.abs(difference) > 0.1
+
+      return [direction, isOverflow && isSignificant]
+    })
+  )
+
+  return { ...overflow, any: Object.values(overflow).some(val => val) }
 }
