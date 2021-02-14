@@ -2,8 +2,9 @@
 
 @mixin grid-template {
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: var(--space-400);
   margin: 0 auto;
+  margin-top: var(--space-300);
   place-content: center;
   justify-content: space-between;
   width: 100%;
@@ -11,9 +12,9 @@
 
 @mixin grid-cover {
   grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
-  grid-gap: 1.25rem;
+  grid-gap: var(--space-500);
   @include for-tablet-portrait-up {
-    grid-gap: 2rem;
+    grid-gap: var(--space-600);
     grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
   }
 

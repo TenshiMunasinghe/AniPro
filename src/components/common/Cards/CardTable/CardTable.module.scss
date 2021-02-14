@@ -14,27 +14,27 @@
 
   .hash {
     font-weight: 400;
-    margin-right: 0.05em;
+    margin-right: var(--space-100);
   }
 
   .number {
     font-weight: 550;
-    font-size: 1.5em;
+    font-size: var(--text-size-600);
   }
 }
 
 .card {
   flex: 1;
   position: relative;
-  column-gap: 0.8em;
-  padding: 0.8em;
-  font-size: 0.85rem;
-  border-radius: 0.2em;
+  column-gap: var(--space-300);
+  padding: var(--space-400);
+  font-size: var(--text-size-300);
+  border-radius: 0.1em;
   background: var(--color-foreground-100);
 
   @include for-tablet-landscape-up {
     display: grid;
-    grid-template-columns: 3.25rem 1fr;
+    grid-template-columns: 3.5rem 1fr;
   }
 
   &:hover,
@@ -112,18 +112,19 @@
   align-items: center;
   justify-content: stretch;
   max-width: 100%;
-  padding-right: 2em;
+  padding-right: var(--space-600);
 
   @include for-phone-only {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: 1fr 1fr;
-    column-gap: 1em;
-    row-gap: 0.5em;
-    font-size: 0.9em;
+    column-gap: var(--space-400);
+    row-gap: var(--space-200);
+    font-size: var(--text-size-400);
     padding: 0.5em;
   }
 
   .title {
+    font-size: var(--text-size-400);
     max-width: 100%;
     overflow: hidden;
     margin-right: auto;
@@ -131,14 +132,13 @@
 
     a {
       display: block;
-      margin-bottom: 0.5em;
+      margin-bottom: var(--space-300);
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       text-decoration-color: var(--color-underline-100);
-      text-underline-offset: 0.2em;
+      text-underline-offset: var(--space-100);
       transition: all 0.15s ease-in-out;
-      margin-bottom: 1em;
       max-width: 100%;
 
       &:hover,
@@ -153,7 +153,7 @@
       margin: 0;
       width: 100%;
       grid-column: auto;
-      padding-right: 2em;
+      padding-right: var(--space-500);
     }
   }
 
@@ -161,7 +161,7 @@
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    font-size: 0.7em;
+    font-size: var(--text-size-200);
     height: 2.7em;
 
     button {
