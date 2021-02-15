@@ -1,17 +1,16 @@
-import React, { memo, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import React, { memo, useLayoutEffect, useRef, useState } from 'react'
 
 import styles from './Popover.module.scss'
 import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
-import { Genre } from '../Genre/Genre'
 import { SearchResult } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
-import { addKey } from '../../../utils/addKey'
 import { timeToArr } from '../../../utils/timeToArr'
 import { convertTime } from '../../../utils/convertTIme'
 import { airingInfo } from '../../../utils/airingInfo'
 import { formatLabel } from '../../../utils/formatLabel'
 import { pluralize } from '../../../utils/pluralize'
+import { Genres } from '../Genres/Genres'
 
 interface Props {
   isVisible: boolean
@@ -81,8 +80,6 @@ export const Popover = memo(
       '--color-light': adjustColor(color, 'var(--lightness)'),
     } as React.CSSProperties
 
-    const _genres = useMemo(() => addKey(genres), [genres])
-
     const _duration = timeToArr(
       convertTime({
         num: duration,
@@ -141,16 +138,13 @@ export const Popover = memo(
           )}
         </div>
 
-        <footer className={styles.genres}>
-          {_genres.slice(0, 3).map(g => (
-            <Genre
-              key={g.key}
-              genre={g.value}
-              color={color}
-              canInteract={false}
-            />
-          ))}
-        </footer>
+        <Genres
+          as='footer'
+          genres={genres}
+          color={color}
+          canInteract={false}
+          className={styles.genres}
+        />
       </aside>
     )
   }

@@ -1,20 +1,18 @@
-import React, { useMemo, memo } from 'react'
+import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './CardTable.module.scss'
 import { SearchResult } from '../../../../api/types'
 import { currentYear } from '../../../../api/queries'
 import { Image } from '../../Image/Image'
-import { Genre } from '../../Genre/Genre'
 import { FaceIcon } from '../../FaceIcon/FaceIcon'
 import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
-import { useSetGenre } from '../../../../hooks/useSetGenre'
 import { toStartCase } from '../../../../utils/toStartCase'
 import { adjustColor } from '../../../../utils/adjustColor'
-import { addKey } from '../../../../utils/addKey'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { airingInfo } from '../../../../utils/airingInfo'
+import { Genres } from '../../Genres/Genres'
 
 interface Props {
   id: number
@@ -55,8 +53,6 @@ export const CardTable = memo(
   }: Props) => {
     const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
 
-    const handleSetGenre = useSetGenre()
-
     const url = `/anime/${id}`
 
     const _style = {
@@ -64,8 +60,6 @@ export const CardTable = memo(
       '--color-original': image.color,
       '--image-url': `url(${src})`,
     } as React.CSSProperties
-
-    const _genres = useMemo(() => addKey(genres), [genres])
 
     return (
       <article className={styles.wrapper} style={_style}>
@@ -89,16 +83,13 @@ export const CardTable = memo(
           <div className={styles.content}>
             <div className={styles.title}>
               <Link to={url}>{title.romaji}</Link>
-              <div className={styles.genres}>
-                {_genres.map(g => (
-                  <Genre
-                    key={g.key}
-                    genre={g.value}
-                    onClick={() => handleSetGenre(g.value)}
-                    color={image.color}
-                  />
-                ))}
-              </div>
+              <Genres
+                as='section'
+                genres={genres}
+                color={image.color}
+                canInteract={false}
+                className={styles.genres}
+              />
             </div>
 
             <div className={styles.review}>

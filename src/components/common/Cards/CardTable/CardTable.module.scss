@@ -158,13 +158,7 @@
   }
 
   .genres {
-    display: flex;
-    overflow: hidden;
     font-size: var(--text-size-200);
-
-    button {
-      margin-right: var(--space-300);
-    }
   }
 
   .row {

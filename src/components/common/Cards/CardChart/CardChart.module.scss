@@ -106,15 +106,9 @@
 }
 
 .genres {
-  display: flex;
-  font-size: var(--text-size-100);
+  font-size: var(--text-size-200);
   padding: var(--space-300);
   background: var(--color-foreground-200);
-  overflow: hidden;
-
-  button {
-    margin: 0 var(--space-200);
-  }
 }
 
 .description {
