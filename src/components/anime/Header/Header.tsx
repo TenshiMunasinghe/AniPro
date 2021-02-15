@@ -8,7 +8,7 @@ import { FluidText } from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']['extraLarge']
+  coverImg: Common['coverImage']['large']
   title: Common['title']['romaji']
   description: Common['description']
 }

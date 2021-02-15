@@ -51,7 +51,7 @@ export const CardTable = memo(
     episodes,
     rank,
   }: Props) => {
-    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
+    const { isImageLoaded, src } = useIsImageLoaded(image.large)
 
     const url = `/anime/${id}`
 

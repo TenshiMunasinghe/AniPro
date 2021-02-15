@@ -45,7 +45,7 @@ export const CardCover = memo(
     const showPopover = () => setIsPopoverVisible(true)
     const hidePopover = () => setIsPopoverVisible(false)
 
-    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
+    const { isImageLoaded, src } = useIsImageLoaded(image.large)
     const url = `/anime/${id}`
 
     const _style = {

@@ -21,7 +21,7 @@ interface Props {
 
 export const CardChart = memo(
   ({ id, image, title, genres, meanScore, description }: Props) => {
-    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
+    const { isImageLoaded, src } = useIsImageLoaded(image.large)
 
     const pageUrl = `/anime/${id}`
 

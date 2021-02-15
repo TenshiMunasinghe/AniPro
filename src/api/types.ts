@@ -27,7 +27,6 @@ export interface QueryData {
         romaji: string
       }
       coverImage: {
-        extraLarge: string
         large: string
         color: string
       }
@@ -71,7 +70,7 @@ export interface Common {
     native: string
   }
   coverImage: {
-    extraLarge: string
+    large: string
   }
   bannerImage: string
   description: string
@@ -191,7 +190,7 @@ export interface Overview extends Watch, Characters, Staff {
           romaji: string
         }
         coverImage: {
-          extraLarge: string
+          large: string
         }
         format: string
         status: string
@@ -222,7 +221,7 @@ export interface Overview extends Watch, Characters, Staff {
           romaji: string
         }
         coverImage: {
-          extraLarge: string
+          large: string
         }
       }
     }
