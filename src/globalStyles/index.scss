@@ -43,22 +43,53 @@
   --cyan-3: #b2eae7;
   --cyan-2: #c5f5f3;
   --cyan-1: #d9fffe;
+
+  --scale-900: 2.488;
+  --scale-800: 2.074;
+  --scale-700: 1.728;
+  --scale-600: 1.44;
+  --scale-500: 1.2;
+  --scale-400: 1;
+  --scale-300: 0.833;
+  --scale-200: 0.694;
+  --scale-100: 0.579;
+
+  --text-unit: 1rem;
+  --text-size-100: calc(var(--scale-100) * var(--text-unit));
+  --text-size-200: calc(var(--scale-200) * var(--text-unit));
+  --text-size-300: calc(var(--scale-300) * var(--text-unit));
+  --text-size-400: calc(var(--scale-400) * var(--text-unit));
+  --text-size-500: calc(var(--scale-500) * var(--text-unit));
+  --text-size-600: calc(var(--scale-600) * var(--text-unit));
+  --text-size-700: calc(var(--scale-700) * var(--text-unit));
+  --text-size-800: calc(var(--scale-800) * var(--text-unit));
+  --text-size-900: calc(var(--scale-900) * var(--text-unit));
+
+  --space-unit: 1em;
+  --space-unit: 1em;
+  --space-100: calc(0.25 * var(--space-unit));
+  --space-200: calc(0.5 * var(--space-unit));
+  --space-300: calc(0.75 * var(--space-unit));
+  --space-400: calc(1.25 * var(--space-unit));
+  --space-500: calc(2 * var(--space-unit));
+  --space-600: calc(3.25 * var(--space-unit));
+  --space-700: calc(5.25 * var(--space-unit));
+  // --space-100: var(--scale--100) * var(--space-unit);
+  // --space-200: var(--scale--200) * var(--space-unit);
+  // --space-300: var(--scale--300) * var(--space-unit);
+  // --space-400: var(--scale--400) * var(--space-unit);
+  // --space-500: var(--scale--500) * var(--space-unit);
+  // --space-600: var(--scale--600) * var(--space-unit);
+  // --space-700: var(--scale--700) * var(--space-unit);
+  // --space-800: var(--scale--800) * var(--space-unit);
+  // --space-900: var(--scale-900) * var(--space-unit);
 }
 
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
   overflow-x: hidden;
-}
-@media screen and (min-width: 320px) {
-  html {
-    font-size: calc(16px + 2 * ((100vw - 320px) / 680));
-  }
-}
-@media screen and (min-width: 1000px) {
-  html {
-    font-size: 18px;
-  }
+  font-size: clamp(1rem, calc(0.2rem + 1.3vw), 1.2rem);
 }
 
 * {
@@ -84,6 +115,8 @@ button {
 
 body {
   overflow-x: hidden;
+  font-size: var(--text-size-400);
+
   &.dark {
     --color-background: var(--b-12);
     --color-foreground-50: var(--b-11);
@@ -125,7 +158,7 @@ body {
     --color-underline-100: var(--w-8);
     --color-highlight-100: var(--w-6);
     --color-highlight-200: var(--w-7);
-    --lightness: 25%;
+    --lightness: 40%;
   }
 
   --header-height: 3rem;
@@ -136,7 +169,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--color-background);
-  line-height: 1.3;
+  line-height: 1.6;
 }
 
 #root {
@@ -147,11 +180,11 @@ body {
 
 #container {
   margin: auto;
-  padding: 2rem 7vw;
+  padding: var(--space-500) var(--space-400);
   width: 100%;
   max-width: 1200px;
 
   @include for-desktop-up {
-    padding: 2rem;
+    padding: var(--space-500);
   }
 }

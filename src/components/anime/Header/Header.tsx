@@ -26,7 +26,7 @@ export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
         <FluidText
           as='h1'
           min={0.8}
-          max={1.5}
+          max={2.5}
           resolution={0.05}
           className={styles.title}>
           {title}

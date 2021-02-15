@@ -1,5 +1,5 @@
-import { useRef, useState, useLayoutEffect } from 'react'
-import { checkElementOverflow } from '../utils/checkElementOverflow'
+import { useRef, useState, useEffect } from 'react'
+import { isOverflowingFromParent } from '../utils/isOverflowingFromParent'
 
 interface UseFitTextArgs {
   min: number
@@ -18,10 +18,10 @@ export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
   })
   const { fontSize, fontSizeMax, fontSizeMin, fontSizePrev } = state
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isDone = Math.abs(fontSize - fontSizePrev) <= resolution
 
-    const isOverflow = checkElementOverflow(ref.current as HTMLElement)
+    const isOverflow = isOverflowingFromParent(ref.current as HTMLElement)?.any
 
     const isAsc = fontSize > fontSizePrev
 

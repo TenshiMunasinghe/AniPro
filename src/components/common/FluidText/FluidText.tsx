@@ -12,8 +12,7 @@ interface Props {
 }
 
 export const FluidText: FC<Props> = memo(
-  ({ as, max, min, resolution, className, children }) => {
-    const Tag = as
+  ({ as: Tag, max, min, resolution, className, children }) => {
     const { fontSize, ref } = useFitText({ max, min, resolution })
     const style = { '--font-size': fontSize } as CSSProperties
 

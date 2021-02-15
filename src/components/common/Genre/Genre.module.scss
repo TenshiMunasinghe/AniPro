@@ -16,4 +16,13 @@
     color: var(--color-foreground-100);
     background: var(--color-bg);
   }
+
+  &.hide {
+    height: 0;
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border: 0;
+  }
 }
