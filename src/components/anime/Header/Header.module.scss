@@ -2,12 +2,14 @@
 
 .wrapper {
   .details {
+    --image-width: calc(4rem + 6vw);
     position: relative;
     display: grid;
-    grid-template-columns: 7em 1fr;
-    column-gap: 2em;
+    grid-template-columns: var(--image-width) 1fr;
+    height: calc(2 * var(--image-width));
+    column-gap: var(--space-600);
     place-items: center;
-    padding: var(--space-600) var(--space-800);
+    padding: var(--space-600);
 
     &:before {
       content: '';
@@ -26,6 +28,7 @@
     }
 
     .cover {
+      width: 100%;
       @include image-with-aspect-ratio;
       border-radius: 0.2em;
     }
@@ -38,7 +41,6 @@
       text-align: center;
       padding: 1em;
       border-radius: 0.15em;
-      max-width: 100%;
 
       @supports (
         backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
