@@ -8,8 +8,8 @@ interface Props {
   type: CardType
 }
 
-const color = 'var(--color-foreground-200)'
-const highlightColor = 'var(--color-foreground-300)'
+const color = 'var(--color-foreground-300)'
+const highlightColor = 'var(--color-foreground-400)'
 
 export const CardLoading = memo(({ type }: Props) => {
   switch (type) {
@@ -28,7 +28,9 @@ export const CardLoading = memo(({ type }: Props) => {
       return (
         <SkeletonTheme color={color} highlightColor={highlightColor}>
           <div className={styles.chart}>
-            <Skeleton className={styles.image} />
+            <div className={styles.imageWrapper}>
+              <Skeleton className={styles.image} />
+            </div>
 
             <div className={styles.content}>
               <div className={styles.cardBody}>
@@ -36,15 +38,11 @@ export const CardLoading = memo(({ type }: Props) => {
                   <Skeleton className={styles.title} />
                   <Skeleton className={styles.secondaryTitle} />
                 </div>
-                <Skeleton className={styles.description} count={4} />
+                <Skeleton className={styles.description} count={2} />
               </div>
 
               <div className={styles.footer}>
-                <div className={styles.genres}>
-                  <Skeleton className={styles.genre} />
-                  <Skeleton className={styles.genre} />
-                  <Skeleton className={styles.genre} />
-                </div>
+                <Skeleton className={styles.genre} count={2} />
               </div>
             </div>
           </div>
