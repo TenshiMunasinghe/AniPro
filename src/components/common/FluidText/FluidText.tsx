@@ -11,7 +11,7 @@ interface Props {
   className?: string
 }
 
-export const FluidText: FC<Props> = memo(
+const FluidText: FC<Props> = memo(
   ({ as: Tag, max, min, resolution, className, children }) => {
     const { fontSize, ref } = useFitText({ max, min, resolution })
     const style = { '--font-size': fontSize } as CSSProperties
@@ -24,3 +24,5 @@ export const FluidText: FC<Props> = memo(
     })
   }
 )
+
+export default FluidText

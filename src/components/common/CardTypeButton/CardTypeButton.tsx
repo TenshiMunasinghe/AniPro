@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction } from 'react'
 
 import styles from './CardTypeButton.module.scss'
 import { CardType } from '../../../pages/search/Search'
-import { GridIcon } from '../GridIcon/GridIcon'
+import GridIcon from '../GridIcon/GridIcon'
 
 interface Props {
   cardType: CardType
@@ -10,7 +10,7 @@ interface Props {
   setCardType: Dispatch<SetStateAction<CardType>>
 }
 
-export const CardTypeButton = ({ cardType, isActive, setCardType }: Props) => {
+const CardTypeButton = ({ cardType, isActive, setCardType }: Props) => {
   return (
     <button
       onClick={() => setCardType(cardType)}
@@ -19,3 +19,5 @@ export const CardTypeButton = ({ cardType, isActive, setCardType }: Props) => {
     </button>
   )
 }
+
+export default CardTypeButton

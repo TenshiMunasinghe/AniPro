@@ -7,7 +7,7 @@ interface Props {
   meanScore: number | null
 }
 
-export const FaceIcon = ({ meanScore }: Props) => {
+const FaceIcon = ({ meanScore }: Props) => {
   if (meanScore === null) return <></>
 
   if (meanScore < 50) {
@@ -24,3 +24,5 @@ export const FaceIcon = ({ meanScore }: Props) => {
 
   return <FaSmileBeam className={styles.smileBeam} aria-label='smile beam' />
 }
+
+export default FaceIcon

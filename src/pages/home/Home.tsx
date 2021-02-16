@@ -10,9 +10,9 @@ import {
 } from '../../api/queries'
 import { SearchResult, QueryVar } from '../../api/types'
 import { CardType } from '../search/Search'
-import { Footer } from '../../components/home/Footer/Footer'
-import { Filters } from '../../components/common/Filters/Filters'
-import { Content } from '../../components/home/Content/Content'
+import Footer from '../../components/home/Footer/Footer'
+import Filters from '../../components/common/Filters/Filters'
+import Content from '../../components/home/Content/Content'
 
 type Medias = {
   trending: SearchResult[]
@@ -46,7 +46,7 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
 
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
-export const Home = () => {
+const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
   const contents: {
@@ -103,3 +103,5 @@ export const Home = () => {
     </>
   )
 }
+
+export default Home

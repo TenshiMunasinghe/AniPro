@@ -2,7 +2,7 @@ import React, { useState, RefObject, memo } from 'react'
 import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
 import styles from './Select.module.scss'
-import { Options } from '../Options/Options'
+import Options from '../Options/Options'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
 import { toStartCase } from '../../../utils/toStartCase'
 
@@ -18,7 +18,7 @@ interface Props {
   name: string
 }
 
-export const Select = memo(
+const Select = memo(
   ({
     onChange,
     options,
@@ -117,3 +117,5 @@ export const Select = memo(
     )
   }
 )
+
+export default Select

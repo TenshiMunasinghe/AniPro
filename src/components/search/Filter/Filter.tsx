@@ -9,7 +9,7 @@ interface Props {
   variant: 'primary' | 'secondary'
 }
 
-export const Filter = ({ text, onClick, variant }: Props) => {
+const Filter = ({ text, onClick, variant }: Props) => {
   return (
     <button
       className={styles.wrapper + ' ' + styles[variant]}
@@ -19,3 +19,5 @@ export const Filter = ({ text, onClick, variant }: Props) => {
     </button>
   )
 }
+
+export default Filter

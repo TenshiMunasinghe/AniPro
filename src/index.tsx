@@ -4,7 +4,7 @@ import * as serviceWorker from './serviceWorker'
 
 import './globalStyles/reset.css'
 import './globalStyles/index.scss'
-import { App } from './App'
+import App from './App'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

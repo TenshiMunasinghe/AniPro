@@ -7,7 +7,7 @@ const handleClick = () => {
   window.scrollTo(0, 0)
 }
 
-export const ScrollButton = () => {
+const ScrollButton = () => {
   return (
     <button
       className={styles.button}
@@ -17,3 +17,5 @@ export const ScrollButton = () => {
     </button>
   )
 }
+
+export default ScrollButton

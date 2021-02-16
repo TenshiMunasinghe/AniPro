@@ -12,7 +12,7 @@ interface Props {
   selected: string | string[]
 }
 
-export const Options = ({
+const Options = ({
   isVisible,
   options,
   handleChange,
@@ -47,3 +47,5 @@ export const Options = ({
     </div>
   )
 }
+
+export default Options

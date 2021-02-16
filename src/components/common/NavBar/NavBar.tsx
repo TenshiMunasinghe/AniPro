@@ -9,12 +9,12 @@ import { Link } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
 
 import styles from './NavBar.module.scss'
-import { Switch } from '../Switch/Switch'
+import Switch from '../Switch/Switch'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
-export const NavBar = () => {
+const NavBar = () => {
   const [isVisible, setIsVisible] = useState(true)
   const { theme, setTheme } = useThemeStore(themeSelector)
   const lastScroll = useRef(0)
@@ -68,3 +68,5 @@ export const NavBar = () => {
     </nav>
   )
 }
+
+export default NavBar

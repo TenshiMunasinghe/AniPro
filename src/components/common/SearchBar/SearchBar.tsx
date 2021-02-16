@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import styles from './SearchBar.module.scss'
 import { SEARCH_TEXT } from '../../../api/queries'
 
-export const SearchBar = () => {
+const SearchBar = () => {
   const history = useHistory()
   const { handleSubmit, register, formState } = useForm<{
     [SEARCH_TEXT]: string
@@ -46,3 +46,5 @@ export const SearchBar = () => {
     </form>
   )
 }
+
+export default SearchBar

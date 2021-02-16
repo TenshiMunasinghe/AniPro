@@ -5,7 +5,7 @@ import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 
 const themeSelector = ({ set }: ThemeStore) => set
 
-export const Footer = () => {
+const Footer = () => {
   const setTheme = useThemeStore(themeSelector)
 
   return (
@@ -39,3 +39,5 @@ export const Footer = () => {
     </footer>
   )
 }
+
+export default Footer

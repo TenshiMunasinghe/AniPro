@@ -5,7 +5,7 @@ import { QueryVar } from '../../../api/types'
 import { CardType } from '../../../pages/search/Search'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { filterOptions } from '../../../filterOptions/filterOptions'
-import { CardGrid } from '../../common/CardGrid/CardGrid'
+import CardGrid from '../../common/CardGrid/CardGrid'
 
 export type _Content = {
   text: string
@@ -18,7 +18,7 @@ interface Props {
   content: _Content
 }
 
-export const Content = ({ queryVar, content }: Props) => {
+const Content = ({ queryVar, content }: Props) => {
   const updateUrLParam = useUpdateUrlParam()
 
   const filterQuery = Object.fromEntries(
@@ -46,3 +46,5 @@ export const Content = ({ queryVar, content }: Props) => {
     </section>
   )
 }
+
+export default Content

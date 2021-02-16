@@ -3,10 +3,10 @@ import { useHistory, useLocation } from 'react-router-dom'
 
 import styles from './ActiveFilters.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { Filter } from '../Filter/Filter'
 import { formatLabel } from '../../../utils/formatLabel'
+import Filter from '../Filter/Filter'
 
-export const ActiveFilters = memo(() => {
+const ActiveFilters = memo(() => {
   const location = useLocation()
   const history = useHistory()
   const params = useMemo(() => new URLSearchParams(location.search), [
@@ -45,3 +45,5 @@ export const ActiveFilters = memo(() => {
     </section>
   )
 })
+
+export default ActiveFilters

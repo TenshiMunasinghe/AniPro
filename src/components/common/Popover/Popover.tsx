@@ -1,7 +1,6 @@
 import React, { memo, useLayoutEffect, useRef, useState } from 'react'
 
 import styles from './Popover.module.scss'
-import { FaceIcon } from '../FaceIcon/FaceIcon'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import { SearchResult } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
@@ -10,7 +9,8 @@ import { convertTime } from '../../../utils/convertTIme'
 import { airingInfo } from '../../../utils/airingInfo'
 import { formatLabel } from '../../../utils/formatLabel'
 import { pluralize } from '../../../utils/pluralize'
-import { Genres } from '../Genres/Genres'
+import FaceIcon from '../FaceIcon/FaceIcon'
+import Genres from '../Genres/Genres'
 
 interface Props {
   isVisible: boolean
@@ -33,7 +33,7 @@ type DisplayState = {
 
 const windowStateSelector = (state: WindowSizeStore) => state.width
 
-export const Popover = memo(
+const Popover = memo(
   ({
     nextAiringEpisode,
     isVisible,
@@ -149,3 +149,5 @@ export const Popover = memo(
     )
   }
 )
+
+export default Popover
