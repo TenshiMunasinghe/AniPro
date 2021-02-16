@@ -1,21 +1,27 @@
 import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import loadable from '@loadable/component'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import debounce from 'lodash/debounce'
 
-import { Search } from './pages/search/Search'
-import { Anime } from './pages/anime/Anime'
-import { Home } from './pages/home/Home'
-import { NavBar } from './components/common/NavBar/NavBar'
 import {
   useWindowSizeStore,
   WindowSizeStore,
   useThemeStore,
   Theme,
 } from './zustand/stores'
+import NavBar from './components/common/NavBar/NavBar'
+
+// import Search from './pages/search/Search'
+// import Anime from './pages/anime/Anime'
+// import Home from './pages/home/Home'
+
+const Home = loadable(() => import('./pages/home/Home'))
+const Search = loadable(() => import('./pages/search/Search'))
+const Anime = loadable(() => import('./pages/anime/Anime'))
 
 const selector = (state: WindowSizeStore) => state.set
 
-export const App = () => {
+const App = () => {
   const setSize = useWindowSizeStore(selector)
 
   const updateSize = useMemo(
@@ -63,3 +69,5 @@ export const App = () => {
     </>
   )
 }
+
+export default App
