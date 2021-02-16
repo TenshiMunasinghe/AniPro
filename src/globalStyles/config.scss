@@ -61,7 +61,8 @@
     padding-top: calc(100% / var(--image-aspect-ratio));
   }
 
-  & img {
+  img,
+  span {
     position: absolute;
     display: block;
     left: 0;
