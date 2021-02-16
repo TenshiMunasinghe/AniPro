@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { isOverflowingFromParent } from '../utils/isOverflowingFromParent'
+import { useResizeDetector } from 'react-resize-detector'
 
 interface UseFitTextArgs {
   min: number
@@ -8,7 +9,10 @@ interface UseFitTextArgs {
 }
 
 export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
-  const ref = useRef<HTMLElement>(null)
+  const { width, ref } = useResizeDetector({
+    refreshMode: 'debounce',
+    refreshRate: 250,
+  })
 
   const [state, setState] = useState({
     fontSize: max,
@@ -21,7 +25,8 @@ export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
   useEffect(() => {
     const isDone = Math.abs(fontSize - fontSizePrev) <= resolution
 
-    const isOverflow = isOverflowingFromParent(ref.current as HTMLElement)?.any
+    const isOverflow =
+      isOverflowingFromParent(ref.current as HTMLElement)?.any && !width
 
     const isAsc = fontSize > fontSizePrev
 
@@ -60,7 +65,7 @@ export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
       fontSizeMin: newMin,
       fontSizePrev: fontSize,
     })
-  }, [fontSize, fontSizeMax, fontSizeMin, fontSizePrev, ref, resolution])
+  }, [fontSize, fontSizeMax, fontSizeMin, fontSizePrev, ref, resolution, width])
 
   return { fontSize: `${fontSize}em`, ref }
 }
