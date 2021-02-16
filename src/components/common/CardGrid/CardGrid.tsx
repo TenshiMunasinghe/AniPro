@@ -1,21 +1,25 @@
 import React, { useMemo } from 'react'
 import range from 'lodash/range'
+import {
+  trackWindowScroll,
+  LazyComponentProps,
+} from 'react-lazy-load-image-component'
 
 import styles from './CardGrid.module.scss'
-import { CardChart } from '../Cards/CardChart/CardChart'
-import { CardCover } from '../Cards/CardCover/CardCover'
-import { CardTable } from '../Cards/CardTable/CardTable'
-import { CardLoading } from '../Cards/CardLoading/CardLoading'
 import { QueryVar, SearchResult } from '../../../api/types'
 import { CardType } from '../../../pages/search/Search'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
-import { NotFound } from '../NotFound/NotFound'
+import CardChart from '../Cards/CardChart/CardChart'
+import CardCover from '../Cards/CardCover/CardCover'
+import CardTable from '../Cards/CardTable/CardTable'
+import CardLoading from '../Cards/CardLoading/CardLoading'
+import NotFound from '../NotFound/NotFound'
 
 interface Medias extends SearchResult {
   rank?: number | null
 }
 
-interface Props {
+interface Props extends LazyComponentProps {
   queryVariables: Partial<QueryVar>
   cardType: CardType
   loadingCount: number
@@ -23,12 +27,13 @@ interface Props {
   allowLoadMore: boolean
 }
 
-export const CardGrid = ({
+const CardGrid = ({
   queryVariables,
   cardType,
   loadingCount,
   hasRank = false,
   allowLoadMore,
+  scrollPosition,
 }: Props) => {
   const {
     medias,
@@ -90,6 +95,7 @@ export const CardGrid = ({
                     meanScore={m.meanScore}
                     studios={m.studios}
                     rank={m.rank}
+                    scrollPosition={scrollPosition}
                   />
                 )
 
@@ -112,6 +118,7 @@ export const CardGrid = ({
                     studios={m.studios}
                     popularity={m.popularity}
                     rank={m.rank}
+                    scrollPosition={scrollPosition}
                   />
                 )
 
@@ -125,6 +132,7 @@ export const CardGrid = ({
                     genres={m.genres}
                     description={m.description}
                     meanScore={m.meanScore}
+                    scrollPosition={scrollPosition}
                   />
                 )
 
@@ -145,3 +153,5 @@ export const CardGrid = ({
     </div>
   )
 }
+
+export default trackWindowScroll(CardGrid)

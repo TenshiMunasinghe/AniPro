@@ -1,14 +1,13 @@
 import React, { memo } from 'react'
 import htmr from 'htmr'
 import { Link } from 'react-router-dom'
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
 
 import styles from './CardChart.module.scss'
-import { Image } from '../../Image/Image'
-import { FaceIcon } from '../../FaceIcon/FaceIcon'
+import FaceIcon from '../../FaceIcon/FaceIcon'
 import { SearchResult } from '../../../../api/types'
-import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
-import { Genres } from '../../Genres/Genres'
+import Genres from '../../Genres/Genres'
 
 interface Props {
   id: number
@@ -17,12 +16,19 @@ interface Props {
   genres: SearchResult['genres']
   meanScore: SearchResult['meanScore']
   description: SearchResult['description']
+  scrollPosition: ScrollPosition
 }
 
-export const CardChart = memo(
-  ({ id, image, title, genres, meanScore, description }: Props) => {
-    const { isImageLoaded, src } = useIsImageLoaded(image.large)
-
+const CardChart = memo(
+  ({
+    id,
+    image,
+    title,
+    genres,
+    meanScore,
+    description,
+    scrollPosition,
+  }: Props) => {
     const pageUrl = `/anime/${id}`
 
     const _style = {
@@ -36,10 +42,11 @@ export const CardChart = memo(
           to={pageUrl}
           aria-label={title.romaji}
           className={styles.imageWrapper}>
-          <Image
-            src={src}
+          <LazyLoadImage
+            src={image.large}
             alt={title.romaji}
-            className={styles[isImageLoaded ? 'loaded' : 'loading']}
+            scrollPosition={scrollPosition}
+            effect='opacity'
           />
         </Link>
 
@@ -84,3 +91,5 @@ export const CardChart = memo(
     )
   }
 )
+
+export default CardChart

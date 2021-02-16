@@ -1,18 +1,17 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
 
 import styles from './CardTable.module.scss'
 import { SearchResult } from '../../../../api/types'
 import { currentYear } from '../../../../api/queries'
-import { Image } from '../../Image/Image'
-import { FaceIcon } from '../../FaceIcon/FaceIcon'
-import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { toStartCase } from '../../../../utils/toStartCase'
 import { adjustColor } from '../../../../utils/adjustColor'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { airingInfo } from '../../../../utils/airingInfo'
-import { Genres } from '../../Genres/Genres'
+import Genres from '../../Genres/Genres'
+import FaceIcon from '../../FaceIcon/FaceIcon'
 
 interface Props {
   id: number
@@ -30,12 +29,13 @@ interface Props {
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   popularity: SearchResult['popularity']
   rank?: number | null
+  scrollPosition: ScrollPosition
 }
 
 const mapStatus = (status: SearchResult['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
-export const CardTable = memo(
+const CardTable = memo(
   ({
     image,
     title,
@@ -50,15 +50,14 @@ export const CardTable = memo(
     format,
     episodes,
     rank,
+    scrollPosition,
   }: Props) => {
-    const { isImageLoaded, src } = useIsImageLoaded(image.large)
-
     const url = `/anime/${id}`
 
     const _style = {
       '--color-text': adjustColor(image.color, 'var(--lightness)'),
       '--color-original': image.color,
-      '--image-url': `url(${src})`,
+      '--image-url': `url(${image.large})`,
     } as React.CSSProperties
 
     return (
@@ -73,10 +72,11 @@ export const CardTable = memo(
         )}
         <div className={styles.card}>
           <Link to={url} className={styles.imageWrapper}>
-            <Image
-              className={styles[isImageLoaded ? 'loaded' : 'loading']}
-              src={src}
+            <LazyLoadImage
+              src={image.large}
               alt={title.romaji}
+              scrollPosition={scrollPosition}
+              effect='opacity'
             />
           </Link>
 
@@ -125,3 +125,5 @@ export const CardTable = memo(
     )
   }
 )
+
+export default CardTable

@@ -1,10 +1,10 @@
 import React, { CSSProperties } from 'react'
 import htmr from 'htmr'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import styles from './Header.module.scss'
 import { Common } from '../../../api/types'
-import { Image } from '../../common/Image/Image'
-import { FluidText } from '../../common/FluidText/FluidText'
+import FluidText from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
@@ -13,7 +13,7 @@ interface Props {
   description: Common['description']
 }
 
-export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
+const Header = ({ bannerImg, coverImg, title, description }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
   } as CSSProperties
@@ -21,7 +21,7 @@ export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
     <header className={styles.wrapper} style={style}>
       <div className={styles.details}>
         <figure className={styles.cover}>
-          <Image src={coverImg} alt={title} />
+          <LazyLoadImage src={coverImg} alt={title} />
         </figure>
         <FluidText
           as='h1'
@@ -36,3 +36,5 @@ export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
     </header>
   )
 }
+
+export default Header
