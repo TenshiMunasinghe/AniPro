@@ -11,19 +11,14 @@ import {
 } from './zustand/stores'
 import NavBar from './components/common/NavBar/NavBar'
 
-// import Search from './pages/search/Search'
-// import Anime from './pages/anime/Anime'
-// import Home from './pages/home/Home'
-
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Anime = loadable(() => import('./pages/anime/Anime'))
 
-const selector = (state: WindowSizeStore) => state.set
+const windowSizeSelector = (state: WindowSizeStore) => state.set
 
 const App = () => {
-  const setSize = useWindowSizeStore(selector)
-
+  const setSize = useWindowSizeStore(windowSizeSelector)
   const updateSize = useMemo(
     () =>
       debounce(() => {

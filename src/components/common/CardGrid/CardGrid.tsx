@@ -35,6 +35,8 @@ const CardGrid = ({
   allowLoadMore,
   scrollPosition,
 }: Props) => {
+  console.log(scrollPosition)
+
   const {
     medias,
     loading,
@@ -47,20 +49,17 @@ const CardGrid = ({
 
   const _medias: Medias[] | null = useMemo(() => {
     if (!medias) return null
+    if (!hasRank) return medias
 
-    if (hasRank) {
-      return medias
-        .map(m => {
-          const _ranking = m.rankings.find(
-            r => (r.context = 'highest rated all time')
-          )
-          const rank = _ranking ? _ranking.rank : null
-          return { ...m, rank }
-        })
-        .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
-    } else {
-      return medias
-    }
+    return medias
+      .map(m => {
+        const _ranking = m.rankings.find(
+          r => (r.context = 'highest rated all time')
+        )
+        const rank = _ranking ? _ranking.rank : null
+        return { ...m, rank }
+      })
+      .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
   }, [hasRank, medias])
 
   const fetchMore = () => {
