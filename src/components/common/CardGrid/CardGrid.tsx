@@ -35,8 +35,6 @@ const CardGrid = ({
   allowLoadMore,
   scrollPosition,
 }: Props) => {
-  console.log(scrollPosition)
-
   const {
     medias,
     loading,
