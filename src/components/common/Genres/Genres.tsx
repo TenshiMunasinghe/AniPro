@@ -1,11 +1,10 @@
-import React, { memo, useEffect, useMemo, useState, useCallback } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useResizeDetector } from 'react-resize-detector'
 
 import styles from './Genres.module.scss'
 import { addKey } from '../../../utils/addKey'
-import { isChildOverflow } from '../../../utils/isChildOverflow'
 import Genre from '../Genre/Genre'
+import { useFitContent } from '../../../hooks/useFitContent'
 
 interface Props {
   as: 'section' | 'footer'
@@ -18,25 +17,7 @@ interface Props {
 const Genres = memo(
   ({ as: Tag, genres: allGenres, color, canInteract, className }: Props) => {
     const history = useHistory()
-    const [genres, setGenres] = useState(allGenres)
-
-    const onResize = useCallback(() => {
-      setGenres(allGenres)
-    }, [allGenres])
-    const { width, ref } = useResizeDetector({
-      onResize,
-      refreshMode: 'debounce',
-      refreshRate: 250,
-    })
-
-    useEffect(() => {
-      if (!ref.current || !width) return
-      const _genres = genres
-
-      if (isChildOverflow(ref.current as HTMLElement).overflow.either) {
-        setGenres(_genres.slice(0, -1))
-      }
-    }, [genres, ref, width])
+    const { ref, state: genres } = useFitContent(allGenres)
 
     const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
     const _genres = useMemo(() => addKey(genres), [genres])
