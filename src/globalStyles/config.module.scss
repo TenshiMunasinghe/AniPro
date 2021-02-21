@@ -1,0 +1,100 @@
+@value xl: 1800px;
+@value xlCardCount: 10;
+@value lg: 1200px;
+@value lgCardCount: 8;
+@value md: 900px;
+@value mdCardCount: 6;
+@value sm: 600px;
+@value smCardCount: 4;
+
+@mixin for-phone-only {
+  @media (max-width: calc(sm - 1px)) {
+    @content;
+  }
+}
+@mixin for-tablet-portrait-up {
+  @media (min-width: sm) {
+    @content;
+  }
+}
+@mixin for-tablet-landscape-up {
+  @media (min-width: md) {
+    @content;
+  }
+}
+@mixin for-desktop-up {
+  @media (min-width: lg) {
+    @content;
+  }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: xl) {
+    @content;
+  }
+}
+
+@mixin add-ellipsis($lines: 1) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@mixin on-hoverable-devices {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin mouse-effects {
+  &:hover,
+  &:focus {
+    background: var(--color-highlight-100);
+  }
+  &:active {
+    background: var(--color-highlight-200);
+  }
+}
+
+@mixin image-with-aspect-ratio {
+  position: relative;
+  height: auto;
+  padding: 0;
+  overflow: hidden;
+  &:after {
+    content: '';
+    display: block;
+    padding-top: calc(100% / var(--image-aspect-ratio));
+  }
+
+  img,
+  span {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@mixin circle($size: 1) {
+  $size-em: $size * 1em;
+  width: $size-em;
+  height: $size-em;
+  line-height: $size-em;
+  text-align: center;
+  border-radius: ($size / 2) * 1em;
+}
+
+@mixin zoom-image {
+  &:hover,
+  &:focus-within {
+    & img {
+      transform: scale(1.05) rotateZ(-1deg);
+    }
+  }
+}
