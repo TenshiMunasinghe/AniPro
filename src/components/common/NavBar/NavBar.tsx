@@ -7,11 +7,11 @@ import React, {
 } from 'react'
 import { Link } from 'react-router-dom'
 import { FaSun, FaMoon } from 'react-icons/fa'
+import classnames from 'classnames'
 
 import styles from './NavBar.module.scss'
 import Switch from '../Switch/Switch'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
-
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
 const NavBar = () => {
@@ -53,7 +53,7 @@ const NavBar = () => {
 
   return (
     <nav
-      className={styles.wrapper + (isVisible ? ' ' + styles.visible : '')}
+      className={classnames(styles.wrapper, { [styles.visible]: isVisible })}
       ref={wrapperRef as RefObject<HTMLElement>}>
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>

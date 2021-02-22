@@ -1,5 +1,6 @@
 import React, { memo, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
+import classnames from 'classnames'
 
 import styles from './Genres.module.scss'
 import { addKey } from '../../../utils/addKey'
@@ -31,7 +32,7 @@ const Genres = memo(
           onClick={canInteract ? () => setGenre(g.value) : undefined}
         />
       )),
-      className: styles.wrapper + (className ? ` ${className}` : ''),
+      className: classnames(styles.wrapper, className),
       ref,
     })
   }

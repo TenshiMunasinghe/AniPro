@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
+import classnames from 'classnames'
 
 import styles from './CardTypeButton.module.scss'
 import { CardType } from '../../../pages/search/Search'
@@ -14,7 +15,7 @@ const CardTypeButton = ({ cardType, isActive, setCardType }: Props) => {
   return (
     <button
       onClick={() => setCardType(cardType)}
-      className={styles.button + (isActive ? ` ${styles.active}` : '')}>
+      className={classnames(styles.button, { [styles.active]: isActive })}>
       <GridIcon cardType={cardType} />
     </button>
   )

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { v4 } from 'uuid'
+import classnames from 'classnames'
 
 import styles from './Options.module.scss'
 
@@ -28,17 +29,16 @@ const Options = ({
 
   return (
     <div
-      className={styles.wrapper + (isVisible ? '' : ' ' + styles.hide)}
+      className={classnames(styles.wrapper, { [styles.hide]: isVisible })}
       tabIndex={0}>
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
           <button onClick={() => handleChange(o.value)} tabIndex={-1}>
             <span>{o.label}</span>
             <div
-              className={
-                styles.iconWrapper +
-                (isSelected(o.value) ? '' : ' ' + styles.hide)
-              }>
+              className={classnames(styles.iconWrapper, {
+                [styles.hide]: isSelected(o.value),
+              })}>
               <AiOutlineCheck aria-label='check' />
             </div>
           </button>

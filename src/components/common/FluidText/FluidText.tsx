@@ -1,5 +1,6 @@
 import React, { CSSProperties, FC, memo } from 'react'
 import styles from './FluidText.module.scss'
+import classnames from 'classnames'
 
 import { useFitText } from '../../../hooks/useFitText'
 
@@ -18,7 +19,7 @@ const FluidText: FC<Props> = memo(
 
     return React.createElement(Tag, {
       children,
-      className: styles.fluidText + (className ? ` ${className}` : ''),
+      className: classnames(styles.fluidText, className),
       style,
       ref,
     })

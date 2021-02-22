@@ -1,4 +1,5 @@
 import React, { memo, useLayoutEffect, useRef, useState } from 'react'
+import classnames from 'classnames'
 
 import styles from './Popover.module.scss'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
@@ -94,12 +95,9 @@ const Popover = memo(
 
     return (
       <aside
-        className={
-          styles.wrapper +
-          ' ' +
-          styles[className] +
-          (isHidden ? ` ${styles.hide}` : '')
-        }
+        className={classnames(styles.wrapper, styles[className], {
+          [styles.hide]: isHidden,
+        })}
         ref={wrapperRef}
         style={_style}>
         <header className={styles.header}>
