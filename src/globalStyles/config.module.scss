@@ -49,6 +49,12 @@
   }
 }
 
+@mixin on-non-hoverable-devices {
+  @media (hover: none) and (pointer: coarse) {
+    @content;
+  }
+}
+
 @mixin mouse-effects {
   &:hover,
   &:focus {
