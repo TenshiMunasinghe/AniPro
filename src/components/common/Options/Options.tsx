@@ -29,16 +29,17 @@ const Options = ({
 
   return (
     <div
-      className={classnames(styles.wrapper, { [styles.hide]: isVisible })}
+      className={classnames(styles.wrapper, { [styles.hide]: !isVisible })}
       tabIndex={0}>
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
           <button onClick={() => handleChange(o.value)} tabIndex={-1}>
             <span>{o.label}</span>
             <div
-              className={classnames(styles.iconWrapper, {
-                [styles.hide]: isSelected(o.value),
-              })}>
+              className={
+                styles.iconWrapper +
+                (isSelected(o.value) ? '' : ' ' + styles.hide)
+              }>
               <AiOutlineCheck aria-label='check' />
             </div>
           </button>
