@@ -42,6 +42,7 @@ const Content = ({ queryVar, content }: Props) => {
         loadingCount={queryVar.perPage}
         hasRank={content.hasRank}
         allowLoadMore={false}
+        sideScroll={content.cardType === 'cover'}
       />
     </section>
   )

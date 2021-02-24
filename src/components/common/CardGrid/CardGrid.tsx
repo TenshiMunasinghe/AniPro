@@ -4,6 +4,7 @@ import {
   trackWindowScroll,
   LazyComponentProps,
 } from 'react-lazy-load-image-component'
+import classnames from 'classnames'
 
 import styles from './CardGrid.module.scss'
 import { QueryVar, SearchResult } from '../../../api/types'
@@ -25,6 +26,7 @@ interface Props extends LazyComponentProps {
   loadingCount: number
   hasRank?: boolean
   allowLoadMore: boolean
+  sideScroll?: boolean
 }
 
 const CardGrid = ({
@@ -33,6 +35,7 @@ const CardGrid = ({
   loadingCount,
   hasRank = false,
   allowLoadMore,
+  sideScroll = false,
   scrollPosition,
 }: Props) => {
   const {
@@ -60,17 +63,20 @@ const CardGrid = ({
       .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
   }, [hasRank, medias])
 
-  const fetchMore = () => {
-    allowLoadMore && fetchData({ queryVariables, paginate: true })
-  }
-
   if (error || _medias?.length === 0) {
     return <NotFound />
   }
 
+  const fetchMore = () => {
+    allowLoadMore && fetchData({ queryVariables, paginate: true })
+  }
+
   return (
-    <div className={styles.wrapper}>
-      <section className={styles.slider + ' ' + styles[cardType]}>
+    <div
+      className={classnames(styles.wrapper, {
+        [styles.sideScroll]: sideScroll,
+      })}>
+      <section className={classnames(styles.slider, styles[cardType])}>
         {_medias &&
           _medias.map(m => {
             switch (cardType) {
