@@ -10,7 +10,7 @@
 
   .imageWrapper {
     max-width: 11rem;
-    flex: 1 0 45%;
+    flex: 0 0 45%;
     background: var(--color-original);
     @include image-with-aspect-ratio;
     @include zoom-image;
