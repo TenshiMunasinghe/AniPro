@@ -1,11 +1,7 @@
-@value xl: 1800px;
-@value xlCardCount: 10;
-@value lg: 1200px;
-@value lgCardCount: 8;
-@value md: 900px;
-@value mdCardCount: 6;
-@value sm: 600px;
-@value smCardCount: 4;
+$xl: 1800px;
+$lg: 1200px;
+$md: 900px;
+$sm: 600px;
 
 @mixin for-phone-only {
   @media (max-width: calc(sm - 1px)) {
