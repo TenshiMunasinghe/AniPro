@@ -22,24 +22,26 @@ type Medias = {
   topRated: SearchResult[]
 }
 
+const perPage = 10
+
 const queryVars: { [key in keyof Medias]: QueryVar } = {
-  trending: { sortBy: 'TRENDING_DESC', perPage: 5 },
+  trending: { sortBy: 'TRENDING_DESC', perPage },
 
   popularNow: {
     sortBy: 'POPULARITY_DESC',
     year: currentYear.toString(),
     season: currentSeason,
-    perPage: 5,
+    perPage,
   },
 
   upComing: {
     year: nextYear.toString(),
     season: nextSeason,
-    perPage: 5,
+    perPage,
     sortBy: 'TRENDING_DESC',
   },
 
-  popularAllTime: { sortBy: 'POPULARITY_DESC', perPage: 5 },
+  popularAllTime: { sortBy: 'POPULARITY_DESC', perPage },
 
   topRated: { sortBy: 'SCORE_DESC', perPage: 10 },
 }
