@@ -26,6 +26,7 @@ export interface QueryData {
         english: string
         romaji: string
       }
+      bannerImage: string
       coverImage: {
         large: string
         color: string

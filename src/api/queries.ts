@@ -75,6 +75,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
           romaji
           english
         }
+        bannerImage
         coverImage {
           large
           large
