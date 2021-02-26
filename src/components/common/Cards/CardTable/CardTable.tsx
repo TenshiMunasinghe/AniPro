@@ -15,7 +15,10 @@ import FaceIcon from '../../FaceIcon/FaceIcon'
 
 interface Props {
   id: number
-  image: SearchResult['coverImage']
+  image: {
+    cover: SearchResult['coverImage']
+    banner: SearchResult['bannerImage']
+  }
   title: SearchResult['title']
   format: SearchResult['format']
   season: SearchResult['season']
@@ -53,11 +56,12 @@ const CardTable = memo(
     scrollPosition,
   }: Props) => {
     const url = `/anime/${id}`
+    const { color } = image.cover
 
     const _style = {
-      '--color-text': adjustColor(image.color, 'var(--lightness)'),
-      '--color-original': image.color,
-      '--image-url': `url(${image.large})`,
+      '--color-text': adjustColor(color, 'var(--lightness)'),
+      '--color-original': color,
+      '--banner-image': `url(${image.banner})`,
     } as React.CSSProperties
 
     return (
@@ -73,7 +77,7 @@ const CardTable = memo(
         <div className={styles.card}>
           <Link to={url} className={styles.imageWrapper}>
             <LazyLoadImage
-              src={image.large}
+              src={image.cover.large}
               alt={title.romaji}
               scrollPosition={scrollPosition}
               effect='opacity'
@@ -86,7 +90,7 @@ const CardTable = memo(
               <Genres
                 as='section'
                 genres={genres}
-                color={image.color}
+                color={color}
                 canInteract={false}
                 className={styles.genres}
               />

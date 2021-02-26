@@ -31,7 +31,7 @@
   font-size: var(--text-size-300);
   border-radius: 0.1em;
   background-color: var(--color-foreground-100);
-  background-image: var(--image-url);
+  background-image: var(--banner-image);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50% 50%;
@@ -57,7 +57,7 @@
     }
     &:hover,
     &:focus-within {
-      background-image: var(--image-url);
+      background-image: var(--banner-image);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: 50% 50%;
