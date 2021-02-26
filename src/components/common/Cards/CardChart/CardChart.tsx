@@ -83,7 +83,7 @@ const CardChart = memo(
             as='footer'
             genres={genres}
             color={image.color}
-            canInteract={false}
+            canInteract={true}
             className={styles.genres}
           />
         </section>
