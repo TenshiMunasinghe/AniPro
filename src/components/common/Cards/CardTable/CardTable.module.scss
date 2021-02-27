@@ -28,7 +28,7 @@
   position: relative;
   column-gap: var(--space-300);
   padding: var(--space-400);
-  font-size: var(--text-size-300);
+  font-size: var(--text-size-400);
   border-radius: 0.1em;
   background-color: var(--color-foreground-100);
   background-image: var(--banner-image);
@@ -50,7 +50,8 @@
 
   @include for-tablet-landscape-up {
     display: grid;
-    grid-template-columns: 3.5rem 1fr;
+    grid-template-columns: 4rem 1fr;
+    column-gap: var(--space-300);
     background-image: none;
     &::before {
       display: none;
@@ -82,7 +83,6 @@
 
   @include for-tablet-landscape-up {
     display: block;
-    align-self: center;
     border-radius: 0.1rem;
     background: var(--color-original);
     z-index: 999;
@@ -108,34 +108,29 @@
   position: relative;
   z-index: 1000;
   display: grid;
-  grid-template-columns: 1fr 8rem 8rem 10rem;
-  align-items: center;
-  justify-content: stretch;
+  place-items: center;
   max-width: 100%;
   padding-right: var(--space-600);
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  column-gap: var(--space-400);
+  row-gap: var(--space-200);
 
-  @include for-phone-only {
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: 1fr 1fr;
-    column-gap: var(--space-400);
-    row-gap: var(--space-200);
-    font-size: var(--text-size-400);
-    padding: 0.5em;
+  @include for-tablet-landscape-up {
+    grid-template-columns: 1fr 8rem 8rem 10rem;
+    grid-template-rows: 1fr;
   }
 
   .title {
-    font-size: var(--text-size-400);
+    font-size: var(--text-size-600);
     max-width: 100%;
+    grid-column: 1/-1;
     overflow: hidden;
     margin-right: auto;
-    grid-column: span 8;
 
     a {
-      display: block;
-      margin-bottom: var(--space-400);
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
+      @include add-ellipsis(1);
+      margin-bottom: var(--space-300);
       text-decoration-color: var(--color-underline-100);
       text-underline-offset: var(--space-100);
       transition: all 0.15s ease-in-out;
@@ -149,6 +144,7 @@
     }
 
     @include for-tablet-landscape-up {
+      font-size: var(--text-size-500);
       height: min-content;
       margin: 0;
       width: 100%;
@@ -158,54 +154,38 @@
   }
 
   .genres {
-    font-size: var(--text-size-200);
+    font-size: var(--text-size-300);
   }
 
   .row {
+    font-size: var(--text-size-500);
     display: flex;
     flex-direction: column;
     line-height: 1.75;
 
     @include for-tablet-landscape-up {
       margin: 0;
+      font-size: var(--text-size-400);
     }
   }
+}
+.subRow {
+  display: inline-block;
+  font-size: var(--text-size-300);
+  font-weight: 350;
+  color: var(--color-text-200);
+}
 
-  .subRow {
-    display: inline-block;
-    font-size: var(--text-size-300);
-    font-weight: 375;
-    color: var(--color-text-200);
+.review {
+  .percentage {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-200);
+    justify-items: flex-start;
   }
 
-  .review {
-    display: flex;
-
-    .score {
-      .percentage {
-        margin-left: 0.25em;
-      }
-    }
-
-    svg {
-      vertical-align: top;
-      height: 1.75em;
-    }
-
-    @include for-phone-only {
-      grid-column: span 4;
-    }
-  }
-
-  .format {
-    @include for-phone-only {
-      grid-column: span 4;
-    }
-  }
-
-  .airingInfo {
-    @include for-phone-only {
-      grid-column: span 8;
-    }
+  svg {
+    vertical-align: top;
+    height: 1.75em;
   }
 }
