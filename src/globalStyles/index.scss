@@ -44,15 +44,21 @@
   --cyan-2: #c5f5f3;
   --cyan-1: #d9fffe;
 
-  --scale-900: 2.488;
-  --scale-800: 2.074;
-  --scale-700: 1.728;
-  --scale-600: 1.44;
-  --scale-500: 1.2;
+  --scale: 1.2;
+
+  @include for-tablet-landscape-up {
+    --scale: 1.3;
+  }
+
   --scale-400: 1;
-  --scale-300: 0.833;
-  --scale-200: 0.694;
-  --scale-100: 0.579;
+  --scale-500: var(--scale) * var(--scale-400);
+  --scale-600: var(--scale) * var(--scale-500);
+  --scale-700: var(--scale) * var(--scale-600);
+  --scale-800: var(--scale) * var(--scale-700);
+  --scale-900: var(--scale) * var(--scale-800);
+  --scale-300: var(--scale-400) / var(--scale);
+  --scale-200: var(--scale-300) / var(--scale);
+  --scale-100: var(--scale-200) / var(--scale);
 
   --text-unit: 1rem;
   --text-size-100: calc(var(--scale-100) * var(--text-unit));
@@ -65,7 +71,6 @@
   --text-size-800: calc(var(--scale-800) * var(--text-unit));
   --text-size-900: calc(var(--scale-900) * var(--text-unit));
 
-  --space-unit: 1em;
   --space-unit: 1em;
   --space-100: calc(0.25 * var(--space-unit));
   --space-200: calc(0.5 * var(--space-unit));
@@ -170,7 +175,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background: var(--color-background);
-  line-height: 1.6;
+  line-height: 1.75;
 }
 
 #root {
