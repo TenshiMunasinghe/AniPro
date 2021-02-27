@@ -1,26 +1,26 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState, useEffect } from 'react'
 import { useResizeDetector } from 'react-resize-detector'
 import { isChildOverflow } from '../utils/isChildOverflow'
 
 export const useFitContent = <T>(initilState: T[]) => {
   const [state, setState] = useState(initilState)
   const onResize = useCallback(() => {
-    setState(initilState)
+    setState([...initilState])
   }, [initilState])
-  const { width, ref } = useResizeDetector({
-    onResize,
+  const { ref } = useResizeDetector({
+    onResize: onResize,
     refreshMode: 'debounce',
     refreshRate: 250,
+    skipOnMount: true,
   })
 
   useEffect(() => {
-    if (!ref.current || !width) return
-    const _state = state
+    if (!ref.current) return
 
     if (isChildOverflow(ref.current as HTMLElement).overflow.either) {
-      setState(_state.slice(0, -1))
+      setState(state.slice(0, -1))
     }
-  }, [state, ref, width])
+  }, [state, ref])
 
   return { ref, state, setState }
 }
