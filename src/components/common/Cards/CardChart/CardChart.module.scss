@@ -10,7 +10,7 @@
 
   .imageWrapper {
     max-width: 11rem;
-    flex: 0 0 45%;
+    flex: 0 0 42.5%;
     background: var(--color-original);
     @include image-with-aspect-ratio;
     @include zoom-image;
@@ -41,15 +41,16 @@
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
-  padding-left: var(--space-400);
 }
 
 .scrollWrapper {
   position: absolute;
+  width: 100%;
+  padding: var(--space-400);
 }
 
 .cardHeader {
-  margin: var(--space-400);
+  margin-bottom: var(--space-400);
   margin-left: 0;
 
   .score {
@@ -96,9 +97,9 @@
     }
 
     .secondaryTitle {
-      font-weight: normal;
-      font-size: var(--text-size-100);
-      margin-top: var(--space-300);
+      font-weight: 300;
+      font-size: var(--text-size-200);
+      margin-top: var(--space-200);
       color: var(--color-text-200);
       @include add-ellipsis(1);
     }
@@ -113,34 +114,32 @@
 
 .description {
   min-height: 0;
-  margin-bottom: var(--space-400);
   padding-right: var(--space-500);
-  font-size: var(--text-size-200);
+  font-size: var(--text-size-300);
   color: var(--color-text-300);
-  @include add-ellipsis(3);
+  @include add-ellipsis(2);
 
-  @include for-phone-only {
-    &:focus {
-      display: block;
-      color: var(--color-text-200);
+  @mixin show-description {
+    display: block;
+    color: var(--color-text-200);
+  }
 
-      * {
-        color: inherit;
-      }
+  &:focus {
+    @include show-description;
+  }
+
+  @include on-hoverable-devices {
+    &:hover {
+      @include show-description;
     }
   }
 
   @include for-tablet-portrait-up {
+    @include add-ellipsis(3);
+  }
+
+  @include for-tablet-landscape-up {
     @include add-ellipsis(4);
-
-    &:hover {
-      display: block;
-      color: var(--color-text-200);
-
-      * {
-        color: inherit;
-      }
-    }
   }
 
   * {
