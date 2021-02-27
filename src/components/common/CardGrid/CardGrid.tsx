@@ -107,7 +107,7 @@ const CardGrid = ({
                   <CardTable
                     key={m.id}
                     id={m.id}
-                    image={m.coverImage}
+                    image={{ cover: m.coverImage, banner: m.bannerImage }}
                     title={m.title}
                     genres={m.genres}
                     status={m.status}
