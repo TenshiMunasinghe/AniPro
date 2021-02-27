@@ -1,39 +1,15 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 import loadable from '@loadable/component'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import debounce from 'lodash/debounce'
 
-import {
-  useWindowSizeStore,
-  WindowSizeStore,
-  useThemeStore,
-  Theme,
-} from './zustand/stores'
+import { useThemeStore, Theme } from './zustand/stores'
 import NavBar from './components/common/NavBar/NavBar'
 
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Anime = loadable(() => import('./pages/anime/Anime'))
 
-const windowSizeSelector = (state: WindowSizeStore) => state.set
-
 const App = () => {
-  const setSize = useWindowSizeStore(windowSizeSelector)
-  const updateSize = useMemo(
-    () =>
-      debounce(() => {
-        setSize({ width: window.innerWidth, height: window.innerHeight })
-      }, 250),
-    [setSize]
-  )
-
-  useLayoutEffect(() => {
-    window.addEventListener('resize', updateSize)
-    updateSize()
-
-    return () => window.removeEventListener('resize', updateSize)
-  }, [updateSize])
-
   useEffect(() => {
     useThemeStore.subscribe(
       (state: Theme) => (document.body.className = state),

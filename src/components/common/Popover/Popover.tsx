@@ -1,8 +1,8 @@
 import React, { memo, useLayoutEffect, useRef, useState } from 'react'
 import classnames from 'classnames'
+import { useResizeDetector } from 'react-resize-detector'
 
 import styles from './Popover.module.scss'
-import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import { SearchResult } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
 import { timeToArr } from '../../../utils/timeToArr'
@@ -32,8 +32,6 @@ type DisplayState = {
   isRight: boolean
 }
 
-const windowStateSelector = (state: WindowSizeStore) => state.width
-
 const Popover = memo(
   ({
     nextAiringEpisode,
@@ -53,9 +51,13 @@ const Popover = memo(
       isRight: false,
     })
     const wrapperRef = useRef<HTMLDivElement | null>(null)
-    const windowWidth = useWindowSizeStore(windowStateSelector)
+    const { width } = useResizeDetector({
+      refreshMode: 'debounce',
+      refreshRate: 250,
+    })
 
     useLayoutEffect(() => {
+      if (!width) return
       setDisplay(prev => {
         if (!wrapperRef.current || !wrapperRef.current.parentElement)
           return prev
@@ -65,8 +67,8 @@ const Popover = memo(
         const { offsetLeft } = wrapperRef.current
 
         const isRight =
-          (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||
-          (offsetLeft < 0 && parentRect.right - offsetLeft < windowWidth * 0.9)
+          (offsetLeft > 0 && rect.right < width * 0.9) ||
+          (offsetLeft < 0 && parentRect.right - offsetLeft < width * 0.9)
         const isLeft =
           !isRight &&
           ((offsetLeft > 0 &&
@@ -75,7 +77,7 @@ const Popover = memo(
 
         return { isLeft, isRight }
       })
-    }, [windowWidth])
+    }, [width])
 
     const _style = {
       '--color-light': adjustColor(color, 'var(--lightness)'),
