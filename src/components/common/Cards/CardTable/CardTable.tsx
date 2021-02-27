@@ -97,9 +97,9 @@ const CardTable = memo(
             </div>
 
             <div className={styles.review}>
-              <FaceIcon meanScore={meanScore} />
               <div className={styles.score + ' ' + styles.row}>
                 <div className={styles.percentage + ' ' + styles.row}>
+                  <FaceIcon meanScore={meanScore} />
                   {meanScore ? meanScore + '%' : ''}
                 </div>
                 <div className={styles.subRow}>
