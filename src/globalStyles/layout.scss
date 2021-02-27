@@ -2,7 +2,7 @@
 
 @mixin grid-template {
   display: grid;
-  grid-gap: var(--space-400);
+  grid-gap: var(--space-500);
   margin: 0 auto;
   margin-top: var(--space-400);
   place-content: center;
@@ -12,17 +12,12 @@
 }
 
 @mixin grid-cover {
-  grid-gap: var(--space-500);
-  grid-template-columns: repeat(auto-fill, minmax(calc(5rem + 8%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(5rem + 8%), 1fr));
 }
 
 @mixin grid-chart {
-  display: flex;
-  flex-wrap: wrap;
-  & > * {
-    flex: 1 0 22.5rem;
-    max-width: 100%;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(MIN(25rem, 100%), 1fr));
 }
 
 @mixin grid-table {
