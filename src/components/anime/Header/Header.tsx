@@ -8,7 +8,7 @@ import FluidText from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']['large']
+  coverImg: Common['coverImage']
   title: Common['title']['romaji']
   description: Common['description']
 }
@@ -16,12 +16,13 @@ interface Props {
 const Header = ({ bannerImg, coverImg, title, description }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
+    '--bg-color': coverImg.color,
   } as CSSProperties
   return (
     <header className={styles.wrapper} style={style}>
       <div className={styles.details}>
         <figure className={styles.cover}>
-          <LazyLoadImage src={coverImg} alt={title} />
+          <LazyLoadImage src={coverImg.large} alt={title} />
         </figure>
         <FluidText
           as='h1'
