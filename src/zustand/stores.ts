@@ -2,7 +2,9 @@ import create from 'zustand'
 import { combine } from 'zustand/middleware'
 
 export const useWindowSizeStore = create(
-  combine({ width: 0, height: 0 }, set => ({ set }))
+  combine({ width: window.innerWidth, height: window.innerHeight }, set => ({
+    set,
+  }))
 )
 
 export type WindowSizeStore = ReturnType<typeof useWindowSizeStore.getState>
