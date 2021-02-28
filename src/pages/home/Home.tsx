@@ -1,7 +1,7 @@
 import React from 'react'
-import { useResizeDetector } from 'react-resize-detector'
 
 import styles from './Home.module.scss'
+import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import {
   currentYear,
   currentSeason,
@@ -46,11 +46,10 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
   topRated: { sortBy: 'SCORE_DESC', perPage: 10 },
 }
 
+const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
+
 const Home = () => {
-  const { width = 0 } = useResizeDetector({
-    refreshMode: 'debounce',
-    refreshRate: 250,
-  })
+  const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
   const contents: {
     [key in keyof Medias]: {
@@ -81,7 +80,7 @@ const Home = () => {
 
     topRated: {
       text: 'Top Animes',
-      cardType: width > 1200 ? 'table' : 'cover',
+      cardType: windowWidth > 1200 ? 'table' : 'cover',
       hasRank: true,
     },
   }
