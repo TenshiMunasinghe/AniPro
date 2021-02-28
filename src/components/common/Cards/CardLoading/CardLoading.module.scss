@@ -115,27 +115,29 @@
   border-radius: 0.2em;
   background: var(--color-foreground-100);
 
-  .imageWrapper {
-    display: none;
+  @include for-tablet-portrait-up {
+    display: grid;
+    grid-template-columns: calc(3rem + 7%) 1fr;
+    column-gap: var(--space-300);
   }
 
   .content {
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
   }
 
   .header {
-    margin-right: auto;
-    width: 65%;
+    width: 100%;
+    flex: 1 0 auto;
   }
 
   .title {
-    font-size: var(--text-size-500);
-    margin-bottom: var(--space-400);
-    a {
-      display: block;
-      margin-bottom: var(--space-200);
-      overflow: hidden;
-    }
+    width: 60%;
+    height: min-content;
+    margin: 0;
+    margin-bottom: var(--space-300);
   }
 
   .genres {
@@ -152,72 +154,41 @@
     }
   }
 
+  .imageWrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    padding-top: calc(100% / var(--image-aspect-ratio));
+    border-radius: 0.15rem;
+    overflow: hidden;
+
+    @include for-phone-only {
+      display: none;
+    }
+  }
+
+  .image {
+    position: absolute;
+    display: block;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+
   .row {
-    display: inline-block;
-    margin: var(--space-400) 0;
-    margin-right: var(--space-400);
-    width: 25%;
-    font-size: var(--text-size-400);
+    flex-basis: 7rem;
+    max-width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
   }
 
   .subRow {
-    display: inline-block;
-  }
-
-  @include for-tablet-landscape-up {
-    display: grid;
-    grid-template-columns: 4rem 1fr;
-    column-gap: var(--space-300);
-
-    .content {
-      display: grid;
-      grid-template-columns: 1fr 8rem 8rem 10rem;
-      align-items: center;
-      justify-content: stretch;
-      padding-right: var(--space-600);
-    }
-
-    .header {
-      width: 70%;
-    }
-
-    .title {
-      height: min-content;
-      margin: 0;
-      margin-bottom: var(--space-300);
-    }
-
-    .imageWrapper {
-      position: relative;
-      display: block;
-      width: 100%;
-      padding: 0;
-      padding-top: calc(100% / var(--image-aspect-ratio));
-      border-radius: 0.15rem;
-      overflow: hidden;
-    }
-
-    .image {
-      position: absolute;
-      display: block;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-    }
-
-    .row {
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      width: 70%;
-    }
-
-    .subRow {
-      width: 100%;
-      color: var(--color-text-100);
-      font-size: var(--text-size-300);
-      margin-top: var(--space-200);
-    }
+    width: 100%;
+    color: var(--color-text-100);
+    font-size: var(--text-size-300);
+    margin-top: var(--space-200);
   }
 }
