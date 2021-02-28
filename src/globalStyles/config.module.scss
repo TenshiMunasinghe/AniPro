@@ -95,6 +95,26 @@
   }
 }
 
+@mixin image-fade-in {
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  & img {
+    animation: fade-in 0.2s forwards;
+  }
+}
+
+@mixin card-image {
+  @include image-with-aspect-ratio;
+  @include zoom-image;
+  @include image-fade-in;
+}
+
 @mixin rank($top: auto, $right: auto, $bottom: auto, $left: auto, $size: 1) {
   position: absolute;
   top: $top;
