@@ -59,21 +59,14 @@ const CardTable = memo(
     const { color } = image.cover
 
     const _style = {
-      '--color-text': adjustColor(color, 'var(--lightness)'),
+      '--color-adjusted': adjustColor(color, 'var(--lightness)'),
       '--color-original': color,
       '--banner-image': `url(${image.banner})`,
     } as React.CSSProperties
 
     return (
       <article className={styles.wrapper} style={_style}>
-        {rank && (
-          <div className={styles.rank}>
-            <div>
-              <span className={styles.hash}>#</span>
-              <span className={styles.number}>{rank}</span>
-            </div>
-          </div>
-        )}
+        {rank && <div className={styles.rank}>#{rank}</div>}
         <div className={styles.card}>
           <Link to={url} className={styles.imageWrapper}>
             <LazyLoadImage
@@ -85,7 +78,7 @@ const CardTable = memo(
           </Link>
 
           <div className={styles.content}>
-            <div className={styles.title}>
+            <div className={styles.header}>
               <Link to={url}>{title.romaji}</Link>
               <Genres
                 as='section'
