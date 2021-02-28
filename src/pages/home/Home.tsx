@@ -80,7 +80,7 @@ const Home = () => {
 
     topRated: {
       text: 'Top Animes',
-      cardType: windowWidth > 1200 ? 'table' : 'cover',
+      cardType: windowWidth >= 600 ? 'table' : 'cover',
       hasRank: true,
     },
   }
