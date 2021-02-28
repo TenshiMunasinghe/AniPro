@@ -72,6 +72,7 @@ export interface Common {
   }
   coverImage: {
     large: string
+    color: string
   }
   bannerImage: string
   description: string
