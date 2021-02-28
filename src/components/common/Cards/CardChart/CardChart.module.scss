@@ -12,20 +12,7 @@
     max-width: 11rem;
     flex: 0 0 42.5%;
     background: var(--color-original);
-    @include image-with-aspect-ratio;
-    @include zoom-image;
-  }
-
-  img {
-    transition: all 0.3s ease-in-out;
-
-    &.loaded {
-      opacity: 1;
-    }
-
-    &.loading {
-      opacity: 0;
-    }
+    @include card-image;
   }
 }
 

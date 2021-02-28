@@ -37,20 +37,9 @@
 
   .imageWrapper {
     @include image-with-aspect-ratio;
+    @include image-fade-in;
     border-radius: 0.15em;
     background: var(--color-original);
-
-    &.loaded {
-      .image {
-        opacity: 1;
-      }
-    }
-
-    &.loading {
-      .image {
-        opacity: 0;
-      }
-    }
   }
 
   .image {

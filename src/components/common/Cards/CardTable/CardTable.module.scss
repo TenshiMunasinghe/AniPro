@@ -65,21 +65,8 @@
   border-radius: 0.1rem;
   background: var(--color-original);
   z-index: 999;
-  @include image-with-aspect-ratio;
-  @include zoom-image;
+  @include card-image;
   align-self: center;
-
-  img {
-    transition: all 0.3s ease-in-out;
-
-    &.loaded {
-      opacity: 1;
-    }
-
-    &.loading {
-      opacity: 0;
-    }
-  }
 
   @include for-phone-only {
     display: none;
