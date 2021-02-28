@@ -22,7 +22,7 @@ type Medias = {
   topRated: SearchResult[]
 }
 
-const perPage = 10
+const perPage = 8
 
 const queryVars: { [key in keyof Medias]: QueryVar } = {
   trending: { sortBy: 'TRENDING_DESC', perPage },
