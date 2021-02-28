@@ -21,7 +21,7 @@ const Anime = () => {
     <section className={styles.wrapper}>
       <Header
         bannerImg={data.bannerImage}
-        coverImg={data.coverImage.large}
+        coverImg={data.coverImage}
         title={data.title.romaji}
         description={data.description}
       />
