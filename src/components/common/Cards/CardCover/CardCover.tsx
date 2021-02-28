@@ -49,7 +49,7 @@ const CardCover = memo(
     const url = `/anime/${id}`
 
     const _style = {
-      '--color-light': adjustColor(image.color, 'var(--lightness)'),
+      '--color-adjusted': adjustColor(image.color, 'var(--lightness)'),
       '--color-original': image.color
         ? image.color
         : 'var(--color-foreground-100)',
