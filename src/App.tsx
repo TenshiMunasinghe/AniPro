@@ -29,7 +29,6 @@ const App = () => {
 
   useLayoutEffect(() => {
     window.addEventListener('resize', updateSize)
-    updateSize()
 
     return () => window.removeEventListener('resize', updateSize)
   }, [updateSize])
