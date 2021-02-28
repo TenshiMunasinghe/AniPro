@@ -78,13 +78,12 @@
   }
 }
 
-@mixin circle($size: 1) {
-  $size-em: $size * 1em;
-  width: $size-em;
-  height: $size-em;
-  line-height: $size-em;
+@mixin circle($size: 1rem) {
+  width: $size;
+  height: $size;
+  line-height: $size;
   text-align: center;
-  border-radius: ($size / 2) * 1em;
+  border-radius: calc(#{$size} / 2);
 }
 
 @mixin zoom-image {
@@ -94,4 +93,14 @@
       transform: scale(1.05) rotateZ(-1deg);
     }
   }
+}
+
+@mixin rank($top: auto, $right: auto, $bottom: auto, $left: auto, $size: 1) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+  z-index: 999;
+  @include circle($size);
 }
