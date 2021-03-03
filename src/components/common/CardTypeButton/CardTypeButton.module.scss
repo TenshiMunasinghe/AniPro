@@ -8,13 +8,13 @@
   &:focus {
     transform: scale(1.05);
     * {
-      color: var(--color-text-accent-200);
+      color: var(--color-foreground-accent-100);
     }
   }
 
   &.active {
     * {
-      color: var(--color-text-accent-100);
+      color: var(--color-foreground-accent-200);
     }
   }
 }
