@@ -25,7 +25,7 @@
     padding: 1.75em;
     border-radius: 0.4em;
     top: 0;
-    z-index: 1000;
+    z-index: 1001;
     opacity: 1;
     height: auto;
     @include transition;
@@ -40,7 +40,7 @@
 
       &:after {
         @include transition;
-        z-index: 1000;
+        z-index: 1001;
         content: '';
         display: block;
         position: absolute;
@@ -59,7 +59,7 @@
     &.right {
       &:after {
         @include transition;
-        z-index: 1000;
+        z-index: 1001;
         content: '';
         display: block;
         position: absolute;

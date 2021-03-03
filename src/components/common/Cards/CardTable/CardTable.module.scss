@@ -64,7 +64,7 @@
   display: block;
   border-radius: 0.1rem;
   background: var(--color-original);
-  z-index: 999;
+  z-index: 998;
   @include card-image;
   align-self: center;
 
@@ -76,7 +76,7 @@
 .content {
   overflow: hidden;
   position: relative;
-  z-index: 1000;
+  z-index: 999;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
