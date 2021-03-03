@@ -13,6 +13,7 @@
   overflow-x: hidden;
   background: var(--color-foreground-200);
   border-radius: 0.2rem;
+  box-shadow: 0 0.075em 0.1em 0 var(--color-shadow);
 
   &.hide {
     opacity: 0;
