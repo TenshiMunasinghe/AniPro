@@ -113,6 +113,9 @@
   @include image-with-aspect-ratio;
   @include zoom-image;
   @include image-fade-in;
+  img {
+    transition: 0.1s all ease-in-out;
+  }
 }
 
 @mixin rank($top: auto, $right: auto, $bottom: auto, $left: auto, $size: 1) {
