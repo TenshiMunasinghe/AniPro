@@ -62,6 +62,7 @@
       height: var(--play-btn-size);
       background: var(--cl-primary-3);
       border-radius: 50%;
+      box-shadow: 0 0.05em 0.05em 0.05em var(--color-shadow);
 
       .text {
         display: none;
