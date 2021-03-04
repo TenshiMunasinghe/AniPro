@@ -104,6 +104,9 @@ export interface Common {
   hashtag: string
   genres: string[]
   synonyms: string[]
+  streamingEpisodes: {
+    url: string
+  }[]
 }
 
 export interface Watch {

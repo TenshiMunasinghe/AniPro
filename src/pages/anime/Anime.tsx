@@ -24,6 +24,9 @@ const Anime = () => {
         coverImg={data.coverImage}
         title={data.title.romaji}
         description={data.description}
+        streamUrl={
+          data.streamingEpisodes[data.streamingEpisodes.length - 1].url
+        }
       />
     </section>
   )

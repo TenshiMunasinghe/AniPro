@@ -10,9 +10,16 @@ interface Props {
   coverImg: Common['coverImage']
   title: Common['title']['romaji']
   description: Common['description']
+  streamUrl: Common['streamingEpisodes'][number]['url']
 }
 
-const Header = ({ bannerImg, coverImg, title, description }: Props) => {
+const Header = ({
+  bannerImg,
+  coverImg,
+  title,
+  description,
+  streamUrl,
+}: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
     '--bg-color': coverImg.color,
@@ -24,10 +31,10 @@ const Header = ({ bannerImg, coverImg, title, description }: Props) => {
         <figure className={styles.cover}>
           <img src={coverImg.large} alt={title + ' cover'} />
         </figure>
-        <button className={styles.watch}>
+        <a href={streamUrl} target='blank' className={styles.watch}>
           <span className={styles.text}>Watch </span>
           <FaPlay />
-        </button>
+        </a>
       </div>
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{htmr(description)}</p>

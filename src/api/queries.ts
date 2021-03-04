@@ -155,6 +155,9 @@ export const GET_ANIME_PAGE = {
         hashtag
         genres
         synonyms
+        streamingEpisodes {
+          url
+        }
       }
     }
   `,
