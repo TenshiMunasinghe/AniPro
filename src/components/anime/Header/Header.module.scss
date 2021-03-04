@@ -1,17 +1,26 @@
 @import '../../../globalStyles/config.module.scss';
 
 .wrapper {
-  .details {
-    --image-width: calc(4rem + 6vw);
-    position: relative;
-    display: grid;
-    grid-template-columns: var(--image-width) 1fr;
-    height: calc(2 * var(--image-width));
-    column-gap: var(--space-600);
-    place-items: center;
-    padding: var(--space-600);
+  --image-width: calc(6rem + 7vw);
+  --play-btn-size: 4rem;
+  --padding: var(--space-400);
 
-    &:before {
+  position: relative;
+  padding: 0 var(--padding);
+
+  .banner {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-1 * var(--padding));
+    height: calc(2 * var(--image-width));
+    background-color: var(--bg-color);
+    background-image: var(--banner-image);
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -999;
+
+    &:after {
       content: '';
       display: block;
       position: absolute;
@@ -19,14 +28,25 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: var(--bg-color);
-      background-image: var(--banner-image);
-      background-position: 50% 35%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      z-index: -999;
-      filter: blur(0.15em) saturate(1.5) brightness(0.7);
+      background: linear-gradient(
+        180deg,
+        rgba(19, 19, 19, 0) 40%,
+        rgba(19, 19, 19, 0.55)
+      );
     }
+  }
+
+  .details {
+    margin-top: calc(
+      var(--play-btn-size) / 2 -
+        (var(--image-width) / var(--image-aspect-ratio))
+    );
+    display: grid;
+    grid-template-columns: var(--image-width) 1fr;
+    column-gap: var(--space-500);
+    justify-items: center;
+    align-items: flex-end;
+    padding-left: var(--space-400);
 
     .cover {
       width: 100%;
@@ -34,46 +54,36 @@
       border-radius: 0.2em;
     }
 
-    .title {
-      font-weight: 750;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-      color: var(--w-4);
-      text-align: center;
-      padding: 1em;
-      border-radius: 0.15em;
+    .watch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--play-btn-size);
+      height: var(--play-btn-size);
+      background: var(--cl-primary-3);
+      border-radius: 50%;
 
-      @supports (
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
-      ) {
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg);
+      .text {
+        display: none;
       }
 
-      @supports not (
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
-      ) {
-        position: relative;
-        &:before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          border-radius: 0.15em;
-          background: var(--b-12);
-          opacity: 0.6;
-          z-index: -999;
-        }
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
       }
     }
   }
 
+  .title {
+    font-size: var(--text-size-600);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: var(--space-400) 0;
+  }
+
   .description {
     font-size: var(--text-size-400);
-    padding: 2em;
-    margin: 1em 2em;
+    padding: var(--space-500);
     line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;

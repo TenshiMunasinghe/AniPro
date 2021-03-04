@@ -1,10 +1,9 @@
 import React, { CSSProperties } from 'react'
 import htmr from 'htmr'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { FaPlay } from 'react-icons/fa'
 
 import styles from './Header.module.scss'
 import { Common } from '../../../api/types'
-import FluidText from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
@@ -20,19 +19,17 @@ const Header = ({ bannerImg, coverImg, title, description }: Props) => {
   } as CSSProperties
   return (
     <header className={styles.wrapper} style={style}>
+      <div className={styles.banner} />
       <div className={styles.details}>
         <figure className={styles.cover}>
-          <LazyLoadImage src={coverImg.large} alt={title} />
+          <img src={coverImg.large} alt={title + ' cover'} />
         </figure>
-        <FluidText
-          as='h1'
-          min={0.8}
-          max={2.5}
-          resolution={0.05}
-          className={styles.title}>
-          {title}
-        </FluidText>
+        <button className={styles.watch}>
+          <span className={styles.text}>Watch </span>
+          <FaPlay />
+        </button>
       </div>
+      <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{htmr(description)}</p>
     </header>
   )
