@@ -1,11 +1,10 @@
 import React, { useState, memo } from 'react'
 import { Link } from 'react-router-dom'
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
 
 import styles from './CardCover.module.scss'
-import { Image } from '../../Image/Image'
-import { Popover } from '../../Popover/Popover'
+import Popover from '../../Popover/Popover'
 import { SearchResult } from '../../../../api/types'
-import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { adjustColor } from '../../../../utils/adjustColor'
 
 interface Props {
@@ -23,9 +22,10 @@ interface Props {
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   rank?: number | null
+  scrollPosition: ScrollPosition
 }
 
-export const CardCover = memo(
+const CardCover = memo(
   ({
     image,
     title,
@@ -40,16 +40,16 @@ export const CardCover = memo(
     nextAiringEpisode,
     meanScore,
     rank,
+    scrollPosition,
   }: Props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
     const showPopover = () => setIsPopoverVisible(true)
     const hidePopover = () => setIsPopoverVisible(false)
 
-    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
     const url = `/anime/${id}`
 
     const _style = {
-      '--color-light': adjustColor(image.color, 'var(--lightness)'),
+      '--color-adjusted': adjustColor(image.color, 'var(--lightness)'),
       '--color-original': image.color
         ? image.color
         : 'var(--color-foreground-100)',
@@ -65,15 +65,14 @@ export const CardCover = memo(
         style={_style}>
         <article className={styles.wrapper}>
           {rank && <div className={styles.rank}>#{rank}</div>}
-          <Link
-            to={url}
-            tabIndex={-1}
-            className={
-              styles.imageWrapper +
-              ' ' +
-              styles[isImageLoaded ? 'loaded' : 'loading']
-            }>
-            <Image className={styles.image} src={src} alt={title.romaji} />
+          <Link to={url} tabIndex={-1} className={styles.imageWrapper}>
+            <LazyLoadImage
+              className={styles.image}
+              src={image.large}
+              alt={title.romaji}
+              scrollPosition={scrollPosition}
+              effect='opacity'
+            />
           </Link>
           <Link to={url} className={styles.titleWrapper}>
             <h3 className={styles.title}>{title.romaji}</h3>
@@ -97,3 +96,5 @@ export const CardCover = memo(
     )
   }
 )
+
+export default CardCover

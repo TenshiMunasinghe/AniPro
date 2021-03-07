@@ -1,7 +1,6 @@
 import React, { CSSProperties } from 'react'
 
 import { adjustColor } from '../../../utils/adjustColor'
-
 import styles from './Genre.module.scss'
 
 interface Props {
@@ -10,7 +9,7 @@ interface Props {
   color?: string
 }
 
-export const Genre = ({ genre, onClick, color }: Props) => {
+const Genre = ({ genre, onClick, color }: Props) => {
   const _color = adjustColor(color, 'var(--lightness)')
   const style = {
     '--color-text': _color ? _color : 'var(--color-text-200)',
@@ -28,3 +27,5 @@ export const Genre = ({ genre, onClick, color }: Props) => {
     </button>
   )
 }
+
+export default Genre

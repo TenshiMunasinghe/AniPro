@@ -1,4 +1,4 @@
-@import '../../../../globalStyles/config.scss';
+@import '../../../../globalStyles/config.module.scss';
 
 .popoverWrapper {
   position: relative;
@@ -14,38 +14,32 @@
   &:hover,
   &:focus-within {
     .titleWrapper {
-      color: var(--color-light);
+      color: var(--color-adjusted);
     }
   }
 
   .rank {
-    position: absolute;
-    left: calc(-1 * var(--space-200));
-    top: calc(-1 * var(--space-200));
-    background: var(--color-light);
+    --size: 2.5rem;
+    background: var(--color-adjusted);
     color: var(--color-foreground-300);
-    z-index: 999;
     font-size: var(--text-size-400);
     font-weight: 500;
-    @include circle(2.5);
+    @include for-phone-only {
+      --size: 3.5rem;
+      font-size: var(--text-size-500);
+    }
+    @include rank(
+      $left: calc(-1 * var(--space-200)),
+      $top: calc(-1 * var(--space-200)),
+      $size: var(--size)
+    );
   }
 
   .imageWrapper {
     @include image-with-aspect-ratio;
+    @include image-fade-in;
     border-radius: 0.15em;
     background: var(--color-original);
-
-    &.loaded {
-      .image {
-        opacity: 1;
-      }
-    }
-
-    &.loading {
-      .image {
-        opacity: 0;
-      }
-    }
   }
 
   .image {

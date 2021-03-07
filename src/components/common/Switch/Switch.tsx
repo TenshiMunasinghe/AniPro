@@ -11,7 +11,7 @@ interface Props {
   label: string
 }
 
-export const Switch = memo(({ onChange, On, Off, isOn, label }: Props) => {
+const Switch = memo(({ onChange, On, Off, isOn, label }: Props) => {
   return (
     <label
       htmlFor={styles.checkbox}
@@ -27,3 +27,5 @@ export const Switch = memo(({ onChange, On, Off, isOn, label }: Props) => {
     </label>
   )
 })
+
+export default Switch

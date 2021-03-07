@@ -1,4 +1,4 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 .wrapper {
   max-height: 5rem;
@@ -29,7 +29,7 @@
   cursor: pointer;
 
   &:focus-within {
-    box-shadow: 0px 0px 1.5px var(--color-border-100);
+    box-shadow: 0px 0px 0px var(--color-border-100);
 
     .selected {
       display: none;

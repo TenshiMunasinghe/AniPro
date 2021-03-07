@@ -3,7 +3,7 @@ import { FaSort } from 'react-icons/fa'
 
 import styles from './SimpleSelect.module.scss'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import { Options } from '../Options/Options'
+import Options from '../Options/Options'
 
 interface Props {
   onChange: (state: string | string[]) => void
@@ -14,7 +14,7 @@ interface Props {
   }[]
   selected: string | string[]
 }
-export const SimpleSelect = memo(
+const SimpleSelect = memo(
   ({ onChange, isMulti = false, options, selected }: Props) => {
     const { ref, isFocused } = useFocusedWithin()
 
@@ -58,3 +58,5 @@ export const SimpleSelect = memo(
     )
   }
 )
+
+export default SimpleSelect

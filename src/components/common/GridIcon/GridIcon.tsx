@@ -7,7 +7,7 @@ interface Props {
   cardType: CardType
 }
 
-export const GridIcon = ({ cardType }: Props) => {
+const GridIcon = ({ cardType }: Props) => {
   switch (cardType) {
     case 'chart':
       return <FaThLarge aria-label={cardType} />
@@ -19,3 +19,5 @@ export const GridIcon = ({ cardType }: Props) => {
       return <FaThList aria-label={cardType} />
   }
 }
+
+export default GridIcon

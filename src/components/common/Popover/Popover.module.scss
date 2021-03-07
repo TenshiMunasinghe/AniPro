@@ -1,4 +1,4 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 @mixin transition {
   transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
@@ -6,10 +6,11 @@
 
 .wrapper {
   pointer-events: none;
+  display: none;
   opacity: 0;
-  height: 0;
 
   @include on-hoverable-devices {
+    display: block;
     right: auto;
     left: 100%;
     margin-right: 0;
@@ -17,14 +18,14 @@
     position: absolute;
     background: var(--color-foreground-300);
     font-size: 0.8rem;
-    min-width: 19rem;
-    max-width: 24rem;
+    min-width: 18rem;
+    max-width: 21rem;
     width: auto;
     margin-left: 0.5em;
     padding: 1.75em;
     border-radius: 0.4em;
     top: 0;
-    z-index: 1000;
+    z-index: 1001;
     opacity: 1;
     height: auto;
     @include transition;
@@ -39,7 +40,7 @@
 
       &:after {
         @include transition;
-        z-index: 1000;
+        z-index: 1001;
         content: '';
         display: block;
         position: absolute;
@@ -58,7 +59,7 @@
     &.right {
       &:after {
         @include transition;
-        z-index: 1000;
+        z-index: 1001;
         content: '';
         display: block;
         position: absolute;

@@ -1,0 +1,25 @@
+@import './config.module.scss';
+
+@mixin grid-template {
+  display: grid;
+  grid-gap: var(--space-500);
+  margin: 0 auto;
+  margin-top: var(--space-400);
+  place-content: center;
+  justify-content: space-evenly;
+  max-width: 100%;
+  width: 100%;
+}
+
+@mixin grid-cover {
+  grid-template-columns: repeat(auto-fit, minmax(calc(5rem + 8%), 1fr));
+}
+
+@mixin grid-chart {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(MIN(25rem, 100%), 1fr));
+}
+
+@mixin grid-table {
+  grid-template-columns: 1fr;
+}

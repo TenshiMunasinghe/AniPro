@@ -1,7 +1,7 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 .wrapper {
-  z-index: 9999;
+  z-index: 1000;
   position: absolute;
   opacity: 1;
   transition: all 0.2s ease-in-out;
@@ -11,8 +11,9 @@
   max-width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
-  background: var(--color-foreground-100);
+  background: var(--color-foreground-200);
   border-radius: 0.2rem;
+  box-shadow: 0 0.075em 0.1em 0 var(--color-shadow);
 
   &.hide {
     opacity: 0;
@@ -30,6 +31,7 @@
   cursor: pointer;
   transition: all 0.05s ease-in-out;
   z-index: 1000;
+  background: inherit;
 
   & > div {
     flex: 1;
@@ -49,10 +51,6 @@
         color: var(--color-text-accent-200);
       }
     }
-  }
-
-  &:active {
-    background: var(--color-highlight-200);
   }
 
   &:last-child {

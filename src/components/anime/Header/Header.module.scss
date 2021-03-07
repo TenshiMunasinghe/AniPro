@@ -1,17 +1,27 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 .wrapper {
-  .details {
-    --image-width: calc(4rem + 6vw);
-    position: relative;
-    display: grid;
-    grid-template-columns: var(--image-width) 1fr;
-    height: calc(2 * var(--image-width));
-    column-gap: var(--space-600);
-    place-items: center;
-    padding: var(--space-600);
+  --image-width: calc(6rem + 7vw);
+  --play-btn-size: 2.5rem;
+  --padding: var(--space-400);
 
-    &:before {
+  position: relative;
+  padding: 0 var(--padding);
+
+  .banner {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-1 * var(--padding));
+    height: calc(2 * var(--image-width));
+    background-color: var(--bg-color);
+    background-image: var(--banner-image);
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -999;
+    overflow: hidden;
+
+    &:after {
       content: '';
       display: block;
       position: absolute;
@@ -19,13 +29,23 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-image: var(--banner-image);
-      background-position: 50% 35%;
-      background-repeat: no-repeat;
-      background-size: cover;
-      z-index: -999;
-      filter: blur(0.35em) saturate(1.5) brightness(0.7);
+      background: linear-gradient(
+        180deg,
+        rgba(19, 19, 19, 0) 40%,
+        rgba(19, 19, 19, 0.55)
+      );
     }
+  }
+
+  .details {
+    margin-top: calc(
+      var(--play-btn-size) + var(--space-300) -
+        (var(--image-width) / var(--image-aspect-ratio))
+    );
+    display: grid;
+    grid-template-columns: var(--image-width) 1fr;
+    column-gap: var(--space-400);
+    align-items: flex-end;
 
     .cover {
       width: 100%;
@@ -33,46 +53,47 @@
       border-radius: 0.2em;
     }
 
-    .title {
-      font-weight: 750;
-      letter-spacing: 0.02em;
-      line-height: 1.4;
-      color: var(--w-4);
-      text-align: center;
-      padding: 1em;
-      border-radius: 0.15em;
+    .watch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--cl-primary-3);
+      box-shadow: 0 0.05em 0.025em 0.025em var(--color-shadow);
+      text-decoration: none;
+      width: 100%;
+      height: var(--play-btn-size);
+      border-radius: 0.1em;
+      @include mouse-effects($active: 90%);
 
-      @supports (
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
-      ) {
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg);
+      &:active {
+        transform: scale(0.98);
       }
 
-      @supports not (
-        backdrop-filter: brightness(0.7) grayscale(0.5) hue-rotate(36deg)
-      ) {
-        position: relative;
-        &:before {
-          content: '';
-          display: block;
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          border-radius: 0.15em;
-          background: var(--b-12);
-          opacity: 0.6;
-          z-index: -999;
-        }
+      .text {
+        color: var(--w-5);
+        margin-right: var(--space-200);
+      }
+
+      svg {
+        fill: var(--w-5);
+      }
+
+      @include for-tablet-landscape-up {
+        max-width: var(--image-width);
       }
     }
   }
 
+  .title {
+    font-size: var(--text-size-600);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: var(--space-400) 0;
+  }
+
   .description {
     font-size: var(--text-size-400);
-    padding: 2em;
-    margin: 1em 2em;
+    padding: var(--space-500);
     line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;

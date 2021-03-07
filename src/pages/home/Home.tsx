@@ -10,9 +10,9 @@ import {
 } from '../../api/queries'
 import { SearchResult, QueryVar } from '../../api/types'
 import { CardType } from '../search/Search'
-import { Footer } from '../../components/home/Footer/Footer'
-import { Filters } from '../../components/common/Filters/Filters'
-import { Content } from '../../components/home/Content/Content'
+import Footer from '../../components/home/Footer/Footer'
+import Filters from '../../components/common/Filters/Filters'
+import Content from '../../components/home/Content/Content'
 
 type Medias = {
   trending: SearchResult[]
@@ -22,31 +22,33 @@ type Medias = {
   topRated: SearchResult[]
 }
 
+const perPage = 8
+
 const queryVars: { [key in keyof Medias]: QueryVar } = {
-  trending: { sortBy: 'TRENDING_DESC', perPage: 5 },
+  trending: { sortBy: 'TRENDING_DESC', perPage },
 
   popularNow: {
     sortBy: 'POPULARITY_DESC',
     year: currentYear.toString(),
     season: currentSeason,
-    perPage: 5,
+    perPage,
   },
 
   upComing: {
     year: nextYear.toString(),
     season: nextSeason,
-    perPage: 5,
+    perPage,
     sortBy: 'TRENDING_DESC',
   },
 
-  popularAllTime: { sortBy: 'POPULARITY_DESC', perPage: 5 },
+  popularAllTime: { sortBy: 'POPULARITY_DESC', perPage },
 
   topRated: { sortBy: 'SCORE_DESC', perPage: 10 },
 }
 
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
-export const Home = () => {
+const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
   const contents: {
@@ -78,7 +80,7 @@ export const Home = () => {
 
     topRated: {
       text: 'Top Animes',
-      cardType: windowWidth > 1200 ? 'table' : 'cover',
+      cardType: windowWidth >= 600 ? 'table' : 'cover',
       hasRank: true,
     },
   }
@@ -103,3 +105,5 @@ export const Home = () => {
     </>
   )
 }
+
+export default Home

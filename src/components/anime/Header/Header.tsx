@@ -1,38 +1,49 @@
 import React, { CSSProperties } from 'react'
 import htmr from 'htmr'
+import { FaPlay, FaExternalLinkAlt } from 'react-icons/fa'
 
 import styles from './Header.module.scss'
 import { Common } from '../../../api/types'
-import { Image } from '../../common/Image/Image'
-import { FluidText } from '../../common/FluidText/FluidText'
 
 interface Props {
   bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']['extraLarge']
+  coverImg: Common['coverImage']
   title: Common['title']['romaji']
   description: Common['description']
+  streamUrl?: Common['streamingEpisodes'][number]['url']
+  siteUrl?: Common['externalLinks'][number]['url']
 }
 
-export const Header = ({ bannerImg, coverImg, title, description }: Props) => {
+const Header = ({
+  bannerImg,
+  coverImg,
+  title,
+  description,
+  streamUrl,
+  siteUrl,
+}: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
+    '--bg-color': coverImg.color,
   } as CSSProperties
   return (
     <header className={styles.wrapper} style={style}>
+      <div className={styles.banner} />
       <div className={styles.details}>
         <figure className={styles.cover}>
-          <Image src={coverImg} alt={title} />
+          <img src={coverImg.large} alt={title + ' cover'} />
         </figure>
-        <FluidText
-          as='h1'
-          min={0.8}
-          max={2.5}
-          resolution={0.05}
-          className={styles.title}>
-          {title}
-        </FluidText>
+        <a href={streamUrl || siteUrl} target='blank' className={styles.watch}>
+          <span className={styles.text}>
+            {streamUrl ? 'Watch' : 'Official Site'}
+          </span>
+          {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
+        </a>
       </div>
+      <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{htmr(description)}</p>
     </header>
   )
 }
+
+export default Header

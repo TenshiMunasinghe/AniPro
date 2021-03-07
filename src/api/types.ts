@@ -26,8 +26,8 @@ export interface QueryData {
         english: string
         romaji: string
       }
+      bannerImage: string
       coverImage: {
-        extraLarge: string
         large: string
         color: string
       }
@@ -71,7 +71,8 @@ export interface Common {
     native: string
   }
   coverImage: {
-    extraLarge: string
+    large: string
+    color: string
   }
   bannerImage: string
   description: string
@@ -103,6 +104,13 @@ export interface Common {
   hashtag: string
   genres: string[]
   synonyms: string[]
+  streamingEpisodes: {
+    url: string
+  }[]
+  externalLinks: {
+    url: string
+    site: string
+  }[]
 }
 
 export interface Watch {
@@ -191,7 +199,7 @@ export interface Overview extends Watch, Characters, Staff {
           romaji: string
         }
         coverImage: {
-          extraLarge: string
+          large: string
         }
         format: string
         status: string
@@ -222,7 +230,7 @@ export interface Overview extends Watch, Characters, Staff {
           romaji: string
         }
         coverImage: {
-          extraLarge: string
+          large: string
         }
       }
     }

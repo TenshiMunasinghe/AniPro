@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { v4 } from 'uuid'
+import classnames from 'classnames'
 
 import styles from './Options.module.scss'
 
@@ -12,7 +13,7 @@ interface Props {
   selected: string | string[]
 }
 
-export const Options = ({
+const Options = ({
   isVisible,
   options,
   handleChange,
@@ -28,7 +29,7 @@ export const Options = ({
 
   return (
     <div
-      className={styles.wrapper + (isVisible ? '' : ' ' + styles.hide)}
+      className={classnames(styles.wrapper, { [styles.hide]: !isVisible })}
       tabIndex={0}>
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
@@ -47,3 +48,5 @@ export const Options = ({
     </div>
   )
 }
+
+export default Options

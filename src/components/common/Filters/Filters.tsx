@@ -2,8 +2,8 @@ import React, { useMemo, memo } from 'react'
 import { v4 } from 'uuid'
 
 import styles from './Filters.module.scss'
-import { SearchBar } from '../SearchBar/SearchBar'
-import { Select } from '../Select/Select'
+import SearchBar from '../SearchBar/SearchBar'
+import Select from '../Select/Select'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -12,7 +12,7 @@ interface Props {
   filterQuery?: string
 }
 
-export const Filters = memo(({ filterQuery = '' }: Props) => {
+const Filters = memo(({ filterQuery = '' }: Props) => {
   const updateUrlParams = useUpdateUrlParam()
   const params = useMemo(() => new URLSearchParams(filterQuery), [filterQuery])
 
@@ -59,3 +59,5 @@ export const Filters = memo(({ filterQuery = '' }: Props) => {
     </>
   )
 })
+
+export default Filters

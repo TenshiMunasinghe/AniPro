@@ -1,4 +1,4 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 .wrapper {
   display: flex;
@@ -19,9 +19,10 @@
   &.primary {
     background: var(--color-foreground-accent-100);
 
+    @include mouse-effects(110%, 120%);
+
     &:hover,
     &:focus {
-      background: var(--color-foreground-accent-200);
       svg {
         margin-left: 0.5em;
         width: 0.75em;

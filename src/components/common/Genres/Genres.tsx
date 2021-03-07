@@ -1,10 +1,11 @@
-import React, { memo, useEffect, useMemo, useState, useRef } from 'react'
+import React, { memo, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
+import classnames from 'classnames'
 
 import styles from './Genres.module.scss'
 import { addKey } from '../../../utils/addKey'
-import { Genre } from '../Genre/Genre'
-import { isChildOverflow } from '../../../utils/isChildOverflow'
+import Genre from '../Genre/Genre'
+import { useFitContent } from '../../../hooks/useFitContent'
 
 interface Props {
   as: 'section' | 'footer'
@@ -14,20 +15,10 @@ interface Props {
   className?: string
 }
 
-export const Genres = memo(
+const Genres = memo(
   ({ as: Tag, genres: allGenres, color, canInteract, className }: Props) => {
     const history = useHistory()
-    const [genres, setGenres] = useState(allGenres)
-    const ref = useRef<HTMLElement>(null)
-
-    useEffect(() => {
-      if (!ref.current) return
-      const _genres = genres
-
-      if (isChildOverflow(ref.current).overflow.either) {
-        setGenres(_genres.slice(0, -1))
-      }
-    }, [genres])
+    const { ref, state: genres } = useFitContent(allGenres)
 
     const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
     const _genres = useMemo(() => addKey(genres), [genres])
@@ -41,8 +32,10 @@ export const Genres = memo(
           onClick={canInteract ? () => setGenre(g.value) : undefined}
         />
       )),
-      className: styles.wrapper + (className ? ` ${className}` : ''),
+      className: classnames(styles.wrapper, className),
       ref,
     })
   }
 )
+
+export default Genres

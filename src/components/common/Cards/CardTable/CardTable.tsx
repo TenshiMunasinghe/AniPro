@@ -1,22 +1,24 @@
 import React, { memo } from 'react'
 import { Link } from 'react-router-dom'
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
 
 import styles from './CardTable.module.scss'
 import { SearchResult } from '../../../../api/types'
 import { currentYear } from '../../../../api/queries'
-import { Image } from '../../Image/Image'
-import { FaceIcon } from '../../FaceIcon/FaceIcon'
-import { useIsImageLoaded } from '../../../../hooks/useIsImageLoaded'
 import { toStartCase } from '../../../../utils/toStartCase'
 import { adjustColor } from '../../../../utils/adjustColor'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { airingInfo } from '../../../../utils/airingInfo'
-import { Genres } from '../../Genres/Genres'
+import Genres from '../../Genres/Genres'
+import FaceIcon from '../../FaceIcon/FaceIcon'
 
 interface Props {
   id: number
-  image: SearchResult['coverImage']
+  image: {
+    cover: SearchResult['coverImage']
+    banner: SearchResult['bannerImage']
+  }
   title: SearchResult['title']
   format: SearchResult['format']
   season: SearchResult['season']
@@ -30,12 +32,13 @@ interface Props {
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   popularity: SearchResult['popularity']
   rank?: number | null
+  scrollPosition: ScrollPosition
 }
 
 const mapStatus = (status: SearchResult['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
-export const CardTable = memo(
+const CardTable = memo(
   ({
     image,
     title,
@@ -50,52 +53,46 @@ export const CardTable = memo(
     format,
     episodes,
     rank,
+    scrollPosition,
   }: Props) => {
-    const { isImageLoaded, src } = useIsImageLoaded(image.extraLarge)
-
     const url = `/anime/${id}`
+    const { color } = image.cover
 
     const _style = {
-      '--color-text': adjustColor(image.color, 'var(--lightness)'),
-      '--color-original': image.color,
-      '--image-url': `url(${src})`,
+      '--color-adjusted': adjustColor(color, 'var(--lightness)'),
+      '--color-original': color,
+      '--banner-image': `url(${image.banner})`,
     } as React.CSSProperties
 
     return (
       <article className={styles.wrapper} style={_style}>
-        {rank && (
-          <div className={styles.rank}>
-            <div>
-              <span className={styles.hash}>#</span>
-              <span className={styles.number}>{rank}</span>
-            </div>
-          </div>
-        )}
+        {rank && <div className={styles.rank}>#{rank}</div>}
         <div className={styles.card}>
           <Link to={url} className={styles.imageWrapper}>
-            <Image
-              className={styles[isImageLoaded ? 'loaded' : 'loading']}
-              src={src}
+            <LazyLoadImage
+              src={image.cover.large}
               alt={title.romaji}
+              scrollPosition={scrollPosition}
+              effect='opacity'
             />
           </Link>
 
           <div className={styles.content}>
-            <div className={styles.title}>
+            <div className={styles.header}>
               <Link to={url}>{title.romaji}</Link>
               <Genres
                 as='section'
                 genres={genres}
-                color={image.color}
+                color={color}
                 canInteract={false}
                 className={styles.genres}
               />
             </div>
 
             <div className={styles.review}>
-              <FaceIcon meanScore={meanScore} />
               <div className={styles.score + ' ' + styles.row}>
                 <div className={styles.percentage + ' ' + styles.row}>
+                  <FaceIcon meanScore={meanScore} />
                   {meanScore ? meanScore + '%' : ''}
                 </div>
                 <div className={styles.subRow}>
@@ -125,3 +122,5 @@ export const CardTable = memo(
     )
   }
 )
+
+export default CardTable

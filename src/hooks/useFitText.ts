@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { isOverflowingFromParent } from '../utils/isOverflowingFromParent'
+import { useResizeDetector } from 'react-resize-detector'
 
 interface UseFitTextArgs {
   min: number
@@ -8,14 +9,28 @@ interface UseFitTextArgs {
 }
 
 export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
-  const ref = useRef<HTMLElement>(null)
+  const initialState = useMemo(
+    () => ({
+      fontSize: max,
+      fontSizePrev: min,
+      fontSizeMax: max,
+      fontSizeMin: min,
+    }),
+    [min, max]
+  )
 
-  const [state, setState] = useState({
-    fontSize: max,
-    fontSizePrev: min,
-    fontSizeMax: max,
-    fontSizeMin: min,
+  const onResize = useCallback(() => {
+    setState(initialState)
+  }, [initialState])
+
+  const { ref } = useResizeDetector({
+    onResize,
+    refreshMode: 'debounce',
+    refreshRate: 250,
+    skipOnMount: true,
   })
+
+  const [state, setState] = useState(initialState)
   const { fontSize, fontSizeMax, fontSizeMin, fontSizePrev } = state
 
   useEffect(() => {
@@ -62,5 +77,5 @@ export const useFitText = ({ min, max, resolution }: UseFitTextArgs) => {
     })
   }, [fontSize, fontSizeMax, fontSizeMin, fontSizePrev, ref, resolution])
 
-  return { fontSize: `${fontSize}em`, ref }
+  return { fontSize: `${fontSize}rem`, ref }
 }

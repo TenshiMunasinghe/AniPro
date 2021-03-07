@@ -11,12 +11,12 @@ import {
 } from '../../filterOptions/filterOptions'
 import { countryCode, Countries } from '../../filterOptions/countryCode'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { CardGrid } from '../../components/common/CardGrid/CardGrid'
-import { ScrollButton } from '../../components/search/ScrollButton/ScrollButton'
-import { SimpleSelect } from '../../components/common/SimpleSelect/SimpleSelect'
-import { CardTypeButton } from '../../components/common/CardTypeButton/CardTypeButton'
-import { Filters } from '../../components/common/Filters/Filters'
-import { ActiveFilters } from '../../components/search/ActiveFilters/ActiveFilters'
+import CardGrid from '../../components/common/CardGrid/CardGrid'
+import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
+import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
+import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
+import Filters from '../../components/common/Filters/Filters'
+import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import { addKey } from '../../utils/addKey'
 
 const loadingCount = {
@@ -29,7 +29,7 @@ const cardTypes = addKey(Object.keys(loadingCount))
 
 export type CardType = keyof typeof loadingCount
 
-export const Search = () => {
+const Search = () => {
   const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
   const updateUrlParams = useUpdateUrlParam()
@@ -117,3 +117,5 @@ export const Search = () => {
     </>
   )
 }
+
+export default Search

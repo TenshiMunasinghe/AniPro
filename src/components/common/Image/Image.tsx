@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 interface Props {
   src: string
@@ -15,7 +16,7 @@ interface State {
 const defaultFallbackSrc =
   'https://upload.wikimedia.org/wikipedia/commons/4/41/Noimage.svg'
 
-export const Image = <T extends Props>({
+const Image = <T extends Props>({
   fallbackSrc = defaultFallbackSrc,
   imageRef,
   ...props
@@ -31,12 +32,13 @@ export const Image = <T extends Props>({
 
   const { src: _1, fallbackSrc: _2, alt: _3, ..._props } = props
   return (
-    <img
+    <LazyLoadImage
       src={state.src}
       alt={props.alt}
       onError={handleError}
-      loading='lazy'
       {..._props}
     />
   )
 }
+
+export default Image

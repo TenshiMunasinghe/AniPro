@@ -34,7 +34,7 @@ export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 //   navigator.webkitConnection ||
 //   null
 
-export const imageSize = 'extraLarge'
+export const imageSize = 'large'
 
 export const GET_SEARCH_RESULT = /* GraphQL */ `
   query getSearchResult(
@@ -75,9 +75,10 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
           romaji
           english
         }
+        bannerImage
         coverImage {
           large
-          extraLarge
+          large
           color
         }
         status
@@ -121,7 +122,8 @@ export const GET_ANIME_PAGE = {
           native
         }
         coverImage {
-          extraLarge
+          large
+          color
         }
         bannerImage
         description
@@ -153,6 +155,13 @@ export const GET_ANIME_PAGE = {
         hashtag
         genres
         synonyms
+        streamingEpisodes {
+          url
+        }
+        externalLinks {
+          url
+          site
+        }
       }
     }
   `,
@@ -169,7 +178,7 @@ export const GET_ANIME_PAGE = {
                 romaji
               }
               coverImage {
-                extraLarge
+                large
               }
               format
               status
@@ -240,7 +249,7 @@ export const GET_ANIME_PAGE = {
                 romaji
               }
               coverImage {
-                extraLarge
+                large
               }
             }
           }

@@ -1,4 +1,4 @@
-@import '../../../globalStyles/config.scss';
+@import '../../../globalStyles/config.module.scss';
 
 .button {
   background: var(--color-foreground-200);
@@ -7,7 +7,7 @@
   right: calc(1rem + 1vw);
   border: none;
   opacity: 0.85;
-  z-index: 1000;
+  z-index: 1002;
   padding: 0.8rem;
   width: fit-content;
   height: fit-content;
