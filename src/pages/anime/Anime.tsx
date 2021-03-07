@@ -16,6 +16,7 @@ const Anime = () => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'common')
   if (!data) return <></>
+  console.log(data.externalLinks)
 
   return (
     <section className={styles.wrapper}>
@@ -25,7 +26,12 @@ const Anime = () => {
         title={data.title.romaji}
         description={data.description}
         streamUrl={
-          data.streamingEpisodes[data.streamingEpisodes.length - 1].url
+          data.streamingEpisodes.length > 0
+            ? data.streamingEpisodes[data.streamingEpisodes.length - 1].url
+            : undefined
+        }
+        siteUrl={
+          data.externalLinks.find(link => link.site === 'Official Site')?.url
         }
       />
     </section>
