@@ -46,13 +46,18 @@
   }
 }
 
-@mixin mouse-effects {
-  &:hover,
-  &:focus {
-    background: var(--color-highlight-100);
+@mixin mouse-effects(
+  $hover: var(--highlight-100),
+  $active: var(--highlight-200)
+) {
+  @include on-hoverable-devices {
+    &:hover,
+    &:focus {
+      filter: brightness($hover);
+    }
   }
   &:active {
-    background: var(--color-highlight-200);
+    filter: brightness($active);
   }
 }
 
