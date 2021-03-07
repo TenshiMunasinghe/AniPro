@@ -158,6 +158,10 @@ export const GET_ANIME_PAGE = {
         streamingEpisodes {
           url
         }
+        externalLinks {
+          url
+          site
+        }
       }
     }
   `,

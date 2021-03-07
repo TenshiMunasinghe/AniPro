@@ -107,6 +107,10 @@ export interface Common {
   streamingEpisodes: {
     url: string
   }[]
+  externalLinks: {
+    url: string
+    site: string
+  }[]
 }
 
 export interface Watch {
