@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 import htmr from 'htmr'
-import { FaPlay } from 'react-icons/fa'
+import { FaPlay, FaExternalLinkAlt } from 'react-icons/fa'
 
 import styles from './Header.module.scss'
 import { Common } from '../../../api/types'
@@ -10,7 +10,8 @@ interface Props {
   coverImg: Common['coverImage']
   title: Common['title']['romaji']
   description: Common['description']
-  streamUrl: Common['streamingEpisodes'][number]['url']
+  streamUrl?: Common['streamingEpisodes'][number]['url']
+  siteUrl?: Common['externalLinks'][number]['url']
 }
 
 const Header = ({
@@ -19,6 +20,7 @@ const Header = ({
   title,
   description,
   streamUrl,
+  siteUrl,
 }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
@@ -31,9 +33,11 @@ const Header = ({
         <figure className={styles.cover}>
           <img src={coverImg.large} alt={title + ' cover'} />
         </figure>
-        <a href={streamUrl} target='blank' className={styles.watch}>
-          <span className={styles.text}>Watch </span>
-          <FaPlay />
+        <a href={streamUrl || siteUrl} target='blank' className={styles.watch}>
+          <span className={styles.text}>
+            {streamUrl ? 'Watch' : 'Official Site'}
+          </span>
+          {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
         </a>
       </div>
       <h1 className={styles.title}>{title}</h1>
