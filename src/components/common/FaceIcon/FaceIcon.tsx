@@ -1,7 +1,7 @@
-import React from 'react';
-import { FaFrown, FaMeh, FaSmile, FaSmileBeam } from 'react-icons/fa';
+import React from 'react'
+import { FaFrown, FaMeh, FaSmile, FaSmileBeam } from 'react-icons/fa'
 
-import styles from './FaceIcon.module.scss';
+import styles from './FaceIcon.module.scss'
 
 interface Props {
   meanScore: number | null

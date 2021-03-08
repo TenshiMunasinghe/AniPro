@@ -1,10 +1,10 @@
-import React, { memo, RefObject, useState } from 'react';
-import { FaAngleDown, FaTimes } from 'react-icons/fa';
+import React, { memo, RefObject, useState } from 'react'
+import { FaAngleDown, FaTimes } from 'react-icons/fa'
 
-import { useFocusedWithin } from '../../../hooks/useFocusedWithin';
-import { toStartCase } from '../../../utils/toStartCase';
-import Options from '../Options/Options';
-import styles from './Select.module.scss';
+import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
+import { toStartCase } from '../../../utils/toStartCase'
+import Options from '../Options/Options'
+import styles from './Select.module.scss'
 
 interface Props {
   onChange: (state: string | string[]) => void

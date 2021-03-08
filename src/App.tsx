@@ -1,11 +1,11 @@
-import debounce from 'lodash/debounce';
-import React, { useEffect, useLayoutEffect, useMemo } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import debounce from 'lodash/debounce'
+import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import loadable from '@loadable/component';
+import loadable from '@loadable/component'
 
-import NavBar from './components/common/NavBar/NavBar';
-import { Theme, useThemeStore, useWindowSizeStore, WindowSizeStore } from './zustand/stores';
+import NavBar from './components/common/NavBar/NavBar'
+import { Theme, useThemeStore, useWindowSizeStore, WindowSizeStore } from './zustand/stores'
 
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))

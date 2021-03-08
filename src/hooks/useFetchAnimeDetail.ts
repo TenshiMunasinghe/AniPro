@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { GET_ANIME_PAGE, ky } from '../api/queries';
-import { AnimeDetails } from '../api/types';
-import { Tabs } from '../pages/anime/Anime';
+import { GET_ANIME_PAGE, ky } from '../api/queries'
+import { AnimeDetails } from '../api/types'
+import { Tabs } from '../pages/anime/Anime'
 
 export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
   id: string,

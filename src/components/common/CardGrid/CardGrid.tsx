@@ -1,17 +1,17 @@
-import classnames from 'classnames';
-import range from 'lodash/range';
-import React, { useMemo } from 'react';
-import { LazyComponentProps, trackWindowScroll } from 'react-lazy-load-image-component';
+import classnames from 'classnames'
+import range from 'lodash/range'
+import React, { useMemo } from 'react'
+import { LazyComponentProps, trackWindowScroll } from 'react-lazy-load-image-component'
 
-import { QueryVar, SearchResult } from '../../../api/types';
-import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult';
-import { CardType } from '../../../pages/search/Search';
-import CardChart from '../Cards/CardChart/CardChart';
-import CardCover from '../Cards/CardCover/CardCover';
-import CardLoading from '../Cards/CardLoading/CardLoading';
-import CardTable from '../Cards/CardTable/CardTable';
-import NotFound from '../NotFound/NotFound';
-import styles from './CardGrid.module.scss';
+import { QueryVar, SearchResult } from '../../../api/types'
+import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import { CardType } from '../../../pages/search/Search'
+import CardChart from '../Cards/CardChart/CardChart'
+import CardCover from '../Cards/CardCover/CardCover'
+import CardLoading from '../Cards/CardLoading/CardLoading'
+import CardTable from '../Cards/CardTable/CardTable'
+import NotFound from '../NotFound/NotFound'
+import styles from './CardGrid.module.scss'
 
 interface Medias extends SearchResult {
   rank?: number | null

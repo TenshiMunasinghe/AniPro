@@ -1,4 +1,4 @@
-import { toStartCase } from './toStartCase';
+import { toStartCase } from './toStartCase'
 
 const directions = ['top', 'bottom', 'left', 'right'] as const
 
