@@ -1,11 +1,11 @@
-import classnames from 'classnames';
-import React, { memo, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import classnames from 'classnames'
+import React, { memo, useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
 
-import { useFitContent } from '../../../hooks/useFitContent';
-import { addKey } from '../../../utils/addKey';
-import Genre from '../Genre/Genre';
-import styles from './Genres.module.scss';
+import { useFitContent } from '../../../hooks/useFitContent'
+import { addKey } from '../../../utils/addKey'
+import Genre from '../Genre/Genre'
+import styles from './Genres.module.scss'
 
 interface Props {
   as: 'section' | 'footer'

@@ -1,7 +1,7 @@
-import React from 'react';
-import { FaTh, FaThLarge, FaThList } from 'react-icons/fa';
+import React from 'react'
+import { FaTh, FaThLarge, FaThList } from 'react-icons/fa'
 
-import { CardType } from '../../../pages/search/Search';
+import { CardType } from '../../../pages/search/Search'
 
 interface Props {
   cardType: CardType

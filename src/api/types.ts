@@ -1,4 +1,4 @@
-import { SortBy } from '../filterOptions/filterOptions';
+import { SortBy } from '../filterOptions/filterOptions'
 
 export interface QueryVar {
   page?: number

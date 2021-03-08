@@ -1,7 +1,7 @@
-import React, { ChangeEvent, memo } from 'react';
-import { IconType } from 'react-icons';
+import React, { ChangeEvent, memo } from 'react'
+import { IconType } from 'react-icons'
 
-import styles from './Switch.module.scss';
+import styles from './Switch.module.scss'
 
 interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void

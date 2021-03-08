@@ -1,19 +1,19 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useCallback, useMemo, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { SEARCH_TEXT } from '../../api/queries';
-import { QueryVar } from '../../api/types';
-import CardGrid from '../../components/common/CardGrid/CardGrid';
-import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton';
-import Filters from '../../components/common/Filters/Filters';
-import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect';
-import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters';
-import ScrollButton from '../../components/search/ScrollButton/ScrollButton';
-import { Countries, countryCode } from '../../filterOptions/countryCode';
-import { FilterOptionKeys, filterOptions, sortByOptions } from '../../filterOptions/filterOptions';
-import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam';
-import { addKey } from '../../utils/addKey';
-import styles from './Search.module.scss';
+import { SEARCH_TEXT } from '../../api/queries'
+import { QueryVar } from '../../api/types'
+import CardGrid from '../../components/common/CardGrid/CardGrid'
+import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
+import Filters from '../../components/common/Filters/Filters'
+import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
+import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
+import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
+import { Countries, countryCode } from '../../filterOptions/countryCode'
+import { FilterOptionKeys, filterOptions, sortByOptions } from '../../filterOptions/filterOptions'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { addKey } from '../../utils/addKey'
+import styles from './Search.module.scss'
 
 const loadingCount = {
   chart: 4,

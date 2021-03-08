@@ -1,10 +1,10 @@
-import React, { FormEvent, useCallback } from 'react';
-import { useForm } from 'react-hook-form';
-import { FaSearch } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
+import React, { FormEvent, useCallback } from 'react'
+import { useForm } from 'react-hook-form'
+import { FaSearch } from 'react-icons/fa'
+import { useHistory } from 'react-router-dom'
 
-import { SEARCH_TEXT } from '../../../api/queries';
-import styles from './SearchBar.module.scss';
+import { SEARCH_TEXT } from '../../../api/queries'
+import styles from './SearchBar.module.scss'
 
 const SearchBar = () => {
   const history = useHistory()

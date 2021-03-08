@@ -1,7 +1,7 @@
-import React from 'react';
-import { FaCaretUp } from 'react-icons/fa';
+import React from 'react'
+import { FaCaretUp } from 'react-icons/fa'
 
-import styles from './ScrollButton.module.scss';
+import styles from './ScrollButton.module.scss'
 
 const handleClick = () => {
   window.scrollTo(0, 0)

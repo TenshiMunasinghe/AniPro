@@ -1,17 +1,17 @@
-import React, { memo } from 'react';
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component';
-import { Link } from 'react-router-dom';
+import React, { memo } from 'react'
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
+import { Link } from 'react-router-dom'
 
-import { currentYear } from '../../../../api/queries';
-import { SearchResult } from '../../../../api/types';
-import { adjustColor } from '../../../../utils/adjustColor';
-import { airingInfo } from '../../../../utils/airingInfo';
-import { formatLabel } from '../../../../utils/formatLabel';
-import { pluralize } from '../../../../utils/pluralize';
-import { toStartCase } from '../../../../utils/toStartCase';
-import FaceIcon from '../../FaceIcon/FaceIcon';
-import Genres from '../../Genres/Genres';
-import styles from './CardTable.module.scss';
+import { currentYear } from '../../../../api/queries'
+import { SearchResult } from '../../../../api/types'
+import { adjustColor } from '../../../../utils/adjustColor'
+import { airingInfo } from '../../../../utils/airingInfo'
+import { formatLabel } from '../../../../utils/formatLabel'
+import { pluralize } from '../../../../utils/pluralize'
+import { toStartCase } from '../../../../utils/toStartCase'
+import FaceIcon from '../../FaceIcon/FaceIcon'
+import Genres from '../../Genres/Genres'
+import styles from './CardTable.module.scss'
 
 interface Props {
   id: number

@@ -1,7 +1,7 @@
-import { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useCallback } from 'react'
+import { useHistory } from 'react-router-dom'
 
-import { QueryVar } from '../api/types';
+import { QueryVar } from '../api/types'
 
 type Value = string | string[]
 

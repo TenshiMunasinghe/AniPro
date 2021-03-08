@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './NotFound.module.scss';
+import styles from './NotFound.module.scss'
 
 const NotFound = () => {
   return <div className={styles.wrapper}>Not Found {'><'}</div>
