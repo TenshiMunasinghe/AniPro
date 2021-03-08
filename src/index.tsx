@@ -1,5 +1,5 @@
-import './globalStyles/index.scss'
 import './globalStyles/reset.css'
+import './globalStyles/index.scss'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
