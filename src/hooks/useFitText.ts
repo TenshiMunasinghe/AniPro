@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useMemo } from 'react'
-import { isOverflowingFromParent } from '../utils/isOverflowingFromParent'
-import { useResizeDetector } from 'react-resize-detector'
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
+
+import { isOverflowingFromParent } from '../utils/isOverflowingFromParent';
 
 interface UseFitTextArgs {
   min: number

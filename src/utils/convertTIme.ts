@@ -1,4 +1,4 @@
-import { TimeUnits } from './type'
+import { TimeUnits } from './type';
 
 export const convertTime: (obj: {
   num: number

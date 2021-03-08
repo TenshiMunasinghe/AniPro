@@ -1,18 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './Home.module.scss'
-import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import {
-  currentYear,
-  currentSeason,
-  nextYear,
-  nextSeason,
-} from '../../api/queries'
-import { SearchResult, QueryVar } from '../../api/types'
-import { CardType } from '../search/Search'
-import Footer from '../../components/home/Footer/Footer'
-import Filters from '../../components/common/Filters/Filters'
-import Content from '../../components/home/Content/Content'
+import { currentSeason, currentYear, nextSeason, nextYear } from '../../api/queries';
+import { QueryVar, SearchResult } from '../../api/types';
+import Filters from '../../components/common/Filters/Filters';
+import Content from '../../components/home/Content/Content';
+import Footer from '../../components/home/Footer/Footer';
+import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores';
+import { CardType } from '../search/Search';
+import styles from './Home.module.scss';
 
 type Medias = {
   trending: SearchResult[]

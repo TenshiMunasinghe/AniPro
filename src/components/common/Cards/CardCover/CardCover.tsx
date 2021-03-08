@@ -1,11 +1,11 @@
-import React, { useState, memo } from 'react'
-import { Link } from 'react-router-dom'
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
+import React, { memo, useState } from 'react';
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
 
-import styles from './CardCover.module.scss'
-import Popover from '../../Popover/Popover'
-import { SearchResult } from '../../../../api/types'
-import { adjustColor } from '../../../../utils/adjustColor'
+import { SearchResult } from '../../../../api/types';
+import { adjustColor } from '../../../../utils/adjustColor';
+import Popover from '../../Popover/Popover';
+import styles from './CardCover.module.scss';
 
 interface Props {
   id: number

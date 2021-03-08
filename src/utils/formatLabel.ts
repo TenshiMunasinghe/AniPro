@@ -1,5 +1,5 @@
-import { sortByOptions } from '../filterOptions/filterOptions'
-import { toStartCase } from './toStartCase'
+import { sortByOptions } from '../filterOptions/filterOptions';
+import { toStartCase } from './toStartCase';
 
 export const formatLabel = (str: string) => {
   const _sortByOptions = Object.fromEntries(

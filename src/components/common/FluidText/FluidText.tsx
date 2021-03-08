@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC, memo } from 'react'
-import styles from './FluidText.module.scss'
-import classnames from 'classnames'
+import classnames from 'classnames';
+import React, { CSSProperties, FC, memo } from 'react';
 
-import { useFitText } from '../../../hooks/useFitText'
+import { useFitText } from '../../../hooks/useFitText';
+import styles from './FluidText.module.scss';
 
 interface Props {
   as: keyof JSX.IntrinsicElements

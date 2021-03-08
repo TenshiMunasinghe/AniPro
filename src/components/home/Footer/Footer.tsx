@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './Footer.module.scss'
-import { ThemeStore, useThemeStore } from '../../../zustand/stores'
+import { ThemeStore, useThemeStore } from '../../../zustand/stores';
+import styles from './Footer.module.scss';
 
 const themeSelector = ({ set }: ThemeStore) => set
 

@@ -1,9 +1,9 @@
-import React, { CSSProperties } from 'react'
-import htmr from 'htmr'
-import { FaPlay, FaExternalLinkAlt } from 'react-icons/fa'
+import htmr from 'htmr';
+import React, { CSSProperties } from 'react';
+import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa';
 
-import styles from './Header.module.scss'
-import { Common } from '../../../api/types'
+import { Common } from '../../../api/types';
+import styles from './Header.module.scss';
 
 interface Props {
   bannerImg: Common['bannerImage']

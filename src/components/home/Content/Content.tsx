@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-import styles from './Content.module.scss'
-import { QueryVar } from '../../../api/types'
-import { CardType } from '../../../pages/search/Search'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { filterOptions } from '../../../filterOptions/filterOptions'
-import CardGrid from '../../common/CardGrid/CardGrid'
+import { QueryVar } from '../../../api/types';
+import { filterOptions } from '../../../filterOptions/filterOptions';
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam';
+import { CardType } from '../../../pages/search/Search';
+import CardGrid from '../../common/CardGrid/CardGrid';
+import styles from './Content.module.scss';
 
 export type _Content = {
   text: string

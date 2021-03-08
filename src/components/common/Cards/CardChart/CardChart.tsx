@@ -1,13 +1,13 @@
-import React, { memo } from 'react'
-import htmr from 'htmr'
-import { Link } from 'react-router-dom'
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
+import htmr from 'htmr';
+import React, { memo } from 'react';
+import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component';
+import { Link } from 'react-router-dom';
 
-import styles from './CardChart.module.scss'
-import FaceIcon from '../../FaceIcon/FaceIcon'
-import { SearchResult } from '../../../../api/types'
-import { adjustColor } from '../../../../utils/adjustColor'
-import Genres from '../../Genres/Genres'
+import { SearchResult } from '../../../../api/types';
+import { adjustColor } from '../../../../utils/adjustColor';
+import FaceIcon from '../../FaceIcon/FaceIcon';
+import Genres from '../../Genres/Genres';
+import styles from './CardChart.module.scss';
 
 interface Props {
   id: number

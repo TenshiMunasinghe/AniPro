@@ -1,6 +1,7 @@
-import { useCallback, useState, useEffect } from 'react'
-import { useResizeDetector } from 'react-resize-detector'
-import { isChildOverflow } from '../utils/isChildOverflow'
+import { useCallback, useEffect, useState } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
+
+import { isChildOverflow } from '../utils/isChildOverflow';
 
 export const useFitContent = <T>(initilState: T[]) => {
   const [state, setState] = useState(initilState)

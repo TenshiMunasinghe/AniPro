@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react'
-import { AiOutlineCheck } from 'react-icons/ai'
-import { v4 } from 'uuid'
-import classnames from 'classnames'
+import classnames from 'classnames';
+import React, { useMemo } from 'react';
+import { AiOutlineCheck } from 'react-icons/ai';
+import { v4 } from 'uuid';
 
-import styles from './Options.module.scss'
+import styles from './Options.module.scss';
 
 interface Props {
   options: { value: string; label: string }[]

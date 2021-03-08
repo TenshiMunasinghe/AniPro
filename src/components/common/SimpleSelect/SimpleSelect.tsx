@@ -1,9 +1,9 @@
-import React, { RefObject, memo } from 'react'
-import { FaSort } from 'react-icons/fa'
+import React, { memo, RefObject } from 'react';
+import { FaSort } from 'react-icons/fa';
 
-import styles from './SimpleSelect.module.scss'
-import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import Options from '../Options/Options'
+import { useFocusedWithin } from '../../../hooks/useFocusedWithin';
+import Options from '../Options/Options';
+import styles from './SimpleSelect.module.scss';
 
 interface Props {
   onChange: (state: string | string[]) => void

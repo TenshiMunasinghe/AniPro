@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react';
 
 export const useFocusedWithin = () => {
   const ref = useRef<HTMLElement>(null)

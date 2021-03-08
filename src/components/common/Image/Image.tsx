@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import React, { useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface Props {
   src: string
