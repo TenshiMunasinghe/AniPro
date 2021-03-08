@@ -1,4 +1,4 @@
-import { TimeUnits } from './type'
+import { TimeUnits } from './type';
 
 export const timeToArr = (time: { [key in TimeUnits]?: number }) =>
   Object.entries<number | undefined>(time)

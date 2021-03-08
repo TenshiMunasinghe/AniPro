@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import React, { memo } from 'react';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 
-import styles from './CardLoading.module.scss'
-import { CardType } from '../../../../pages/search/Search'
+import { CardType } from '../../../../pages/search/Search';
+import styles from './CardLoading.module.scss';
 
 interface Props {
   type: CardType

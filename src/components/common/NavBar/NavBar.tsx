@@ -1,17 +1,12 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  RefObject,
-  useCallback,
-} from 'react'
-import { Link } from 'react-router-dom'
-import { FaSun, FaMoon } from 'react-icons/fa'
-import classnames from 'classnames'
+import classnames from 'classnames';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-import styles from './NavBar.module.scss'
-import Switch from '../Switch/Switch'
-import { ThemeStore, useThemeStore } from '../../../zustand/stores'
+import { ThemeStore, useThemeStore } from '../../../zustand/stores';
+import Switch from '../Switch/Switch';
+import styles from './NavBar.module.scss';
+
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
 const NavBar = () => {

@@ -1,12 +1,12 @@
-import React, { useMemo, memo } from 'react'
-import { v4 } from 'uuid'
+import React, { memo, useMemo } from 'react';
+import { v4 } from 'uuid';
 
-import styles from './Filters.module.scss'
-import SearchBar from '../SearchBar/SearchBar'
-import Select from '../Select/Select'
-import { filterOptionTypes } from '../../../filterOptions/filterOptions'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { formatLabel } from '../../../utils/formatLabel'
+import { filterOptionTypes } from '../../../filterOptions/filterOptions';
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam';
+import { formatLabel } from '../../../utils/formatLabel';
+import SearchBar from '../SearchBar/SearchBar';
+import Select from '../Select/Select';
+import styles from './Filters.module.scss';
 
 interface Props {
   filterQuery?: string

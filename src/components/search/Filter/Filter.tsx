@@ -1,7 +1,7 @@
-import React from 'react'
-import { FaTimes } from 'react-icons/fa'
+import React from 'react';
+import { FaTimes } from 'react-icons/fa';
 
-import styles from './Filter.module.scss'
+import styles from './Filter.module.scss';
 
 interface Props {
   text: string

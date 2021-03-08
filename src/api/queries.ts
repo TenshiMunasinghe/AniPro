@@ -1,4 +1,4 @@
-import _ky from 'ky'
+import _ky from 'ky';
 
 const dateNow = new Date()
 const dateNext = new Date(

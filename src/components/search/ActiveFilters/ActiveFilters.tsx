@@ -1,10 +1,10 @@
-import React, { useMemo, memo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { memo, useMemo } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
-import styles from './ActiveFilters.module.scss'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { formatLabel } from '../../../utils/formatLabel'
-import Filter from '../Filter/Filter'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam';
+import { formatLabel } from '../../../utils/formatLabel';
+import Filter from '../Filter/Filter';
+import styles from './ActiveFilters.module.scss';
 
 const ActiveFilters = memo(() => {
   const location = useLocation()

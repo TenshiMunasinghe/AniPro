@@ -1,9 +1,9 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import Header from '../../components/anime/Header/Header'
-import styles from './Anime.module.scss'
-import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
+import Header from '../../components/anime/Header/Header';
+import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail';
+import styles from './Anime.module.scss';
 
 export type Tabs = 'overview' | 'watch' | 'characters' | 'staff' | 'stats'
 

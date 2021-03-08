@@ -1,8 +1,8 @@
-import { SearchResult } from '../api/types'
-import { toStartCase } from './toStartCase'
-import { convertTime } from './convertTIme'
-import { pluralize } from './pluralize'
-import { timeToArr } from './timeToArr'
+import { SearchResult } from '../api/types';
+import { convertTime } from './convertTIme';
+import { pluralize } from './pluralize';
+import { timeToArr } from './timeToArr';
+import { toStartCase } from './toStartCase';
 
 export const airingInfo = ({
   nextAiringEpisode,
