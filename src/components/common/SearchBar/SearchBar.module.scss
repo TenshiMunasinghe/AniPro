@@ -27,7 +27,7 @@
   margin-top: 0.75em;
 
   &:focus-within {
-    box-shadow: 0 0 1.5px var(--color-border-100);
+    box-shadow: 0 0 0 0.1em var(--color-border-100);
   }
 }
 
