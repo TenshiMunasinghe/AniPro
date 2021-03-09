@@ -26,6 +26,7 @@ const Header = ({
     '--banner-image': `url(${bannerImg})`,
     '--bg-color': coverImg.color,
   } as CSSProperties
+
   return (
     <header className={styles.wrapper} style={style}>
       <div className={styles.banner} />
@@ -41,7 +42,9 @@ const Header = ({
         </a>
       </div>
       <h1 className={styles.title}>{title}</h1>
-      <p className={styles.description}>{htmr(description)}</p>
+      <div className={styles.description}>
+        <p className={styles.scrollWrapper}>{htmr(description)}</p>
+      </div>
     </header>
   )
 }
