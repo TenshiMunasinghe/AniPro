@@ -53,6 +53,8 @@ const Select = memo(
       setInputState('')
     }
 
+    const focusSelect = () => ref.current?.querySelector('input')?.focus()
+
     return (
       <div className={styles.wrapper}>
         <label className={styles.label} htmlFor={name}>
@@ -97,7 +99,7 @@ const Select = memo(
             {selected.length !== 0 ? (
               <FaTimes onClick={resetSelect} aria-label='reset select' />
             ) : (
-              <FaAngleDown aria-label='open select' />
+              <FaAngleDown onClick={focusSelect} aria-label='open select' />
             )}
           </div>
 
