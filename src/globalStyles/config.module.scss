@@ -132,3 +132,23 @@
   z-index: 999;
   @include circle($size);
 }
+
+@mixin padding-on-scroll-element($padding: var(--space-400), $row: false) {
+  @if $row {
+    padding: $padding;
+    padding-right: 0;
+    &:after {
+      content: '';
+      height: 100%;
+      padding-left: $padding;
+    }
+  } @else {
+    padding: $padding;
+    padding-bottom: 0;
+    &:after {
+      content: '';
+      display: block;
+      padding-top: $padding;
+    }
+  }
+}
