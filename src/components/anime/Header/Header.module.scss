@@ -94,7 +94,7 @@
   .description {
     position: relative;
     font-size: var(--text-size-400);
-    @include padding-on-scroll-element(var(--padding-500));
+    @include padding-on-scroll-element(var(--space-500));
     line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;
