@@ -5,9 +5,17 @@ import Header from '../../components/anime/Header/Header'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Anime.module.scss'
 
-export type Tabs = 'overview' | 'watch' | 'characters' | 'staff' | 'stats'
+export const TAB = [
+  'overview',
+  'watch',
+  'characters',
+  'staff',
+  'stats',
+] as const
 
-type ParamTypes = {
+export type Tabs = typeof TAB[number]
+
+export type ParamTypes = {
   id: string
   tab: Tabs
 }
