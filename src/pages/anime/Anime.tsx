@@ -24,7 +24,6 @@ const Anime = () => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'common')
   if (!data) return <></>
-  console.log(data.externalLinks)
 
   return (
     <section className={styles.wrapper}>
