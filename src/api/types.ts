@@ -28,6 +28,7 @@ export interface QueryData {
       }
       bannerImage: string
       coverImage: {
+        extraLarge: string
         large: string
         color: string
       }

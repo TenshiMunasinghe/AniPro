@@ -77,7 +77,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
         }
         bannerImage
         coverImage {
-          large
+          extraLarge
           large
           color
         }
