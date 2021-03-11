@@ -135,7 +135,7 @@
 
 @mixin padding-on-scroll-element($padding: var(--space-400), $row: false) {
   @if $row {
-    padding: $padding;
+    padding-left: $padding;
     padding-right: 0;
     &:after {
       content: '';
@@ -143,7 +143,7 @@
       padding-left: $padding;
     }
   } @else {
-    padding: $padding;
+    padding-top: $padding;
     padding-bottom: 0;
     &:after {
       content: '';
