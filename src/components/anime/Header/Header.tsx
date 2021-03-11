@@ -42,9 +42,7 @@ const Header = ({
         </a>
       </div>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.description}>
-        <p className={styles.scrollWrapper}>{htmr(description)}</p>
-      </div>
+      <p className={styles.description}>{htmr(description)}</p>
     </header>
   )
 }
