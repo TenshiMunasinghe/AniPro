@@ -9,7 +9,8 @@ import styles from './CardCover.module.scss'
 
 interface Props {
   id: number
-  image: SearchResult['coverImage']
+  image: string
+  color: string
   title: SearchResult['title']
   format: SearchResult['format']
   season: SearchResult['season']
@@ -41,6 +42,7 @@ const CardCover = memo(
     meanScore,
     rank,
     scrollPosition,
+    color,
   }: Props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
     const showPopover = () => setIsPopoverVisible(true)
@@ -49,10 +51,8 @@ const CardCover = memo(
     const url = `/anime/${id}`
 
     const _style = {
-      '--color-adjusted': adjustColor(image.color, 'var(--lightness)'),
-      '--color-original': image.color
-        ? image.color
-        : 'var(--color-foreground-100)',
+      '--color-adjusted': adjustColor(color, 'var(--lightness)'),
+      '--color-original': color ? color : 'var(--color-foreground-100)',
     } as React.CSSProperties
 
     return (
@@ -68,7 +68,7 @@ const CardCover = memo(
           <Link to={url} tabIndex={-1} className={styles.imageWrapper}>
             <LazyLoadImage
               className={styles.image}
-              src={image.large}
+              src={image}
               alt={title.romaji}
               scrollPosition={scrollPosition}
               effect='opacity'
@@ -89,7 +89,7 @@ const CardCover = memo(
           episodes={episodes}
           duration={duration}
           studios={studios}
-          color={image.color}
+          color={color}
           meanScore={meanScore}
         />
       </div>

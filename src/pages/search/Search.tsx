@@ -105,6 +105,7 @@ const Search = () => {
         <CardGrid
           queryVariables={queryVariables}
           cardType={cardType}
+          imageSize='large'
           loadingCount={loadingCount[cardType]}
           allowLoadMore={true}
         />

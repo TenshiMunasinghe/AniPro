@@ -20,6 +20,7 @@ interface Medias extends SearchResult {
 interface Props extends LazyComponentProps {
   queryVariables: Partial<QueryVar>
   cardType: CardType
+  imageSize: 'large' | 'extraLarge'
   loadingCount: number
   hasRank?: boolean
   allowLoadMore: boolean
@@ -29,6 +30,7 @@ interface Props extends LazyComponentProps {
 const CardGrid = ({
   queryVariables,
   cardType,
+  imageSize,
   loadingCount,
   hasRank = false,
   allowLoadMore,
@@ -82,7 +84,8 @@ const CardGrid = ({
                   <CardCover
                     key={m.id}
                     id={m.id}
-                    image={m.coverImage}
+                    image={m.coverImage[imageSize]}
+                    color={m.coverImage.color}
                     title={m.title}
                     genres={m.genres}
                     status={m.status}
@@ -104,7 +107,11 @@ const CardGrid = ({
                   <CardTable
                     key={m.id}
                     id={m.id}
-                    image={{ cover: m.coverImage, banner: m.bannerImage }}
+                    image={{
+                      cover: m.coverImage[imageSize],
+                      banner: m.bannerImage,
+                    }}
+                    color={m.coverImage.color}
                     title={m.title}
                     genres={m.genres}
                     status={m.status}
@@ -127,7 +134,8 @@ const CardGrid = ({
                   <CardChart
                     key={m.id}
                     id={m.id}
-                    image={m.coverImage}
+                    image={m.coverImage[imageSize]}
+                    color={m.coverImage[imageSize]}
                     title={m.title}
                     genres={m.genres}
                     description={m.description}

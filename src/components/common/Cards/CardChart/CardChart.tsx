@@ -11,7 +11,8 @@ import styles from './CardChart.module.scss'
 
 interface Props {
   id: number
-  image: SearchResult['coverImage']
+  image: string
+  color: string
   title: SearchResult['title']
   genres: SearchResult['genres']
   meanScore: SearchResult['meanScore']
@@ -23,6 +24,7 @@ const CardChart = memo(
   ({
     id,
     image,
+    color,
     title,
     genres,
     meanScore,
@@ -32,8 +34,8 @@ const CardChart = memo(
     const pageUrl = `/anime/${id}`
 
     const _style = {
-      '--color-text': adjustColor(image.color, 'var(--lightness)'),
-      '--color-original': image.color,
+      '--color-text': adjustColor(color, 'var(--lightness)'),
+      '--color-original': color,
     } as React.CSSProperties
 
     return (
@@ -43,7 +45,7 @@ const CardChart = memo(
           aria-label={title.romaji}
           className={styles.imageWrapper}>
           <LazyLoadImage
-            src={image.large}
+            src={image}
             alt={title.romaji}
             scrollPosition={scrollPosition}
             effect='opacity'
@@ -82,7 +84,7 @@ const CardChart = memo(
           <Genres
             as='footer'
             genres={genres}
-            color={image.color}
+            color={color}
             canInteract={true}
             className={styles.genres}
           />

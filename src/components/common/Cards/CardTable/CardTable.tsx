@@ -16,9 +16,10 @@ import styles from './CardTable.module.scss'
 interface Props {
   id: number
   image: {
-    cover: SearchResult['coverImage']
+    cover: string
     banner: SearchResult['bannerImage']
   }
+  color: string
   title: SearchResult['title']
   format: SearchResult['format']
   season: SearchResult['season']
@@ -54,9 +55,9 @@ const CardTable = memo(
     episodes,
     rank,
     scrollPosition,
+    color,
   }: Props) => {
     const url = `/anime/${id}`
-    const { color } = image.cover
 
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),
@@ -70,7 +71,7 @@ const CardTable = memo(
         <div className={styles.card}>
           <Link to={url} className={styles.imageWrapper}>
             <LazyLoadImage
-              src={image.cover.large}
+              src={image.cover}
               alt={title.romaji}
               scrollPosition={scrollPosition}
               effect='opacity'

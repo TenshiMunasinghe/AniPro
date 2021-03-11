@@ -39,6 +39,7 @@ const Content = ({ queryVar, content }: Props) => {
       <CardGrid
         queryVariables={queryVar}
         cardType={content.cardType}
+        imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
         loadingCount={queryVar.perPage}
         hasRank={content.hasRank}
         allowLoadMore={false}
