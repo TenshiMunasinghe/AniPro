@@ -44,12 +44,11 @@ export interface QueryData {
       popularity: number
       studios: {
         nodes: { name: string }[] | undefined[]
-      }
+      }[]
       nextAiringEpisode: {
         timeUntilAiring: number
         episode: number
       } | null
-
       rankings: {
         rank: number
         context: string
@@ -65,7 +64,84 @@ export type NextPageInfo = QueryData['Page']['pageInfo']
 
 export type SearchResult = QueryData['Page']['media'][number]
 
-export interface Common {
+export interface Watch {
+  streamingEpisodes: {
+    site: string
+    title: string
+    thumbnail: string
+    url: string
+  }[]
+}
+
+export interface Characters {
+  characters: {
+    edges: {
+      node: {
+        id: number
+        name: {
+          full: string
+        }
+      }
+      role: string
+      voiceActors: {
+        id: number
+        name: {
+          full: string
+        }
+        image: {
+          large: string
+        }
+      }
+    }[]
+  }
+}
+
+export interface Staff {
+  staff: {
+    edges: {
+      node: {
+        id: number
+        name: {
+          full: string
+        }
+        image: {
+          large: string
+        }
+      }
+      role: string
+    }[]
+  }
+}
+
+export interface Stats {
+  rankings: {
+    rank: number
+    context: string
+    year: number | null
+    season: string | null
+    allTime: boolean
+  }[]
+  trends: {
+    nodes: {
+      date: number
+      trending: number
+      averageScore: number
+      inProgress: number
+    }
+  }[]
+  stats: {
+    scoreDistribution: {
+      score: number
+      amount: number
+    }[]
+    statusDistribution: {
+      status: number
+      amount: number
+    }[]
+  }
+}
+
+export interface Overview extends Watch, Characters, Staff {
   title: {
     romaji: string
     english: string
@@ -105,93 +181,10 @@ export interface Common {
   hashtag: string
   genres: string[]
   synonyms: string[]
-  streamingEpisodes: {
-    url: string
-  }[]
   externalLinks: {
     url: string
     site: string
   }[]
-}
-
-export interface Watch {
-  streamingEpisodes: {
-    site: string
-    title: string
-    thumbnail: string
-  }
-}
-
-export interface Characters {
-  characters: {
-    edges: {
-      node: {
-        id: number
-        name: {
-          full: string
-        }
-      }
-      role: string
-      voiceActors: {
-        id: number
-        name: {
-          full: string
-        }
-        image: {
-          large: string
-        }
-      }
-    }
-  }
-}
-
-export interface Staff {
-  staff: {
-    edges: {
-      node: {
-        id: number
-        name: {
-          full: string
-        }
-        image: {
-          large: string
-        }
-      }
-      role: string
-    }
-  }
-}
-
-export interface Stats {
-  rankings: {
-    rank: number
-    context: string
-    year: number | null
-    season: string | null
-    allTime: boolean
-  }
-  trends: {
-    nodes: {
-      date: number
-      trending: number
-      averageScore: number
-      inProgress: number
-    }
-  }
-  stats: {
-    scoreDistribution: {
-      score: number
-      amount: number
-    }
-    statusDistribution: {
-      status: number
-      amount: number
-    }
-  }
-}
-
-export interface Overview extends Watch, Characters, Staff {
-  description: string
   relations: {
     edges: {
       node: {
@@ -238,4 +231,10 @@ export interface Overview extends Watch, Characters, Staff {
   }
 }
 
-export type AnimeDetails<T> = T extends 'common' ? Common : never
+export type AnimeDetails = {
+  overview: Overview
+  watch: Watch
+  characters: Characters
+  staff: Staff
+  stats: Stats
+}

@@ -113,7 +113,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
 `
 
 export const GET_ANIME_PAGE = {
-  common: /* GraphQL */ `
+  overview: /* GraphQL */ `
     query common($id: Int!) {
       Media(id: $id) {
         title {
@@ -155,21 +155,6 @@ export const GET_ANIME_PAGE = {
         hashtag
         genres
         synonyms
-        streamingEpisodes {
-          url
-        }
-        externalLinks {
-          url
-          site
-        }
-      }
-    }
-  `,
-
-  overview: /* GraphQL */ `
-    query overview($id: Int!) {
-      Media(id: $id) {
-        description
         relations {
           edges {
             node {
@@ -257,6 +242,7 @@ export const GET_ANIME_PAGE = {
       }
     }
   `,
+
   watch: /* GraphQL */ `
     query watch($id: Int!) {
       Media(id: $id) {
