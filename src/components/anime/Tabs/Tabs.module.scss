@@ -1,0 +1,8 @@
+.tabs {
+  display: flex;
+  overflow-x: auto;
+
+  .tab {
+    padding: var(--space-400);
+  }
+}
