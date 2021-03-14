@@ -2,16 +2,19 @@ import htmr from 'htmr'
 import React, { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 
-import { Common } from '../../../api/types'
+import { Overview } from '../../../api/types'
+import { TabsType } from '../../../pages/anime/Anime'
+import Tabs from '../Tabs/Tabs'
 import styles from './Header.module.scss'
 
 interface Props {
-  bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']
-  title: Common['title']['romaji']
-  description: Common['description']
-  streamUrl?: Common['streamingEpisodes'][number]['url']
-  siteUrl?: Common['externalLinks'][number]['url']
+  bannerImg: Overview['bannerImage']
+  coverImg: Overview['coverImage']
+  title: Overview['title']['romaji']
+  description: Overview['description']
+  streamUrl?: Overview['streamingEpisodes'][number]['url']
+  siteUrl?: Overview['externalLinks'][number]['url']
+  tabs: Partial<TabsType>[]
 }
 
 const Header = ({
@@ -21,6 +24,7 @@ const Header = ({
   description,
   streamUrl,
   siteUrl,
+  tabs,
 }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
@@ -34,15 +38,19 @@ const Header = ({
         <figure className={styles.cover}>
           <img src={coverImg.large} alt={title + ' cover'} />
         </figure>
-        <a href={streamUrl || siteUrl} target='blank' className={styles.watch}>
+        <a
+          href={streamUrl || siteUrl || '#'}
+          target='blank'
+          className={styles.watch}>
           <span className={styles.text}>
-            {streamUrl ? 'Watch' : 'Official Site'}
+            {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
           </span>
           {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
         </a>
       </div>
       <h1 className={styles.title}>{title}</h1>
       <p className={styles.description}>{htmr(description)}</p>
+      <Tabs tabs={tabs} />
     </header>
   )
 }
