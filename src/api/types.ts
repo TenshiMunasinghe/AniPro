@@ -44,7 +44,7 @@ export interface QueryData {
       popularity: number
       studios: {
         nodes: { name: string }[] | undefined[]
-      }[]
+      }
       nextAiringEpisode: {
         timeUntilAiring: number
         episode: number
@@ -91,7 +91,7 @@ export interface Characters {
         image: {
           large: string
         }
-      }
+      }[]
     }[]
   }
 }
@@ -156,7 +156,7 @@ export interface Overview extends Watch, Characters, Staff {
   nextAiringEpisode: {
     episode: number
     timeUntilAiring: number
-  }
+  } | null
   format: string
   episodes: number
   duration: number
@@ -175,10 +175,10 @@ export interface Overview extends Watch, Characters, Staff {
   studios: {
     nodes: {
       name: string
-    }
+    }[]
   }
   source: string
-  hashtag: string
+  hashtag: string | null
   genres: string[]
   synonyms: string[]
   externalLinks: {
@@ -199,7 +199,7 @@ export interface Overview extends Watch, Characters, Staff {
         status: string
       }
       relationType: string
-    }
+    }[]
   }
   stats: {
     scoreDistribution: {
@@ -215,7 +215,7 @@ export interface Overview extends Watch, Characters, Staff {
     id: number
     site: string
     thumbnail: string
-  }
+  } | null
   recommendations: {
     nodes: {
       mediaRecommendation: {
@@ -227,7 +227,7 @@ export interface Overview extends Watch, Characters, Staff {
           large: string
         }
       }
-    }
+    }[]
   }
 }
 

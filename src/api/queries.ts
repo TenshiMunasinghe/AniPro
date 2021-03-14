@@ -155,6 +155,10 @@ export const GET_ANIME_PAGE = {
         hashtag
         genres
         synonyms
+        externalLinks {
+          url
+          site
+        }
         relations {
           edges {
             node {
