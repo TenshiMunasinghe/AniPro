@@ -2,13 +2,13 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { GET_ANIME_PAGE, ky } from '../api/queries'
 import { AnimeDetails } from '../api/types'
-import { Tabs } from '../pages/anime/Anime'
+import { TabsType } from '../pages/anime/Anime'
 
-export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
+export const useFetchAnimeDetails = <T extends TabsType>(
   id: string,
   tab: T
 ) => {
-  const [data, setData] = useState<AnimeDetails<typeof tab>>()
+  const [data, setData] = useState<AnimeDetails[typeof tab] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
 
@@ -25,7 +25,7 @@ export const useFetchAnimeDetails = <T extends Tabs | 'common'>(
     async (tab: T) => {
       setLoading(true)
       try {
-        const res: { data: { Media: AnimeDetails<typeof tab> } } = await ky
+        const res: { data: { Media: AnimeDetails[typeof tab] } } = await ky
           .post('', {
             json: {
               query: GET_ANIME_PAGE[tab],
