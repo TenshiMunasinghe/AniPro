@@ -1,8 +1,50 @@
 .tabs {
   display: flex;
+  gap: var(--space-300);
   overflow-x: auto;
+  margin: var(--space-400) 0;
 
   .tab {
-    padding: var(--space-400);
+    --border-height: 100%;
+    --border-width: 60%;
+    --border-thickness: 0.025rem;
+    position: relative;
+    padding: var(--space-100) var(--space-200);
+    border-radius: 0.1rem;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      background-color: var(--color-border-100);
+    }
+
+    &:before {
+      top: calc((50% + var(--border-height) / 2));
+      bottom: calc((100% - var(--border-height)) / 2);
+      left: calc(var(--border-thickness) * 2);
+      width: var(--border-thickness);
+      transition: top 0.125s ease-in-out;
+      transition-delay: 0.15s;
+    }
+
+    &:after {
+      left: calc((100% - var(--border-width)) / 2);
+      right: calc((100% - var(--border-width)) / 2);
+      bottom: 0;
+      margin: auto;
+      height: var(--border-thickness);
+      transition: right 0.125s ease-in-out;
+    }
+
+    &:hover {
+      &:before {
+        top: calc((100% - var(--border-height)) / 2);
+      }
+      &:after {
+        right: calc((50% + var(--border-width) / 2));
+      }
+    }
   }
 }
