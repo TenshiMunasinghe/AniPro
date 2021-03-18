@@ -8,6 +8,7 @@ import { convertTime } from '../../../utils/convertTIme'
 import { formatLabel } from '../../../utils/formatLabel'
 import { pluralize } from '../../../utils/pluralize'
 import { timeToArr } from '../../../utils/timeToArr'
+import { timeToStr } from '../../../utils/timeToStr'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import FaceIcon from '../FaceIcon/FaceIcon'
 import Genres from '../Genres/Genres'
@@ -118,13 +119,7 @@ const Popover = memo(
           {format === 'MOVIE' && _duration.length > 0 ? (
             <>
               <span className={styles.separator}>•</span>
-              {
-                //eg: outputs 1 hour 20 minutes
-                _duration
-                  .map(val => (val ? `${val.num} ${val.unit}` : ''))
-                  .filter(str => str !== '')
-                  .join(' ')
-              }
+              {timeToStr(_duration)}
             </>
           ) : format !== 'MOVIE' && episodes ? (
             <>
