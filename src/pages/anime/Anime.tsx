@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 import { Overview } from '../../api/types'
+import Aside from '../../components/anime/Aside/Aside'
 import Header from '../../components/anime/Header/Header'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Anime.module.scss'
@@ -60,6 +61,7 @@ const Anime = () => {
         }
         tabs={filterTabs(data)}
       />
+      <Aside data={data} />
     </section>
   )
 }
