@@ -1,0 +1,28 @@
+@import '../../../globalStyles/config.module.scss';
+
+.wrapper {
+  max-width: 100%;
+  display: flex;
+  overflow-x: auto;
+  padding: var(--space-400) 0;
+  @include padding-on-scroll-element(var(--space-200), $row: true);
+  margin-top: var(--space-700);
+  background: var(--color-foreground-50);
+
+  .item {
+    margin: 0 var(--space-400);
+    white-space: nowrap;
+
+    &.active {
+      & > .info {
+        color: var(--color-text-accent-200);
+      }
+    }
+  }
+
+  .label {
+    font-size: var(--text-size-300);
+    color: var(--text-size-300);
+    font-weight: 350;
+  }
+}
