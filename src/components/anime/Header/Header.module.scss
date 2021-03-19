@@ -3,15 +3,13 @@
 .wrapper {
   --image-width: calc(6rem + 7vw);
   --play-btn-size: 2.5rem;
-  --padding: var(--space-400);
 
   position: relative;
-  padding: 0 var(--padding);
 
   .banner {
     position: relative;
     width: 100vw;
-    margin-left: calc(-1 * var(--padding));
+    margin-left: calc(-1 * var(--space-400));
     height: calc(2 * var(--image-width));
     background-color: var(--bg-color);
     background-image: var(--banner-image);
@@ -89,11 +87,10 @@
     font-weight: 700;
     line-height: 1.5;
     margin-top: var(--space-400);
-    margin-bottom: var(--space-500);
   }
 
   .subTitle {
-    margin-bottom: var(--space-200);
+    margin-top: var(--space-500);
     @include for-desktop-up {
       display: none;
     }
@@ -103,12 +100,11 @@
     position: relative;
     font-size: var(--text-size-400);
     padding: 0 var(--space-400);
+    margin-top: var(--space-200);
     @include padding-on-scroll-element(var(--space-500));
     line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;
     background: var(--color-foreground-50);
-    max-height: 25rem;
-    overflow-x: auto;
   }
 }
