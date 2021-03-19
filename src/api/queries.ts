@@ -140,6 +140,11 @@ export const GET_ANIME_PAGE = {
           month
           day
         }
+        endDate {
+          year
+          month
+          day
+        }
         season
         seasonYear
         averageScore

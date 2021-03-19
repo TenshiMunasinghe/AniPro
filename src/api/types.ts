@@ -166,6 +166,11 @@ export interface Overview extends Watch, Characters, Staff {
     month: number
     date: number
   }
+  endDate: {
+    year: number
+    month: number
+    date: number
+  }
   season: string
   seasonYear: number
   averageScore: number
