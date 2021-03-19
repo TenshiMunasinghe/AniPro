@@ -151,9 +151,9 @@ export const GET_ANIME_PAGE = {
         meanScore
         popularity
         favourites
-        studios {
-          edges {
-            id
+        studios(isMain: true) {
+          nodes {
+            name
           }
         }
         source
