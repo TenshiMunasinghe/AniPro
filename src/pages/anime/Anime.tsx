@@ -61,7 +61,9 @@ const Anime = () => {
         }
         tabs={filterTabs(data)}
       />
-      <Aside data={data} />
+      <main className={styles.main}>
+        <Aside data={data} />
+      </main>
     </section>
   )
 }
