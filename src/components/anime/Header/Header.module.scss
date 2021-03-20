@@ -5,6 +5,9 @@
   --play-btn-size: 2.5rem;
 
   position: relative;
+  background: var(--color-foreground-50);
+  padding: 0 var(--space-400);
+  padding-bottom: var(--space-500);
 
   .banner {
     position: relative;
@@ -16,7 +19,6 @@
     background-position: 50% 35%;
     background-repeat: no-repeat;
     background-size: cover;
-    z-index: -999;
     overflow: hidden;
 
     &:after {
@@ -44,6 +46,7 @@
     grid-template-columns: var(--image-width) 1fr;
     column-gap: var(--space-400);
     align-items: flex-end;
+    z-index: 999;
 
     .cover {
       width: 100%;
@@ -105,6 +108,5 @@
     line-height: 1.7;
     grid-column-start: 1;
     grid-column-end: -1;
-    background: var(--color-foreground-50);
   }
 }
