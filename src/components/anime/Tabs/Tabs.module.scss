@@ -7,7 +7,7 @@
   .tab {
     --border-height: 100%;
     --border-width: 60%;
-    --border-thickness: 0.025rem;
+    --border-thickness: 1px;
     position: relative;
     padding: var(--space-100) var(--space-300);
 
@@ -22,7 +22,7 @@
     &:before {
       top: calc((50% + var(--border-height) / 2));
       bottom: calc((100% - var(--border-height)) / 2);
-      left: calc(var(--border-thickness) * 2);
+      left: 0;
       width: var(--border-thickness);
       transition: top 0.125s ease-in-out;
       transition-delay: 0.15s;
@@ -40,6 +40,8 @@
     &:hover {
       &:before {
         top: calc((100% - var(--border-height)) / 2);
+        background-color: var(--cl-primary-4);
+        filter: brightness(var(--lightness));
       }
       &:after {
         right: calc((50% + var(--border-width) / 2));
