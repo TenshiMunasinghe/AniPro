@@ -20,6 +20,12 @@ interface Content {
   isActive?: boolean
 }
 
+const dateFormat = {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+}
+
 const contents: Content[] = [
   {
     label: 'Airing',
@@ -62,14 +68,15 @@ const contents: Content[] = [
   },
   {
     label: 'Start Date',
-    text: ({ startDate }: Overview) =>
-      startDate
+    text: ({ startDate }: Overview) => {
+      return startDate
         ? new Date(
             startDate.year,
             startDate.month - 1,
-            startDate.date
-          ).toLocaleDateString()
-        : '',
+            startDate.day
+          ).toLocaleDateString('en-US', dateFormat)
+        : ''
+    },
   },
   {
     label: 'End Date',
@@ -78,8 +85,8 @@ const contents: Content[] = [
         ? new Date(
             endDate.year,
             endDate.month - 1,
-            endDate.date
-          ).toLocaleDateString()
+            endDate.day
+          ).toLocaleDateString('en-US', dateFormat)
         : '',
   },
   {
