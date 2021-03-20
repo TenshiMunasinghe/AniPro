@@ -164,12 +164,12 @@ export interface Overview extends Watch, Characters, Staff {
   startDate: {
     year: number
     month: number
-    date: number
+    day: number
   }
   endDate: {
     year: number
     month: number
-    date: number
+    day: number
   }
   season: string
   seasonYear: number
