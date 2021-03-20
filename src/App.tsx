@@ -41,7 +41,7 @@ const App = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path='/anime/:id/:tab?'>
+          <Route exact path='/anime/:id'>
             <Anime />
           </Route>
           <Route path='/'>
