@@ -6,7 +6,7 @@
   overflow-x: auto;
   padding: var(--space-400) 0;
   @include padding-on-scroll-element(var(--space-200), $row: true);
-  margin-top: var(--space-700);
+  margin-top: var(--space-500);
   background: var(--color-foreground-50);
 
   .item {

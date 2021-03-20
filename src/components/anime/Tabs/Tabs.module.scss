@@ -9,8 +9,7 @@
     --border-width: 60%;
     --border-thickness: 0.025rem;
     position: relative;
-    padding: var(--space-100) var(--space-200);
-    border-radius: 0.1rem;
+    padding: var(--space-100) var(--space-300);
 
     &:before,
     &:after {
