@@ -114,7 +114,7 @@ const contents: Content[] = [
     text: ({ studios }: Overview) => studios.nodes[0].name || '',
   },
   {
-    label: '',
+    label: 'Source',
     text: (prop: Overview) => toStartCase(prop.source || ''),
   },
   {
