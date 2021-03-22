@@ -1,7 +1,10 @@
 import classnames from 'classnames'
 import range from 'lodash/range'
 import React, { useMemo } from 'react'
-import { LazyComponentProps, trackWindowScroll } from 'react-lazy-load-image-component'
+import {
+  LazyComponentProps,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
 
 import { QueryVar, SearchResult } from '../../../api/types'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
@@ -135,7 +138,7 @@ const CardGrid = ({
                     key={m.id}
                     id={m.id}
                     image={m.coverImage[imageSize]}
-                    color={m.coverImage[imageSize]}
+                    color={m.coverImage.color}
                     title={m.title}
                     genres={m.genres}
                     description={m.description}
