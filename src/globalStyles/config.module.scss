@@ -32,6 +32,28 @@
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
+  padding: 0 !important;
+}
+
+@mixin show-description {
+  display: block;
+  color: var(--color-text-200);
+}
+
+@mixin description($lines: 1) {
+  @include add-ellipsis($lines);
+  @include on-non-hoverable-devices {
+    &:focus,
+    &:focus-within {
+      @include show-description;
+    }
+  }
+
+  @include on-hoverable-devices {
+    &:hover {
+      @include show-description;
+    }
+  }
 }
 
 @mixin on-hoverable-devices {
