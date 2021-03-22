@@ -33,11 +33,13 @@
         overflow-x: auto;
         overflow-y: hidden;
         .slider {
-          padding: var(--space-400);
-          display: flex;
-          & > * {
-            flex: 1 0 auto;
-            width: 47.5vw;
+          &.cover {
+            padding: var(--space-400);
+            display: flex;
+            & > * {
+              flex: 1 0 auto;
+              width: 47.5vw;
+            }
           }
         }
       }
