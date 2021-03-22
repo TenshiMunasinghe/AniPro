@@ -50,7 +50,9 @@ const Header = ({
       </div>
       <h1 className={styles.title}>{title}</h1>
       <h5 className={styles.subTitle}>Description</h5>
-      <p className={styles.description}>{htmr(description)}</p>
+      <p className={styles.description} tabIndex={0}>
+        {htmr(description)}
+      </p>
       <Tabs tabs={tabs} />
     </header>
   )
