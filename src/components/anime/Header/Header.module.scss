@@ -102,11 +102,8 @@
   .description {
     position: relative;
     font-size: var(--text-size-400);
-    padding: 0 var(--space-400);
-    margin-top: var(--space-200);
-    @include padding-on-scroll-element(var(--space-500));
+    margin: var(--space-700) 0;
     line-height: 1.7;
-    grid-column-start: 1;
-    grid-column-end: -1;
+    @include description(5);
   }
 }

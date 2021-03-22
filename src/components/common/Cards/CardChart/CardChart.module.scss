@@ -100,33 +100,16 @@
 }
 
 .description {
-  min-height: 0;
-  padding-right: var(--space-500);
   font-size: var(--text-size-300);
   color: var(--color-text-300);
-  @include add-ellipsis(2);
-
-  @mixin show-description {
-    display: block;
-    color: var(--color-text-200);
-  }
-
-  &:focus {
-    @include show-description;
-  }
-
-  @include on-hoverable-devices {
-    &:hover {
-      @include show-description;
-    }
-  }
+  @include description(2);
 
   @include for-tablet-portrait-up {
-    @include add-ellipsis(3);
+    @include description(3);
   }
 
   @include for-tablet-landscape-up {
-    @include add-ellipsis(4);
+    @include description(4);
   }
 
   * {
