@@ -2,17 +2,18 @@
 
 .wrapper {
   --image-width: calc(6rem + 7vw);
-  --play-btn-size: 2.5rem;
+  --play-btn-size: 2.75rem;
+  --padding: var(--space-400);
 
   position: relative;
+  padding: 0 var(--padding);
+  padding-bottom: var(--padding);
   background: var(--color-foreground-50);
-  padding: 0 var(--space-400);
-  padding-bottom: var(--space-500);
 
   .banner {
     position: relative;
     width: 100vw;
-    margin-left: calc(-1 * var(--space-400));
+    margin-left: calc(-1 * var(--padding));
     height: calc(2 * var(--image-width));
     background-color: var(--bg-color);
     background-image: var(--banner-image);
@@ -63,7 +64,7 @@
       text-decoration: none;
       width: 100%;
       height: var(--play-btn-size);
-      border-radius: 0.1em;
+      border-radius: 0.25em;
       @include mouse-effects($active: 90%);
 
       &:active {
@@ -100,10 +101,23 @@
   }
 
   .description {
-    position: relative;
-    font-size: var(--text-size-400);
-    margin: var(--space-700) 0;
-    line-height: 1.7;
-    @include description(5);
+    --padding: var(--space-500);
+    --lines: 9;
+    --line-height: 1.8;
+
+    background: var(--color-foreground-100);
+    @include padding-on-scroll-element(var(--padding));
+    padding: var(--padding);
+    margin-top: var(--space-400);
+    max-height: calc(
+      var(--line-height) * var(--lines) * 1em + (2 * var(--padding))
+    );
+    overflow-y: scroll;
+
+    & > p {
+      @include description(var(--lines));
+      line-height: var(--line-height);
+      font-size: var(--text-size-400);
+    }
   }
 }
