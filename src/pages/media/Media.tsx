@@ -6,9 +6,9 @@ import {
 import { useParams } from 'react-router-dom'
 
 import { Overview } from '../../api/types'
-import Aside from '../../components/anime/Aside/Aside'
-import Header from '../../components/anime/Header/Header'
-import Relation from '../../components/anime/Relation/Relation'
+import Aside from '../../components/media/Aside/Aside'
+import Header from '../../components/media/Header/Header'
+import Relation from '../../components/media/Relation/Relation'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Media.module.scss'
 

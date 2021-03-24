@@ -14,7 +14,7 @@ const Tabs = ({ tabs }: Props) => {
   const history = useHistory()
 
   const switchTab = (tab: TabsType) =>
-    history.push(`/anime/${id}/${tab === 'overview' ? '' : tab}`)
+    history.push(`/media/${id}/${tab === 'overview' ? '' : tab}`)
 
   return (
     <nav className={styles.tabs}>
