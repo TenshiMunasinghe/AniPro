@@ -57,7 +57,7 @@ const CardTable = memo(
     scrollPosition,
     color,
   }: Props) => {
-    const url = `/anime/${id}`
+    const url = `/media/${id}`
 
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),

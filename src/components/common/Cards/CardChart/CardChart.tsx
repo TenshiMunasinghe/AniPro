@@ -31,7 +31,7 @@ const CardChart = memo(
     description,
     scrollPosition,
   }: Props) => {
-    const pageUrl = `/anime/${id}`
+    const pageUrl = `/media/${id}`
 
     const _style = {
       '--color-text': adjustColor(color, 'var(--lightness)'),
