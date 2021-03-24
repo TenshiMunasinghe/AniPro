@@ -111,7 +111,7 @@ const contents: Content[] = [
   },
   {
     label: 'Studios',
-    text: ({ studios }: Overview) => studios.nodes[0].name || '',
+    text: ({ studios }: Overview) => studios.nodes[0]?.name || '',
   },
   {
     label: 'Source',
@@ -145,18 +145,21 @@ const contents: Content[] = [
 
 const Aside = ({ data }: Props) => {
   return (
-    <aside className={styles.wrapper}>
-      {contents.map(content => (
-        <div
-          className={classnames(
-            { [styles.active]: content.isActive },
-            styles.item
-          )}
-          key={content.label}>
-          <div className={styles.label}>{content.label}</div>
-          <div className={styles.info}>{content.text(data)}</div>
-        </div>
-      ))}
+    <aside className={styles.container}>
+      {contents.map(
+        content =>
+          content.text(data) && (
+            <div
+              className={classnames(
+                { [styles.active]: content.isActive },
+                styles.item
+              )}
+              key={content.label}>
+              <div className={styles.label}>{content.label}</div>
+              <div className={styles.info}>{content.text(data)}</div>
+            </div>
+          )
+      )}
     </aside>
   )
 }
