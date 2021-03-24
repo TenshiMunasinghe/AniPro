@@ -1,11 +1,16 @@
 import React from 'react'
+import {
+  LazyComponentProps,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
 import { useParams } from 'react-router-dom'
 
 import { Overview } from '../../api/types'
 import Aside from '../../components/anime/Aside/Aside'
 import Header from '../../components/anime/Header/Header'
+import Relation from '../../components/anime/Relation/Relation'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
-import styles from './Anime.module.scss'
+import styles from './Media.module.scss'
 
 export const TAB = [
   'overview',
@@ -38,7 +43,7 @@ const filterTabs = (data: Overview) => {
   return tabs
 }
 
-const Anime = () => {
+const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'overview')
 
@@ -63,9 +68,23 @@ const Anime = () => {
       />
       <main className={styles.main}>
         <Aside data={data} />
+        <section className={styles.relations}>
+          {data.relations.edges.map(({ node, relationType }) => (
+            <Relation
+              key={node.id}
+              id={node.id}
+              image={node.coverImage.large}
+              title={node.title.romaji}
+              format={node.format}
+              status={node.status}
+              relation={relationType}
+              scrollPosition={scrollPosition}
+            />
+          ))}
+        </section>
       </main>
     </section>
   )
 }
 
-export default Anime
+export default trackWindowScroll(Media)

@@ -5,11 +5,16 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import loadable from '@loadable/component'
 
 import NavBar from './components/common/NavBar/NavBar'
-import { Theme, useThemeStore, useWindowSizeStore, WindowSizeStore } from './zustand/stores'
+import {
+  Theme,
+  useThemeStore,
+  useWindowSizeStore,
+  WindowSizeStore,
+} from './zustand/stores'
 
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
-const Anime = loadable(() => import('./pages/anime/Anime'))
+const Media = loadable(() => import('./pages/media/Media'))
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
@@ -41,8 +46,8 @@ const App = () => {
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path='/anime/:id'>
-            <Anime />
+          <Route exact path='/media/:id'>
+            <Media />
           </Route>
           <Route path='/'>
             <div id='container'>
