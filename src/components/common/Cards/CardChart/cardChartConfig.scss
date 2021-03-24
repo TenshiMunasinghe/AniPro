@@ -1,8 +1,6 @@
 @import '../../../../globalStyles/config.scss';
 
 @mixin card-wrapper {
-  --genre-height: 2.5em;
-
   display: flex;
   background: var(--color-foreground-100);
   border-radius: 0.1rem;
