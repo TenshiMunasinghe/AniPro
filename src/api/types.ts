@@ -178,9 +178,11 @@ export interface Overview extends Watch, Characters, Staff {
   popularity: number
   favourites: number
   studios: {
-    nodes: {
-      name: string
-    }[]
+    nodes:
+      | {
+          name: string
+        }[]
+      | undefined[]
   }
   source: string
   hashtag: string | null
