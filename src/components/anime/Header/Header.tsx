@@ -3,7 +3,7 @@ import React, { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 
 import { Overview } from '../../../api/types'
-import { TabsType } from '../../../pages/anime/Anime'
+import { TabsType } from '../../../pages/media/Media'
 import Tabs from '../Tabs/Tabs'
 import styles from './Header.module.scss'
 
@@ -32,7 +32,7 @@ const Header = ({
   } as CSSProperties
 
   return (
-    <header className={styles.wrapper} style={style}>
+    <header className={styles.container} style={style}>
       <div className={styles.banner} />
       <div className={styles.details}>
         <figure className={styles.cover}>

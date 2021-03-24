@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 
-import { ParamTypes, TabsType } from '../../../pages/anime/Anime'
+import { ParamTypes, TabsType } from '../../../pages/media/Media'
 import { toStartCase } from '../../../utils/toStartCase'
 import styles from './Tabs.module.scss'
 
