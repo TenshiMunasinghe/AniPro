@@ -1,0 +1,41 @@
+@import '../../../globalStyles/config.scss';
+
+.wrapper {
+  flex-shrink: 0;
+  display: flex;
+  margin-right: var(--space-400);
+  background: var(--color-foreground-50);
+
+  .imageWrapper {
+    position: relative;
+    span,
+    img {
+      width: 6rem;
+    }
+    img {
+      position: absolute;
+      height: 100%;
+      top: 0;
+    }
+  }
+
+  .content {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-400) var(--space-600) var(--space-400) var(--space-400);
+  }
+
+  .relationType,
+  .status {
+    font-size: var(--text-size-300);
+  }
+
+  .relationType {
+    color: var(--color-text-accent-100);
+  }
+
+  .title {
+    margin: var(--space-200) 0;
+  }
+}
