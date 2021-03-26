@@ -36,7 +36,7 @@ export const useFetchAnimeDetails = <T extends TabsType>(
           })
           .json()
 
-        if (!isMounted || !res) return
+        if (!isMounted.current || !res) return
 
         setData(res.data.Media)
       } catch (e) {
