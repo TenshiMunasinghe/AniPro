@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use 'sass:color';
+
+$-colors: (
+  'black': (
+    'hsl': hsl(0, 0%, 0%),
+    'precision': 5%,
+  ),
+  'white': (
+    'hsl': hsl(0, 0%, 55%),
+    'precision': 5%,
+  ),
+  'primary': (
+    'hsl': hsl(169, 36%, 0%),
+    'precision': 10%,
+  ),
+);
+
+:root {
+  @each $key, $val in $-colors {
+    @for $i from 1 to 10 {
+      --clr-#{$key}-#{$i * 100}: #{color.adjust(
+          $color: map.get($val, 'hsl'),
+          $lightness: $i * map.get($val, 'precision')
+        )};
+    }
+  }
+}
