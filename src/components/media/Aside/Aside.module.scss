@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .container {
   max-width: 100%;
   display: flex;

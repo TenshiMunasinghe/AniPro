@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .container {
   --image-width: calc(6rem + 7vw);
   --play-btn-size: 2.75rem;

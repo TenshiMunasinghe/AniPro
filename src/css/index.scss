@@ -1,6 +1,5 @@
+@use './config.scss';
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
-
-@import './config.scss';
 
 :root {
   --b-13: #080808;
@@ -46,7 +45,7 @@
 
   --scale: 1.2;
 
-  @include for-tablet-landscape-up {
+  @include config.for-tablet-landscape-up {
     --scale: 1.3;
   }
 
@@ -193,7 +192,7 @@ body {
   width: 100%;
   max-width: 1200px;
 
-  @include for-desktop-up {
+  @include config.for-desktop-up {
     padding: var(--space-500);
   }
 }

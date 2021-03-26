@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .form {
   display: flex;
   flex-direction: column;

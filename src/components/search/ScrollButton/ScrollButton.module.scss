@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .button {
   background: var(--color-foreground-200);
   position: fixed;

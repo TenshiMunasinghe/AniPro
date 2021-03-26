@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 @mixin transition {
   transition: opacity 0.06s ease-in-out, transform 0.1s ease-in-out;
 }

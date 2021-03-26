@@ -1,23 +1,23 @@
-@import '../../../css/config.scss';
-@import '../../../css/layout.scss';
+@use '../../../css/config.scss' as *;
+@use '../../../css/layout.scss';
 
 .wrapper {
   display: grid;
   justify-items: center;
 
   .slider {
-    @include grid-template;
+    @include layout.grid-template;
 
     &.cover {
-      @include grid-cover;
+      @include layout.grid-cover;
     }
 
     &.chart {
-      @include grid-chart;
+      @include layout.grid-chart;
     }
 
     &.table {
-      @include grid-table;
+      @include layout.grid-table;
     }
   }
 

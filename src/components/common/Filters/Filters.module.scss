@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .dropdowns {
   margin: 0 auto;
   display: grid;

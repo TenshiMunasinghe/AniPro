@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .wrapper {
   z-index: 1000;
   position: absolute;

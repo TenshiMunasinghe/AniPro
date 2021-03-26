@@ -1,4 +1,5 @@
-@import '../CardChart/cardChartConfig.scss';
+@use '../../../../css/config.scss' as *;
+@use '../CardChart/cardChartConfig.scss' as card-config;
 
 .genre {
   &#{&} {
@@ -7,7 +8,7 @@
 }
 
 .chart {
-  @include card-wrapper;
+  @include card-config.card-wrapper;
   .imageWrapper {
     position: relative;
     width: 45%;

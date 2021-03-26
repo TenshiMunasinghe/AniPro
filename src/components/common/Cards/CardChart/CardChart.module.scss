@@ -1,8 +1,8 @@
-@import '../../../../css/config.scss';
-@import './cardChartConfig.scss';
+@use '../../../../css/config.scss' as *;
+@use './cardChartConfig.scss' as card-config;
 
 .wrapper {
-  @include card-wrapper;
+  @include card-config.card-wrapper;
 
   a {
     overflow: hidden;

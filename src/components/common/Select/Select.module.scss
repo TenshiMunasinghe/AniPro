@@ -1,5 +1,4 @@
-@import '../../../css/config.scss';
-
+@use '../../../css/config.scss' as *;
 .wrapper {
   max-height: 5rem;
   width: 100%;
