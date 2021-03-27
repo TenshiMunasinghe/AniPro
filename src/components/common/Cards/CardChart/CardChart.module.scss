@@ -32,12 +32,13 @@
 
 .scrollWrapper {
   position: absolute;
-  width: 100%;
-  padding: var(--space-400);
+  left: 0;
+  right: 0;
+  padding: var(--space-500);
 }
 
 .cardHeader {
-  margin-bottom: var(--space-400);
+  margin-bottom: var(--space-500);
   margin-left: 0;
 
   .score {
@@ -106,10 +107,6 @@
 
   @include for-tablet-portrait-up {
     @include description(3);
-  }
-
-  @include for-tablet-landscape-up {
-    @include description(4);
   }
 
   * {
