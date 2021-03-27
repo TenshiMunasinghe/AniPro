@@ -1,0 +1,13 @@
+@use 'sass:math';
+@use './config.scss';
+
+:root {
+  @for $i from 1 to 10 {
+    --text-size-#{$i * 100}: #{math.pow(1.2, $i - 4)}rem;
+  }
+  @include config.for-tablet-landscape-up {
+    @for $i from 1 to 10 {
+      --text-size-#{$i * 100}: #{math.pow(1.3, $i - 4)}rem;
+    }
+  }
+}
