@@ -20,8 +20,8 @@
     background: var(--color-foreground-accent-100);
 
     @include mouse-effects(
-      var(--color-foreground-200),
-      var(--color-foreground-300)
+      var(--color-foreground-accent-200),
+      var(--color-foreground-accent-100)
     );
 
     &:hover,
