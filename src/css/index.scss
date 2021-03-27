@@ -40,7 +40,6 @@ body {
   font-size: var(--text-size-400);
 
   &.dark {
-    $bg: red;
     --color-background: var(--black-100);
     --color-foreground-50: var(--black-200);
     --color-foreground-100: var(--black-300);
@@ -64,7 +63,6 @@ body {
   }
 
   &.light {
-    $bg: blue;
     --color-background: var(--white-900);
     --color-foreground-50: var(--white-800);
     --color-foreground-100: var(--white-700);
