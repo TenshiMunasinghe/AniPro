@@ -58,7 +58,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--cl-primary-3);
+      background: var(--primary-500);
       box-shadow: 0 0.05em 0.025em 0.025em var(--color-shadow);
       text-decoration: none;
       width: 100%;
@@ -71,12 +71,12 @@
       }
 
       .text {
-        color: var(--w-5);
+        color: var(--white-600);
         margin-right: var(--space-200);
       }
 
       svg {
-        fill: var(--w-5);
+        fill: var(--white-600);
       }
 
       @include for-tablet-landscape-up {

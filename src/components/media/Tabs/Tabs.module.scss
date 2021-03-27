@@ -40,7 +40,7 @@
     &:hover {
       &:before {
         top: calc((100% - var(--border-height)) / 2);
-        background-color: var(--cl-primary-4);
+        background-color: var(--primary-400);
       }
       &:after {
         right: calc((50% + var(--border-width) / 2));

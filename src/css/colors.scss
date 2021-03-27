@@ -19,7 +19,7 @@ $-colors: (
 :root {
   @each $key, $val in $-colors {
     @for $i from 1 to 10 {
-      --clr-#{$key}-#{$i * 100}: #{color.adjust(
+      --#{$key}-#{$i * 100}: #{color.adjust(
           $color: map.get($val, 'hsl'),
           $lightness: $i * map.get($val, 'precision')
         )};
