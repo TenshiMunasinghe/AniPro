@@ -41,7 +41,7 @@ const Header = ({
         <a
           href={streamUrl || siteUrl || '#'}
           target='blank'
-          className={styles.watch}>
+          className={styles.button}>
           <span className={styles.text}>
             {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
           </span>
