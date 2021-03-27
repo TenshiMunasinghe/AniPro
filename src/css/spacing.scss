@@ -1,8 +1,7 @@
-@use 'sass:map';
 @use 'sass:math';
 
 :root {
   @for $i from 1 to 10 {
-    --spacing-#{$i * 100}: #{math.pow(math.cos(36deg) * 2, $i - 4)}em;
+    --space-#{$i * 100}: #{math.pow(math.cos(36deg) * 2, $i - 4)}em;
   }
 }
