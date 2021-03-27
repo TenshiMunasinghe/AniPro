@@ -10,7 +10,10 @@
   padding: 0.8rem;
   width: fit-content;
   height: fit-content;
-  @include mouse-effects;
+  @include mouse-effects(
+    var(--color-foreground-300),
+    var(--color-foreground-400)
+  );
 
   svg {
     width: 1.3rem;

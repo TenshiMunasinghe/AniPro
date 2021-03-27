@@ -64,7 +64,7 @@
       width: 100%;
       height: var(--play-btn-size);
       border-radius: 0.25em;
-      @include mouse-effects($active: 90%);
+      @include mouse-effects(var(--primary-600), var(--primary-400));
 
       &:active {
         transform: scale(0.98);

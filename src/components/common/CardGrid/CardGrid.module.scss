@@ -58,5 +58,8 @@
   transition: 0.05s all ease-in-out;
   border-radius: 0.1em;
 
-  @include mouse-effects;
+  @include mouse-effects(
+    var(--color-foreground-300),
+    var(--color-foreground-400)
+  );
 }

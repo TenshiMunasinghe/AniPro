@@ -9,7 +9,10 @@
   padding: 0.5em;
   width: 2.5em;
   height: 2.5em;
-  @include mouse-effects;
+  @include mouse-effects(
+    var(--color-foreground-200),
+    var(--color-foreground-300)
+  );
   &:focus-within {
     background: var(--color-highlight-100);
   }

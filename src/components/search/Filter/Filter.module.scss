@@ -1,4 +1,5 @@
 @use '../../../css/config.scss' as *;
+
 .wrapper {
   display: flex;
   align-items: center;
@@ -18,7 +19,10 @@
   &.primary {
     background: var(--color-foreground-accent-100);
 
-    @include mouse-effects(110%, 120%);
+    @include mouse-effects(
+      var(--color-foreground-200),
+      var(--color-foreground-300)
+    );
 
     &:hover,
     &:focus {
@@ -51,6 +55,9 @@
     svg {
       margin-left: 0.5em;
     }
-    @include mouse-effects;
+    @include mouse-effects(
+      var(--color-foreground-300),
+      var(--color-foreground-400)
+    );
   }
 }

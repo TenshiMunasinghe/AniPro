@@ -57,5 +57,8 @@
     background: transparent;
   }
 
-  @include mouse-effects;
+  @include mouse-effects(
+    var(--color-foreground-200),
+    var(--color-foreground-300)
+  );
 }

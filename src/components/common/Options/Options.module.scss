@@ -43,7 +43,10 @@
     line-height: 1.5;
   }
 
-  @include mouse-effects;
+  @include mouse-effects(
+    var(--color-foreground-300),
+    var(--color-foreground-400)
+  );
   @include on-hoverable-devices {
     &:hover {
       span {
