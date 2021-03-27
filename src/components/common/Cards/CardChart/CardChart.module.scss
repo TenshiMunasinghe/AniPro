@@ -85,10 +85,10 @@
     }
 
     .secondaryTitle {
-      font-weight: 300;
+      font-weight: 400;
       font-size: var(--text-size-200);
       margin-top: var(--space-200);
-      color: var(--color-text-200);
+      color: var(--color-text-300);
       @include add-ellipsis(1);
     }
   }
