@@ -59,6 +59,7 @@ body {
     --highlight-100: 120%;
     --highlight-200: 140%;
     --color-shadow: var(--black-200);
+    --lightness: 75%;
   }
 
   &.light {
@@ -81,6 +82,7 @@ body {
     --highlight-100: 90%;
     --highlight-200: 80%;
     --color-shadow: var(--black-900);
+    --lightness: 40%;
   }
 
   --header-height: 3rem;
