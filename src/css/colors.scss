@@ -1,15 +1,20 @@
 @use 'sass:map';
 @use 'sass:color';
 
-$-colors: (
+$-monochrome-colors: (
   'black': (
-    'hsl': hsl(0, 0%, 0%),
+    'alt-name': 'dark',
+    'hsl': hsl(0, 0%, 5%),
     'precision': 5%,
   ),
   'white': (
+    'alt-name': 'light',
     'hsl': hsl(0, 0%, 55%),
     'precision': 5%,
   ),
+);
+
+$-other-colors: (
   'primary': (
     'hsl': hsl(169, 36%, 10%),
     'precision': 7.5%,
@@ -17,11 +22,30 @@ $-colors: (
 );
 
 :root {
-  @each $key, $val in $-colors {
+  @each $key, $val in map.merge($-monochrome-colors, $-other-colors) {
     @for $i from 1 to 10 {
       --#{$key}-#{$i * 100}: #{color.adjust(
           $color: map.get($val, 'hsl'),
           $lightness: $i * map.get($val, 'precision')
+        )};
+    }
+  }
+
+  @each $key, $val in $-monochrome-colors {
+    @for $i from 1 to 10 {
+      --#{map.get($val, 'alt-name')}-#{$i * 100}: #{color.mix(
+          color.adjust(
+            $color: map.get($val, 'hsl'),
+            $lightness: $i * map.get($val, 'precision')
+          ),
+          color.change(
+            $color: map.get(map.get($-other-colors, 'primary'), 'hsl'),
+            $lightness:
+              $i *
+              map.get($val, 'precision') +
+              color.lightness(map.get($val, 'hsl'))
+          ),
+          80%
         )};
     }
   }
