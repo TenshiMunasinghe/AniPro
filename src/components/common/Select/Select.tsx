@@ -53,8 +53,6 @@ const Select = memo(
       setInputState('')
     }
 
-    const focusSelect = () => ref.current?.querySelector('input')?.focus()
-
     return (
       <div className={styles.wrapper}>
         <label className={styles.label} htmlFor={name}>
@@ -72,6 +70,7 @@ const Select = memo(
               value={inputState}
               id={name}
               name={name}
+              tabIndex={1}
               onChange={e => setInputState(e.target.value)}
             />
 
@@ -97,9 +96,13 @@ const Select = memo(
             )}
 
             {selected.length !== 0 ? (
-              <FaTimes onClick={resetSelect} aria-label='reset select' />
+              <FaTimes
+                onClick={resetSelect}
+                tabIndex={-1}
+                aria-label='reset select'
+              />
             ) : (
-              <FaAngleDown onClick={focusSelect} aria-label='open select' />
+              <FaAngleDown tabIndex={-1} aria-label='open select' />
             )}
           </div>
 
