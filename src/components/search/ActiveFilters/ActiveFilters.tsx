@@ -12,13 +12,16 @@ const ActiveFilters = memo(() => {
   const params = useMemo(() => new URLSearchParams(location.search), [
     location.search,
   ])
-  const updateUrlParams = useUpdateUrlParam()
+  const { addFilterOptions } = useUpdateUrlParam()
 
   const removeParam = (key: string, value: string) => {
-    updateUrlParams(params, {
-      key,
-      value: params.getAll(key).filter(v => v !== value),
-    })
+    addFilterOptions(
+      {
+        key,
+        value: params.getAll(key).filter(v => v !== value),
+      },
+      true
+    )
   }
   const paramArr = Array.from(params.entries())
   return (

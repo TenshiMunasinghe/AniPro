@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 
 import { SEARCH_TEXT } from '../../api/queries'
 import { QueryVar } from '../../api/types'
@@ -10,7 +9,11 @@ import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import { Countries, countryCode } from '../../filterOptions/countryCode'
-import { FilterOptionKeys, filterOptions, sortByOptions } from '../../filterOptions/filterOptions'
+import {
+  FilterOptionKeys,
+  filterOptions,
+  sortByOptions,
+} from '../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
@@ -26,13 +29,8 @@ const cardTypes = addKey(Object.keys(loadingCount))
 export type CardType = keyof typeof loadingCount
 
 const Search = () => {
-  const location = useLocation()
   const [cardType, setCardType] = useState<CardType>('chart')
-  const updateUrlParams = useUpdateUrlParam()
-
-  const search = useMemo(() => location.search, [location.search])
-
-  const params = useMemo(() => new URLSearchParams(search), [search])
+  const { addFilterOptions, params } = useUpdateUrlParam()
 
   const paramsObj = useMemo(
     () =>
@@ -70,14 +68,14 @@ const Search = () => {
 
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
-      updateUrlParams(params, { value, key: 'sortBy' })
+      addFilterOptions({ value, key: 'sortBy' }, false)
     },
-    [updateUrlParams, params]
+    [addFilterOptions]
   )
 
   return (
     <>
-      <Filters filterQuery={search} />
+      <Filters />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
