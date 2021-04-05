@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
@@ -49,7 +49,7 @@ const NavBar = () => {
   return (
     <nav
       className={classnames(styles.wrapper, { [styles.visible]: isVisible })}
-      ref={wrapperRef as RefObject<HTMLElement>}>
+      ref={wrapperRef}>
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
