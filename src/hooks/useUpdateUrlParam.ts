@@ -1,5 +1,5 @@
-import { useCallback } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { QueryVar } from '../api/types'
 
@@ -16,7 +16,7 @@ type KeyValue = {
   key: string
 }
 
-const setParam = ({ params, value, key }: setParamArg) => {
+const addParam = ({ params, value, key }: setParamArg) => {
   if (value.length === 0) {
     params.delete(key)
     return
@@ -33,19 +33,49 @@ const setParam = ({ params, value, key }: setParamArg) => {
 
 export const useUpdateUrlParam = () => {
   const history = useHistory()
+  const location = useLocation()
 
-  return useCallback(
-    (params: URLSearchParams, obj: KeyValue | Partial<QueryVar>) => {
-      if ('key' in obj && 'value' in obj) {
-        setParam({ value: obj.value, key: obj.key, params })
-      } else {
-        Object.entries(obj).forEach(
-          ([key, value]) =>
-            value && setParam({ value: String(value), key, params })
-        )
-      }
-      history.push(`/search${params ? `/?${params}` : ''}`)
+  const [params, setParams] = useState({
+    query: new URLSearchParams(location.search).toString(),
+    willApply: false,
+  })
+
+  useEffect(() => {
+    if (params.willApply) {
+      history.push(`/search${params.query ? `/?${params.query}` : ''}`)
+    }
+  }, [params, history])
+
+  const addFilterOptions = useCallback(
+    (obj: KeyValue | Partial<QueryVar>, willApply: boolean) => {
+      setParams(prev => {
+        const params = new URLSearchParams(prev.query)
+        if ('key' in obj && 'value' in obj) {
+          addParam({ value: obj.value, key: obj.key, params })
+        } else {
+          Object.entries(obj).forEach(
+            ([key, value]) =>
+              value && addParam({ value: String(value), key, params })
+          )
+        }
+        console.log(params.toString())
+
+        return { query: params.toString(), willApply }
+      })
     },
-    [history]
+    []
   )
+
+  const applyFilter = () => {
+    setParams(prev => ({
+      ...prev,
+      willApply: true,
+    }))
+  }
+
+  return {
+    addFilterOptions,
+    applyFilter,
+    params: new URLSearchParams(params.query),
+  }
 }
