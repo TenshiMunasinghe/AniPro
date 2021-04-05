@@ -19,16 +19,17 @@ interface Props {
 }
 
 const Content = ({ queryVar, content }: Props) => {
-  const updateUrLParam = useUpdateUrlParam()
+  const { addFilterOptions } = useUpdateUrlParam()
 
   const filterQuery = Object.fromEntries(
-    Object.entries(queryVar).filter(([k, _]) =>
+    Object.entries(queryVar).filter(([k]) =>
       //filter out the query variable which is not a filter option(eg:perPage)
       Object.keys(filterOptions).includes(k)
     )
   )
-  const setFilterQuery = () =>
-    updateUrLParam(new URLSearchParams(), filterQuery as Partial<QueryVar>)
+  const setFilterQuery = () => {
+    addFilterOptions(filterQuery as Partial<QueryVar>, true)
+  }
 
   return (
     <section className={styles.content}>
