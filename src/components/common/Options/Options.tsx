@@ -34,8 +34,7 @@ const Options = ({
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
           <button
-            onClick={e => {
-              e.stopPropagation()
+            onClick={() => {
               handleChange(o.value)
             }}
             tabIndex={-1}>
