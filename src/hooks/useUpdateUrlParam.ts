@@ -41,15 +41,19 @@ export const useUpdateUrlParam = () => {
   })
 
   useEffect(() => {
-    if (params.willApply) {
+    if (
+      params.willApply &&
+      new URLSearchParams(location.search).toString() !== params.query
+    ) {
       history.push(`/search${params.query ? `/?${params.query}` : ''}`)
     }
-  }, [params, history])
+  }, [params, history, location.search])
 
   const addFilterOptions = useCallback(
     (obj: KeyValue | Partial<QueryVar>, willApply: boolean) => {
       setParams(prev => {
         const params = new URLSearchParams(prev.query)
+
         if ('key' in obj && 'value' in obj) {
           addParam({ value: obj.value, key: obj.key, params })
         } else {
@@ -58,7 +62,6 @@ export const useUpdateUrlParam = () => {
               value && addParam({ value: String(value), key, params })
           )
         }
-        console.log(params.toString())
 
         return { query: params.toString(), willApply }
       })
