@@ -73,7 +73,7 @@
 @mixin mouse-effects($hover, $active, $change) {
   $things-to-change: (
     txt: 'color',
-    'bg': 'background-color',
+    bg: 'background-color',
   );
   @include on-hoverable-devices {
     &:hover,
