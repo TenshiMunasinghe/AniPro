@@ -60,6 +60,7 @@
 
   @include mouse-effects(
     var(--color-foreground-300),
-    var(--color-foreground-400)
+    var(--color-foreground-400),
+    bg
   );
 }

@@ -21,7 +21,8 @@
 
     @include mouse-effects(
       var(--color-foreground-accent-200),
-      var(--color-foreground-accent-100)
+      var(--color-foreground-accent-100),
+      bg
     );
 
     &:hover,
@@ -57,7 +58,8 @@
     }
     @include mouse-effects(
       var(--color-foreground-300),
-      var(--color-foreground-400)
+      var(--color-foreground-400),
+      bg
     );
   }
 }

@@ -70,7 +70,7 @@
   }
 }
 
-@mixin mouse-effects($hover, $active, $change: 'bg') {
+@mixin mouse-effects($hover, $active, $change) {
   $things-to-change: (
     txt: 'color',
     'bg': 'background-color',
