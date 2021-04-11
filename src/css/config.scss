@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @mixin for-phone-only {
   @media (max-width: 599px) {
     @content;
@@ -68,15 +70,27 @@
   }
 }
 
-@mixin mouse-effects($hover, $active) {
+@mixin mouse-effects($hover, $active, $change: 'bg') {
+  $things-to-change: (
+    txt: 'color',
+    'bg': 'background-color',
+  );
   @include on-hoverable-devices {
     &:hover,
     &:focus {
-      background-color: $hover;
+      @if ($hover == 'underline') {
+        text-decoration: underline;
+      } @else {
+        #{map.get($things-to-change, $change)}: $hover;
+      }
     }
   }
   &:active {
-    background-color: $active;
+    @if ($active == 'underline') {
+      text-decoration: underline;
+    } @else {
+      #{map.get($things-to-change, $change)}: $active;
+    }
   }
 }
 
