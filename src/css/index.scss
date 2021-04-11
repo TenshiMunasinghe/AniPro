@@ -48,12 +48,13 @@ body {
     --color-foreground-400: var(--dark-600);
     --color-foreground-accent-100: var(--primary-500);
     --color-foreground-accent-200: var(--primary-600);
+    --color-foreground-accent-300: var(--primary-700);
     --color-text-100: var(--white-500);
     --color-text-200: var(--white-400);
     --color-text-300: var(--white-300);
-    --color-text-accent-100: var(--primary-700);
+    --color-text-accent-100: var(--primary-800);
     --color-text-accent-200: var(--primary-600);
-    --color-text-accent-300: var(--primary-500);
+    --color-text-accent-300: var(--primary-400);
     --color-border-100: var(--white-200);
     --color-border-200: var(--white-100);
     --color-underline-100: var(--black-900);
@@ -64,19 +65,20 @@ body {
   }
 
   &.light {
-    --color-background: var(--light-400);
-    --color-foreground-50: var(--light-500);
-    --color-foreground-100: var(--light-600);
-    --color-foreground-200: var(--light-700);
-    --color-foreground-300: var(--light-800);
-    --color-foreground-400: var(--light-900);
-    --color-foreground-accent-100: var(--primary-300);
-    --color-foreground-accent-200: var(--primary-200);
+    --color-background: var(--light-900);
+    --color-foreground-50: var(--light-800);
+    --color-foreground-100: var(--light-700);
+    --color-foreground-200: var(--light-600);
+    --color-foreground-300: var(--light-500);
+    --color-foreground-400: var(--light-400);
+    --color-foreground-accent-100: var(--primary-400);
+    --color-foreground-accent-200: var(--primary-300);
+    --color-foreground-accent-300: var(--primary-200);
     --color-text-100: var(--black-100);
     --color-text-200: var(--black-200);
     --color-text-300: var(--black-300);
-    --color-text-accent-100: var(--primary-300);
-    --color-text-accent-200: var(--primary-400);
+    --color-text-accent-100: var(--primary-100);
+    --color-text-accent-200: var(--primary-300);
     --color-text-accent-300: var(--primary-500);
     --color-border-100: var(--black-800);
     --color-border-200: var(--black-900);
