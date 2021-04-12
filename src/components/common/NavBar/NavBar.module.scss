@@ -1,20 +1,12 @@
 @use '../../../css/config.scss' as *;
 .wrapper {
-  position: fixed;
   width: 100vw;
   display: flex;
-  padding: 0 1rem;
+  padding: var(--space-100) var(--space-400);
   align-items: center;
   justify-content: space-between;
-  height: var(--header-height);
   background: var(--color-foreground-100);
-  transition: all 0.2s ease-in-out;
   z-index: 9999;
-  top: calc(var(--header-height) * -1);
-
-  &.visible {
-    top: 0;
-  }
 }
 
 .heading {

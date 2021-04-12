@@ -10,11 +10,7 @@ import styles from './NavBar.module.scss'
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
 const NavBar = () => {
-  const [isVisible, setIsVisible] = useState(true)
   const { theme, setTheme } = useThemeStore(themeSelector)
-  const lastScroll = useRef(0)
-  const wrapperRef = useRef<HTMLElement>(null)
-
   const onChange = useCallback(
     () =>
       setTheme(({ theme }) =>
@@ -23,33 +19,8 @@ const NavBar = () => {
     [setTheme]
   )
 
-  useEffect(() => {
-    const onScroll = () => {
-      const currentScroll = window.pageYOffset
-
-      if (!wrapperRef.current) {
-        return
-      }
-
-      if (currentScroll < wrapperRef.current.offsetHeight) {
-        setIsVisible(true)
-      } else if (currentScroll > lastScroll.current) {
-        setIsVisible(false)
-      } else {
-        setIsVisible(true)
-      }
-
-      lastScroll.current = currentScroll
-    }
-    document.addEventListener('scroll', onScroll)
-
-    return () => document.removeEventListener('scroll', onScroll)
-  }, [])
-
   return (
-    <nav
-      className={classnames(styles.wrapper, { [styles.visible]: isVisible })}
-      ref={wrapperRef}>
+    <nav className={styles.wrapper}>
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
