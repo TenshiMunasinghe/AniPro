@@ -1,10 +1,15 @@
 import React from 'react'
 
-import { currentSeason, currentYear, nextSeason, nextYear } from '../../api/queries'
+import {
+  currentSeason,
+  currentYear,
+  nextSeason,
+  nextYear,
+} from '../../api/queries'
 import { QueryVar, SearchResult } from '../../api/types'
-import Filters from '../../components/common/Filters/Filters'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
+import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
@@ -82,7 +87,7 @@ const Home = () => {
 
   return (
     <>
-      <Filters />
+      <SearchOptions />
       <main className={styles.wrapper}>
         {Object.keys(queryVars).map(k => {
           const key = k as keyof Medias

@@ -4,7 +4,6 @@ import { SEARCH_TEXT } from '../../api/queries'
 import { QueryVar } from '../../api/types'
 import CardGrid from '../../components/common/CardGrid/CardGrid'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
-import Filters from '../../components/common/Filters/Filters'
 import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
@@ -17,6 +16,7 @@ import {
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
+import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
 
 const loadingCount = {
   chart: 4,
@@ -30,14 +30,14 @@ export type CardType = keyof typeof loadingCount
 
 const Search = () => {
   const [cardType, setCardType] = useState<CardType>('chart')
-  const { addFilterOptions, params } = useUpdateUrlParam()
+  const { addFilterOptions, initialParams } = useUpdateUrlParam()
 
   const paramsObj = useMemo(
     () =>
       Object.fromEntries(
-        Array.from(params.keys()).map(key => {
+        Array.from(initialParams.keys()).map(key => {
           if (key === SEARCH_TEXT) {
-            return [SEARCH_TEXT, params.get(SEARCH_TEXT)]
+            return [SEARCH_TEXT, initialParams.get(SEARCH_TEXT)]
           }
           if (!Object.keys(filterOptions).includes(key)) {
             return []
@@ -47,13 +47,13 @@ const Search = () => {
             !filterOptions[key as FilterOptionKeys].isMulti ||
             key === SEARCH_TEXT
           ) {
-            return [key, params.get(key)]
+            return [key, initialParams.get(key)]
           } else {
-            return [key, params.getAll(key)]
+            return [key, initialParams.getAll(key)]
           }
         })
       ),
-    [params]
+    [initialParams]
   )
 
   const queryVariables: QueryVar = useMemo(() => {
@@ -75,14 +75,14 @@ const Search = () => {
 
   return (
     <>
-      <Filters />
+      <SearchOptions />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
           <SimpleSelect
             onChange={sortByOnChange}
             isMulti={false}
             options={sortByOptions}
-            selected={params.get('sortBy') || 'TRENDING_DESC'}
+            selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
           />
           <section className={styles.gridType}>
             {cardTypes.map(c => (
