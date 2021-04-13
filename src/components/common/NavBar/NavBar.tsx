@@ -4,6 +4,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
+import SearchBar from '../SearchBar/SearchBar'
 import Switch from '../Switch/Switch'
 import styles from './NavBar.module.scss'
 
@@ -20,10 +21,11 @@ const NavBar = () => {
   )
 
   return (
-    <nav className={styles.wrapper}>
+    <nav className={styles.container}>
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
+      <SearchBar />
       <Switch
         onChange={onChange}
         On={FaSun}

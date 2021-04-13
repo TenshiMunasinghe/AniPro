@@ -1,17 +1,35 @@
 @use '../../../css/config.scss' as *;
-.wrapper {
+.container {
+  --margin: var(--space-300);
+
+  @include for-tablet-portrait-up {
+    --margin: var(--space-500);
+  }
+
   width: 100vw;
   display: flex;
-  padding: var(--space-100) var(--space-400);
+  padding: var(--space-200) var(--margin);
   align-items: center;
-  justify-content: space-between;
   background: var(--color-foreground-100);
   z-index: 9999;
+
+  form {
+    flex-basis: 45rem;
+  }
+
+  label {
+    margin-left: var(--margin);
+    flex-shrink: 0;
+
+    @include for-tablet-portrait-up {
+      margin-left: auto;
+    }
+  }
 }
 
 .heading {
-  font-size: 1.15rem;
-  margin-left: 1em;
+  font-size: var(--text-size-500);
+  margin-right: var(--margin);
 
   &:hover {
     a {

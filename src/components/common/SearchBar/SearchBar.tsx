@@ -24,25 +24,22 @@ const SearchBar = () => {
 
   return (
     <form onSubmit={onSubmit} autoComplete='off' className={styles.form}>
-      <label htmlFor={SEARCH_TEXT}>Search (･ω･≡･ω･)</label>
-      <div className={styles.searchBar}>
-        <input
-          className={styles.input}
-          name={SEARCH_TEXT}
-          id={SEARCH_TEXT}
-          ref={register}
-          type='text'
-          placeholder='Type here ＼_( ﾟﾛﾟ)'
-          aria-label='searchbar'
-        />
-        <button
-          className={styles.submitButton}
-          type='submit'
-          disabled={formState.isSubmitting}
-          aria-label='search button'>
-          <FaSearch aria-label='search icon' />
-        </button>
-      </div>
+      <input
+        className={styles.input}
+        name={SEARCH_TEXT}
+        id={SEARCH_TEXT}
+        ref={register}
+        type='text'
+        placeholder='search'
+        aria-label='searchbar'
+      />
+      <button
+        className={styles.submitButton}
+        type='submit'
+        disabled={formState.isSubmitting}
+        aria-label='search button'>
+        <FaSearch aria-label='search icon' />
+      </button>
     </form>
   )
 }

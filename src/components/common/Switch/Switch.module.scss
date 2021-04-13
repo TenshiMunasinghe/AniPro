@@ -1,14 +1,15 @@
 @use '../../../css/config.scss' as *;
 .switch {
+  --size: 2.5rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 1em;
-  border-radius: 1.25em;
+  border-radius: calc(var(--size) / 2);
   cursor: pointer;
-  padding: 0.5em;
-  width: 2.5em;
-  height: 2.5em;
+  padding: var(--space-200);
+  width: var(--size);
+  height: var(--size);
   @include mouse-effects(
     var(--color-foreground-200),
     var(--color-foreground-300),
