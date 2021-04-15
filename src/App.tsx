@@ -18,6 +18,8 @@ const Media = loadable(() => import('./pages/media/Media'))
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
+export const linkToAnimePage = (id: number) => `/anime/${id}`
+
 const App = () => {
   const setSize = useWindowSizeStore(windowSizeSelector)
   const updateSize = useMemo(

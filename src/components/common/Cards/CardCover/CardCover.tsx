@@ -6,6 +6,7 @@ import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
 import Popover from '../../Popover/Popover'
 import styles from './CardCover.module.scss'
+import { linkToAnimePage } from '../../../../App'
 
 interface Props {
   id: number
@@ -48,8 +49,6 @@ const CardCover = memo(
     const showPopover = () => setIsPopoverVisible(true)
     const hidePopover = () => setIsPopoverVisible(false)
 
-    const url = `/anime/${id}`
-
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),
       '--color-original': color ? color : 'var(--color-foreground-100)',
@@ -65,7 +64,10 @@ const CardCover = memo(
         style={_style}>
         <article className={styles.wrapper}>
           {rank && <div className={styles.rank}>#{rank}</div>}
-          <Link to={url} tabIndex={-1} className={styles.imageWrapper}>
+          <Link
+            to={linkToAnimePage(id)}
+            tabIndex={-1}
+            className={styles.imageWrapper}>
             <LazyLoadImage
               className={styles.image}
               src={image}
@@ -74,7 +76,7 @@ const CardCover = memo(
               effect='opacity'
             />
           </Link>
-          <Link to={url} className={styles.titleWrapper}>
+          <Link to={linkToAnimePage(id)} className={styles.titleWrapper}>
             <h3 className={styles.title}>{title.romaji}</h3>
           </Link>
         </article>

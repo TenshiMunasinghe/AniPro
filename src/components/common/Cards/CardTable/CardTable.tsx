@@ -12,6 +12,7 @@ import { toStartCase } from '../../../../utils/toStartCase'
 import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../../Genres/Genres'
 import styles from './CardTable.module.scss'
+import { linkToAnimePage } from '../../../../App'
 
 interface Props {
   id: number
@@ -57,8 +58,6 @@ const CardTable = memo(
     scrollPosition,
     color,
   }: Props) => {
-    const url = `/media/${id}`
-
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),
       '--color-original': color,
@@ -69,7 +68,7 @@ const CardTable = memo(
       <article className={styles.wrapper} style={_style}>
         {rank && <div className={styles.rank}>#{rank}</div>}
         <div className={styles.card}>
-          <Link to={url} className={styles.imageWrapper}>
+          <Link to={linkToAnimePage(id)} className={styles.imageWrapper}>
             <LazyLoadImage
               src={image.cover}
               alt={title.romaji}
@@ -80,7 +79,7 @@ const CardTable = memo(
 
           <div className={styles.content}>
             <div className={styles.header}>
-              <Link to={url}>{title.romaji}</Link>
+              <Link to={linkToAnimePage(id)}>{title.romaji}</Link>
               <Genres
                 as='section'
                 genres={genres}
