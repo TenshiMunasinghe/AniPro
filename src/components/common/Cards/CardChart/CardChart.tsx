@@ -8,7 +8,7 @@ import { adjustColor } from '../../../../utils/adjustColor'
 import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../../Genres/Genres'
 import styles from './CardChart.module.scss'
-import { linkToAnimePage } from '../../../../App'
+import { linkToMediaPage } from '../../../../App'
 
 interface Props {
   id: number
@@ -40,7 +40,7 @@ const CardChart = memo(
     return (
       <article className={styles.wrapper} style={_style}>
         <Link
-          to={linkToAnimePage(id)}
+          to={linkToMediaPage(id)}
           aria-label={title.romaji}
           className={styles.imageWrapper}>
           <LazyLoadImage
@@ -57,7 +57,7 @@ const CardChart = memo(
               <header className={styles.cardHeader}>
                 <div className={styles.title}>
                   <h3 className={styles.primaryTitle}>
-                    <Link to={linkToAnimePage(id)}>{title.romaji}</Link>
+                    <Link to={linkToMediaPage(id)}>{title.romaji}</Link>
                   </h3>
                   <h4 className={styles.secondaryTitle}>
                     {title.english || title.romaji}

@@ -18,7 +18,7 @@ const Media = loadable(() => import('./pages/media/Media'))
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
-export const linkToAnimePage = (id: number) => `/anime/${id}`
+export const linkToMediaPage = (id: number) => `/media/${id}`
 
 const App = () => {
   const setSize = useWindowSizeStore(windowSizeSelector)

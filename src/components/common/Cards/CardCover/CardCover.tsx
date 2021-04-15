@@ -6,7 +6,7 @@ import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
 import Popover from '../../Popover/Popover'
 import styles from './CardCover.module.scss'
-import { linkToAnimePage } from '../../../../App'
+import { linkToMediaPage } from '../../../../App'
 
 interface Props {
   id: number
@@ -65,7 +65,7 @@ const CardCover = memo(
         <article className={styles.wrapper}>
           {rank && <div className={styles.rank}>#{rank}</div>}
           <Link
-            to={linkToAnimePage(id)}
+            to={linkToMediaPage(id)}
             tabIndex={-1}
             className={styles.imageWrapper}>
             <LazyLoadImage
@@ -76,7 +76,7 @@ const CardCover = memo(
               effect='opacity'
             />
           </Link>
-          <Link to={linkToAnimePage(id)} className={styles.titleWrapper}>
+          <Link to={linkToMediaPage(id)} className={styles.titleWrapper}>
             <h3 className={styles.title}>{title.romaji}</h3>
           </Link>
         </article>
