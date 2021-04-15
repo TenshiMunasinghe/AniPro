@@ -3,20 +3,19 @@ import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 
-import { SEARCH_TEXT } from '../../../api/queries'
 import styles from './SearchBar.module.scss'
 
 const SearchBar = () => {
   const history = useHistory()
   const { handleSubmit, register, formState } = useForm<{
-    [SEARCH_TEXT]: string
+    ['searchText']: string
   }>()
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
       handleSubmit(values => {
         e.preventDefault()
-        history.push(`/search?${SEARCH_TEXT}=${values[SEARCH_TEXT]}`)
+        history.push(`/search?${'searchText'}=${values['searchText']}`)
       })()
     },
     [history, handleSubmit]
@@ -26,8 +25,8 @@ const SearchBar = () => {
     <form onSubmit={onSubmit} autoComplete='off' className={styles.form}>
       <input
         className={styles.input}
-        name={SEARCH_TEXT}
-        id={SEARCH_TEXT}
+        name={'searchText'}
+        id={'searchText'}
         ref={register}
         type='text'
         placeholder='search'

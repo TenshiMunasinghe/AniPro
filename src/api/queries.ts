@@ -24,8 +24,6 @@ export const nextSeason = next ? next.name : ''
 
 export const nextYear = dateNext.getFullYear()
 
-export const SEARCH_TEXT = 'search'
-
 export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 
 // const connection =
@@ -55,6 +53,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
       pageInfo {
         currentPage
         hasNextPage
+        lastPage
       }
       media(
         genre_in: $genres
