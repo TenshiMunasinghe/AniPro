@@ -19,6 +19,7 @@ export interface QueryData {
     pageInfo: {
       currentPage: number
       hasNextPage: boolean
+      lastPage: number
     }
     media: {
       id: number
@@ -60,7 +61,7 @@ export interface QueryData {
   }
 }
 
-export type NextPageInfo = QueryData['Page']['pageInfo']
+export type PageInfo = QueryData['Page']['pageInfo']
 
 export type SearchResult = QueryData['Page']['media'][number]
 
