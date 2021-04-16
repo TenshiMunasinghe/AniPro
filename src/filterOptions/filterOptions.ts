@@ -91,10 +91,17 @@ export const filterOptionTypes = {
   },
 }
 
-export const filterOptions = {
+const filterOptions = {
   ...filterOptionTypes.default,
   ...filterOptionTypes.simple,
 }
+
+export const allowedURLParams = [
+  ...Object.keys(filterOptions),
+  'searchText',
+  'page',
+  'perPage',
+]
 
 export type FilterOptionKeys = keyof typeof filterOptions
 
