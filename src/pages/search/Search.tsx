@@ -1,18 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
-import { SEARCH_TEXT } from '../../api/queries'
-import { QueryVar } from '../../api/types'
 import CardGrid from '../../components/common/CardGrid/CardGrid'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import { Countries, countryCode } from '../../filterOptions/countryCode'
-import {
-  FilterOptionKeys,
-  filterOptions,
-  sortByOptions,
-} from '../../filterOptions/filterOptions'
+import { sortByOptions } from '../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
@@ -32,43 +25,9 @@ const Search = () => {
   const [cardType, setCardType] = useState<CardType>('chart')
   const { addFilterOptions, initialParams } = useUpdateUrlParam()
 
-  const paramsObj = useMemo(
-    () =>
-      Object.fromEntries(
-        Array.from(initialParams.keys()).map(key => {
-          if (key === SEARCH_TEXT) {
-            return [SEARCH_TEXT, initialParams.get(SEARCH_TEXT)]
-          }
-          if (!Object.keys(filterOptions).includes(key)) {
-            return []
-          }
-
-          if (
-            !filterOptions[key as FilterOptionKeys].isMulti ||
-            key === SEARCH_TEXT
-          ) {
-            return [key, initialParams.get(key)]
-          } else {
-            return [key, initialParams.getAll(key)]
-          }
-        })
-      ),
-    [initialParams]
-  )
-
-  const queryVariables: QueryVar = useMemo(() => {
-    return {
-      ...paramsObj,
-      sortBy: paramsObj.sortBy ? paramsObj.sortBy : 'TRENDING_DESC',
-      searchText: paramsObj[SEARCH_TEXT] ? paramsObj[SEARCH_TEXT] : null,
-      country: countryCode[paramsObj.country as Countries],
-      perPage: 10,
-    }
-  }, [paramsObj])
-
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
-      addFilterOptions({ value, key: 'sortBy' }, false)
+      addFilterOptions({ sortBy: value as string }, true)
     },
     [addFilterOptions]
   )
@@ -101,11 +60,11 @@ const Search = () => {
 
       <main>
         <CardGrid
-          queryVariables={queryVariables}
+          params={initialParams}
           cardType={cardType}
           imageSize='large'
           loadingCount={loadingCount[cardType]}
-          allowLoadMore={true}
+          hasPages={true}
         />
       </main>
       <ScrollButton />
