@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react'
 
-import { adjustColor } from '../../../utils/adjustColor'
+import { adjustColor } from '../../../../utils/adjustColor'
 import styles from './Genre.module.scss'
 
 interface Props {

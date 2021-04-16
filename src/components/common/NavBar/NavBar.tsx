@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 import SearchBar from '../SearchBar/SearchBar'
-import Switch from '../Switch/Switch'
+import Switch from './Switch/Switch'
 import styles from './NavBar.module.scss'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })

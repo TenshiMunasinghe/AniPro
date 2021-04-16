@@ -1,17 +1,20 @@
 import classnames from 'classnames'
 import React, { memo, useLayoutEffect, useRef, useState } from 'react'
 
-import { SearchResult } from '../../../api/types'
-import { adjustColor } from '../../../utils/adjustColor'
-import { airingInfo } from '../../../utils/airingInfo'
-import { convertTime } from '../../../utils/convertTIme'
-import { formatLabel } from '../../../utils/formatLabel'
-import { pluralize } from '../../../utils/pluralize'
-import { timeToArr } from '../../../utils/timeToArr'
-import { timeToStr } from '../../../utils/timeToStr'
-import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
-import FaceIcon from '../FaceIcon/FaceIcon'
-import Genres from '../Genres/Genres'
+import { SearchResult } from '../../../../../api/types'
+import { adjustColor } from '../../../../../utils/adjustColor'
+import { airingInfo } from '../../../../../utils/airingInfo'
+import { convertTime } from '../../../../../utils/convertTIme'
+import { formatLabel } from '../../../../../utils/formatLabel'
+import { pluralize } from '../../../../../utils/pluralize'
+import { timeToArr } from '../../../../../utils/timeToArr'
+import { timeToStr } from '../../../../../utils/timeToStr'
+import {
+  useWindowSizeStore,
+  WindowSizeStore,
+} from '../../../../../zustand/stores'
+import FaceIcon from '../../../FaceIcon/FaceIcon'
+import Genres from '../../../Genres/Genres'
 import styles from './Popover.module.scss'
 
 interface Props {

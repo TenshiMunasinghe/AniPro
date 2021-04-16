@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
-import Popover from '../../Popover/Popover'
+import Popover from './Popover/Popover'
 import styles from './CardCover.module.scss'
 import { linkToMediaPage } from '../../../../App'
 

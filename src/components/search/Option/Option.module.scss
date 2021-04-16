@@ -1,0 +1,61 @@
+@use '../../../css/config.scss' as *;
+
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  width: fit-content;
+  cursor: pointer;
+
+  &:focus-within {
+    outline: solid 0.1em var(--color-border-100);
+  }
+}
+
+.checkbox {
+  opacity: 0;
+  transform: scale(0);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.checkMark {
+  display: grid;
+  place-items: center;
+  height: 1.25em;
+  width: 1.25em;
+  background: var(--color-foreground-200);
+  border: 0.1em solid var(--color-border-100);
+  border-radius: 0.25em;
+  margin-right: var(--space-300);
+
+  svg {
+    transform: scale(1);
+    transition: transform 0.125s ease-in-out;
+  }
+
+  &.hide {
+    svg {
+      transform: scale(0);
+    }
+  }
+
+  @include mouse-effects(
+    var(--color-foreground-200),
+    var(--color-foreground-400),
+    bg
+  );
+
+  &:active {
+    border-color: var(--color-border-200);
+  }
+}
+
+.option {
+  line-height: 1;
+
+  &:hover {
+    color: var(--color-text-100);
+  }
+}

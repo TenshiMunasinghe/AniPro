@@ -2,7 +2,7 @@ import React, { memo, RefObject } from 'react'
 import { FaSort } from 'react-icons/fa'
 
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import Options from '../Options/Options'
+import Items from './Items/Items'
 import styles from './Dropdown.module.scss'
 
 interface Props {
@@ -46,7 +46,7 @@ const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
           {options.find(o => o.value === selected)?.label}
         </div>
       </button>
-      <Options
+      <Items
         isVisible={isFocused}
         options={options}
         handleChange={handleChange}
