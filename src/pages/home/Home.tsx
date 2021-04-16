@@ -9,7 +9,6 @@ import {
 import { QueryVar, SearchResult } from '../../api/types'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
-import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
@@ -87,7 +86,6 @@ const Home = () => {
 
   return (
     <>
-      <SearchOptions />
       <main className={styles.wrapper}>
         {Object.keys(queryVars).map(k => {
           const key = k as keyof Medias
