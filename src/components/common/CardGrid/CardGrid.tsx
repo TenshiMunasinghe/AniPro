@@ -6,7 +6,7 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 
-import { QueryVar, SearchResult } from '../../../api/types'
+import { SearchResult } from '../../../api/types'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
@@ -15,40 +15,37 @@ import CardLoading from '../Cards/CardLoading/CardLoading'
 import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { URLSearchParams } from 'url'
 
 interface Medias extends SearchResult {
   rank?: number | null
 }
 
 interface Props extends LazyComponentProps {
-  queryVariables: Partial<QueryVar>
+  params: URLSearchParams
   cardType: CardType
   imageSize: 'large' | 'extraLarge'
   loadingCount: number
   hasRank?: boolean
-  allowLoadMore: boolean
+  hasPages: boolean
   sideScroll?: boolean
 }
 
+const PAGES = [-2, -1, 0, 1, 2]
+
 const CardGrid = ({
-  queryVariables,
+  params,
   cardType,
   imageSize,
   loadingCount,
   hasRank = false,
-  allowLoadMore,
+  hasPages,
   sideScroll = false,
   scrollPosition,
 }: Props) => {
-  const {
-    medias,
-    loading,
-    error,
-    fetchData,
-    nextPageInfo,
-  } = useFetchSearchResult({
-    queryVariables,
-  })
+  const { medias, loading, error, pageInfo } = useFetchSearchResult(params)
+  const { addFilterOptions } = useUpdateUrlParam()
 
   const _medias: Medias[] | null = useMemo(() => {
     if (!medias) return null
@@ -69,8 +66,8 @@ const CardGrid = ({
     return <NotFound />
   }
 
-  const fetchMore = () => {
-    allowLoadMore && fetchData({ queryVariables, paginate: true })
+  const redirectToPage = (page: number) => {
+    addFilterOptions({ page }, true)
   }
 
   return (
@@ -156,10 +153,34 @@ const CardGrid = ({
             <CardLoading type={cardType} key={i} />
           ))}
       </section>
-      {!loading && !error && nextPageInfo.hasNextPage && allowLoadMore && (
-        <button className={styles.loadMore} onClick={fetchMore}>
-          Load More! щ(ﾟДﾟщ)
-        </button>
+      {!error && !loading && hasPages && (
+        <section className={styles.pages}>
+          <button className={styles.page} onClick={() => redirectToPage(1)}>
+            {'<<'}
+          </button>
+          {PAGES.map(p => {
+            const page = pageInfo.currentPage + p
+
+            if (page <= 0 || page > pageInfo.lastPage) return null
+
+            return (
+              <button
+                key={page}
+                className={classnames(
+                  { [styles.current]: pageInfo.currentPage === page },
+                  styles.page
+                )}
+                onClick={() => redirectToPage(page)}>
+                {page}
+              </button>
+            )
+          })}
+          <button
+            className={styles.page}
+            onClick={() => redirectToPage(pageInfo.lastPage)}>
+            {'>>'}
+          </button>
+        </section>
       )}
     </div>
   )
