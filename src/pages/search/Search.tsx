@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 
 import CardGrid from '../../components/common/CardGrid/CardGrid'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
-import SimpleSelect from '../../components/common/SimpleSelect/SimpleSelect'
+import Dropdown from '../../components/common/Dropdown/Dropdown'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import { sortByOptions } from '../../filterOptions/filterOptions'
@@ -37,7 +37,7 @@ const Search = () => {
       <SearchOptions />
       <div className={styles.upperSection}>
         <section className={styles.extraOptions}>
-          <SimpleSelect
+          <Dropdown
             onChange={sortByOnChange}
             isMulti={false}
             options={sortByOptions}
