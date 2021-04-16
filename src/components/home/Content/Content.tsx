@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { QueryVar } from '../../../api/types'
-import { filterOptions } from '../../../filterOptions/filterOptions'
+import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
@@ -24,9 +24,10 @@ const Content = ({ queryVar, content }: Props) => {
   const filterQuery = Object.fromEntries(
     Object.entries(queryVar).filter(([k]) =>
       //filter out the query variable which is not a filter option(eg:perPage)
-      Object.keys(filterOptions).includes(k)
+      allowedURLParams.includes(k)
     )
   )
+
   const setFilterQuery = () => {
     addFilterOptions(filterQuery as Partial<QueryVar>, true)
   }
@@ -38,12 +39,12 @@ const Content = ({ queryVar, content }: Props) => {
         <span className={styles.viewAll}>View All</span>
       </button>
       <CardGrid
-        queryVariables={queryVar}
+        params={new URLSearchParams(Object.entries(queryVar))}
         cardType={content.cardType}
         imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
         loadingCount={queryVar.perPage}
         hasRank={content.hasRank}
-        allowLoadMore={false}
+        hasPages={false}
         sideScroll={content.cardType === 'cover'}
       />
     </section>
