@@ -6,6 +6,8 @@ import { formatLabel } from '../../../utils/formatLabel'
 import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
 
+const TO_EXCLUDE = ['page']
+
 const ActiveFilters = memo(() => {
   const location = useLocation()
   const history = useHistory()
@@ -17,13 +19,14 @@ const ActiveFilters = memo(() => {
   const removeParam = (key: string, value: string) => {
     addFilterOptions(
       {
-        key,
-        value: params.getAll(key).filter(v => v !== value),
+        [key]: params.getAll(key).filter(v => v !== value),
       },
       true
     )
   }
-  const paramArr = Array.from(params.entries())
+  const paramArr = Array.from(params.entries()).filter(
+    ([key]) => !TO_EXCLUDE.includes(key)
+  )
   return (
     <section className={styles.wrapper}>
       {paramArr.map(([key, value]) => (
