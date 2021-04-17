@@ -7,7 +7,10 @@ import {
 } from 'react-lazy-load-image-component'
 
 import { SearchResult } from '../../../api/types'
-import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import {
+  useFetchSearchResult,
+  DEFAULT_PER_PAGE,
+} from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
 import CardCover from '../Cards/CardCover/CardCover'
@@ -26,7 +29,7 @@ interface Props extends LazyComponentProps {
   params: URLSearchParams
   cardType: CardType
   imageSize: 'large' | 'extraLarge'
-  loadingCount: number
+  loadingCount?: number
   hasRank?: boolean
   hasPages: boolean
   sideScroll?: boolean
@@ -38,7 +41,8 @@ const CardGrid = ({
   params,
   cardType,
   imageSize,
-  loadingCount,
+  loadingCount = parseInt(new URLSearchParams(params).get('perPage') || '0') ||
+    DEFAULT_PER_PAGE,
   hasRank = false,
   hasPages,
   sideScroll = false,
