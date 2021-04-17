@@ -6,7 +6,7 @@ import { formatLabel } from '../../../utils/formatLabel'
 import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
 
-const TO_EXCLUDE = ['page']
+const TO_EXCLUDE = ['page', 'perPage']
 
 const ActiveFilters = memo(() => {
   const location = useLocation()
