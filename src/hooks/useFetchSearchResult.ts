@@ -6,6 +6,8 @@ import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData, SearchResult } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
 
+export const DEFAULT_PER_PAGE = 20
+
 export const useFetchSearchResult = (params: URLSearchParams) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
@@ -36,7 +38,7 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
             variables: {
               ...queryVariables,
               sortBy: queryVariables.sortBy || 'TRENDING_DESC',
-              perPage: queryVariables.perPage || 20,
+              perPage: queryVariables.perPage || DEFAULT_PER_PAGE,
             },
           },
         })
