@@ -1,0 +1,42 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &.hide {
+    display: none;
+  }
+}
+
+.scrollWrapper {
+  padding: 0 var(--space-600);
+  @include padding-on-scroll-element(var(--space-400));
+  overflow-y: auto;
+  flex-basis: 100%;
+}
+
+.clearFilter {
+  margin-bottom: var(--space-600);
+  color: var(--color-text-accent-200);
+  @include mouse-effects(underline, var(--color-text-accent-300), txt);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: var(--space-600);
+  row-gap: var(--space-600);
+  font-size: var(--text-size-300);
+}
+
+.toggleShowMore {
+  margin-left: auto;
+  margin-top: var(--space-500);
+  font-size: var(--text-size-300);
+  color: var(--color-text-accent-200);
+
+  @include mouse-effects(underline, var(--color-text-accent-100), txt);
+}
