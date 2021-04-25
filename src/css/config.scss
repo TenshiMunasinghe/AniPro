@@ -1,27 +1,28 @@
 @use 'sass:map';
+@use './breakpoints.module.scss' as bp;
 
 @mixin for-phone-only {
-  @media (max-width: 599px) {
+  @media (max-width: #{bp.$sm - 0.1px}) {
     @content;
   }
 }
 @mixin for-tablet-portrait-up {
-  @media (min-width: 600px) {
+  @media (min-width: bp.$sm) {
     @content;
   }
 }
 @mixin for-tablet-landscape-up {
-  @media (min-width: 900px) {
+  @media (min-width: bp.$md) {
     @content;
   }
 }
 @mixin for-desktop-up {
-  @media (min-width: 1200px) {
+  @media (min-width: bp.$lg) {
     @content;
   }
 }
 @mixin for-big-desktop-up {
-  @media (min-width: 1800px) {
+  @media (min-width: bp.$xl) {
     @content;
   }
 }
