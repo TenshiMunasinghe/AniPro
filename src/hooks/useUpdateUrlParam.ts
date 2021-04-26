@@ -58,7 +58,11 @@ export const useUpdateUrlParam = () => {
           ([key, value]) =>
             value !== null &&
             value !== undefined &&
-            addParam({ value: String(value), key, params })
+            addParam({
+              value: Array.isArray(value) ? value : String(value),
+              key,
+              params,
+            })
         )
 
         if (!Object.keys(queryVars).includes('page') && willApply)
