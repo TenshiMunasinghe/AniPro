@@ -5,22 +5,23 @@ import { QueryVar } from '../api/types'
 
 type setParamArg = {
   params: URLSearchParams
-  value: string | string[]
+  value: string | number | string[]
   key: string
 }
 
 const addParam = ({ params, value, key }: setParamArg) => {
-  if (value.length === 0) {
+  const _value = Array.isArray(value) ? value : String(value)
+  if (_value.length === 0) {
     params.delete(key)
     return
   }
-  if (Array.isArray(value)) {
+  if (Array.isArray(_value)) {
     params.delete(key)
-    value.forEach(v => {
+    _value.forEach(v => {
       params.append(key, v)
     })
   } else {
-    params.set(key, value)
+    params.set(key, _value)
   }
 }
 
@@ -59,7 +60,7 @@ export const useUpdateUrlParam = () => {
             value !== null &&
             value !== undefined &&
             addParam({
-              value: Array.isArray(value) ? value : String(value),
+              value,
               key,
               params,
             })
