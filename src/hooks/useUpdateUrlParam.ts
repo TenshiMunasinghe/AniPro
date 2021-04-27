@@ -11,18 +11,25 @@ type setParamArg = {
 
 const addParam = ({ params, value, key }: setParamArg) => {
   const _value = Array.isArray(value) ? value : String(value)
-  if (_value.length === 0) {
-    params.delete(key)
+
+  if (!Array.isArray(_value)) {
+    _value === params.get(key) ? params.delete(key) : params.set(key, _value)
     return
   }
-  if (Array.isArray(_value)) {
-    params.delete(key)
-    _value.forEach(v => {
-      params.append(key, v)
-    })
-  } else {
-    params.set(key, _value)
-  }
+
+  const next = [...params.getAll(key)]
+  _value.forEach(v => {
+    if (next.includes(v)) {
+      const i = next.indexOf(v)
+      next.splice(i, 1)
+    } else {
+      next.push(v)
+    }
+  })
+  params.delete(key)
+  next.forEach(v => {
+    params.append(key, v)
+  })
 }
 
 export const useUpdateUrlParam = () => {
@@ -39,7 +46,7 @@ export const useUpdateUrlParam = () => {
 
   useEffect(() => {
     setParams({
-      query: initialParams.toString() || 'page=1&sortBy=TRENDING_DESC',
+      query: initialParams.toString(),
       willApply: false,
     })
   }, [initialParams])

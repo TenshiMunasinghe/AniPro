@@ -29,18 +29,7 @@ const Options = ({
   id,
 }: Props) => {
   const handleChange = (value: string) => {
-    if (!isMulti) {
-      onChange(value === selected ? '' : value)
-      return
-    }
-    const next = [...(selected as string[])]
-    if (next.includes(value)) {
-      const i = next.indexOf(value)
-      next.splice(i, 1)
-    } else {
-      next.push(value)
-    }
-    onChange(next)
+    onChange(isMulti ? [value] : value)
   }
 
   const isAllSelected = options.length === selected.length
@@ -59,7 +48,7 @@ const Options = ({
       className={classnames({ [styles.hide]: !isActive }, styles.container)}>
       <div className={styles.scrollWrapper}>
         {Array.isArray(defaultValue) && (
-          <button className={styles.clearFilter} onClick={toggleAll}>
+          <button className={styles.selectAll} onClick={toggleAll}>
             {isAllSelected ? 'Deselect' : 'Select'} All
           </button>
         )}
