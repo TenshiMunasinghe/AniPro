@@ -1,38 +1,39 @@
-import React, { memo, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import React, { memo } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
 import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
+import {
+  filterOptions,
+  FilterOptionKeys,
+} from '../../../filterOptions/filterOptions'
 
 const TO_EXCLUDE = ['page', 'perPage']
 
 const ActiveFilters = memo(() => {
-  const location = useLocation()
   const history = useHistory()
-  const params = useMemo(() => new URLSearchParams(location.search), [
-    location.search,
-  ])
-  const { addFilterOptions } = useUpdateUrlParam()
 
-  const removeParam = (key: string, value: string) => {
+  const { addFilterOptions, initialParams } = useUpdateUrlParam()
+
+  const removeParam = (key: FilterOptionKeys, value: string) => {
     addFilterOptions(
       {
-        [key]: params.getAll(key).filter(v => v !== value),
+        [key]: filterOptions[key].isMulti ? [value] : value,
       },
       true
     )
   }
-  const paramArr = Array.from(params.entries()).filter(
+  const paramArr = Array.from(initialParams.entries()).filter(
     ([key]) => !TO_EXCLUDE.includes(key)
   )
   return (
     <section className={styles.wrapper}>
       {paramArr.map(([key, value]) => (
         <Filter
-          key={key + value}
-          onClick={() => removeParam(key, value)}
+          key={value}
+          onClick={() => removeParam(key as FilterOptionKeys, value)}
           text={
             key === 'search'
               ? `Search: ${formatLabel(value)}`
