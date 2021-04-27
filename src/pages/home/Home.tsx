@@ -85,8 +85,8 @@ const Home = () => {
   }
 
   return (
-    <>
-      <main className={styles.wrapper}>
+    <div className={styles.container}>
+      <main className={styles.content}>
         {Object.keys(queryVars).map(k => {
           const key = k as keyof Medias
 
@@ -100,7 +100,7 @@ const Home = () => {
         })}
       </main>
       <Footer />
-    </>
+    </div>
   )
 }
 
