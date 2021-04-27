@@ -19,7 +19,6 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { URLSearchParams } from 'url'
 
 interface Medias extends SearchResult {
   rank?: number | null
@@ -41,7 +40,7 @@ const CardGrid = ({
   params,
   cardType,
   imageSize,
-  loadingCount = parseInt(new URLSearchParams(params).get('perPage') || '0') ||
+  loadingCount = parseInt(new URLSearchParams(params).get('perPage') || '') ||
     DEFAULT_PER_PAGE,
   hasRank = false,
   hasPages,
