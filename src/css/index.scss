@@ -106,11 +106,6 @@ body {
 
 #container {
   margin: auto;
-  padding: var(--space-500) var(--space-400);
+  padding: var(--space-500) 0;
   width: 100%;
-  max-width: 1200px;
-
-  @include config.for-desktop-up {
-    padding: var(--space-500);
-  }
 }
