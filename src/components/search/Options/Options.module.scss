@@ -31,12 +31,3 @@
   row-gap: var(--space-600);
   font-size: var(--text-size-300);
 }
-
-.toggleShowMore {
-  margin-left: auto;
-  margin-top: var(--space-500);
-  font-size: var(--text-size-300);
-  color: var(--color-text-accent-200);
-
-  @include mouse-effects(underline, var(--color-text-accent-100), txt);
-}
