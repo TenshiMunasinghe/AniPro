@@ -31,7 +31,7 @@ const ActiveFilters = memo(() => {
     <section className={styles.wrapper}>
       {paramArr.map(([key, value]) => (
         <Filter
-          key={value}
+          key={key + value}
           onClick={() => removeParam(key, value)}
           text={
             key === 'search'
