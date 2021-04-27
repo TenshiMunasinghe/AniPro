@@ -15,6 +15,7 @@ interface Props {
   selected?: string | string[]
   name: string
   isActive: boolean
+  id: string
 }
 
 const Options = ({
@@ -25,6 +26,7 @@ const Options = ({
   selected = defaultValue,
   name,
   isActive,
+  id,
 }: Props) => {
   const handleChange = (value: string) => {
     if (!isMulti) {
@@ -63,18 +65,21 @@ const Options = ({
         )}
 
         <div className={styles.options}>
-          {options.map(({ value, label }) => (
-            <Option
-              value={value}
-              label={label}
-              handleChange={handleChange}
-              isSelected={
-                isMulti ? selected.includes(value) : selected === value
-              }
-              id={name + label}
-              key={name + label}
-            />
-          ))}
+          {options.map(({ value, label }) => {
+            const key = id + name + label
+            return (
+              <Option
+                value={value}
+                label={label}
+                handleChange={handleChange}
+                isSelected={
+                  isMulti ? selected.includes(value) : selected === value
+                }
+                id={key}
+                key={key}
+              />
+            )
+          })}
         </div>
       </div>
     </section>
