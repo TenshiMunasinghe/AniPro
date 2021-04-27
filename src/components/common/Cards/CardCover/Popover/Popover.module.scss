@@ -16,11 +16,11 @@
     margin-left: var(--margin);
     position: absolute;
     background: var(--color-foreground-300);
-    font-size: 0.8rem;
+    font-size: var(--text-size-300);
     min-width: 18rem;
     max-width: 21rem;
     width: auto;
-    margin-left: 0.5em;
+    margin-left: var(--space-300);
     padding: 1.75em;
     border-radius: 0.4em;
     top: 0;
@@ -29,7 +29,7 @@
     height: auto;
     @include transition;
 
-    --margin: 1rem;
+    --margin: var(--space-400);
 
     &.left {
       left: auto;
@@ -86,9 +86,8 @@
   .header {
     display: grid;
     grid-template-columns: 1fr auto;
-    column-gap: 1em;
-    font-size: 1.1em;
-    margin-bottom: 1em;
+    column-gap: var(--space-400);
+    margin-bottom: var(--space-400);
     align-items: center;
     white-space: nowrap;
 
@@ -98,7 +97,7 @@
 
     .score {
       display: grid;
-      column-gap: 0.25em;
+      column-gap: var(--space-200);
       grid-template-columns: auto auto;
       align-items: center;
     }
@@ -109,15 +108,15 @@
   }
 
   .info {
-    margin-top: 0.5em;
+    margin-top: var(--space-300);
 
     .separator {
-      margin: 0.25em;
+      margin: var(--space-200);
     }
   }
 
   .genres {
-    font-size: 0.85em;
-    margin-top: 1.5em;
+    font-size: var(--text-size-300);
+    margin-top: var(--space-500);
   }
 }
