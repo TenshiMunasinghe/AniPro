@@ -91,7 +91,7 @@ export const filterOptionTypes = {
   },
 }
 
-const filterOptions = {
+export const filterOptions = {
   ...filterOptionTypes.default,
   ...filterOptionTypes.simple,
 }
