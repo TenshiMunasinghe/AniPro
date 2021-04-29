@@ -10,26 +10,9 @@ type setParamArg = {
 }
 
 const addParam = ({ params, value, key }: setParamArg) => {
-  const _value = Array.isArray(value) ? value : String(value)
-
-  if (!Array.isArray(_value)) {
-    _value === params.get(key) ? params.delete(key) : params.set(key, _value)
-    return
-  }
-
-  const next = [...params.getAll(key)]
-  _value.forEach(v => {
-    if (next.includes(v)) {
-      const i = next.indexOf(v)
-      next.splice(i, 1)
-    } else {
-      next.push(v)
-    }
-  })
-  params.delete(key)
-  next.forEach(v => {
-    params.append(key, v)
-  })
+  String(value).length !== 0
+    ? params.set(key, String(value))
+    : params.delete(key)
 }
 
 export const useUpdateUrlParam = () => {
