@@ -3,9 +3,11 @@ import React, { memo } from 'react'
 import Option from '../Option/Option'
 import styles from './Options.module.scss'
 import classnames from 'classnames'
+import { HandleChangeArgs } from '../SearchOptions/SearchOptions'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 
 interface Props {
-  onChange: (state: string | string[]) => void
+  handleChange: (args: HandleChangeArgs) => void
   isMulti?: boolean
   options: {
     label: string
@@ -19,7 +21,7 @@ interface Props {
 }
 
 const Options = ({
-  onChange,
+  handleChange,
   options,
   isMulti = false,
   defaultValue = isMulti ? [] : '',
@@ -28,18 +30,19 @@ const Options = ({
   isActive,
   id,
 }: Props) => {
-  const handleChange = (value: string) => {
-    onChange(isMulti ? [value] : value)
-  }
+  const { addFilterOptions } = useUpdateUrlParam()
 
   const isAllSelected = options.length === selected.length
 
   const toggleAll = (e: React.MouseEvent) => {
     e.stopPropagation()
-    onChange(
-      isAllSelected
-        ? defaultValue
-        : Object.values(options).map(({ value }) => value)
+    addFilterOptions(
+      {
+        [name]: isAllSelected
+          ? defaultValue
+          : Object.values(options).map(({ value }) => value),
+      },
+      false
     )
   }
 
@@ -60,7 +63,15 @@ const Options = ({
               <Option
                 value={value}
                 label={label}
-                handleChange={handleChange}
+                handleChange={() =>
+                  handleChange({
+                    isMulti,
+                    selected,
+                    key: name,
+                    value,
+                    toApply: false,
+                  })
+                }
                 isSelected={
                   isMulti ? selected.includes(value) : selected === value
                 }
