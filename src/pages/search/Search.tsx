@@ -30,31 +30,31 @@ const Search = () => {
 
   return (
     <div className={styles.container}>
-      <SearchOptions />
-
-      <main>
-        <div className={styles.upperSection}>
-          <section className={styles.extraOptions}>
-            <Dropdown
-              onChange={sortByOnChange}
-              isMulti={false}
-              options={sortByOptions}
-              selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
-            />
-            <section className={styles.gridType}>
-              {cardTypes.map(c => (
-                <CardTypeButton
-                  key={c.key}
-                  cardType={c.value as CardType}
-                  setCardType={setCardType}
-                  isActive={c.value === cardType}
-                />
-              ))}
-            </section>
+      <div className={styles.upperSection}>
+        <section className={styles.extraOptions}>
+          <section className={styles.gridType}>
+            {cardTypes.map(c => (
+              <CardTypeButton
+                key={c.key}
+                cardType={c.value as CardType}
+                setCardType={setCardType}
+                isActive={c.value === cardType}
+              />
+            ))}
           </section>
+          <Dropdown
+            onChange={sortByOnChange}
+            isMulti={false}
+            options={sortByOptions}
+            selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
+          />
+        </section>
 
-          <ActiveFilters />
-        </div>
+        <ActiveFilters />
+      </div>
+
+      <main className={styles.mainContent}>
+        <SearchOptions />
 
         <CardGrid
           params={initialParams}

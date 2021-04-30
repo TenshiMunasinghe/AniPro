@@ -1,7 +1,12 @@
 @use '../../css/config.scss' as *;
 
+.container {
+  padding: var(--space-600);
+}
+
 .upperSection {
-  padding: var(--space-500) 0;
+  padding-bottom: var(--space-500);
+  flex-basis: 100%;
 }
 
 .extraOptions {
@@ -13,11 +18,19 @@
   .gridType {
     display: flex;
     padding: 0 calc(var(--space-200) * -1);
-    padding-left: var(--space-300);
-    margin-left: var(--space-300);
+    padding-right: var(--space-300);
+    margin-right: var(--space-300);
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    border-left: solid 1px var(--color-border-200);
+    border-right: solid 1px var(--color-border-200);
+  }
+}
+
+.mainContent {
+  @include for-tablet-landscape-up {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--space-500);
   }
 }
