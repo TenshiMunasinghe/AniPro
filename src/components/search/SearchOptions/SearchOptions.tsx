@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styles from './SearchOptions.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -8,6 +8,15 @@ import Options from '../Options/Options'
 import { toStartCase } from '../../../utils/toStartCase'
 import classnames from 'classnames'
 import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
+import Option from '../Option/Option'
+
+export type HandleChangeArgs = {
+  isMulti: boolean
+  selected: string | string[]
+  key: string
+  value: string
+  toApply: boolean
+}
 
 const SearchOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
@@ -15,11 +24,29 @@ const SearchOptions = () => {
 
   useEffect(() => {
     if (activeFilterOption) {
-      document.body.classList.add('search-options-open')
+      document.body.classList.add(styles['search-options-open'])
     } else {
-      document.body.classList.remove('search-options-open')
+      document.body.classList.remove(styles['search-options-open'])
     }
   }, [activeFilterOption])
+
+  const handleChange = useCallback(
+    ({ isMulti, selected, key, value, toApply }: HandleChangeArgs) => {
+      if (!isMulti) {
+        addFilterOptions({ [key]: value === selected ? '' : value }, toApply)
+        return
+      }
+      const next = [...(selected as string[])]
+      if (next.includes(value)) {
+        const i = next.indexOf(value)
+        next.splice(i, 1)
+      } else {
+        next.push(value)
+      }
+      addFilterOptions({ [key]: next }, toApply)
+    },
+    [addFilterOptions]
+  )
 
   // an object to map to the Options component
   const filters = useMemo(
@@ -29,16 +56,13 @@ const SearchOptions = () => {
         .map(([key, value]) => ({
           key: v4(),
           name: key,
-          onChange: (value: string | string[]) => {
-            addFilterOptions({ [key]: value }, false)
-          },
           isMulti: value.isMulti,
           options: value.options.map(o => ({
             value: o,
             label: formatLabel(o),
           })),
         })),
-    [addFilterOptions]
+    []
   )
 
   const closeFilterOptions = () => setActiveFilterOption('')
@@ -48,34 +72,85 @@ const SearchOptions = () => {
     closeFilterOptions()
   }
 
+  const selectedOptions = (isMulti: boolean, name: string) =>
+    isMulti ? params.get(name)?.split(',') : params.get(name)
+
   return (
     <aside
       className={classnames(
         { [styles.active]: activeFilterOption },
         styles.container
       )}>
-      <header className={styles.filterOptions}>
+      <header
+        className={classnames(
+          { [styles.vertical]: !activeFilterOption },
+          styles.filterOptions
+        )}>
         {filters.map(f => (
-          <button
-            key={f.key}
-            className={styles.filterOption}
-            onClick={() => setActiveFilterOption(f.name)}>
-            <span className={styles.text}>{toStartCase(f.name)}</span>
-            <FaAngleDown />
-          </button>
+          <div key={f.key + 'aside'} className={styles.filterOptionContainer}>
+            <button
+              className={classnames(
+                { [styles.active]: f.name === activeFilterOption },
+                styles.filterOption
+              )}
+              onClick={() => setActiveFilterOption(f.name)}>
+              <span className={styles.text}>{toStartCase(f.name)}</span>
+              <FaAngleDown />
+            </button>
+
+            {!activeFilterOption && (
+              // only on desktop
+              <div className={styles.options}>
+                {f.options.slice(0, 5).map(({ value, label }) => {
+                  const selected = selectedOptions(f.isMulti, f.name) || []
+                  const key = f.key + f.name + label + 'aside'
+                  return (
+                    <Option
+                      value={value}
+                      label={label}
+                      handleChange={() =>
+                        handleChange({
+                          isMulti: f.isMulti,
+                          selected,
+                          key: f.name,
+                          value,
+                          toApply: true,
+                        })
+                      }
+                      isSelected={
+                        f.isMulti
+                          ? selected.includes(value)
+                          : selected === value
+                      }
+                      id={key}
+                      key={key}
+                    />
+                  )
+                })}
+                {f.isMulti && f.options.length > 5 && (
+                  <button
+                    className={styles.showMore}
+                    onClick={() => setActiveFilterOption(f.name)}>
+                    {'>'} Show More
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         ))}
       </header>
       {filters.map(f => {
-        const selected = f.isMulti ? params.getAll(f.name) : params.get(f.name)
+        const selected = selectedOptions(f.isMulti, f.name)
         return (
           <Options
             key={f.key}
-            onChange={f.onChange}
+            handleChange={handleChange}
             isMulti={f.isMulti}
             options={f.options}
-            selected={selected ? selected : undefined}
+            selected={selected || undefined}
             name={f.name}
             isActive={f.name === activeFilterOption}
+            id={f.key}
           />
         )
       })}
