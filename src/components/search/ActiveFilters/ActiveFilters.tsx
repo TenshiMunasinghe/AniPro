@@ -10,38 +10,40 @@ import {
   FilterOptionKeys,
 } from '../../../filterOptions/filterOptions'
 
-const TO_EXCLUDE = ['page', 'perPage']
-
 const ActiveFilters = memo(() => {
   const history = useHistory()
 
-  const { addFilterOptions, initialParams } = useUpdateUrlParam()
+  const { addFilterOptions, initialParams, params } = useUpdateUrlParam()
 
   const removeParam = (key: FilterOptionKeys, value: string) => {
     addFilterOptions(
       {
-        [key]: filterOptions[key].isMulti ? [value] : value,
+        [key]: filterOptions[key].isMulti
+          ? params
+              .get(key)
+              ?.split(',')
+              .filter(v => v !== value)
+          : value,
       },
       true
     )
   }
-  const paramArr = Array.from(initialParams.entries()).filter(
-    ([key]) => !TO_EXCLUDE.includes(key)
-  )
+  const paramArr = Array.from(initialParams.keys())
+    .filter(key => Object.keys(filterOptions).includes(key))
+    .map(key => ({ key, values: params.get(key)?.split(',') }))
+
   return (
     <section className={styles.wrapper}>
-      {paramArr.map(([key, value]) => (
-        <Filter
-          key={value}
-          onClick={() => removeParam(key as FilterOptionKeys, value)}
-          text={
-            key === 'search'
-              ? `Search: ${formatLabel(value)}`
-              : formatLabel(value)
-          }
-          variant='primary'
-        />
-      ))}
+      {paramArr.map(({ key, values }) =>
+        values?.map(value => (
+          <Filter
+            key={value}
+            onClick={() => removeParam(key as FilterOptionKeys, value)}
+            text={formatLabel(value)}
+            variant='primary'
+          />
+        ))
+      )}
       {paramArr.length > 0 && (
         <Filter
           onClick={() => history.push('/search')}
