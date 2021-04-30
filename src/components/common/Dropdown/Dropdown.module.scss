@@ -2,7 +2,7 @@
   position: relative;
 
   * {
-    font-size: 0.8rem;
+    font-size: var(--text-size-300);
   }
 
   &:hover,
@@ -26,5 +26,5 @@
 }
 
 .selected {
-  padding-left: 0.3rem;
+  padding-left: var(--space-200);
 }
