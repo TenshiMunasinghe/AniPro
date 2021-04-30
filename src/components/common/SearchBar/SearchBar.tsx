@@ -4,6 +4,7 @@ import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 
 import styles from './SearchBar.module.scss'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 
 const SearchBar = () => {
   const history = useHistory()
@@ -11,11 +12,17 @@ const SearchBar = () => {
     ['searchText']: string
   }>()
 
+  const { initialParams } = useUpdateUrlParam()
+
   const onSubmit = useCallback(
     (e: FormEvent) => {
       handleSubmit(values => {
         e.preventDefault()
-        history.push(`/search?${'searchText'}=${values['searchText']}`)
+        history.push(
+          values.searchText
+            ? `/search?searchText=${values.searchText}`
+            : '/search'
+        )
       })()
     },
     [history, handleSubmit]
@@ -31,6 +38,7 @@ const SearchBar = () => {
         type='text'
         placeholder='search'
         aria-label='searchbar'
+        defaultValue={initialParams.get('searchText') || ''}
       />
       <button
         className={styles.submitButton}
