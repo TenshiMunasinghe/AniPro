@@ -34,7 +34,6 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
           return [key, value?.includes(',') ? value.split(',') : value]
         })
       )
-      console.log(queryVariables)
 
       setLoading(true)
       setMedias(null)
