@@ -6,10 +6,15 @@ import uniq from 'lodash/uniq'
 import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData, SearchResult } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
+import { LoadingStore, useLoadingStore } from '../zustand/stores'
 
 export const DEFAULT_PER_PAGE = 20
 
+const loadingSelector = (state: LoadingStore) => state.setLoadingSearchResult
+
 export const useFetchSearchResult = (params: URLSearchParams) => {
+  const setLoadingSearchResult = useLoadingStore(loadingSelector)
+
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -86,6 +91,10 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
   useEffect(() => {
     fetchData(params)
   }, [params, fetchData])
+
+  useEffect(() => {
+    setLoadingSearchResult(isMounted.current ? loading : false)
+  }, [loading, setLoadingSearchResult])
 
   return {
     medias,
