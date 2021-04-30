@@ -11,6 +11,7 @@ interface Props {
   handleChange: (value: string) => void
   isMulti: boolean
   selected: string | string[]
+  position: 'left' | 'right'
 }
 
 const Items = ({
@@ -19,6 +20,7 @@ const Items = ({
   handleChange,
   isMulti,
   selected,
+  position,
 }: Props) => {
   const isSelected = (val: string) =>
     isMulti ? selected.includes(val) : selected === val
@@ -30,7 +32,8 @@ const Items = ({
   return (
     <div
       className={classnames(styles.wrapper, { [styles.hide]: !isVisible })}
-      tabIndex={0}>
+      tabIndex={0}
+      style={{ [position]: 0 }}>
       {_options.map(o => (
         <div className={styles.option} key={o.key}>
           <button
