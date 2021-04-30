@@ -20,3 +20,12 @@ export const useThemeStore = create(
 )
 
 export type ThemeStore = ReturnType<typeof useThemeStore.getState>
+
+export const useLoadingStore = create(
+  combine({ loadingSearchResult: false }, set => ({
+    setLoadingSearchResult: (loading: boolean) =>
+      set({ loadingSearchResult: loading }),
+  }))
+)
+
+export type LoadingStore = ReturnType<typeof useLoadingStore.getState>
