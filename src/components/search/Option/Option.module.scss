@@ -1,14 +1,17 @@
 @use '../../../css/config.scss' as *;
 
 .label {
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: left;
+  grid-template-columns: 0 auto 1fr;
   width: fit-content;
   cursor: pointer;
 
   &:focus-within {
-    outline: solid 0.1em var(--color-border-100);
+    .checkMark {
+      border-color: var(--color-text-accent-100);
+    }
   }
 }
 
