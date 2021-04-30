@@ -13,20 +13,20 @@
 
 .scrollWrapper {
   padding: 0 var(--space-600);
-  @include padding-on-scroll-element(var(--space-400));
+  @include padding-on-scroll-element(var(--space-600));
   overflow-y: auto;
   flex-basis: 100%;
 }
 
-.clearFilter {
-  margin-bottom: var(--space-600);
+.selectAll {
+  margin-bottom: var(--space-500);
   color: var(--color-text-accent-200);
   @include mouse-effects(underline, var(--color-text-accent-300), txt);
 }
 
 .options {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(20%, 1fr));
   column-gap: var(--space-600);
   row-gap: var(--space-600);
   font-size: var(--text-size-300);
