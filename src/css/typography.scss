@@ -3,11 +3,11 @@
 
 :root {
   @for $i from 1 to 10 {
-    --text-size-#{$i * 100}: #{math.pow(1.1, $i - 4)}rem;
+    --text-size-#{$i * 100}: #{math.pow(1.125, $i - 4)}rem;
   }
   @include config.for-tablet-landscape-up {
     @for $i from 1 to 10 {
-      --text-size-#{$i * 100}: #{math.pow(1.2, $i - 4)}rem;
+      --text-size-#{$i * 100}: #{math.pow(1.25, $i - 4)}rem;
     }
   }
 }
