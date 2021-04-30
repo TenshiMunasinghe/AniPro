@@ -52,6 +52,7 @@ const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
         handleChange={handleChange}
         isMulti={isMulti}
         selected={selected}
+        position={'right'}
       />
     </div>
   )
