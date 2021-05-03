@@ -7,12 +7,15 @@ import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData, SearchResult } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
 import { LoadingStore, useLoadingStore } from '../zustand/stores'
+import { useLocation } from 'react-router-dom'
 
 export const DEFAULT_PER_PAGE = 20
 
 const loadingSelector = (state: LoadingStore) => state.setLoadingSearchResult
 
 export const useFetchSearchResult = (params: URLSearchParams) => {
+  const location = useLocation()
+
   const setLoadingSearchResult = useLoadingStore(loadingSelector)
 
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
@@ -93,8 +96,10 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
   }, [params, fetchData])
 
   useEffect(() => {
+    if (location.pathname !== '/search/') return
+
     setLoadingSearchResult(isMounted.current ? loading : false)
-  }, [loading, setLoadingSearchResult])
+  }, [loading, setLoadingSearchResult, location.pathname])
 
   return {
     medias,
