@@ -19,6 +19,7 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { LoadingStore } from '../../../zustand/stores'
 
 interface Medias extends SearchResult {
   rank?: number | null
@@ -32,6 +33,7 @@ interface Props extends LazyComponentProps {
   hasRank?: boolean
   hasPages: boolean
   sideScroll?: boolean
+  setLoading?: LoadingStore['setLoadingSearchResult']
 }
 
 const PAGES = [-2, -1, 0, 1, 2]
@@ -46,8 +48,12 @@ const CardGrid = ({
   hasPages,
   sideScroll = false,
   scrollPosition,
+  setLoading,
 }: Props) => {
-  const { medias, loading, error, pageInfo } = useFetchSearchResult(params)
+  const { medias, loading, error, pageInfo } = useFetchSearchResult(
+    params,
+    setLoading
+  )
   const { addFilterOptions } = useUpdateUrlParam()
 
   const _medias: Medias[] | null = useMemo(() => {

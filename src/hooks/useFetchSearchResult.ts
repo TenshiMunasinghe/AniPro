@@ -6,18 +6,14 @@ import uniq from 'lodash/uniq'
 import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData, SearchResult } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
-import { LoadingStore, useLoadingStore } from '../zustand/stores'
-import { useLocation } from 'react-router-dom'
+import { LoadingStore } from '../zustand/stores'
 
 export const DEFAULT_PER_PAGE = 20
 
-const loadingSelector = (state: LoadingStore) => state.setLoadingSearchResult
-
-export const useFetchSearchResult = (params: URLSearchParams) => {
-  const location = useLocation()
-
-  const setLoadingSearchResult = useLoadingStore(loadingSelector)
-
+export const useFetchSearchResult = (
+  params: URLSearchParams,
+  setGlobalLoading?: LoadingStore['setLoadingSearchResult']
+) => {
   const [medias, setMedias] = useState<SearchResult[] | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState()
@@ -96,10 +92,8 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
   }, [params, fetchData])
 
   useEffect(() => {
-    if (location.pathname !== '/search/') return
-
-    setLoadingSearchResult(isMounted.current ? loading : false)
-  }, [loading, setLoadingSearchResult, location.pathname])
+    setGlobalLoading && setGlobalLoading(isMounted.current ? loading : false)
+  }, [loading, setGlobalLoading])
 
   return {
     medias,

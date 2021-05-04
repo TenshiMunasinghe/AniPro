@@ -10,6 +10,7 @@ import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
 import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
+import { LoadingStore, useLoadingStore } from '../../zustand/stores'
 
 export type CardType = 'chart' | 'cover' | 'table'
 
@@ -17,9 +18,13 @@ const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
 
 const cardTypes = addKey(CARD_TYPES)
 
+const loadingSelector = (state: LoadingStore) => state.setLoadingSearchResult
+
 const Search = () => {
   const [cardType, setCardType] = useState<CardType>('chart')
+
   const { addFilterOptions, initialParams } = useUpdateUrlParam()
+  const setLoading = useLoadingStore(loadingSelector)
 
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
@@ -61,6 +66,7 @@ const Search = () => {
           cardType={cardType}
           imageSize='large'
           hasPages={true}
+          setLoading={setLoading}
         />
         <ScrollButton />
       </main>
