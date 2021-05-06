@@ -186,3 +186,31 @@
     }
   }
 }
+
+@mixin padding-vertical($padding) {
+  padding-top: $padding;
+  padding-bottom: $padding;
+}
+
+@mixin padding-horizontal($padding) {
+  padding-left: $padding;
+  padding-right: $padding;
+}
+
+@mixin gap($gap, $direction: 'column') {
+  @if $direction == 'row' {
+    & > * {
+      margin-right: $gap;
+    }
+    & > *:last-child {
+      margin-right: 0;
+    }
+  } @else if $direction == 'column' {
+    & > * {
+      margin-bottom: $gap;
+    }
+    & > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
