@@ -19,18 +19,16 @@ body.search-options-open {
     background: var(--color-background);
     height: 100vh;
     z-index: 9999;
-
-    .filterOptions {
-      flex-direction: row;
-    }
   }
 }
 
 .filterOptions {
   display: flex;
-  overflow-x: scroll;
+  overflow-x: auto;
   background: var(--color-foreground-50);
-  padding-right: var(--space-400);
+  @include padding-on-scroll-element(var(--space-400), 'row');
+  @include padding-vertical(var(--space-300));
+  @include gap(var(--space-400), 'row');
 
   &.vertical {
     @include for-tablet-landscape-up {
@@ -40,13 +38,12 @@ body.search-options-open {
       background: inherit;
       overflow: hidden;
       border-right: solid 1px var(--color-border-200);
-    }
-  }
-}
+      font-size: var(--text-size-300);
 
-.filterOptionContainer {
-  @include for-tablet-landscape-up {
-    font-size: var(--text-size-300);
+      &::after {
+        display: none;
+      }
+    }
   }
 }
 
@@ -54,7 +51,6 @@ body.search-options-open {
   display: flex;
   align-items: center;
   background: var(--color-foreground-100);
-  margin-right: var(--space-400);
   padding: var(--space-200) var(--space-300);
   border-radius: 0.2em;
 
@@ -77,6 +73,7 @@ body.search-options-open {
     background: transparent;
     font-weight: 500;
     padding: 0;
+    margin: 0;
     margin-bottom: var(--space-400);
 
     svg {
