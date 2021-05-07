@@ -167,8 +167,11 @@
   @include circle($size);
 }
 
-@mixin padding-on-scroll-element($padding: var(--space-400), $row: false) {
-  @if $row {
+@mixin padding-on-scroll-element(
+  $padding: var(--space-400),
+  $direction: 'column'
+) {
+  @if $direction == 'row' {
     padding-left: $padding;
     padding-right: 0;
     &:after {
@@ -176,7 +179,7 @@
       height: 0.01px;
       padding-left: $padding;
     }
-  } @else {
+  } @else if $direction == 'column' {
     padding-top: $padding;
     padding-bottom: 0;
     &:after {
