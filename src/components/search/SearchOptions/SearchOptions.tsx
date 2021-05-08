@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+  Fragment,
+} from 'react'
 import styles from './SearchOptions.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -87,7 +93,7 @@ const SearchOptions = () => {
           styles.filterOptions
         )}>
         {filters.map(f => (
-          <div key={f.key + 'aside'} className={styles.filterOptionContainer}>
+          <Fragment key={f.key + 'aside'}>
             <button
               className={classnames(
                 { [styles.active]: f.name === activeFilterOption },
@@ -136,7 +142,7 @@ const SearchOptions = () => {
                 )}
               </div>
             )}
-          </div>
+          </Fragment>
         ))}
       </header>
       {filters.map(f => {
