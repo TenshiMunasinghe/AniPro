@@ -1,6 +1,7 @@
 import debounce from 'lodash/debounce'
 import React, { useEffect, useLayoutEffect, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 import loadable from '@loadable/component'
 
@@ -15,6 +16,8 @@ import {
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Media = loadable(() => import('./pages/media/Media'))
+
+const queryClient = new QueryClient()
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
@@ -44,7 +47,7 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Router>
         <NavBar />
         <Switch>
@@ -63,7 +66,7 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-    </>
+    </QueryClientProvider>
   )
 }
 
