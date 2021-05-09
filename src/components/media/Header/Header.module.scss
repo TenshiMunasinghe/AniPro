@@ -111,7 +111,7 @@
     max-height: calc(
       var(--line-height) * var(--lines) * 1em + (2 * var(--padding))
     );
-    overflow-y: scroll;
+    overflow-y: auto;
 
     & > p {
       @include description(var(--lines));
