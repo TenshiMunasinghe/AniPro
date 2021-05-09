@@ -93,7 +93,7 @@ const SearchOptions = () => {
           styles.filterOptions
         )}>
         {filters.map(f => (
-          <Fragment key={f.key + 'aside'}>
+          <div key={f.key + 'aside'}>
             <button
               className={classnames(
                 { [styles.active]: f.name === activeFilterOption },
@@ -142,7 +142,7 @@ const SearchOptions = () => {
                 )}
               </div>
             )}
-          </Fragment>
+          </div>
         ))}
       </header>
       {filters.map(f => {
