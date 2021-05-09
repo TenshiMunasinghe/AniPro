@@ -1,48 +1,34 @@
 import uniqBy from 'lodash/uniqBy'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { URLSearchParams } from 'url'
+import { useRef } from 'react'
 import uniq from 'lodash/uniq'
+import { useQuery } from 'react-query'
 
 import { GET_SEARCH_RESULT, ky } from '../api/queries'
-import { PageInfo, QueryData, SearchResult } from '../api/types'
+import { PageInfo, QueryData } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
-import { LoadingStore } from '../zustand/stores'
 
 export const DEFAULT_PER_PAGE = 20
 
-export const useFetchSearchResult = (
-  params: URLSearchParams,
-  setGlobalLoading?: LoadingStore['setLoadingSearchResult']
-) => {
-  const [medias, setMedias] = useState<SearchResult[] | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState()
+export const SEARCH_QUERY_KEY = 'search'
 
-  const pageInfo = useRef<PageInfo>({
-    currentPage: 1,
-    hasNextPage: false,
-    lastPage: 1,
-  })
+const paramToObj = (params: URLSearchParams) =>
+  Object.fromEntries(
+    uniq(
+      Array.from(params.keys()).filter(key => allowedURLParams.includes(key))
+    ).map(key => {
+      const value = params.get(key)
+      return [key, value?.includes(',') ? value.split(',') : value]
+    })
+  )
 
-  const isMounted = useRef(false)
+export const useFetchSearchResult = (params: URLSearchParams) => {
+  console.log(params.toString())
 
-  const fetchData = useCallback(async (params: URLSearchParams) => {
-    try {
-      const queryVariables = Object.fromEntries(
-        uniq(
-          Array.from(params.keys()).filter(key =>
-            allowedURLParams.includes(key)
-          )
-        ).map(key => {
-          const value = params.get(key)
-          return [key, value?.includes(',') ? value.split(',') : value]
-        })
-      )
-
-      setLoading(true)
-      setMedias(null)
-
-      const res: { data: QueryData } = await ky
+  const { data, isLoading, error, isSuccess, isError } = useQuery<QueryData>({
+    queryKey: [SEARCH_QUERY_KEY, params.toString()],
+    queryFn: async () => {
+      const queryVariables = paramToObj(params)
+      const { data } = await ky
         .post('', {
           json: {
             query: GET_SEARCH_RESULT,
@@ -55,51 +41,25 @@ export const useFetchSearchResult = (
         })
         .json()
 
-      if (!res || !isMounted.current) {
-        return
-      }
+      return data as QueryData
+    },
+    onSuccess: data => {
+      pageInfo.current = { ...data.Page.pageInfo }
+    },
+  })
 
-      const {
-        data: { Page },
-      } = res
-
-      setMedias(prev => {
-        if (prev) {
-          return uniqBy([...prev, ...Page.media], 'id')
-        } else {
-          return res.data.Page.media
-        }
-      })
-      pageInfo.current = { ...Page.pageInfo }
-    } catch (e) {
-      if (isMounted.current) {
-        setError(e)
-      }
-      console.error(e)
-    }
-    setLoading(false)
-  }, [])
-
-  useEffect(() => {
-    isMounted.current = true
-    return () => {
-      isMounted.current = false
-    }
-  }, [])
-
-  useEffect(() => {
-    fetchData(params)
-  }, [params, fetchData])
-
-  useEffect(() => {
-    setGlobalLoading && setGlobalLoading(isMounted.current ? loading : false)
-  }, [loading, setGlobalLoading])
+  const pageInfo = useRef<PageInfo>({
+    currentPage: 1,
+    hasNextPage: false,
+    lastPage: 1,
+  })
 
   return {
-    medias,
-    loading,
+    medias: uniqBy(data?.Page.media, 'id'),
+    isLoading,
     error,
-    fetchData,
     pageInfo: pageInfo.current,
+    isSuccess,
+    isError,
   }
 }
