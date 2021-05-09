@@ -133,7 +133,7 @@ const SearchOptions = () => {
                     />
                   )
                 })}
-                {f.isMulti && f.options.length > 5 && (
+                {f.options.length > 5 && (
                   <button
                     className={styles.showMore}
                     onClick={() => setActiveFilterOption(f.name)}>
