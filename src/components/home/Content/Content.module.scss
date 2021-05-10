@@ -1,20 +1,26 @@
+@use '../../../css/config.scss' as *;
+
 .content {
-  margin-bottom: 3.5em;
+  margin-bottom: var(--space-700);
 }
 
-.button {
+.title {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  margin-bottom: 0.8em;
-  cursor: pointer;
+  margin-bottom: var(--space-200);
 
-  &:hover,
-  &:focus {
-    .contentTitle {
-      color: var(--color-text-accent-100);
-    }
+  & > * {
+    cursor: pointer;
+  }
+
+  .contentTitle {
+    @include mouse-effects(
+      var(--color-text-accent-100),
+      var(--color-text-accent-200),
+      txt
+    );
   }
 
   .viewAll {

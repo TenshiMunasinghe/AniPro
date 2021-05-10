@@ -34,10 +34,14 @@ const Content = ({ queryVar, content }: Props) => {
 
   return (
     <section className={styles.content}>
-      <button className={styles.button} onClick={setFilterQuery}>
-        <h3 className={styles.contentTitle}>{content.text}</h3>
-        <span className={styles.viewAll}>View All</span>
-      </button>
+      <div className={styles.title}>
+        <button className={styles.contentTitle} onClick={setFilterQuery}>
+          {content.text}
+        </button>
+        <button className={styles.viewAll} onClick={setFilterQuery}>
+          View All
+        </button>
+      </div>
       <CardGrid
         params={new URLSearchParams(Object.entries(queryVar))}
         cardType={content.cardType}
