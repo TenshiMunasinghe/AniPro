@@ -18,11 +18,11 @@
   }
 
   .viewAll {
-    font-size: 0.7em;
+    font-size: var(--text-size-200);
     color: var(--color-text-200);
     &:hover {
       color: var(--color-text-100);
-      font-weight: 500;
+      text-decoration: underline;
     }
   }
 }
