@@ -3,18 +3,11 @@
 .wrapper {
   display: flex;
   align-items: center;
-  font-size: 0.8rem;
-  padding: 0.6em;
+  font-size: var(--text-size-300);
+  padding: var(--space-300);
   border-radius: 0.2em;
   text-align: center;
   transition: all 0.075s ease-in-out;
-
-  svg {
-    transition: all 0.075s ease-in-out;
-    margin-left: 0.5em;
-    width: 0.75em;
-    height: 0.75em;
-  }
 
   &.primary {
     background: var(--color-foreground-accent-100);
@@ -25,26 +18,9 @@
       bg
     );
 
-    &:hover,
-    &:focus {
-      svg {
-        margin-left: 0.5em;
-        width: 0.75em;
-      }
-    }
-
-    @include on-hoverable-devices {
-      svg {
-        width: 0;
-        margin: 0;
-      }
-
-      &:hover {
-        svg {
-          margin-left: 0.5em;
-          width: 0.75em;
-        }
-      }
+    svg {
+      margin-left: var(--space-300);
+      transform: scale(0.8);
     }
   }
 
