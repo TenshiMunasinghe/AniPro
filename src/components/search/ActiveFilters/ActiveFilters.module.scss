@@ -1,10 +1,10 @@
 .wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 1.5em;
+  margin-top: var(--space-500);
 
   & > * {
-    margin-right: 2em;
-    margin-bottom: 1em;
+    margin-right: var(--space-600);
+    margin-bottom: var(--space-400);
   }
 }

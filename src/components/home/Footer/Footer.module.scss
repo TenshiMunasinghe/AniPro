@@ -1,6 +1,6 @@
 .footer {
   width: 100%;
-  margin-top: 7rem;
+  margin-top: calc(2 * var(--space-700));
 
   a {
     text-decoration: none;
@@ -46,14 +46,14 @@
     background: var(--black-100);
     color: var(--white-400);
     border-color: var(--white-100);
-    margin-left: 1em;
+    margin-left: var(--space-400);
   }
 }
 
 .disclaimer {
   font-size: var(--text-size-300);
   font-weight: 550;
-  margin-top: 3em;
+  margin-top: var(--space-500);
   text-align: right;
 
   a {

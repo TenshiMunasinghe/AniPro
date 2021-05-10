@@ -53,7 +53,7 @@
     width: 100%;
     max-width: 100%;
     height: fit-content;
-    padding-top: 1em;
+    padding-top: var(--space-400);
     @include add-ellipsis(2);
   }
 
