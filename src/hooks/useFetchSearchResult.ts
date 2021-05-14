@@ -22,8 +22,6 @@ const paramToObj = (params: URLSearchParams) =>
   )
 
 export const useFetchSearchResult = (params: URLSearchParams) => {
-  console.log(params.toString())
-
   const { data, isLoading, error, isSuccess, isError } = useQuery<QueryData>({
     queryKey: [SEARCH_QUERY_KEY, params.toString()],
     queryFn: async () => {
