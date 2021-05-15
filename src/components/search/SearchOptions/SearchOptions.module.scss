@@ -28,7 +28,7 @@ body.search-options-open {
   background: var(--color-foreground-50);
   @include padding-on-scroll-element(var(--space-400), 'row');
   @include padding-vertical(var(--space-300));
-  @include gap(var(--space-400), 'row');
+  @include gap($row: var(--space-400));
 
   &.vertical {
     @include for-tablet-landscape-up {
