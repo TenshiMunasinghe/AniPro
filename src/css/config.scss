@@ -1,6 +1,8 @@
 @use 'sass:map';
 @use './breakpoints.module.scss' as bp;
 
+// TODO: Implement more flexible media query mixin;
+
 @mixin for-phone-only {
   @media (max-width: #{bp.$sm - 0.1px}) {
     @content;
@@ -176,7 +178,6 @@
     padding-right: 0;
     &:after {
       content: '';
-      height: 0.01px;
       padding-left: $padding;
     }
   } @else if $direction == 'column' {
@@ -200,17 +201,18 @@
   padding-right: $padding;
 }
 
-@mixin gap($gap, $direction: 'column') {
-  @if $direction == 'row' {
+@mixin gap($row: 0, $column: 0) {
+  @if $row != 0 {
     & > * {
-      margin-right: $gap;
+      margin-right: $row;
     }
     & > *:last-child {
       margin-right: 0;
     }
-  } @else if $direction == 'column' {
+  }
+  @if $column != 0 {
     & > * {
-      margin-bottom: $gap;
+      margin-bottom: $column;
     }
     & > *:last-child {
       margin-bottom: 0;
