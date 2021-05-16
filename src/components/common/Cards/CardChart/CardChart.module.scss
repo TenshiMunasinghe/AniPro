@@ -51,7 +51,7 @@
     display: none;
   }
 
-  @include for-tablet-portrait-up {
+  @include mq(above, sm) {
     display: grid;
     grid-template-columns: 1fr auto;
     column-gap: var(--space-400);
@@ -111,7 +111,7 @@
   color: var(--color-text-300);
   @include description(2);
 
-  @include for-tablet-portrait-up {
+  @include mq(above, sm) {
     @include description(3);
   }
 

@@ -79,7 +79,7 @@
         fill: var(--white-600);
       }
 
-      @include for-tablet-landscape-up {
+      @include mq(above, md) {
         max-width: var(--image-width);
       }
     }
@@ -94,7 +94,7 @@
 
   .subTitle {
     margin-top: var(--space-500);
-    @include for-desktop-up {
+    @include mq(above, lg) {
       display: none;
     }
   }

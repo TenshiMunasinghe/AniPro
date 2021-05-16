@@ -116,7 +116,7 @@
   border-radius: 0.2em;
   background: var(--color-foreground-100);
 
-  @include for-tablet-portrait-up {
+  @include mq(above, sm) {
     display: grid;
     grid-template-columns: calc(3rem + 7%) 1fr;
     column-gap: var(--space-300);
@@ -164,7 +164,7 @@
     border-radius: 0.15rem;
     overflow: hidden;
 
-    @include for-phone-only {
+    @include mq(below, sm) {
       display: none;
     }
   }

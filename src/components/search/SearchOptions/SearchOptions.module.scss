@@ -31,7 +31,7 @@ body.search-options-open {
   @include gap($row: var(--space-400));
 
   &.vertical {
-    @include for-tablet-landscape-up {
+    @include mq(above, md) {
       display: grid;
       row-gap: var(--space-500);
       padding-right: var(--space-600);
@@ -69,7 +69,7 @@ body.search-options-open {
 }
 
 .filterOptions.vertical .filterOption {
-  @include for-tablet-landscape-up {
+  @include mq(above, md) {
     background: transparent;
     font-weight: 500;
     padding: 0;
@@ -84,7 +84,7 @@ body.search-options-open {
 
 .options {
   display: none;
-  @include for-tablet-landscape-up {
+  @include mq(above, md) {
     display: grid;
     row-gap: var(--space-300);
   }

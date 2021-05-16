@@ -2,7 +2,7 @@
 .container {
   --margin: var(--space-300);
 
-  @include for-tablet-portrait-up {
+  @include mq(above, sm) {
     --margin: var(--space-500);
   }
 
@@ -21,7 +21,7 @@
     margin-left: var(--margin);
     flex-shrink: 0;
 
-    @include for-tablet-portrait-up {
+    @include mq(above, sm) {
       margin-left: auto;
     }
   }

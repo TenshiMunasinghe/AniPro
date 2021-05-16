@@ -1,7 +1,10 @@
 @use '../../../css/config.scss' as *;
 
 .content {
-  margin-bottom: var(--space-700);
+  margin-bottom: var(--space-400);
+  @include mq(above, lg) {
+    margin-bottom: var(--space-700);
+  }
 }
 
 .title {

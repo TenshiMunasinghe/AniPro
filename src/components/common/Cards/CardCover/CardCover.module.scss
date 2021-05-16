@@ -24,7 +24,7 @@
     color: var(--color-foreground-300);
     font-size: var(--text-size-400);
     font-weight: 500;
-    @include for-phone-only {
+    @include mq(below, sm) {
       --size: 3.5rem;
       font-size: var(--text-size-500);
     }

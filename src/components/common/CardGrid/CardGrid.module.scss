@@ -29,18 +29,16 @@
       }
     }
 
-    @include on-non-hoverable-devices {
-      @include for-phone-only {
-        overflow-x: auto;
-        overflow-y: hidden;
-        .slider {
-          &.cover {
-            padding: var(--space-400);
-            display: flex;
-            & > * {
-              flex: 1 0 auto;
-              width: 47.5vw;
-            }
+    @include mq(below, sm) {
+      overflow-x: auto;
+      overflow-y: hidden;
+      .slider {
+        &.cover {
+          padding: var(--space-400);
+          display: flex;
+          & > * {
+            flex: 1 0 auto;
+            width: 47.5vw;
           }
         }
       }

@@ -28,7 +28,7 @@
 }
 
 .mainContent {
-  @include for-tablet-landscape-up {
+  @include mq(above, md) {
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: var(--space-500);

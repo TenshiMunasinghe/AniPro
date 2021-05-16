@@ -1,31 +1,15 @@
 @use 'sass:map';
 @use './breakpoints.module.scss' as bp;
 
-// TODO: Implement more flexible media query mixin;
-
-@mixin for-phone-only {
-  @media (max-width: #{bp.$sm - 0.1px}) {
-    @content;
-  }
-}
-@mixin for-tablet-portrait-up {
-  @media (min-width: bp.$sm) {
-    @content;
-  }
-}
-@mixin for-tablet-landscape-up {
-  @media (min-width: bp.$md) {
-    @content;
-  }
-}
-@mixin for-desktop-up {
-  @media (min-width: bp.$lg) {
-    @content;
-  }
-}
-@mixin for-big-desktop-up {
-  @media (min-width: bp.$xl) {
-    @content;
+@mixin mq($direction, $breakpoint) {
+  @if ($direction == 'below') {
+    @media (max-width: #{map.get(bp.$list, #{$breakpoint}) - 0.1px}) {
+      @content;
+    }
+  } @else if($direction == 'above') {
+    @media (min-width: map.get(bp.$list, #{$breakpoint})) {
+      @content;
+    }
   }
 }
 
