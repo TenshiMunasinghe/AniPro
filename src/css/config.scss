@@ -153,8 +153,8 @@
   @include circle($size);
 }
 
-@mixin padding-on-scroll-element($row: 0, $column: 0) {
-  @if $row != 0 {
+@mixin padding-on-scroll-element($row: null, $column: null) {
+  @if $row != null {
     padding-left: $row;
     padding-right: 0;
     &:after {
@@ -162,7 +162,7 @@
       padding-left: $row;
     }
   }
-  @if $column != 0 {
+  @if $column != null {
     padding-top: $column;
     padding-bottom: 0;
     &:after {
@@ -183,8 +183,8 @@
   padding-right: $padding;
 }
 
-@mixin gap($row: 0, $column: 0) {
-  @if $row != 0 {
+@mixin gap($row: null, $column: null) {
+  @if $row != null {
     & > * {
       margin-right: $row;
     }
@@ -192,7 +192,7 @@
       margin-right: 0;
     }
   }
-  @if $column != 0 {
+  @if $column != null {
     & > * {
       margin-bottom: $column;
     }
