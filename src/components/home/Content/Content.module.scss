@@ -19,6 +19,8 @@
   }
 
   .contentTitle {
+    font-weight: 550;
+
     @include mouse-effects(
       var(--color-text-accent-100),
       var(--color-text-accent-200),
