@@ -4,7 +4,7 @@
   display: flex;
   overflow-x: auto;
   padding: var(--space-400) 0;
-  @include padding-on-scroll-element(var(--space-200), 'row');
+  @include padding-on-scroll-element($row: var(--space-200));
   margin-top: var(--space-500);
   background: var(--color-foreground-50);
 

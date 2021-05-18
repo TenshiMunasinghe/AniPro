@@ -153,28 +153,24 @@
   @include circle($size);
 }
 
-@mixin padding-on-scroll-element(
-  $padding: var(--space-400),
-  $direction: 'column'
-) {
-  @if $direction == 'row' {
-    padding-left: $padding;
+@mixin padding-on-scroll-element($row: 0, $column: 0) {
+  @if $row != 0 {
+    padding-left: $row;
     padding-right: 0;
     &:after {
       content: '';
-      padding-left: $padding;
+      padding-left: $row;
     }
-  } @else if $direction == 'column' {
-    padding-top: $padding;
+  } @else if $column != 0 {
+    padding-top: $column;
     padding-bottom: 0;
     &:after {
       content: '';
       display: block;
-      padding-top: $padding;
+      padding-top: $column;
     }
   }
 }
-
 @mixin padding-vertical($padding) {
   padding-top: $padding;
   padding-bottom: $padding;

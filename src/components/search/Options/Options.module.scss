@@ -13,7 +13,7 @@
 
 .scrollWrapper {
   padding: 0 var(--space-600);
-  @include padding-on-scroll-element(var(--space-600));
+  @include padding-on-scroll-element($column: var(--space-600));
   overflow-y: auto;
   flex-basis: 100%;
 }

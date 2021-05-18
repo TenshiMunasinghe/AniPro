@@ -105,7 +105,7 @@
     --line-height: 1.8;
 
     background: var(--color-foreground-100);
-    @include padding-on-scroll-element(var(--padding));
+    @include padding-on-scroll-element($column: var(--padding));
     padding: var(--padding);
     margin-top: var(--space-400);
     max-height: calc(
