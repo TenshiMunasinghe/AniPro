@@ -161,7 +161,8 @@
       content: '';
       padding-left: $row;
     }
-  } @else if $column != 0 {
+  }
+  @if $column != 0 {
     padding-top: $column;
     padding-bottom: 0;
     &:after {
@@ -171,6 +172,7 @@
     }
   }
 }
+
 @mixin padding-vertical($padding) {
   padding-top: $padding;
   padding-bottom: $padding;
