@@ -14,7 +14,7 @@ import {
   WindowSizeStore,
 } from '../../../../../zustand/stores'
 import FaceIcon from '../../../FaceIcon/FaceIcon'
-import Genres from '../../Genres/Genres'
+import Genres from '../../components/Genres/Genres'
 import styles from './Popover.module.scss'
 
 interface Props {
