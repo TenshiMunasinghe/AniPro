@@ -10,7 +10,7 @@ import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
 import FaceIcon from '../../FaceIcon/FaceIcon'
-import Genres from '../../Genres/Genres'
+import Genres from '../Genres/Genres'
 import styles from './CardTable.module.scss'
 import { linkToMediaPage } from '../../../../App'
 

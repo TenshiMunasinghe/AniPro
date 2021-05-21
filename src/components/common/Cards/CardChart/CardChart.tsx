@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
 import FaceIcon from '../../FaceIcon/FaceIcon'
-import Genres from '../../Genres/Genres'
+import Genres from '../Genres/Genres'
 import styles from './CardChart.module.scss'
 import { linkToMediaPage } from '../../../../App'
 
