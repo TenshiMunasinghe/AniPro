@@ -35,7 +35,7 @@
   }
 
   .imageWrapper {
-    @include image-with-aspect-ratio;
+    @include aspect-ratio(var(--image-aspect-ratio));
     @include image-fade-in;
     border-radius: 0.15em;
     background: var(--color-original);

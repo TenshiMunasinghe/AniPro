@@ -81,21 +81,19 @@
   }
 }
 
-@mixin image-with-aspect-ratio {
+@mixin aspect-ratio($ratio) {
+  display: inline-block;
   position: relative;
-  height: min-content;
   padding: 0;
   overflow: hidden;
   &:after {
     content: '';
     display: block;
-    padding-top: calc(100% / var(--image-aspect-ratio));
+    padding-top: calc(100% / #{$ratio});
   }
 
-  img,
-  span {
+  & > * {
     position: absolute;
-    display: block;
     left: 0;
     top: 0;
     height: 100%;
@@ -135,7 +133,7 @@
 }
 
 @mixin card-image {
-  @include image-with-aspect-ratio;
+  @include aspect-ratio(var(--image-aspect-ratio));
   @include zoom-image;
   @include image-fade-in;
   img {
