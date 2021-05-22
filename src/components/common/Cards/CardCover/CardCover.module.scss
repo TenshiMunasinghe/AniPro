@@ -5,15 +5,14 @@
 }
 
 .wrapper {
-  height: 100%;
-  width: 100%;
   display: grid;
   grid-template-rows: min-content auto;
+  row-gap: var(--space-300);
   cursor: pointer;
 
   &:hover,
   &:focus-within {
-    .titleWrapper {
+    .title a {
       color: var(--color-adjusted);
     }
   }
@@ -46,25 +45,7 @@
     transition: all 0.3s ease-in-out;
   }
 
-  .titleWrapper {
-    color: var(--color-text-300);
-    align-self: stretch;
-    text-align: left;
-    width: 100%;
-    max-width: 100%;
-    height: fit-content;
-    padding-top: var(--space-400);
-    @include add-ellipsis(2);
-  }
-
   .title {
-    font-size: var(--text-size-400);
-    line-height: 1.2;
-    font-weight: 550;
-    color: inherit;
-    transition: all 0.15s ease-in-out;
-    text-decoration-color: inherit;
-    text-underline-offset: 0.2em;
-    margin-top: var(--space-300);
+    font-size: var(--text-size-300);
   }
 }

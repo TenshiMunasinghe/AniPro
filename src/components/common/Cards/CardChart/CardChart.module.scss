@@ -66,37 +66,12 @@
     }
   }
 
-  .title {
-    width: 100%;
-    .primaryTitle {
-      font-size: var(--text-size-400);
-      color: var(--color-text-100);
-      @include add-ellipsis(2);
-      font-weight: 550;
-      cursor: pointer;
-
-      &:hover,
-      &:focus-within {
-        a {
-          text-decoration-color: inherit;
-          color: var(--color-text);
-        }
-      }
-      a {
-        color: inherit;
-        text-decoration-color: var(--black-6);
-        text-underline-offset: var(--space-100);
-        transition: all 0.15s ease-in-out;
-      }
-    }
-
-    .secondaryTitle {
-      font-weight: 400;
-      font-size: var(--text-size-200);
-      margin-top: var(--space-200);
-      color: var(--color-text-300);
-      @include add-ellipsis(1);
-    }
+  .secondaryTitle {
+    font-weight: 400;
+    font-size: var(--text-size-200);
+    margin-top: var(--space-200);
+    color: var(--color-text-300);
+    @include add-ellipsis(1);
   }
 }
 

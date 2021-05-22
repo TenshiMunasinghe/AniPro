@@ -91,18 +91,7 @@
     margin-bottom: var(--space-200);
 
     a {
-      @include add-ellipsis(1);
       margin-bottom: var(--space-200);
-      text-decoration-color: var(--color-underline-100);
-      text-underline-offset: var(--space-100);
-      transition: all 0.15s ease-in-out;
-      max-width: 100%;
-
-      &:hover,
-      &:focus {
-        text-decoration-color: inherit;
-        color: var(--color-adjusted);
-      }
     }
 
     @include mq(above, sm) {
