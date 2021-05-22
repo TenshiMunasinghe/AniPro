@@ -63,7 +63,14 @@ body.search-options-open {
     }
   }
 
+  @include mouse-effects(
+    var(--color-text-accent-100),
+    var(--color-text-accent-200),
+    txt
+  );
+
   .text {
+    color: inherit;
     margin-right: var(--space-100);
   }
 }
