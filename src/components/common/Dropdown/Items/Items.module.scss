@@ -43,6 +43,10 @@
     white-space: nowrap;
   }
 
+  &:focus-within {
+    background-color: var(--color-foreground-300);
+  }
+
   @include mouse-effects(
     var(--color-foreground-300),
     var(--color-foreground-400),
