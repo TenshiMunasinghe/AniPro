@@ -9,6 +9,7 @@ import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardChart.module.scss'
 import { linkToMediaPage } from '../../../../App'
+import Title from '../components/Title/Title'
 
 interface Props {
   id: number
@@ -56,8 +57,8 @@ const CardChart = memo(
             <div className={styles.scrollWrapper}>
               <header className={styles.cardHeader}>
                 <div className={styles.title}>
-                  <h3 className={styles.primaryTitle}>
-                    <Link to={linkToMediaPage(id)}>{title.romaji}</Link>
+                  <h3>
+                    <Title id={id} text={title.romaji} color={color} />
                   </h3>
                   <h4 className={styles.secondaryTitle}>
                     {title.english || title.romaji}

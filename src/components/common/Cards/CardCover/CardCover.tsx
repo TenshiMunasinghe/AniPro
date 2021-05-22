@@ -7,6 +7,7 @@ import { adjustColor } from '../../../../utils/adjustColor'
 import Popover from './Popover/Popover'
 import styles from './CardCover.module.scss'
 import { linkToMediaPage } from '../../../../App'
+import Title from '../components/Title/Title'
 
 interface Props {
   id: number
@@ -76,9 +77,9 @@ const CardCover = memo(
               effect='opacity'
             />
           </Link>
-          <Link to={linkToMediaPage(id)} className={styles.titleWrapper}>
-            <h3 className={styles.title}>{title.romaji}</h3>
-          </Link>
+          <h3 className={styles.title}>
+            <Title id={id} text={title.romaji} color={color} />
+          </h3>
         </article>
 
         <Popover

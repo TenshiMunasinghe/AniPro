@@ -13,6 +13,7 @@ import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardTable.module.scss'
 import { linkToMediaPage } from '../../../../App'
+import Title from '../components/Title/Title'
 
 interface Props {
   id: number
@@ -79,7 +80,7 @@ const CardTable = memo(
 
           <div className={styles.content}>
             <div className={styles.header}>
-              <Link to={linkToMediaPage(id)}>{title.romaji}</Link>
+              <Title id={id} text={title.romaji} color={color} />
               <Genres
                 as='section'
                 genres={genres}
