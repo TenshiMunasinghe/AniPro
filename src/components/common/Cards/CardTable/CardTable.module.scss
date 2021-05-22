@@ -2,8 +2,15 @@
 
 .wrapper {
   position: relative;
-  display: flex;
   overflow: hidden;
+
+  @include mq(above, sm) {
+    display: flex;
+  }
+
+  @include mq(below, sm) {
+    font-size: var(--text-size-300);
+  }
 }
 
 .rank {
@@ -15,8 +22,10 @@
 }
 
 .card {
+  background-color: var(--color-foreground-100);
+  @include padding-vertical(var(--space-400));
+
   @mixin background-image {
-    background-color: var(--color-foreground-100);
     background-image: var(--banner-image);
     background-repeat: no-repeat;
     background-size: cover;
@@ -34,15 +43,10 @@
       opacity: 0.85;
     }
   }
-  flex: 1;
-  max-width: 100%;
-  position: relative;
-  display: grid;
-  grid-template-columns: calc(3rem + 7%) 1fr;
-  padding: var(--space-400);
-  font-size: var(--text-size-400);
-  border-radius: 0.1em;
-  @include background-image;
+
+  @include on-non-hoverable-devices {
+    @include background-image;
+  }
 
   @include on-hoverable-devices {
     background-image: none;
@@ -55,13 +59,19 @@
     }
   }
 
-  @include mq(below, sm) {
-    display: block;
+  @include mq(above, sm) {
+    flex: 1;
+    max-width: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: calc(3rem + 7%) 1fr;
+    font-size: var(--text-size-400);
+    border-radius: 0.1em;
+    @include padding-horizontal(var(--space-400));
   }
 }
 
 .imageWrapper {
-  display: block;
   border-radius: 0.1rem;
   background: var(--color-original);
   z-index: 998;
@@ -81,26 +91,27 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   max-width: 100%;
+  @include padding-horizontal(var(--space-500));
 
   .header {
     font-size: var(--text-size-500);
     max-width: 100%;
     width: 100%;
-    flex: 1 0 auto;
     overflow: hidden;
-    margin-bottom: var(--space-200);
+    margin-bottom: var(--space-300);
 
     a {
-      margin-bottom: var(--space-200);
-    }
-
-    @include mq(above, sm) {
-      margin-left: var(--space-500);
+      margin-bottom: var(--space-300);
+      max-width: 100%;
     }
   }
 
   .genres {
     font-size: var(--text-size-300);
+
+    @include mq(below, sm) {
+      font-size: var(--text-size-200);
+    }
   }
 
   .row {
