@@ -1,5 +1,5 @@
 import htmr from 'htmr'
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'

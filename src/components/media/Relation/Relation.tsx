@@ -1,4 +1,3 @@
-import React from 'react'
 import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
 
 import styles from './Relation.module.scss'

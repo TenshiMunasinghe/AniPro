@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 
 import { adjustColor } from '../../../../../../utils/adjustColor'
 import styles from './Genre.module.scss'

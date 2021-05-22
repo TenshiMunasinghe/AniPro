@@ -1,5 +1,5 @@
 import htmr from 'htmr'
-import React, { CSSProperties } from 'react'
+import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 
 import { Overview } from '../../../api/types'

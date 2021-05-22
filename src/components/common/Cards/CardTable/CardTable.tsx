@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 
 import { currentYear } from '../../../../api/queries'
 import { SearchResult } from '../../../../api/types'

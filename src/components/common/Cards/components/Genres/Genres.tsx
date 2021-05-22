@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { memo, useMemo } from 'react'
+import { memo, useMemo, createElement } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useFitContent } from '../../../../../hooks/useFitContent'
@@ -23,7 +23,7 @@ const Genres = memo(
     const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
     const _genres = useMemo(() => addKey(genres), [genres])
 
-    return React.createElement(Tag, {
+    return createElement(Tag, {
       children: _genres.map(g => (
         <Genre
           key={g.key}

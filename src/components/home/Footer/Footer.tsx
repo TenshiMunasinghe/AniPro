@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 import styles from './Footer.module.scss'
 

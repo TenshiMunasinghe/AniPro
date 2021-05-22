@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback } from 'react'
+import { FormEvent, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'

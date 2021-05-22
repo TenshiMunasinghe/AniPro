@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import { memo, useState } from 'react'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'

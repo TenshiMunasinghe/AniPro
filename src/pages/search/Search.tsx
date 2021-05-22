@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import CardGrid from '../../components/common/CardGrid/CardGrid'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'

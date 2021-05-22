@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { QueryVar } from '../../../api/types'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'

@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'

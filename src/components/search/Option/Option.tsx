@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import styles from './Option.module.scss'
 import classnames from 'classnames'
 import { FaCheck } from 'react-icons/fa'

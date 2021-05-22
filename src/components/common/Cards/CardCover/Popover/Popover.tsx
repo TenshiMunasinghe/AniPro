@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { memo, useLayoutEffect, useRef, useState } from 'react'
+import { memo, useLayoutEffect, useRef, useState } from 'react'
 
 import { SearchResult } from '../../../../../api/types'
 import { adjustColor } from '../../../../../utils/adjustColor'

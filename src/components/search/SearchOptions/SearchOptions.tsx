@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import styles from './SearchOptions.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'

@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce'
-import React, { useEffect, useLayoutEffect, useMemo } from 'react'
+import { useEffect, useLayoutEffect, useMemo } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
 

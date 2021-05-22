@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import range from 'lodash/range'
-import React, { createContext, useMemo } from 'react'
+import { createContext, useMemo } from 'react'
 import {
   LazyComponentProps,
   ScrollPosition,

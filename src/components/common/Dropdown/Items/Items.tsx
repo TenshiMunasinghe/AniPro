@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { v4 } from 'uuid'
 

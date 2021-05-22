@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   LazyComponentProps,
   trackWindowScroll,
@@ -43,6 +42,14 @@ const filterTabs = (data: Overview) => {
   return tabs
 }
 
+/*TODO: Complete media page
+tabs:
+overview
+characters
+staff
+stats
+social
+*/
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'overview')

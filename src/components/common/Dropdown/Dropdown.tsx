@@ -1,4 +1,4 @@
-import React, { memo, RefObject } from 'react'
+import { memo, RefObject } from 'react'
 import { FaSort } from 'react-icons/fa'
 
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'

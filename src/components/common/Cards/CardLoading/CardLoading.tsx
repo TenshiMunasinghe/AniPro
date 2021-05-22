@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 import { CardType } from '../../../../pages/search/Search'

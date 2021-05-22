@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import React from 'react'
 
 import { Overview } from '../../../api/types'
 import { airingInfo } from '../../../utils/airingInfo'

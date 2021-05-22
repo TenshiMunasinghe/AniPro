@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo } from 'react'
+import { ChangeEvent, memo } from 'react'
 import { IconType } from 'react-icons'
 
 import styles from './Switch.module.scss'

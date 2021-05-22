@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import { CardType } from '../../../pages/search/Search'
 import GridIcon from './GridIcon/GridIcon'
