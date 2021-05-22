@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import styles from './CoverImage.module.scss'
 import { ScrollPositionContext } from '../../../CardGrid/CardGrid'
+import { adjustColor } from '../../../../../utils/adjustColor'
 
 interface Props {
   id: number
@@ -18,6 +19,7 @@ const CoverImage = ({ id, title, src, color }: Props) => {
 
   const style = {
     '--color-original': color,
+    '--color-adjusted': adjustColor(color, 'var(--lightness)'),
   } as React.CSSProperties
 
   return (
