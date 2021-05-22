@@ -1,15 +1,13 @@
 import htmr from 'htmr'
 import React, { memo } from 'react'
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
-import { Link } from 'react-router-dom'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
 import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardChart.module.scss'
-import { linkToMediaPage } from '../../../../App'
 import Title from '../components/Title/Title'
+import CoverImage from '../components/CoverImage/CoverImage'
 
 interface Props {
   id: number
@@ -19,20 +17,10 @@ interface Props {
   genres: SearchResult['genres']
   meanScore: SearchResult['meanScore']
   description: SearchResult['description']
-  scrollPosition: ScrollPosition
 }
 
 const CardChart = memo(
-  ({
-    id,
-    image,
-    color,
-    title,
-    genres,
-    meanScore,
-    description,
-    scrollPosition,
-  }: Props) => {
+  ({ id, image, color, title, genres, meanScore, description }: Props) => {
     const _style = {
       '--color-text': adjustColor(color, 'var(--lightness)'),
       '--color-original': color,
@@ -40,18 +28,7 @@ const CardChart = memo(
 
     return (
       <article className={styles.wrapper} style={_style}>
-        <Link
-          to={linkToMediaPage(id)}
-          aria-label={title.romaji}
-          className={styles.imageWrapper}>
-          <LazyLoadImage
-            src={image}
-            alt={title.romaji}
-            scrollPosition={scrollPosition}
-            effect='opacity'
-          />
-        </Link>
-
+        <CoverImage id={id} src={image} color={color} title={title.romaji} />
         <section className={styles.content}>
           <section className={styles.cardBody}>
             <div className={styles.scrollWrapper}>

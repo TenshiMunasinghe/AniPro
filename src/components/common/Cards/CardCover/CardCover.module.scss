@@ -34,15 +34,8 @@
     );
   }
 
-  .imageWrapper {
-    @include aspect-ratio(var(--image-aspect-ratio));
-    @include image-fade-in;
+  & > a {
     border-radius: 0.15em;
-    background: var(--color-original);
-  }
-
-  .image {
-    transition: all 0.3s ease-in-out;
   }
 
   .title {

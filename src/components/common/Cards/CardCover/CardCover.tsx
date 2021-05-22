@@ -1,13 +1,11 @@
 import React, { memo, useState } from 'react'
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
-import { Link } from 'react-router-dom'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
 import Popover from './Popover/Popover'
 import styles from './CardCover.module.scss'
-import { linkToMediaPage } from '../../../../App'
 import Title from '../components/Title/Title'
+import CoverImage from '../components/CoverImage/CoverImage'
 
 interface Props {
   id: number
@@ -25,7 +23,6 @@ interface Props {
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   rank?: number | null
-  scrollPosition: ScrollPosition
 }
 
 const CardCover = memo(
@@ -43,7 +40,6 @@ const CardCover = memo(
     nextAiringEpisode,
     meanScore,
     rank,
-    scrollPosition,
     color,
   }: Props) => {
     const [isPopoverVisible, setIsPopoverVisible] = useState(false)
@@ -65,18 +61,7 @@ const CardCover = memo(
         style={_style}>
         <article className={styles.container}>
           {rank && <div className={styles.rank}>#{rank}</div>}
-          <Link
-            to={linkToMediaPage(id)}
-            tabIndex={-1}
-            className={styles.imageWrapper}>
-            <LazyLoadImage
-              className={styles.image}
-              src={image}
-              alt={title.romaji}
-              scrollPosition={scrollPosition}
-              effect='opacity'
-            />
-          </Link>
+          <CoverImage id={id} src={image} title={title.romaji} color={color} />
           <h3 className={styles.title}>
             <Title id={id} text={title.romaji} color={color} />
           </h3>

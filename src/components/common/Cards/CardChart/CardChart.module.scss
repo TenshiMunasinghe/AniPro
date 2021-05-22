@@ -5,14 +5,8 @@
   @include card-config.card-wrapper;
 
   a {
-    overflow: hidden;
-  }
-
-  .imageWrapper {
     max-width: 11rem;
     flex: 0 0 42.5%;
-    background: var(--color-original, var(--color-foreground-300));
-    @include card-image;
   }
 }
 

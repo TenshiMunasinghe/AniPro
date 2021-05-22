@@ -1,6 +1,4 @@
 import React, { memo } from 'react'
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
-import { Link } from 'react-router-dom'
 
 import { currentYear } from '../../../../api/queries'
 import { SearchResult } from '../../../../api/types'
@@ -12,8 +10,8 @@ import { toStartCase } from '../../../../utils/toStartCase'
 import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardTable.module.scss'
-import { linkToMediaPage } from '../../../../App'
 import Title from '../components/Title/Title'
+import CoverImage from '../components/CoverImage/CoverImage'
 
 interface Props {
   id: number
@@ -35,7 +33,6 @@ interface Props {
   nextAiringEpisode: SearchResult['nextAiringEpisode']
   popularity: SearchResult['popularity']
   rank?: number | null
-  scrollPosition: ScrollPosition
 }
 
 const mapStatus = (status: SearchResult['status']) =>
@@ -56,12 +53,10 @@ const CardTable = memo(
     format,
     episodes,
     rank,
-    scrollPosition,
     color,
   }: Props) => {
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),
-      '--color-original': color,
       '--banner-image': `url(${image.banner})`,
     } as React.CSSProperties
 
@@ -69,15 +64,12 @@ const CardTable = memo(
       <article className={styles.wrapper} style={_style}>
         {rank && <div className={styles.rank}>#{rank}</div>}
         <div className={styles.card}>
-          <Link to={linkToMediaPage(id)} className={styles.imageWrapper}>
-            <LazyLoadImage
-              src={image.cover}
-              alt={title.romaji}
-              scrollPosition={scrollPosition}
-              effect='opacity'
-            />
-          </Link>
-
+          <CoverImage
+            id={id}
+            title={title.romaji}
+            src={image.cover}
+            color={color}
+          />
           <div className={styles.content}>
             <div className={styles.header}>
               <Title id={id} text={title.romaji} color={color} />

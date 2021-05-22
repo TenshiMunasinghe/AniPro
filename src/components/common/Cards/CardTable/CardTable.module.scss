@@ -69,17 +69,11 @@
     border-radius: 0.1em;
     @include padding-horizontal(var(--space-400));
   }
-}
-
-.imageWrapper {
-  border-radius: 0.1rem;
-  background: var(--color-original);
-  z-index: 998;
-  @include card-image;
-  align-self: center;
 
   @include mq(below, sm) {
-    display: none;
+    & > a {
+      display: none;
+    }
   }
 }
 
