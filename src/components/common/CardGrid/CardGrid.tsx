@@ -107,7 +107,6 @@ const CardGrid = ({
                       meanScore={m.meanScore}
                       studios={m.studios}
                       rank={m.rank}
-                      scrollPosition={scrollPosition}
                     />
                   )
 
@@ -134,7 +133,6 @@ const CardGrid = ({
                       studios={m.studios}
                       popularity={m.popularity}
                       rank={m.rank}
-                      scrollPosition={scrollPosition}
                     />
                   )
 
@@ -149,7 +147,6 @@ const CardGrid = ({
                       genres={m.genres}
                       description={m.description}
                       meanScore={m.meanScore}
-                      scrollPosition={scrollPosition}
                     />
                   )
 
