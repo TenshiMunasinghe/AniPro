@@ -1,0 +1,11 @@
+@use '../../../../../css/config.scss' as *;
+
+.wrapper {
+  background-color: var(--color-original, var(--color-foreground-300));
+  @include aspect-ratio(var(--image-aspect-ratio));
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
