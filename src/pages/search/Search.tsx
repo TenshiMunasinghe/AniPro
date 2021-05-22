@@ -32,6 +32,7 @@ const Search = () => {
   return (
     <div className={styles.container}>
       <div className={styles.upperSection}>
+        <ActiveFilters />
         <section className={styles.extraOptions}>
           <section className={styles.gridType}>
             {cardTypes.map(c => (
@@ -50,8 +51,6 @@ const Search = () => {
             selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
           />
         </section>
-
-        <ActiveFilters />
       </div>
 
       <main className={styles.mainContent}>
