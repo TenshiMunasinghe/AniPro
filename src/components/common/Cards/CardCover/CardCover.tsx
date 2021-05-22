@@ -63,7 +63,7 @@ const CardCover = memo(
         onFocus={showPopover}
         onBlur={hidePopover}
         style={_style}>
-        <article className={styles.wrapper}>
+        <article className={styles.container}>
           {rank && <div className={styles.rank}>#{rank}</div>}
           <Link
             to={linkToMediaPage(id)}
