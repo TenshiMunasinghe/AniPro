@@ -48,7 +48,6 @@ const CardCover = memo(
 
     const _style = {
       '--color-adjusted': adjustColor(color, 'var(--lightness)'),
-      '--color-original': color ? color : 'var(--color-foreground-100)',
     } as React.CSSProperties
 
     return (
