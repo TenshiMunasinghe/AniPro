@@ -103,8 +103,6 @@ export const allowedURLParams = [
   'perPage',
 ]
 
-export type FilterOptionKeys = keyof typeof filterOptions
-
 export const sortByOptions = filterOptions.sortBy.options.map(s => ({
   value: s,
   label:
