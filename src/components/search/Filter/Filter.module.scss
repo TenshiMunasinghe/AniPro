@@ -8,6 +8,7 @@
   border-radius: 0.2em;
   text-align: center;
   transition: all 0.075s ease-in-out;
+  white-space: nowrap;
 
   &.primary {
     background: var(--color-foreground-accent-100);
