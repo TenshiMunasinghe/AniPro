@@ -5,20 +5,20 @@ import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
 import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
-import {
-  filterOptions,
-  FilterOptionKeys,
-} from '../../../filterOptions/filterOptions'
+import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 
 const ActiveFilters = memo(() => {
   const history = useHistory()
 
   const { addFilterOptions, initialParams, params } = useUpdateUrlParam()
 
-  const removeParam = (key: FilterOptionKeys, value: string) => {
+  const removeParam = (
+    key: keyof typeof filterOptionTypes.default,
+    value: string
+  ) => {
     addFilterOptions(
       {
-        [key]: filterOptions[key].isMulti
+        [key]: filterOptionTypes.default[key].isMulti
           ? params
               .get(key)
               ?.split(',')
@@ -28,8 +28,9 @@ const ActiveFilters = memo(() => {
       true
     )
   }
+
   const paramArr = Array.from(initialParams.keys())
-    .filter(key => Object.keys(filterOptions).includes(key))
+    .filter(key => Object.keys(filterOptionTypes.default).includes(key))
     .map(key => ({ key, values: params.get(key)?.split(',') }))
 
   return (
@@ -38,7 +39,9 @@ const ActiveFilters = memo(() => {
         values?.map(value => (
           <Filter
             key={value}
-            onClick={() => removeParam(key as FilterOptionKeys, value)}
+            onClick={() =>
+              removeParam(key as keyof typeof filterOptionTypes.default, value)
+            }
             text={formatLabel(value)}
             variant='primary'
           />
