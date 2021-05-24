@@ -181,6 +181,16 @@
   padding-right: $padding;
 }
 
+@mixin margin-vertical($margin) {
+  margin-top: $margin;
+  margin-bottom: $margin;
+}
+
+@mixin margin-horizontal($margin) {
+  margin-left: $margin;
+  margin-right: $margin;
+}
+
 @mixin gap($row: null, $column: null) {
   @if $row != null {
     & > * {
