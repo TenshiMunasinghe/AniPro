@@ -7,10 +7,16 @@ import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 
-const ActiveFilters = memo(() => {
+const ActiveFilters = () => {
   const history = useHistory()
 
   const { addFilterOptions, initialParams, params } = useUpdateUrlParam()
+
+  const paramArr = Array.from(initialParams.keys())
+    .filter(key => Object.keys(filterOptionTypes.default).includes(key))
+    .map(key => ({ key, values: params.get(key)?.split(',') }))
+
+  if (paramArr.length === 0) return null
 
   const removeParam = (
     key: keyof typeof filterOptionTypes.default,
@@ -28,10 +34,6 @@ const ActiveFilters = memo(() => {
       true
     )
   }
-
-  const paramArr = Array.from(initialParams.keys())
-    .filter(key => Object.keys(filterOptionTypes.default).includes(key))
-    .map(key => ({ key, values: params.get(key)?.split(',') }))
 
   return (
     <section className={styles.wrapper}>
@@ -56,6 +58,6 @@ const ActiveFilters = memo(() => {
       )}
     </section>
   )
-})
+}
 
-export default ActiveFilters
+export default memo(ActiveFilters)
