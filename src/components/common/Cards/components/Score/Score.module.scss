@@ -1,0 +1,8 @@
+.wrapper {
+  display: grid;
+  width: min-content;
+  font-size: var(--text-size-300);
+  column-gap: var(--space-200);
+  grid-template-columns: auto auto;
+  place-items: center;
+}
