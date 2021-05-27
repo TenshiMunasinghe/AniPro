@@ -11,7 +11,7 @@
 
   &:hover,
   &:focus {
-    color: var(--color-text);
+    color: var(--color-text, --color-text-100);
     text-decoration-color: inherit;
   }
 }
