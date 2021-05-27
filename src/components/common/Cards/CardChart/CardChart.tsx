@@ -34,9 +34,7 @@ const CardChart = memo(
             <div className={styles.scrollWrapper}>
               <header className={styles.cardHeader}>
                 <div className={styles.title}>
-                  <h3>
-                    <Title id={id} text={title.romaji} color={color} />
-                  </h3>
+                  <Title id={id} text={title.romaji} color={color} />
                   <h4 className={styles.secondaryTitle}>
                     {title.english || title.romaji}
                   </h4>

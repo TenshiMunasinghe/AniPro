@@ -61,9 +61,7 @@ const CardCover = memo(
         <article className={styles.container}>
           {rank && <div className={styles.rank}>#{rank}</div>}
           <CoverImage id={id} src={image} title={title.romaji} color={color} />
-          <h3 className={styles.title}>
-            <Title id={id} text={title.romaji} color={color} />
-          </h3>
+          <Title id={id} text={title.romaji} color={color} />
         </article>
 
         <Popover
