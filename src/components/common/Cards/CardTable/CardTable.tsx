@@ -7,11 +7,11 @@ import { airingInfo } from '../../../../utils/airingInfo'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardTable.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
+import Score from '../components/Score/Score'
 
 interface Props {
   id: number
@@ -82,15 +82,10 @@ const CardTable = memo(
               />
             </div>
 
-            <div className={styles.review}>
-              <div className={styles.score + ' ' + styles.row}>
-                <div className={styles.percentage + ' ' + styles.row}>
-                  <FaceIcon meanScore={meanScore} />
-                  {meanScore ? meanScore + '%' : ''}
-                </div>
-                <div className={styles.subRow}>
-                  {meanScore && popularity !== 0 ? `${popularity} users` : ''}
-                </div>
+            <div className={styles.row}>
+              {meanScore && <Score score={meanScore} />}
+              <div className={styles.subRow}>
+                {meanScore && popularity !== 0 ? `${popularity} users` : ''}
               </div>
             </div>
 

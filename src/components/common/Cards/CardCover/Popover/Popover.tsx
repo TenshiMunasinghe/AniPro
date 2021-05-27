@@ -13,8 +13,8 @@ import {
   useWindowSizeStore,
   WindowSizeStore,
 } from '../../../../../zustand/stores'
-import FaceIcon from '../../../FaceIcon/FaceIcon'
 import Genres from '../../components/Genres/Genres'
+import Score from '../../components/Score/Score'
 import styles from './Popover.module.scss'
 
 interface Props {
@@ -108,12 +108,7 @@ const Popover = memo(
           <div className={styles.airingInfo}>
             {airingInfo({ nextAiringEpisode, season, seasonYear })}
           </div>
-          {meanScore && (
-            <div className={styles.score}>
-              <FaceIcon meanScore={meanScore} />
-              {meanScore}%
-            </div>
-          )}
+          {meanScore && <Score score={meanScore} />}
         </header>
 
         <div className={styles.studio}>{studios.nodes[0]?.name}</div>

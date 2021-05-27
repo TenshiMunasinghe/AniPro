@@ -42,7 +42,9 @@
   margin-left: 0;
 
   .score {
-    display: none;
+    @include mq(below, sm) {
+      display: none;
+    }
   }
 
   @include mq(above, sm) {
@@ -50,14 +52,6 @@
     grid-template-columns: 1fr auto;
     column-gap: var(--space-400);
     place-items: start;
-
-    .score {
-      display: grid;
-      font-size: var(--text-size-300);
-      column-gap: var(--space-100);
-      grid-template-columns: auto auto;
-      place-items: center;
-    }
   }
 
   .secondaryTitle {

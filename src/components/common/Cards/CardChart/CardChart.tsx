@@ -3,11 +3,11 @@ import { memo } from 'react'
 
 import { SearchResult } from '../../../../api/types'
 import { adjustColor } from '../../../../utils/adjustColor'
-import FaceIcon from '../../FaceIcon/FaceIcon'
 import Genres from '../components/Genres/Genres'
 import styles from './CardChart.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
+import Score from '../components/Score/Score'
 
 interface Props {
   id: number
@@ -43,8 +43,7 @@ const CardChart = memo(
                 </div>
                 {meanScore && (
                   <div className={styles.score}>
-                    <FaceIcon meanScore={meanScore} />
-                    {meanScore}%
+                    <Score score={meanScore} />
                   </div>
                 )}
               </header>
