@@ -7,7 +7,7 @@ import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
 
-export const DEFAULT_PER_PAGE = 10
+export const DEFAULT_PER_PAGE = 20
 
 export const SEARCH_QUERY_KEY = 'search'
 
