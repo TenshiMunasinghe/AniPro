@@ -1,7 +1,7 @@
 @use '../../../../../css/config.scss' as *;
 
 .link {
-  color: var(--color-text-100);
+  color: var(--color-text-200);
   text-decoration-color: var(--black-600);
   text-underline-offset: var(--space-100);
   @include add-ellipsis(2);
