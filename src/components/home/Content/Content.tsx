@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom'
 import { QueryVar } from '../../../api/types'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
@@ -17,28 +17,24 @@ interface Props {
 }
 
 const Content = ({ queryVar, content }: Props) => {
-  const { addFilterOptions } = useUpdateUrlParam()
-
-  const filterQuery = Object.fromEntries(
+  const { perPage, ...filterQuery } = Object.fromEntries(
     Object.entries(queryVar).filter(([k]) =>
       //filter out the query variable which is not a filter option(eg:perPage)
       allowedURLParams.includes(k)
     )
   )
 
-  const setFilterQuery = () => {
-    addFilterOptions(filterQuery as Partial<QueryVar>, true)
-  }
+  const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
   return (
     <section className={styles.content}>
       <div className={styles.title}>
-        <button className={styles.contentTitle} onClick={setFilterQuery}>
+        <Link to={link} className={styles.contentTitle}>
           {content.text}
-        </button>
-        <button className={styles.viewAll} onClick={setFilterQuery}>
+        </Link>
+        <Link to={link} className={styles.viewAll}>
           View All
-        </button>
+        </Link>
       </div>
       <CardGrid
         params={new URLSearchParams(Object.entries(queryVar))}
