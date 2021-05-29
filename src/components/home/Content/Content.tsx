@@ -19,7 +19,7 @@ interface Props {
 const Content = ({ queryVar, content }: Props) => {
   const { perPage, ...filterQuery } = Object.fromEntries(
     Object.entries(queryVar).filter(([k]) =>
-      //filter out the query variable which is not a filter option(eg:perPage)
+      //filter out the query variable which is not a filter option
       allowedURLParams.includes(k)
     )
   )
