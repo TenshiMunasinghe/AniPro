@@ -93,4 +93,5 @@
   color: var(--color-text-accent-200);
   text-align: center;
   animation: rotate 5s linear infinite;
+  pointer-events: none;
 }
