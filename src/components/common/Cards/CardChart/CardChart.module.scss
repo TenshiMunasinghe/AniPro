@@ -15,12 +15,6 @@
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 0;
-
-  &:hover {
-    .description {
-      @include show-description;
-    }
-  }
 }
 
 .cardBody {
@@ -28,6 +22,12 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+
+  &:hover {
+    .description {
+      @include show-description;
+    }
+  }
 }
 
 .scrollWrapper {
