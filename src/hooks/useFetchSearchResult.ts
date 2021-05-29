@@ -51,6 +51,7 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
     onSuccess: data => {
       pageInfo.current = { ...data.Page.pageInfo }
     },
+    keepPreviousData: true,
   })
 
   const pageInfo = useRef<PageInfo>({
