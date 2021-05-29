@@ -198,7 +198,7 @@ const CardGrid = ({
             )}
           </section>
         )}
-        {!isLoading && isFetching && (
+        {hasPages && !isLoading && isFetching && (
           <div className={styles.fetchingIndicator}>Loading...</div>
         )}
       </div>
