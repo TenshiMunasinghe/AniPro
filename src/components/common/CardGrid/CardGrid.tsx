@@ -52,7 +52,13 @@ const CardGrid = ({
   sideScroll = false,
   scrollPosition,
 }: Props) => {
-  const { medias, isLoading, isError, pageInfo } = useFetchSearchResult(params)
+  const {
+    medias,
+    isLoading,
+    isError,
+    pageInfo,
+    isFetching,
+  } = useFetchSearchResult(params)
   const { addFilterOptions } = useUpdateUrlParam()
 
   const _medias: Medias[] | null = useMemo(() => {
@@ -187,6 +193,9 @@ const CardGrid = ({
               {'>>'}
             </button>
           </section>
+        )}
+        {!isLoading && isFetching && (
+          <div className={styles.fetchingIndicator}>Loading...</div>
         )}
       </div>
     </ScrollPositionContext.Provider>

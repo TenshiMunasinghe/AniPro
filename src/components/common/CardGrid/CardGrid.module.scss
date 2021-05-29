@@ -7,6 +7,7 @@
   justify-items: center;
 
   .slider {
+    position: relative;
     @include layout.grid-template;
 
     &.cover {
@@ -73,4 +74,23 @@
     background: var(--color-foreground-400);
     color: var(--colo-text-300);
   }
+}
+
+.fetchingIndicator {
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  position: fixed;
+  top: 50%;
+  transform: translateY(50%);
+  font-size: var(--text-size-600);
+  color: var(--color-text-accent-200);
+  text-align: center;
+  animation: rotate 5s linear infinite;
 }
