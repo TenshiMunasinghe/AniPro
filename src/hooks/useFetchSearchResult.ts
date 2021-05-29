@@ -22,7 +22,14 @@ const paramToObj = (params: URLSearchParams) =>
   )
 
 export const useFetchSearchResult = (params: URLSearchParams) => {
-  const { data, isLoading, error, isSuccess, isError } = useQuery<QueryData>({
+  const {
+    data,
+    isLoading,
+    error,
+    isSuccess,
+    isError,
+    isFetching,
+  } = useQuery<QueryData>({
     queryKey: [SEARCH_QUERY_KEY, params.toString()],
     queryFn: async () => {
       const queryVariables = paramToObj(params)
@@ -59,5 +66,6 @@ export const useFetchSearchResult = (params: URLSearchParams) => {
     pageInfo: pageInfo.current,
     isSuccess,
     isError,
+    isFetching,
   }
 }
