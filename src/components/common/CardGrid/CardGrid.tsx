@@ -167,9 +167,11 @@ const CardGrid = ({
         </section>
         {!isError && !isLoading && hasPages && (
           <section className={styles.pages}>
-            <button className={styles.page} onClick={() => redirectToPage(1)}>
-              {'<<'}
-            </button>
+            {pageInfo.currentPage !== 1 && (
+              <button className={styles.page} onClick={() => redirectToPage(1)}>
+                {'<<'}
+              </button>
+            )}
             {PAGES.map(p => {
               const page = pageInfo.currentPage + p
 
@@ -187,11 +189,13 @@ const CardGrid = ({
                 </button>
               )
             })}
-            <button
-              className={styles.page}
-              onClick={() => redirectToPage(pageInfo.lastPage)}>
-              {'>>'}
-            </button>
+            {pageInfo.currentPage !== pageInfo.lastPage && (
+              <button
+                className={styles.page}
+                onClick={() => redirectToPage(pageInfo.lastPage)}>
+                {'>>'}
+              </button>
+            )}
           </section>
         )}
         {!isLoading && isFetching && (
