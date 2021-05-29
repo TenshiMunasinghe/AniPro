@@ -1,3 +1,4 @@
+import debounce from 'lodash/debounce'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useIsFetching } from 'react-query'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -44,30 +45,30 @@ export const useUpdateUrlParam = () => {
     }
   }, [params, history, initialParams])
 
-  const addFilterOptions = useCallback(
-    (queryVars: Partial<QueryVar>, willApply: boolean) => {
-      if (isFetching) return
-      setParams(prev => {
-        const params = new URLSearchParams(prev.query)
+  const addFilterOptions = useMemo(
+    () =>
+      debounce((queryVars: Partial<QueryVar>, willApply: boolean) => {
+        setParams(prev => {
+          const params = new URLSearchParams(prev.query)
 
-        Object.entries(queryVars).forEach(
-          ([key, value]) =>
-            value !== null &&
-            value !== undefined &&
-            addParam({
-              value,
-              key,
-              params,
-            })
-        )
+          Object.entries(queryVars).forEach(
+            ([key, value]) =>
+              value !== null &&
+              value !== undefined &&
+              addParam({
+                value,
+                key,
+                params,
+              })
+          )
 
-        if (!Object.keys(queryVars).includes('page') && willApply)
-          params.set('page', '1')
+          if (!Object.keys(queryVars).includes('page') && willApply)
+            params.set('page', '1')
 
-        return { query: params.toString(), willApply }
-      })
-    },
-    [isFetching]
+          return { query: params.toString(), willApply }
+        })
+      }, 250),
+    []
   )
 
   const applyFilter = useCallback(() => {
