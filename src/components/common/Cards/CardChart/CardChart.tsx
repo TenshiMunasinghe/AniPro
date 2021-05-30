@@ -19,53 +19,59 @@ interface Props {
   description: SearchResult['description']
 }
 
-const CardChart = memo(
-  ({ id, image, color, title, genres, meanScore, description }: Props) => {
-    const _style = {
-      '--color-text': adjustColor(color, 'var(--lightness)'),
-      '--color-original': color,
-    } as React.CSSProperties
+const CardChart = ({
+  id,
+  image,
+  color,
+  title,
+  genres,
+  meanScore,
+  description,
+}: Props) => {
+  const _style = {
+    '--color-text': adjustColor(color, 'var(--lightness)'),
+    '--color-original': color,
+  } as React.CSSProperties
 
-    return (
-      <article className={styles.wrapper} style={_style}>
-        <CoverImage id={id} src={image} color={color} title={title.romaji} />
-        <section className={styles.content}>
-          <section className={styles.cardBody}>
-            <div className={styles.scrollWrapper}>
-              <header className={styles.cardHeader}>
-                <div className={styles.title}>
-                  <Title id={id} text={title.romaji} color={color} />
-                  <h4 className={styles.secondaryTitle}>
-                    {title.english || title.romaji}
-                  </h4>
-                </div>
-                {meanScore && (
-                  <div className={styles.score}>
-                    <Score score={meanScore} />
-                  </div>
-                )}
-              </header>
-
-              <div className={styles.description} tabIndex={0}>
-                {description ? (
-                  htmr(`<p>${description}</p>`)
-                ) : (
-                  <i>no description</i>
-                )}
+  return (
+    <article className={styles.wrapper} style={_style}>
+      <CoverImage id={id} src={image} color={color} title={title.romaji} />
+      <section className={styles.content}>
+        <section className={styles.cardBody}>
+          <div className={styles.scrollWrapper}>
+            <header className={styles.cardHeader}>
+              <div className={styles.title}>
+                <Title id={id} text={title.romaji} color={color} />
+                <h4 className={styles.secondaryTitle}>
+                  {title.english || title.romaji}
+                </h4>
               </div>
-            </div>
-          </section>
-          <Genres
-            as='footer'
-            genres={genres}
-            color={color}
-            canInteract={true}
-            className={styles.genres}
-          />
-        </section>
-      </article>
-    )
-  }
-)
+              {meanScore && (
+                <div className={styles.score}>
+                  <Score score={meanScore} />
+                </div>
+              )}
+            </header>
 
-export default CardChart
+            <div className={styles.description} tabIndex={0}>
+              {description ? (
+                htmr(`<p>${description}</p>`)
+              ) : (
+                <i>no description</i>
+              )}
+            </div>
+          </div>
+        </section>
+        <Genres
+          as='footer'
+          genres={genres}
+          color={color}
+          canInteract={true}
+          className={styles.genres}
+        />
+      </section>
+    </article>
+  )
+}
+
+export default memo(CardChart)

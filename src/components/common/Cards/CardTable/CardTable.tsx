@@ -38,77 +38,75 @@ interface Props {
 const mapStatus = (status: SearchResult['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
-const CardTable = memo(
-  ({
-    image,
-    title,
-    id,
-    genres,
-    meanScore,
-    popularity,
-    status,
-    season,
-    seasonYear,
-    nextAiringEpisode,
-    format,
-    episodes,
-    rank,
-    color,
-  }: Props) => {
-    const _style = {
-      '--color-adjusted': adjustColor(color, 'var(--lightness)'),
-      '--banner-image': `url(${image.banner})`,
-    } as React.CSSProperties
+const CardTable = ({
+  image,
+  title,
+  id,
+  genres,
+  meanScore,
+  popularity,
+  status,
+  season,
+  seasonYear,
+  nextAiringEpisode,
+  format,
+  episodes,
+  rank,
+  color,
+}: Props) => {
+  const _style = {
+    '--color-adjusted': adjustColor(color, 'var(--lightness)'),
+    '--banner-image': `url(${image.banner})`,
+  } as React.CSSProperties
 
-    return (
-      <article className={styles.wrapper} style={_style}>
-        {rank && <div className={styles.rank}>#{rank}</div>}
-        <div className={styles.card}>
-          <CoverImage
-            id={id}
-            title={title.romaji}
-            src={image.cover}
-            color={color}
-          />
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <Title id={id} text={title.romaji} color={color} />
-              <Genres
-                as='section'
-                genres={genres}
-                color={color}
-                canInteract={false}
-                className={styles.genres}
-              />
+  return (
+    <article className={styles.wrapper} style={_style}>
+      {rank && <div className={styles.rank}>#{rank}</div>}
+      <div className={styles.card}>
+        <CoverImage
+          id={id}
+          title={title.romaji}
+          src={image.cover}
+          color={color}
+        />
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <Title id={id} text={title.romaji} color={color} />
+            <Genres
+              as='section'
+              genres={genres}
+              color={color}
+              canInteract={false}
+              className={styles.genres}
+            />
+          </div>
+
+          <div className={styles.row}>
+            {meanScore && <Score score={meanScore} />}
+            <div className={styles.subRow}>
+              {meanScore && popularity !== 0 ? `${popularity} users` : ''}
             </div>
+          </div>
 
-            <div className={styles.row}>
-              {meanScore && <Score score={meanScore} />}
-              <div className={styles.subRow}>
-                {meanScore && popularity !== 0 ? `${popularity} users` : ''}
-              </div>
+          <div className={styles.format + ' ' + styles.row}>
+            {formatLabel(format)}
+            <div className={styles.subRow}>
+              {episodes && pluralize(episodes, 'episode')}
             </div>
+          </div>
 
-            <div className={styles.format + ' ' + styles.row}>
-              {formatLabel(format)}
-              <div className={styles.subRow}>
-                {episodes && pluralize(episodes, 'episode')}
-              </div>
-            </div>
-
-            <div className={styles.airingInfo + ' ' + styles.row}>
-              {status === 'RELEASING' && seasonYear !== currentYear
-                ? `Airing Since ${seasonYear}`
-                : mapStatus(status)}
-              <div className={styles.subRow}>
-                {airingInfo({ nextAiringEpisode, season, seasonYear })}
-              </div>
+          <div className={styles.airingInfo + ' ' + styles.row}>
+            {status === 'RELEASING' && seasonYear !== currentYear
+              ? `Airing Since ${seasonYear}`
+              : mapStatus(status)}
+            <div className={styles.subRow}>
+              {airingInfo({ nextAiringEpisode, season, seasonYear })}
             </div>
           </div>
         </div>
-      </article>
-    )
-  }
-)
+      </div>
+    </article>
+  )
+}
 
-export default CardTable
+export default memo(CardTable)

@@ -25,61 +25,59 @@ interface Props {
   rank?: number | null
 }
 
-const CardCover = memo(
-  ({
-    image,
-    title,
-    id,
-    format,
-    season,
-    seasonYear,
-    episodes,
-    duration,
-    genres,
-    studios,
-    nextAiringEpisode,
-    meanScore,
-    rank,
-    color,
-  }: Props) => {
-    const [isPopoverVisible, setIsPopoverVisible] = useState(false)
-    const showPopover = () => setIsPopoverVisible(true)
-    const hidePopover = () => setIsPopoverVisible(false)
+const CardCover = ({
+  image,
+  title,
+  id,
+  format,
+  season,
+  seasonYear,
+  episodes,
+  duration,
+  genres,
+  studios,
+  nextAiringEpisode,
+  meanScore,
+  rank,
+  color,
+}: Props) => {
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false)
+  const showPopover = () => setIsPopoverVisible(true)
+  const hidePopover = () => setIsPopoverVisible(false)
 
-    const _style = {
-      '--color-adjusted': adjustColor(color, 'var(--lightness)'),
-    } as React.CSSProperties
+  const _style = {
+    '--color-adjusted': adjustColor(color, 'var(--lightness)'),
+  } as React.CSSProperties
 
-    return (
-      <div
-        className={styles.popoverWrapper}
-        onMouseOver={showPopover}
-        onMouseLeave={hidePopover}
-        onFocus={showPopover}
-        onBlur={hidePopover}
-        style={_style}>
-        <article className={styles.container}>
-          {rank && <div className={styles.rank}>#{rank}</div>}
-          <CoverImage id={id} src={image} title={title.romaji} color={color} />
-          <Title id={id} text={title.romaji} color={color} />
-        </article>
+  return (
+    <div
+      className={styles.popoverWrapper}
+      onMouseOver={showPopover}
+      onMouseLeave={hidePopover}
+      onFocus={showPopover}
+      onBlur={hidePopover}
+      style={_style}>
+      <article className={styles.container}>
+        {rank && <div className={styles.rank}>#{rank}</div>}
+        <CoverImage id={id} src={image} title={title.romaji} color={color} />
+        <Title id={id} text={title.romaji} color={color} />
+      </article>
 
-        <Popover
-          isVisible={isPopoverVisible}
-          genres={genres}
-          nextAiringEpisode={nextAiringEpisode}
-          format={format}
-          season={season}
-          seasonYear={seasonYear}
-          episodes={episodes}
-          duration={duration}
-          studios={studios}
-          color={color}
-          meanScore={meanScore}
-        />
-      </div>
-    )
-  }
-)
+      <Popover
+        isVisible={isPopoverVisible}
+        genres={genres}
+        nextAiringEpisode={nextAiringEpisode}
+        format={format}
+        season={season}
+        seasonYear={seasonYear}
+        episodes={episodes}
+        duration={duration}
+        studios={studios}
+        color={color}
+        meanScore={meanScore}
+      />
+    </div>
+  )
+}
 
-export default CardCover
+export default memo(CardCover)

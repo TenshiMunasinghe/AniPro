@@ -11,7 +11,7 @@ interface Props {
 const color = 'var(--color-foreground-300)'
 const highlightColor = 'var(--color-foreground-400)'
 
-const CardLoading = memo(({ type }: Props) => {
+const CardLoading = ({ type }: Props) => {
   switch (type) {
     case 'cover':
       return (
@@ -91,6 +91,6 @@ const CardLoading = memo(({ type }: Props) => {
     default:
       return <></>
   }
-})
+}
 
-export default CardLoading
+export default memo(CardLoading)

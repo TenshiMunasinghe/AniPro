@@ -15,27 +15,31 @@ interface Props {
   className?: string
 }
 
-const Genres = memo(
-  ({ as: Tag, genres: allGenres, color, canInteract, className }: Props) => {
-    const history = useHistory()
-    const { ref, state: genres } = useFitContent(allGenres)
+const Genres = ({
+  as: Tag,
+  genres: allGenres,
+  color,
+  canInteract,
+  className,
+}: Props) => {
+  const history = useHistory()
+  const { ref, state: genres } = useFitContent(allGenres)
 
-    const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
-    const _genres = useMemo(() => addKey(genres), [genres])
+  const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
+  const _genres = useMemo(() => addKey(genres), [genres])
 
-    return createElement(Tag, {
-      children: _genres.map(g => (
-        <Genre
-          key={g.key}
-          genre={g.value}
-          color={color}
-          onClick={canInteract ? () => setGenre(g.value) : undefined}
-        />
-      )),
-      className: classnames(styles.wrapper, className),
-      ref,
-    })
-  }
-)
+  return createElement(Tag, {
+    children: _genres.map(g => (
+      <Genre
+        key={g.key}
+        genre={g.value}
+        color={color}
+        onClick={canInteract ? () => setGenre(g.value) : undefined}
+      />
+    )),
+    className: classnames(styles.wrapper, className),
+    ref,
+  })
+}
 
-export default Genres
+export default memo(Genres)
