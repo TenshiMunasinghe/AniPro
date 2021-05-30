@@ -25,8 +25,11 @@ const Genres = ({
   const history = useHistory()
   const { ref, state: genres } = useFitContent(allGenres)
 
-  const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
   const _genres = useMemo(() => addKey(genres), [genres])
+
+  if (genres.length === 0) return null
+
+  const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
 
   return createElement(Tag, {
     children: _genres.map(g => (
