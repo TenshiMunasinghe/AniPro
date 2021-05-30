@@ -92,12 +92,13 @@ const CardGrid = ({
         })}>
         <section className={classnames(styles.slider, styles[cardType])}>
           {_medias &&
-            _medias.map(m => {
+            _medias.map((m, i) => {
               switch (cardType) {
                 case 'cover':
                   return (
                     <CardCover
                       key={m.id}
+                      index={i}
                       id={m.id}
                       image={m.coverImage[imageSize]}
                       color={m.coverImage.color}

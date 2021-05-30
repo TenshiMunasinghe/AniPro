@@ -8,6 +8,7 @@ import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
 
 interface Props {
+  index: number
   id: number
   image: string
   color: string
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const CardCover = ({
+  index,
   image,
   title,
   id,
@@ -64,6 +66,7 @@ const CardCover = ({
       </article>
 
       <Popover
+        index={index}
         isVisible={isPopoverVisible}
         genres={genres}
         nextAiringEpisode={nextAiringEpisode}

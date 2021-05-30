@@ -18,6 +18,7 @@ import Score from '../../components/Score/Score'
 import styles from './Popover.module.scss'
 
 interface Props {
+  index: number
   isVisible: boolean
   format: SearchResult['format']
   season: SearchResult['season']
@@ -39,6 +40,7 @@ type DisplayState = {
 const windowStateSelector = (state: WindowSizeStore) => state.width
 
 const Popover = ({
+  index,
   nextAiringEpisode,
   isVisible,
   season,
@@ -76,7 +78,7 @@ const Popover = ({
 
       return { isLeft, isRight }
     })
-  }, [windowWidth])
+  }, [windowWidth, index])
 
   const _style = {
     '--color-light': adjustColor(color, 'var(--lightness)'),
