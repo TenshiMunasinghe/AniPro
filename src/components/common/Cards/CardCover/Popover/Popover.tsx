@@ -94,11 +94,9 @@ const Popover = ({
 
   const isHidden = (!isLeft && !isRight) || !isVisible
 
-  const className = isLeft ? 'left' : 'right'
-
   return (
     <aside
-      className={classnames(styles.wrapper, styles[className], {
+      className={classnames(styles.wrapper, styles[isLeft ? 'left' : 'right'], {
         [styles.hide]: isHidden,
       })}
       ref={wrapperRef}
