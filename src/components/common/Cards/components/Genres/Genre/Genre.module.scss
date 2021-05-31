@@ -1,5 +1,5 @@
 .genre {
-  --color: var(--color-adjusted, --color-text-200);
+  --color: var(--color-adjusted, var(--color-text-200));
   display: flex;
   align-items: center;
   font-size: inherit;
