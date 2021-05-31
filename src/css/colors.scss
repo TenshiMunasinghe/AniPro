@@ -45,7 +45,7 @@ $-other-colors: (
               map.get($val, 'precision') +
               color.lightness(map.get($val, 'hsl'))
           ),
-          80%
+          86%
         )};
     }
   }
