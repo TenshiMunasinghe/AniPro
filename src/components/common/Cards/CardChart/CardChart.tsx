@@ -2,12 +2,12 @@ import htmr from 'htmr'
 import { memo } from 'react'
 
 import { SearchResult } from '../../../../api/types'
-import { adjustColor } from '../../../../utils/adjustColor'
 import Genres from '../components/Genres/Genres'
 import styles from './CardChart.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
 import Score from '../components/Score/Score'
+import { createColorVariable } from '../../../../utils/createColorVariable'
 
 interface Props {
   id: number
@@ -28,20 +28,15 @@ const CardChart = ({
   meanScore,
   description,
 }: Props) => {
-  const _style = {
-    '--color-text': adjustColor(color, 'var(--lightness)'),
-    '--color-original': color,
-  } as React.CSSProperties
-
   return (
-    <article className={styles.wrapper} style={_style}>
+    <article className={styles.wrapper} style={createColorVariable(color)}>
       <CoverImage id={id} src={image} color={color} title={title.romaji} />
       <section className={styles.content}>
         <section className={styles.cardBody}>
           <div className={styles.scrollWrapper}>
             <header className={styles.cardHeader}>
               <div className={styles.title}>
-                <Title id={id} text={title.romaji} color={color} />
+                <Title id={id} text={title.romaji} />
                 <h4 className={styles.secondaryTitle}>
                   {title.english || title.romaji}
                 </h4>
@@ -65,7 +60,6 @@ const CardChart = ({
         <Genres
           as='footer'
           genres={genres}
-          color={color}
           canInteract={true}
           className={styles.genres}
         />

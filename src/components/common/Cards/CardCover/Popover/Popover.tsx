@@ -2,7 +2,6 @@ import classnames from 'classnames'
 import { memo, useLayoutEffect, useRef, useState } from 'react'
 
 import { SearchResult } from '../../../../../api/types'
-import { adjustColor } from '../../../../../utils/adjustColor'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
 import { formatLabel } from '../../../../../utils/formatLabel'
@@ -27,7 +26,6 @@ interface Props {
   duration: SearchResult['duration']
   genres: SearchResult['genres']
   studios: SearchResult['studios']
-  color: SearchResult['coverImage']['color']
   meanScore: SearchResult['meanScore']
   nextAiringEpisode: SearchResult['nextAiringEpisode']
 }
@@ -46,7 +44,6 @@ const Popover = ({
   season,
   seasonYear,
   studios,
-  color,
   meanScore,
   genres,
   format,
@@ -80,10 +77,6 @@ const Popover = ({
     })
   }, [windowWidth, index])
 
-  const _style = {
-    '--color-light': adjustColor(color, 'var(--lightness)'),
-  } as React.CSSProperties
-
   const _duration = timeToArr(
     convertTime({
       num: duration,
@@ -99,8 +92,7 @@ const Popover = ({
       className={classnames(styles.wrapper, styles[isLeft ? 'left' : 'right'], {
         [styles.hide]: isHidden,
       })}
-      ref={wrapperRef}
-      style={_style}>
+      ref={wrapperRef}>
       <header className={styles.header}>
         <div className={styles.airingInfo}>
           {airingInfo({ nextAiringEpisode, season, seasonYear })}
@@ -129,7 +121,6 @@ const Popover = ({
       <Genres
         as='footer'
         genres={genres}
-        color={color}
         canInteract={false}
         className={styles.genres}
       />

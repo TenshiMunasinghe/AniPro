@@ -1,11 +1,11 @@
 import { memo, useState } from 'react'
 
 import { SearchResult } from '../../../../api/types'
-import { adjustColor } from '../../../../utils/adjustColor'
 import Popover from './Popover/Popover'
 import styles from './CardCover.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
+import { createColorVariable } from '../../../../utils/createColorVariable'
 
 interface Props {
   index: number
@@ -47,10 +47,6 @@ const CardCover = ({
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
 
-  const _style = {
-    '--color-adjusted': adjustColor(color, 'var(--lightness)'),
-  } as React.CSSProperties
-
   return (
     <div
       className={styles.popoverWrapper}
@@ -58,11 +54,11 @@ const CardCover = ({
       onMouseLeave={hidePopover}
       onFocus={showPopover}
       onBlur={hidePopover}
-      style={_style}>
+      style={createColorVariable(color)}>
       <article className={styles.container}>
         {rank && <div className={styles.rank}>#{rank}</div>}
         <CoverImage id={id} src={image} title={title.romaji} color={color} />
-        <Title id={id} text={title.romaji} color={color} />
+        <Title id={id} text={title.romaji} />
       </article>
 
       <Popover
@@ -76,7 +72,6 @@ const CardCover = ({
         episodes={episodes}
         duration={duration}
         studios={studios}
-        color={color}
         meanScore={meanScore}
       />
     </div>

@@ -10,7 +10,6 @@ import styles from './Genres.module.scss'
 interface Props {
   as: 'section' | 'footer'
   genres: string[]
-  color: string
   canInteract: boolean
   className?: string
 }
@@ -18,7 +17,6 @@ interface Props {
 const Genres = ({
   as: Tag,
   genres: allGenres,
-  color,
   canInteract,
   className,
 }: Props) => {
@@ -36,7 +34,6 @@ const Genres = ({
       <Genre
         key={g.key}
         genre={g.value}
-        color={color}
         onClick={canInteract ? () => setGenre(g.value) : undefined}
       />
     )),

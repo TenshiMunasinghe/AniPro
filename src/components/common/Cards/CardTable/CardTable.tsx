@@ -2,7 +2,6 @@ import { memo } from 'react'
 
 import { currentYear } from '../../../../api/queries'
 import { SearchResult } from '../../../../api/types'
-import { adjustColor } from '../../../../utils/adjustColor'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
@@ -12,6 +11,7 @@ import styles from './CardTable.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
 import Score from '../components/Score/Score'
+import { createColorVariable } from '../../../../utils/createColorVariable'
 
 interface Props {
   id: number
@@ -55,7 +55,7 @@ const CardTable = ({
   color,
 }: Props) => {
   const _style = {
-    '--color-adjusted': adjustColor(color, 'var(--lightness)'),
+    ...createColorVariable(color),
     '--banner-image': `url(${image.banner})`,
   } as React.CSSProperties
 
@@ -71,11 +71,10 @@ const CardTable = ({
         />
         <div className={styles.content}>
           <div className={styles.header}>
-            <Title id={id} text={title.romaji} color={color} />
+            <Title id={id} text={title.romaji} />
             <Genres
               as='section'
               genres={genres}
-              color={color}
               canInteract={false}
               className={styles.genres}
             />

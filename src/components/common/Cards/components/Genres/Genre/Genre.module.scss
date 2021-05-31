@@ -1,12 +1,13 @@
 .genre {
+  --color: var(--color-adjusted, --color-text-200);
   display: flex;
   align-items: center;
   font-size: inherit;
-  color: var(--color-text);
+  color: var(--color);
   padding: var(--space-300) var(--space-400);
   background: var(--color-background-200);
   border-radius: 0.75em;
-  border: solid 1px var(--color-border);
+  border: solid 1px var(--color);
   cursor: pointer;
   white-space: nowrap;
   transition: all 0.15s ease-in-out;
@@ -14,7 +15,7 @@
   &:hover,
   &:focus {
     color: var(--color-foreground-100);
-    background: var(--color-bg);
+    background: var(--color);
   }
 
   &.hide {
