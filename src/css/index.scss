@@ -65,12 +65,12 @@ body {
   }
 
   &.light {
-    --color-background: var(--light-900);
-    --color-foreground-50: var(--light-800);
-    --color-foreground-100: var(--light-700);
-    --color-foreground-200: var(--light-600);
-    --color-foreground-300: var(--light-500);
-    --color-foreground-400: var(--light-400);
+    --color-background: var(--light-400);
+    --color-foreground-50: var(--light-500);
+    --color-foreground-100: var(--light-600);
+    --color-foreground-200: var(--light-700);
+    --color-foreground-300: var(--light-800);
+    --color-foreground-400: var(--light-900);
     --color-foreground-accent-100: var(--primary-400);
     --color-foreground-accent-200: var(--primary-300);
     --color-foreground-accent-300: var(--primary-200);
@@ -86,7 +86,7 @@ body {
     --highlight-100: 90%;
     --highlight-200: 80%;
     --color-shadow: var(--black-900);
-    --lightness: 42%;
+    --lightness: 32%;
   }
 
   --image-aspect-ratio: (2/3);
