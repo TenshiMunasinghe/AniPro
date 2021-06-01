@@ -3,6 +3,7 @@
 .wrapper {
   position: relative;
   overflow: hidden;
+  --padding: var(--space-400);
 
   @include mq(above, sm) {
     display: flex;
@@ -15,14 +16,14 @@
 
 .rank {
   position: absolute;
-  right: var(--space-300);
-  top: var(--space-300);
+  right: var(--padding);
+  top: var(--padding);
   width: 3rem;
 }
 
 .card {
   background-color: var(--color-foreground-100);
-  @include padding-vertical(var(--space-400));
+  @include padding-vertical(var(--padding));
 
   @mixin background-image {
     background-image: var(--banner-image);
@@ -66,7 +67,7 @@
     grid-template-columns: calc(3rem + 7%) 1fr;
     font-size: var(--text-size-400);
     border-radius: 0.1em;
-    @include padding-horizontal(var(--space-400));
+    @include padding-horizontal(var(--padding));
   }
 
   @include mq(below, sm) {
