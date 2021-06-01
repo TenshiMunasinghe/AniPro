@@ -18,20 +18,10 @@
   }
 
   .rank {
-    --size: 2.5rem;
-    background: var(--color-adjusted);
-    color: var(--color-foreground-300);
-    font-size: var(--text-size-400);
-    font-weight: 500;
-    @include mq(below, sm) {
-      --size: 3.5rem;
-      font-size: var(--text-size-500);
-    }
-    @include rank(
-      $left: calc(-1 * var(--space-200)),
-      $top: calc(-1 * var(--space-200)),
-      $size: var(--size)
-    );
+    position: absolute;
+    left: calc(-1 * var(--space-200));
+    top: calc(-1 * var(--space-200));
+    width: 2.5rem;
   }
 
   & > a {

@@ -6,6 +6,7 @@ import styles from './CardCover.module.scss'
 import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
 import { createColorVariable } from '../../../../utils/createColorVariable'
+import Rank from '../components/Rank/Rank'
 
 interface Props {
   index: number
@@ -56,7 +57,11 @@ const CardCover = ({
       onBlur={hidePopover}
       style={createColorVariable(color)}>
       <article className={styles.container}>
-        {rank && <div className={styles.rank}>#{rank}</div>}
+        {rank && (
+          <div className={styles.rank}>
+            <Rank rank={rank} />
+          </div>
+        )}
         <CoverImage id={id} src={image} title={title.romaji} color={color} />
         <Title id={id} text={title.romaji} />
       </article>

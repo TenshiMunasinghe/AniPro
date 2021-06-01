@@ -14,11 +14,10 @@
 }
 
 .rank {
-  background: var(--color-adjusted);
-  color: var(--color-foreground-300);
-  font-size: var(--text-size-400);
-  font-weight: 500;
-  @include rank($right: var(--space-300), $top: var(--space-300), $size: 3rem);
+  position: absolute;
+  right: var(--space-300);
+  top: var(--space-300);
+  width: 3rem;
 }
 
 .card {

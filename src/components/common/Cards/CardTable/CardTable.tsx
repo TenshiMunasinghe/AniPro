@@ -12,6 +12,7 @@ import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
 import Score from '../components/Score/Score'
 import { createColorVariable } from '../../../../utils/createColorVariable'
+import Rank from '../components/Rank/Rank'
 
 interface Props {
   id: number
@@ -61,7 +62,11 @@ const CardTable = ({
 
   return (
     <article className={styles.wrapper} style={_style}>
-      {rank && <div className={styles.rank}>#{rank}</div>}
+      {rank && (
+        <div className={styles.rank}>
+          <Rank rank={rank} />
+        </div>
+      )}
       <div className={styles.card}>
         <CoverImage
           id={id}
