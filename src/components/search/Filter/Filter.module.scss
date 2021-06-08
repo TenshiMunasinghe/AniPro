@@ -9,43 +9,31 @@
   text-align: center;
   transition: all 0.075s ease-in-out;
   white-space: nowrap;
+  background-color: var(--color-bg);
+  @include mouse-effects(var(--color-bg-hover), var(--color-bg-active), bg);
 
+  &,
   & > * {
-    color: var(--color, var(--color-text-100));
+    color: var(--color-txt);
   }
 
   & > svg {
-    fill: var(--color, var(--color-text-100));
+    fill: var(--color-txt);
+    margin-left: var(--space-300);
+    transform: scale(0.8);
   }
 
   &.primary {
-    --color: var(--color-text-invert-100);
-    background: var(--color-foreground-accent-100);
-
-    @include mouse-effects(
-      var(--color-foreground-accent-200),
-      var(--color-foreground-accent-100),
-      bg
-    );
-
-    svg {
-      margin-left: var(--space-300);
-      transform: scale(0.8);
-    }
+    --color-txt: var(--color-text-invert-100);
+    --color-bg: var(--color-foreground-accent-100);
+    --color-bg-hover: var(--color-foreground-accent-200);
+    --color-bg-active: var(--color-foreground-accent-100);
   }
 
   &.secondary {
-    --color: var(--color-text-accent-200);
-    background: var(--color-foreground-200);
-    transition: all 0.075s ease-in-out;
-
-    svg {
-      margin-left: 0.5em;
-    }
-    @include mouse-effects(
-      var(--color-foreground-300),
-      var(--color-foreground-400),
-      bg
-    );
+    --color-txt: var(--color-text-accent-200);
+    --color-bg: var(--color-foreground-200);
+    --color-bg-hover: var(--color-foreground-300);
+    --color-bg-active: var(--color-foreground-400);
   }
 }
