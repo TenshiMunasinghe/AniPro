@@ -13,7 +13,7 @@ const Filter = ({ text, onClick, variant }: Props) => {
     <button
       className={styles.wrapper + ' ' + styles[variant]}
       onClick={onClick}>
-      <span className={styles.text}>{text}</span>
+      {text}
       <FaTimes />
     </button>
   )
