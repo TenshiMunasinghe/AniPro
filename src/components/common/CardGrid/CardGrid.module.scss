@@ -1,98 +1,37 @@
 @use '../../../css/config.scss' as *;
 @use '../../../css/layout.scss';
 
-.wrapper {
-  display: grid;
-  height: fit-content;
-  justify-items: center;
+.slider {
+  @include layout.grid-template;
 
-  .slider {
-    position: relative;
-    @include layout.grid-template;
+  &.cover {
+    @include layout.grid-cover;
+  }
 
-    &.cover {
-      @include layout.grid-cover;
-    }
+  &.chart {
+    @include layout.grid-chart;
+  }
 
-    &.chart {
-      @include layout.grid-chart;
-    }
-
-    &.table {
-      @include layout.grid-table;
-    }
+  &.table {
+    @include layout.grid-table;
   }
 
   &.sideScroll {
-    .slider {
-      &.cover {
-        grid-template-columns: repeat(5, 1fr);
-      }
+    &.cover {
+      grid-template-columns: repeat(5, 1fr);
     }
 
     @include mq(below, sm) {
       overflow-x: auto;
       overflow-y: hidden;
-      .slider {
-        &.cover {
-          padding: var(--space-400);
-          display: flex;
-          & > * {
-            flex: 1 0 auto;
-            width: 47.5vw;
-          }
+      &.cover {
+        padding: var(--space-400);
+        display: flex;
+        & > * {
+          flex: 1 0 auto;
+          width: 47.5vw;
         }
       }
     }
   }
-}
-
-.pages {
-  display: flex;
-  margin: var(--space-700) 0;
-}
-
-.page {
-  background: var(--color-foreground-200);
-  font-weight: 500;
-  padding: var(--space-300) var(--space-400);
-  margin-right: var(--space-400);
-  transition: 0.05s all ease-in-out;
-  border-radius: 0.1em;
-
-  @include mouse-effects(
-    var(--color-foreground-300),
-    var(--color-foreground-400),
-    bg
-  );
-
-  &:last-child {
-    margin-right: 0;
-  }
-
-  &.current {
-    background: var(--color-foreground-400);
-    color: var(--colo-text-300);
-  }
-}
-
-.fetchingIndicator {
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  position: fixed;
-  top: 50%;
-  transform: translateY(50%);
-  font-size: var(--text-size-600);
-  color: var(--color-text-accent-200);
-  text-align: center;
-  animation: rotate 5s linear infinite;
-  pointer-events: none;
-  z-index: 9999;
 }

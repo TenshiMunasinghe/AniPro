@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 
-import CardGrid from '../../components/common/CardGrid/CardGrid'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../components/common/Dropdown/Dropdown'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
@@ -10,6 +9,7 @@ import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
 import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
+import SearchResult from '../../components/search/SearchResult/SearchResult'
 
 export type CardType = 'chart' | 'cover' | 'table'
 
@@ -56,12 +56,7 @@ const Search = () => {
       <main className={styles.mainContent}>
         <SearchOptions />
 
-        <CardGrid
-          params={initialParams}
-          cardType={cardType}
-          imageSize='large'
-          hasPages={true}
-        />
+        <SearchResult params={initialParams} cardType={cardType} />
         <ScrollButton />
       </main>
     </div>

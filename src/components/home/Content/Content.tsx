@@ -4,6 +4,7 @@ import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
+import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 
 export type _Content = {
   text: string
@@ -24,6 +25,10 @@ const Content = ({ queryVar, content }: Props) => {
     )
   )
 
+  const { medias, isLoading, isError } = useFetchSearchResult(
+    new URLSearchParams(Object.entries(queryVar))
+  )
+
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
   return (
@@ -37,12 +42,11 @@ const Content = ({ queryVar, content }: Props) => {
         </Link>
       </div>
       <CardGrid
-        params={new URLSearchParams(Object.entries(queryVar))}
+        medias={medias}
+        isLoading={isLoading}
+        isError={isError}
         cardType={content.cardType}
         imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
-        loadingCount={queryVar.perPage}
-        hasRank={content.hasRank}
-        hasPages={false}
         sideScroll={content.cardType === 'cover'}
       />
     </section>
