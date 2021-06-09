@@ -1,6 +1,6 @@
 import { memo, useState } from 'react'
 
-import { SearchResult } from '../../../../api/types'
+import { FetchedMedias } from '../../../../api/types'
 import Popover from './Popover/Popover'
 import styles from './CardCover.module.scss'
 import Title from '../components/Title/Title'
@@ -13,17 +13,17 @@ interface Props {
   id: number
   image: string
   color: string
-  title: SearchResult['title']
-  format: SearchResult['format']
-  season: SearchResult['season']
-  seasonYear: SearchResult['seasonYear']
-  episodes: SearchResult['episodes']
-  duration: SearchResult['duration']
-  genres: SearchResult['genres']
-  status: SearchResult['status']
-  studios: SearchResult['studios']
-  meanScore: SearchResult['meanScore']
-  nextAiringEpisode: SearchResult['nextAiringEpisode']
+  title: FetchedMedias['title']
+  format: FetchedMedias['format']
+  season: FetchedMedias['season']
+  seasonYear: FetchedMedias['seasonYear']
+  episodes: FetchedMedias['episodes']
+  duration: FetchedMedias['duration']
+  genres: FetchedMedias['genres']
+  status: FetchedMedias['status']
+  studios: FetchedMedias['studios']
+  meanScore: FetchedMedias['meanScore']
+  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
   rank?: number | null
 }
 

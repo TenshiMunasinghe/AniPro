@@ -1,7 +1,7 @@
 import htmr from 'htmr'
 import { memo } from 'react'
 
-import { SearchResult } from '../../../../api/types'
+import { FetchedMedias } from '../../../../api/types'
 import Genres from '../components/Genres/Genres'
 import styles from './CardChart.module.scss'
 import Title from '../components/Title/Title'
@@ -13,10 +13,10 @@ interface Props {
   id: number
   image: string
   color: string
-  title: SearchResult['title']
-  genres: SearchResult['genres']
-  meanScore: SearchResult['meanScore']
-  description: SearchResult['description']
+  title: FetchedMedias['title']
+  genres: FetchedMedias['genres']
+  meanScore: FetchedMedias['meanScore']
+  description: FetchedMedias['description']
 }
 
 const CardChart = ({

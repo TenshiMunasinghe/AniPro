@@ -1,7 +1,7 @@
 import { memo } from 'react'
 
 import { currentYear } from '../../../../api/queries'
-import { SearchResult } from '../../../../api/types'
+import { FetchedMedias } from '../../../../api/types'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
@@ -18,25 +18,25 @@ interface Props {
   id: number
   image: {
     cover: string
-    banner: SearchResult['bannerImage']
+    banner: FetchedMedias['bannerImage']
   }
   color: string
-  title: SearchResult['title']
-  format: SearchResult['format']
-  season: SearchResult['season']
-  seasonYear: SearchResult['seasonYear']
-  episodes: SearchResult['episodes']
-  duration: SearchResult['duration']
-  genres: SearchResult['genres']
-  status: SearchResult['status']
-  studios: SearchResult['studios']
-  meanScore: SearchResult['meanScore']
-  nextAiringEpisode: SearchResult['nextAiringEpisode']
-  popularity: SearchResult['popularity']
+  title: FetchedMedias['title']
+  format: FetchedMedias['format']
+  season: FetchedMedias['season']
+  seasonYear: FetchedMedias['seasonYear']
+  episodes: FetchedMedias['episodes']
+  duration: FetchedMedias['duration']
+  genres: FetchedMedias['genres']
+  status: FetchedMedias['status']
+  studios: FetchedMedias['studios']
+  meanScore: FetchedMedias['meanScore']
+  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
+  popularity: FetchedMedias['popularity']
   rank?: number | null
 }
 
-const mapStatus = (status: SearchResult['status']) =>
+const mapStatus = (status: FetchedMedias['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
 const CardTable = ({
