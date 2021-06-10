@@ -78,6 +78,10 @@
     @include description(3);
   }
 
+  &:focus {
+    @include show-description;
+  }
+
   * {
     color: inherit;
   }
