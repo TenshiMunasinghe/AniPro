@@ -1,14 +1,14 @@
+import classnames from 'classnames'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import styles from './SearchOptions.module.scss'
+import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
+import { v4 } from 'uuid'
+import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
-import { filterOptionTypes } from '../../../filterOptions/filterOptions'
-import { v4 } from 'uuid'
-import Options from '../Options/Options'
 import { toStartCase } from '../../../utils/toStartCase'
-import classnames from 'classnames'
-import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
 import Option from '../Option/Option'
+import Options from '../Options/Options'
+import styles from './SearchOptions.module.scss'
 
 export type HandleChangeArgs = {
   isMulti: boolean

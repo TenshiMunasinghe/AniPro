@@ -6,7 +6,7 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-
+import { FetchedMedias } from '../../../api/types'
 import { DEFAULT_PER_PAGE } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
@@ -15,7 +15,6 @@ import CardLoading from '../Cards/CardLoading/CardLoading'
 import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
-import { FetchedMedias } from '../../../api/types'
 
 interface Media extends FetchedMedias {
   rank?: number | null

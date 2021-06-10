@@ -1,9 +1,8 @@
 import classnames from 'classnames'
 import { Dispatch, SetStateAction } from 'react'
-
 import { CardType } from '../../../pages/search/Search'
-import GridIcon from './GridIcon/GridIcon'
 import styles from './CardTypeButton.module.scss'
+import GridIcon from './GridIcon/GridIcon'
 
 interface Props {
   cardType: CardType

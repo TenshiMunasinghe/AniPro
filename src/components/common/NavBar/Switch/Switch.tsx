@@ -1,6 +1,5 @@
 import { ChangeEvent, memo } from 'react'
 import { IconType } from 'react-icons'
-
 import styles from './Switch.module.scss'
 
 interface Props {

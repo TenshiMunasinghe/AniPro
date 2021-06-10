@@ -5,13 +5,12 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
+import CardGrid from '../../common/CardGrid/CardGrid'
 import NotFound from '../../common/NotFound/NotFound'
 import styles from './SearchResult.module.scss'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import CardGrid from '../../common/CardGrid/CardGrid'
 
 interface Props extends LazyComponentProps {
   params: URLSearchParams

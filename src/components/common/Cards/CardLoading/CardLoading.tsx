@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-
 import { CardType } from '../../../../pages/search/Search'
 import styles from './CardLoading.module.scss'
 

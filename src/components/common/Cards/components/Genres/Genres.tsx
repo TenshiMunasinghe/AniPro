@@ -1,7 +1,6 @@
 import classnames from 'classnames'
-import { memo, useMemo, createElement } from 'react'
+import { createElement, memo, useMemo } from 'react'
 import { useHistory } from 'react-router-dom'
-
 import { useFitContent } from '../../../../../hooks/useFitContent'
 import { addKey } from '../../../../../utils/addKey'
 import Genre from './Genre/Genre'

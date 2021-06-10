@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-
 import { Overview } from '../../../api/types'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'

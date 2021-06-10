@@ -1,5 +1,4 @@
 import { FaFrown, FaMeh, FaSmile, FaSmileBeam } from 'react-icons/fa'
-
 import styles from './FaceIcon.module.scss'
 
 interface Props {

@@ -1,5 +1,4 @@
 import range from 'lodash/range'
-
 import { currentYear } from '../api/queries'
 import { toStartCase } from '../utils/toStartCase'
 import { tags } from './tags'

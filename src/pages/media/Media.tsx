@@ -3,7 +3,6 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import { useParams } from 'react-router-dom'
-
 import { Overview } from '../../api/types'
 import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'

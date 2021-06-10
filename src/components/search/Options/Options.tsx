@@ -1,10 +1,9 @@
-import { memo } from 'react'
-
-import Option from '../Option/Option'
-import styles from './Options.module.scss'
 import classnames from 'classnames'
-import { HandleChangeArgs } from '../SearchOptions/SearchOptions'
+import { memo } from 'react'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import Option from '../Option/Option'
+import { HandleChangeArgs } from '../SearchOptions/SearchOptions'
+import styles from './Options.module.scss'
 
 interface Props {
   handleChange: (args: HandleChangeArgs) => void

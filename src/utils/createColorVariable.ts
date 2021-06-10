@@ -1,5 +1,4 @@
 import { CSSProperties } from 'react'
-
 import { adjustColor } from './adjustColor'
 
 export const createColorVariable = (color: string) =>

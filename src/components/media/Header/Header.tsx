@@ -1,7 +1,6 @@
 import htmr from 'htmr'
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
-
 import { Overview } from '../../../api/types'
 import { TabsType } from '../../../pages/media/Media'
 import Tabs from '../Tabs/Tabs'

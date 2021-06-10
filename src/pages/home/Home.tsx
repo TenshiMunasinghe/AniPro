@@ -4,7 +4,7 @@ import {
   nextSeason,
   nextYear,
 } from '../../api/queries'
-import { QueryVar, FetchedMedias } from '../../api/types'
+import { FetchedMedias, QueryVar } from '../../api/types'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'

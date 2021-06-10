@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useResizeDetector } from 'react-resize-detector'
-
 import { isChildOverflow } from '../utils/isChildOverflow'
 
 export const useFitContent = <T>(initilState: T[]) => {

@@ -1,13 +1,12 @@
 import htmr from 'htmr'
 import { memo } from 'react'
-
 import { FetchedMedias } from '../../../../api/types'
-import Genres from '../components/Genres/Genres'
-import styles from './CardChart.module.scss'
-import Title from '../components/Title/Title'
-import CoverImage from '../components/CoverImage/CoverImage'
-import Score from '../components/Score/Score'
 import { createColorVariable } from '../../../../utils/createColorVariable'
+import CoverImage from '../components/CoverImage/CoverImage'
+import Genres from '../components/Genres/Genres'
+import Score from '../components/Score/Score'
+import Title from '../components/Title/Title'
+import styles from './CardChart.module.scss'
 
 interface Props {
   id: number

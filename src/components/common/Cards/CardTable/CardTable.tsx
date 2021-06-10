@@ -1,18 +1,17 @@
 import { memo } from 'react'
-
 import { currentYear } from '../../../../api/queries'
 import { FetchedMedias } from '../../../../api/types'
 import { airingInfo } from '../../../../utils/airingInfo'
+import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import Genres from '../components/Genres/Genres'
-import styles from './CardTable.module.scss'
-import Title from '../components/Title/Title'
 import CoverImage from '../components/CoverImage/CoverImage'
-import Score from '../components/Score/Score'
-import { createColorVariable } from '../../../../utils/createColorVariable'
+import Genres from '../components/Genres/Genres'
 import Rank from '../components/Rank/Rank'
+import Score from '../components/Score/Score'
+import Title from '../components/Title/Title'
+import styles from './CardTable.module.scss'
 import Info from './Info/Info'
 
 interface Props {

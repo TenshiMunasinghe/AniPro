@@ -1,7 +1,7 @@
-import { memo } from 'react'
-import styles from './Option.module.scss'
 import classnames from 'classnames'
+import { memo } from 'react'
 import { FaCheck } from 'react-icons/fa'
+import styles from './Option.module.scss'
 
 interface Props {
   value: string

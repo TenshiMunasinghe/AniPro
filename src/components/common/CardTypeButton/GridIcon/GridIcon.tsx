@@ -1,5 +1,4 @@
 import { FaTh, FaThLarge, FaThList } from 'react-icons/fa'
-
 import { CardType } from '../../../../pages/search/Search'
 
 interface Props {
