@@ -9,6 +9,7 @@ import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
+import LinearLoading from '../../common/LinearLoading/LinearLoading'
 import NotFound from '../../common/NotFound/NotFound'
 import styles from './SearchResult.module.scss'
 
@@ -84,9 +85,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
             )}
           </section>
         )}
-        {!isLoading && isFetching && (
-          <div className={styles.fetchingIndicator} />
-        )}
+        {!isLoading && isFetching && <LinearLoading />}
       </div>
     </ScrollPositionContext.Provider>
   )
