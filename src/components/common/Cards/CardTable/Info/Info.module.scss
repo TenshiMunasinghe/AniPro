@@ -1,0 +1,14 @@
+.container {
+  display: grid;
+  align-items: flex-start;
+}
+
+.main {
+  font-size: var(--text-size-400);
+}
+
+.sub {
+  font-size: var(--text-size-300);
+  font-weight: 350;
+  color: var(--color-text-200);
+}
