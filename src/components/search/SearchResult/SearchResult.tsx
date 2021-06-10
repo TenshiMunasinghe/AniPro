@@ -85,7 +85,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
           </section>
         )}
         {!isLoading && isFetching && (
-          <div className={styles.fetchingIndicator}>Loading...</div>
+          <div className={styles.fetchingIndicator} />
         )}
       </div>
     </ScrollPositionContext.Provider>

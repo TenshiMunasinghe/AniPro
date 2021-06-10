@@ -36,22 +36,57 @@
   }
 
   .fetchingIndicator {
-    @keyframes rotate {
-      from {
-        transform: rotate(0deg);
+    @keyframes progress-before {
+      0% {
+        left: -50%;
+        width: 50%;
       }
-      to {
-        transform: rotate(360deg);
+
+      100% {
+        left: 200%;
+        width: 50%;
+      }
+    }
+
+    @keyframes progress-after {
+      0% {
+        left: -100%;
+        width: 50%;
+      }
+
+      100% {
+        left: 150%;
+        width: 50%;
       }
     }
 
     position: fixed;
-    top: 50%;
-    font-size: var(--text-size-600);
-    color: var(--color-text-accent-200);
-    text-align: center;
-    animation: rotate 5s linear infinite;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 0.1rem;
+    background-color: var(--white-300);
     pointer-events: none;
     z-index: 9999;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 100%;
+      position: absolute;
+      background-color: var(--primary-300);
+      animation: progress-before infinite 2s ease-out;
+    }
+
+    &::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 100%;
+      position: absolute;
+      background-color: var(--primary-300);
+      animation: progress-after infinite 2s ease-in;
+    }
   }
 }
