@@ -1,15 +1,20 @@
 import { Link } from 'react-router-dom'
-import { QueryVar } from '../../../api/types'
+import { QueryVar, FetchedMedias } from '../../../api/types'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import { useMemo } from 'react'
 
 export type _Content = {
   text: string
   cardType: CardType
   hasRank?: boolean
+}
+
+interface Medias extends FetchedMedias {
+  rank?: number | null
 }
 
 interface Props {
@@ -29,6 +34,20 @@ const Content = ({ queryVar, content }: Props) => {
     new URLSearchParams(Object.entries(queryVar))
   )
 
+  const _medias: Medias[] | null = useMemo(() => {
+    if (!medias) return null
+
+    return medias
+      .map(m => {
+        const _ranking = m.rankings.find(
+          r => (r.context = 'highest rated all time')
+        )
+        const rank = _ranking ? _ranking.rank : null
+        return { ...m, rank }
+      })
+      .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
+  }, [medias])
+
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
   return (
@@ -42,7 +61,7 @@ const Content = ({ queryVar, content }: Props) => {
         </Link>
       </div>
       <CardGrid
-        medias={medias}
+        medias={_medias}
         isLoading={isLoading}
         isError={isError}
         cardType={content.cardType}
