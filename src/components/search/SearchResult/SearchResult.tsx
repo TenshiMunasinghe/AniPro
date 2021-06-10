@@ -1,22 +1,17 @@
 import classnames from 'classnames'
-import { createContext, useMemo } from 'react'
+import { createContext } from 'react'
 import {
   LazyComponentProps,
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 
-import { FetchedMedias } from '../../../api/types'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import NotFound from '../../common/NotFound/NotFound'
 import styles from './SearchResult.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import CardGrid from '../../common/CardGrid/CardGrid'
-
-interface Medias extends FetchedMedias {
-  rank?: number | null
-}
 
 interface Props extends LazyComponentProps {
   params: URLSearchParams
@@ -39,20 +34,6 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
   } = useFetchSearchResult(params)
   const { addFilterOptions } = useUpdateUrlParam()
 
-  const _medias: Medias[] | null = useMemo(() => {
-    if (!medias) return null
-
-    return medias
-      .map(m => {
-        const _ranking = m.rankings.find(
-          r => (r.context = 'highest rated all time')
-        )
-        const rank = _ranking ? _ranking.rank : null
-        return { ...m, rank }
-      })
-      .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
-  }, [medias])
-
   if (!isLoading && (isError || medias?.length === 0)) {
     return <NotFound />
   }
@@ -65,7 +46,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
     <ScrollPositionContext.Provider value={scrollPosition}>
       <div className={styles.wrapper}>
         <CardGrid
-          medias={_medias}
+          medias={medias}
           isLoading={isLoading}
           isError={isError}
           cardType={cardType}
