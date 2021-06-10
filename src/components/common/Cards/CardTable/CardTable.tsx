@@ -13,6 +13,7 @@ import CoverImage from '../components/CoverImage/CoverImage'
 import Score from '../components/Score/Score'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import Rank from '../components/Rank/Rank'
+import Info from './Info/Info'
 
 interface Props {
   id: number
@@ -85,28 +86,26 @@ const CardTable = ({
             />
           </div>
 
-          <div className={styles.row}>
-            {meanScore && <Score score={meanScore} />}
-            <div className={styles.subRow}>
-              {meanScore && popularity !== 0 ? `${popularity} users` : ''}
-            </div>
-          </div>
+          <Info
+            main={() => (meanScore ? <Score score={meanScore} /> : null)}
+            sub={() =>
+              meanScore && popularity !== 0 ? `${popularity} users` : null
+            }
+          />
 
-          <div className={styles.format + ' ' + styles.row}>
-            {formatLabel(format)}
-            <div className={styles.subRow}>
-              {episodes && pluralize(episodes, 'episode')}
-            </div>
-          </div>
+          <Info
+            main={() => formatLabel(format)}
+            sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
+          />
 
-          <div className={styles.airingInfo + ' ' + styles.row}>
-            {status === 'RELEASING' && seasonYear !== currentYear
-              ? `Airing Since ${seasonYear}`
-              : mapStatus(status)}
-            <div className={styles.subRow}>
-              {airingInfo({ nextAiringEpisode, season, seasonYear })}
-            </div>
-          </div>
+          <Info
+            main={() =>
+              status === 'RELEASING' && seasonYear !== currentYear
+                ? `Airing Since ${seasonYear}`
+                : mapStatus(status)
+            }
+            sub={() => airingInfo({ nextAiringEpisode, season, seasonYear })}
+          />
         </div>
       </div>
     </article>

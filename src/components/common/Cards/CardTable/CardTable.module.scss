@@ -107,18 +107,4 @@
       font-size: var(--text-size-200);
     }
   }
-
-  .row {
-    flex-basis: auto;
-    font-size: var(--text-size-400);
-    display: flex;
-    flex-direction: column;
-    line-height: 1.75;
-  }
-}
-.subRow {
-  display: inline-block;
-  font-size: var(--text-size-300);
-  font-weight: 350;
-  color: var(--color-text-200);
 }
