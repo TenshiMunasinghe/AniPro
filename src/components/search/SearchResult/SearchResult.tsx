@@ -43,7 +43,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
 
   return (
     <ScrollPositionContext.Provider value={scrollPosition}>
-      <div className={styles.wrapper}>
+      <div className={styles.container}>
         <CardGrid
           medias={medias}
           isLoading={isLoading}
