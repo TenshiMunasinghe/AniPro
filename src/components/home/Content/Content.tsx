@@ -36,6 +36,7 @@ const Content = ({ queryVar, content }: Props) => {
 
   const _medias: Medias[] | null = useMemo(() => {
     if (!medias) return null
+    if (!content.hasRank) return medias
 
     return medias
       .map(m => {
@@ -46,7 +47,7 @@ const Content = ({ queryVar, content }: Props) => {
         return { ...m, rank }
       })
       .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
-  }, [medias])
+  }, [medias, content.hasRank])
 
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
