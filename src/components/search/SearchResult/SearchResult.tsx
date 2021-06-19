@@ -32,14 +32,10 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
     pageInfo,
     isFetching,
   } = useFetchSearchResult(params)
-  const { addFilterOptions } = useUpdateUrlParam()
+  const { movePage } = useUpdateUrlParam()
 
   if (!isLoading && (isError || medias?.length === 0)) {
     return <NotFound />
-  }
-
-  const redirectToPage = (page: number) => {
-    addFilterOptions({ page }, true)
   }
 
   return (
@@ -55,7 +51,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
         {!isError && !isLoading && (
           <section className={styles.pages}>
             {pageInfo.currentPage !== 1 && (
-              <button className={styles.page} onClick={() => redirectToPage(1)}>
+              <button className={styles.page} onClick={() => movePage(1)}>
                 {'<<'}
               </button>
             )}
@@ -71,7 +67,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
                     { [styles.current]: pageInfo.currentPage === page },
                     styles.page
                   )}
-                  onClick={() => redirectToPage(page)}>
+                  onClick={() => movePage(page)}>
                   {page}
                 </button>
               )
@@ -79,7 +75,7 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
             {pageInfo.currentPage !== pageInfo.lastPage && (
               <button
                 className={styles.page}
-                onClick={() => redirectToPage(pageInfo.lastPage)}>
+                onClick={() => movePage(pageInfo.lastPage)}>
                 {'>>'}
               </button>
             )}

@@ -5,22 +5,15 @@ import { v4 } from 'uuid'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
+import { nextParam, NextParamArgs } from '../../../utils/nextParam'
 import { toStartCase } from '../../../utils/toStartCase'
 import Option from '../Option/Option'
 import Options from '../Options/Options'
 import styles from './SearchOptions.module.scss'
 
-export type HandleChangeArgs = {
-  isMulti: boolean
-  selected: string | string[]
-  key: string
-  value: string
-  toApply: boolean
-}
-
 const SearchOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
-  const { addFilterOptions, params, applyFilter } = useUpdateUrlParam()
+  const { updateFilter, updateUrl, params, applyFilter } = useUpdateUrlParam()
 
   useEffect(() => {
     if (activeFilterOption) {
@@ -29,24 +22,6 @@ const SearchOptions = () => {
       document.body.classList.remove(styles['search-options-open'])
     }
   }, [activeFilterOption])
-
-  const handleChange = useCallback(
-    ({ isMulti, selected, key, value, toApply }: HandleChangeArgs) => {
-      if (!isMulti) {
-        addFilterOptions({ [key]: value === selected ? '' : value }, toApply)
-        return
-      }
-      const next = [...(selected as string[])]
-      if (next.includes(value)) {
-        const i = next.indexOf(value)
-        next.splice(i, 1)
-      } else {
-        next.push(value)
-      }
-      addFilterOptions({ [key]: next }, toApply)
-    },
-    [addFilterOptions]
-  )
 
   // an object to map to the Options component
   const filters = useMemo(
@@ -63,6 +38,22 @@ const SearchOptions = () => {
           })),
         })),
     []
+  )
+
+  const changeUrl = useCallback(
+    (args: NextParamArgs) => {
+      const next = nextParam(args)
+      updateUrl(next)
+    },
+    [updateUrl]
+  )
+
+  const changeFilter = useCallback(
+    (args: NextParamArgs) => {
+      const next = nextParam(args)
+      updateFilter(next)
+    },
+    [updateFilter]
   )
 
   const closeFilterOptions = () => setActiveFilterOption('')
@@ -109,12 +100,11 @@ const SearchOptions = () => {
                       value={value}
                       label={label}
                       handleChange={() =>
-                        handleChange({
+                        changeUrl({
                           isMulti: f.isMulti,
                           selected,
                           key: f.name,
                           value,
-                          toApply: true,
                         })
                       }
                       isSelected={
@@ -144,7 +134,7 @@ const SearchOptions = () => {
         return (
           <Options
             key={f.key}
-            handleChange={handleChange}
+            handleChange={changeFilter}
             isMulti={f.isMulti}
             options={f.options}
             selected={selected || undefined}

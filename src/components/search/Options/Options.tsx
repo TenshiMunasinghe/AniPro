@@ -1,12 +1,12 @@
 import classnames from 'classnames'
 import { memo } from 'react'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { NextParamArgs } from '../../../utils/nextParam'
 import Option from '../Option/Option'
-import { HandleChangeArgs } from '../SearchOptions/SearchOptions'
 import styles from './Options.module.scss'
 
 interface Props {
-  handleChange: (args: HandleChangeArgs) => void
+  handleChange: (args: NextParamArgs) => void
   isMulti?: boolean
   options: {
     label: string
@@ -29,20 +29,17 @@ const Options = ({
   isActive,
   id,
 }: Props) => {
-  const { addFilterOptions } = useUpdateUrlParam()
+  const { updateFilter } = useUpdateUrlParam()
 
   const isAllSelected = options.length === selected.length
 
   const toggleAll = (e: React.MouseEvent) => {
     e.stopPropagation()
-    addFilterOptions(
-      {
-        [name]: isAllSelected
-          ? defaultValue
-          : Object.values(options).map(({ value }) => value),
-      },
-      false
-    )
+    updateFilter({
+      [name]: isAllSelected
+        ? defaultValue
+        : Object.values(options).map(({ value }) => value),
+    })
   }
 
   return (
@@ -68,7 +65,6 @@ const Options = ({
                     selected,
                     key: name,
                     value,
-                    toApply: false,
                   })
                 }
                 isSelected={
