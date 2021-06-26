@@ -2,35 +2,36 @@
 @use '../../../css/layout.scss';
 
 .slider {
-  @include layout.grid-template;
+  @include mq(above, sm) {
+    @include layout.grid-template;
 
-  &.cover {
-    @include layout.grid-cover;
+    &.cover {
+      @include layout.grid-cover;
+    }
+
+    &.chart {
+      @include layout.grid-chart;
+    }
+
+    &.table {
+      @include layout.grid-table;
+    }
   }
-
-  &.chart {
-    @include layout.grid-chart;
-  }
-
-  &.table {
-    @include layout.grid-table;
-  }
-
   &.sideScroll {
     &.cover {
       grid-template-columns: repeat(5, 1fr);
     }
-
-    @include mq(below, sm) {
-      overflow-x: auto;
-      overflow-y: hidden;
-      &.cover {
-        padding: var(--space-400);
-        display: flex;
-        & > * {
-          flex: 1 0 auto;
-          width: 47.5vw;
-        }
+  }
+  @include mq(below, sm) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    &.cover {
+      padding: var(--space-400);
+      display: flex;
+      @include gap(var(--space-500));
+      & > * {
+        flex: 1 0 auto;
+        width: 47.5vw;
       }
     }
   }
