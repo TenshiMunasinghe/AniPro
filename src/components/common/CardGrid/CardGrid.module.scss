@@ -27,7 +27,7 @@
       &.cover {
         padding: var(--space-400);
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         grid-gap: 0;
 
         @include gap(var(--space-500));
