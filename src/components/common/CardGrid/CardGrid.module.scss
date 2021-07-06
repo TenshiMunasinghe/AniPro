@@ -1,19 +1,28 @@
 @use '../../../css/config.scss' as *;
-@use '../../../css/layout.scss';
 
 .slider {
-  @include layout.grid-template;
+  display: grid;
+  margin: 0 auto;
+  margin-top: var(--space-400);
+  place-content: center;
+  justify-content: space-evenly;
+  max-width: 100%;
+  width: 100%;
 
   &.cover {
-    @include layout.grid-cover;
+    grid-template-columns: repeat(auto-fit, minmax(calc(5rem + 10%), 1fr));
+    grid-gap: var(--space-600);
   }
 
   &.chart {
-    @include layout.grid-chart;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(MIN(25rem, 100%), 1fr));
+    grid-gap: var(--space-500);
   }
 
   &.table {
-    @include layout.grid-table;
+    grid-template-columns: 1fr;
+    row-gap: var(--space-500);
   }
 
   &.sideScroll {
