@@ -15,7 +15,6 @@
   }
 
   &.chart {
-    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(MIN(25rem, 100%), 1fr));
     grid-gap: var(--space-500);
   }
@@ -25,25 +24,19 @@
     row-gap: var(--space-500);
   }
 
-  &.sideScroll {
-    &.cover {
-      grid-template-columns: repeat(5, 1fr);
-    }
-
+  &.sideScroll.cover {
     @include mq(below, sm) {
       overflow-x: auto;
       overflow-y: hidden;
-      &.cover {
-        padding: var(--space-400);
-        display: flex;
-        justify-content: flex-start;
-        grid-gap: 0;
+      padding: var(--space-400);
+      display: flex;
+      justify-content: flex-start;
+      grid-gap: 0;
 
-        @include gap(var(--space-500));
-        & > * {
-          flex: 1 0 auto;
-          width: 47.5vw;
-        }
+      @include gap(var(--space-500));
+      & > * {
+        flex: 1 0 auto;
+        width: 47.5vw;
       }
     }
   }
