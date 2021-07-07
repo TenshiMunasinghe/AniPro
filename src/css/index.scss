@@ -8,7 +8,6 @@
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
-  overflow-x: hidden;
   font-size: clamp(0.9rem, calc(0.2rem + 1.3vw), 1.1rem);
 }
 
@@ -36,9 +35,6 @@ button {
 }
 
 body {
-  overflow-x: hidden;
-  font-size: var(--text-size-400);
-
   &.dark {
     --color-background: var(--dark-100);
     --color-foreground-50: var(--dark-200);
@@ -97,9 +93,9 @@ body {
 
   --image-aspect-ratio: (2/3);
 
+  font-size: var(--text-size-400);
   width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden;
   background: var(--color-background);
   line-height: 1.75;
 }
@@ -108,9 +104,4 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-#container {
-  margin: auto;
-  width: 100%;
 }
