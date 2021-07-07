@@ -1,11 +1,11 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { QueryVar, FetchedMedias } from '../../../api/types'
+import { FetchedMedias, QueryVar } from '../../../api/types'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
+import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
-import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
-import { useMemo } from 'react'
 
 export type _Content = {
   text: string
