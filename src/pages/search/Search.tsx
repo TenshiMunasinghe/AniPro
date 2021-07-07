@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../components/common/Dropdown/Dropdown'
+import NavBar from '../../components/common/NavBar/NavBar'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
@@ -29,36 +30,39 @@ const Search = () => {
   )
 
   return (
-    <div className={styles.container}>
-      <div className={styles.upperSection}>
-        <ActiveFilters />
-        <section className={styles.extraOptions}>
-          <section className={styles.gridType}>
-            {cardTypes.map(c => (
-              <CardTypeButton
-                key={c.key}
-                cardType={c.value as CardType}
-                setCardType={setCardType}
-                isActive={c.value === cardType}
-              />
-            ))}
+    <>
+      <NavBar />
+      <div className={styles.container}>
+        <div className={styles.upperSection}>
+          <ActiveFilters />
+          <section className={styles.extraOptions}>
+            <section className={styles.gridType}>
+              {cardTypes.map(c => (
+                <CardTypeButton
+                  key={c.key}
+                  cardType={c.value as CardType}
+                  setCardType={setCardType}
+                  isActive={c.value === cardType}
+                />
+              ))}
+            </section>
+            <Dropdown
+              onChange={sortByOnChange}
+              isMulti={false}
+              options={sortByOptions}
+              selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
+            />
           </section>
-          <Dropdown
-            onChange={sortByOnChange}
-            isMulti={false}
-            options={sortByOptions}
-            selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
-          />
-        </section>
+        </div>
+
+        <main className={styles.mainContent}>
+          <SearchOptions />
+
+          <SearchResult params={initialParams} cardType={cardType} />
+          <ScrollButton />
+        </main>
       </div>
-
-      <main className={styles.mainContent}>
-        <SearchOptions />
-
-        <SearchResult params={initialParams} cardType={cardType} />
-        <ScrollButton />
-      </main>
-    </div>
+    </>
   )
 }
 
