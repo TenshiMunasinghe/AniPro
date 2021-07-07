@@ -6,6 +6,8 @@
     --margin: var(--space-500);
   }
 
+  position: sticky;
+  top: 0;
   width: 100vw;
   display: flex;
   padding: var(--space-200) var(--margin);
