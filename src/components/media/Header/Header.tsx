@@ -1,8 +1,8 @@
-import htmr from 'htmr'
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 import { Overview } from '../../../api/types'
 import { TabsType } from '../../../pages/media/Media'
+import Description from '../../common/Description/Description'
 import Tabs from '../Tabs/Tabs'
 import styles from './Header.module.scss'
 
@@ -50,7 +50,9 @@ const Header = ({
       <h1 className={styles.title}>{title}</h1>
       <h5 className={styles.subTitle}>Description</h5>
       <div className={styles.description}>
-        <p tabIndex={0}>{htmr(description)}</p>
+        <p tabIndex={0}>
+          <Description description={description} />
+        </p>
       </div>
       <Tabs tabs={tabs} />
     </header>

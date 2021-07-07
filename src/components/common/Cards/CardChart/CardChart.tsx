@@ -1,7 +1,7 @@
-import htmr from 'htmr'
 import { memo } from 'react'
 import { FetchedMedias } from '../../../../api/types'
 import { createColorVariable } from '../../../../utils/createColorVariable'
+import Description from '../../Description/Description'
 import CoverImage from '../components/CoverImage/CoverImage'
 import Genres from '../components/Genres/Genres'
 import Score from '../components/Score/Score'
@@ -47,13 +47,9 @@ const CardChart = ({
               )}
             </header>
 
-            <div className={styles.description} tabIndex={0}>
-              {description ? (
-                htmr(`<p>${description}</p>`)
-              ) : (
-                <i>no description</i>
-              )}
-            </div>
+            <p className={styles.description} tabIndex={0}>
+              <Description description={description} />
+            </p>
           </div>
         </section>
         <Genres
