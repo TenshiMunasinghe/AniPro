@@ -1,11 +1,8 @@
+import loadable from '@loadable/component'
 import debounce from 'lodash/debounce'
 import { useEffect, useLayoutEffect, useMemo } from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from 'react-query'
-
-import loadable from '@loadable/component'
-
-import NavBar from './components/common/NavBar/NavBar'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import {
   Theme,
   useThemeStore,
@@ -49,20 +46,17 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <NavBar />
         <Switch>
           <Route exact path='/media/:id'>
             <Media />
           </Route>
           <Route path='/'>
-            <div id='container'>
-              <Route exact path='/'>
-                <Home />
-              </Route>
-              <Route exact path='/search'>
-                <Search />
-              </Route>
-            </div>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/search'>
+              <Search />
+            </Route>
           </Route>
         </Switch>
       </Router>
