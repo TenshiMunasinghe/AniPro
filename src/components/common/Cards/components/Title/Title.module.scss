@@ -11,7 +11,8 @@
 
   &:hover,
   &:focus {
-    color: var(--color-adjusted, --color-text-100);
-    text-decoration-color: inherit;
+    color: var(--color-adjusted, --color-text-100) !important;
+    text-decoration: underline !important;
+    text-decoration-color: inherit !important;
   }
 }
