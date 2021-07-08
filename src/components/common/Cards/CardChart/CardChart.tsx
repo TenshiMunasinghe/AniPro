@@ -29,7 +29,7 @@ const CardChart = ({
 }: Props) => {
   return (
     <article className={styles.wrapper} style={createColorVariable(color)}>
-      <CoverImage id={id} src={image} color={color} title={title.romaji} />
+      <CoverImage id={id} src={image} title={title.romaji} />
       <section className={styles.content}>
         <section className={styles.cardBody}>
           <div className={styles.scrollWrapper}>

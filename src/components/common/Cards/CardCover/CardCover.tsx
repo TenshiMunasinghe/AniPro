@@ -61,7 +61,7 @@ const CardCover = ({
             <Rank rank={rank} />
           </div>
         )}
-        <CoverImage id={id} src={image} title={title.romaji} color={color} />
+        <CoverImage id={id} src={image} title={title.romaji} />
         <Title id={id} text={title.romaji} />
       </article>
 

@@ -9,10 +9,9 @@ interface Props {
   id: number
   title: string
   src: string
-  color: string
 }
 
-const CoverImage = ({ id, title, src, color }: Props) => {
+const CoverImage = ({ id, title, src }: Props) => {
   const scrollPosition = useContext(ScrollPositionContext)
 
   return (

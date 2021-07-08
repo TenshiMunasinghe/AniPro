@@ -68,12 +68,7 @@ const CardTable = ({
         </div>
       )}
       <div className={styles.card}>
-        <CoverImage
-          id={id}
-          title={title.romaji}
-          src={image.cover}
-          color={color}
-        />
+        <CoverImage id={id} title={title.romaji} src={image.cover} />
         <div className={styles.content}>
           <div className={styles.header}>
             <Title id={id} text={title.romaji} />
