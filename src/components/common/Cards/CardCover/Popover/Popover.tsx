@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { memo, useLayoutEffect, useRef, useState } from 'react'
-
 import { FetchedMedias } from '../../../../../api/types'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
@@ -12,7 +11,7 @@ import {
   useWindowSizeStore,
   WindowSizeStore,
 } from '../../../../../zustand/stores'
-import Genres from '../../components/Genres/Genres'
+import Genres from '../../../Genres/Genres'
 import Score from '../../components/Score/Score'
 import styles from './Popover.module.scss'
 

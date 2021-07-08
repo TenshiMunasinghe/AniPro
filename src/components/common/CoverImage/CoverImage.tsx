@@ -1,10 +1,9 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { linkToMediaPage } from '../../../../../App'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-
+import { Link } from 'react-router-dom'
+import { linkToMediaPage } from '../../../App'
+import { ScrollPositionContext } from '../CardGrid/CardGrid'
 import styles from './CoverImage.module.scss'
-import { ScrollPositionContext } from '../../../CardGrid/CardGrid'
 
 interface Props {
   id: number

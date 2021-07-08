@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
 import { FetchedMedias } from '../../../../api/types'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import CoverImage from '../components/CoverImage/CoverImage'
+import CoverImage from '../../CoverImage/CoverImage'
 import Rank from '../components/Rank/Rank'
 import Title from '../components/Title/Title'
 import styles from './CardCover.module.scss'
