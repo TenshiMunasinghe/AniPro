@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   currentSeason,
   currentYear,
@@ -5,8 +6,10 @@ import {
   nextYear,
 } from '../../api/queries'
 import { FetchedMedias, QueryVar } from '../../api/types'
+import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
+import Slider from '../../components/home/Slider/Slider'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
@@ -84,8 +87,19 @@ const Home = () => {
     },
   }
 
+  const contentsKey = Object.keys(queryVars) as (keyof typeof queryVars)[]
+  const randomKey = contentsKey[(contentsKey.length * Math.random()) << 0]
+
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <Link to='/' className={styles.siteName}>
+          AniPro
+        </Link>
+        <div>{contents[randomKey].text}</div>
+      </div>
+      <Slider queryVar={queryVars[randomKey]} />
+      <NavBar />
       <main className={styles.content}>
         {Object.keys(queryVars).map(k => {
           const key = k as keyof Medias

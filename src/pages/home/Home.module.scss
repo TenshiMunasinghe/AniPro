@@ -1,12 +1,27 @@
 @use '../../css/config.scss' as *;
 
-.container {
-  padding: var(--space-500);
-  @include mq(above, lg) {
-    padding: var(--space-500) var(--space-700);
+.header {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  padding: var(--space-600);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-size-300);
+
+  .siteName {
+    font-size: var(--text-size-400);
+    font-weight: 650;
+    text-decoration: none;
   }
 }
 
 .content {
   position: relative;
+  padding: var(--space-500);
+
+  @include mq(above, lg) {
+    padding: var(--space-500) var(--space-700);
+  }
 }
