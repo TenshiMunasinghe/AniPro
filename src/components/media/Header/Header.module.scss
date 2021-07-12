@@ -39,7 +39,7 @@
 
   .details {
     margin-top: calc(
-      var(--play-btn-size) + var(--space-300) -
+      var(--play-btn-size) + var(--space-500) -
         (var(--image-width) / var(--image-aspect-ratio))
     );
     display: grid;
@@ -89,11 +89,10 @@
     font-size: var(--text-size-600);
     font-weight: 700;
     line-height: 1.5;
-    margin-top: var(--space-400);
+    margin: var(--space-500) 0;
   }
 
   .subTitle {
-    margin-top: var(--space-500);
     @include mq(above, lg) {
       display: none;
     }
