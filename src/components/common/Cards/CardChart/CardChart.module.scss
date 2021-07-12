@@ -72,14 +72,13 @@
 .description {
   font-size: var(--text-size-300);
   color: var(--color-text-300);
-  @include description(2);
 
-  @include mq(above, sm) {
+  @include mq(above, md) {
     @include description(3);
-  }
 
-  &:focus {
-    @include show-description;
+    &:focus {
+      @include show-description;
+    }
   }
 
   * {
