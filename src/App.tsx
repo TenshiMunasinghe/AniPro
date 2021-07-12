@@ -2,7 +2,12 @@ import loadable from '@loadable/component'
 import debounce from 'lodash/debounce'
 import { useEffect, useLayoutEffect, useMemo } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useLocation,
+} from 'react-router-dom'
 import {
   Theme,
   useThemeStore,
@@ -19,6 +24,16 @@ const queryClient = new QueryClient()
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
 export const linkToMediaPage = (id: number) => `/media/${id}`
+
+const ScrollToTop = () => {
+  const { pathname, search } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname, search])
+
+  return null
+}
 
 const App = () => {
   const setSize = useWindowSizeStore(windowSizeSelector)
@@ -46,6 +61,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
+        <ScrollToTop />
         <Switch>
           <Route exact path='/media/:id'>
             <Media />
