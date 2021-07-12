@@ -99,7 +99,7 @@ const Home = () => {
         <div>{contents[randomKey].text}</div>
       </div>
       <Slider queryVar={queryVars[randomKey]} />
-      <NavBar />
+      <NavBar position='sticky' />
       <main className={styles.content}>
         {Object.keys(queryVars).map(k => {
           const key = k as keyof Medias
