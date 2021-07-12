@@ -1,15 +1,18 @@
-import { useCallback } from 'react'
+import { CSSProperties, useCallback } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
 import SearchBar from '../SearchBar/SearchBar'
-import Switch from './Switch/Switch'
 import styles from './NavBar.module.scss'
+import Switch from './Switch/Switch'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
-const NavBar = () => {
+interface Props {
+  position?: 'static' | 'sticky' | 'fixed'
+}
+
+const NavBar = ({ position = 'static' }: Props) => {
   const { theme, setTheme } = useThemeStore(themeSelector)
   const onChange = useCallback(
     () =>
@@ -19,8 +22,10 @@ const NavBar = () => {
     [setTheme]
   )
 
+  const style = { '--position': position } as CSSProperties
+
   return (
-    <nav className={styles.container}>
+    <nav className={styles.container} style={style}>
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
