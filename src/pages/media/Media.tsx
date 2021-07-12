@@ -4,6 +4,7 @@ import {
 } from 'react-lazy-load-image-component'
 import { useParams } from 'react-router-dom'
 import { Overview } from '../../api/types'
+import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'
 import Relation from '../../components/media/Relation/Relation'
@@ -56,40 +57,43 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
   if (!data) return <></>
 
   return (
-    <section className={styles.wrapper}>
-      <Header
-        bannerImg={data.bannerImage}
-        coverImg={data.coverImage}
-        title={data.title.romaji}
-        description={data.description}
-        streamUrl={
-          data.streamingEpisodes.length > 0
-            ? data.streamingEpisodes[data.streamingEpisodes.length - 1].url
-            : undefined
-        }
-        siteUrl={
-          data.externalLinks.find(link => link.site === 'Official Site')?.url
-        }
-        tabs={filterTabs(data)}
-      />
-      <main className={styles.main}>
-        <Aside data={data} />
-        <section className={styles.relations}>
-          {data.relations.edges.map(({ node, relationType }) => (
-            <Relation
-              key={node.id}
-              id={node.id}
-              image={node.coverImage.large}
-              title={node.title.romaji}
-              format={node.format}
-              status={node.status}
-              relation={relationType}
-              scrollPosition={scrollPosition}
-            />
-          ))}
-        </section>
-      </main>
-    </section>
+    <>
+      <NavBar />
+      <section className={styles.wrapper}>
+        <Header
+          bannerImg={data.bannerImage}
+          coverImg={data.coverImage}
+          title={data.title.romaji}
+          description={data.description}
+          streamUrl={
+            data.streamingEpisodes.length > 0
+              ? data.streamingEpisodes[data.streamingEpisodes.length - 1].url
+              : undefined
+          }
+          siteUrl={
+            data.externalLinks.find(link => link.site === 'Official Site')?.url
+          }
+          tabs={filterTabs(data)}
+        />
+        <main className={styles.main}>
+          <Aside data={data} />
+          <section className={styles.relations}>
+            {data.relations.edges.map(({ node, relationType }) => (
+              <Relation
+                key={node.id}
+                id={node.id}
+                image={node.coverImage.large}
+                title={node.title.romaji}
+                format={node.format}
+                status={node.status}
+                relation={relationType}
+                scrollPosition={scrollPosition}
+              />
+            ))}
+          </section>
+        </main>
+      </section>
+    </>
   )
 }
 
