@@ -78,18 +78,21 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         <main className={styles.main}>
           <Aside data={data} />
           <section className={styles.relations}>
-            {data.relations.edges.map(({ node, relationType }) => (
-              <Relation
-                key={node.id}
-                id={node.id}
-                image={node.coverImage.large}
-                title={node.title.romaji}
-                format={node.format}
-                status={node.status}
-                relation={relationType}
-                scrollPosition={scrollPosition}
-              />
-            ))}
+            <h6>Relations</h6>
+            <div className={styles.cards}>
+              {data.relations.edges.map(({ node, relationType }) => (
+                <Relation
+                  key={node.id}
+                  id={node.id}
+                  image={node.coverImage.large}
+                  title={node.title.romaji}
+                  format={node.format}
+                  status={node.status}
+                  relation={relationType}
+                  scrollPosition={scrollPosition}
+                />
+              ))}
+            </div>
           </section>
         </main>
       </section>
