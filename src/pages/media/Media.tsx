@@ -54,7 +54,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeDetails(id, 'overview')
 
-  if (!data) return <></>
+  if (!data) return null
 
   return (
     <>
