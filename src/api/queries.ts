@@ -180,7 +180,7 @@ export const GET_ANIME_PAGE = {
             relationType
           }
         }
-        characters(sort: ROLE, page: 1, perPage: 6) {
+        characters(sort: [ROLE, RELEVANCE], page: 1, perPage: 6) {
           edges {
             node {
               id
