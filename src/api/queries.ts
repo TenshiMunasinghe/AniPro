@@ -187,6 +187,9 @@ export const GET_ANIME_PAGE = {
               name {
                 full
               }
+              image {
+                large
+              }
             }
             role
             voiceActors(language: JAPANESE) {
