@@ -82,6 +82,9 @@ export interface Characters {
         name: {
           full: string
         }
+        image: {
+          large: string
+        }
       }
       role: string
       voiceActors: {
