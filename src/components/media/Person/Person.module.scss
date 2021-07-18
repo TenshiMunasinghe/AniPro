@@ -1,0 +1,37 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  display: flex;
+  height: 6rem;
+
+  .image {
+    width: 4rem;
+  }
+
+  .details {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-400);
+    background-color: var(--color-foreground-100);
+    font-size: var(--text-size-300);
+  }
+
+  .name {
+    font-weight: 600;
+    flex: 1;
+  }
+
+  .role {
+    font-size: var(--text-size-200);
+  }
+
+  &.reversed {
+    flex-direction: row-reverse;
+
+    .details {
+      text-align: right;
+    }
+  }
+}
