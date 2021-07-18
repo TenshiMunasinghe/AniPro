@@ -48,8 +48,6 @@ const queryVars: { [key in keyof Medias]: QueryVar } = {
 
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 
-//TODO: add some more things on home page
-
 const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
