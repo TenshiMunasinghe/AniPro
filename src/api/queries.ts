@@ -203,7 +203,7 @@ export const GET_ANIME_PAGE = {
             }
           }
         }
-        staff(page: 1, perPage: 4) {
+        staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
           edges {
             node {
               id
@@ -291,7 +291,7 @@ export const GET_ANIME_PAGE = {
   `,
   staff: /* GraphQL */ `
     query characters($id: Int!) {
-      staff(page: 1, perPage: 4) {
+      staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
         edges {
           node {
             id
