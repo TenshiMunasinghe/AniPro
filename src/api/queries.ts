@@ -267,7 +267,7 @@ export const GET_ANIME_PAGE = {
   `,
   characters: /* GraphQL */ `
     query characters($id: Int!) {
-      characters(sort: ROLE, page: 1, perPage: 6) {
+      characters(sort: [ROLE, ID], page: 1, perPage: 6) {
         edges {
           node {
             id
