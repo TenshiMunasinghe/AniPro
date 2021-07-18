@@ -13,7 +13,7 @@
     overflow-x: auto;
   }
 
-  .staff {
+  .characters {
     @include gap($column: var(--space-400));
   }
 }
