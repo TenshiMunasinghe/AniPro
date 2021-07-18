@@ -9,12 +9,11 @@
   padding-bottom: var(--space-600);
 
   .relations {
-    padding-bottom: var(--space-400);
+    display: flex;
+    overflow-x: auto;
+  }
 
-    .cards {
-      display: flex;
-      overflow-x: auto;
-      margin-top: var(--space-300);
-    }
+  .staff {
+    @include gap($column: var(--space-400));
   }
 }

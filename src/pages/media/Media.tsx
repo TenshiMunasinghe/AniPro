@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import { Overview } from '../../api/types'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
+import Character from '../../components/media/Character/Character'
+import Content from '../../components/media/Content/Content'
 import Header from '../../components/media/Header/Header'
 import Relation from '../../components/media/Relation/Relation'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
@@ -77,9 +79,8 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         />
         <main className={styles.main}>
           <Aside data={data} />
-          <section className={styles.relations}>
-            <h6>Relations</h6>
-            <div className={styles.cards}>
+          <Content heading='Relations'>
+            <div className={styles.relations}>
               {data.relations.edges.map(({ node, relationType }) => (
                 <Relation
                   key={node.id}
@@ -93,7 +94,14 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
                 />
               ))}
             </div>
-          </section>
+          </Content>
+          <Content heading='Staff'>
+            <div className={styles.staff}>
+              {data.characters.edges.map(character => (
+                <Character character={character} />
+              ))}
+            </div>
+          </Content>
         </main>
       </section>
     </>
