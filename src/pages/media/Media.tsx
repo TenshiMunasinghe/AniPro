@@ -9,6 +9,7 @@ import Aside from '../../components/media/Aside/Aside'
 import Character from '../../components/media/Character/Character'
 import Content from '../../components/media/Content/Content'
 import Header from '../../components/media/Header/Header'
+import Person from '../../components/media/Person/Person'
 import Relation from '../../components/media/Relation/Relation'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Media.module.scss'
@@ -99,6 +100,17 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
             <div className={styles.characters}>
               {data.characters.edges.map(character => (
                 <Character character={character} />
+              ))}
+            </div>
+          </Content>
+          <Content heading='Staff'>
+            <div className={styles.staff}>
+              {data.staff.edges.map(staff => (
+                <Person
+                  name={staff.node.name.full}
+                  image={staff.node.image.large}
+                  info={staff.role}
+                />
               ))}
             </div>
           </Content>
