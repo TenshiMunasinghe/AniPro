@@ -99,7 +99,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           <Content heading='Characters'>
             <div className={styles.characters}>
               {data.characters.edges.map(character => (
-                <Character character={character} />
+                <Character character={character} key={character.node.id} />
               ))}
             </div>
           </Content>
