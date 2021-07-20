@@ -216,11 +216,11 @@ export interface Overview extends Watch, Characters, Staff {
     scoreDistribution: {
       score: number
       amount: number
-    }
+    }[]
     statusDistribution: {
       status: string
       amount: number
-    }
+    }[]
   }
   trailer: {
     id: number
