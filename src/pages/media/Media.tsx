@@ -110,6 +110,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
                   name={staff.node.name.full}
                   image={staff.node.image.large}
                   info={staff.role}
+                  key={staff.node.id}
                 />
               ))}
             </div>
