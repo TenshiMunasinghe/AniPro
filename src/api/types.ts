@@ -139,7 +139,7 @@ export interface Stats {
       amount: number
     }[]
     statusDistribution: {
-      status: number
+      status: string
       amount: number
     }[]
   }
