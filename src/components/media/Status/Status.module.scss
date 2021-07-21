@@ -1,0 +1,49 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  background-color: var(--color-foreground-100);
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  .statuses {
+    display: flex;
+    justify-content: center;
+    padding: var(--space-300);
+
+    @include mq(above, md) {
+      @include gap($row: var(--space-200));
+    }
+  }
+
+  .status {
+    @include gap($column: var(--space-200));
+  }
+
+  .name {
+    text-align: center;
+    color: var(--black-300);
+    background-color: var(--color);
+    padding: var(--space-100) var(--space-300);
+
+    @include mq(above, md) {
+      border-radius: 0.25rem;
+    }
+  }
+
+  .amount {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    @include gap($row: var(--space-200));
+  }
+
+  .number {
+    font-weight: 550;
+  }
+
+  .percentage {
+    height: 1rem;
+    display: flex;
+  }
+}
