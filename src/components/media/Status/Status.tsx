@@ -55,6 +55,7 @@ const Status = ({ viewingStatus, airingStatus }: Props) => {
           const percentage = (amount * 100) / totalStatusCount
           return (
             <div
+              key={status}
               style={{
                 width: `${percentage}%`,
                 backgroundColor: COLORS[status as ColorKeys],
