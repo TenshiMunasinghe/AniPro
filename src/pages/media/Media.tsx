@@ -1,5 +1,7 @@
+import { createContext } from 'react'
 import {
   LazyComponentProps,
+  ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import { useParams } from 'react-router-dom'
@@ -46,6 +48,10 @@ const filterTabs = (data: Overview) => {
   return tabs
 }
 
+export const context = createContext<{ scrollPosition: ScrollPosition }>({
+  scrollPosition: { x: 0, y: 0 },
+})
+
 /*TODO: Complete media page
 tabs:
 overview
@@ -61,7 +67,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
   if (!data) return null
 
   return (
-    <>
+    <context.Provider value={{ scrollPosition }}>
       <NavBar />
       <section className={styles.wrapper}>
         <Header
@@ -92,7 +98,6 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
                   format={node.format}
                   status={node.status}
                   relation={relationType}
-                  scrollPosition={scrollPosition}
                 />
               ))}
             </div>
@@ -124,7 +129,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           </Content>
         </main>
       </section>
-    </>
+    </context.Provider>
   )
 }
 
