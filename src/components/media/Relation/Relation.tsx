@@ -1,5 +1,6 @@
-import { LazyLoadImage, ScrollPosition } from 'react-lazy-load-image-component'
-
+import { useContext } from 'react'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { context } from '../../../pages/media/Media'
 import styles from './Relation.module.scss'
 
 interface Props {
@@ -9,18 +10,10 @@ interface Props {
   title: string
   format: string
   status: string
-  scrollPosition: ScrollPosition
 }
 
-const Relation = ({
-  id,
-  image,
-  relation,
-  title,
-  format,
-  status,
-  scrollPosition,
-}: Props) => {
+const Relation = ({ id, image, relation, title, format, status }: Props) => {
+  const { scrollPosition } = useContext(context)
   return (
     <div className={styles.wrapper}>
       <a href={`/`} className={styles.imageWrapper}>
