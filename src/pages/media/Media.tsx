@@ -131,6 +131,14 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           <Content heading='Score Distribution'>
             <Scores scores={data.stats.scoreDistribution} />
           </Content>
+          <Content heading='Trailer'>
+            <div className={styles.trailer}>
+              <iframe
+                title='Trailer'
+                src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
+              />
+            </div>
+          </Content>
         </main>
       </section>
     </context.Provider>

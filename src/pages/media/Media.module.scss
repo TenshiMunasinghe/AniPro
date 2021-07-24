@@ -17,4 +17,9 @@
   .staff {
     @include gap($column: var(--space-400));
   }
+
+  .trailer {
+    @include aspect-ratio(5/3);
+    width: 100%;
+  }
 }
