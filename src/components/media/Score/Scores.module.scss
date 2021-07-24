@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-size-200);
+  background: var(--color-foreground-100);
+  border-radius: 0.25rem;
+  padding: var(--space-400);
+
+  .score {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+  }
+
+  .bar {
+    background: var(--color-text-100);
+    border-radius: 0.15rem;
+  }
+}
