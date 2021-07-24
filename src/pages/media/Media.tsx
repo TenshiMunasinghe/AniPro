@@ -13,6 +13,7 @@ import Content from '../../components/media/Content/Content'
 import Header from '../../components/media/Header/Header'
 import Person from '../../components/media/Person/Person'
 import Relation from '../../components/media/Relation/Relation'
+import Scores from '../../components/media/Score/Scores'
 import Status from '../../components/media/Status/Status'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Media.module.scss'
@@ -126,6 +127,9 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
               viewingStatus={data.stats.statusDistribution}
               airingStatus={data.status}
             />
+          </Content>
+          <Content heading='Score Distribution'>
+            <Scores scores={data.stats.scoreDistribution} />
           </Content>
         </main>
       </section>
