@@ -2,6 +2,7 @@
 
 .tabs {
   display: flex;
+  justify-content: center;
   @include gap(var(--space-300));
   overflow-x: auto;
   margin-top: var(--space-600);
