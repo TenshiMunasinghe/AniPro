@@ -6,6 +6,8 @@ import {
 } from 'react-lazy-load-image-component'
 import { useParams } from 'react-router-dom'
 import { Overview } from '../../api/types'
+import Title from '../../components/common/Cards/components/Title/Title'
+import CoverImage from '../../components/common/CoverImage/CoverImage'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
 import Character from '../../components/media/Character/Character'
@@ -137,6 +139,22 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
                 title='Trailer'
                 src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
               />
+            </div>
+          </Content>
+          <Content heading='Recomendations'>
+            <div className={styles.recommendations}>
+              {data.recommendations.nodes.map(
+                ({ mediaRecommendation: m }, i) => (
+                  <div className={styles.cardCover}>
+                    <CoverImage
+                      id={m.id}
+                      src={m.coverImage.large}
+                      title={m.title.romaji}
+                    />
+                    <Title id={m.id} text={m.title.romaji} />
+                  </div>
+                )
+              )}
             </div>
           </Content>
         </main>
