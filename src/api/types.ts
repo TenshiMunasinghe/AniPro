@@ -236,6 +236,7 @@ export interface Overview extends Watch, Characters, Staff {
         }
         coverImage: {
           large: string
+          color: string
         }
       }
     }[]

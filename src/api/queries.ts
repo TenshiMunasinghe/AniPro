@@ -246,6 +246,7 @@ export const GET_ANIME_PAGE = {
               }
               coverImage {
                 large
+                color
               }
             }
           }
