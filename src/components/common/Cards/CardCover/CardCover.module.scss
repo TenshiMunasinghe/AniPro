@@ -1,10 +1,6 @@
 @use '../../../../css/config.scss' as *;
 
-.popoverWrapper {
-  position: relative;
-}
-
-.container {
+@mixin card-cover {
   display: grid;
   grid-template-rows: min-content auto;
   row-gap: var(--space-300);
@@ -16,6 +12,14 @@
       color: var(--color-adjusted);
     }
   }
+}
+
+.popoverWrapper {
+  position: relative;
+}
+
+.container {
+  @include card-cover;
 
   .rank {
     position: absolute;
