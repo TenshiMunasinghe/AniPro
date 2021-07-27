@@ -1,5 +1,4 @@
 @use '../../css/config.scss' as *;
-@use '../../components/common//Cards//CardCover/CardCover.module.scss' as card-cover;
 
 .main {
   display: flex;
@@ -8,31 +7,4 @@
   @include gap($column: var(--space-500));
   padding: 0 var(--space-400);
   padding-bottom: var(--space-600);
-
-  .relations {
-    display: flex;
-    overflow-x: auto;
-  }
-
-  .characters,
-  .staff {
-    @include gap($column: var(--space-400));
-  }
-
-  .trailer {
-    @include aspect-ratio(5/3);
-    width: 100%;
-  }
-
-  .recommendations {
-    display: flex;
-    overflow-x: auto;
-    @include gap($row: var(--space-400));
-
-    .cardCover {
-      flex-basis: 40%;
-      flex-shrink: 0;
-      @include card-cover.card-cover;
-    }
-  }
 }

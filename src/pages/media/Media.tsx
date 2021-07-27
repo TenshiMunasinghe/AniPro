@@ -4,19 +4,12 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { useParams } from 'react-router-dom'
-import { Overview } from '../../api/types'
-import Title from '../../components/common/Cards/components/Title/Title'
-import CoverImage from '../../components/common/CoverImage/CoverImage'
+import { Route, Switch, useParams } from 'react-router-dom'
+import { Common } from '../../api/types'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
-import Character from '../../components/media/Character/Character'
-import Content from '../../components/media/Content/Content'
 import Header from '../../components/media/Header/Header'
-import Person from '../../components/media/Person/Person'
-import Relation from '../../components/media/Relation/Relation'
-import Scores from '../../components/media/Score/Scores'
-import Status from '../../components/media/Status/Status'
+import Overview from '../../components/media/Overview/Overview'
 import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
 import styles from './Media.module.scss'
 
@@ -35,7 +28,7 @@ export type ParamTypes = {
   tab: TabsType
 }
 
-const filterTabs = (data: Overview) => {
+const filterTabs = (data: Common) => {
   const tabs = [...TAB]
   const tabsArr = [
     ['watch', data.streamingEpisodes],
@@ -65,7 +58,7 @@ social
 */
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeDetails(id, 'overview')
+  const { data } = useFetchAnimeDetails(id, 'common')
 
   if (!data) return null
 
@@ -90,73 +83,11 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         />
         <main className={styles.main}>
           <Aside data={data} />
-          <Content heading='Relations'>
-            <div className={styles.relations}>
-              {data.relations.edges.map(({ node, relationType }) => (
-                <Relation
-                  key={node.id}
-                  id={node.id}
-                  image={node.coverImage.large}
-                  title={node.title.romaji}
-                  format={node.format}
-                  status={node.status}
-                  relation={relationType}
-                />
-              ))}
-            </div>
-          </Content>
-          <Content heading='Characters'>
-            <div className={styles.characters}>
-              {data.characters.edges.map(character => (
-                <Character character={character} key={character.node.id} />
-              ))}
-            </div>
-          </Content>
-          <Content heading='Staff'>
-            <div className={styles.staff}>
-              {data.staff.edges.map(staff => (
-                <Person
-                  name={staff.node.name.full}
-                  image={staff.node.image.large}
-                  info={staff.role}
-                  key={staff.node.id}
-                />
-              ))}
-            </div>
-          </Content>
-          <Content heading='Status Distribution'>
-            <Status
-              viewingStatus={data.stats.statusDistribution}
-              airingStatus={data.status}
-            />
-          </Content>
-          <Content heading='Score Distribution'>
-            <Scores scores={data.stats.scoreDistribution} />
-          </Content>
-          <Content heading='Trailer'>
-            <div className={styles.trailer}>
-              <iframe
-                title='Trailer'
-                src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
-              />
-            </div>
-          </Content>
-          <Content heading='Recomendations'>
-            <div className={styles.recommendations}>
-              {data.recommendations.nodes.map(
-                ({ mediaRecommendation: m }, i) => (
-                  <div className={styles.cardCover}>
-                    <CoverImage
-                      id={m.id}
-                      src={m.coverImage.large}
-                      title={m.title.romaji}
-                    />
-                    <Title id={m.id} text={m.title.romaji} />
-                  </div>
-                )
-              )}
-            </div>
-          </Content>
+          <Switch>
+            <Route exact path='/media/:id'>
+              <Overview />
+            </Route>
+          </Switch>
         </main>
       </section>
     </context.Provider>
