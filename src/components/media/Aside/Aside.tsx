@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { Overview } from '../../../api/types'
+import { Common } from '../../../api/types'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -9,12 +9,12 @@ import { toStartCase } from '../../../utils/toStartCase'
 import styles from './Aside.module.scss'
 
 interface Props {
-  data: Overview
+  data: Common
 }
 
 interface Content {
   label: string
-  text: (prop: Overview) => string
+  text: (prop: Common) => string
   isActive?: boolean
 }
 
@@ -27,7 +27,7 @@ const dateFormat = {
 const contents: Content[] = [
   {
     label: 'Airing',
-    text: ({ nextAiringEpisode }: Overview) =>
+    text: ({ nextAiringEpisode }) =>
       nextAiringEpisode
         ? airingInfo({
             nextAiringEpisode: nextAiringEpisode,
@@ -39,15 +39,15 @@ const contents: Content[] = [
   },
   {
     label: 'Format',
-    text: ({ format }: Overview) => formatLabel(format || ''),
+    text: ({ format }) => formatLabel(format || ''),
   },
   {
     label: 'Episodes',
-    text: ({ episodes }: Overview) => episodes?.toString() || '',
+    text: ({ episodes }) => episodes?.toString() || '',
   },
   {
     label: 'Episode Duration',
-    text: ({ duration, format }: Overview) =>
+    text: ({ duration, format }) =>
       duration
         ? timeToStr(
             timeToArr(
@@ -62,11 +62,11 @@ const contents: Content[] = [
   },
   {
     label: 'Status',
-    text: ({ status }: Overview) => toStartCase(status || ''),
+    text: ({ status }) => toStartCase(status || ''),
   },
   {
     label: 'Start Date',
-    text: ({ startDate }: Overview) => {
+    text: ({ startDate }) => {
       return startDate
         ? new Date(
             startDate.year,
@@ -78,7 +78,7 @@ const contents: Content[] = [
   },
   {
     label: 'End Date',
-    text: ({ endDate }: Overview) =>
+    text: ({ endDate }) =>
       endDate
         ? new Date(
             endDate.year,
@@ -89,55 +89,54 @@ const contents: Content[] = [
   },
   {
     label: 'Season',
-    text: ({ season, seasonYear }: Overview) =>
+    text: ({ season, seasonYear }) =>
       season && seasonYear
         ? `${toStartCase(season)} ${seasonYear.toString()}`
         : '',
   },
   {
     label: 'Average Score',
-    text: ({ meanScore }: Overview) =>
-      meanScore ? `${meanScore.toString()}%` : '',
+    text: ({ meanScore }) => (meanScore ? `${meanScore.toString()}%` : ''),
   },
   {
     label: 'Popularity',
-    text: ({ popularity }: Overview) => popularity?.toString() || '',
+    text: ({ popularity }) => popularity?.toString() || '',
   },
   {
     label: 'Favorites',
-    text: ({ favourites }: Overview) => favourites?.toString() || '',
+    text: ({ favourites }) => favourites?.toString() || '',
   },
   {
     label: 'Studios',
-    text: ({ studios }: Overview) => studios.nodes[0]?.name || '',
+    text: ({ studios }) => studios.nodes[0]?.name || '',
   },
   {
     label: 'Source',
-    text: (prop: Overview) => toStartCase(prop.source || ''),
+    text: prop => toStartCase(prop.source || ''),
   },
   {
     label: 'Hashtag',
-    text: ({ hashtag }: Overview) => hashtag || '',
+    text: ({ hashtag }) => hashtag || '',
   },
   {
     label: 'Genres',
-    text: ({ genres }: Overview) => genres?.join(',') || '',
+    text: ({ genres }) => genres?.join(',') || '',
   },
   {
     label: 'Romaji',
-    text: ({ title }: Overview) => title?.romaji || '',
+    text: ({ title }) => title?.romaji || '',
   },
   {
     label: 'English',
-    text: ({ title }: Overview) => title?.english || '',
+    text: ({ title }) => title?.english || '',
   },
   {
     label: 'Native',
-    text: ({ title }: Overview) => title?.native || '',
+    text: ({ title }) => title?.native || '',
   },
   {
     label: 'Synonyms',
-    text: ({ synonyms }: Overview) => synonyms?.join(' ') || '',
+    text: ({ synonyms }) => synonyms?.join(' ') || '',
   },
 ]
 

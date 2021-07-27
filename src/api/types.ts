@@ -118,6 +118,7 @@ export interface Staff {
 }
 
 export interface Stats {
+  status: string
   rankings: {
     rank: number
     context: string
@@ -145,7 +146,56 @@ export interface Stats {
   }
 }
 
-export interface Overview extends Watch, Characters, Staff {
+export interface Overview extends Characters, Staff {
+  status: string
+  relations: {
+    edges: {
+      node: {
+        id: number
+        title: {
+          romaji: string
+        }
+        coverImage: {
+          large: string
+        }
+        format: string
+        status: string
+      }
+      relationType: string
+    }[]
+  }
+  stats: {
+    scoreDistribution: {
+      score: number
+      amount: number
+    }[]
+    statusDistribution: {
+      status: string
+      amount: number
+    }[]
+  }
+  trailer: {
+    id: number
+    site: string
+    thumbnail: string
+  } | null
+  recommendations: {
+    nodes: {
+      mediaRecommendation: {
+        id: number
+        title: {
+          romaji: string
+        }
+        coverImage: {
+          large: string
+          color: string
+        }
+      }
+    }[]
+  }
+}
+
+export interface Common extends Watch {
   title: {
     romaji: string
     english: string
@@ -196,48 +246,17 @@ export interface Overview extends Watch, Characters, Staff {
     url: string
     site: string
   }[]
-  relations: {
+  staff: {
     edges: {
       node: {
         id: number
-        title: {
-          romaji: string
-        }
-        coverImage: {
-          large: string
-        }
-        format: string
-        status: string
       }
-      relationType: string
     }[]
   }
-  stats: {
-    scoreDistribution: {
-      score: number
-      amount: number
-    }[]
-    statusDistribution: {
-      status: string
-      amount: number
-    }[]
-  }
-  trailer: {
-    id: number
-    site: string
-    thumbnail: string
-  } | null
-  recommendations: {
-    nodes: {
-      mediaRecommendation: {
+  characters: {
+    edges: {
+      node: {
         id: number
-        title: {
-          romaji: string
-        }
-        coverImage: {
-          large: string
-          color: string
-        }
       }
     }[]
   }
@@ -249,4 +268,5 @@ export type AnimeDetails = {
   characters: Characters
   staff: Staff
   stats: Stats
+  common: Common
 }

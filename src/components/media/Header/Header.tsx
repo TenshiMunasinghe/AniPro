@@ -1,18 +1,18 @@
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
-import { Overview } from '../../../api/types'
+import { Common } from '../../../api/types'
 import { TabsType } from '../../../pages/media/Media'
 import Description from '../../common/Description/Description'
 import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 
 interface Props {
-  bannerImg: Overview['bannerImage']
-  coverImg: Overview['coverImage']
-  title: Overview['title']['romaji']
-  description: Overview['description']
-  streamUrl?: Overview['streamingEpisodes'][number]['url']
-  siteUrl?: Overview['externalLinks'][number]['url']
+  bannerImg: Common['bannerImage']
+  coverImg: Common['coverImage']
+  title: Common['title']['romaji']
+  description: Common['description']
+  streamUrl?: Common['streamingEpisodes'][number]['url']
+  siteUrl?: Common['externalLinks'][number]['url']
   tabs: Partial<TabsType>[]
 }
 

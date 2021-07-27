@@ -112,7 +112,7 @@ export const GET_SEARCH_RESULT = /* GraphQL */ `
 `
 
 export const GET_ANIME_PAGE = {
-  overview: /* GraphQL */ `
+  common: /* GraphQL */ `
     query common($id: Int!) {
       Media(id: $id) {
         title {
@@ -163,6 +163,31 @@ export const GET_ANIME_PAGE = {
           url
           site
         }
+        characters(sort: [ROLE, ID], page: 1, perPage: 6) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
+          edges {
+            node {
+              id
+            }
+          }
+        }
+        streamingEpisodes {
+          title
+        }
+      }
+    }
+  `,
+
+  overview: /* GraphQL */ `
+    query overview($id: Int!) {
+      Media(id: $id) {
+        status
         relations {
           edges {
             node {
@@ -311,6 +336,7 @@ export const GET_ANIME_PAGE = {
   stats: /* GraphQL */ `
     query stats($id: Int!) {
       Media(id: $id) {
+        status
         rankings {
           rank
           context

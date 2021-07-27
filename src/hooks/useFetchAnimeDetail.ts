@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-
 import { GET_ANIME_PAGE, ky } from '../api/queries'
 import { AnimeDetails } from '../api/types'
 import { TabsType } from '../pages/media/Media'
 
-export const useFetchAnimeDetails = <T extends TabsType>(
+export const useFetchAnimeDetails = <T extends TabsType | 'common'>(
   id: string,
   tab: T
 ) => {
