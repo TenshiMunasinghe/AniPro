@@ -3,7 +3,7 @@ import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 import { Overview } from '../../../api/types'
 import { TabsType } from '../../../pages/media/Media'
 import Description from '../../common/Description/Description'
-import Tabs from '../Tabs/Tabs'
+import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 
 interface Props {
@@ -54,7 +54,7 @@ const Header = ({
           <Description description={description} />
         </p>
       </div>
-      <Tabs tabs={tabs} />
+      <TabNav tabs={tabs} />
     </header>
   )
 }

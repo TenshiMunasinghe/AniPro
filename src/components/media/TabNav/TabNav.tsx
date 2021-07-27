@@ -1,14 +1,13 @@
 import { useHistory, useParams } from 'react-router-dom'
-
 import { ParamTypes, TabsType } from '../../../pages/media/Media'
 import { toStartCase } from '../../../utils/toStartCase'
-import styles from './Tabs.module.scss'
+import styles from './TabNav.module.scss'
 
 interface Props {
   tabs: Partial<TabsType>[]
 }
 
-const Tabs = ({ tabs }: Props) => {
+const TabNav = ({ tabs }: Props) => {
   const { id } = useParams<ParamTypes>()
   const history = useHistory()
 
@@ -26,4 +25,4 @@ const Tabs = ({ tabs }: Props) => {
   )
 }
 
-export default Tabs
+export default TabNav
