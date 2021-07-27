@@ -1,0 +1,13 @@
+@mixin card-cover {
+  display: grid;
+  grid-template-rows: min-content auto;
+  row-gap: var(--space-300);
+  cursor: pointer;
+
+  &:hover,
+  &:focus-within {
+    .title a {
+      color: var(--color-adjusted);
+    }
+  }
+}

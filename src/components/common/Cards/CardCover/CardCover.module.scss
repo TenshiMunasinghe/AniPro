@@ -1,25 +1,12 @@
 @use '../../../../css/config.scss' as *;
-
-@mixin card-cover {
-  display: grid;
-  grid-template-rows: min-content auto;
-  row-gap: var(--space-300);
-  cursor: pointer;
-
-  &:hover,
-  &:focus-within {
-    .title a {
-      color: var(--color-adjusted);
-    }
-  }
-}
+@use './cardChartTemplate.module.scss' as template;
 
 .popoverWrapper {
   position: relative;
 }
 
 .container {
-  @include card-cover;
+  @include template.card-cover;
 
   .rank {
     position: absolute;
