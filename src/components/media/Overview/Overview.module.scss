@@ -2,6 +2,8 @@
 @use '../../common/Cards/CardCover/cardChartTemplate.module.scss' as card-cover;
 
 .container {
+  @include gap($column: var(--space-600));
+
   .relations {
     display: flex;
     overflow-x: auto;
