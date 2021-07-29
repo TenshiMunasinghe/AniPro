@@ -1,7 +1,10 @@
+@use '../../../css/config.scss' as *;
+
 .container {
   display: flex;
   justify-content: space-between;
-  font-size: var(--text-size-200);
+  font-size: var(--text-size-100);
+  font-weight: 500;
   background: var(--color-foreground-100);
   border-radius: 0.25rem;
   padding: var(--space-400);
