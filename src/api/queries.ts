@@ -163,7 +163,7 @@ export const GET_ANIME_PAGE = {
           url
           site
         }
-        characters(sort: [ROLE, ID], page: 1, perPage: 6) {
+        characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
           edges {
             node {
               id
@@ -205,7 +205,7 @@ export const GET_ANIME_PAGE = {
             relationType
           }
         }
-        characters(sort: [ROLE, ID], page: 1, perPage: 6) {
+        characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
           edges {
             node {
               id
