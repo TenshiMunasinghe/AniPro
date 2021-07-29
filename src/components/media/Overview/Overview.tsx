@@ -5,6 +5,7 @@ import Title from '../../common/Cards/components/Title/Title'
 import CoverImage from '../../common/CoverImage/CoverImage'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
+import peopleStyles from '../People/People.module.scss'
 import Person from '../Person/Person'
 import Relation from '../Relation/Relation'
 import Scores from '../Score/Scores'
@@ -35,14 +36,14 @@ const Overview = () => {
         </div>
       </Content>
       <Content heading='Characters'>
-        <div className={styles.characters}>
+        <div className={peopleStyles.container}>
           {data.characters.edges.map(character => (
             <Character character={character} key={character.node.id} />
           ))}
         </div>
       </Content>
       <Content heading='Staff'>
-        <div className={styles.staff}>
+        <div className={peopleStyles.container}>
           {data.staff.edges.map(staff => (
             <Person
               name={staff.node.name.full}
