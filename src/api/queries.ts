@@ -293,22 +293,24 @@ export const GET_ANIME_PAGE = {
   `,
   characters: /* GraphQL */ `
     query characters($id: Int!) {
-      characters(sort: [ROLE, ID], page: 1, perPage: 6) {
-        edges {
-          node {
-            id
-            name {
-              full
+      Media(id: $id) {
+        characters(sort: [ROLE, ID], page: 1, perPage: 6) {
+          edges {
+            node {
+              id
+              name {
+                full
+              }
             }
-          }
-          role
-          voiceActors(language: JAPANESE) {
-            id
-            name {
-              full
-            }
-            image {
-              large
+            role
+            voiceActors(language: JAPANESE) {
+              id
+              name {
+                full
+              }
+              image {
+                large
+              }
             }
           }
         }
@@ -317,18 +319,20 @@ export const GET_ANIME_PAGE = {
   `,
   staff: /* GraphQL */ `
     query characters($id: Int!) {
-      staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
-        edges {
-          node {
-            id
-            name {
-              full
+      Media(id: $id) {
+        staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
+          edges {
+            node {
+              id
+              name {
+                full
+              }
+              image {
+                large
+              }
             }
-            image {
-              large
-            }
+            role
           }
-          role
         }
       }
     }
