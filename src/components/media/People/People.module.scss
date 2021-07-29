@@ -1,0 +1,5 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  @include gap($column: var(--space-400));
+}
