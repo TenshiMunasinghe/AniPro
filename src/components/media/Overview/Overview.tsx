@@ -3,6 +3,7 @@ import { useFetchAnimeOverview } from '../../../hooks/useFetchAnimeOverview'
 import { ParamTypes } from '../../../pages/media/Media'
 import Title from '../../common/Cards/components/Title/Title'
 import CoverImage from '../../common/CoverImage/CoverImage'
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
 import peopleStyles from '../People/People.module.scss'
@@ -14,7 +15,9 @@ import styles from './Overview.module.scss'
 
 const Overview = () => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeOverview(id)
+  const { data, isLoading } = useFetchAnimeOverview(id)
+
+  if (isLoading) return <LoadingSpinner />
 
   if (!data) return null
 
