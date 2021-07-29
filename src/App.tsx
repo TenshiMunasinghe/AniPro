@@ -63,7 +63,7 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <Switch>
-          <Route exact path='/media/:id'>
+          <Route exact path='/media/:id/:tab?'>
             <Media />
           </Route>
           <Route path='/'>
