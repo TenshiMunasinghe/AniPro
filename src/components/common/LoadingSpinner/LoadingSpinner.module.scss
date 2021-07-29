@@ -1,0 +1,15 @@
+.container {
+  @keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(69deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(429deg);
+    }
+  }
+
+  font-size: var(--text-size-900);
+  margin: auto;
+  text-align: center;
+  animation: rotate linear infinite 2s;
+}
