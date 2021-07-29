@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useFetchAnimeDetails } from '../../../hooks/useFetchAnimeDetail'
+import { useFetchAnimeOverview } from '../../../hooks/useFetchAnimeOverview'
 import { ParamTypes } from '../../../pages/media/Media'
 import Title from '../../common/Cards/components/Title/Title'
 import CoverImage from '../../common/CoverImage/CoverImage'
@@ -14,7 +14,7 @@ import styles from './Overview.module.scss'
 
 const Overview = () => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeDetails(id, 'overview')
+  const { data } = useFetchAnimeOverview(id)
 
   if (!data) return null
 

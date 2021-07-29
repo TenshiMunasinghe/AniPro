@@ -10,7 +10,7 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'
 import Overview from '../../components/media/Overview/Overview'
-import { useFetchAnimeDetails } from '../../hooks/useFetchAnimeDetail'
+import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
 import styles from './Media.module.scss'
 
 export const TAB = [
@@ -58,7 +58,7 @@ social
 */
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeDetails(id, 'common')
+  const { data } = useFetchAnimeCommon(id)
 
   if (!data) return null
 
