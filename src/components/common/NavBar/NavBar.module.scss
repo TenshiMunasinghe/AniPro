@@ -1,4 +1,5 @@
 @use '../../../css/config.scss' as *;
+
 .container {
   --margin: var(--space-300);
 
@@ -30,8 +31,10 @@
 }
 
 .heading {
-  font-size: var(--text-size-500);
   margin-right: var(--margin);
+  @include mq(above, sm) {
+    font-size: var(--text-size-500);
+  }
 
   &:hover {
     a {
