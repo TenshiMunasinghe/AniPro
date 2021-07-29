@@ -1,5 +1,6 @@
 import { QueryVar } from '../../../api/types'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
 
@@ -13,7 +14,7 @@ const Slider = ({ queryVar }: Props) => {
   )
   return (
     <div className={styles.container}>
-      {isLoading && <div className={styles.loading}>A</div>}
+      {isLoading && <LoadingSpinner />}
       {!isLoading && medias.length > 0 && (
         <>
           {medias.map(media => (
