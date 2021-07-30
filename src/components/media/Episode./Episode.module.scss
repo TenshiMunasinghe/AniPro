@@ -1,0 +1,22 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  display: flex;
+  align-items: flex-end;
+  background-image: var(--thumbnail);
+  background-position: 50%;
+  background-size: cover;
+  height: 8rem;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  font-size: var(--text-size-200);
+
+  .title {
+    font-weight: 450;
+    width: 100%;
+    padding: var(--space-200) var(--space-300);
+    @include add-ellipsis(1);
+    background: var(--color-foreground-200);
+  }
+}
