@@ -6,6 +6,7 @@ import CoverImage from '../../common/CoverImage/CoverImage'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
+import Episode from '../Episode./Episode'
 import peopleStyles from '../People/People.module.scss'
 import Person from '../Person/Person'
 import Relation from '../Relation/Relation'
@@ -38,6 +39,7 @@ const Overview = () => {
           ))}
         </div>
       </Content>
+
       <Content heading='Characters'>
         <div className={peopleStyles.container}>
           {data.characters.edges.map(character => (
@@ -48,6 +50,7 @@ const Overview = () => {
           ))}
         </div>
       </Content>
+
       <Content heading='Staff'>
         <div className={peopleStyles.container}>
           {data.staff.edges.map(staff => (
@@ -60,15 +63,28 @@ const Overview = () => {
           ))}
         </div>
       </Content>
+
       <Content heading='Status Distribution'>
         <Status
           viewingStatus={data.stats.statusDistribution}
           airingStatus={data.status}
         />
       </Content>
+
       <Content heading='Score Distribution'>
         <Scores scores={data.stats.scoreDistribution} />
       </Content>
+
+      {data.streamingEpisodes.length > 0 && (
+        <Content heading='Watch'>
+          <div className={styles.watch}>
+            {data.streamingEpisodes.slice(0, 4).map(episode => (
+              <Episode key={'overview' + episode.url} episode={episode} />
+            ))}
+          </div>
+        </Content>
+      )}
+
       <Content heading='Trailer'>
         <div className={styles.trailer}>
           <iframe
@@ -77,6 +93,7 @@ const Overview = () => {
           />
         </div>
       </Content>
+
       <Content heading='Recomendations'>
         <div className={styles.recommendations}>
           {data.recommendations.nodes.map(({ mediaRecommendation: m }) => (
