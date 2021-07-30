@@ -102,21 +102,23 @@ export interface Characters {
   }[]
 }
 
-export interface Staff {
-  staff: {
-    edges: {
-      node: {
-        id: number
-        name: {
-          full: string
-        }
-        image: {
-          large: string
-        }
-      }
-      role: string
-    }[]
+export interface Staffs {
+  pageInfo: {
+    currentPage: number
+    hasNextPage: boolean
   }
+  edges: {
+    node: {
+      id: number
+      name: {
+        full: string
+      }
+      image: {
+        large: string
+      }
+    }
+    role: string
+  }[]
 }
 
 export interface Stats {
@@ -148,7 +150,7 @@ export interface Stats {
   }
 }
 
-export interface Overview extends Staff {
+export interface Overview {
   status: string
   relations: {
     edges: {
@@ -167,6 +169,7 @@ export interface Overview extends Staff {
     }[]
   }
   characters: Omit<Characters, 'pageInfo'>
+  staffs: Omit<Staffs, 'pageInfo'>
   stats: {
     scoreDistribution: {
       score: number
@@ -269,7 +272,7 @@ export type AnimeDetails = {
   overview: Overview
   watch: Watch
   characters: Characters
-  staff: Staff
+  staffs: Staffs
   stats: Stats
   common: Common
 }
