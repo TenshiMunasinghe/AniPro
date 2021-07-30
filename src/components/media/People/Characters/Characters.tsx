@@ -7,9 +7,12 @@ import styles from '../People.module.scss'
 
 const Characters = () => {
   const { id } = useParams<ParamTypes>()
-  const { data, fetchNextPage, isFetching, hasNextPage } = useAnimeCharacters(
-    id
-  )
+  const {
+    data,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useAnimeCharacters(id)
 
   if (!data) return null
 
@@ -20,12 +23,12 @@ const Characters = () => {
           <Character character={character} key={character.node.id} />
         ))
       )}
-      {!isFetching && hasNextPage && (
+      {!isFetchingNextPage && hasNextPage && (
         <button className={styles.loadMore} onClick={() => fetchNextPage()}>
           Load More!
         </button>
       )}
-      {isFetching && <LoadingSpinner />}
+      {isFetchingNextPage && <LoadingSpinner />}
     </div>
   )
 }
