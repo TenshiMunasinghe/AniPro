@@ -292,9 +292,13 @@ export const GET_ANIME_PAGE = {
     }
   `,
   characters: /* GraphQL */ `
-    query characters($id: Int!) {
+    query characters($id: Int!, $page: Int!) {
       Media(id: $id) {
-        characters(sort: [ROLE, ID], page: 1, perPage: 6) {
+        characters(sort: [ROLE, ID], page: $page, perPage: 6) {
+          pageInfo {
+            currentPage
+            hasNextPage
+          }
           edges {
             node {
               id

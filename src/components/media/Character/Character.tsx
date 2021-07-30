@@ -3,7 +3,7 @@ import Person from '../Person/Person'
 import styles from './Character.module.scss'
 
 interface Props {
-  character: Characters['characters']['edges'][number]
+  character: Characters['edges'][number]
 }
 
 const Character = ({ character }: Props) => {

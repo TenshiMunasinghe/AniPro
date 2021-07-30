@@ -75,29 +75,31 @@ export interface Watch {
 }
 
 export interface Characters {
-  characters: {
-    edges: {
-      node: {
-        id: number
-        name: {
-          full: string
-        }
-        image: {
-          large: string
-        }
-      }
-      role: string
-      voiceActors: {
-        id: number
-        name: {
-          full: string
-        }
-        image: {
-          large: string
-        }
-      }[]
-    }[]
+  pageInfo: {
+    currentPage: number
+    hasNextPage: boolean
   }
+  edges: {
+    node: {
+      id: number
+      name: {
+        full: string
+      }
+      image: {
+        large: string
+      }
+    }
+    role: string
+    voiceActors: {
+      id: number
+      name: {
+        full: string
+      }
+      image: {
+        large: string
+      }
+    }[]
+  }[]
 }
 
 export interface Staff {
@@ -146,7 +148,7 @@ export interface Stats {
   }
 }
 
-export interface Overview extends Characters, Staff {
+export interface Overview extends Staff {
   status: string
   relations: {
     edges: {
@@ -164,6 +166,7 @@ export interface Overview extends Characters, Staff {
       relationType: string
     }[]
   }
+  characters: Omit<Characters, 'pageInfo'>
   stats: {
     scoreDistribution: {
       score: number
