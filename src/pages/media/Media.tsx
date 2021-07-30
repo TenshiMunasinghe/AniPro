@@ -11,6 +11,7 @@ import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'
 import Overview from '../../components/media/Overview/Overview'
 import Characters from '../../components/media/People/Characters/Characters'
+import Staff from '../../components/media/People/Staff/Staff'
 import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
 import styles from './Media.module.scss'
 
@@ -51,9 +52,6 @@ export const context = createContext<{ scrollPosition: ScrollPosition }>({
 
 /*TODO: Complete media page
 tabs:
-overview
-characters
-staff
 stats
 social
 */
@@ -90,6 +88,9 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
             </Route>
             <Route exact path='/media/:id/characters'>
               <Characters />
+            </Route>
+            <Route exact path='/media/:id/staff'>
+              <Staff />
             </Route>
           </Switch>
         </main>
