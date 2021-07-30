@@ -253,7 +253,9 @@ export const GET_ANIME_PAGE = {
           }
         }
         streamingEpisodes {
+          url
           title
+          thumbnail
         }
         trailer {
           id
