@@ -328,6 +328,10 @@ export const GET_ANIME_PAGE = {
     query characters($id: Int!) {
       Media(id: $id) {
         staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
+          pageInfo {
+            currentPage
+            hasNextPage
+          }
           edges {
             node {
               id
