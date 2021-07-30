@@ -284,7 +284,7 @@ export const GET_ANIME_PAGE = {
     query watch($id: Int!) {
       Media(id: $id) {
         streamingEpisodes {
-          site
+          url
           title
           thumbnail
         }
