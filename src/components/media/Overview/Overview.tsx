@@ -27,7 +27,7 @@ const Overview = () => {
         <div className={styles.relations}>
           {data.relations.edges.map(({ node, relationType }) => (
             <Relation
-              key={node.id}
+              key={'relation' + node.id}
               id={node.id}
               image={node.coverImage.large}
               title={node.title.romaji}
@@ -41,7 +41,10 @@ const Overview = () => {
       <Content heading='Characters'>
         <div className={peopleStyles.container}>
           {data.characters.edges.map(character => (
-            <Character character={character} key={character.node.id} />
+            <Character
+              character={character}
+              key={'overview' + character.node.id}
+            />
           ))}
         </div>
       </Content>
@@ -52,7 +55,7 @@ const Overview = () => {
               name={staff.node.name.full}
               image={staff.node.image.large}
               info={staff.role}
-              key={staff.node.id}
+              key={'overview' + staff.node.id}
             />
           ))}
         </div>

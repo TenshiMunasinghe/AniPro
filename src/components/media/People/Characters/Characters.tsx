@@ -20,7 +20,10 @@ const Characters = () => {
     <div className={styles.container}>
       {data.pages.map(characters =>
         characters.edges.map(character => (
-          <Character character={character} key={character.node.id} />
+          <Character
+            character={character}
+            key={'character' + character.node.id}
+          />
         ))
       )}
       {!isFetchingNextPage && hasNextPage && (
