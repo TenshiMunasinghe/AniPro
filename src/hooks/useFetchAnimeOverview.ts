@@ -16,8 +16,6 @@ const fetchOverview = async (id: string) => {
     })
     .json()
 
-  console.log(Media)
-
   return Media as Overview
 }
 
