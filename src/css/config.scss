@@ -193,18 +193,18 @@
 @mixin gap($row: null, $column: null) {
   @if $row != null {
     & > * {
-      margin-right: $row;
+      margin-left: $row;
     }
-    & > *:last-child {
-      margin-right: 0;
+    & > *:first-child {
+      margin-left: 0;
     }
   }
   @if $column != null {
     & > * {
-      margin-bottom: $column;
+      margin-top: $column;
     }
-    & > *:last-child {
-      margin-bottom: 0;
+    & > *:first-child {
+      margin-top: 0;
     }
   }
 }
