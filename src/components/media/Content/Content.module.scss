@@ -1,5 +1,5 @@
 .container {
-  h6 {
+  & > h6 {
     margin-bottom: var(--space-300);
   }
 }
