@@ -10,6 +10,7 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'
 import Overview from '../../components/media/Overview/Overview'
+import Characters from '../../components/media/People/Characters/Characters'
 import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
 import styles from './Media.module.scss'
 
@@ -86,6 +87,9 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           <Switch>
             <Route exact path='/media/:id'>
               <Overview />
+            </Route>
+            <Route exact path='/media/:id/characters'>
+              <Characters />
             </Route>
           </Switch>
         </main>
