@@ -67,7 +67,6 @@ export type FetchedMedias = QueryData['Page']['media'][number]
 
 export interface Watch {
   streamingEpisodes: {
-    site: string
     title: string
     thumbnail: string
     url: string
@@ -150,7 +149,7 @@ export interface Stats {
   }
 }
 
-export interface Overview {
+export interface Overview extends Watch {
   status: string
   relations: {
     edges: {
