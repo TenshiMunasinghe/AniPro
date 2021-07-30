@@ -79,7 +79,7 @@ const Overview = () => {
       </Content>
       <Content heading='Recomendations'>
         <div className={styles.recommendations}>
-          {data.recommendations.nodes.map(({ mediaRecommendation: m }, i) => (
+          {data.recommendations.nodes.map(({ mediaRecommendation: m }) => (
             <div className={styles.cardCover} key={'recommendations' + m.id}>
               <CoverImage
                 id={m.id}
