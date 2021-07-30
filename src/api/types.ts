@@ -169,7 +169,7 @@ export interface Overview {
     }[]
   }
   characters: Omit<Characters, 'pageInfo'>
-  staffs: Omit<Staff, 'pageInfo'>
+  staff: Omit<Staff, 'pageInfo'>
   stats: {
     scoreDistribution: {
       score: number
@@ -272,7 +272,7 @@ export type AnimeDetails = {
   overview: Overview
   watch: Watch
   characters: Characters
-  staffs: Staff
+  staff: Staff
   stats: Stats
   common: Common
 }
