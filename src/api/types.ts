@@ -102,7 +102,7 @@ export interface Characters {
   }[]
 }
 
-export interface Staffs {
+export interface Staff {
   pageInfo: {
     currentPage: number
     hasNextPage: boolean
@@ -169,7 +169,7 @@ export interface Overview {
     }[]
   }
   characters: Omit<Characters, 'pageInfo'>
-  staffs: Omit<Staffs, 'pageInfo'>
+  staffs: Omit<Staff, 'pageInfo'>
   stats: {
     scoreDistribution: {
       score: number
@@ -272,7 +272,7 @@ export type AnimeDetails = {
   overview: Overview
   watch: Watch
   characters: Characters
-  staffs: Staffs
+  staffs: Staff
   stats: Stats
   common: Common
 }
