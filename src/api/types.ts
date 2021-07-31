@@ -121,17 +121,23 @@ export interface Staff {
 }
 
 export interface Review {
-  id: number
-  summary: string
-  rating: number
-  ratingAmount: number
-  score: number
-  user: {
-    name: string
-    avatar: {
-      medium: string
-    }
+  pageInfo: {
+    currentPage: number
+    hasNextPage: boolean
   }
+  nodes: {
+    id: number
+    summary: string
+    rating: number
+    ratingAmount: number
+    score: number
+    user: {
+      name: string
+      avatar: {
+        medium: string
+      }
+    }
+  }[]
 }
 
 export interface Stats {
@@ -183,7 +189,7 @@ export interface Overview extends Watch {
   }
   characters: Omit<Characters, 'pageInfo'>
   staff: Omit<Staff, 'pageInfo'>
-  reviews: { nodes: Review[] }
+  reviews: Omit<Review, 'pageInfo'>
   stats: {
     scoreDistribution: {
       score: number

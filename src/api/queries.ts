@@ -367,9 +367,13 @@ export const GET_ANIME_PAGE = {
   `,
 
   reviews: /* GraphQL */ `
-    query reviews($id: Int!) {
+    query reviews($id: Int!, $page: Int!) {
       Media(id: $id) {
-        reviews(sort: [SCORE_DESC]) {
+        reviews(sort: [SCORE_DESC], page: $page) {
+          pageInfo {
+            currentPage
+            hasNextPage
+          }
           nodes {
             id
             summary
