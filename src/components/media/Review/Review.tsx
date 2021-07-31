@@ -7,7 +7,7 @@ import Score from '../../common/Score/Score'
 import styles from './Review.module.scss'
 
 interface Props {
-  review: ReviewType
+  review: ReviewType['nodes'][number]
 }
 
 const Review = ({ review }: Props) => {
