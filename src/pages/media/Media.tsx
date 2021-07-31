@@ -13,6 +13,7 @@ import Header from '../../components/media/Header/Header'
 import Overview from '../../components/media/Overview/Overview'
 import Characters from '../../components/media/People/Characters/Characters'
 import Staff from '../../components/media/People/Staff/Staff'
+import Reviews from '../../components/media/Reviews/Reviews'
 import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
 import styles from './Media.module.scss'
 
@@ -21,6 +22,7 @@ export const TAB = [
   'watch',
   'characters',
   'staff',
+  'reviews',
   'stats',
 ] as const
 
@@ -54,8 +56,8 @@ export const context = createContext<{ scrollPosition: ScrollPosition }>({
 /*TODO: Complete media page
 tabs:
 stats
-social
 */
+
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
   const { data } = useFetchAnimeCommon(id)
@@ -95,6 +97,9 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
             </Route>
             <Route exact path='/media/:id/staff'>
               <Staff />
+            </Route>
+            <Route exact path='/media/:id/reviews'>
+              <Reviews />
             </Route>
           </Switch>
         </main>
