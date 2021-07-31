@@ -242,6 +242,21 @@ export const GET_ANIME_PAGE = {
             role
           }
         }
+        reviews(sort: [SCORE_DESC], perPage: 2) {
+          nodes {
+            id
+            summary
+            rating
+            ratingAmount
+            score
+            user {
+              name
+              avatar {
+                medium
+              }
+            }
+          }
+        }
         stats {
           scoreDistribution {
             score
@@ -291,6 +306,7 @@ export const GET_ANIME_PAGE = {
       }
     }
   `,
+
   characters: /* GraphQL */ `
     query characters($id: Int!, $page: Int!) {
       Media(id: $id) {
@@ -324,6 +340,7 @@ export const GET_ANIME_PAGE = {
       }
     }
   `,
+
   staff: /* GraphQL */ `
     query characters($id: Int!, $page: Int!) {
       Media(id: $id) {
@@ -348,6 +365,29 @@ export const GET_ANIME_PAGE = {
       }
     }
   `,
+
+  reviews: /* GraphQL */ `
+    query reviews($id: Int!) {
+      Media(id: $id) {
+        reviews(sort: [SCORE_DESC]) {
+          nodes {
+            id
+            summary
+            rating
+            ratingAmount
+            score
+            user {
+              name
+              avatar {
+                medium
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+
   stats: /* GraphQL */ `
     query stats($id: Int!) {
       Media(id: $id) {

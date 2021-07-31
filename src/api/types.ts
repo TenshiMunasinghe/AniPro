@@ -120,6 +120,20 @@ export interface Staff {
   }[]
 }
 
+export interface Review {
+  id: number
+  summary: string
+  rating: number
+  ratingAmount: number
+  score: number
+  user: {
+    name: string
+    avatar: {
+      medium: string
+    }
+  }
+}
+
 export interface Stats {
   status: string
   rankings: {
@@ -169,6 +183,7 @@ export interface Overview extends Watch {
   }
   characters: Omit<Characters, 'pageInfo'>
   staff: Omit<Staff, 'pageInfo'>
+  reviews: { nodes: Review[] }
   stats: {
     scoreDistribution: {
       score: number
