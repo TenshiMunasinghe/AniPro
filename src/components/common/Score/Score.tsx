@@ -1,4 +1,4 @@
-import FaceIcon from '../../../FaceIcon/FaceIcon'
+import FaceIcon from '../FaceIcon/FaceIcon'
 import styles from './Score.module.scss'
 
 interface Props {

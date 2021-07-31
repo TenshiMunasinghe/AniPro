@@ -12,7 +12,7 @@ import {
   WindowSizeStore,
 } from '../../../../../zustand/stores'
 import Genres from '../../../Genres/Genres'
-import Score from '../../components/Score/Score'
+import Score from '../../../Score/Score'
 import styles from './Popover.module.scss'
 
 interface Props {

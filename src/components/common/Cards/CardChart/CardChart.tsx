@@ -4,8 +4,8 @@ import { createColorVariable } from '../../../../utils/createColorVariable'
 import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
 import Genres from '../../Genres/Genres'
+import Score from '../../Score/Score'
 import Title from '../../Title/Title'
-import Score from '../components/Score/Score'
 import styles from './CardChart.module.scss'
 
 interface Props {
