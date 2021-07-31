@@ -23,6 +23,9 @@ export const useAnimeCharacters = (id: string) =>
     ['characters', id],
     ({ pageParam = 1 }) => fetchCharacters(id, pageParam),
     {
-      getNextPageParam: lastpage => lastpage.pageInfo.currentPage + 1,
+      getNextPageParam: lastpage =>
+        lastpage.pageInfo.hasNextPage
+          ? lastpage.pageInfo.currentPage + 1
+          : undefined,
     }
   )

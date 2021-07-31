@@ -23,6 +23,9 @@ export const useAnimeStaff = (id: string) =>
     ['staff', id],
     ({ pageParam = 1 }) => fetchStaff(id, pageParam),
     {
-      getNextPageParam: lastpage => lastpage.pageInfo.currentPage + 1,
+      getNextPageParam: lastpage =>
+        lastpage.pageInfo.hasNextPage
+          ? lastpage.pageInfo.currentPage + 1
+          : undefined,
     }
   )
