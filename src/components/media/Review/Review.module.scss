@@ -1,0 +1,49 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.4rem 1fr;
+  column-gap: var(--space-500);
+  font-size: var(--text-size-300);
+
+  .avatar {
+    height: 3.4rem;
+    border-radius: 0.1rem;
+  }
+
+  .review {
+    position: relative;
+    background: var(--color-foreground-100);
+    padding: var(--space-400) var(--space-500);
+    @include gap($column: var(--space-200));
+    border-radius: 0.25rem;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 0;
+      height: 0;
+      left: -1rem;
+      top: 12.5%;
+      border: solid transparent;
+      border-top-width: 0.7rem;
+      border-bottom-width: 0.7rem;
+      border-right-width: 1rem;
+      border-right-color: var(--color-foreground-100);
+    }
+  }
+
+  .summary {
+    display: block;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .rating {
+    @include gap($row: var(--space-100));
+    width: fit-content;
+    margin-left: auto;
+  }
+}
