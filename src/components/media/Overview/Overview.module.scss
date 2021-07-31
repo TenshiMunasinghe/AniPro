@@ -36,4 +36,8 @@
       @include card-cover.card-cover;
     }
   }
+
+  .reviews {
+    @include gap($column: var(--space-400));
+  }
 }

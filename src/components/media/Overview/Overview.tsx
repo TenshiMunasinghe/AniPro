@@ -1,15 +1,16 @@
 import { useParams } from 'react-router-dom'
 import { useFetchAnimeOverview } from '../../../hooks/useFetchAnimeOverview'
 import { ParamTypes } from '../../../pages/media/Media'
-import Title from '../../common/Cards/components/Title/Title'
 import CoverImage from '../../common/CoverImage/CoverImage'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import Title from '../../common/Title/Title'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
 import Episode from '../Episode./Episode'
 import peopleStyles from '../People/People.module.scss'
 import Person from '../Person/Person'
 import Relation from '../Relation/Relation'
+import Review from '../Review/Review'
 import Scores from '../Score/Scores'
 import Status from '../Status/Status'
 import styles from './Overview.module.scss'
@@ -105,6 +106,14 @@ const Overview = () => {
               />
               <Title id={m.id} text={m.title.romaji} />
             </div>
+          ))}
+        </div>
+      </Content>
+
+      <Content heading='Reviews'>
+        <div className={styles.reviews}>
+          {data.reviews.nodes.map(review => (
+            <Review review={review} />
           ))}
         </div>
       </Content>
