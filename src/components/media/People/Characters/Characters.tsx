@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom'
 import { useAnimeCharacters } from '../../../../hooks/useAnimeCharacters'
 import { ParamTypes } from '../../../../pages/media/Media'
-import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import Character from '../../Character/Character'
+import LoadMore from '../../LoadMore/LoadMore'
 import styles from '../People.module.scss'
 
 const Characters = () => {
@@ -26,12 +26,11 @@ const Characters = () => {
           />
         ))
       )}
-      {!isFetchingNextPage && hasNextPage && (
-        <button className={styles.loadMore} onClick={() => fetchNextPage()}>
-          Load More!
-        </button>
-      )}
-      {isFetchingNextPage && <LoadingSpinner />}
+      <LoadMore
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage || false}
+        onClick={() => fetchNextPage()}
+      />
     </div>
   )
 }
