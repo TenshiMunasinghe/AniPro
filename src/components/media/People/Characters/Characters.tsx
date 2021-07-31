@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useAnimeCharacters } from '../../../../hooks/useAnimeCharacters'
 import { ParamTypes } from '../../../../pages/media/Media'
+import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import Character from '../../Character/Character'
 import LoadMore from '../../LoadMore/LoadMore'
 import styles from '../People.module.scss'
@@ -12,7 +13,10 @@ const Characters = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
+    isLoading,
   } = useAnimeCharacters(id)
+
+  if (isLoading) return <LoadingSpinner />
 
   if (!data) return null
 

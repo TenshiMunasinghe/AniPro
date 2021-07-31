@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useAnimeReviews } from '../../../hooks/useAnimeReviews'
 import { ParamTypes } from '../../../pages/media/Media'
+import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../LoadMore/LoadMore'
 import Review from '../Review/Review'
 import styles from './Reviews.module.scss'
@@ -12,7 +13,10 @@ const Reviews = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
+    isLoading,
   } = useAnimeReviews(id)
+
+  if (isLoading) return <LoadingSpinner />
 
   if (!data) return null
 
