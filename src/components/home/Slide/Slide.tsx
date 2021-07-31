@@ -2,10 +2,10 @@ import { CSSProperties } from 'react'
 import { FetchedMedias } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
 import { createColorVariable } from '../../../utils/createColorVariable'
-import Title from '../../common/Cards/components/Title/Title'
 import CoverImage from '../../common/CoverImage/CoverImage'
 import Description from '../../common/Description/Description'
 import Genres from '../../common/Genres/Genres'
+import Title from '../../common/Title/Title'
 import styles from './Slide.module.scss'
 
 interface Props {

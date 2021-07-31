@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
+import { linkToMediaPage } from '../../../App'
 import styles from './Title.module.scss'
-import { linkToMediaPage } from '../../../../../App'
 
 interface Props {
   id: number
