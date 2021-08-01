@@ -46,7 +46,7 @@ const Overview = () => {
           {data.characters.edges.map(character => (
             <Character
               character={character}
-              key={'overview' + character.node.id}
+              key={'overview character' + character.node.id}
             />
           ))}
         </div>
@@ -59,7 +59,7 @@ const Overview = () => {
               name={staff.node.name.full}
               image={staff.node.image.large}
               info={staff.role}
-              key={'overview' + staff.node.id}
+              key={'overview staff' + staff.node.id}
             />
           ))}
         </div>
@@ -113,7 +113,7 @@ const Overview = () => {
       <Content heading='Reviews'>
         <div className={styles.reviews}>
           {data.reviews.nodes.map(review => (
-            <Review review={review} />
+            <Review key={'overview review' + review.id} review={review} />
           ))}
         </div>
       </Content>
