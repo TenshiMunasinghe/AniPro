@@ -105,3 +105,26 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.ct-labels {
+  width: 100%;
+  height: 100%;
+}
+
+.ct-label {
+  color: inherit;
+  fill: inherit;
+  font-size: inherit;
+  align-self: flex-end;
+}
+
+.ct-series-a .ct-bar,
+.ct-series-a .ct-line,
+.ct-series-a .ct-point,
+.ct-series-a .ct-slice-donut {
+  stroke: var(--color-text-200);
+}
+
+.ct-grid {
+  stroke: var(--color-foreground-400);
+}
