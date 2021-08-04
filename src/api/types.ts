@@ -155,8 +155,8 @@ export interface Stats {
       trending: number
       averageScore: number
       inProgress: number
-    }
-  }[]
+    }[]
+  }
   stats: {
     scoreDistribution: {
       score: number
