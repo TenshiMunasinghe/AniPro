@@ -1,0 +1,11 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  font-size: var(--text-size-100);
+  font-weight: 500;
+  background: var(--color-foreground-100);
+  border-radius: 0.25rem;
+  padding: var(--space-500);
+  padding-bottom: 0;
+  padding-right: 0;
+}
