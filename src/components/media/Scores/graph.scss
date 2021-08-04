@@ -1,9 +1,0 @@
-.ct-chart-bar {
-  .ct-series {
-    @for $n from 1 through 10 {
-      .ct-bar:nth-child(#{$n}) {
-        stroke: HSL(#{$n * 10}deg, 50%, 50%);
-      }
-    }
-  }
-}

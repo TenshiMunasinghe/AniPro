@@ -1,7 +1,6 @@
 import ChartistGraph from 'react-chartist'
 import { Stats } from '../../../api/types'
 import styles from './Scores.module.scss'
-import './graph.scss'
 
 interface Props {
   scores: Stats['stats']['scoreDistribution']
@@ -10,7 +9,12 @@ interface Props {
 const Scores = ({ scores }: Props) => {
   const data = {
     labels: scores.map(({ score }) => score),
-    series: [scores.map(({ amount }) => amount)],
+    series: [
+      {
+        data: scores.map(({ amount }) => amount),
+        className: styles.series,
+      },
+    ],
   }
 
   return (
