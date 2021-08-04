@@ -1,11 +1,10 @@
-import './css/reset.css'
-import './css/index.scss'
-
-import ReactDOM from 'react-dom'
-
-import App from './App'
-import * as serviceWorker from './serviceWorker'
 import { StrictMode } from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import './css/reset.css'
+import 'chartist/dist/chartist.min.css'
+import './css/index.scss'
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <StrictMode>
