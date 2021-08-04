@@ -11,7 +11,7 @@ import peopleStyles from '../People/People.module.scss'
 import Person from '../Person/Person'
 import Relation from '../Relation/Relation'
 import Review from '../Review/Review'
-import Scores from '../Score/Scores'
+import Scores from '../Scores/Scores'
 import Status from '../Status/Status'
 import styles from './Overview.module.scss'
 
