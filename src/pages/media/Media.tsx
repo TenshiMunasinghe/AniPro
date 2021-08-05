@@ -14,6 +14,7 @@ import Overview from '../../components/media/Overview/Overview'
 import Characters from '../../components/media/People/Characters/Characters'
 import Staff from '../../components/media/People/Staff/Staff'
 import Reviews from '../../components/media/Reviews/Reviews'
+import Stats from '../../components/media/Stats/Stats'
 import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
 import styles from './Media.module.scss'
 
@@ -52,11 +53,6 @@ const filterTabs = (data: Common) => {
 export const context = createContext<{ scrollPosition: ScrollPosition }>({
   scrollPosition: { x: 0, y: 0 },
 })
-
-/*TODO: Complete media page
-tabs:
-stats
-*/
 
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
@@ -100,6 +96,9 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
             </Route>
             <Route exact path='/media/:id/reviews'>
               <Reviews />
+            </Route>
+            <Route exact path='/media/:id/stats'>
+              <Stats />
             </Route>
           </Switch>
         </main>
