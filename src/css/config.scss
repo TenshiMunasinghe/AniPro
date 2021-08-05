@@ -150,26 +150,6 @@
   @include circle($size);
 }
 
-@mixin padding-on-scroll-element($row: null, $column: null) {
-  @if $row != null {
-    padding-left: $row;
-    padding-right: 0;
-    &:after {
-      content: '';
-      padding-left: $row;
-    }
-  }
-  @if $column != null {
-    padding-top: $column;
-    padding-bottom: 0;
-    &:after {
-      content: '';
-      display: block;
-      padding-top: $column;
-    }
-  }
-}
-
 @mixin padding-vertical($padding) {
   padding-top: $padding;
   padding-bottom: $padding;

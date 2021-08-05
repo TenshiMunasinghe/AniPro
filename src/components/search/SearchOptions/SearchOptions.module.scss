@@ -26,8 +26,7 @@ body.search-options-open {
   display: flex;
   overflow-x: auto;
   background: var(--color-foreground-50);
-  @include padding-on-scroll-element($row: var(--space-400));
-  @include padding-vertical(var(--space-300));
+  padding: var(--space-300) var(--space-400);
   @include gap($row: var(--space-400));
 
   &.vertical {

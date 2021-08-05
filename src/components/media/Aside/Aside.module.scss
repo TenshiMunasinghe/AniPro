@@ -3,13 +3,12 @@
   max-width: 100%;
   display: flex;
   overflow-x: auto;
-  padding: var(--space-400) 0;
-  @include padding-on-scroll-element($row: var(--space-200));
+  padding: var(--space-400) var(--space-500);
+  @include gap($row: var(--space-600));
   margin-top: var(--space-500);
   background: var(--color-foreground-50);
 
   .item {
-    margin: 0 var(--space-400);
     white-space: nowrap;
 
     &.active {
