@@ -143,8 +143,10 @@ export interface Review {
 export interface Stats {
   status: string
   rankings: {
+    id: number
     rank: number
     context: string
+    type: string
     year: number | null
     season: string | null
     allTime: boolean

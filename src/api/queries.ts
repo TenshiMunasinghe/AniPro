@@ -397,8 +397,10 @@ export const GET_ANIME_PAGE = {
       Media(id: $id) {
         status
         rankings {
+          id
           rank
           context
+          type
           year
           season
           allTime
