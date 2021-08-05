@@ -17,11 +17,7 @@ const Scores = ({ scores }: Props) => {
     ],
   }
 
-  return (
-    <div className={styles.container}>
-      <ChartistGraph data={data} type='Bar' />
-    </div>
-  )
+  return <ChartistGraph data={data} type='Bar' className={styles.container} />
 }
 
 export default Scores
