@@ -3,12 +3,10 @@
 
 $-monochrome-colors: (
   'black': (
-    'alt-name': 'dark',
     'hsl': hsl(0, 0%, 5%),
     'precision': 5%,
   ),
   'white': (
-    'alt-name': 'light',
     'hsl': hsl(0, 0%, 75%),
     'precision': 2.5%,
   ),
@@ -27,25 +25,6 @@ $-other-colors: (
       --#{$key}-#{$i * 100}: #{color.adjust(
           $color: map.get($val, 'hsl'),
           $lightness: $i * map.get($val, 'precision')
-        )};
-    }
-  }
-
-  @each $key, $val in $-monochrome-colors {
-    @for $i from 1 to 10 {
-      --#{map.get($val, 'alt-name')}-#{$i * 100}: #{color.mix(
-          color.adjust(
-            $color: map.get($val, 'hsl'),
-            $lightness: $i * map.get($val, 'precision')
-          ),
-          color.change(
-            $color: map.get(map.get($-other-colors, 'primary'), 'hsl'),
-            $lightness:
-              $i *
-              map.get($val, 'precision') +
-              color.lightness(map.get($val, 'hsl'))
-          ),
-          86%
         )};
     }
   }

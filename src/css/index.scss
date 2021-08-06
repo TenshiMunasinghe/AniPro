@@ -36,12 +36,12 @@ button {
 
 body {
   &.dark {
-    --color-background: var(--dark-100);
-    --color-foreground-50: var(--dark-200);
-    --color-foreground-100: var(--dark-300);
-    --color-foreground-200: var(--dark-400);
-    --color-foreground-300: var(--dark-500);
-    --color-foreground-400: var(--dark-600);
+    --color-background: var(--black-100);
+    --color-foreground-50: var(--black-200);
+    --color-foreground-100: var(--black-300);
+    --color-foreground-200: var(--black-400);
+    --color-foreground-300: var(--black-500);
+    --color-foreground-400: var(--black-600);
     --color-foreground-accent-100: var(--primary-600);
     --color-foreground-accent-200: var(--primary-700);
     --color-foreground-accent-300: var(--primary-800);
@@ -64,12 +64,12 @@ body {
   }
 
   &.light {
-    --color-background: var(--light-400);
-    --color-foreground-50: var(--light-500);
-    --color-foreground-100: var(--light-600);
-    --color-foreground-200: var(--light-700);
-    --color-foreground-300: var(--light-800);
-    --color-foreground-400: var(--light-900);
+    --color-background: var(--white-400);
+    --color-foreground-50: var(--white-500);
+    --color-foreground-100: var(--white-600);
+    --color-foreground-200: var(--white-700);
+    --color-foreground-300: var(--white-800);
+    --color-foreground-400: var(--white-900);
     --color-foreground-accent-100: var(--primary-500);
     --color-foreground-accent-200: var(--primary-600);
     --color-foreground-accent-300: var(--primary-700);
