@@ -29,7 +29,9 @@ const ScrollToTop = () => {
   const { pathname, search } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0)
+    console.log(pathname.split('/')[1])
+
+    if (pathname.split('/')[1] !== 'media') window.scrollTo(0, 0)
   }, [pathname, search])
 
   return null
