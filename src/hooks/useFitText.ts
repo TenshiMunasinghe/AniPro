@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useResizeDetector } from 'react-resize-detector'
-
 import { isOverflowingFromParent } from '../utils/isOverflowingFromParent'
 
 interface UseFitTextArgs {

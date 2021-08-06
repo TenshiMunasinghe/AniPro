@@ -1,5 +1,4 @@
 import { FaCaretUp } from 'react-icons/fa'
-
 import styles from './ScrollButton.module.scss'
 
 const handleClick = () => {

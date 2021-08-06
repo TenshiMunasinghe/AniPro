@@ -1,8 +1,7 @@
+import uniq from 'lodash/uniq'
 import uniqBy from 'lodash/uniqBy'
 import { useRef } from 'react'
-import uniq from 'lodash/uniq'
 import { useQuery } from 'react-query'
-
 import { GET_SEARCH_RESULT, ky } from '../api/queries'
 import { PageInfo, QueryData } from '../api/types'
 import { allowedURLParams } from '../filterOptions/filterOptions'
