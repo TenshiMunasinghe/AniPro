@@ -2,7 +2,6 @@ import classnames from 'classnames'
 import { useMemo } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 import { v4 } from 'uuid'
-
 import styles from './Items.module.scss'
 
 interface Props {

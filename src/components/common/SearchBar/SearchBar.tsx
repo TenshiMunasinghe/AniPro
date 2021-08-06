@@ -2,9 +2,8 @@ import { FormEvent, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
-
-import styles from './SearchBar.module.scss'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import styles from './SearchBar.module.scss'
 
 const SearchBar = () => {
   const history = useHistory()

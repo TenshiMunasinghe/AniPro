@@ -1,9 +1,8 @@
 import { memo, RefObject } from 'react'
 import { FaSort } from 'react-icons/fa'
-
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import Items from './Items/Items'
 import styles from './Dropdown.module.scss'
+import Items from './Items/Items'
 
 interface Props {
   onChange: (state: string | string[]) => void
