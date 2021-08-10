@@ -7,6 +7,11 @@
   margin-top: var(--space-600);
   padding-bottom: var(--space-400);
 
+  @include mq(above, md) {
+    margin-top: var(--space-400);
+    justify-content: space-evenly;
+  }
+
   .tab {
     --border-height: 100%;
     --border-width: 60%;
