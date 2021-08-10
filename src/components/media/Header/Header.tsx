@@ -33,28 +33,32 @@ const Header = ({
   return (
     <header className={styles.container} style={style}>
       <div className={styles.banner} />
-      <div className={styles.details}>
-        <figure className={styles.cover}>
-          <img src={coverImg.large} alt={title + ' cover'} />
-        </figure>
-        <a
-          href={streamUrl || siteUrl || '#'}
-          target='blank'
-          className={styles.button}>
-          <span className={styles.text}>
-            {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
-          </span>
-          {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
-        </a>
+      <div className={styles.contents}>
+        <div className={styles.imageContainer}>
+          <figure className={styles.cover}>
+            <img src={coverImg.large} alt={title + ' cover'} />
+          </figure>
+          <a
+            href={streamUrl || siteUrl || '#'}
+            target='blank'
+            className={styles.button}>
+            <span className={styles.text}>
+              {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
+            </span>
+            {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
+          </a>
+        </div>
+        <div className={styles.details}>
+          <h1 className={styles.title}>{title}</h1>
+          <h5 className={styles.subTitle}>Description</h5>
+          <div className={styles.description}>
+            <p tabIndex={0}>
+              <Description description={description} />
+            </p>
+          </div>
+        </div>
+        <TabNav tabs={tabs} />
       </div>
-      <h1 className={styles.title}>{title}</h1>
-      <h5 className={styles.subTitle}>Description</h5>
-      <div className={styles.description}>
-        <p tabIndex={0}>
-          <Description description={description} />
-        </p>
-      </div>
-      <TabNav tabs={tabs} />
     </header>
   )
 }

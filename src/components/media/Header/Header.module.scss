@@ -1,6 +1,6 @@
 @use '../../../css/config.scss' as *;
 .container {
-  --image-width: calc(6rem + 7vw);
+  --image-width: calc(5rem + 10vw);
   --play-btn-size: 2.75rem;
   --padding: var(--space-400);
 
@@ -9,17 +9,28 @@
   padding-bottom: var(--padding);
   background: var(--color-foreground-50);
 
+  @include mq(above, md) {
+    padding-bottom: var(--space-200);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .banner {
     position: relative;
     width: 100vw;
-    margin-left: calc(-1 * var(--padding));
     height: calc(2 * var(--image-width));
+    margin-left: calc(-1 * var(--padding));
     background-color: var(--bg-color);
     background-image: var(--banner-image);
     background-position: 50% 35%;
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
+
+    @include mq(above, md) {
+      height: 40vh;
+    }
 
     &:after {
       content: '';
@@ -37,7 +48,23 @@
     }
   }
 
-  .details {
+  .contents {
+    max-width: 1069px;
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: min-content 1fr;
+      grid-template-rows: 1fr auto;
+      column-gap: var(--space-500);
+      padding-top: var(--space-400);
+
+      & > *:last-child {
+        grid-column: 2/-1;
+      }
+    }
+  }
+
+  .imageContainer {
     margin-top: calc(
       var(--play-btn-size) + var(--space-500) -
         (var(--image-width) / var(--image-aspect-ratio))
@@ -47,6 +74,14 @@
     column-gap: var(--space-400);
     align-items: flex-end;
     z-index: 999;
+
+    @include mq(above, md) {
+      margin-top: -9rem;
+      width: min-content;
+      grid-template-columns: var(--image-width);
+      align-content: flex-end;
+      row-gap: var(--space-400);
+    }
 
     .cover {
       width: 100%;
@@ -90,6 +125,10 @@
     font-weight: 700;
     line-height: 1.5;
     margin: var(--space-500) 0;
+
+    @include mq(above, md) {
+      margin: 0;
+    }
   }
 
   .subTitle {
@@ -103,6 +142,10 @@
     --lines: 9;
     --line-height: 1.8;
 
+    @include mq(above, md) {
+      --lines: 6;
+    }
+
     background: var(--color-foreground-100);
     padding: var(--padding);
     margin-top: var(--space-400);
@@ -114,7 +157,6 @@
     & > p {
       @include description(var(--lines));
       line-height: var(--line-height);
-      font-size: var(--text-size-400);
     }
   }
 }
