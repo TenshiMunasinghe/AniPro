@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { Common } from '../../../api/types'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
@@ -7,15 +6,10 @@ import { timeToArr } from '../../../utils/timeToArr'
 import { timeToStr } from '../../../utils/timeToStr'
 import { toStartCase } from '../../../utils/toStartCase'
 import styles from './Aside.module.scss'
+import Item from './Item/Item'
 
 interface Props {
   data: Common
-}
-
-interface Content {
-  label: string
-  text: (prop: Common) => string
-  isActive?: boolean
 }
 
 const dateFormat = {
@@ -24,139 +18,91 @@ const dateFormat = {
   day: 'numeric',
 }
 
-const contents: Content[] = [
-  {
-    label: 'Airing',
-    text: ({ nextAiringEpisode }) =>
-      nextAiringEpisode
-        ? airingInfo({
-            nextAiringEpisode: nextAiringEpisode,
-            season: null,
-            seasonYear: null,
-          })
-        : '',
-    isActive: true,
-  },
-  {
-    label: 'Format',
-    text: ({ format }) => formatLabel(format || ''),
-  },
-  {
-    label: 'Episodes',
-    text: ({ episodes }) => episodes?.toString() || '',
-  },
-  {
-    label: 'Episode Duration',
-    text: ({ duration, format }) =>
-      duration
-        ? timeToStr(
-            timeToArr(
-              convertTime({
-                num: duration,
-                input: 'minutes',
-                output: format === 'MOVIE' ? ['hours', 'minutes'] : ['minutes'],
-              })
-            )
-          )
-        : '',
-  },
-  {
-    label: 'Status',
-    text: ({ status }) => toStartCase(status || ''),
-  },
-  {
-    label: 'Start Date',
-    text: ({ startDate }) => {
-      return startDate
-        ? new Date(
-            startDate.year,
-            startDate.month - 1,
-            startDate.day
-          ).toLocaleDateString('en-US', dateFormat)
-        : ''
-    },
-  },
-  {
-    label: 'End Date',
-    text: ({ endDate }) =>
-      endDate
-        ? new Date(
-            endDate.year,
-            endDate.month - 1,
-            endDate.day
-          ).toLocaleDateString('en-US', dateFormat)
-        : '',
-  },
-  {
-    label: 'Season',
-    text: ({ season, seasonYear }) =>
-      season && seasonYear
-        ? `${toStartCase(season)} ${seasonYear.toString()}`
-        : '',
-  },
-  {
-    label: 'Average Score',
-    text: ({ meanScore }) => (meanScore ? `${meanScore.toString()}%` : ''),
-  },
-  {
-    label: 'Popularity',
-    text: ({ popularity }) => popularity?.toString() || '',
-  },
-  {
-    label: 'Favorites',
-    text: ({ favourites }) => favourites?.toString() || '',
-  },
-  {
-    label: 'Studios',
-    text: ({ studios }) => studios.nodes[0]?.name || '',
-  },
-  {
-    label: 'Source',
-    text: prop => toStartCase(prop.source || ''),
-  },
-  {
-    label: 'Hashtag',
-    text: ({ hashtag }) => hashtag || '',
-  },
-  {
-    label: 'Genres',
-    text: ({ genres }) => genres?.join(',') || '',
-  },
-  {
-    label: 'Romaji',
-    text: ({ title }) => title?.romaji || '',
-  },
-  {
-    label: 'English',
-    text: ({ title }) => title?.english || '',
-  },
-  {
-    label: 'Native',
-    text: ({ title }) => title?.native || '',
-  },
-  {
-    label: 'Synonyms',
-    text: ({ synonyms }) => synonyms?.join(' ') || '',
-  },
-]
-
 const Aside = ({ data }: Props) => {
   return (
     <aside className={styles.container}>
-      {contents.map(
-        content =>
-          content.text(data) && (
-            <div
-              className={classnames(
-                { [styles.active]: content.isActive },
-                styles.item
-              )}
-              key={content.label}>
-              <div className={styles.label}>{content.label}</div>
-              <div className={styles.info}>{content.text(data)}</div>
-            </div>
-          )
-      )}
+      <Item label='Airing'>
+        {data.nextAiringEpisode
+          ? airingInfo({
+              nextAiringEpisode: data.nextAiringEpisode,
+              season: null,
+              seasonYear: null,
+            })
+          : ''}
+      </Item>
+
+      <Item label='Format'>{formatLabel(data.format || '')}</Item>
+
+      <Item label='Episodes'>{data.episodes?.toString() || ''}</Item>
+
+      <Item label='Episode Duration'>
+        {data.duration
+          ? timeToStr(
+              timeToArr(
+                convertTime({
+                  num: data.duration,
+                  input: 'minutes',
+                  output:
+                    data.format === 'MOVIE'
+                      ? ['hours', 'minutes']
+                      : ['minutes'],
+                })
+              )
+            )
+          : ''}
+      </Item>
+
+      <Item label='Status'>{toStartCase(data.status || '')}</Item>
+
+      <Item label='Start Date'>
+        {data.startDate
+          ? new Date(
+              data.startDate.year,
+              data.startDate.month - 1,
+              data.startDate.day
+            ).toLocaleDateString('en-US', dateFormat)
+          : ''}
+      </Item>
+
+      <Item label='End Date'>
+        {data.endDate
+          ? new Date(
+              data.endDate.year,
+              data.endDate.month - 1,
+              data.endDate.day
+            ).toLocaleDateString('en-US', dateFormat)
+          : ''}
+      </Item>
+
+      <Item label='Season'>
+        {data.season && data.seasonYear
+          ? `${toStartCase(data.season)} ${data.seasonYear.toString()}`
+          : ''}
+      </Item>
+
+      <Item label='Average Score'>
+        {data.meanScore ? `${data.meanScore.toString()}%` : ''}
+      </Item>
+
+      <Item label='Popularity'>{data.popularity?.toString() || ''}</Item>
+
+      <Item label='Favorites'>{data.favourites?.toString() || ''}</Item>
+
+      <Item label='Studios'>{data.studios.nodes[0]?.name || ''}</Item>
+
+      <Item label='Source'>{toStartCase(data.source || '')}</Item>
+
+      <Item label='Hashtag'>{data.hashtag || ''}</Item>
+
+      <Item label='Genres'>{data.genres?.join(',') || ''}</Item>
+
+      <Item label='Romaji'>{data.title?.romaji || ''}</Item>
+
+      <Item label='English'>{data.title?.english || ''}</Item>
+
+      <Item label='Native'>{data.title?.native || ''}</Item>
+
+      <Item label='Synonyms'>{data.synonyms?.join(' ') || ''}</Item>
     </aside>
   )
 }
