@@ -1,9 +1,25 @@
 @use '../../css/config.scss' as *;
 
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  @include gap($column: var(--space-600));
-  padding: var(--space-600) var(--space-400);
+.container {
+  --image-width: clamp(8rem, 8rem + 7vw, 15rem);
+
+  .main {
+    max-width: 1069px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-600) var(--space-400);
+    @include gap($column: var(--space-600));
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: var(--image-width) 1fr;
+      column-gap: var(--space-600);
+      margin: auto;
+    }
+
+    @include mq(above, lg) {
+      @include padding-horizontal(0);
+    }
+  }
 }

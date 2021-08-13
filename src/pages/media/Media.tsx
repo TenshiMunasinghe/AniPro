@@ -63,7 +63,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
   return (
     <context.Provider value={{ scrollPosition }}>
       <NavBar />
-      <section className={styles.wrapper}>
+      <div className={styles.container}>
         <Header
           bannerImg={data.bannerImage}
           coverImg={data.coverImage}
@@ -102,7 +102,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
             </Route>
           </Switch>
         </main>
-      </section>
+      </div>
     </context.Provider>
   )
 }

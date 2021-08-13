@@ -1,8 +1,21 @@
+@use '../../../../css/config.scss' as *;
+
 .container {
-  white-space: nowrap;
+  @include mq(above, md) {
+    font-size: var(--text-size-300);
+  }
+
+  & > *:last-child {
+    @include mq(below, md) {
+      white-space: nowrap;
+    }
+  }
 
   .label {
-    font-size: var(--text-size-300);
     font-weight: 350;
+
+    @include mq(above, md) {
+      font-weight: 550;
+    }
   }
 }
