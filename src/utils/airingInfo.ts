@@ -1,4 +1,4 @@
-import { FetchedMedias } from '../api/types'
+import { Media } from '../api/types'
 import { convertTime } from './convertTIme'
 import { pluralize } from './pluralize'
 import { timeToArr } from './timeToArr'
@@ -9,9 +9,9 @@ export const airingInfo = ({
   season,
   seasonYear,
 }: {
-  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
-  season: FetchedMedias['season']
-  seasonYear: FetchedMedias['seasonYear']
+  nextAiringEpisode: Media['nextAiringEpisode']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
 }) => {
   if (!nextAiringEpisode && season && seasonYear) {
     return `${toStartCase(season)} ${seasonYear}`

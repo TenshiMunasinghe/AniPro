@@ -63,7 +63,7 @@ export interface QueryData {
 
 export type PageInfo = QueryData['Page']['pageInfo']
 
-export type FetchedMedias = QueryData['Page']['media'][number]
+export type Media = QueryData['Page']['media'][number]
 
 export interface Watch {
   streamingEpisodes: {

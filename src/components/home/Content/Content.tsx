@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { FetchedMedias, QueryVar } from '../../../api/types'
+import { Media, QueryVar } from '../../../api/types'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
@@ -13,7 +13,7 @@ export type _Content = {
   hasRank?: boolean
 }
 
-interface Medias extends FetchedMedias {
+interface Medias extends Media {
   rank?: number | null
 }
 

@@ -5,7 +5,7 @@ import {
   nextSeason,
   nextYear,
 } from '../../api/queries'
-import { FetchedMedias, QueryVar } from '../../api/types'
+import { Media, QueryVar } from '../../api/types'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
@@ -15,11 +15,11 @@ import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
 
 type Medias = {
-  trending: FetchedMedias[]
-  popularNow: FetchedMedias[]
-  popularAllTime: FetchedMedias[]
-  upComing: FetchedMedias[]
-  topRated: FetchedMedias[]
+  trending: Media[]
+  popularNow: Media[]
+  popularAllTime: Media[]
+  upComing: Media[]
+  topRated: Media[]
 }
 
 const perPage = 10

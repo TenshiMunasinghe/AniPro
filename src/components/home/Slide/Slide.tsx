@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react'
-import { FetchedMedias } from '../../../api/types'
+import { Media } from '../../../api/types'
 import { adjustColor } from '../../../utils/adjustColor'
 import { createColorVariable } from '../../../utils/createColorVariable'
 import CoverImage from '../../common/CoverImage/CoverImage'
@@ -9,7 +9,7 @@ import Title from '../../common/Title/Title'
 import styles from './Slide.module.scss'
 
 interface Props {
-  media: FetchedMedias
+  media: Media
 }
 
 const Slide = ({ media }: Props) => {

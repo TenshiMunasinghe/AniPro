@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { memo, useLayoutEffect, useRef, useState } from 'react'
-import { FetchedMedias } from '../../../../../api/types'
+import { Media } from '../../../../../api/types'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
 import { formatLabel } from '../../../../../utils/formatLabel'
@@ -18,15 +18,15 @@ import styles from './Popover.module.scss'
 interface Props {
   index: number
   isVisible: boolean
-  format: FetchedMedias['format']
-  season: FetchedMedias['season']
-  seasonYear: FetchedMedias['seasonYear']
-  episodes: FetchedMedias['episodes']
-  duration: FetchedMedias['duration']
-  genres: FetchedMedias['genres']
-  studios: FetchedMedias['studios']
-  meanScore: FetchedMedias['meanScore']
-  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
+  format: Media['format']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
+  episodes: Media['episodes']
+  duration: Media['duration']
+  genres: Media['genres']
+  studios: Media['studios']
+  meanScore: Media['meanScore']
+  nextAiringEpisode: Media['nextAiringEpisode']
 }
 
 type DisplayState = {
