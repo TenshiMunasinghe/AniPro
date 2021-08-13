@@ -36,7 +36,7 @@ const Header = ({
       <div className={styles.contents}>
         <div className={styles.imageContainer}>
           <figure className={styles.cover}>
-            <img src={coverImg.large} alt={title + ' cover'} />
+            <img src={coverImg.extraLarge} alt={title + ' cover'} />
           </figure>
           <a
             href={streamUrl || siteUrl || '#'}
