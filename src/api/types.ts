@@ -231,6 +231,7 @@ export interface Common extends Watch {
   }
   coverImage: {
     large: string
+    extraLarge: string
     color: string
   }
   bannerImage: string

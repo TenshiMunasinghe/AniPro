@@ -122,6 +122,7 @@ export const GET_ANIME_PAGE = {
         }
         coverImage {
           large
+          extraLarge
           color
         }
         bannerImage
