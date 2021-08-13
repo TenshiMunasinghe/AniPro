@@ -5,7 +5,6 @@
   display: flex;
   overflow-x: auto;
   padding: var(--space-400) var(--space-500);
-  margin-top: var(--space-500);
   background: var(--color-foreground-50);
 
   @include mq(below, md) {
