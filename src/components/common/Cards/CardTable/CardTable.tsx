@@ -1,11 +1,12 @@
-import { memo } from 'react'
+import { memo, useContext } from 'react'
 import { currentYear } from '../../../../api/queries'
-import { FetchedMedias } from '../../../../api/types'
+import { Media } from '../../../../api/types'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
+import { ImageSizeContext } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
@@ -13,51 +14,37 @@ import Title from '../../Title/Title'
 import Rank from '../components/Rank/Rank'
 import styles from './CardTable.module.scss'
 import Info from './Info/Info'
-
 interface Props {
-  id: number
-  image: {
-    cover: string
-    banner: FetchedMedias['bannerImage']
-  }
-  color: string
-  title: FetchedMedias['title']
-  format: FetchedMedias['format']
-  season: FetchedMedias['season']
-  seasonYear: FetchedMedias['seasonYear']
-  episodes: FetchedMedias['episodes']
-  duration: FetchedMedias['duration']
-  genres: FetchedMedias['genres']
-  status: FetchedMedias['status']
-  studios: FetchedMedias['studios']
-  meanScore: FetchedMedias['meanScore']
-  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
-  popularity: FetchedMedias['popularity']
+  media: Media
   rank?: number | null
 }
 
-const mapStatus = (status: FetchedMedias['status']) =>
+const mapStatus = (status: Media['status']) =>
   status === 'RELEASING' ? 'Airing' : toStartCase(status)
 
 const CardTable = ({
-  image,
-  title,
-  id,
-  genres,
-  meanScore,
-  popularity,
-  status,
-  season,
-  seasonYear,
-  nextAiringEpisode,
-  format,
-  episodes,
+  media: {
+    title,
+    id,
+    coverImage,
+    bannerImage,
+    genres,
+    meanScore,
+    popularity,
+    status,
+    season,
+    seasonYear,
+    nextAiringEpisode,
+    format,
+    episodes,
+  },
   rank,
-  color,
 }: Props) => {
+  const imageSize = useContext(ImageSizeContext)
+
   const _style = {
-    ...createColorVariable(color),
-    '--banner-image': `url(${image.banner})`,
+    ...createColorVariable(coverImage.color),
+    '--banner-image': `url(${bannerImage})`,
   } as React.CSSProperties
 
   return (
@@ -68,7 +55,7 @@ const CardTable = ({
         </div>
       )}
       <div className={styles.card}>
-        <CoverImage id={id} title={title.romaji} src={image.cover} />
+        <CoverImage id={id} title={title.romaji} src={coverImage[imageSize]} />
         <div className={styles.content}>
           <div className={styles.header}>
             <Title id={id} text={title.romaji} />

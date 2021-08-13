@@ -6,7 +6,7 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { FetchedMedias } from '../../../api/types'
+import { Media } from '../../../api/types'
 import { DEFAULT_PER_PAGE } from '../../../hooks/useFetchSearchResult'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
@@ -16,16 +16,18 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 
-interface Media extends FetchedMedias {
+interface MediaWithRank extends Media {
   rank?: number | null
 }
 
+type ImageSize = 'large' | 'extraLarge'
+
 interface Props extends LazyComponentProps {
-  medias: Media[] | null
+  medias: MediaWithRank[] | null
   isLoading: boolean
   isError: boolean
   cardType: CardType
-  imageSize: 'large' | 'extraLarge'
+  imageSize: ImageSize
   loadingCount?: number
   sideScroll?: boolean
 }
@@ -34,12 +36,14 @@ export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
   undefined
 )
 
+export const ImageSizeContext = createContext<ImageSize>('large')
+
 const CardGrid = ({
   medias,
   isLoading,
   isError,
   cardType,
-  imageSize,
+  imageSize = 'large',
   loadingCount = medias?.length || DEFAULT_PER_PAGE,
   sideScroll = false,
   scrollPosition,
@@ -49,87 +53,37 @@ const CardGrid = ({
   }
 
   return (
-    <ScrollPositionContext.Provider value={scrollPosition}>
-      <section
-        className={classnames(styles.slider, styles[cardType], {
-          [styles.sideScroll]: sideScroll,
-        })}>
-        {medias &&
-          medias.map((m, i) => {
-            switch (cardType) {
-              case 'cover':
-                return (
-                  <CardCover
-                    key={m.id}
-                    index={i}
-                    id={m.id}
-                    image={m.coverImage[imageSize]}
-                    color={m.coverImage.color}
-                    title={m.title}
-                    genres={m.genres}
-                    status={m.status}
-                    nextAiringEpisode={m.nextAiringEpisode}
-                    format={m.format}
-                    season={m.season}
-                    seasonYear={m.seasonYear}
-                    episodes={m.episodes}
-                    duration={m.duration}
-                    meanScore={m.meanScore}
-                    studios={m.studios}
-                    rank={m.rank}
-                  />
-                )
+    <ImageSizeContext.Provider value={imageSize}>
+      <ScrollPositionContext.Provider value={scrollPosition}>
+        <section
+          className={classnames(styles.slider, styles[cardType], {
+            [styles.sideScroll]: sideScroll,
+          })}>
+          {medias &&
+            medias.map((m, i) => {
+              switch (cardType) {
+                case 'cover':
+                  return (
+                    <CardCover key={m.id} index={i} rank={m.rank} media={m} />
+                  )
 
-              case 'table':
-                return (
-                  <CardTable
-                    key={m.id}
-                    id={m.id}
-                    image={{
-                      cover: m.coverImage[imageSize],
-                      banner: m.bannerImage,
-                    }}
-                    color={m.coverImage.color}
-                    title={m.title}
-                    genres={m.genres}
-                    status={m.status}
-                    nextAiringEpisode={m.nextAiringEpisode}
-                    format={m.format}
-                    season={m.season}
-                    seasonYear={m.seasonYear}
-                    episodes={m.episodes}
-                    duration={m.duration}
-                    meanScore={m.meanScore}
-                    studios={m.studios}
-                    popularity={m.popularity}
-                    rank={m.rank}
-                  />
-                )
+                case 'table':
+                  return <CardTable key={m.id} media={m} rank={m.rank} />
 
-              case 'chart':
-                return (
-                  <CardChart
-                    key={m.id}
-                    id={m.id}
-                    image={m.coverImage[imageSize]}
-                    color={m.coverImage.color}
-                    title={m.title}
-                    genres={m.genres}
-                    description={m.description}
-                    meanScore={m.meanScore}
-                  />
-                )
+                case 'chart':
+                  return <CardChart key={m.id} media={m} />
 
-              default:
-                return <></>
-            }
-          })}
-        {isLoading &&
-          range(0, loadingCount).map((_, i) => (
-            <CardLoading type={cardType} key={i} />
-          ))}
-      </section>
-    </ScrollPositionContext.Provider>
+                default:
+                  return <></>
+              }
+            })}
+          {isLoading &&
+            range(0, loadingCount).map((_, i) => (
+              <CardLoading type={cardType} key={i} />
+            ))}
+        </section>
+      </ScrollPositionContext.Provider>
+    </ImageSizeContext.Provider>
   )
 }
 

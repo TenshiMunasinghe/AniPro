@@ -1,6 +1,7 @@
-import { memo, useState } from 'react'
-import { FetchedMedias } from '../../../../api/types'
+import { memo, useContext, useState } from 'react'
+import { Media } from '../../../../api/types'
 import { createColorVariable } from '../../../../utils/createColorVariable'
+import { ImageSizeContext } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Title from '../../Title/Title'
 import Rank from '../components/Rank/Rank'
@@ -9,40 +10,29 @@ import Popover from './Popover/Popover'
 
 interface Props {
   index: number
-  id: number
-  image: string
-  color: string
-  title: FetchedMedias['title']
-  format: FetchedMedias['format']
-  season: FetchedMedias['season']
-  seasonYear: FetchedMedias['seasonYear']
-  episodes: FetchedMedias['episodes']
-  duration: FetchedMedias['duration']
-  genres: FetchedMedias['genres']
-  status: FetchedMedias['status']
-  studios: FetchedMedias['studios']
-  meanScore: FetchedMedias['meanScore']
-  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
   rank?: number | null
+  media: Media
 }
 
 const CardCover = ({
   index,
-  image,
-  title,
-  id,
-  format,
-  season,
-  seasonYear,
-  episodes,
-  duration,
-  genres,
-  studios,
-  nextAiringEpisode,
-  meanScore,
   rank,
-  color,
+  media: {
+    coverImage,
+    title,
+    id,
+    format,
+    season,
+    seasonYear,
+    episodes,
+    duration,
+    genres,
+    studios,
+    nextAiringEpisode,
+    meanScore,
+  },
 }: Props) => {
+  const imageSize = useContext(ImageSizeContext)
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
@@ -54,14 +44,14 @@ const CardCover = ({
       onMouseLeave={hidePopover}
       onFocus={showPopover}
       onBlur={hidePopover}
-      style={createColorVariable(color)}>
+      style={createColorVariable(coverImage.color)}>
       <article className={styles.container}>
         {rank && (
           <div className={styles.rank}>
             <Rank rank={rank} />
           </div>
         )}
-        <CoverImage id={id} src={image} title={title.romaji} />
+        <CoverImage id={id} src={coverImage[imageSize]} title={title.romaji} />
         <Title id={id} text={title.romaji} />
       </article>
 
