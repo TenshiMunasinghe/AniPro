@@ -6,15 +6,8 @@
   background: var(--color-foreground-50);
 
   .imageWrapper {
-    position: relative;
-    span,
     img {
       width: 6.5rem;
-    }
-    img {
-      position: absolute;
-      height: 100%;
-      top: 0;
     }
   }
 
