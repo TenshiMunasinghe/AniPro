@@ -94,7 +94,7 @@ const Aside = ({ data }: Props) => {
 
       <Item label='Hashtag'>{data.hashtag || ''}</Item>
 
-      <Item label='Genres'>{data.genres?.join(',') || ''}</Item>
+      <Item label='Genres'>{data.genres?.join(', ') || ''}</Item>
 
       <Item label='Romaji'>{data.title?.romaji || ''}</Item>
 
