@@ -8,6 +8,7 @@
   .imageWrapper {
     img {
       width: 6.5rem;
+      height: 6.5rem / var(--image-aspect-ratio);
     }
   }
 
@@ -29,7 +30,10 @@
   .title {
     @include add-ellipsis(2);
     margin-top: var(--space-200);
-    margin-bottom: var(--space-500);
     flex: 1;
+  }
+
+  .info {
+    margin-top: var(--space-200);
   }
 }
