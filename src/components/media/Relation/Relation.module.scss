@@ -35,7 +35,8 @@
 
   .title {
     @include add-ellipsis(2);
-    margin: var(--space-200) 0;
+    margin-top: var(--space-200);
+    margin-bottom: var(--space-500);
     flex: 1;
   }
 }
