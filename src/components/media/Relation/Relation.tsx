@@ -15,7 +15,7 @@ interface Props {
 const Relation = ({ id, image, relation, title, format, status }: Props) => {
   const { scrollPosition } = useContext(context)
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.container}>
       <a href={`/`} className={styles.imageWrapper}>
         <LazyLoadImage
           src={image}

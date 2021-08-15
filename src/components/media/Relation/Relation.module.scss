@@ -1,6 +1,6 @@
 @use '../../../css/config.scss' as *;
 
-.wrapper {
+.container {
   flex-shrink: 0;
   display: flex;
   background: var(--color-foreground-50);
