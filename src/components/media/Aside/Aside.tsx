@@ -55,7 +55,7 @@ const Aside = ({ data }: Props) => {
       <Item label='Status'>{toStartCase(data.status || '')}</Item>
 
       <Item label='Start Date'>
-        {data.startDate
+        {data.startDate.year
           ? new Date(
               data.startDate.year,
               data.startDate.month - 1,
@@ -65,7 +65,7 @@ const Aside = ({ data }: Props) => {
       </Item>
 
       <Item label='End Date'>
-        {data.endDate
+        {data.endDate.year
           ? new Date(
               data.endDate.year,
               data.endDate.month - 1,
