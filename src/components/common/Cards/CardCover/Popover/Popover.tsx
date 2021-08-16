@@ -1,22 +1,19 @@
 import classnames from 'classnames'
-import { memo, useLayoutEffect, useRef, useState } from 'react'
+import { memo } from 'react'
 import { Media } from '../../../../../api/types'
+import { useOverflow } from '../../../../../hooks/useOverflow'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
 import { formatLabel } from '../../../../../utils/formatLabel'
 import { pluralize } from '../../../../../utils/pluralize'
 import { timeToArr } from '../../../../../utils/timeToArr'
 import { timeToStr } from '../../../../../utils/timeToStr'
-import {
-  useWindowSizeStore,
-  WindowSizeStore,
-} from '../../../../../zustand/stores'
 import Genres from '../../../Genres/Genres'
 import Score from '../../../Score/Score'
 import styles from './Popover.module.scss'
 
 interface Props {
-  index: number
+  index: number // for repositioning when order changes
   isVisible: boolean
   format: Media['format']
   season: Media['season']
@@ -29,15 +26,7 @@ interface Props {
   nextAiringEpisode: Media['nextAiringEpisode']
 }
 
-type DisplayState = {
-  isLeft: boolean
-  isRight: boolean
-}
-
-const windowStateSelector = (state: WindowSizeStore) => state.width
-
 const Popover = ({
-  index,
   nextAiringEpisode,
   isVisible,
   season,
@@ -49,32 +38,7 @@ const Popover = ({
   episodes,
   duration,
 }: Props) => {
-  const [{ isLeft, isRight }, setDisplay] = useState<DisplayState>({
-    isLeft: false,
-    isRight: false,
-  })
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const windowWidth = useWindowSizeStore(windowStateSelector)
-
-  useLayoutEffect(() => {
-    setDisplay(prev => {
-      if (!wrapperRef.current || !wrapperRef.current.parentElement) return prev
-
-      const rect = wrapperRef.current.getBoundingClientRect()
-      const parentRect = wrapperRef.current.parentElement.getBoundingClientRect()
-      const { offsetLeft } = wrapperRef.current
-
-      const isRight =
-        (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||
-        (offsetLeft < 0 && parentRect.right - offsetLeft < windowWidth * 0.9)
-      const isLeft =
-        !isRight &&
-        ((offsetLeft > 0 && parentRect.left > rect.right - parentRect.right) ||
-          (offsetLeft < 0 && rect.left > 0))
-
-      return { isLeft, isRight }
-    })
-  }, [windowWidth, index])
+  const { isLeft, isRight, wrapperRef } = useOverflow()
 
   const _duration = timeToArr(
     convertTime({
