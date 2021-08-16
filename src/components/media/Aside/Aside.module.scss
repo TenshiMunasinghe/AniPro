@@ -12,6 +12,7 @@
   }
 
   @include mq(above, md) {
+    height: min-content;
     flex-direction: column;
     @include padding-horizontal(var(--space-400));
     @include gap($column: var(--space-400));
