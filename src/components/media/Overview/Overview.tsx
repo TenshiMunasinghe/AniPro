@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import { useParams } from 'react-router-dom'
 import { useFetchAnimeOverview } from '../../../hooks/useFetchAnimeOverview'
 import { ParamTypes } from '../../../pages/media/Media'
@@ -26,7 +27,10 @@ const Overview = () => {
   return (
     <div className={styles.container}>
       <Content heading='Relations'>
-        <div className={styles.relations}>
+        <div
+          className={classnames(styles.relations, {
+            [styles.collapsed]: data.relations.edges.length > 3,
+          })}>
           {data.relations.edges.map(({ node, relationType }) => (
             <Relation
               key={'relation' + node.id}
@@ -36,6 +40,7 @@ const Overview = () => {
               format={node.format}
               status={node.status}
               relation={relationType}
+              isCollapsed={data.relations.edges.length > 2}
             />
           ))}
         </div>

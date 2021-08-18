@@ -5,9 +5,22 @@
   @include gap($column: var(--space-600));
 
   .relations {
-    display: flex;
-    overflow-x: auto;
-    @include gap($row: var(--space-400));
+    --image-width: 6.5rem;
+    @include mq(below, md) {
+      display: flex;
+      overflow-x: auto;
+      @include gap($row: var(--space-400));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      &.collapsed {
+        grid-template-columns: repeat(auto-fit, var(--image-width));
+        gap: var(--space-400);
+      }
+    }
   }
 
   .watch {
