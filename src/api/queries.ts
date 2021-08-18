@@ -343,7 +343,7 @@ export const GET_ANIME_PAGE = {
   `,
 
   staff: /* GraphQL */ `
-    query characters($id: Int!, $page: Int!) {
+    query staff($id: Int!, $page: Int!) {
       Media(id: $id) {
         staff(page: $page, perPage: 4, sort: [RELEVANCE]) {
           pageInfo {
