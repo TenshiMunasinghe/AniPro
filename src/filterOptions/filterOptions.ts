@@ -10,9 +10,6 @@ import {
 import { toStartCase } from '../utils/toStartCase'
 import { tags } from './tags'
 
-const enumToArr = <T extends { [key: string]: string }>(enumme: T) =>
-  Object.values(enumme).filter(val => isNaN(Number(val)) === false)
-
 export const filterOptionTypes = {
   default: {
     genres: {
@@ -52,17 +49,17 @@ export const filterOptionTypes = {
     },
 
     season: {
-      options: enumToArr(MediaSeason),
+      options: Object.values(MediaSeason) as string[],
       isMulti: false,
     },
 
     format: {
-      options: enumToArr(MediaFormat),
+      options: Object.values(MediaFormat) as string[],
       isMulti: true,
     },
 
     status: {
-      options: enumToArr(MediaStatus),
+      options: Object.values(MediaStatus) as string[],
       isMulti: false,
     },
 
@@ -72,13 +69,13 @@ export const filterOptionTypes = {
     },
 
     source: {
-      options: enumToArr(MediaSource),
+      options: Object.values(MediaSource) as string[],
       isMulti: false,
     },
   },
   simple: {
     sortBy: {
-      options: enumToArr(MediaSort),
+      options: Object.values(MediaSort) as string[],
       isMulti: false,
     },
   },
