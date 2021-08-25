@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
 import { v4 } from 'uuid'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
+import { SearchResultQueryVariables } from '../../../generated'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
 import { nextParam, NextParamArgs } from '../../../utils/nextParam'
@@ -13,7 +14,12 @@ import styles from './SearchOptions.module.scss'
 
 const SearchOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
-  const { updateFilter, updateUrl, params, applyFilter } = useUpdateUrlParam()
+  const {
+    updateFilter,
+    updateUrl,
+    queryVars,
+    applyFilter,
+  } = useUpdateUrlParam()
 
   useEffect(() => {
     if (activeFilterOption) {
@@ -30,7 +36,7 @@ const SearchOptions = () => {
         .filter(([key]) => key !== 'sortBy')
         .map(([key, value]) => ({
           key: v4(),
-          name: key,
+          name: key as keyof SearchResultQueryVariables,
           isMulti: value.isMulti,
           options: value.options.map(o => ({
             value: o,
@@ -63,8 +69,10 @@ const SearchOptions = () => {
     closeFilterOptions()
   }
 
-  const selectedOptions = (isMulti: boolean, name: string) =>
-    isMulti ? params.get(name)?.split(',') : params.get(name)
+  const selectedOptions = (
+    isMulti: boolean,
+    name: keyof SearchResultQueryVariables
+  ) => (isMulti ? queryVars.current[name]?.split(',') : queryVars.current[name])
 
   return (
     <aside

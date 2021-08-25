@@ -1,10 +1,13 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { Media, QueryVar } from '../../../api/types'
+import gqlRequestClient from '../../../api/graphqlClient'
 import { allowedURLParams } from '../../../filterOptions/filterOptions'
-import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import {
+  SearchResultQueryVariables,
+  useSearchResultQuery,
+} from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
-import CardGrid from '../../common/CardGrid/CardGrid'
+import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
 
 export type _Content = {
@@ -13,12 +16,8 @@ export type _Content = {
   hasRank?: boolean
 }
 
-interface Medias extends Media {
-  rank?: number | null
-}
-
 interface Props {
-  queryVar: QueryVar
+  queryVar: SearchResultQueryVariables
   content: _Content
 }
 
@@ -30,24 +29,26 @@ const Content = ({ queryVar, content }: Props) => {
     )
   )
 
-  const { medias, isLoading, isError } = useFetchSearchResult(
-    new URLSearchParams(Object.entries(queryVar))
+  const { data, isLoading, isError } = useSearchResultQuery(
+    gqlRequestClient,
+    queryVar
   )
 
-  const _medias: Medias[] | null = useMemo(() => {
-    if (!medias) return null
-    if (!content.hasRank) return medias
+  const medias = useMemo(() => {
+    const _medias = data?.Page?.media
+    if (!_medias) return null
+    if (!content.hasRank) return _medias as MediaWithRank[]
 
-    return medias
+    return _medias
       .map(m => {
-        const _ranking = m.rankings.find(
-          r => (r.context = 'highest rated all time')
+        const _ranking = m?.rankings?.find(
+          r => r?.context === 'highest rated all time'
         )
         const rank = _ranking ? _ranking.rank : null
-        return { ...m, rank }
+        return { ...m, rank } as MediaWithRank
       })
       .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
-  }, [medias, content.hasRank])
+  }, [data?.Page?.media, content.hasRank])
 
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
@@ -62,7 +63,7 @@ const Content = ({ queryVar, content }: Props) => {
         </Link>
       </div>
       <CardGrid
-        medias={_medias}
+        medias={medias}
         isLoading={isLoading}
         isError={isError}
         cardType={content.cardType}

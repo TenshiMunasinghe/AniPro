@@ -1,4 +1,4 @@
-import { Common } from '../../../api/types'
+import { CommonQuery } from '../../../generated/index'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -9,7 +9,7 @@ import styles from './Aside.module.scss'
 import Item from './Item/Item'
 
 interface Props {
-  data: Common
+  data: CommonQuery['Media']
 }
 
 const dateFormat = {
@@ -19,6 +19,8 @@ const dateFormat = {
 }
 
 const Aside = ({ data }: Props) => {
+  if (!data) return null
+
   return (
     <aside className={styles.container}>
       <Item label='Airing'>
@@ -55,21 +57,21 @@ const Aside = ({ data }: Props) => {
       <Item label='Status'>{toStartCase(data.status || '')}</Item>
 
       <Item label='Start Date'>
-        {data.startDate.year
+        {data.startDate?.year
           ? new Date(
               data.startDate.year,
-              data.startDate.month - 1,
-              data.startDate.day
+              data.startDate.month || 0 - 1,
+              data.startDate.day || 0
             ).toLocaleDateString('en-US', dateFormat)
           : ''}
       </Item>
 
       <Item label='End Date'>
-        {data.endDate.year
+        {data.endDate?.year
           ? new Date(
               data.endDate.year,
-              data.endDate.month - 1,
-              data.endDate.day
+              data.endDate?.month || 0 - 1,
+              data.endDate?.day || 0
             ).toLocaleDateString('en-US', dateFormat)
           : ''}
       </Item>
@@ -88,7 +90,7 @@ const Aside = ({ data }: Props) => {
 
       <Item label='Favorites'>{data.favourites?.toString() || ''}</Item>
 
-      <Item label='Studios'>{data.studios.nodes[0]?.name || ''}</Item>
+      <Item label='Studios'>{data.studios?.nodes?.[0]?.name || ''}</Item>
 
       <Item label='Source'>{toStartCase(data.source || '')}</Item>
 

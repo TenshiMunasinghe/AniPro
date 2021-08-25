@@ -6,8 +6,7 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { Media } from '../../../api/types'
-import { DEFAULT_PER_PAGE } from '../../../hooks/useFetchSearchResult'
+import { Maybe, SearchResultQuery } from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
 import CardCover from '../Cards/CardCover/CardCover'
@@ -16,14 +15,18 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 
-interface MediaWithRank extends Media {
+export type Media = NonNullable<
+  NonNullable<NonNullable<SearchResultQuery['Page']>['media']>[number]
+>
+
+export interface MediaWithRank extends Media {
   rank?: number | null
 }
 
 type ImageSize = 'large' | 'extraLarge'
 
 interface Props extends LazyComponentProps {
-  medias: MediaWithRank[] | null
+  medias?: Maybe<MediaWithRank>[] | null
   isLoading: boolean
   isError: boolean
   cardType: CardType
@@ -44,7 +47,7 @@ const CardGrid = ({
   isError,
   cardType,
   imageSize = 'large',
-  loadingCount = medias?.length || DEFAULT_PER_PAGE,
+  loadingCount = medias?.length,
   sideScroll = false,
   scrollPosition,
 }: Props) => {
@@ -61,6 +64,8 @@ const CardGrid = ({
           })}>
           {medias &&
             medias.map((m, i) => {
+              if (!m) return null
+
               switch (cardType) {
                 case 'cover':
                   return (
@@ -74,7 +79,7 @@ const CardGrid = ({
                   return <CardChart key={m.id} media={m} />
 
                 default:
-                  return <></>
+                  return null
               }
             })}
           {isLoading &&

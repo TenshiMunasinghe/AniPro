@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { memo } from 'react'
-import { Media } from '../../../../../api/types'
 import { useOverflow } from '../../../../../hooks/useOverflow'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
@@ -8,6 +7,7 @@ import { formatLabel } from '../../../../../utils/formatLabel'
 import { pluralize } from '../../../../../utils/pluralize'
 import { timeToArr } from '../../../../../utils/timeToArr'
 import { timeToStr } from '../../../../../utils/timeToStr'
+import { Media } from '../../../CardGrid/CardGrid'
 import Genres from '../../../Genres/Genres'
 import Score from '../../../Score/Score'
 import styles from './Popover.module.scss'
@@ -42,7 +42,7 @@ const Popover = ({
 
   const _duration = timeToArr(
     convertTime({
-      num: duration,
+      num: duration || 0,
       input: 'minutes',
       output: ['hours', 'minutes'],
     })
@@ -63,9 +63,11 @@ const Popover = ({
         {meanScore && <Score score={meanScore} />}
       </header>
 
-      <div className={styles.studio}>{studios.nodes[0]?.name}</div>
+      <div className={styles.studio}>
+        {studios?.nodes?.[0]?.name || 'no name'}
+      </div>
       <div className={styles.info}>
-        {formatLabel(format)}
+        {formatLabel(format || '')}
         {format === 'MOVIE' && _duration.length > 0 ? (
           <>
             <span className={styles.separator}>•</span>

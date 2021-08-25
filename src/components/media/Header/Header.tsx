@@ -1,23 +1,24 @@
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
-import { Common } from '../../../api/types'
+import { NO_IMAGE_URL } from '../../../api/queries'
+import { MediaCoverImage } from '../../../generated/index'
 import { TabsType } from '../../../pages/media/Media'
 import Description from '../../common/Description/Description'
 import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 
 interface Props {
-  bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']
-  title: Common['title']['romaji']
-  description: Common['description']
-  streamUrl?: Common['streamingEpisodes'][number]['url']
-  siteUrl?: Common['externalLinks'][number]['url']
+  bannerImg?: string | null
+  coverImg?: MediaCoverImage | null
+  title?: string | null
+  description?: string | null
+  streamUrl?: string | null
+  siteUrl?: string | null
   tabs: Partial<TabsType>[]
 }
 
 const Header = ({
-  bannerImg,
+  bannerImg = NO_IMAGE_URL,
   coverImg,
   title,
   description,
@@ -27,7 +28,7 @@ const Header = ({
 }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
-    '--bg-color': coverImg.color,
+    '--bg-color': coverImg?.color,
   } as CSSProperties
 
   return (
@@ -36,7 +37,10 @@ const Header = ({
       <div className={styles.contents}>
         <div className={styles.imageContainer}>
           <figure className={styles.cover}>
-            <img src={coverImg.extraLarge} alt={title + ' cover'} />
+            <img
+              src={coverImg?.extraLarge || NO_IMAGE_URL}
+              alt={title + ' cover'}
+            />
           </figure>
           <a
             href={streamUrl || siteUrl || '#'}

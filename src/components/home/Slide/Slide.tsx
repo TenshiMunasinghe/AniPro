@@ -1,7 +1,8 @@
 import { CSSProperties } from 'react'
-import { Media } from '../../../api/types'
+import { NO_IMAGE_URL } from '../../../api/queries'
 import { adjustColor } from '../../../utils/adjustColor'
 import { createColorVariable } from '../../../utils/createColorVariable'
+import { Media } from '../../common/CardGrid/CardGrid'
 import CoverImage from '../../common/CoverImage/CoverImage'
 import Description from '../../common/Description/Description'
 import Genres from '../../common/Genres/Genres'
@@ -9,14 +10,21 @@ import Title from '../../common/Title/Title'
 import styles from './Slide.module.scss'
 
 interface Props {
-  media: Media
+  media?: Media | null
 }
 
 const Slide = ({ media }: Props) => {
+  if (!media) return null
+
   const style = {
-    '--cover-image': `url(${media.coverImage.extraLarge})`,
-    ...createColorVariable(media.coverImage.color),
-    '--color-adjusted': adjustColor(media.coverImage.color, '90%'),
+    '--cover-image': `url(${media?.coverImage?.extraLarge || NO_IMAGE_URL})`,
+    ...createColorVariable(
+      media?.coverImage?.color || 'var(--color-foreground-200)'
+    ),
+    '--color-adjusted': adjustColor(
+      media?.coverImage?.color || 'var(--color-foreground-200)',
+      '90%'
+    ),
   } as CSSProperties
 
   return (
@@ -24,7 +32,7 @@ const Slide = ({ media }: Props) => {
       <div className={styles.coverImage} />
       <div className={styles.content}>
         <div>
-          <Title id={media.id} text={media.title.romaji} />
+          <Title id={media.id} text={media?.title?.romaji || 'no title'} />
           <div className={styles.description}>
             <Description description={media.description} />
           </div>
@@ -32,8 +40,8 @@ const Slide = ({ media }: Props) => {
         <div className={styles.image}>
           <CoverImage
             id={media.id}
-            title={media.title.romaji}
-            src={media.coverImage.extraLarge}
+            title={media?.title?.romaji || 'no title'}
+            src={media?.coverImage?.extraLarge || NO_IMAGE_URL}
           />
         </div>
       </div>

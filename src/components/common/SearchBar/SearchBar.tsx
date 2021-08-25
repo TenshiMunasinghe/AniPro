@@ -11,7 +11,7 @@ const SearchBar = () => {
     ['searchText']: string
   }>()
 
-  const { initialParams } = useUpdateUrlParam()
+  const { queryVars } = useUpdateUrlParam()
 
   const onSubmit = useCallback(
     (e: FormEvent) => {
@@ -37,7 +37,7 @@ const SearchBar = () => {
         type='text'
         placeholder='search'
         aria-label='searchbar'
-        defaultValue={initialParams.get('searchText') || ''}
+        defaultValue={queryVars.initial.searchText || ''}
       />
       <button
         className={styles.submitButton}

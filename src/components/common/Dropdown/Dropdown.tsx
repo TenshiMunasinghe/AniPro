@@ -11,7 +11,7 @@ interface Props {
     label: string
     value: string
   }[]
-  selected: string | string[]
+  selected: string | (string | null)[]
 }
 const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
   const { ref, isFocused } = useFocusedWithin()

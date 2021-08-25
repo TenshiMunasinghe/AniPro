@@ -1,9 +1,10 @@
 import debounce from 'lodash/debounce'
+import uniq from 'lodash/uniq'
 import { useEffect, useMemo, useState } from 'react'
 import { useIsFetching } from 'react-query'
 import { useHistory, useLocation } from 'react-router-dom'
-import { QueryVar } from '../api/types'
-import { SEARCH_QUERY_KEY } from './useFetchSearchResult'
+import { allowedURLParams } from '../filterOptions/filterOptions'
+import { SearchResultQueryVariables } from '../generated/index'
 
 type setParamArg = {
   params: URLSearchParams
@@ -11,13 +12,26 @@ type setParamArg = {
   key: string
 }
 
+const paramToObj = (params: URLSearchParams) =>
+  Object.fromEntries(
+    uniq(
+      Array.from(params.keys()).filter(key => allowedURLParams.includes(key))
+    ).map(key => {
+      const value = params.get(key)
+      return [key, value?.includes(',') ? value.split(',') : value]
+    })
+  ) as SearchResultQueryVariables
+
 const addParam = ({ params, value, key }: setParamArg) => {
   String(value).length !== 0
     ? params.set(key, String(value))
     : params.delete(key)
 }
 
-const nextParam = (paramStr: string, queryVars: Partial<QueryVar>) => {
+const nextParam = (
+  paramStr: string,
+  queryVars: Partial<SearchResultQueryVariables>
+) => {
   const params = new URLSearchParams(paramStr)
 
   Object.entries(queryVars).forEach(
@@ -37,7 +51,7 @@ const nextParam = (paramStr: string, queryVars: Partial<QueryVar>) => {
 export const useUpdateUrlParam = () => {
   const history = useHistory()
   const location = useLocation()
-  const isFetching = useIsFetching([SEARCH_QUERY_KEY]) > 0
+  const isFetching = useIsFetching(['search']) > 0
 
   const initialParams = useMemo(
     () => new URLSearchParams(location.search).toString(),
@@ -51,7 +65,7 @@ export const useUpdateUrlParam = () => {
   }, [initialParams])
 
   const updateUrl = debounce(
-    (queryVars: Partial<QueryVar>) =>
+    (queryVars: SearchResultQueryVariables) =>
       history.push(
         `/search?${nextParam(initialParams, {
           ...queryVars,
@@ -61,8 +75,8 @@ export const useUpdateUrlParam = () => {
     250
   )
 
-  const updateFilter = debounce((queryVars: Partial<QueryVar>) => {
-    setParams(prev => nextParam(prev, queryVars))
+  const updateFilter = debounce((queryVars: SearchResultQueryVariables) => {
+    setParams(prev => nextParam(prev, queryVars || {}))
   }, 250)
 
   const applyFilter = () => history.push(`/search?${params}`)
@@ -75,7 +89,9 @@ export const useUpdateUrlParam = () => {
     updateFilter,
     applyFilter,
     movePage,
-    params: new URLSearchParams(params),
-    initialParams: new URLSearchParams(initialParams),
+    queryVars: {
+      current: paramToObj(new URLSearchParams(params)),
+      initial: paramToObj(new URLSearchParams(initialParams)),
+    },
   }
 }

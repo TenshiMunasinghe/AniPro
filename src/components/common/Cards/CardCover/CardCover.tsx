@@ -1,7 +1,7 @@
 import { memo, useContext, useState } from 'react'
-import { Media } from '../../../../api/types'
+import { NO_IMAGE_URL } from '../../../../api/queries'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext } from '../../CardGrid/CardGrid'
+import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Title from '../../Title/Title'
 import Rank from '../components/Rank/Rank'
@@ -44,15 +44,21 @@ const CardCover = ({
       onMouseLeave={hidePopover}
       onFocus={showPopover}
       onBlur={hidePopover}
-      style={createColorVariable(coverImage.color)}>
+      style={createColorVariable(
+        coverImage?.color || 'var(--color-foreground-200)'
+      )}>
       <article className={styles.container}>
         {rank && (
           <div className={styles.rank}>
             <Rank rank={rank} />
           </div>
         )}
-        <CoverImage id={id} src={coverImage[imageSize]} title={title.romaji} />
-        <Title id={id} text={title.romaji} />
+        <CoverImage
+          id={id}
+          src={coverImage?.[imageSize] || NO_IMAGE_URL}
+          title={title?.romaji || 'no title'}
+        />
+        <Title id={id} text={title?.romaji || 'no title'} />
       </article>
 
       <Popover

@@ -1,4 +1,4 @@
-import { Media } from '../api/types'
+import { Media } from '../components/common/CardGrid/CardGrid'
 import { convertTime } from './convertTIme'
 import { pluralize } from './pluralize'
 import { timeToArr } from './timeToArr'

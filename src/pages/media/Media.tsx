@@ -5,7 +5,7 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import { Route, Switch, useParams } from 'react-router-dom'
-import { Common } from '../../api/types'
+import gqlRequestClient from '../../api/graphqlClient'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Aside from '../../components/media/Aside/Aside'
 import Episodes from '../../components/media/Episodes/Episodes'
@@ -15,7 +15,7 @@ import Characters from '../../components/media/People/Characters/Characters'
 import Staff from '../../components/media/People/Staff/Staff'
 import Reviews from '../../components/media/Reviews/Reviews'
 import Stats from '../../components/media/Stats/Stats'
-import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
+import { CommonQuery, useCommonQuery } from '../../generated/index'
 import styles from './Media.module.scss'
 
 export const TAB = [
@@ -34,15 +34,15 @@ export type ParamTypes = {
   tab: TabsType
 }
 
-const filterTabs = (data: Common) => {
+const filterTabs = (data: CommonQuery['Media']) => {
   const tabs = [...TAB]
   const tabsArr = [
-    ['watch', data.streamingEpisodes],
-    ['staff', data.staff.edges],
-    ['characters', data.characters.edges],
+    ['watch', data?.streamingEpisodes],
+    ['staff', data?.staff?.edges],
+    ['characters', data?.characters?.edges],
   ]
   for (const subArr of tabsArr) {
-    if (subArr[1].length === 0) {
+    if (subArr[1]?.length === 0) {
       const idx = tabs.indexOf(subArr[0] as TabsType)
       tabs.splice(idx, 1)
     }
@@ -56,31 +56,35 @@ export const context = createContext<{ scrollPosition: ScrollPosition }>({
 
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeCommon(id)
+  const { data } = useCommonQuery(gqlRequestClient, { id: parseInt(id) })
 
-  if (!data) return null
+  if (!data || !data.Media) return null
+
+  const media = data.Media
 
   return (
     <context.Provider value={{ scrollPosition }}>
       <NavBar />
       <div className={styles.container}>
         <Header
-          bannerImg={data.bannerImage}
-          coverImg={data.coverImage}
-          title={data.title.romaji}
-          description={data.description}
+          bannerImg={media.bannerImage}
+          coverImg={media.coverImage}
+          title={media.title?.romaji}
+          description={media.description}
           streamUrl={
-            data.streamingEpisodes.length > 0
-              ? data.streamingEpisodes[data.streamingEpisodes.length - 1].url
-              : undefined
+            (media.streamingEpisodes?.length || -1) > 0
+              ? media.streamingEpisodes?.[media.streamingEpisodes?.length - 1]
+                  ?.url
+              : null
           }
           siteUrl={
-            data.externalLinks.find(link => link.site === 'Official Site')?.url
+            media.externalLinks?.find(link => link?.site === 'Official Site')
+              ?.url
           }
-          tabs={filterTabs(data)}
+          tabs={filterTabs(media)}
         />
         <main className={styles.main}>
-          <Aside data={data} />
+          <Aside data={media} />
           <Switch>
             <Route exact path='/media/:id'>
               <Overview />

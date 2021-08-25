@@ -1,12 +1,11 @@
 import { memo, useContext } from 'react'
-import { currentYear } from '../../../../api/queries'
-import { Media } from '../../../../api/types'
+import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import { ImageSizeContext } from '../../CardGrid/CardGrid'
+import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
@@ -20,7 +19,7 @@ interface Props {
 }
 
 const mapStatus = (status: Media['status']) =>
-  status === 'RELEASING' ? 'Airing' : toStartCase(status)
+  status === 'RELEASING' ? 'Airing' : toStartCase(status || '')
 
 const CardTable = ({
   media: {
@@ -43,7 +42,7 @@ const CardTable = ({
   const imageSize = useContext(ImageSizeContext)
 
   const _style = {
-    ...createColorVariable(coverImage.color),
+    ...createColorVariable(coverImage?.color || 'var(--color-foreground-200)'),
     '--banner-image': `url(${bannerImage})`,
   } as React.CSSProperties
 
@@ -55,10 +54,14 @@ const CardTable = ({
         </div>
       )}
       <div className={styles.card}>
-        <CoverImage id={id} title={title.romaji} src={coverImage[imageSize]} />
+        <CoverImage
+          id={id}
+          title={title?.romaji || 'no title'}
+          src={coverImage?.[imageSize] || NO_IMAGE_URL}
+        />
         <div className={styles.content}>
           <div className={styles.header}>
-            <Title id={id} text={title.romaji} />
+            <Title id={id} text={title?.romaji || 'no title'} />
             <Genres
               as='section'
               genres={genres}
@@ -75,7 +78,7 @@ const CardTable = ({
           />
 
           <Info
-            main={() => formatLabel(format)}
+            main={() => formatLabel(format || '')}
             sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
           />
 

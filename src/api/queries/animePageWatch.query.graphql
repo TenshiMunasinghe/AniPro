@@ -1,0 +1,9 @@
+query watch($id: Int!) {
+  Media(id: $id) {
+    streamingEpisodes {
+      url
+      title
+      thumbnail
+    }
+  }
+}

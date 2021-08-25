@@ -5,11 +5,12 @@ import {
   nextSeason,
   nextYear,
 } from '../../api/queries'
-import { Media, QueryVar } from '../../api/types'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
 import Slider from '../../components/home/Slider/Slider'
+import { Media, MediaSort } from '../../generated'
+import { SearchResultQueryVariables } from '../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
@@ -22,28 +23,24 @@ type Medias = {
   topRated: Media[]
 }
 
-const perPage = 10
-
-const queryVars: { [key in keyof Medias]: QueryVar } = {
-  trending: { sortBy: 'TRENDING_DESC', perPage },
+const queryVars: { [key in keyof Medias]: SearchResultQueryVariables } = {
+  trending: { sortBy: MediaSort.TrendingDesc },
 
   popularNow: {
-    sortBy: 'POPULARITY_DESC',
-    year: currentYear.toString(),
+    sortBy: MediaSort.PopularityDesc,
+    year: currentYear,
     season: currentSeason,
-    perPage,
   },
 
   upComing: {
-    year: nextYear.toString(),
+    year: nextYear,
     season: nextSeason,
-    perPage,
-    sortBy: 'TRENDING_DESC',
+    sortBy: MediaSort.TrendingDesc,
   },
 
-  popularAllTime: { sortBy: 'POPULARITY_DESC', perPage },
+  popularAllTime: { sortBy: MediaSort.PopularityDesc },
 
-  topRated: { sortBy: 'SCORE_DESC', perPage: 10 },
+  topRated: { sortBy: MediaSort.ScoreDesc },
 }
 
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width

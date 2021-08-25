@@ -1,0 +1,31 @@
+query characters($id: Int!, $page: Int!) {
+  Media(id: $id) {
+    characters(sort: [ROLE, RELEVANCE, ID], page: $page, perPage: 6) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+        role
+        voiceActors(language: JAPANESE) {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { SortBy } from '../filterOptions/filterOptions'
 
-export interface QueryVar {
+interface QueryVar {
   page?: number
   genres?: string[]
   year?: string
@@ -14,7 +14,7 @@ export interface QueryVar {
   perPage: number
 }
 
-export interface QueryData {
+interface QueryData {
   Page: {
     pageInfo: {
       currentPage: number
@@ -61,11 +61,11 @@ export interface QueryData {
   }
 }
 
-export type PageInfo = QueryData['Page']['pageInfo']
+type PageInfo = QueryData['Page']['pageInfo']
 
-export type Media = QueryData['Page']['media'][number]
+type Media = QueryData['Page']['media'][number]
 
-export interface Watch {
+interface Watch {
   streamingEpisodes: {
     title: string
     thumbnail: string
@@ -73,7 +73,7 @@ export interface Watch {
   }[]
 }
 
-export interface Characters {
+interface Characters {
   pageInfo: {
     currentPage: number
     hasNextPage: boolean
@@ -101,7 +101,7 @@ export interface Characters {
   }[]
 }
 
-export interface Staff {
+interface Staff {
   pageInfo: {
     currentPage: number
     hasNextPage: boolean
@@ -120,7 +120,7 @@ export interface Staff {
   }[]
 }
 
-export interface Review {
+interface Review {
   pageInfo: {
     currentPage: number
     hasNextPage: boolean
@@ -140,7 +140,7 @@ export interface Review {
   }[]
 }
 
-export interface Stats {
+interface Stats {
   status: string
   rankings: {
     id: number
@@ -171,7 +171,7 @@ export interface Stats {
   }
 }
 
-export interface Overview extends Watch {
+interface Overview extends Watch {
   status: string
   relations: {
     edges: {
@@ -223,7 +223,7 @@ export interface Overview extends Watch {
   }
 }
 
-export interface Common extends Watch {
+interface Common extends Watch {
   title: {
     romaji: string
     english: string
@@ -291,7 +291,7 @@ export interface Common extends Watch {
   }
 }
 
-export type AnimeDetails = {
+type AnimeDetails = {
   overview: Overview
   watch: Watch
   characters: Characters
