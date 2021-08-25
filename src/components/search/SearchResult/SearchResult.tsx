@@ -29,10 +29,12 @@ export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
 )
 
 const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
-  const { data, isLoading, isError, isFetching } = useSearchResultQuery(
-    gqlRequestClient,
-    queryVars
-  )
+  const {
+    data,
+    isLoading,
+    isError,
+    isFetching,
+  } = useSearchResultQuery(gqlRequestClient, { ...queryVars, perPage: 12 })
   const { movePage } = useUpdateUrlParam()
 
   const medias = data?.Page?.media
