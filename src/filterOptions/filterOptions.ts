@@ -1,7 +1,17 @@
 import range from 'lodash/range'
 import { currentYear } from '../api/queries'
+import {
+  MediaFormat,
+  MediaSeason,
+  MediaSort,
+  MediaSource,
+  MediaStatus,
+} from '../generated/index'
 import { toStartCase } from '../utils/toStartCase'
 import { tags } from './tags'
+
+const enumToArr = <T extends { [key: string]: string }>(enumme: T) =>
+  Object.values(enumme).filter(val => isNaN(Number(val)) === false)
 
 export const filterOptionTypes = {
   default: {
@@ -42,17 +52,17 @@ export const filterOptionTypes = {
     },
 
     season: {
-      options: ['WINTER', 'SPRING', 'SUMMER', 'FALL'],
+      options: enumToArr(MediaSeason),
       isMulti: false,
     },
 
     format: {
-      options: ['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA', 'MUSIC'],
+      options: enumToArr(MediaFormat),
       isMulti: true,
     },
 
     status: {
-      options: ['FINISHED', 'RELEASING', 'NOT_YET_RELEASED', 'CANCELLED'],
+      options: enumToArr(MediaStatus),
       isMulti: false,
     },
 
@@ -62,29 +72,13 @@ export const filterOptionTypes = {
     },
 
     source: {
-      options: [
-        'ORIGINAL',
-        'MANGA',
-        'LIGHT_NOVEL',
-        'VISUAL_NOVEL',
-        'VIDEO_GAME',
-        'OTHER',
-        'NOVEL',
-        'DOUJINSHI',
-        'ANIME',
-      ],
+      options: enumToArr(MediaSource),
       isMulti: false,
     },
   },
   simple: {
     sortBy: {
-      options: [
-        'TRENDING_DESC',
-        'POPULARITY_DESC',
-        'SCORE_DESC',
-        'FAVOURITES_DESC',
-        'START_DATE_DESC',
-      ],
+      options: enumToArr(MediaSort),
       isMulti: false,
     },
   },
