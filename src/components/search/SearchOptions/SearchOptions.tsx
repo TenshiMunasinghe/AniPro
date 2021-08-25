@@ -14,12 +14,7 @@ import styles from './SearchOptions.module.scss'
 
 const SearchOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
-  const {
-    updateFilter,
-    updateUrl,
-    queryVars,
-    applyFilter,
-  } = useUpdateUrlParam()
+  const { updateFilter, updateUrl, params, applyFilter } = useUpdateUrlParam()
 
   useEffect(() => {
     if (activeFilterOption) {
@@ -72,7 +67,8 @@ const SearchOptions = () => {
   const selectedOptions = (
     isMulti: boolean,
     name: keyof SearchResultQueryVariables
-  ) => (isMulti ? queryVars.current[name]?.split(',') : queryVars.current[name])
+  ) =>
+    isMulti ? params.current.get(name)?.split(',') : params.current.get(name)
 
   return (
     <aside

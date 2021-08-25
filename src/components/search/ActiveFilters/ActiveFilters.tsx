@@ -9,11 +9,14 @@ import styles from './ActiveFilters.module.scss'
 const ActiveFilters = () => {
   const history = useHistory()
 
-  const { updateUrl, queryVars } = useUpdateUrlParam()
+  const { updateUrl, params } = useUpdateUrlParam()
 
-  const paramArr = Object.entries(queryVars.initial)
-    .filter(([key]) => Object.keys(filterOptionTypes.default).includes(key))
-    .map(([key, value]) => ({ key, values: value?.split(',') as string[] }))
+  const paramArr = Array.from(params.initial.keys())
+    .filter(key => Object.keys(filterOptionTypes.default).includes(key))
+    .map(key => ({
+      key,
+      values: params.initial.get(key)?.split(',') as string[],
+    }))
 
   if (paramArr.length === 0) return null
 
@@ -23,7 +26,10 @@ const ActiveFilters = () => {
   ) => {
     updateUrl({
       [key]: filterOptionTypes.default[key].isMulti
-        ? queryVars.initial[key]?.split(',').filter((v: string) => v !== value)
+        ? params.initial
+            .get(key)
+            ?.split(',')
+            .filter(v => v !== value)
         : '',
     })
   }

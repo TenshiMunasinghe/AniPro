@@ -93,5 +93,9 @@ export const useUpdateUrlParam = () => {
       current: paramToObj(new URLSearchParams(params)),
       initial: paramToObj(new URLSearchParams(initialParams)),
     },
+    params: {
+      current: new URLSearchParams(params),
+      initial: new URLSearchParams(initialParams),
+    },
   }
 }
