@@ -75,7 +75,13 @@ export const filterOptionTypes = {
   },
   simple: {
     sortBy: {
-      options: Object.values(MediaSort) as string[],
+      options: [
+        MediaSort.TrendingDesc,
+        MediaSort.PopularityDesc,
+        MediaSort.ScoreDesc,
+        MediaSort.FavouritesDesc,
+        MediaSort.StartDateDesc,
+      ] as string[],
       isMulti: false,
     },
   },
