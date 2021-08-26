@@ -36,7 +36,7 @@ const Overview = () => {
       <Content heading='Relations'>
         <div
           className={classnames(styles.relations, {
-            [styles.collapsed]: (data.relations?.edges?.length || 0) > 2,
+            [styles.collapsed]: (data.relations?.edges?.length || 0) > 4,
           })}>
           {data.relations?.edges &&
             data.relations?.edges?.map(edge => {
@@ -53,7 +53,7 @@ const Overview = () => {
                   format={node.format}
                   status={node.status}
                   relation={relationType}
-                  isCollapsed={(data.relations?.edges?.length || 0) > 2}
+                  isCollapsed={(data.relations?.edges?.length || 0) > 4}
                 />
               )
             })}
