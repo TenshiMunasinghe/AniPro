@@ -1,5 +1,5 @@
 @use '../../../css//config.scss' as *;
-@use '../../common/Cards/CardCover/cardChartTemplate.module.scss' as card-cover;
+@use '../../common/Cards/CardCover/cardCoverTemplate.module.scss' as card-cover;
 
 .container {
   @include gap($column: var(--space-600));
@@ -58,17 +58,37 @@
   .trailer {
     @include aspect-ratio(5/3);
     width: 100%;
+
+    @include mq(above, md) {
+      @include aspect-ratio(2);
+    }
   }
 
   .recommendations {
-    display: flex;
-    overflow-x: auto;
-    @include gap($row: var(--space-400));
-
     .cardCover {
-      flex-basis: 40%;
-      flex-shrink: 0;
       @include card-cover.card-cover;
+      font-size: var(--text-size-300);
+    }
+
+    @include mq(below, md) {
+      display: flex;
+      overflow-x: auto;
+      @include gap($row: var(--space-400));
+
+      .cardCover {
+        flex-basis: 40%;
+        flex-shrink: 0;
+      }
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-500);
+
+      .cardCover {
+        width: 100%;
+      }
     }
   }
 
