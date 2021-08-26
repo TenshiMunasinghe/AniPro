@@ -19,7 +19,7 @@
     @include mq(above, md) {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-400);
+      gap: var(--space-400) var(--space-500);
 
       &.collapsed {
         grid-template-columns: repeat(auto-fit, var(--image-width));
