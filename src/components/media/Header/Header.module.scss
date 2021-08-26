@@ -54,7 +54,7 @@
       display: grid;
       grid-template-columns: min-content 1fr;
       grid-template-rows: 1fr auto;
-      column-gap: var(--space-500);
+      column-gap: var(--space-600);
       padding-top: var(--space-400);
 
       & > *:last-child {
