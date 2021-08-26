@@ -84,16 +84,18 @@ const Overview = () => {
         </div>
       </Content>
 
-      <Content heading='Status Distribution'>
-        <Status
-          viewingStatus={data?.stats?.statusDistribution}
-          airingStatus={data?.status}
-        />
-      </Content>
+      <div className={styles.stats}>
+        <Content heading='Status Distribution'>
+          <Status
+            viewingStatus={data?.stats?.statusDistribution}
+            airingStatus={data?.status}
+          />
+        </Content>
 
-      <Content heading='Score Distribution'>
-        <Scores scores={data.stats?.scoreDistribution} />
-      </Content>
+        <Content heading='Score Distribution'>
+          <Scores scores={data.stats?.scoreDistribution} />
+        </Content>
+      </div>
 
       {(data.streamingEpisodes?.length || -1) > 0 && (
         <Content heading='Watch'>

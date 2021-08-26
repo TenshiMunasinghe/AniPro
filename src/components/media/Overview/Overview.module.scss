@@ -27,6 +27,23 @@
     }
   }
 
+  .stats {
+    @include mq(below, md) {
+      @include gap($column: var(--space-600));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-500);
+
+      & > *:first-child {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+
   .watch {
     display: flex;
     @include gap($row: var(--space-400));
