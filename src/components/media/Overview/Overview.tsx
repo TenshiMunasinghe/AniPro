@@ -33,69 +33,77 @@ const Overview = () => {
 
   return (
     <div className={styles.container}>
-      <Content heading='Relations'>
-        <div
-          className={classnames(styles.relations, {
-            [styles.collapsed]: (data.relations?.edges?.length || 0) > 4,
-          })}>
-          {data.relations?.edges &&
-            data.relations?.edges?.map(edge => {
-              if (!edge) return null
+      {(data.relations?.edges?.length || -1) > 0 && (
+        <Content heading='Relations'>
+          <div
+            className={classnames(styles.relations, {
+              [styles.collapsed]: (data.relations?.edges?.length || 0) > 4,
+            })}>
+            {data.relations?.edges &&
+              data.relations?.edges?.map(edge => {
+                if (!edge) return null
 
-              const { node, relationType } = edge
-              if (!node || !relationType) return null
-              return (
-                <Relation
-                  key={'relation' + node.id}
-                  id={node.id}
-                  image={node.coverImage?.large}
-                  title={node.title?.romaji}
-                  format={node.format}
-                  status={node.status}
-                  relation={relationType}
-                  isCollapsed={(data.relations?.edges?.length || 0) > 4}
-                />
-              )
-            })}
-        </div>
-      </Content>
-
-      <Content heading='Characters'>
-        <div className={peopleStyles.container}>
-          {data.characters?.edges?.map(character => (
-            <Character
-              character={character}
-              key={'overview character' + character?.node?.id}
-            />
-          ))}
-        </div>
-      </Content>
-
-      <Content heading='Staff'>
-        <div className={peopleStyles.container}>
-          {data?.staff?.edges?.map(staff => (
-            <Person
-              name={staff?.node?.name?.full}
-              image={staff?.node?.image?.large}
-              info={staff?.role}
-              key={'overview staff' + staff?.node?.id}
-            />
-          ))}
-        </div>
-      </Content>
-
-      <div className={styles.stats}>
-        <Content heading='Status Distribution'>
-          <Status
-            viewingStatus={data?.stats?.statusDistribution}
-            airingStatus={data?.status}
-          />
+                const { node, relationType } = edge
+                if (!node || !relationType) return null
+                return (
+                  <Relation
+                    key={'relation' + node.id}
+                    id={node.id}
+                    image={node.coverImage?.large}
+                    title={node.title?.romaji}
+                    format={node.format}
+                    status={node.status}
+                    relation={relationType}
+                    isCollapsed={(data.relations?.edges?.length || 0) > 4}
+                  />
+                )
+              })}
+          </div>
         </Content>
+      )}
 
-        <Content heading='Score Distribution'>
-          <Scores scores={data.stats?.scoreDistribution} />
+      {(data.characters?.edges?.length || -1) > 0 && (
+        <Content heading='Characters'>
+          <div className={peopleStyles.container}>
+            {data.characters?.edges?.map(character => (
+              <Character
+                character={character}
+                key={'overview character' + character?.node?.id}
+              />
+            ))}
+          </div>
         </Content>
-      </div>
+      )}
+
+      {(data.staff?.edges?.length || -1) > 0 && (
+        <Content heading='Staff'>
+          <div className={peopleStyles.container}>
+            {data.staff?.edges?.map(staff => (
+              <Person
+                name={staff?.node?.name?.full}
+                image={staff?.node?.image?.large}
+                info={staff?.role}
+                key={'overview staff' + staff?.node?.id}
+              />
+            ))}
+          </div>
+        </Content>
+      )}
+
+      {data.stats && (
+        <div className={styles.stats}>
+          <Content heading='Status Distribution'>
+            <Status
+              viewingStatus={data.stats?.statusDistribution}
+              airingStatus={data.status}
+            />
+          </Content>
+
+          <Content heading='Score Distribution'>
+            <Scores scores={data.stats?.scoreDistribution} />
+          </Content>
+        </div>
+      )}
 
       {(data.streamingEpisodes?.length || -1) > 0 && (
         <Content heading='Watch'>
@@ -107,42 +115,50 @@ const Overview = () => {
         </Content>
       )}
 
-      <Content heading='Trailer'>
-        <div className={styles.trailer}>
-          <iframe
-            title='Trailer'
-            src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
-          />
-        </div>
-      </Content>
+      {data.trailer && (
+        <Content heading='Trailer'>
+          <div className={styles.trailer}>
+            <iframe
+              title='Trailer'
+              src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
+            />
+          </div>
+        </Content>
+      )}
 
-      <Content heading='Recomendations'>
-        <div className={styles.recommendations}>
-          {data.recommendations?.nodes?.map(node => {
-            if (!node) return null
-            const { mediaRecommendation: m } = node
-            if (!m) return null
-            return (
-              <div className={styles.cardCover} key={'recommendations' + m.id}>
-                <CoverImage
-                  id={m.id}
-                  src={m.coverImage?.large}
-                  title={m.title?.romaji}
-                />
-                <Title id={m.id} text={m.title?.romaji || 'no title'} />
-              </div>
-            )
-          })}
-        </div>
-      </Content>
+      {(data.recommendations?.nodes?.length || -1) > 0 && (
+        <Content heading='Recomendations'>
+          <div className={styles.recommendations}>
+            {data.recommendations?.nodes?.map(node => {
+              if (!node) return null
+              const { mediaRecommendation: m } = node
+              if (!m) return null
+              return (
+                <div
+                  className={styles.cardCover}
+                  key={'recommendations' + m.id}>
+                  <CoverImage
+                    id={m.id}
+                    src={m.coverImage?.large}
+                    title={m.title?.romaji}
+                  />
+                  <Title id={m.id} text={m.title?.romaji || 'no title'} />
+                </div>
+              )
+            })}
+          </div>
+        </Content>
+      )}
 
-      <Content heading='Reviews'>
-        <div className={styles.reviews}>
-          {data.reviews?.nodes?.map(review => (
-            <Review key={'overview review' + review?.id} review={review} />
-          ))}
-        </div>
-      </Content>
+      {(data.reviews?.nodes?.length || -1) > 0 && (
+        <Content heading='Reviews'>
+          <div className={styles.reviews}>
+            {data.reviews?.nodes?.map(review => (
+              <Review key={'overview review' + review?.id} review={review} />
+            ))}
+          </div>
+        </Content>
+      )}
     </div>
   )
 }
