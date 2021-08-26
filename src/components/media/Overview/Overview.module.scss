@@ -45,13 +45,25 @@
   }
 
   .watch {
-    display: flex;
-    @include gap($row: var(--space-400));
-    overflow-x: auto;
+    @include mq(below, md) {
+      display: flex;
+      @include gap($row: var(--space-400));
+      overflow-x: auto;
 
-    & > *:nth-child(3),
-    & > *:nth-child(4) {
-      display: none;
+      & > * {
+        flex-basis: 20rem;
+      }
+
+      & > *:nth-child(3),
+      & > *:nth-child(4) {
+        display: none;
+      }
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-500);
     }
   }
 
