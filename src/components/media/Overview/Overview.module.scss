@@ -93,6 +93,14 @@
   }
 
   .reviews {
-    @include gap($column: var(--space-400));
+    @include mq(below, md) {
+      @include gap($column: var(--space-400));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-500);
+    }
   }
 }
