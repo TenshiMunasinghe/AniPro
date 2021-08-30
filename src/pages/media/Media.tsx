@@ -7,6 +7,7 @@ import {
 import { Route, Switch, useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import NavBar from '../../components/common/NavBar/NavBar'
+import Footer from '../../components/home/Footer/Footer'
 import Aside from '../../components/media/Aside/Aside'
 import Episodes from '../../components/media/Episodes/Episodes'
 import Header from '../../components/media/Header/Header'
@@ -107,6 +108,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           </Switch>
         </main>
       </div>
+      <Footer />
     </context.Provider>
   )
 }

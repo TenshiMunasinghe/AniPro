@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../components/common/Dropdown/Dropdown'
 import NavBar from '../../components/common/NavBar/NavBar'
+import Footer from '../../components/home/Footer/Footer'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
@@ -63,6 +64,7 @@ const Search = () => {
           <ScrollButton />
         </main>
       </div>
+      <Footer />
     </>
   )
 }
