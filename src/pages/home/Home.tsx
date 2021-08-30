@@ -86,7 +86,7 @@ const Home = () => {
   const randomKey = contentsKey[(contentsKey.length * Math.random()) << 0]
 
   return (
-    <div className={styles.container}>
+    <>
       <div className={styles.header}>
         <Link to='/' className={styles.siteName}>
           AniPro
@@ -109,7 +109,7 @@ const Home = () => {
         })}
       </main>
       <Footer />
-    </div>
+    </>
   )
 }
 
