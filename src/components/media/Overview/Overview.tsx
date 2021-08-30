@@ -3,14 +3,13 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useOverviewQuery } from '../../../generated/index'
 import { ParamTypes } from '../../../pages/media/Media'
-import CoverImage from '../../common/CoverImage/CoverImage'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
-import Title from '../../common/Title/Title'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
 import Episode from '../Episode./Episode'
 import peopleStyles from '../People/People.module.scss'
 import Person from '../Person/Person'
+import Recommendations from '../Recommendations/Recommendations'
 import Relation from '../Relation/Relation'
 import Review from '../Review/Review'
 import Scores from '../Scores/Scores'
@@ -127,27 +126,7 @@ const Overview = () => {
       )}
 
       {(data.recommendations?.nodes?.length || -1) > 0 && (
-        <Content heading='Recomendations'>
-          <div className={styles.recommendations}>
-            {data.recommendations?.nodes?.map(node => {
-              if (!node) return null
-              const { mediaRecommendation: m } = node
-              if (!m) return null
-              return (
-                <div
-                  className={styles.cardCover}
-                  key={'recommendations' + m.id}>
-                  <CoverImage
-                    id={m.id}
-                    src={m.coverImage?.large}
-                    title={m.title?.romaji}
-                  />
-                  <Title id={m.id} text={m.title?.romaji || 'no title'} />
-                </div>
-              )
-            })}
-          </div>
-        </Content>
+        <Recommendations recommendations={data?.recommendations?.nodes} />
       )}
 
       {(data.reviews?.nodes?.length || -1) > 0 && (
