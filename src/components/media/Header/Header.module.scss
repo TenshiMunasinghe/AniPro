@@ -26,13 +26,15 @@
     background-image: var(--banner-image);
     background-repeat: no-repeat;
     background-attachment: scroll;
+    background-position: center;
     background-size: cover;
     overflow: hidden;
 
     @include mq(above, md) {
       height: 40vh;
       background-attachment: fixed;
-      background-size: contain;
+      background-size: auto 50vh;
+      background-position: top;
     }
 
     &:after {
