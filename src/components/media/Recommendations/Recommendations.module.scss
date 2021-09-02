@@ -21,6 +21,10 @@
   .cardCover {
     @include card-cover.card-cover;
     font-size: var(--text-size-300);
+
+    & > *:first-child {
+      border-radius: 0.2rem;
+    }
   }
 
   @include mq(below, md) {
