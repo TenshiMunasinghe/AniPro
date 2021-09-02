@@ -1,12 +1,15 @@
 @use '../../../css/config.scss' as *;
 .container {
   --play-btn-size: 2.75rem;
-  --padding: var(--space-400);
 
   position: relative;
-  padding: 0 var(--padding);
-  padding-bottom: var(--padding);
   background: var(--color-foreground-50);
+
+  @include mq(below, md) {
+    & > *:not(.banner) {
+      @include padding-horizontal(var(--space-400));
+    }
+  }
 
   @include mq(above, md) {
     padding-bottom: var(--space-200);
@@ -19,16 +22,17 @@
     position: relative;
     width: 100vw;
     height: calc(2 * var(--image-width));
-    margin-left: calc(-1 * var(--padding));
     background-color: var(--bg-color);
     background-image: var(--banner-image);
-    background-position: 50% 35%;
     background-repeat: no-repeat;
+    background-attachment: scroll;
     background-size: cover;
     overflow: hidden;
 
     @include mq(above, md) {
       height: 40vh;
+      background-attachment: fixed;
+      background-size: contain;
     }
 
     &:after {
