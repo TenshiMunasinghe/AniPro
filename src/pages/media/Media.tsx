@@ -1,3 +1,4 @@
+import loadable from '@loadable/component'
 import { createContext } from 'react'
 import {
   LazyComponentProps,
@@ -6,18 +7,28 @@ import {
 } from 'react-lazy-load-image-component'
 import { Route, Switch, useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
+import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
 import Aside from '../../components/media/Aside/Aside'
-import Episodes from '../../components/media/Episodes/Episodes'
 import Header from '../../components/media/Header/Header'
-import Overview from '../../components/media/Overview/Overview'
-import Characters from '../../components/media/People/Characters/Characters'
-import Staff from '../../components/media/People/Staff/Staff'
-import Reviews from '../../components/media/Reviews/Reviews'
-import Stats from '../../components/media/Stats/Stats'
 import { CommonQuery, useCommonQuery } from '../../generated/index'
 import styles from './Media.module.scss'
+
+const Overview = loadable(
+  () => import('../../components/media/Overview/Overview')
+)
+const Episodes = loadable(
+  () => import('../../components/media/Episodes/Episodes')
+)
+const Characters = loadable(
+  () => import('../../components/media/People/Characters/Characters')
+)
+const Staff = loadable(
+  () => import('../../components/media/People/Staff/Staff')
+)
+const Reviews = loadable(() => import('../../components/media/Reviews/Reviews'))
+const Stats = loadable(() => import('../../components/media/Stats/Stats'))
 
 export const TAB = [
   'overview',
@@ -88,22 +99,22 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           <Aside data={media} />
           <Switch>
             <Route exact path='/media/:id'>
-              <Overview />
+              <Overview fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/media/:id/watch'>
-              <Episodes />
+              <Episodes fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/media/:id/characters'>
-              <Characters />
+              <Characters fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/media/:id/staff'>
-              <Staff />
+              <Staff fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/media/:id/reviews'>
-              <Reviews />
+              <Reviews fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/media/:id/stats'>
-              <Stats />
+              <Stats fallback={<LoadingSpinner />} />
             </Route>
           </Switch>
         </main>
