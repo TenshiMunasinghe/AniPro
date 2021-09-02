@@ -16,12 +16,14 @@ const Character = ({ character }: Props) => {
         name={character?.node?.name?.full || 'no name'}
         info={character?.role}
       />
-      <Person
-        image={character?.voiceActors?.[0]?.image?.large || NO_IMAGE_URL}
-        name={character?.voiceActors?.[0]?.name?.full || 'no name'}
-        info='Japanese'
-        isReversed
-      />
+      {character?.voiceActors?.length ? (
+        <Person
+          image={character?.voiceActors?.[0]?.image?.large || NO_IMAGE_URL}
+          name={character?.voiceActors?.[0]?.name?.full || 'no name'}
+          info='Japanese'
+          isReversed
+        />
+      ) : null}
     </div>
   )
 }
