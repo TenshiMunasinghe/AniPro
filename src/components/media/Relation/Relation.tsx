@@ -14,11 +14,11 @@ import { useOverflow } from '../../../hooks/useOverflow'
 import { context } from '../../../pages/media/Media'
 import styles from './Relation.module.scss'
 
-const UNSUPPORTED_FORMAT: (MediaFormat | undefined | null)[] = [
-  MediaFormat.Novel,
-  MediaFormat.Manga,
-  MediaFormat.Music,
-]
+// const UNSUPPORTED_FORMAT: (MediaFormat | undefined | null)[] = [
+//   MediaFormat.Novel,
+//   MediaFormat.Manga,
+//   MediaFormat.Music,
+// ]
 
 interface Props {
   id?: number
@@ -44,8 +44,7 @@ const Relation = ({
 
   const relationLabel = relation?.replace('_', ' ').toLowerCase()
 
-  const linkUrl =
-    UNSUPPORTED_FORMAT.includes(format) && id ? linkToMediaPage(id) : '/'
+  const linkUrl = id ? linkToMediaPage(id) : '#'
 
   return (
     <div
