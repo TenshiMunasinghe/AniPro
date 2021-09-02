@@ -57,6 +57,7 @@
     max-width: 1069px;
 
     @include mq(above, md) {
+      width: 100%;
       display: grid;
       grid-template-columns: min-content 1fr;
       grid-template-rows: 1fr auto;
