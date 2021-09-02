@@ -2,7 +2,9 @@ import classnames from 'classnames'
 import { useContext } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { Link } from 'react-router-dom'
 import { NO_IMAGE_URL } from '../../../api/queries'
+import { linkToMediaPage } from '../../../App'
 import {
   MediaFormat,
   MediaRelation,
@@ -11,6 +13,12 @@ import {
 import { useOverflow } from '../../../hooks/useOverflow'
 import { context } from '../../../pages/media/Media'
 import styles from './Relation.module.scss'
+
+const UNSUPPORTED_FORMAT: (MediaFormat | undefined | null)[] = [
+  MediaFormat.Novel,
+  MediaFormat.Manga,
+  MediaFormat.Music,
+]
 
 interface Props {
   id?: number
@@ -36,12 +44,15 @@ const Relation = ({
 
   const relationLabel = relation?.replace('_', ' ').toLowerCase()
 
+  const linkUrl =
+    UNSUPPORTED_FORMAT.includes(format) && id ? linkToMediaPage(id) : '/'
+
   return (
     <div
       className={classnames(styles.container, {
         [styles.collapsed]: isCollapsed,
       })}>
-      <a href={`/`} className={styles.imageWrapper}>
+      <Link to={linkUrl} className={styles.imageWrapper}>
         <LazyLoadImage
           src={image || NO_IMAGE_URL}
           alt={title || 'no image'}
@@ -51,7 +62,7 @@ const Relation = ({
         <div className={styles.label}>
           <span>{relationLabel || 'unknown'}</span>
         </div>
-      </a>
+      </Link>
 
       <div
         className={classnames(
@@ -60,7 +71,9 @@ const Relation = ({
         )}
         ref={wrapperRef}>
         <div className={styles.relationType}>{relationLabel}</div>
-        <h5 className={styles.title}>{title || 'no title'}</h5>
+        <h5 className={styles.title}>
+          <Link to={linkUrl}>{title || 'no title'}</Link>
+        </h5>
         <div className={styles.info}>
           <span className={styles.format}>{format}</span>
           {' - '}
