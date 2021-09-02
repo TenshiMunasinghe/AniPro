@@ -119,5 +119,8 @@
   .info {
     margin-top: auto;
     padding-top: var(--space-200);
+    & > * {
+      text-transform: capitalize;
+    }
   }
 }

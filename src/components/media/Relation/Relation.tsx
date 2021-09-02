@@ -75,9 +75,9 @@ const Relation = ({
           <Link to={linkUrl}>{title || 'no title'}</Link>
         </h5>
         <div className={styles.info}>
-          <span className={styles.format}>{format}</span>
+          <span className={styles.format}>{format?.toLowerCase()}</span>
           {' - '}
-          <span className={styles.status}>{status}</span>
+          <span className={styles.status}>{status?.toLowerCase()}</span>
         </div>
       </div>
     </div>
