@@ -9,25 +9,6 @@ import styles from '../People.module.scss'
 
 const Staff = () => {
   const { id } = useParams<ParamTypes>()
-  // const {
-  //   data,
-  //   fetchNextPage,
-  //   isFetchingNextPage,
-  //   hasNextPage,
-  //   isLoading,
-  // } = useAnimeStaff(id)
-
-  // const [pages, setPages] = useState<StaffQuery[]>([])
-  // const [pageNumber, setPageNumber] = useState(1)
-
-  // const { data, isLoading } = useStaffQuery(gqlRequestClient, {
-  //   id: parseInt(id),
-  //   page: pageNumber,
-  // })
-
-  // useEffect(() => {
-  //   if (data) setPages(prev => [...prev, data])
-  // }, [data])
 
   const {
     data,
