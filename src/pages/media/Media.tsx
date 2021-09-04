@@ -80,9 +80,11 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
       <NavBar />
       <div className={styles.container}>
         <Header
+          id={id}
           bannerImg={media.bannerImage}
           coverImg={media.coverImage}
           title={media.title?.romaji}
+          format={media.format}
           description={media.description}
           streamUrl={
             (media.streamingEpisodes?.length || -1) > 0

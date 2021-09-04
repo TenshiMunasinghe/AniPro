@@ -1,16 +1,18 @@
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 import { NO_IMAGE_URL } from '../../../api/queries'
-import { MediaCoverImage } from '../../../generated/index'
+import { MediaCoverImage, MediaFormat } from '../../../generated/index'
 import { TabsType } from '../../../pages/media/Media'
 import Description from '../../common/Description/Description'
 import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 
 interface Props {
+  id: string
   bannerImg?: string | null
   coverImg?: MediaCoverImage | null
   title?: string | null
+  format?: MediaFormat | null
   description?: string | null
   streamUrl?: string | null
   siteUrl?: string | null
@@ -18,9 +20,11 @@ interface Props {
 }
 
 const Header = ({
+  id,
   bannerImg = NO_IMAGE_URL,
   coverImg,
   title,
+  format,
   description,
   streamUrl,
   siteUrl,
@@ -43,11 +47,15 @@ const Header = ({
             />
           </figure>
           <a
-            href={streamUrl || siteUrl || '#'}
+            href={
+              streamUrl ||
+              siteUrl ||
+              `https://anilist.co/${format?.toLowerCase()}/${id}`
+            }
             target='blank'
             className={styles.button}>
             <span className={styles.text}>
-              {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
+              {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : 'AniList Site'}
             </span>
             {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
           </a>
