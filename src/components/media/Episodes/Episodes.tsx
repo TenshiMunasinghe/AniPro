@@ -12,7 +12,7 @@ const Episodes = () => {
     id: parseInt(id),
   })
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data?.Media?.streamingEpisodes) return null
 

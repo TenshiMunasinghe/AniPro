@@ -99,22 +99,34 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
           <Aside data={media} />
           <Switch>
             <Route exact path='/media/:id'>
-              <Overview fallback={<LoadingSpinner />} />
+              <Overview
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/watch'>
-              <Episodes fallback={<LoadingSpinner />} />
+              <Episodes
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/characters'>
-              <Characters fallback={<LoadingSpinner />} />
+              <Characters
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/staff'>
-              <Staff fallback={<LoadingSpinner />} />
+              <Staff
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/reviews'>
-              <Reviews fallback={<LoadingSpinner />} />
+              <Reviews
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/stats'>
-              <Stats fallback={<LoadingSpinner />} />
+              <Stats
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
           </Switch>
         </main>

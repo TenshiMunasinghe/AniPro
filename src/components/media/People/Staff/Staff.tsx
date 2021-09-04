@@ -53,7 +53,7 @@ const Staff = () => {
     }
   )
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data || data?.pages.length === 0) return null
 

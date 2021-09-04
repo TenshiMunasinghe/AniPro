@@ -33,7 +33,7 @@ const Characters = () => {
     }
   )
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data) return null
 

@@ -18,7 +18,7 @@ const Stats = () => {
     { select: res => res.Media }
   )
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data) return null
 
