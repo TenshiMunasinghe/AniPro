@@ -155,7 +155,7 @@
     background: var(--color-foreground-100);
     padding: var(--padding);
     margin-top: var(--space-400);
-    max-height: calc(
+    height: calc(
       var(--line-height) * var(--lines) * 1em + (2 * var(--padding))
     );
     overflow-y: auto;
