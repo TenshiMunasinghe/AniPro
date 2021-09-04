@@ -67,5 +67,10 @@ query common($id: Int!) {
       title
       url
     }
+    reviews(perPage: 1) {
+      nodes {
+        id
+      }
+    }
   }
 }
