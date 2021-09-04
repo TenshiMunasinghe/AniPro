@@ -42,16 +42,19 @@ const Staff = () => {
 
   return (
     <div className={styles.container}>
-      {pages.map(page =>
-        page?.Media?.staff?.edges?.map(staff => (
-          <Person
-            name={staff?.node?.name?.full}
-            image={staff?.node?.image?.large}
-            info={staff?.role}
-            key={'staff' + staff?.node?.id}
-          />
-        ))
-      )}
+      <div className={styles.people}>
+        {pages.map(page =>
+          page?.Media?.staff?.edges?.map(staff => (
+            <Person
+              name={staff?.node?.name?.full}
+              image={staff?.node?.image?.large}
+              info={staff?.role}
+              key={'staff' + staff?.node?.id}
+            />
+          ))
+        )}
+      </div>
+
       <LoadMore
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage || false}

@@ -63,7 +63,7 @@ const Overview = () => {
 
       {(data.characters?.edges?.length || -1) > 0 && (
         <Content heading='Characters'>
-          <div className={peopleStyles.container}>
+          <div className={peopleStyles.people}>
             {data.characters?.edges?.map(character => (
               <Character
                 character={character}
@@ -76,7 +76,7 @@ const Overview = () => {
 
       {(data.staff?.edges?.length || -1) > 0 && (
         <Content heading='Staff'>
-          <div className={peopleStyles.container}>
+          <div className={peopleStyles.people}>
             {data.staff?.edges?.map(staff => (
               <Person
                 name={staff?.node?.name?.full}

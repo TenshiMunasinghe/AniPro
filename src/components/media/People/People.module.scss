@@ -3,13 +3,19 @@
 .container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: min-content;
+  @include gap($column: var(--space-500));
+}
+
+.people {
+  display: grid;
 
   @include mq(below, md) {
-    @include gap($column: var(--space-400));
+    row-gap: var(--space-400);
   }
 
   @include mq(above, md) {
-    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-400) var(--space-500);
   }

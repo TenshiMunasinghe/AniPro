@@ -39,14 +39,17 @@ const Characters = () => {
 
   return (
     <div className={styles.container}>
-      {data.pages.map(characters =>
-        characters.Media?.characters?.edges?.map(character => (
-          <Character
-            character={character as CharacterEdge}
-            key={'character' + character?.node?.id}
-          />
-        ))
-      )}
+      <div className={styles.people}>
+        {data.pages.map(characters =>
+          characters.Media?.characters?.edges?.map(character => (
+            <Character
+              character={character as CharacterEdge}
+              key={'character' + character?.node?.id}
+            />
+          ))
+        )}
+      </div>
+
       <LoadMore
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage || false}
