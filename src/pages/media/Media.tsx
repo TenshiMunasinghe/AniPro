@@ -48,14 +48,14 @@ export type ParamTypes = {
 
 const filterTabs = (data: CommonQuery['Media']) => {
   const tabs = [...TAB]
-  const tabsArr = [
-    ['watch', data?.streamingEpisodes],
-    ['staff', data?.staff?.edges],
-    ['characters', data?.characters?.edges],
+  const tabsArr: { tab: TabsType; data: any }[] = [
+    { tab: 'watch', data: data?.streamingEpisodes },
+    { tab: 'staff', data: data?.staff?.edges },
+    { tab: 'characters', data: data?.characters?.edges },
   ]
   for (const subArr of tabsArr) {
-    if (subArr[1]?.length === 0) {
-      const idx = tabs.indexOf(subArr[0] as TabsType)
+    if (!subArr.data?.length) {
+      const idx = tabs.indexOf(subArr.tab as TabsType)
       tabs.splice(idx, 1)
     }
   }
