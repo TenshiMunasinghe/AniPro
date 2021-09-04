@@ -52,6 +52,7 @@ const filterTabs = (data: CommonQuery['Media']) => {
     { tab: 'watch', data: data?.streamingEpisodes },
     { tab: 'staff', data: data?.staff?.edges },
     { tab: 'characters', data: data?.characters?.edges },
+    { tab: 'reviews', data: data?.reviews },
   ]
   for (const subArr of tabsArr) {
     if (!subArr.data?.length) {
