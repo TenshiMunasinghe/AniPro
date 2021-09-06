@@ -8,6 +8,8 @@ interface Props {
   hasPointLabel?: boolean
 }
 
+const orderOf = (num: number) => Math.floor(Math.log10(num))
+
 const LineChart = ({
   labels: _labels,
   data: _data,
@@ -30,20 +32,30 @@ const LineChart = ({
     ],
   }
 
+  const max = Math.max(...data)
+  const min = Math.min(...data)
+
   return (
     <ChartistGraph
       type='Line'
       data={activityData}
       options={
-        hasPointLabel &&
-        ({
-          plugins: [ctPointLabels({ textAnchor: 'start' })],
+        {
+          plugins: hasPointLabel && [ctPointLabels({ textAnchor: 'start' })],
           axisY: {
-            low: Math.floor(Math.min(...data) / 5) * 5,
-            high: Math.ceil(Math.max(...data) / 10) * 10,
+            low: Math.floor(
+              Math.floor(min / 10 ** (orderOf(min) - 1)) *
+                10 ** (orderOf(min) - 1) -
+                10 ** (orderOf(min) - 1)
+            ),
+            high: Math.ceil(
+              Math.floor(max / 10 ** (orderOf(max) - 1)) *
+                10 ** (orderOf(max) - 1) +
+                10 ** (orderOf(max) - 1)
+            ),
             onlyInteger: true,
           },
-        } as any)
+        } as any
       }
       className={styles.container}
     />
