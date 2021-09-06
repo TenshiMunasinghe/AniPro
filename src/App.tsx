@@ -8,6 +8,7 @@ import {
   Switch,
   useLocation,
 } from 'react-router-dom'
+import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner'
 import {
   Theme,
   useThemeStore,
@@ -64,14 +65,14 @@ const App = () => {
         <ScrollToTop />
         <Switch>
           <Route exact path='/media/:id/:tab?'>
-            <Media />
+            <Media fallback={<LoadingSpinner />} />
           </Route>
           <Route path='/'>
             <Route exact path='/'>
-              <Home />
+              <Home fallback={<LoadingSpinner />} />
             </Route>
             <Route exact path='/search'>
-              <Search />
+              <Search fallback={<LoadingSpinner />} />
             </Route>
           </Route>
         </Switch>
