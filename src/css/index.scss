@@ -113,8 +113,8 @@ body {
 }
 
 .ct-label {
-  color: inherit;
-  fill: inherit;
+  color: var(--color-text-200);
+  fill: var(--color-text-200);
   font-size: inherit;
   align-self: flex-end;
 }
