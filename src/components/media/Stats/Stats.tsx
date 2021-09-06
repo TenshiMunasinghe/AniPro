@@ -6,8 +6,10 @@ import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Content from '../../media/Content/Content'
 import Activities from '../Activities/Activities'
 import Ranking from '../Ranking/Ranking'
+import ScoreProgression from '../ScoreProgression/ScoreProgression'
 import Scores from '../Scores/Scores'
 import Status from '../Status/Status'
+import WatcherProgression from '../WatcherProgression/WatcherProgression'
 import styles from './Stats.module.scss'
 
 const Stats = () => {
@@ -34,6 +36,14 @@ const Stats = () => {
 
       <Content heading='Recent Activity Per Day'>
         <Activities activities={data.trends?.nodes} />
+      </Content>
+
+      <Content heading='Airing Score Progression'>
+        <ScoreProgression trends={data.episodeTrends?.nodes} />
+      </Content>
+
+      <Content heading='Airing Watchers Progression'>
+        <WatcherProgression trends={data.episodeTrends?.nodes} />
       </Content>
 
       <Content heading='Status Distribution'>
