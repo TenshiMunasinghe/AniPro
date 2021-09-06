@@ -4632,7 +4632,7 @@ export type StatsQueryVariables = Exact<{
 }>;
 
 
-export type StatsQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, trends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', date: number, trending: number, averageScore?: Maybe<number>, inProgress?: Maybe<number> }>>> }>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }> }> };
+export type StatsQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, trends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', date: number, trending: number, averageScore?: Maybe<number> }>>> }>, episodeTrends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', averageScore?: Maybe<number>, inProgress?: Maybe<number>, episode?: Maybe<number> }>>> }>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }> }> };
 
 export type WatchQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -5028,12 +5028,18 @@ export const StatsDocument = `
       season
       allTime
     }
-    trends(sort: DATE_DESC) {
+    trends(sort: ID_DESC) {
       nodes {
         date
         trending
         averageScore
+      }
+    }
+    episodeTrends: trends(releasing: true, sort: EPISODE_DESC) {
+      nodes {
+        averageScore
         inProgress
+        episode
       }
     }
     stats {

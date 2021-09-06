@@ -10,12 +10,18 @@ query stats($id: Int!) {
       season
       allTime
     }
-    trends(sort: DATE_DESC) {
+    trends(sort: ID_DESC) {
       nodes {
         date
         trending
         averageScore
+      }
+    }
+    episodeTrends: trends(releasing: true, sort: EPISODE_DESC) {
+      nodes {
+        averageScore
         inProgress
+        episode
       }
     }
     stats {
