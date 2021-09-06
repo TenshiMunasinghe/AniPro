@@ -10,6 +10,10 @@
   padding-right: 0;
   width: 100%;
 
+  @include mq(above, md) {
+    font-size: var(--text-size-300);
+  }
+
   .series {
     @for $n from 1 through 10 {
       line:nth-child(#{$n}) {
