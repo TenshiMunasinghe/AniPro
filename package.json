@@ -21,6 +21,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/uuid": "^8.3.0",
     "chartist": "^0.11.4",
+    "chartist-plugin-pointlabels": "^0.0.6",
     "classnames": "^2.2.6",
     "graphql": "^15.5.1",
     "htmr": "^0.9.1",
