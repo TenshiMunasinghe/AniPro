@@ -69,7 +69,11 @@ export const context = createContext<{ scrollPosition: ScrollPosition }>({
 
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useCommonQuery(gqlRequestClient, { id: parseInt(id) })
+  const { data, isLoading } = useCommonQuery(gqlRequestClient, {
+    id: parseInt(id),
+  })
+
+  if (isLoading) return <LoadingSpinner />
 
   if (!data || !data.Media) return null
 
