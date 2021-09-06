@@ -9,9 +9,22 @@
   border-radius: 0.25rem;
   overflow: hidden;
 
-  .thumbnail {
+  .imageContainer {
     height: 6.9rem;
     width: 100%;
+    overflow: hidden;
+
+    &:hover {
+      .thumbnail {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .thumbnail {
+    height: 100%;
+    width: 100%;
+    transition: all 0.169s ease-in-out;
   }
 
   .title {
