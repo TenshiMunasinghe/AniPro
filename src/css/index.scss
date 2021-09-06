@@ -113,8 +113,8 @@ body {
 }
 
 .ct-label {
-  color: var(--color-text-accent-200);
-  fill: var(--color-text-accent-200);
+  color: var(--color-text-200);
+  fill: var(--color-text-200);
   font-size: inherit;
   align-self: flex-end;
 }
@@ -123,9 +123,9 @@ body {
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
 .ct-series-a .ct-slice-donut {
-  stroke: var(--color-text-200);
+  stroke: var(--color-text-accent-200);
 }
 
 .ct-grid {
-  stroke: var(--color-foreground-400);
+  stroke: var(--color-text-accent-300);
 }
