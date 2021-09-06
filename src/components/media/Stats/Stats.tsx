@@ -4,12 +4,10 @@ import { useStatsQuery } from '../../../generated/index'
 import { ParamTypes } from '../../../pages/media/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Content from '../../media/Content/Content'
-import Activities from '../Activities/Activities'
+import LineChart from '../LineChart/LineChart'
 import Ranking from '../Ranking/Ranking'
-import ScoreProgression from '../ScoreProgression/ScoreProgression'
 import Scores from '../Scores/Scores'
 import Status from '../Status/Status'
-import WatcherProgression from '../WatcherProgression/WatcherProgression'
 import styles from './Stats.module.scss'
 
 const Stats = () => {
@@ -24,6 +22,14 @@ const Stats = () => {
 
   if (!data) return null
 
+  const sortedTrends = data.trends?.nodes?.sort((a, b) =>
+    a?.date && b?.date ? a.date - b.date : 0
+  )
+
+  const sortedEpisodeTrends = data.episodeTrends?.nodes
+    ?.filter(trend => typeof trend?.episode === 'number')
+    .sort((a, b) => (a?.episode && b?.episode ? a.episode - b.episode : 0))
+
   return (
     <div className={styles.container}>
       <Content heading='Rankings'>
@@ -34,17 +40,36 @@ const Stats = () => {
         </div>
       </Content>
 
-      <Content heading='Recent Activity Per Day'>
-        <Activities activities={data.trends?.nodes} />
-      </Content>
+      {sortedTrends && (
+        <Content heading='Recent Activity Per Day'>
+          <LineChart
+            labels={sortedTrends.map(trend =>
+              trend?.date
+                ? `${new Date((trend?.date || 0) * 1000).getDate()}th`
+                : null
+            )}
+            data={sortedTrends.map(trend => trend?.trending)}
+          />
+        </Content>
+      )}
 
-      <Content heading='Airing Score Progression'>
-        <ScoreProgression trends={data.episodeTrends?.nodes} />
-      </Content>
+      {sortedEpisodeTrends && (
+        <Content heading='Airing Score Progression'>
+          <LineChart
+            labels={sortedEpisodeTrends.map(trend => trend?.episode)}
+            data={sortedEpisodeTrends.map(trend => trend?.averageScore)}
+          />
+        </Content>
+      )}
 
-      <Content heading='Airing Watchers Progression'>
-        <WatcherProgression trends={data.episodeTrends?.nodes} />
-      </Content>
+      {sortedEpisodeTrends && (
+        <Content heading='Airing Watchers Progression'>
+          <LineChart
+            labels={sortedEpisodeTrends.map(trend => trend?.episode)}
+            data={sortedEpisodeTrends.map(trend => trend?.inProgress)}
+          />
+        </Content>
+      )}
 
       <Content heading='Status Distribution'>
         <Status
