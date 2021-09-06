@@ -5028,7 +5028,7 @@ export const StatsDocument = `
       season
       allTime
     }
-    trends(sort: ID_DESC) {
+    trends(sort: ID_DESC, perPage: 14) {
       nodes {
         date
         trending
