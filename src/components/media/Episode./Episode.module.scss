@@ -35,5 +35,9 @@
     white-space: nowrap;
     background: var(--color-foreground-200);
     font-size: var(--text-size-300);
+
+    &:hover {
+      color: var(--color-text-accent-100);
+    }
   }
 }
