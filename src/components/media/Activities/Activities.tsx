@@ -1,7 +1,7 @@
 import ChartistGraph from 'react-chartist'
 import { DeepPartial } from 'react-hook-form'
 import { MediaTrend } from '../../../generated/index'
-import styles from './Activities.module.scss'
+import styles from '../GraphStyles.module.scss'
 
 interface Props {
   activities?: (DeepPartial<MediaTrend> | null)[] | null
@@ -18,7 +18,7 @@ const Activities = ({ activities }: Props) => {
     ),
     series: [
       {
-        data: activities?.map(activity => activity?.trending),
+        data: sortedActivities?.map(activity => activity?.trending),
         className: styles.series,
       },
     ],
