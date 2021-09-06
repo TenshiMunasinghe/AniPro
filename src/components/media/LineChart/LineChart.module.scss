@@ -1,0 +1,13 @@
+.container {
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: var(--text-size-200);
+  background: var(--color-foreground-100);
+  padding: var(--space-400);
+  padding-bottom: 0;
+  padding-right: 0;
+
+  & > svg {
+    min-width: 1000px;
+  }
+}
