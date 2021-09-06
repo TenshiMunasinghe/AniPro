@@ -11,7 +11,7 @@ interface Props {
 const LineChart = ({
   labels: _labels,
   data: _data,
-  hasPointLabel = false,
+  hasPointLabel = true,
 }: Props) => {
   const labels = _labels.flatMap(data =>
     typeof data === 'number' || typeof data === 'string' ? [data] : []
