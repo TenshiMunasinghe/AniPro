@@ -18,6 +18,28 @@
     align-items: center;
   }
 
+  &.noBanner {
+    padding-top: var(--space-600);
+
+    .banner {
+      display: none;
+    }
+
+    .imageContainer {
+      margin-top: 0;
+    }
+
+    .description {
+      flex: 1;
+
+      & > p {
+        display: block;
+        overflow-y: auto;
+        height: 100%;
+      }
+    }
+  }
+
   .banner {
     position: relative;
     width: 100vw;
@@ -124,6 +146,11 @@
         max-width: var(--image-width);
       }
     }
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
   }
 
   .title {

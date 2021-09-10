@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 import { NO_IMAGE_URL } from '../../../api/queries'
@@ -36,7 +37,11 @@ const Header = ({
   } as CSSProperties
 
   return (
-    <header className={styles.container} style={style}>
+    <header
+      className={classnames(styles.container, {
+        [styles.noBanner]: !bannerImg,
+      })}
+      style={style}>
       <div className={styles.banner} />
       <div className={styles.contents}>
         <div className={styles.imageContainer}>
