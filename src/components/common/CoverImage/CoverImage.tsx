@@ -12,8 +12,6 @@ interface Props {
   src?: string | null
 }
 
-// TODO: add background color
-
 const CoverImage = ({ id, title, src }: Props) => {
   const scrollPosition = useContext(ScrollPositionContext)
 
