@@ -3,9 +3,10 @@
 .container {
   display: flex;
 
-  .image {
+  .imageWrapper {
     width: 4rem;
     @include aspect-ratio(var(--image-aspect-ratio));
+    @include image-with-effect;
   }
 
   .details {

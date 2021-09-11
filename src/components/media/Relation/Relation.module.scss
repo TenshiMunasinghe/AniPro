@@ -78,6 +78,9 @@
   }
 
   .imageWrapper {
+    overflow: hidden;
+    @include image-with-effect;
+
     & > span,
     img {
       width: var(--image-width);
@@ -113,6 +116,13 @@
 
     & > a {
       text-decoration: none;
+    }
+
+    &:hover,
+    &:focus-within {
+      & > a {
+        color: var(--color-text-accent-100);
+      }
     }
   }
 

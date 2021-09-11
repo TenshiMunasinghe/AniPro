@@ -16,17 +16,19 @@ interface Props {
 
 const Person = ({ image, name, info, isReversed = false }: Props) => {
   const { scrollPosition } = useContext(context)
+
   return (
     <div
       className={classnames(styles.container, {
         [styles.reversed]: isReversed,
       })}>
-      <LazyLoadImage
-        scrollPosition={scrollPosition}
-        src={image || NO_IMAGE_URL}
-        alt={name || 'no info'}
-        className={styles.image}
-      />
+      <figure className={styles.imageWrapper}>
+        <LazyLoadImage
+          scrollPosition={scrollPosition}
+          src={image || NO_IMAGE_URL}
+          alt={name || 'no info'}
+        />
+      </figure>
       <div className={styles.details}>
         <div className={styles.name}>{name}</div>
         {info && <div className={styles.info}>{toStartCase(info)}</div>}
