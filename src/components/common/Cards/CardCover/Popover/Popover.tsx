@@ -63,9 +63,9 @@ const Popover = ({
         {meanScore && <Score score={meanScore} />}
       </header>
 
-      <div className={styles.studio}>
-        {studios?.nodes?.[0]?.name || 'no name'}
-      </div>
+      {studios?.nodes?.[0]?.name && (
+        <div className={styles.studio}>{studios?.nodes?.[0]?.name}</div>
+      )}
       <div className={styles.info}>
         {formatLabel(format || '')}
         {format === 'MOVIE' && _duration.length > 0 ? (
