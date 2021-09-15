@@ -4614,7 +4614,7 @@ export type CommonQueryVariables = Exact<{
 }>;
 
 
-export type CommonQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', bannerImage?: Maybe<string>, description?: Maybe<string>, format?: Maybe<MediaFormat>, episodes?: Maybe<number>, duration?: Maybe<number>, status?: Maybe<MediaStatus>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, averageScore?: Maybe<number>, meanScore?: Maybe<number>, popularity?: Maybe<number>, favourites?: Maybe<number>, source?: Maybe<MediaSource>, hashtag?: Maybe<string>, genres?: Maybe<Array<Maybe<string>>>, synonyms?: Maybe<Array<Maybe<string>>>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string>, native?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, extraLarge?: Maybe<string>, color?: Maybe<string> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', episode: number, timeUntilAiring: number }>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, endDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, externalLinks?: Maybe<Array<Maybe<{ __typename?: 'MediaExternalLink', url: string, site: string }>>>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', node?: Maybe<{ __typename?: 'Character', id: number }> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', node?: Maybe<{ __typename?: 'Staff', id: number }> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', title?: Maybe<string>, url?: Maybe<string> }>>>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number }>>> }> }> };
+export type CommonQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', bannerImage?: Maybe<string>, description?: Maybe<string>, format?: Maybe<MediaFormat>, episodes?: Maybe<number>, duration?: Maybe<number>, status?: Maybe<MediaStatus>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, averageScore?: Maybe<number>, meanScore?: Maybe<number>, popularity?: Maybe<number>, favourites?: Maybe<number>, source?: Maybe<MediaSource>, hashtag?: Maybe<string>, genres?: Maybe<Array<Maybe<string>>>, synonyms?: Maybe<Array<Maybe<string>>>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string>, native?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, extraLarge?: Maybe<string>, color?: Maybe<string> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', episode: number, timeUntilAiring: number }>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, endDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, externalLinks?: Maybe<Array<Maybe<{ __typename?: 'MediaExternalLink', url: string, site: string }>>>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', node?: Maybe<{ __typename?: 'Character', id: number }> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', node?: Maybe<{ __typename?: 'Staff', id: number }> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', title?: Maybe<string>, url?: Maybe<string> }>>>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number }>>> }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }> };
 
 export type OverviewQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -4810,6 +4810,7 @@ export const CommonDocument = `
     }
     bannerImage
     description
+    ...Ranking
     nextAiringEpisode {
       episode
       timeUntilAiring
@@ -4872,7 +4873,7 @@ export const CommonDocument = `
     }
   }
 }
-    `;
+    ${RankingFragmentDoc}`;
 export const useCommonQuery = <
       TData = CommonQuery,
       TError = unknown

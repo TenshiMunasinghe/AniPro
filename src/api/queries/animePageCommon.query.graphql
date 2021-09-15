@@ -12,6 +12,7 @@ query common($id: Int!) {
     }
     bannerImage
     description
+    ...Ranking
     nextAiringEpisode {
       episode
       timeUntilAiring
