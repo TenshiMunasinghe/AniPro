@@ -1,20 +1,28 @@
 @use '../../../css/config.scss' as *;
 
 .container {
-  max-width: 100%;
-  display: flex;
-  overflow-x: auto;
-  padding: var(--space-400) var(--space-500);
-  background: var(--color-foreground-50);
-
-  @include mq(below, md) {
-    @include gap($row: var(--space-600));
+  .rankings {
+    & > * {
+      margin-bottom: var(--space-500);
+    }
   }
 
-  @include mq(above, md) {
-    height: min-content;
-    flex-direction: column;
-    @include padding-horizontal(var(--space-400));
-    @include gap($column: var(--space-400));
+  .infos {
+    max-width: 100%;
+    display: flex;
+    overflow-x: auto;
+    padding: var(--space-400) var(--space-500);
+    background: var(--color-foreground-50);
+
+    @include mq(below, md) {
+      @include gap($row: var(--space-600));
+    }
+
+    @include mq(above, md) {
+      height: min-content;
+      flex-direction: column;
+      @include padding-horizontal(var(--space-400));
+      @include gap($column: var(--space-400));
+    }
   }
 }
