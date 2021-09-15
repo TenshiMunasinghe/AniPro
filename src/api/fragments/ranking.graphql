@@ -1,0 +1,11 @@
+fragment Ranking on Media {
+  rankings {
+    id
+    rank
+    context
+    type
+    year
+    season
+    allTime
+  }
+}

@@ -5,27 +5,7 @@ query characters($id: Int!, $page: Int!) {
         currentPage
         hasNextPage
       }
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-        voiceActors(language: JAPANESE) {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-      }
+      ...Characters
     }
   }
 }

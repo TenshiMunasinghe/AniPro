@@ -1,15 +1,7 @@
 query stats($id: Int!) {
   Media(id: $id) {
     status
-    rankings {
-      id
-      rank
-      context
-      type
-      year
-      season
-      allTime
-    }
+    ...Ranking
     trends(sort: ID_DESC, perPage: 14) {
       nodes {
         date
@@ -24,15 +16,6 @@ query stats($id: Int!) {
         episode
       }
     }
-    stats {
-      scoreDistribution {
-        score
-        amount
-      }
-      statusDistribution {
-        status
-        amount
-      }
-    }
+    ...Stats
   }
 }

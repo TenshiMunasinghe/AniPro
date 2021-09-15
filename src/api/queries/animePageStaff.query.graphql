@@ -5,18 +5,7 @@ query staff($id: Int!, $page: Int!) {
         currentPage
         hasNextPage
       }
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-      }
+      ...Staffs
     }
   }
 }

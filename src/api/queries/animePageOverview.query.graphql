@@ -18,73 +18,18 @@ query overview($id: Int!) {
         relationType
       }
     }
+    ...Ranking
     characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-        voiceActors(language: JAPANESE) {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-      }
+      ...Characters
     }
     staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-      }
+      ...Staffs
     }
     reviews(sort: [SCORE_DESC], perPage: 2) {
-      nodes {
-        id
-        summary
-        rating
-        ratingAmount
-        score
-        user {
-          name
-          avatar {
-            medium
-          }
-        }
-      }
+      ...Reviews
     }
-    stats {
-      scoreDistribution {
-        score
-        amount
-      }
-      statusDistribution {
-        status
-        amount
-      }
-    }
-    streamingEpisodes {
-      url
-      title
-      thumbnail
-    }
+    ...Stats
+    ...Episodes
     trailer {
       id
       site

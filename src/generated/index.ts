@@ -4589,6 +4589,18 @@ export type YearStats = {
   meanScore?: Maybe<Scalars['Int']>;
 };
 
+export type CharactersFragment = { __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> };
+
+export type EpisodesFragment = { __typename?: 'Media', streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> };
+
+export type RankingFragment = { __typename?: 'Media', rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> };
+
+export type ReviewsFragment = { __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number, summary?: Maybe<string>, rating?: Maybe<number>, ratingAmount?: Maybe<number>, score?: Maybe<number>, user?: Maybe<{ __typename?: 'User', name: string, avatar?: Maybe<{ __typename?: 'UserAvatar', medium?: Maybe<string> }> }> }>>> };
+
+export type StaffsFragment = { __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', role?: Maybe<string>, node?: Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }> }>>> };
+
+export type StatsFragment = { __typename?: 'Media', stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }> };
+
 export type CharactersQueryVariables = Exact<{
   id: Scalars['Int'];
   page: Scalars['Int'];
@@ -4609,7 +4621,7 @@ export type OverviewQueryVariables = Exact<{
 }>;
 
 
-export type OverviewQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, relations?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, relationType?: Maybe<MediaRelation>, node?: Maybe<{ __typename?: 'Media', id: number, format?: Maybe<MediaFormat>, status?: Maybe<MediaStatus>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string> }> }> }>>> }>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', role?: Maybe<string>, node?: Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }> }>>> }>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number, summary?: Maybe<string>, rating?: Maybe<number>, ratingAmount?: Maybe<number>, score?: Maybe<number>, user?: Maybe<{ __typename?: 'User', name: string, avatar?: Maybe<{ __typename?: 'UserAvatar', medium?: Maybe<string> }> }> }>>> }>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>>, trailer?: Maybe<{ __typename?: 'MediaTrailer', id?: Maybe<string>, site?: Maybe<string>, thumbnail?: Maybe<string> }>, recommendations?: Maybe<{ __typename?: 'RecommendationConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Recommendation', mediaRecommendation?: Maybe<{ __typename?: 'Media', id: number, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
+export type OverviewQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, relations?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, relationType?: Maybe<MediaRelation>, node?: Maybe<{ __typename?: 'Media', id: number, format?: Maybe<MediaFormat>, status?: Maybe<MediaStatus>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string> }> }> }>>> }>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', role?: Maybe<string>, node?: Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }> }>>> }>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number, summary?: Maybe<string>, rating?: Maybe<number>, ratingAmount?: Maybe<number>, score?: Maybe<number>, user?: Maybe<{ __typename?: 'User', name: string, avatar?: Maybe<{ __typename?: 'UserAvatar', medium?: Maybe<string> }> }> }>>> }>, trailer?: Maybe<{ __typename?: 'MediaTrailer', id?: Maybe<string>, site?: Maybe<string>, thumbnail?: Maybe<string> }>, recommendations?: Maybe<{ __typename?: 'RecommendationConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Recommendation', mediaRecommendation?: Maybe<{ __typename?: 'Media', id: number, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> }> };
 
 export type ReviewsQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -4632,7 +4644,7 @@ export type StatsQueryVariables = Exact<{
 }>;
 
 
-export type StatsQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, trends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', date: number, trending: number, averageScore?: Maybe<number> }>>> }>, episodeTrends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', averageScore?: Maybe<number>, inProgress?: Maybe<number>, episode?: Maybe<number> }>>> }>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }> }> };
+export type StatsQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, trends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', date: number, trending: number, averageScore?: Maybe<number> }>>> }>, episodeTrends?: Maybe<{ __typename?: 'MediaTrendConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'MediaTrend', averageScore?: Maybe<number>, inProgress?: Maybe<number>, episode?: Maybe<number> }>>> }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }> }> };
 
 export type WatchQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -4659,7 +4671,100 @@ export type SearchResultQueryVariables = Exact<{
 
 export type SearchResultQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, media?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, bannerImage?: Maybe<string>, status?: Maybe<MediaStatus>, genres?: Maybe<Array<Maybe<string>>>, description?: Maybe<string>, meanScore?: Maybe<number>, format?: Maybe<MediaFormat>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, episodes?: Maybe<number>, duration?: Maybe<number>, popularity?: Maybe<number>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', extraLarge?: Maybe<string>, large?: Maybe<string>, color?: Maybe<string> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', timeUntilAiring: number, episode: number }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', rank: number, context: string, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }>>> }> };
 
-
+export const CharactersFragmentDoc = `
+    fragment Characters on CharacterConnection {
+  edges {
+    node {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+    role
+    voiceActors(language: JAPANESE) {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+  }
+}
+    `;
+export const EpisodesFragmentDoc = `
+    fragment Episodes on Media {
+  streamingEpisodes {
+    url
+    title
+    thumbnail
+  }
+}
+    `;
+export const RankingFragmentDoc = `
+    fragment Ranking on Media {
+  rankings {
+    id
+    rank
+    context
+    type
+    year
+    season
+    allTime
+  }
+}
+    `;
+export const ReviewsFragmentDoc = `
+    fragment Reviews on ReviewConnection {
+  nodes {
+    id
+    summary
+    rating
+    ratingAmount
+    score
+    user {
+      name
+      avatar {
+        medium
+      }
+    }
+  }
+}
+    `;
+export const StaffsFragmentDoc = `
+    fragment Staffs on StaffConnection {
+  edges {
+    node {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+    role
+  }
+}
+    `;
+export const StatsFragmentDoc = `
+    fragment Stats on Media {
+  stats {
+    scoreDistribution {
+      score
+      amount
+    }
+    statusDistribution {
+      status
+      amount
+    }
+  }
+}
+    `;
 export const CharactersDocument = `
     query characters($id: Int!, $page: Int!) {
   Media(id: $id) {
@@ -4668,31 +4773,11 @@ export const CharactersDocument = `
         currentPage
         hasNextPage
       }
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-        voiceActors(language: JAPANESE) {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-      }
+      ...Characters
     }
   }
 }
-    `;
+    ${CharactersFragmentDoc}`;
 export const useCharactersQuery = <
       TData = CharactersQuery,
       TError = unknown
@@ -4826,73 +4911,18 @@ export const OverviewDocument = `
         relationType
       }
     }
+    ...Ranking
     characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-        voiceActors(language: JAPANESE) {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-      }
+      ...Characters
     }
     staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-      }
+      ...Staffs
     }
     reviews(sort: [SCORE_DESC], perPage: 2) {
-      nodes {
-        id
-        summary
-        rating
-        ratingAmount
-        score
-        user {
-          name
-          avatar {
-            medium
-          }
-        }
-      }
+      ...Reviews
     }
-    stats {
-      scoreDistribution {
-        score
-        amount
-      }
-      statusDistribution {
-        status
-        amount
-      }
-    }
-    streamingEpisodes {
-      url
-      title
-      thumbnail
-    }
+    ...Stats
+    ...Episodes
     trailer {
       id
       site
@@ -4914,7 +4944,12 @@ export const OverviewDocument = `
     }
   }
 }
-    `;
+    ${RankingFragmentDoc}
+${CharactersFragmentDoc}
+${StaffsFragmentDoc}
+${ReviewsFragmentDoc}
+${StatsFragmentDoc}
+${EpisodesFragmentDoc}`;
 export const useOverviewQuery = <
       TData = OverviewQuery,
       TError = unknown
@@ -4940,23 +4975,11 @@ export const ReviewsDocument = `
         currentPage
         hasNextPage
       }
-      nodes {
-        id
-        summary
-        rating
-        ratingAmount
-        score
-        user {
-          name
-          avatar {
-            medium
-          }
-        }
-      }
+      ...Reviews
     }
   }
 }
-    `;
+    ${ReviewsFragmentDoc}`;
 export const useReviewsQuery = <
       TData = ReviewsQuery,
       TError = unknown
@@ -4982,22 +5005,11 @@ export const StaffDocument = `
         currentPage
         hasNextPage
       }
-      edges {
-        node {
-          id
-          name {
-            full
-          }
-          image {
-            large
-          }
-        }
-        role
-      }
+      ...Staffs
     }
   }
 }
-    `;
+    ${StaffsFragmentDoc}`;
 export const useStaffQuery = <
       TData = StaffQuery,
       TError = unknown
@@ -5019,15 +5031,7 @@ export const StatsDocument = `
     query stats($id: Int!) {
   Media(id: $id) {
     status
-    rankings {
-      id
-      rank
-      context
-      type
-      year
-      season
-      allTime
-    }
+    ...Ranking
     trends(sort: ID_DESC, perPage: 14) {
       nodes {
         date
@@ -5042,19 +5046,11 @@ export const StatsDocument = `
         episode
       }
     }
-    stats {
-      scoreDistribution {
-        score
-        amount
-      }
-      statusDistribution {
-        status
-        amount
-      }
-    }
+    ...Stats
   }
 }
-    `;
+    ${RankingFragmentDoc}
+${StatsFragmentDoc}`;
 export const useStatsQuery = <
       TData = StatsQuery,
       TError = unknown
@@ -5075,14 +5071,10 @@ useStatsQuery.getKey = (variables: StatsQueryVariables) => ['stats', variables];
 export const WatchDocument = `
     query watch($id: Int!) {
   Media(id: $id) {
-    streamingEpisodes {
-      url
-      title
-      thumbnail
-    }
+    ...Episodes
   }
 }
-    `;
+    ${EpisodesFragmentDoc}`;
 export const useWatchQuery = <
       TData = WatchQuery,
       TError = unknown
@@ -5179,3 +5171,48 @@ export const useSearchResultQuery = <
 useSearchResultQuery.document = SearchResultDocument;
 
 useSearchResultQuery.getKey = (variables?: SearchResultQueryVariables) => ['searchResult', variables];
+
+
+      export interface PossibleTypesResultData {
+        possibleTypes: {
+          [key: string]: string[]
+        }
+      }
+      const result: PossibleTypesResultData = {
+  "possibleTypes": {
+    "ActivityUnion": [
+      "TextActivity",
+      "ListActivity",
+      "MessageActivity"
+    ],
+    "LikeableUnion": [
+      "ListActivity",
+      "TextActivity",
+      "MessageActivity",
+      "ActivityReply",
+      "Thread",
+      "ThreadComment"
+    ],
+    "NotificationUnion": [
+      "AiringNotification",
+      "FollowingNotification",
+      "ActivityMessageNotification",
+      "ActivityMentionNotification",
+      "ActivityReplyNotification",
+      "ActivityReplySubscribedNotification",
+      "ActivityLikeNotification",
+      "ActivityReplyLikeNotification",
+      "ThreadCommentMentionNotification",
+      "ThreadCommentReplyNotification",
+      "ThreadCommentSubscribedNotification",
+      "ThreadCommentLikeNotification",
+      "ThreadLikeNotification",
+      "RelatedMediaAdditionNotification",
+      "MediaDataChangeNotification",
+      "MediaMergeNotification",
+      "MediaDeletionNotification"
+    ]
+  }
+};
+      export default result;
+    

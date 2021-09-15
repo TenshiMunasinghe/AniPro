@@ -1,0 +1,14 @@
+fragment Staffs on StaffConnection {
+  edges {
+    node {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+    role
+  }
+}

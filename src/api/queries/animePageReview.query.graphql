@@ -5,19 +5,7 @@ query reviews($id: Int!, $page: Int!) {
         currentPage
         hasNextPage
       }
-      nodes {
-        id
-        summary
-        rating
-        ratingAmount
-        score
-        user {
-          name
-          avatar {
-            medium
-          }
-        }
-      }
+      ...Reviews
     }
   }
 }

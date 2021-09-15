@@ -1,0 +1,23 @@
+fragment Characters on CharacterConnection {
+  edges {
+    node {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+    role
+    voiceActors(language: JAPANESE) {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+fragment Reviews on ReviewConnection {
+  nodes {
+    id
+    summary
+    rating
+    ratingAmount
+    score
+    user {
+      name
+      avatar {
+        medium
+      }
+    }
+  }
+}
