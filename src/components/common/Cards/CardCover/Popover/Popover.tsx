@@ -56,12 +56,15 @@ const Popover = ({
         [styles.hide]: isHidden,
       })}
       ref={wrapperRef}>
-      <header className={styles.header}>
-        <div className={styles.airingInfo}>
-          {airingInfo({ nextAiringEpisode, season, seasonYear })}
-        </div>
-        {meanScore && <Score score={meanScore} />}
-      </header>
+      {(nextAiringEpisode || season || seasonYear || meanScore) && (
+        <header className={styles.header}>
+          <div className={styles.airingInfo}>
+            {airingInfo({ nextAiringEpisode, season, seasonYear })}
+          </div>
+
+          {meanScore && <Score score={meanScore} />}
+        </header>
+      )}
 
       {studios?.nodes?.[0]?.name && (
         <div className={styles.studio}>{studios?.nodes?.[0]?.name}</div>
