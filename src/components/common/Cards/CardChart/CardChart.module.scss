@@ -41,6 +41,11 @@
   margin-bottom: var(--space-500);
   margin-left: 0;
 
+  .title {
+    width: 100%;
+    overflow: hidden;
+  }
+
   .score {
     @include mq(below, sm) {
       display: none;
@@ -59,7 +64,9 @@
     font-size: var(--text-size-200);
     margin-top: var(--space-200);
     color: var(--color-text-300);
-    @include add-ellipsis(1);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
 }
 
