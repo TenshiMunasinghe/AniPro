@@ -16,16 +16,11 @@
 @mixin add-ellipsis($lines: 1) {
   text-overflow: ellipsis;
   overflow: hidden;
-
-  @if $lines == 1 {
-    white-space: nowrap;
-  } @else {
-    display: -webkit-box;
-    -webkit-line-clamp: $lines;
-    line-clamp: $lines;
-    -moz-box-orient: vertical;
-    -webkit-box-orient: vertical;
-  }
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  line-clamp: $lines;
+  -moz-box-orient: vertical;
+  -webkit-box-orient: vertical;
 }
 
 @mixin show-description {
