@@ -8,7 +8,7 @@
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
-  font-size: clamp(0.9rem, calc(0.2rem + 1.3vw), 1.1rem);
+  font-size: clamp(14px, calc(0.2rem + 1.3vw), 16px);
 }
 
 * {
@@ -45,9 +45,9 @@ body {
     --color-foreground-accent-100: var(--primary-600);
     --color-foreground-accent-200: var(--primary-700);
     --color-foreground-accent-300: var(--primary-800);
-    --color-text-100: var(--white-500);
-    --color-text-200: var(--white-400);
-    --color-text-300: var(--white-300);
+    --color-text-100: var(--white-700);
+    --color-text-200: var(--white-600);
+    --color-text-300: var(--white-500);
     --color-text-invert-100: var(--black-100);
     --color-text-invert-200: var(--black-200);
     --color-text-invert-300: var(--black-300);
@@ -79,9 +79,9 @@ body {
     --color-text-invert-100: var(--white-600);
     --color-text-invert-200: var(--white-500);
     --color-text-invert-300: var(--white-400);
-    --color-text-accent-100: var(--primary-100);
-    --color-text-accent-200: var(--primary-300);
-    --color-text-accent-300: var(--primary-500);
+    --color-text-accent-100: var(--primary-200);
+    --color-text-accent-200: var(--primary-400);
+    --color-text-accent-300: var(--primary-600);
     --color-border-100: var(--black-800);
     --color-border-200: var(--black-900);
     --color-underline-100: var(--white-600);
@@ -101,9 +101,10 @@ body {
 }
 
 #root {
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .ct-labels {
@@ -112,8 +113,8 @@ body {
 }
 
 .ct-label {
-  color: inherit;
-  fill: inherit;
+  color: var(--color-text-200);
+  fill: var(--color-text-200);
   font-size: inherit;
   align-self: flex-end;
 }
@@ -122,9 +123,9 @@ body {
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
 .ct-series-a .ct-slice-donut {
-  stroke: var(--color-text-200);
+  stroke: var(--color-text-accent-200);
 }
 
 .ct-grid {
-  stroke: var(--color-foreground-400);
+  stroke: var(--color-text-accent-300);
 }

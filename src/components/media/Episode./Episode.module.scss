@@ -1,22 +1,43 @@
 @use '../../../css/config.scss' as *;
 
 .container {
+  flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: flex-end;
-  background-image: var(--thumbnail);
-  background-position: 50%;
-  background-size: cover;
-  height: 8rem;
   text-decoration: none;
   border-radius: 0.25rem;
   overflow: hidden;
-  font-size: var(--text-size-200);
+
+  .imageContainer {
+    height: 6.9rem;
+    width: 100%;
+    overflow: hidden;
+
+    &:hover {
+      .thumbnail {
+        transform: scale(1.2);
+      }
+    }
+  }
+
+  .thumbnail {
+    height: 100%;
+    width: 100%;
+    transition: all 0.169s ease-in-out;
+  }
 
   .title {
     font-weight: 450;
     width: 100%;
     padding: var(--space-200) var(--space-300);
     @include add-ellipsis(1);
+    white-space: nowrap;
     background: var(--color-foreground-200);
+    font-size: var(--text-size-300);
+
+    &:hover {
+      color: var(--color-text-accent-100);
+    }
   }
 }

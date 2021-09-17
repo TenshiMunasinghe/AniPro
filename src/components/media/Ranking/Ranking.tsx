@@ -1,12 +1,15 @@
+import { DeepPartial } from 'react-hook-form'
 import { FaHeart, FaStar } from 'react-icons/fa'
-import { Stats } from '../../../api/types'
+import { MediaRank } from '../../../generated/index'
 import styles from './Ranking.module.scss'
 
 interface Props {
-  ranking: Stats['rankings'][number]
+  ranking: DeepPartial<MediaRank> | null
 }
 
 const Ranking = ({ ranking }: Props) => {
+  if (!ranking) return null
+
   return (
     <div className={styles.container}>
       {ranking.type === 'POPULAR' ? (

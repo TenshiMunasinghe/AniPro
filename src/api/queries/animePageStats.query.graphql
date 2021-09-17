@@ -1,0 +1,21 @@
+query stats($id: Int!) {
+  Media(id: $id) {
+    status
+    ...Ranking
+    trends(sort: ID_DESC, perPage: 14) {
+      nodes {
+        date
+        trending
+        averageScore
+      }
+    }
+    episodeTrends: trends(releasing: true, sort: EPISODE_DESC) {
+      nodes {
+        averageScore
+        inProgress
+        episode
+      }
+    }
+    ...Stats
+  }
+}

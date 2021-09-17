@@ -1,0 +1,74 @@
+query searchResult(
+  $page: Int = 1
+  $genres: [String]
+  $tags: [String]
+  $year: Int
+  $season: MediaSeason
+  $format: [MediaFormat]
+  $status: MediaStatus
+  $country: CountryCode
+  $source: MediaSource
+  $searchText: String
+  $sortBy: [MediaSort] = [TRENDING_DESC]
+  $perPage: Int = 10
+) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      currentPage
+      hasNextPage
+      lastPage
+    }
+    media(
+      genre_in: $genres
+      genre_not_in: ["Hentai"]
+      tag_in: $tags
+      seasonYear: $year
+      season: $season
+      format_in: $format
+      status: $status
+      countryOfOrigin: $country
+      source: $source
+      search: $searchText
+      sort: $sortBy
+      format_not_in: [MANGA, NOVEL, ONE_SHOT, MUSIC]
+    ) {
+      id
+      title {
+        romaji
+        english
+      }
+      bannerImage
+      coverImage {
+        extraLarge
+        large
+        color
+      }
+      status
+      genres
+      description
+      meanScore
+      format
+      season
+      seasonYear
+      episodes
+      duration
+      popularity
+      studios(isMain: true) {
+        nodes {
+          name
+        }
+      }
+      nextAiringEpisode {
+        timeUntilAiring
+        episode
+      }
+      rankings {
+        rank
+        context
+        year
+        season
+        allTime
+      }
+    }
+  }
+}

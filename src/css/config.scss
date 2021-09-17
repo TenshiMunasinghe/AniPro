@@ -14,13 +14,18 @@
 }
 
 @mixin add-ellipsis($lines: 1) {
-  display: -webkit-box;
-  -webkit-line-clamp: $lines;
-  line-clamp: $lines;
-  -moz-box-orient: vertical;
-  -webkit-box-orient: vertical;
   text-overflow: ellipsis;
   overflow: hidden;
+
+  @if $lines == 1 {
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+    -moz-box-orient: vertical;
+    -webkit-box-orient: vertical;
+  }
 }
 
 @mixin show-description {
@@ -185,6 +190,21 @@
     }
     & > *:first-child {
       margin-top: 0;
+    }
+  }
+}
+
+@mixin image-with-effect {
+  overflow: hidden;
+
+  img {
+    transition: transform 0.1s ease-in-out;
+  }
+
+  &:focus,
+  &:hover {
+    img {
+      transform: scale(1.1);
     }
   }
 }

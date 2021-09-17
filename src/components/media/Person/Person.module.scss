@@ -2,15 +2,16 @@
 
 .container {
   display: flex;
-  height: 6rem;
 
-  .image {
+  .imageWrapper {
     width: 4rem;
+    @include aspect-ratio(var(--image-aspect-ratio));
+    @include image-with-effect;
   }
 
   .details {
+    flex: 1;
     display: flex;
-    width: 100%;
     flex-direction: column;
     justify-content: center;
     padding: var(--space-400);

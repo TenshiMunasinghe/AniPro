@@ -27,7 +27,10 @@ body.search-options-open {
   overflow-x: auto;
   background: var(--color-foreground-50);
   padding: var(--space-300) var(--space-400);
-  @include gap($row: var(--space-400));
+
+  @include mq(below, md) {
+    @include gap($row: var(--space-400));
+  }
 
   &.vertical {
     @include mq(above, md) {

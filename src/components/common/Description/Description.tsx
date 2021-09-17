@@ -1,7 +1,7 @@
 import htmr from 'htmr'
 
 interface Props {
-  description: string
+  description?: string | null
 }
 
 const Description = ({ description }: Props) => {

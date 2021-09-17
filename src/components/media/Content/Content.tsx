@@ -1,8 +1,8 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import styles from './Content.module.scss'
 
 interface Props {
-  heading: string
+  heading: ReactNode
 }
 
 const Content: FC<Props> = ({ heading, children }) => {

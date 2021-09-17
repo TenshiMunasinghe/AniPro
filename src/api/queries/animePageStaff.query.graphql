@@ -1,0 +1,11 @@
+query staff($id: Int!, $page: Int!) {
+  Media(id: $id) {
+    staff(page: $page, perPage: 4, sort: [RELEVANCE]) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      ...Staffs
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query reviews($id: Int!, $page: Int!) {
+  Media(id: $id) {
+    reviews(sort: [SCORE_DESC], page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      ...Reviews
+    }
+  }
+}

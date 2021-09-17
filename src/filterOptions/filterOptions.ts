@@ -1,5 +1,12 @@
 import range from 'lodash/range'
 import { currentYear } from '../api/queries'
+import {
+  MediaFormat,
+  MediaSeason,
+  MediaSort,
+  MediaSource,
+  MediaStatus,
+} from '../generated/index'
 import { toStartCase } from '../utils/toStartCase'
 import { tags } from './tags'
 
@@ -42,17 +49,17 @@ export const filterOptionTypes = {
     },
 
     season: {
-      options: ['WINTER', 'SPRING', 'SUMMER', 'FALL'],
+      options: Object.values(MediaSeason) as string[],
       isMulti: false,
     },
 
     format: {
-      options: ['TV', 'TV_SHORT', 'MOVIE', 'SPECIAL', 'OVA', 'ONA', 'MUSIC'],
+      options: Object.values(MediaFormat) as string[],
       isMulti: true,
     },
 
     status: {
-      options: ['FINISHED', 'RELEASING', 'NOT_YET_RELEASED', 'CANCELLED'],
+      options: Object.values(MediaStatus) as string[],
       isMulti: false,
     },
 
@@ -62,29 +69,19 @@ export const filterOptionTypes = {
     },
 
     source: {
-      options: [
-        'ORIGINAL',
-        'MANGA',
-        'LIGHT_NOVEL',
-        'VISUAL_NOVEL',
-        'VIDEO_GAME',
-        'OTHER',
-        'NOVEL',
-        'DOUJINSHI',
-        'ANIME',
-      ],
+      options: Object.values(MediaSource) as string[],
       isMulti: false,
     },
   },
   simple: {
     sortBy: {
       options: [
-        'TRENDING_DESC',
-        'POPULARITY_DESC',
-        'SCORE_DESC',
-        'FAVOURITES_DESC',
-        'START_DATE_DESC',
-      ],
+        MediaSort.TrendingDesc,
+        MediaSort.PopularityDesc,
+        MediaSort.ScoreDesc,
+        MediaSort.FavouritesDesc,
+        MediaSort.StartDateDesc,
+      ] as string[],
       isMulti: false,
     },
   },

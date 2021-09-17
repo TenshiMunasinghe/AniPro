@@ -1,43 +1,32 @@
 import classnames from 'classnames'
-import { memo, useLayoutEffect, useRef, useState } from 'react'
-import { FetchedMedias } from '../../../../../api/types'
+import { memo } from 'react'
+import { useOverflow } from '../../../../../hooks/useOverflow'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
 import { formatLabel } from '../../../../../utils/formatLabel'
 import { pluralize } from '../../../../../utils/pluralize'
 import { timeToArr } from '../../../../../utils/timeToArr'
 import { timeToStr } from '../../../../../utils/timeToStr'
-import {
-  useWindowSizeStore,
-  WindowSizeStore,
-} from '../../../../../zustand/stores'
+import { Media } from '../../../CardGrid/CardGrid'
 import Genres from '../../../Genres/Genres'
 import Score from '../../../Score/Score'
 import styles from './Popover.module.scss'
 
 interface Props {
-  index: number
+  index: number // for repositioning when order changes
   isVisible: boolean
-  format: FetchedMedias['format']
-  season: FetchedMedias['season']
-  seasonYear: FetchedMedias['seasonYear']
-  episodes: FetchedMedias['episodes']
-  duration: FetchedMedias['duration']
-  genres: FetchedMedias['genres']
-  studios: FetchedMedias['studios']
-  meanScore: FetchedMedias['meanScore']
-  nextAiringEpisode: FetchedMedias['nextAiringEpisode']
+  format: Media['format']
+  season: Media['season']
+  seasonYear: Media['seasonYear']
+  episodes: Media['episodes']
+  duration: Media['duration']
+  genres: Media['genres']
+  studios: Media['studios']
+  meanScore: Media['meanScore']
+  nextAiringEpisode: Media['nextAiringEpisode']
 }
-
-type DisplayState = {
-  isLeft: boolean
-  isRight: boolean
-}
-
-const windowStateSelector = (state: WindowSizeStore) => state.width
 
 const Popover = ({
-  index,
   nextAiringEpisode,
   isVisible,
   season,
@@ -49,36 +38,11 @@ const Popover = ({
   episodes,
   duration,
 }: Props) => {
-  const [{ isLeft, isRight }, setDisplay] = useState<DisplayState>({
-    isLeft: false,
-    isRight: false,
-  })
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
-  const windowWidth = useWindowSizeStore(windowStateSelector)
-
-  useLayoutEffect(() => {
-    setDisplay(prev => {
-      if (!wrapperRef.current || !wrapperRef.current.parentElement) return prev
-
-      const rect = wrapperRef.current.getBoundingClientRect()
-      const parentRect = wrapperRef.current.parentElement.getBoundingClientRect()
-      const { offsetLeft } = wrapperRef.current
-
-      const isRight =
-        (offsetLeft > 0 && rect.right < windowWidth * 0.9) ||
-        (offsetLeft < 0 && parentRect.right - offsetLeft < windowWidth * 0.9)
-      const isLeft =
-        !isRight &&
-        ((offsetLeft > 0 && parentRect.left > rect.right - parentRect.right) ||
-          (offsetLeft < 0 && rect.left > 0))
-
-      return { isLeft, isRight }
-    })
-  }, [windowWidth, index])
+  const { isLeft, isRight, wrapperRef } = useOverflow()
 
   const _duration = timeToArr(
     convertTime({
-      num: duration,
+      num: duration || 0,
       input: 'minutes',
       output: ['hours', 'minutes'],
     })
@@ -92,16 +56,21 @@ const Popover = ({
         [styles.hide]: isHidden,
       })}
       ref={wrapperRef}>
-      <header className={styles.header}>
-        <div className={styles.airingInfo}>
-          {airingInfo({ nextAiringEpisode, season, seasonYear })}
-        </div>
-        {meanScore && <Score score={meanScore} />}
-      </header>
+      {(nextAiringEpisode || season || seasonYear || meanScore) && (
+        <header className={styles.header}>
+          <div className={styles.airingInfo}>
+            {airingInfo({ nextAiringEpisode, season, seasonYear })}
+          </div>
 
-      <div className={styles.studio}>{studios.nodes[0]?.name}</div>
+          {meanScore && <Score score={meanScore} />}
+        </header>
+      )}
+
+      {studios?.nodes?.[0]?.name && (
+        <div className={styles.studio}>{studios?.nodes?.[0]?.name}</div>
+      )}
       <div className={styles.info}>
-        {formatLabel(format)}
+        {formatLabel(format || '')}
         {format === 'MOVIE' && _duration.length > 0 ? (
           <>
             <span className={styles.separator}>•</span>

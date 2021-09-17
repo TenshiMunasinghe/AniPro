@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom'
-import { useAnimeReviews } from '../../../hooks/useAnimeReviews'
+import { Review as ReviewType } from '../../../generated'
+import { useReviewsQuery } from '../../../generated/index'
+import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { ParamTypes } from '../../../pages/media/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../LoadMore/LoadMore'
@@ -10,21 +12,36 @@ const Reviews = () => {
   const { id } = useParams<ParamTypes>()
   const {
     data,
-    isFetchingNextPage,
+    isLoading,
     hasNextPage,
     fetchNextPage,
-    isLoading,
-  } = useAnimeReviews(id)
+    isFetchingNextPage,
+  } = useInfiniteGraphQLQuery(
+    useReviewsQuery,
+    ({ pageParam = 1 }) => ({ id: parseInt(id), page: pageParam }),
+    {
+      getNextPageParam: ({ Media }) => {
+        if (!Media?.reviews?.pageInfo?.currentPage) return
 
-  if (isLoading) return <LoadingSpinner />
+        const {
+          reviews: { pageInfo },
+        } = Media
+
+        return pageInfo.hasNextPage
+          ? (pageInfo?.currentPage || 0) + 1
+          : undefined
+      },
+    }
+  )
+  if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data) return null
 
   return (
     <div className={styles.container}>
-      {data.pages.map(page =>
-        page.nodes.map(review => (
-          <Review key={'review' + review.id} review={review} />
+      {data.pages.map(({ Media }) =>
+        Media?.reviews?.nodes?.map(review => (
+          <Review key={'review' + review?.id} review={review as ReviewType} />
         ))
       )}
       <LoadMore

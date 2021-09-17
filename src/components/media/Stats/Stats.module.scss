@@ -4,6 +4,14 @@
   @include gap($column: var(--space-600));
 
   .rankings {
-    @include gap($column: var(--space-400));
+    @include mq(below, md) {
+      @include gap($column: var(--space-400));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-400);
+    }
   }
 }

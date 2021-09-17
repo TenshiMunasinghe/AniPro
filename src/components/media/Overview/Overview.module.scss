@@ -1,43 +1,89 @@
 @use '../../../css//config.scss' as *;
-@use '../../common/Cards/CardCover/cardChartTemplate.module.scss' as card-cover;
 
 .container {
   @include gap($column: var(--space-600));
 
   .relations {
-    display: flex;
-    overflow-x: auto;
-    @include gap($row: var(--space-400));
+    --image-width: 6.5rem;
+    @include mq(below, md) {
+      display: flex;
+      overflow-x: auto;
+      @include gap($row: var(--space-400));
+
+      & > * {
+        max-width: 90vw;
+      }
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-400) var(--space-500);
+
+      &.collapsed {
+        grid-template-columns: repeat(auto-fit, var(--image-width));
+      }
+    }
+  }
+
+  .stats {
+    @include mq(below, md) {
+      @include gap($column: var(--space-600));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--space-500);
+
+      & > *:first-child {
+        display: flex;
+        flex-direction: column;
+      }
+    }
   }
 
   .watch {
-    display: flex;
-    @include gap($row: var(--space-400));
+    @include mq(below, md) {
+      display: flex;
+      @include gap($row: var(--space-400));
+      overflow-x: auto;
 
-    & > *:nth-child(3),
-    & > *:nth-child(4) {
-      display: none;
+      & > * {
+        flex-basis: 20rem;
+      }
+
+      & > *:nth-child(3),
+      & > *:nth-child(4) {
+        display: none;
+      }
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-500);
     }
   }
 
   .trailer {
     @include aspect-ratio(5/3);
     width: 100%;
-  }
 
-  .recommendations {
-    display: flex;
-    overflow-x: auto;
-    @include gap($row: var(--space-400));
-
-    .cardCover {
-      flex-basis: 40%;
-      flex-shrink: 0;
-      @include card-cover.card-cover;
+    @include mq(above, md) {
+      @include aspect-ratio(2);
     }
   }
 
   .reviews {
-    @include gap($column: var(--space-400));
+    @include mq(below, md) {
+      @include gap($column: var(--space-400));
+    }
+
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-500);
+    }
   }
 }

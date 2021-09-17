@@ -1,0 +1,53 @@
+query overview($id: Int!) {
+  Media(id: $id) {
+    status
+    relations {
+      edges {
+        node {
+          id
+          title {
+            romaji
+          }
+          coverImage {
+            large
+          }
+          format
+          status
+        }
+        id
+        relationType
+      }
+    }
+    ...Ranking
+    characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
+      ...Characters
+    }
+    staff(page: 1, perPage: 4, sort: [RELEVANCE]) {
+      ...Staffs
+    }
+    reviews(sort: [SCORE_DESC], perPage: 2) {
+      ...Reviews
+    }
+    ...Stats
+    ...Episodes
+    trailer {
+      id
+      site
+      thumbnail
+    }
+    recommendations {
+      nodes {
+        mediaRecommendation {
+          id
+          title {
+            romaji
+          }
+          coverImage {
+            large
+            color
+          }
+        }
+      }
+    }
+  }
+}

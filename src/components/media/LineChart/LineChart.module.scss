@@ -1,13 +1,17 @@
+@use '../../../css/config.scss' as *;
+
 .container {
   overflow-x: auto;
   white-space: nowrap;
-  font-size: var(--text-size-200);
+  font-size: 11px;
   background: var(--color-foreground-100);
   padding: var(--space-400);
   padding-bottom: 0;
   padding-right: 0;
 
-  & > svg {
-    min-width: 1000px;
+  @include mq(below, md) {
+    & > svg {
+      min-width: 696px;
+    }
   }
 }

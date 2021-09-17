@@ -1,0 +1,7 @@
+fragment Episodes on Media {
+  streamingEpisodes {
+    url
+    title
+    thumbnail
+  }
+}

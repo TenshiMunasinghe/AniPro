@@ -2,11 +2,13 @@ import { useCallback, useState } from 'react'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../components/common/Dropdown/Dropdown'
 import NavBar from '../../components/common/NavBar/NavBar'
+import Footer from '../../components/home/Footer/Footer'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
 import SearchResult from '../../components/search/SearchResult/SearchResult'
 import { sortByOptions } from '../../filterOptions/filterOptions'
+import { MediaSort } from '../../generated/index'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
@@ -20,11 +22,11 @@ const cardTypes = addKey(CARD_TYPES)
 const Search = () => {
   const [cardType, setCardType] = useState<CardType>('chart')
 
-  const { updateUrl, initialParams } = useUpdateUrlParam()
+  const { updateUrl, queryVars } = useUpdateUrlParam()
 
   const sortByOnChange = useCallback(
     (value: string | string[]) => {
-      updateUrl({ sortBy: value as string })
+      updateUrl({ sortBy: value as MediaSort | MediaSort[] })
     },
     [updateUrl]
   )
@@ -50,7 +52,7 @@ const Search = () => {
               onChange={sortByOnChange}
               isMulti={false}
               options={sortByOptions}
-              selected={initialParams.get('sortBy') || 'TRENDING_DESC'}
+              selected={queryVars.initial.sortBy || MediaSort.TrendingDesc}
             />
           </section>
         </div>
@@ -58,10 +60,11 @@ const Search = () => {
         <main className={styles.mainContent}>
           <SearchOptions />
 
-          <SearchResult params={initialParams} cardType={cardType} />
+          <SearchResult queryVars={queryVars.initial} cardType={cardType} />
           <ScrollButton />
         </main>
       </div>
+      <Footer />
     </>
   )
 }

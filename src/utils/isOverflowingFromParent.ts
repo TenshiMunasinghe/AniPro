@@ -1,8 +1,25 @@
 import { toStartCase } from './toStartCase'
 
-const directions = ['top', 'bottom', 'left', 'right'] as const
+type Directions = 'top' | 'bottom' | 'left' | 'right'
+const allDirections: Directions[] = ['top', 'bottom', 'left', 'right']
 
-export const isOverflowingFromParent = (element: HTMLElement) => {
+export type IsOverflowingFromParent = (
+  element: HTMLElement,
+  directions?: Directions[] | 'all'
+) =>
+  | {
+      top?: boolean
+      bottom?: boolean
+      left?: boolean
+      right?: boolean
+      any: boolean
+    }
+  | undefined
+
+export const isOverflowingFromParent: IsOverflowingFromParent = (
+  element,
+  directions = 'all'
+) => {
   const parentElm = element.parentElement
   if (!parentElm) return
 
@@ -13,7 +30,7 @@ export const isOverflowingFromParent = (element: HTMLElement) => {
   const childRect = element.getBoundingClientRect()
 
   const overflow = Object.fromEntries(
-    directions.map(direction => {
+    (directions === 'all' ? allDirections : directions).map(direction => {
       const childVal = childRect[direction]
       const parentVal = parent.rect[direction]
       const key = ('padding' +
@@ -33,11 +50,7 @@ export const isOverflowingFromParent = (element: HTMLElement) => {
     })
   )
 
-  return { ...overflow, any: Object.values(overflow).some(val => val) } as {
-    top: boolean
-    bottom: boolean
-    left: boolean
-    right: boolean
-    any: boolean
-  }
+  console.log(overflow)
+
+  return { ...overflow, any: Object.values(overflow).some(val => val) }
 }

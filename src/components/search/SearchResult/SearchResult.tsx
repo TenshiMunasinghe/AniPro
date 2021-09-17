@@ -5,7 +5,11 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { useFetchSearchResult } from '../../../hooks/useFetchSearchResult'
+import gqlRequestClient from '../../../api/graphqlClient'
+import {
+  SearchResultQueryVariables,
+  useSearchResultQuery,
+} from '../../../generated/index'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
@@ -14,7 +18,7 @@ import NotFound from '../../common/NotFound/NotFound'
 import styles from './SearchResult.module.scss'
 
 interface Props extends LazyComponentProps {
-  params: URLSearchParams
+  queryVars: SearchResultQueryVariables
   cardType: CardType
 }
 
@@ -24,15 +28,17 @@ export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
   undefined
 )
 
-const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
+const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
   const {
-    medias,
+    data,
     isLoading,
     isError,
-    pageInfo,
     isFetching,
-  } = useFetchSearchResult(params)
+  } = useSearchResultQuery(gqlRequestClient, { ...queryVars, perPage: 12 })
   const { movePage } = useUpdateUrlParam()
+
+  const medias = data?.Page?.media
+  const pageInfo = data?.Page?.pageInfo
 
   if (!isLoading && (isError || medias?.length === 0)) {
     return <NotFound />
@@ -50,21 +56,22 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
         />
         {!isError && !isLoading && (
           <section className={styles.pages}>
-            {pageInfo.currentPage !== 1 && (
+            {pageInfo?.currentPage !== 1 && (
               <button className={styles.page} onClick={() => movePage(1)}>
                 {'<<'}
               </button>
             )}
             {PAGES.map(p => {
-              const page = pageInfo.currentPage + p
+              const page = (pageInfo?.currentPage || 0) + p
 
-              if (page <= 0 || page > pageInfo.lastPage) return null
+              if (!pageInfo?.lastPage || page <= 0 || page > pageInfo.lastPage)
+                return null
 
               return (
                 <button
                   key={page}
                   className={classnames(
-                    { [styles.current]: pageInfo.currentPage === page },
+                    { [styles.current]: pageInfo?.currentPage === page },
                     styles.page
                   )}
                   onClick={() => movePage(page)}>
@@ -72,10 +79,12 @@ const SearchResult = ({ params, cardType, scrollPosition }: Props) => {
                 </button>
               )
             })}
-            {pageInfo.currentPage !== pageInfo.lastPage && (
+            {pageInfo?.currentPage !== pageInfo?.lastPage && (
               <button
                 className={styles.page}
-                onClick={() => movePage(pageInfo.lastPage)}>
+                onClick={() =>
+                  pageInfo?.lastPage && movePage(pageInfo?.lastPage)
+                }>
                 {'>>'}
               </button>
             )}

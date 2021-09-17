@@ -3,12 +3,13 @@
 .container {
   position: relative;
   display: grid;
-  grid-template-columns: 3.4rem 1fr;
+  grid-template-columns: 3.5rem 1fr;
   column-gap: var(--space-500);
   font-size: var(--text-size-300);
 
   .avatar {
-    height: 3.4rem;
+    height: 3.5rem;
+    width: 100%;
     border-radius: 0.1rem;
   }
 

@@ -1,5 +1,13 @@
 @use '../../../css/config.scss' as *;
 
 .container {
-  @include gap($column: var(--space-500));
+  @include mq(below, md) {
+    @include gap($column: var(--space-500));
+  }
+
+  @include mq(above, md) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-400);
+  }
 }

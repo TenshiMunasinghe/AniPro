@@ -9,7 +9,7 @@ interface Props {
   isVisible: boolean
   handleChange: (value: string) => void
   isMulti: boolean
-  selected: string | string[]
+  selected: string | (string | null)[]
   position: 'left' | 'right'
 }
 

@@ -1,0 +1,50 @@
+@use '../../../css//config.scss' as *;
+@use '../../common/Cards/CardCover/cardCoverTemplate.module.scss' as card-cover;
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+
+  .showAll {
+    @include mq(below, md) {
+      display: none;
+    }
+    font-size: var(--text-size-300);
+
+    &:hover {
+      color: var(--color-text-300);
+    }
+  }
+}
+
+.container {
+  .cardCover {
+    @include card-cover.card-cover;
+    font-size: var(--text-size-300);
+
+    & > *:first-child {
+      border-radius: 0.2rem;
+    }
+  }
+
+  @include mq(below, md) {
+    display: flex;
+    overflow-x: auto;
+    @include gap($row: var(--space-400));
+
+    .cardCover {
+      flex-basis: 40%;
+      flex-shrink: 0;
+    }
+  }
+
+  @include mq(above, md) {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--space-500);
+
+    .cardCover {
+      width: 100%;
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import loadable from '@loadable/component'
 import { createContext } from 'react'
 import {
   LazyComponentProps,
@@ -5,18 +6,29 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import { Route, Switch, useParams } from 'react-router-dom'
-import { Common } from '../../api/types'
+import gqlRequestClient from '../../api/graphqlClient'
+import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
+import Footer from '../../components/home/Footer/Footer'
 import Aside from '../../components/media/Aside/Aside'
-import Episodes from '../../components/media/Episodes/Episodes'
 import Header from '../../components/media/Header/Header'
-import Overview from '../../components/media/Overview/Overview'
-import Characters from '../../components/media/People/Characters/Characters'
-import Staff from '../../components/media/People/Staff/Staff'
-import Reviews from '../../components/media/Reviews/Reviews'
-import Stats from '../../components/media/Stats/Stats'
-import { useFetchAnimeCommon } from '../../hooks/useFetchAnimeCommon'
+import { CommonQuery, useCommonQuery } from '../../generated/index'
 import styles from './Media.module.scss'
+
+const Overview = loadable(
+  () => import('../../components/media/Overview/Overview')
+)
+const Episodes = loadable(
+  () => import('../../components/media/Episodes/Episodes')
+)
+const Characters = loadable(
+  () => import('../../components/media/People/Characters/Characters')
+)
+const Staff = loadable(
+  () => import('../../components/media/People/Staff/Staff')
+)
+const Reviews = loadable(() => import('../../components/media/Reviews/Reviews'))
+const Stats = loadable(() => import('../../components/media/Stats/Stats'))
 
 export const TAB = [
   'overview',
@@ -34,16 +46,17 @@ export type ParamTypes = {
   tab: TabsType
 }
 
-const filterTabs = (data: Common) => {
+const filterTabs = (data: CommonQuery['Media']) => {
   const tabs = [...TAB]
-  const tabsArr = [
-    ['watch', data.streamingEpisodes],
-    ['staff', data.staff.edges],
-    ['characters', data.characters.edges],
+  const tabsArr: { tab: TabsType; data: any }[] = [
+    { tab: 'watch', data: data?.streamingEpisodes },
+    { tab: 'staff', data: data?.staff?.edges },
+    { tab: 'characters', data: data?.characters?.edges },
+    { tab: 'reviews', data: data?.reviews },
   ]
   for (const subArr of tabsArr) {
-    if (subArr[1].length === 0) {
-      const idx = tabs.indexOf(subArr[0] as TabsType)
+    if (!subArr.data?.length) {
+      const idx = tabs.indexOf(subArr.tab as TabsType)
       tabs.splice(idx, 1)
     }
   }
@@ -56,53 +69,76 @@ export const context = createContext<{ scrollPosition: ScrollPosition }>({
 
 const Media = ({ scrollPosition }: LazyComponentProps) => {
   const { id } = useParams<ParamTypes>()
-  const { data } = useFetchAnimeCommon(id)
+  const { data, isLoading } = useCommonQuery(gqlRequestClient, {
+    id: parseInt(id),
+  })
 
-  if (!data) return null
+  if (isLoading) return <LoadingSpinner />
+
+  if (!data || !data.Media) return null
+
+  const media = data.Media
 
   return (
     <context.Provider value={{ scrollPosition }}>
       <NavBar />
-      <section className={styles.wrapper}>
+      <div className={styles.container}>
         <Header
-          bannerImg={data.bannerImage}
-          coverImg={data.coverImage}
-          title={data.title.romaji}
-          description={data.description}
+          id={id}
+          bannerImg={media.bannerImage}
+          coverImg={media.coverImage}
+          title={media.title?.romaji}
+          format={media.format}
+          description={media.description}
           streamUrl={
-            data.streamingEpisodes.length > 0
-              ? data.streamingEpisodes[data.streamingEpisodes.length - 1].url
-              : undefined
+            (media.streamingEpisodes?.length || -1) > 0
+              ? media.streamingEpisodes?.[media.streamingEpisodes?.length - 1]
+                  ?.url
+              : null
           }
           siteUrl={
-            data.externalLinks.find(link => link.site === 'Official Site')?.url
+            media.externalLinks?.find(link => link?.site === 'Official Site')
+              ?.url
           }
-          tabs={filterTabs(data)}
+          tabs={filterTabs(media)}
         />
         <main className={styles.main}>
-          <Aside data={data} />
+          <Aside data={media} />
           <Switch>
             <Route exact path='/media/:id'>
-              <Overview />
+              <Overview
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/watch'>
-              <Episodes />
+              <Episodes
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/characters'>
-              <Characters />
+              <Characters
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/staff'>
-              <Staff />
+              <Staff
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/reviews'>
-              <Reviews />
+              <Reviews
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
             <Route exact path='/media/:id/stats'>
-              <Stats />
+              <Stats
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
             </Route>
           </Switch>
         </main>
-      </section>
+      </div>
+      <Footer />
     </context.Provider>
   )
 }

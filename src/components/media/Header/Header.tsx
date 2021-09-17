@@ -1,25 +1,31 @@
+import classnames from 'classnames'
 import { CSSProperties } from 'react'
 import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
-import { Common } from '../../../api/types'
+import { NO_IMAGE_URL } from '../../../api/queries'
+import { MediaCoverImage, MediaFormat } from '../../../generated/index'
 import { TabsType } from '../../../pages/media/Media'
 import Description from '../../common/Description/Description'
 import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 
 interface Props {
-  bannerImg: Common['bannerImage']
-  coverImg: Common['coverImage']
-  title: Common['title']['romaji']
-  description: Common['description']
-  streamUrl?: Common['streamingEpisodes'][number]['url']
-  siteUrl?: Common['externalLinks'][number]['url']
+  id: string
+  bannerImg?: string | null
+  coverImg?: MediaCoverImage | null
+  title?: string | null
+  format?: MediaFormat | null
+  description?: string | null
+  streamUrl?: string | null
+  siteUrl?: string | null
   tabs: Partial<TabsType>[]
 }
 
 const Header = ({
-  bannerImg,
+  id,
+  bannerImg = NO_IMAGE_URL,
   coverImg,
   title,
+  format,
   description,
   streamUrl,
   siteUrl,
@@ -27,34 +33,49 @@ const Header = ({
 }: Props) => {
   const style = {
     '--banner-image': `url(${bannerImg})`,
-    '--bg-color': coverImg.color,
+    '--bg-color': coverImg?.color,
   } as CSSProperties
 
   return (
-    <header className={styles.container} style={style}>
+    <header
+      className={classnames(styles.container, {
+        [styles.noBanner]: !bannerImg,
+      })}
+      style={style}>
       <div className={styles.banner} />
-      <div className={styles.details}>
-        <figure className={styles.cover}>
-          <img src={coverImg.large} alt={title + ' cover'} />
-        </figure>
-        <a
-          href={streamUrl || siteUrl || '#'}
-          target='blank'
-          className={styles.button}>
-          <span className={styles.text}>
-            {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : ''}
-          </span>
-          {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
-        </a>
+      <div className={styles.contents}>
+        <div className={styles.imageContainer}>
+          <figure className={styles.cover}>
+            <img
+              src={coverImg?.extraLarge || NO_IMAGE_URL}
+              alt={title + ' cover'}
+            />
+          </figure>
+          <a
+            href={
+              streamUrl ||
+              siteUrl ||
+              `https://anilist.co/${format?.toLowerCase()}/${id}`
+            }
+            target='blank'
+            className={styles.button}>
+            <span className={styles.text}>
+              {streamUrl ? 'Watch' : siteUrl ? 'Official Site' : 'AniList Site'}
+            </span>
+            {streamUrl ? <FaPlay /> : <FaExternalLinkAlt />}
+          </a>
+        </div>
+        <div className={styles.details}>
+          <h1 className={styles.title}>{title}</h1>
+          <h5 className={styles.subTitle}>Description</h5>
+          <div className={styles.description}>
+            <p tabIndex={0}>
+              <Description description={description} />
+            </p>
+          </div>
+        </div>
+        <TabNav tabs={tabs} />
       </div>
-      <h1 className={styles.title}>{title}</h1>
-      <h5 className={styles.subTitle}>Description</h5>
-      <div className={styles.description}>
-        <p tabIndex={0}>
-          <Description description={description} />
-        </p>
-      </div>
-      <TabNav tabs={tabs} />
     </header>
   )
 }

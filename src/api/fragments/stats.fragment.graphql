@@ -1,0 +1,12 @@
+fragment Stats on Media {
+  stats {
+    scoreDistribution {
+      score
+      amount
+    }
+    statusDistribution {
+      status
+      amount
+    }
+  }
+}

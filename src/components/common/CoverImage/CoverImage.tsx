@@ -1,14 +1,15 @@
 import { useContext } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link } from 'react-router-dom'
+import { NO_IMAGE_URL } from '../../../api/queries'
 import { linkToMediaPage } from '../../../App'
 import { ScrollPositionContext } from '../CardGrid/CardGrid'
 import styles from './CoverImage.module.scss'
 
 interface Props {
   id: number
-  title: string
-  src: string
+  title?: string | null
+  src?: string | null
 }
 
 const CoverImage = ({ id, title, src }: Props) => {
@@ -17,11 +18,11 @@ const CoverImage = ({ id, title, src }: Props) => {
   return (
     <Link
       to={linkToMediaPage(id)}
-      aria-label={title}
+      aria-label={title || 'no title'}
       className={styles.wrapper}>
       <LazyLoadImage
-        src={src}
-        alt={title}
+        src={src || NO_IMAGE_URL}
+        alt={title || 'no title'}
         scrollPosition={scrollPosition}
         effect='opacity'
       />
