@@ -8,6 +8,7 @@ import { toStartCase } from '../../../utils/toStartCase'
 import Ranking from '../Ranking/Ranking'
 import styles from './Aside.module.scss'
 import Item from './Item/Item'
+import Tags from './Tags/Tags'
 
 interface Props {
   data: CommonQuery['Media']
@@ -117,6 +118,8 @@ const Aside = ({ data }: Props) => {
 
         <Item label='Synonyms'>{data.synonyms?.join(' ') || ''}</Item>
       </section>
+
+      {data?.tags?.length && <Tags tags={data.tags} />}
     </aside>
   )
 }
