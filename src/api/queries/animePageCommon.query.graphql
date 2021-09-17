@@ -50,6 +50,14 @@ query common($id: Int!) {
       url
       site
     }
+    tags {
+      id
+      name
+      description
+      rank
+      isGeneralSpoiler
+      isMediaSpoiler
+    }
     characters(sort: [ROLE, RELEVANCE, ID], page: 1, perPage: 6) {
       edges {
         node {
