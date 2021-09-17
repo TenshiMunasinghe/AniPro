@@ -1,0 +1,43 @@
+@use '../../../../css/config.scss' as *;
+
+.container {
+  font-size: var(--text-size-300);
+  @include gap($column: var(--space-400));
+
+  .heading {
+    font-size: var(--text-size-400);
+  }
+
+  .tags {
+    @include gap($column: var(--space-400));
+  }
+
+  .tag {
+    background: var(--color-foreground-50);
+    padding: var(--space-300);
+    border-radius: 0.2rem;
+
+    & > a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    &.spoiler {
+      a {
+        span {
+          color: rgb(204, 99, 99);
+        }
+      }
+    }
+  }
+
+  .tagName,
+  .button {
+    &:hover,
+    &:focus {
+      color: var(--color-text-accent-100);
+    }
+  }
+}
