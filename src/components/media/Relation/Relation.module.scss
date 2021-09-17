@@ -79,7 +79,6 @@
 
   .imageWrapper {
     overflow: hidden;
-    @include image-with-effect;
 
     & > span,
     img {
