@@ -82,7 +82,7 @@ const Overview = () => {
                 name={staff?.node?.name?.full}
                 image={staff?.node?.image?.large}
                 info={staff?.role}
-                key={'overview staff' + staff?.node?.id}
+                key={'overview staff' + staff?.node?.id + staff?.role}
               />
             ))}
           </div>

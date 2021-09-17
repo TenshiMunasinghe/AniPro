@@ -49,7 +49,7 @@ const Staff = () => {
               name={staff?.node?.name?.full}
               image={staff?.node?.image?.large}
               info={staff?.role}
-              key={'staff' + staff?.node?.id}
+              key={'staff' + staff?.node?.id + staff?.role}
             />
           ))
         )}
