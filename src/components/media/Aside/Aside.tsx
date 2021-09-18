@@ -119,7 +119,11 @@ const Aside = ({ data }: Props) => {
         <Item label='Synonyms'>{data.synonyms?.join(' ') || ''}</Item>
       </section>
 
-      {data?.tags?.length && <Tags tags={data.tags} />}
+      {data?.tags?.length && (
+        <div className={styles.tags}>
+          <Tags tags={data.tags} />
+        </div>
+      )}
     </aside>
   )
 }
