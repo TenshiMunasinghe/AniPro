@@ -47,7 +47,7 @@ const CardGrid = ({
   isError,
   cardType,
   imageSize = 'large',
-  loadingCount = medias?.length,
+  loadingCount = 8,
   sideScroll = false,
   scrollPosition,
 }: Props) => {
@@ -62,6 +62,10 @@ const CardGrid = ({
           className={classnames(styles.slider, styles[cardType], {
             [styles.sideScroll]: sideScroll,
           })}>
+          {isLoading &&
+            range(0, loadingCount).map((_, i) => (
+              <CardLoading type={cardType} key={i} />
+            ))}
           {medias &&
             medias.map((m, i) => {
               if (!m) return null
@@ -82,10 +86,6 @@ const CardGrid = ({
                   return null
               }
             })}
-          {isLoading &&
-            range(0, loadingCount).map((_, i) => (
-              <CardLoading type={cardType} key={i} />
-            ))}
         </section>
       </ScrollPositionContext.Provider>
     </ImageSizeContext.Provider>
