@@ -30,7 +30,7 @@ const Aside = ({ data }: Props) => {
           {data.rankings
             .filter(ranking => ranking?.allTime)
             .map(ranking => (
-              <Ranking ranking={ranking} />
+              <Ranking key={'common' + ranking?.id} ranking={ranking} />
             ))}
         </section>
       )}
