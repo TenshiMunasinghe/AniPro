@@ -4,6 +4,9 @@
   @include gap($column: var(--space-500));
 
   .rankings {
+    @include mq(below, md) {
+      display: none;
+    }
     @include gap($column: var(--space-500));
   }
 
@@ -23,6 +26,12 @@
       flex-direction: column;
       @include padding-horizontal(var(--space-400));
       @include gap($column: var(--space-400));
+    }
+  }
+
+  .tags {
+    @include mq(below, md) {
+      display: none;
     }
   }
 }

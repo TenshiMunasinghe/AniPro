@@ -11,6 +11,7 @@
       @include gap($row: var(--space-400));
 
       & > * {
+        min-width: 80vw;
         max-width: 90vw;
       }
     }
