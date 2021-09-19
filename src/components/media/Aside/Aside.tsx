@@ -49,6 +49,10 @@ const Aside = ({ data }: Props) => {
 
         <Item label='Episodes'>{data.episodes?.toString() || ''}</Item>
 
+        <Item label='Chapters'>{data.chapters?.toString() || ''}</Item>
+
+        <Item label='Volumes'>{data.volumes?.toString() || ''}</Item>
+
         <Item label='Episode Duration'>
           {data.duration
             ? timeToStr(
