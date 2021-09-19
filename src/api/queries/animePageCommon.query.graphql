@@ -21,6 +21,8 @@ query common($id: Int!) {
     episodes
     duration
     status
+    volumes
+    chapters
     startDate {
       year
       month
