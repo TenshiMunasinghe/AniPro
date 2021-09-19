@@ -42,7 +42,9 @@ const Tags = ({ tags }: Props) => {
               </Link>
               {tag.id && (
                 <ReactTooltip id={tag.id.toString()} effect='solid' multiline>
-                  <p style={{ maxWidth: '55ch' }}>{tag.description}</p>
+                  <p style={{ maxWidth: '55ch', color: 'var(--white-600)' }}>
+                    {tag.description}
+                  </p>
                 </ReactTooltip>
               )}
             </li>
