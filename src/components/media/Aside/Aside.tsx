@@ -25,7 +25,7 @@ const Aside = ({ data }: Props) => {
 
   return (
     <aside className={styles.container}>
-      {data.rankings?.length && (
+      {!!data.rankings?.length && (
         <section className={styles.rankings}>
           {data.rankings
             .filter(ranking => ranking?.allTime)
@@ -123,7 +123,7 @@ const Aside = ({ data }: Props) => {
         <Item label='Synonyms'>{data.synonyms?.join(' ') || ''}</Item>
       </section>
 
-      {data?.tags?.length && (
+      {!!data?.tags?.length && (
         <div className={styles.tags}>
           <Tags tags={data.tags} />
         </div>

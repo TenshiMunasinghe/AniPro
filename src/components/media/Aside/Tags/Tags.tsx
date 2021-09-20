@@ -51,7 +51,7 @@ const Tags = ({ tags }: Props) => {
           )
         )}
       </ul>
-      {spoilerTags.length && (
+      {!!spoilerTags.length && (
         <button
           className={styles.button}
           onClick={() => setShowSpoiler(prev => !prev)}>
