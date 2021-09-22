@@ -1,12 +1,12 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
-import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import {
   SearchResultQueryVariables,
   useSearchResultQuery,
 } from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
+import { formatQueryVar } from '../../../utils/formatQueryVar'
 import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
 
@@ -22,12 +22,7 @@ interface Props {
 }
 
 const Content = ({ queryVar, content }: Props) => {
-  const { perPage, ...filterQuery } = Object.fromEntries(
-    Object.entries(queryVar).filter(([k]) =>
-      //filter out the query variable which is not a filter option
-      allowedURLParams.includes(k)
-    )
-  )
+  const { perPage, ...filterQuery } = formatQueryVar(queryVar)
 
   const { data, isLoading, isError } = useSearchResultQuery(
     gqlRequestClient,
