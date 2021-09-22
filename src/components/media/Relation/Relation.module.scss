@@ -113,10 +113,6 @@
     @include add-ellipsis(2);
     margin-top: var(--space-200);
 
-    & > a {
-      text-decoration: none;
-    }
-
     &:hover,
     &:focus-within {
       & > a {

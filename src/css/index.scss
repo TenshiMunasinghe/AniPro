@@ -34,6 +34,10 @@ button {
   text-align: left;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   &.dark {
     --color-background: var(--black-100);
