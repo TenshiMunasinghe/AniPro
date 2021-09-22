@@ -39,11 +39,7 @@ const CardChart = ({
                   {title?.english || title?.romaji || 'no title'}
                 </h4>
               </div>
-              {meanScore && (
-                <div className={styles.score}>
-                  <Score score={meanScore} />
-                </div>
-              )}
+              {meanScore && <Score score={meanScore} />}
             </header>
 
             <p className={styles.description} tabIndex={0}>
@@ -54,7 +50,7 @@ const CardChart = ({
         <Genres
           as='footer'
           genres={genres}
-          canInteract={true}
+          canInteract
           className={styles.genres}
         />
       </section>
