@@ -37,13 +37,10 @@
     right: var(--space-600);
     bottom: var(--space-600);
     z-index: 2;
+    color: var(--primary-700);
 
-    a {
-      color: var(--primary-700);
-
-      &:hover {
-        text-decoration: underline;
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 }

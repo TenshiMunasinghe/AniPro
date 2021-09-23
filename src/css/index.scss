@@ -12,7 +12,7 @@ html {
 }
 
 * {
-  color: var(--color-text-200);
+  color: inherit;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -109,6 +109,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  color: var(--color-text-200);
 }
 
 .ct-labels {

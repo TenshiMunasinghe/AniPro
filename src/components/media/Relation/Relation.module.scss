@@ -115,9 +115,7 @@
 
     &:hover,
     &:focus-within {
-      & > a {
-        color: var(--color-text-accent-100);
-      }
+      color: var(--color-text-accent-100);
     }
   }
 

@@ -24,11 +24,7 @@
     }
 
     &.spoiler {
-      a {
-        span {
-          color: hsl(0, 69%, var(--lightness));
-        }
-      }
+      color: hsl(0, 69%, var(--lightness));
     }
   }
 
