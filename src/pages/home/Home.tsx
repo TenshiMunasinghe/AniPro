@@ -99,7 +99,7 @@ const Home = () => {
             <Content
               key={key}
               content={contents[key]}
-              queryVar={queryVars[key]}
+              queryVar={{ ...queryVars[key], perPage: 10 }}
             />
           )
         })}
