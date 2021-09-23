@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  background: var(--black-200);
   min-width: 100vw;
   height: 100vh;
 
@@ -12,7 +13,7 @@
     justify-content: space-between;
     width: 100%;
     padding: var(--space-600);
-    z-index: 1;
+    z-index: 2;
   }
 
   .context {
@@ -23,6 +24,7 @@
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+    z-index: 1;
 
     & > * {
       flex-shrink: 0;
@@ -34,6 +36,7 @@
     position: absolute;
     right: var(--space-600);
     bottom: var(--space-600);
+    z-index: 2;
 
     a {
       color: var(--primary-700);
