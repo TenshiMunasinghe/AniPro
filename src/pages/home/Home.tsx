@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {
   currentSeason,
   currentYear,
@@ -87,13 +86,10 @@ const Home = () => {
 
   return (
     <>
-      <div className={styles.header}>
-        <Link to='/' className={styles.siteName}>
-          AniPro
-        </Link>
-        <div>{contents[randomKey].text}</div>
-      </div>
-      <Slider queryVar={queryVars[randomKey]} />
+      <Slider
+        queryVar={queryVars[randomKey]}
+        context={contents[randomKey].text}
+      />
       <NavBar position='sticky' />
       <main className={styles.content}>
         {Object.keys(queryVars).map(k => {
