@@ -4,7 +4,7 @@ import { MediaSeason } from '../generated/index'
 const dateNow = new Date()
 const dateNext = new Date(
   dateNow.getFullYear(),
-  dateNow.getMonth() + 4,
+  dateNow.getMonth() + 3,
   dateNow.getDate()
 )
 
@@ -20,15 +20,13 @@ const SEASONS: {
 const current = SEASONS.find(({ months }) =>
   months.includes(dateNow.getMonth() + 1)
 )
-const next = SEASONS.find(({ months }) => months.includes(dateNext.getMonth()))
+const next = SEASONS.find(({ months }) =>
+  months.includes(dateNext.getMonth() + 1)
+)
 
 export const currentYear = dateNow.getFullYear()
-export const currentSeason = current
-  ? MediaSeason[current.name as keyof typeof MediaSeason]
-  : null
-export const nextSeason = next
-  ? MediaSeason[next.name as keyof typeof MediaSeason]
-  : null
+export const currentSeason = current ? MediaSeason[current.name] : null
+export const nextSeason = next ? MediaSeason[next.name] : null
 
 export const nextYear = dateNext.getFullYear()
 
