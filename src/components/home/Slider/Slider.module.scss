@@ -35,8 +35,12 @@
     right: var(--space-600);
     bottom: var(--space-600);
 
-    a:hover {
+    a {
       color: var(--color-text-accent-100);
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
