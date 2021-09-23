@@ -61,6 +61,7 @@ const Content = ({ queryVar, content }: Props) => {
         medias={medias}
         isLoading={isLoading}
         isError={isError}
+        loadingCount={queryVar.perPage || undefined}
         cardType={content.cardType}
         imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
         sideScroll={content.cardType === 'cover'}
