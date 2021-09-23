@@ -23,7 +23,7 @@ const Slide = ({ media }: Props) => {
     ),
     '--color-adjusted': adjustColor(
       media?.coverImage?.color || 'var(--color-foreground-200)',
-      '90%'
+      '85%'
     ),
   } as CSSProperties
 
