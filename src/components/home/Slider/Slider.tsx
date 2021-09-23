@@ -5,6 +5,7 @@ import {
   SearchResultQueryVariables,
   useSearchResultQuery,
 } from '../../../generated/index'
+import { formatQueryVar } from '../../../utils/formatQueryVar'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
@@ -19,6 +20,9 @@ const Slider = ({ queryVar, context }: Props) => {
     ...queryVar,
     perPage: 5,
   })
+
+  const { perPage, ...filterQuery } = formatQueryVar(queryVar)
+  const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
   return (
     <section className={styles.container}>
@@ -40,6 +44,11 @@ const Slider = ({ queryVar, context }: Props) => {
               </>
             )}
           </section>
+          <footer className={styles.footer}>
+            <Link to={link} className={styles.link}>
+              View All
+            </Link>
+          </footer>
         </>
       )}
     </section>
