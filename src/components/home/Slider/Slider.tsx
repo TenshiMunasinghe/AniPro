@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
+import breakpoints from '../../../css/breakpoints.module.scss'
 import {
   SearchResultQueryVariables,
   useSearchResultQuery,
 } from '../../../generated/index'
 import { formatQueryVar } from '../../../utils/formatQueryVar'
+import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
@@ -17,7 +19,10 @@ interface Props {
   context: string
 }
 
+const windowSizeSelector = ({ width }: WindowSizeStore) => width
+
 const Slider = ({ queryVar, context }: Props) => {
+  const windowWidth = useWindowSizeStore(windowSizeSelector)
   const { data, isLoading } = useSearchResultQuery(gqlRequestClient, {
     ...queryVar,
     perPage: 5,
@@ -32,6 +37,17 @@ const Slider = ({ queryVar, context }: Props) => {
   useEffect(() => {
     slideRefs.current.length > 0 && slideRefs.current[slide].scrollIntoView()
   }, [slide])
+
+  useEffect(() => {
+    if (windowWidth >= parseInt(breakpoints.md)) return
+    const id = setTimeout(() => {
+      setSlide(1)
+    }, 2500)
+
+    return () => {
+      clearTimeout(id)
+    }
+  }, [windowWidth])
 
   const { perPage, ...filterQuery } = formatQueryVar(queryVar)
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
