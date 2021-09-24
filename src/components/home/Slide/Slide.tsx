@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, forwardRef } from 'react'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { adjustColor } from '../../../utils/adjustColor'
 import { createColorVariable } from '../../../utils/createColorVariable'
@@ -13,7 +13,7 @@ interface Props {
   media?: Media | null
 }
 
-const Slide = ({ media }: Props) => {
+const Slide = forwardRef<HTMLDivElement, Props>(({ media }, ref) => {
   if (!media) return null
 
   const style = {
@@ -28,7 +28,7 @@ const Slide = ({ media }: Props) => {
   } as CSSProperties
 
   return (
-    <div className={styles.container} style={style}>
+    <div className={styles.container} style={style} ref={ref}>
       <div className={styles.coverImage} />
       <div className={styles.content}>
         <div>
@@ -48,6 +48,6 @@ const Slide = ({ media }: Props) => {
       <Genres as='section' genres={media.genres} canInteract />
     </div>
   )
-}
+})
 
 export default Slide

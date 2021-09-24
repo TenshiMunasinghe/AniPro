@@ -1,3 +1,5 @@
+@use '../../../css/config.scss' as *;
+
 .container {
   display: flex;
   align-items: center;
@@ -22,9 +24,14 @@
 
   .slider {
     display: flex;
-    overflow-x: auto;
     scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     z-index: 1;
+    overflow-x: auto;
+
+    @include mq(above, md) {
+      overflow: hidden;
+    }
 
     & > * {
       flex-shrink: 0;
@@ -41,6 +48,30 @@
 
     &:hover {
       text-decoration: underline;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    left: 50%;
+    bottom: var(--space-500);
+    transform: translateX(-50%);
+    z-index: 1;
+
+    @include mq(below, md) {
+      display: none;
+    }
+
+    button.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    button:not(.disabled) {
+      &:hover,
+      &:focus {
+        color: var(--primary-600);
+      }
     }
   }
 }
