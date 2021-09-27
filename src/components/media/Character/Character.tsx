@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { CharacterEdge } from '../../../generated/index'
@@ -28,4 +29,4 @@ const Character = ({ character }: Props) => {
   )
 }
 
-export default Character
+export default memo(Character)

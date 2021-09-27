@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext } from 'react'
+import { memo, useContext } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { StaffImage, StaffName } from '../../../generated/index'
@@ -37,4 +37,4 @@ const Person = ({ image, name, info, isReversed = false }: Props) => {
   )
 }
 
-export default Person
+export default memo(Person)
