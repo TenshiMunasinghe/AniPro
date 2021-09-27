@@ -1,0 +1,18 @@
+@use '../../../../css/config.scss' as *;
+
+.container {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  z-index: 1;
+  overflow-x: auto;
+
+  @include mq(above, md) {
+    overflow: hidden;
+  }
+
+  & > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}

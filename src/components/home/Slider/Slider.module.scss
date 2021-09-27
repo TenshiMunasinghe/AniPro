@@ -22,23 +22,6 @@
     font-size: var(--text-size-300);
   }
 
-  .slider {
-    display: flex;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    z-index: 1;
-    overflow-x: auto;
-
-    @include mq(above, md) {
-      overflow: hidden;
-    }
-
-    & > * {
-      flex-shrink: 0;
-      scroll-snap-align: start;
-    }
-  }
-
   .footer {
     position: absolute;
     right: var(--space-600);

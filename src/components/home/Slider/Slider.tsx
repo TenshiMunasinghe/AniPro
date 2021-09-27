@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
@@ -11,8 +11,8 @@ import {
 import { formatQueryVar } from '../../../utils/formatQueryVar'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
-import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
+import Slides from './Slides/Slides'
 
 interface Props {
   queryVar: SearchResultQueryVariables
@@ -35,7 +35,10 @@ const Slider = ({ queryVar, context }: Props) => {
   const slideRefs = useRef<HTMLDivElement[]>([])
 
   useEffect(() => {
-    slideRefs.current.length > 0 && slideRefs.current[slide].scrollIntoView()
+    if (slideRefs.current.length > 0) {
+      slideRefs.current[slide].scrollIntoView()
+      slideRefs.current[slide].focus({ preventScroll: true })
+    }
   }, [slide])
 
   useEffect(() => {
@@ -84,20 +87,13 @@ const Slider = ({ queryVar, context }: Props) => {
             </Link>
             <div className={styles.context}>{context}</div>
           </header>
-          <section className={styles.slider}>
-            {!isLoading &&
-              slideCount &&
-              (data?.Page?.media?.map((media, idx) =>
-                media ? (
-                  <Slide
-                    media={media}
-                    key={media.id}
-                    ref={(el: HTMLDivElement) => (slideRefs.current[idx] = el)}
-                  />
-                ) : null
-              ) ||
-                null)}
-          </section>
+
+          <Slides
+            media={data?.Page?.media}
+            setSlide={setSlide}
+            slideRefs={slideRefs}
+          />
+
           <footer className={styles.footer}>
             <Link to={link} className={styles.link}>
               View All
