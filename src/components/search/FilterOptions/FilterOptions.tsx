@@ -10,9 +10,9 @@ import { nextParam, NextParamArgs } from '../../../utils/nextParam'
 import { toStartCase } from '../../../utils/toStartCase'
 import Option from '../Option/Option'
 import Options from '../Options/Options'
-import styles from './SearchOptions.module.scss'
+import styles from './FilterOptions.module.scss'
 
-const SearchOptions = () => {
+const FilterOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
   const { updateFilter, updateUrl, params, applyFilter } = useUpdateUrlParam()
 
@@ -162,4 +162,4 @@ const SearchOptions = () => {
   )
 }
 
-export default SearchOptions
+export default FilterOptions

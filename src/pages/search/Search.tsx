@@ -4,8 +4,8 @@ import Dropdown from '../../components/common/Dropdown/Dropdown'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
+import FilterOptions from '../../components/search/FilterOptions/FilterOptions'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
 import SearchResult from '../../components/search/SearchResult/SearchResult'
 import { sortByOptions } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated/index'
@@ -58,7 +58,7 @@ const Search = () => {
         </div>
 
         <main className={styles.mainContent}>
-          <SearchOptions />
+          <FilterOptions />
 
           <SearchResult queryVars={queryVars.initial} cardType={cardType} />
           <ScrollButton />
