@@ -69,9 +69,8 @@ const Slider = ({ queryVar, context }: Props) => {
           </header>
           <section className={styles.slider}>
             {!isLoading &&
-              data?.Page?.media &&
-              data.Page.media.length > 0 &&
-              (data?.Page?.media?.map((media, idx, arr) =>
+              slideCount &&
+              (data?.Page?.media?.map((media, idx) =>
                 media ? (
                   <Slide
                     media={media}
