@@ -1,3 +1,5 @@
+/// <reference types="@welldone-software/why-did-you-render" />
+import './wdyr.ts'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
