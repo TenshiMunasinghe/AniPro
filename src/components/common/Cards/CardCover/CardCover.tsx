@@ -1,11 +1,8 @@
-import { memo, useContext, useState } from 'react'
-import { NO_IMAGE_URL } from '../../../../api/queries'
+import { memo, useState } from 'react'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
-import CoverImage from '../../CoverImage/CoverImage'
-import Title from '../../Title/Title'
-import Rank from '../components/Rank/Rank'
+import { Media } from '../../CardGrid/CardGrid'
 import styles from './CardCover.module.scss'
+import Content from './Content/Content'
 import Popover from './Popover/Popover'
 
 interface Props {
@@ -14,13 +11,9 @@ interface Props {
   media: Media
 }
 
-const CardCover = ({
-  index,
-  rank,
-  media: {
+const CardCover = ({ index, rank, media }: Props) => {
+  const {
     coverImage,
-    title,
-    id,
     format,
     season,
     seasonYear,
@@ -30,9 +23,7 @@ const CardCover = ({
     studios,
     nextAiringEpisode,
     meanScore,
-  },
-}: Props) => {
-  const imageSize = useContext(ImageSizeContext)
+  } = media
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
@@ -47,20 +38,7 @@ const CardCover = ({
       style={createColorVariable(
         coverImage?.color || 'var(--color-foreground-200)'
       )}>
-      <article className={styles.container}>
-        {rank && (
-          <div className={styles.rank}>
-            <Rank rank={rank} />
-          </div>
-        )}
-        <CoverImage
-          id={id}
-          src={coverImage?.[imageSize] || NO_IMAGE_URL}
-          title={title?.romaji || 'no title'}
-        />
-        <Title id={id} text={title?.romaji || 'no title'} />
-      </article>
-
+      <Content rank={rank} media={media} />
       <Popover
         index={index}
         isVisible={isPopoverVisible}

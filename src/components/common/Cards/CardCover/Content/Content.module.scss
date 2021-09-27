@@ -1,0 +1,17 @@
+@use '../../../../../css/config.scss' as *;
+@use '../cardCoverTemplate.module.scss' as template;
+
+.container {
+  @include template.card-cover;
+
+  .rank {
+    position: absolute;
+    left: calc(-1 * var(--space-200));
+    top: calc(-1 * var(--space-200));
+    width: 2.75rem;
+  }
+
+  & > a {
+    border-radius: 0.15em;
+  }
+}
