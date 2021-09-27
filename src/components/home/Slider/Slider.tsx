@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
@@ -52,12 +52,29 @@ const Slider = ({ queryVar, context }: Props) => {
   const { perPage, ...filterQuery } = formatQueryVar(queryVar)
   const link = `/search?${new URLSearchParams(filterQuery).toString()}`
 
-  const toNextSlide = () =>
-    setSlide(prev => (prev + 1 >= slideCount ? prev : prev + 1))
-  const toPrevSlide = () => setSlide(prev => (prev - 1 < 0 ? prev : prev - 1))
+  const toNextSlide = useCallback(
+    () => setSlide(prev => (prev + 1 >= slideCount ? prev : prev + 1)),
+    [slideCount]
+  )
+
+  const toPrevSlide = useCallback(
+    () => setSlide(prev => (prev - 1 < 0 ? prev : prev - 1)),
+    []
+  )
+
+  const onKeyPress = useCallback(
+    e => {
+      if (e.keyCode === 39) {
+        toNextSlide()
+      } else if (e.keyCode === 37) {
+        toPrevSlide()
+      }
+    },
+    [toNextSlide, toPrevSlide]
+  )
 
   return (
-    <section className={styles.container}>
+    <section className={styles.container} tabIndex={-1} onKeyDown={onKeyPress}>
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <>
