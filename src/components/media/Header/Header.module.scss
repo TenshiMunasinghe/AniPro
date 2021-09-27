@@ -44,7 +44,6 @@
     position: relative;
     width: 100vw;
     height: calc(2 * var(--image-width));
-    background-color: var(--bg-color);
     background-image: var(--banner-image);
     background-repeat: no-repeat;
     background-attachment: scroll;
@@ -55,7 +54,7 @@
     @include mq(above, md) {
       height: 40vh;
       background-attachment: fixed;
-      background-size: auto 50vh;
+      background-size: auto;
       background-position: top;
     }
 
