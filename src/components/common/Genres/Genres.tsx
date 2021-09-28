@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { createElement, memo, useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
 import { useFitContent } from '../../../hooks/useFitContent'
 import { addKey } from '../../../utils/addKey'
 import { Media } from '../CardGrid/CardGrid'
@@ -20,24 +19,15 @@ const Genres = ({
   canInteract,
   className,
 }: Props) => {
-  const history = useHistory()
   const { ref, state: genres } = useFitContent(allGenres || [])
 
   const _genres = useMemo(() => addKey(genres), [genres])
 
   if (!genres || genres.length === 0) return null
 
-  const setGenre = (genre: string) => history.push(`/search/?genres=${genre}`)
-
   return createElement(Tag, {
     children: _genres.map(({ value, key }) =>
-      value ? (
-        <Genre
-          key={key}
-          genre={value}
-          onClick={canInteract ? () => setGenre(value) : undefined}
-        />
-      ) : null
+      value ? <Genre key={key} genre={value} canInteract={canInteract} /> : null
     ),
     className: classnames(styles.wrapper, className),
     ref,

@@ -1,18 +1,18 @@
+import { Link } from 'react-router-dom'
 import styles from './Genre.module.scss'
 
 interface Props {
   genre: string
-  onClick?: () => void
+  canInteract?: boolean
 }
 
-const Genre = ({ genre, onClick }: Props) => {
-  return (
-    <button
-      className={styles.genre}
-      onClick={onClick}
-      tabIndex={onClick ? 0 : -1}>
+const Genre = ({ genre, canInteract = true }: Props) => {
+  return canInteract ? (
+    <Link className={styles.genre} to={`/search?genres=${genre}`}>
       {genre}
-    </button>
+    </Link>
+  ) : (
+    <div className={styles.genre}>{genre}</div>
   )
 }
 
