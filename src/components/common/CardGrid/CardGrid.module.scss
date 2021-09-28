@@ -10,7 +10,7 @@
   width: 100%;
 
   &.cover {
-    grid-template-columns: repeat(auto-fit, minmax(calc(5rem + 10%), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(calc(5rem + 8%), 1fr));
     grid-gap: var(--space-600);
   }
 
