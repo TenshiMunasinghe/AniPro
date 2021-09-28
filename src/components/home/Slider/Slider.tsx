@@ -11,8 +11,8 @@ import {
 import { formatQueryVar } from '../../../utils/formatQueryVar'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
-import Slides from './Slides/Slides'
 
 interface Props {
   queryVar: SearchResultQueryVariables
@@ -88,11 +88,19 @@ const Slider = ({ queryVar, context }: Props) => {
             <div className={styles.context}>{context}</div>
           </header>
 
-          <Slides
-            media={data?.Page?.media}
-            setSlide={setSlide}
-            slideRefs={slideRefs}
-          />
+          {slideCount && (
+            <section className={styles.slides}>
+              {data?.Page?.media?.map((media, idx) => (
+                <Slide
+                  media={media}
+                  key={media?.id}
+                  index={idx}
+                  setSlide={setSlide}
+                  ref={slideRefs}
+                />
+              ))}
+            </section>
+          )}
 
           <footer className={styles.footer}>
             <Link to={link} className={styles.link}>

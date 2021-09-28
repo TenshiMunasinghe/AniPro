@@ -16,7 +16,7 @@ interface Props {
   setSlide: (slide: number) => void
 }
 
-const Slide = forwardRef<HTMLDivElement, Props>(
+const Slide = forwardRef<HTMLDivElement[], Props>(
   ({ media, setSlide, index }, ref) => {
     const onFocus = useCallback(
       e => {
@@ -26,7 +26,7 @@ const Slide = forwardRef<HTMLDivElement, Props>(
       [setSlide, index]
     )
 
-    if (!media?.id) return null
+    if (!media?.id || !ref) return null
 
     const style = {
       '--cover-image': `url(${media?.coverImage?.extraLarge || NO_IMAGE_URL})`,
@@ -43,7 +43,11 @@ const Slide = forwardRef<HTMLDivElement, Props>(
       <div
         className={styles.container}
         style={style}
-        ref={ref}
+        ref={el =>
+          typeof ref !== 'function' && el && ref.current
+            ? (ref.current[index] = el)
+            : null
+        }
         tabIndex={0}
         onFocus={onFocus}>
         <div className={styles.coverImage} />
