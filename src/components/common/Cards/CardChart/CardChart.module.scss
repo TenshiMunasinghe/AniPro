@@ -4,7 +4,7 @@
 .wrapper {
   @include card-config.card-wrapper;
 
-  a {
+  & > a:first-child {
     max-width: 11rem;
     flex: 0 0 42.5%;
   }
