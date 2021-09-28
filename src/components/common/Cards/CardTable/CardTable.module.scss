@@ -64,7 +64,7 @@
     max-width: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: calc(3rem + 7%) 1fr;
+    grid-template-columns: calc(3rem + 5%) 1fr;
     font-size: var(--text-size-400);
     border-radius: 0.1em;
     @include padding-horizontal(var(--padding));
