@@ -34,7 +34,7 @@ const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
     isLoading,
     isError,
     isFetching,
-  } = useSearchResultQuery(gqlRequestClient, { ...queryVars, perPage: 12 })
+  } = useSearchResultQuery(gqlRequestClient, { ...queryVars, perPage: 20 })
   const { movePage } = useUpdateUrlParam()
 
   const medias = data?.Page?.media
