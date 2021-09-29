@@ -1,4 +1,5 @@
 import range from 'lodash/range'
+import { v4 } from 'uuid'
 import { currentYear } from '../api/queries'
 import {
   MediaFormat,
@@ -6,7 +7,9 @@ import {
   MediaSort,
   MediaSource,
   MediaStatus,
+  SearchResultQueryVariables,
 } from '../generated/index'
+import { formatLabel } from '../utils/formatLabel'
 import { toStartCase } from '../utils/toStartCase'
 import { tags } from './tags'
 
@@ -108,3 +111,17 @@ export const sortByOptions = filterOptions.sortBy.options.map(s => ({
 }))
 
 export type SortBy = typeof filterOptions.sortBy.options[number]
+
+export const filters = Object.entries(filterOptionTypes.default)
+  .filter(([key]) => key !== 'sortBy')
+  .map(([key, value]) => ({
+    key: v4(),
+    name: key as keyof SearchResultQueryVariables,
+    isMulti: value.isMulti,
+    options: value.options.map(o => ({
+      value: o,
+      label: formatLabel(o),
+    })),
+  }))
+
+export type Filters = typeof filters
