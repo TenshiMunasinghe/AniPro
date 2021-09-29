@@ -21,6 +21,7 @@
       margin: auto;
 
       & > *:last-child {
+        height: min-content;
         max-width: 100%;
         overflow-x: hidden;
       }
