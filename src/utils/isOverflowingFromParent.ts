@@ -49,8 +49,5 @@ export const isOverflowingFromParent: IsOverflowingFromParent = (
       return [direction, isOverflow && isSignificant]
     })
   )
-
-  console.log(overflow)
-
   return { ...overflow, any: Object.values(overflow).some(val => val) }
 }
