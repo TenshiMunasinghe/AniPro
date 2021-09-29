@@ -68,9 +68,9 @@ const FilterOptions = () => {
 
   const selectedOptions = (
     isMulti: boolean,
-    name: keyof SearchResultQueryVariables
-  ) =>
-    isMulti ? params.current.get(name)?.split(',') : params.current.get(name)
+    name: keyof SearchResultQueryVariables,
+    state: 'initial' | 'current'
+  ) => (isMulti ? params[state].get(name)?.split(',') : params[state].get(name))
 
   return (
     <aside
@@ -99,7 +99,8 @@ const FilterOptions = () => {
               // only on desktop
               <div className={styles.options}>
                 {f.options.slice(0, 5).map(({ value, label }) => {
-                  const selected = selectedOptions(f.isMulti, f.name) || []
+                  const selected =
+                    selectedOptions(f.isMulti, f.name, 'initial') || []
                   const key = f.key + f.name + label + 'aside'
                   return (
                     <Option
@@ -136,7 +137,7 @@ const FilterOptions = () => {
         ))}
       </header>
       {filters.map(f => {
-        const selected = selectedOptions(f.isMulti, f.name)
+        const selected = selectedOptions(f.isMulti, f.name, 'current')
         return (
           <Options
             key={f.key}
