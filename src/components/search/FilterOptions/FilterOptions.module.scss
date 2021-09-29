@@ -38,6 +38,7 @@ body.search-options-open {
       overflow: hidden;
       border-right: solid 1px var(--color-border-200);
       font-size: var(--text-size-300);
+      @include gap($row: 0);
 
       &::after {
         display: none;
