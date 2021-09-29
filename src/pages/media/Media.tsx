@@ -52,7 +52,7 @@ const filterTabs = (data: CommonQuery['Media']) => {
     { tab: 'watch', data: data?.streamingEpisodes },
     { tab: 'staff', data: data?.staff?.edges },
     { tab: 'characters', data: data?.characters?.edges },
-    { tab: 'reviews', data: data?.reviews },
+    { tab: 'reviews', data: data?.reviews?.nodes },
   ]
   for (const subArr of tabsArr) {
     if (!subArr.data?.length) {
@@ -78,6 +78,8 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
   if (!data || !data.Media) return null
 
   const media = data.Media
+
+  console.log(media)
 
   return (
     <context.Provider value={{ scrollPosition }}>
