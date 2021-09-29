@@ -12,6 +12,8 @@ import Option from '../Option/Option'
 import Options from '../Options/Options'
 import styles from './FilterOptions.module.scss'
 
+//TODO: separate aside section and full view
+
 const FilterOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
   const { updateFilter, updateUrl, params, applyFilter } = useUpdateUrlParam()
@@ -145,6 +147,7 @@ const FilterOptions = () => {
             name={f.name}
             isActive={f.name === activeFilterOption}
             id={f.key}
+            updateFilter={updateFilter}
           />
         )
       })}

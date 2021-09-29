@@ -1,6 +1,7 @@
 import classnames from 'classnames'
+import { DebouncedFunc } from 'lodash'
 import { memo } from 'react'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { SearchResultQueryVariables } from '../../../generated'
 import { NextParamArgs } from '../../../utils/nextParam'
 import Option from '../Option/Option'
 import styles from './Options.module.scss'
@@ -17,6 +18,7 @@ interface Props {
   name: string
   isActive: boolean
   id: string
+  updateFilter: DebouncedFunc<(queryVars: SearchResultQueryVariables) => void>
 }
 
 const Options = ({
@@ -28,16 +30,17 @@ const Options = ({
   name,
   isActive,
   id,
+  updateFilter,
 }: Props) => {
-  const { updateFilter } = useUpdateUrlParam()
-
   const isAllSelected = options.length === selected.length
 
   const toggleAll = (e: React.MouseEvent) => {
+    if (!isMulti) return
     e.stopPropagation()
+
     updateFilter({
       [name]: isAllSelected
-        ? defaultValue
+        ? []
         : Object.values(options).map(({ value }) => value),
     })
   }
@@ -46,7 +49,7 @@ const Options = ({
     <section
       className={classnames({ [styles.hide]: !isActive }, styles.container)}>
       <div className={styles.scrollWrapper}>
-        {Array.isArray(defaultValue) && (
+        {isMulti && (
           <button className={styles.selectAll} onClick={toggleAll}>
             {isAllSelected ? 'Deselect' : 'Select'} All
           </button>
