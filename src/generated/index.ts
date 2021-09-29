@@ -4768,7 +4768,7 @@ export const StatsFragmentDoc = `
 export const CharactersDocument = `
     query characters($id: Int!, $page: Int!) {
   Media(id: $id) {
-    characters(sort: [ROLE, RELEVANCE, ID], page: $page, perPage: 6) {
+    characters(sort: [ROLE, RELEVANCE, ID], page: $page, perPage: 24) {
       pageInfo {
         currentPage
         hasNextPage
@@ -5011,7 +5011,7 @@ useReviewsQuery.getKey = (variables: ReviewsQueryVariables) => ['reviews', varia
 export const StaffDocument = `
     query staff($id: Int!, $page: Int!) {
   Media(id: $id) {
-    staff(page: $page, perPage: 4, sort: [RELEVANCE]) {
+    staff(page: $page, perPage: 24, sort: [RELEVANCE]) {
       pageInfo {
         currentPage
         hasNextPage

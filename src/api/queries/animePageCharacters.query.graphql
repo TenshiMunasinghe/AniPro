@@ -1,6 +1,6 @@
 query characters($id: Int!, $page: Int!) {
   Media(id: $id) {
-    characters(sort: [ROLE, RELEVANCE, ID], page: $page, perPage: 6) {
+    characters(sort: [ROLE, RELEVANCE, ID], page: $page, perPage: 24) {
       pageInfo {
         currentPage
         hasNextPage
