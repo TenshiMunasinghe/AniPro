@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import { useHistory, useParams } from 'react-router-dom'
 import { ParamTypes, TabsType } from '../../../pages/media/Media'
 import { toStartCase } from '../../../utils/toStartCase'
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const TabNav = ({ tabs }: Props) => {
-  const { id } = useParams<ParamTypes>()
+  const { id, tab } = useParams<ParamTypes>()
   const history = useHistory()
 
   const switchTab = (tab: TabsType) =>
@@ -16,9 +17,14 @@ const TabNav = ({ tabs }: Props) => {
 
   return (
     <nav className={styles.tabs}>
-      {tabs.map(tab => (
-        <button className={styles.tab} onClick={() => switchTab(tab)} key={tab}>
-          {toStartCase(tab)}
+      {tabs.map(t => (
+        <button
+          className={classnames(styles.tab, {
+            [styles.active]: t === (tab || 'overview'),
+          })}
+          onClick={() => switchTab(t)}
+          key={t}>
+          {toStartCase(t)}
         </button>
       ))}
     </nav>
