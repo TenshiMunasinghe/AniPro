@@ -2,18 +2,18 @@
 
 .container {
   position: relative;
-  display: grid;
-  grid-template-columns: 3.5rem 1fr;
+  display: flex;
   column-gap: var(--space-500);
   font-size: var(--text-size-300);
 
   .avatar {
     height: 3.5rem;
-    width: 100%;
+    width: 3.5rem;
     border-radius: 0.1rem;
   }
 
   .review {
+    flex: 1;
     display: flex;
     flex-direction: column;
     position: relative;
