@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
-import Filter from '../Filter/Filter'
 import styles from './ActiveFilters.module.scss'
+import Filter from './Filter/Filter'
 
 const ActiveFilters = () => {
   const history = useHistory()
