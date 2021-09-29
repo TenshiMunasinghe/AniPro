@@ -1,6 +1,6 @@
 import debounce from 'lodash/debounce'
 import uniq from 'lodash/uniq'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useIsFetching } from 'react-query'
 import { useHistory, useLocation } from 'react-router-dom'
 import { allowedURLParams } from '../filterOptions/filterOptions'
@@ -64,25 +64,40 @@ export const useUpdateUrlParam = () => {
     setParams(initialParams)
   }, [initialParams])
 
-  const updateUrl = debounce(
-    (queryVars: SearchResultQueryVariables) =>
-      history.push(
-        `/search?${nextParam(initialParams, {
-          ...queryVars,
-          page: 1,
-        })}`
+  const updateUrl = useMemo(
+    () =>
+      debounce(
+        (queryVars: SearchResultQueryVariables) =>
+          history.push(
+            `/search?${nextParam(initialParams, {
+              ...queryVars,
+              page: 1,
+            })}`
+          ),
+        250
       ),
-    250
+    [history, initialParams]
   )
 
-  const updateFilter = debounce((queryVars: SearchResultQueryVariables) => {
-    setParams(prev => nextParam(prev, queryVars || {}))
-  }, 250)
+  const updateFilter = useMemo(
+    () =>
+      debounce((queryVars: SearchResultQueryVariables) => {
+        setParams(prev => nextParam(prev, queryVars || {}))
+      }, 250),
+    []
+  )
 
-  const applyFilter = () => history.push(`/search?${params}`)
+  const applyFilter = useCallback(() => history.push(`/search?${params}`), [
+    history,
+    params,
+  ])
 
-  const movePage = (page: number) =>
-    !isFetching && history.push(`/search?${nextParam(initialParams, { page })}`)
+  const movePage = useCallback(
+    (page: number) =>
+      !isFetching &&
+      history.push(`/search?${nextParam(initialParams, { page })}`),
+    [history, isFetching, initialParams]
+  )
 
   return {
     updateUrl,
