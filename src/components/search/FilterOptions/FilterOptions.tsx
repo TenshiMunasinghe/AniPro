@@ -4,8 +4,6 @@ import styles from './FilterOptions.module.scss'
 import Fullview from './Fullview/Fullview'
 import Sidebar from './Sidebar/Sidebar'
 
-//TODO: separate aside section and full view
-
 const FilterOptions = () => {
   const [activeFilterOption, setActiveFilterOption] = useState('')
   const { updateFilter, params, applyFilter } = useUpdateUrlParam()
