@@ -24,18 +24,11 @@
 
   .slides {
     display: flex;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     z-index: 1;
-    overflow-x: auto;
-
-    @include mq(above, md) {
-      overflow: hidden;
-    }
+    overflow: hidden;
 
     & > * {
       flex-shrink: 0;
-      scroll-snap-align: start;
     }
   }
 
@@ -59,7 +52,8 @@
     z-index: 1;
 
     @include mq(below, md) {
-      display: none;
+      left: var(--space-500);
+      transform: translateX(0%);
     }
 
     button.disabled {
