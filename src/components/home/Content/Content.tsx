@@ -12,7 +12,7 @@ import styles from './Content.module.scss'
 
 export type _Content = {
   text: string
-  cardType: CardType
+  cardType?: CardType
   hasRank?: boolean
 }
 
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const Content = ({ queryVar, content }: Props) => {
+  const cardType = content.cardType || 'cover'
   const { perPage, ...filterQuery } = formatQueryVar(queryVar)
 
   const { data, isLoading, isError } = useSearchResultQuery(
@@ -62,9 +63,9 @@ const Content = ({ queryVar, content }: Props) => {
         isLoading={isLoading}
         isError={isError}
         loadingCount={queryVar.perPage || undefined}
-        cardType={content.cardType}
-        imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
-        sideScroll={content.cardType === 'cover'}
+        cardType={cardType}
+        imageSize={cardType === 'table' ? 'large' : 'extraLarge'}
+        sideScroll={cardType === 'cover'}
       />
     </section>
   )
