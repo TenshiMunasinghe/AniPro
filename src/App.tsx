@@ -9,6 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner'
+import { MediaType } from './generated/index'
 import {
   Theme,
   useThemeStore,
@@ -24,7 +25,8 @@ const queryClient = new QueryClient()
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
-export const linkToMediaPage = (id: number) => `/media/${id}`
+export const linkToMediaPage = (id: number, type: MediaType) =>
+  `/media/${type.toLowerCase()}/${id}`
 
 const ScrollToTop = () => {
   const { pathname, search } = useLocation()
@@ -67,9 +69,10 @@ const App = () => {
           <Route exact path='/'>
             <Home fallback={<LoadingSpinner />} />
           </Route>
-          <Route exact path='/media/:id/:tab?'>
+          <Route exact path='/media/:type/:id/:tab?'>
             <Media fallback={<LoadingSpinner />} />
           </Route>
+
           <Route exact path='/search/:type?'>
             <Search fallback={<LoadingSpinner />} />
           </Route>

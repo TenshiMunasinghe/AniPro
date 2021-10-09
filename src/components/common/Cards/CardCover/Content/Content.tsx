@@ -11,7 +11,7 @@ interface Props {
   rank?: number | null
 }
 
-const Content = ({ media: { id, coverImage, title }, rank }: Props) => {
+const Content = ({ media: { id, coverImage, title, type }, rank }: Props) => {
   const imageSize = useContext(ImageSizeContext)
 
   return (
@@ -25,8 +25,9 @@ const Content = ({ media: { id, coverImage, title }, rank }: Props) => {
         id={id}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no title'}
+        type={type || null}
       />
-      <Title id={id} text={title?.romaji || 'no title'} />
+      <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
     </article>
   )
 }

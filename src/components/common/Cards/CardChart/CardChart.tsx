@@ -14,7 +14,7 @@ interface Props {
 }
 
 const CardChart = ({
-  media: { id, title, coverImage, genres, meanScore, description },
+  media: { id, title, coverImage, genres, meanScore, description, type },
 }: Props) => {
   const imageSize = useContext(ImageSizeContext)
 
@@ -28,13 +28,18 @@ const CardChart = ({
         id={id}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
+        type={type || null}
       />
       <section className={styles.content}>
         <section className={styles.cardBody}>
           <div className={styles.scrollWrapper}>
             <header className={styles.cardHeader}>
               <div className={styles.title}>
-                <Title id={id} text={title?.romaji || 'no title'} />
+                <Title
+                  id={id}
+                  text={title?.romaji || 'no title'}
+                  type={type || null}
+                />
                 <h4 className={styles.secondaryTitle}>
                   {title?.english || title?.romaji || 'no title'}
                 </h4>

@@ -12,6 +12,7 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
 import Aside from '../../components/media/Aside/Aside'
 import Header from '../../components/media/Header/Header'
+import { MediaTypes } from '../../filterOptions/filterOptions'
 import { CommonQuery, useCommonQuery } from '../../generated/index'
 import styles from './Media.module.scss'
 
@@ -44,6 +45,7 @@ export type TabsType = typeof TAB[number]
 export type ParamTypes = {
   id: string
   tab: TabsType
+  type: keyof typeof MediaTypes
 }
 
 const filterTabs = (data: CommonQuery['Media']) => {
@@ -79,8 +81,6 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
 
   const media = data.Media
 
-  console.log(media)
-
   return (
     <context.Provider value={{ scrollPosition }}>
       <NavBar />
@@ -107,32 +107,32 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         <main className={styles.main}>
           <Aside data={media} />
           <Switch>
-            <Route exact path='/media/:id'>
+            <Route exact path='/media/:type/:id'>
               <Overview
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />
             </Route>
-            <Route exact path='/media/:id/watch'>
+            <Route exact path='/media/:type/:id/watch'>
               <Episodes
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />
             </Route>
-            <Route exact path='/media/:id/characters'>
+            <Route exact path='/media/:type/:id/characters'>
               <Characters
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />
             </Route>
-            <Route exact path='/media/:id/staff'>
+            <Route exact path='/media/:type/:id/staff'>
               <Staff
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />
             </Route>
-            <Route exact path='/media/:id/reviews'>
+            <Route exact path='/media/:type/:id/reviews'>
               <Reviews
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />
             </Route>
-            <Route exact path='/media/:id/stats'>
+            <Route exact path='/media/:type/:id/stats'>
               <Stats
                 fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
               />

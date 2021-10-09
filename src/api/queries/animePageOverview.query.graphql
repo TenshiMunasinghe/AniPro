@@ -13,6 +13,7 @@ query overview($id: Int!) {
           }
           format
           status
+          type
         }
         id
         relationType
@@ -46,6 +47,7 @@ query overview($id: Int!) {
             large
             color
           }
+          type
         }
       }
     }

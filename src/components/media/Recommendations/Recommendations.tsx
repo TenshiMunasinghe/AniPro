@@ -48,8 +48,13 @@ const Recommendations = ({ recommendations }: Props) => {
                 id={m.id}
                 src={m.coverImage?.large}
                 title={m.title?.romaji}
+                type={m.type || null}
               />
-              <Title id={m.id} text={m.title?.romaji || 'no title'} />
+              <Title
+                id={m.id}
+                text={m.title?.romaji || 'no title'}
+                type={m.type || null}
+              />
             </div>
           )
         })}

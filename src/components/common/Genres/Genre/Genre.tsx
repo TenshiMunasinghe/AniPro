@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { linkToSearchPage } from '../../../../utils/linkToSearchPage'
 import styles from './Genre.module.scss'
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 
 const Genre = ({ genre, canInteract = true }: Props) => {
   return canInteract ? (
-    <Link className={styles.genre} to={`/search?genres=${genre}`}>
+    <Link className={styles.genre} to={linkToSearchPage({ genres: [genre] })}>
       {genre}
     </Link>
   ) : (

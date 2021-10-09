@@ -1,8 +1,11 @@
 import classnames from 'classnames'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
-import { MediaTag } from '../../../../generated/index'
+import { MediaTypes } from '../../../../filterOptions/filterOptions'
+import { MediaTag, MediaType } from '../../../../generated/index'
+import { ParamTypes } from '../../../../pages/media/Media'
+import { linkToSearchPage } from '../../../../utils/linkToSearchPage'
 import styles from './Tags.module.scss'
 
 interface Props {
@@ -11,6 +14,7 @@ interface Props {
 
 const Tags = ({ tags }: Props) => {
   const [showSpoiler, setShowSpoiler] = useState(false)
+  const { type } = useParams<ParamTypes>()
 
   const tagsArr = showSpoiler
     ? tags
@@ -31,7 +35,11 @@ const Tags = ({ tags }: Props) => {
               className={classnames(styles.tag, {
                 [styles.spoiler]: tag.isGeneralSpoiler || tag.isMediaSpoiler,
               })}>
-              <Link to={`/search?tags=${tag.name.replace(' ', '+')}`}>
+              <Link
+                to={linkToSearchPage(
+                  { tags: [tag.name.replace(' ', '+')] },
+                  MediaTypes[type] || MediaType.Anime
+                )}>
                 <span
                   className={styles.tagName}
                   data-tip

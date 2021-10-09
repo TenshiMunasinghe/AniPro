@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TabNav = ({ tabs }: Props) => {
-  const { id, tab } = useParams<ParamTypes>()
+  const { id, tab, type } = useParams<ParamTypes>()
 
   return (
     <nav className={styles.tabs}>
@@ -18,7 +18,7 @@ const TabNav = ({ tabs }: Props) => {
           className={classnames(styles.tab, {
             [styles.active]: t === (tab || 'overview'),
           })}
-          to={`/media/${id}/${t === 'overview' ? '' : t}`}
+          to={`/media/${type}/${id}/${t === 'overview' ? '' : t}`}
           key={t}>
           {toStartCase(t)}
         </Link>

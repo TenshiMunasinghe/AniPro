@@ -7,7 +7,7 @@ import {
   SearchResultQueryVariables,
   useSearchResultQuery,
 } from '../../../generated/index'
-import { formatQueryVar } from '../../../utils/formatQueryVar'
+import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
@@ -36,8 +36,7 @@ const Slider = ({ queryVar, context }: Props) => {
     }
   }, [slide])
 
-  const { perPage, ...filterQuery } = formatQueryVar(queryVar)
-  const link = `/search?${new URLSearchParams(filterQuery).toString()}`
+  const link = linkToSearchPage(queryVar)
 
   const toNextSlide = useCallback(
     () => setSlide(prev => (prev + 1 >= slideCount ? prev : prev + 1)),

@@ -54,6 +54,7 @@ const Overview = () => {
                     status={node.status}
                     relation={relationType}
                     isCollapsed={(data.relations?.edges?.length || 0) > 4}
+                    type={node.type || null}
                   />
                 )
               })}

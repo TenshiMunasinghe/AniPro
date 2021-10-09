@@ -53,7 +53,11 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         <div className={styles.coverImage} />
         <div className={styles.content}>
           <div>
-            <Title id={media.id} text={media?.title?.romaji || 'no title'} />
+            <Title
+              id={media.id}
+              text={media?.title?.romaji || 'no title'}
+              type={media.type || null}
+            />
             <div className={styles.description}>
               <Description description={media.description} />
             </div>
@@ -63,6 +67,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
               id={media.id}
               title={media?.title?.romaji || 'no title'}
               src={media?.coverImage?.extraLarge || NO_IMAGE_URL}
+              type={media.type || null}
             />
           </div>
         </div>

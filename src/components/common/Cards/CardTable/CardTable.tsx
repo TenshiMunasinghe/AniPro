@@ -36,6 +36,7 @@ const CardTable = ({
     nextAiringEpisode,
     format,
     episodes,
+    type,
   },
   rank,
 }: Props) => {
@@ -58,10 +59,15 @@ const CardTable = ({
           id={id}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
+          type={type || null}
         />
         <div className={styles.content}>
           <div className={styles.header}>
-            <Title id={id} text={title?.romaji || 'no title'} />
+            <Title
+              id={id}
+              text={title?.romaji || 'no title'}
+              type={type || null}
+            />
             <Genres
               as='section'
               genres={genres}

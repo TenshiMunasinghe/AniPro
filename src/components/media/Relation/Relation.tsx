@@ -9,6 +9,7 @@ import {
   MediaFormat,
   MediaRelation,
   MediaStatus,
+  MediaType,
 } from '../../../generated/index'
 import { useOverflow } from '../../../hooks/useOverflow'
 import { context } from '../../../pages/media/Media'
@@ -28,6 +29,7 @@ interface Props {
   format?: DeepPartial<MediaFormat> | null
   status?: DeepPartial<MediaStatus> | null
   isCollapsed?: boolean
+  type: MediaType | null
 }
 
 const Relation = ({
@@ -38,13 +40,14 @@ const Relation = ({
   format,
   status,
   isCollapsed,
+  type,
 }: Props) => {
   const { scrollPosition } = useContext(context)
   const { isLeft, wrapperRef } = useOverflow()
 
   const relationLabel = relation?.replace('_', ' ').toLowerCase()
 
-  const linkUrl = id ? linkToMediaPage(id) : '#'
+  const linkUrl = id ? linkToMediaPage(id, type || MediaType.Anime) : '#'
 
   return (
     <div
