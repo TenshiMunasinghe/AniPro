@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import { useHistory } from 'react-router-dom'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
@@ -7,9 +6,7 @@ import styles from './ActiveFilters.module.scss'
 import Filter from './Filter/Filter'
 
 const ActiveFilters = () => {
-  const history = useHistory()
-
-  const { updateUrl, params } = useUpdateUrlParam()
+  const { updateUrl, params, resetParams } = useUpdateUrlParam()
 
   const paramArr = Array.from(params.initial.keys())
     .filter(key => Object.keys(filterOptionTypes.default).includes(key))
@@ -49,11 +46,7 @@ const ActiveFilters = () => {
         ))
       )}
       {paramArr.length > 0 && (
-        <Filter
-          onClick={() => history.push('/search')}
-          text='Clear All'
-          variant='secondary'
-        />
+        <Filter onClick={resetParams} text='Clear All' variant='secondary' />
       )}
     </section>
   )

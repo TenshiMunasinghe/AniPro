@@ -101,11 +101,16 @@ export const useUpdateUrlParam = () => {
     [history, isFetching, initialParams, location.pathname]
   )
 
+  const resetParams = useCallback(() => {
+    history.push(location.pathname)
+  }, [location.pathname, history])
+
   return {
     updateUrl,
     updateFilter,
     applyFilter,
     movePage,
+    resetParams,
     queryVars: {
       current: paramToObj(new URLSearchParams(params)),
       initial: paramToObj(new URLSearchParams(initialParams)),
