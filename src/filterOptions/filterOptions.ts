@@ -7,6 +7,7 @@ import {
   MediaSort,
   MediaSource,
   MediaStatus,
+  MediaType,
   SearchResultQueryVariables,
 } from '../generated/index'
 import { formatLabel } from '../utils/formatLabel'
@@ -100,6 +101,7 @@ export const allowedURLParams = [
   'searchText',
   'page',
   'perPage',
+  'type',
 ]
 
 export const sortByOptions = filterOptions.sortBy.options.map(s => ({
@@ -125,3 +127,8 @@ export const filters = Object.entries(filterOptionTypes.default)
   }))
 
 export type Filters = typeof filters
+
+export const MediaTypes = {
+  anime: MediaType.Anime,
+  manga: MediaType.Manga,
+} as const

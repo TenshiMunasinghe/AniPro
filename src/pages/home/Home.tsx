@@ -8,38 +8,51 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
 import Slider from '../../components/home/Slider/Slider'
-import { Media, MediaSort } from '../../generated'
+import { MediaTypes } from '../../filterOptions/filterOptions'
+import { MediaSort } from '../../generated'
 import { SearchResultQueryVariables } from '../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
 
-type Medias = {
-  trending: Media[]
-  popularNow: Media[]
-  popularAllTime: Media[]
-  upComing: Media[]
-  topRated: Media[]
+type HomeContents<T> = {
+  anime: {
+    [key: string]: T
+  }
+  manga: {
+    [key: string]: T
+  }
 }
 
-const queryVars: { [key in keyof Medias]: SearchResultQueryVariables } = {
-  trending: { sortBy: MediaSort.TrendingDesc },
+const queryVars: HomeContents<SearchResultQueryVariables> = {
+  anime: {
+    trending: { sortBy: MediaSort.TrendingDesc },
 
-  popularNow: {
-    sortBy: MediaSort.PopularityDesc,
-    year: currentYear,
-    season: currentSeason,
+    popularNow: {
+      sortBy: MediaSort.PopularityDesc,
+      year: currentYear,
+      season: currentSeason,
+    },
+
+    upComing: {
+      year: nextYear,
+      season: nextSeason,
+      sortBy: MediaSort.TrendingDesc,
+    },
+
+    popularAllTime: { sortBy: MediaSort.PopularityDesc },
+
+    topRated: { sortBy: MediaSort.ScoreDesc },
   },
-
-  upComing: {
-    year: nextYear,
-    season: nextSeason,
-    sortBy: MediaSort.TrendingDesc,
+  manga: {
+    trending: { sortBy: MediaSort.TrendingDesc },
+    popularNow: {
+      sortBy: MediaSort.PopularityDesc,
+    },
+    topRated: {
+      sortBy: MediaSort.ScoreDesc,
+    },
   },
-
-  popularAllTime: { sortBy: MediaSort.PopularityDesc },
-
-  topRated: { sortBy: MediaSort.ScoreDesc },
 }
 
 const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
@@ -47,62 +60,71 @@ const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
-  const contents: {
-    [key in keyof Medias]: {
-      text: string
-      cardType: CardType
-      hasRank?: boolean
-    }
-  } = {
-    trending: {
-      text: 'Trending Now',
-      cardType: 'cover',
-    },
+  const contents: HomeContents<{
+    text: string
+    cardType?: CardType
+    hasRank?: boolean
+  }> = {
+    anime: {
+      trending: {
+        text: 'Trending Animes',
+      },
 
-    popularNow: {
-      text: 'Popular This Season',
-      cardType: 'cover',
-    },
+      popularNow: {
+        text: 'Popular This Season',
+      },
 
-    upComing: {
-      text: 'Upcoming Next Season',
-      cardType: 'cover',
-    },
+      upComing: {
+        text: 'Upcoming Next Season',
+      },
 
-    popularAllTime: {
-      text: 'All Time Popular',
-      cardType: 'cover',
-    },
+      popularAllTime: {
+        text: 'All Time Popular Animes',
+      },
 
-    topRated: {
-      text: 'Top Animes',
-      cardType: windowWidth >= 600 ? 'table' : 'cover',
-      hasRank: true,
+      topRated: {
+        text: 'Top Animes',
+        cardType: windowWidth >= 600 ? 'table' : 'cover',
+        hasRank: true,
+      },
+    },
+    manga: {
+      trending: { text: 'Trending Manga' },
+      popularNow: {
+        text: 'Popular Manga',
+      },
+      topRated: {
+        text: 'Top Manga',
+      },
     },
   }
 
-  const contentsKey = Object.keys(queryVars) as (keyof typeof queryVars)[]
+  const contentsKey = Object.keys(
+    queryVars.anime
+  ) as (keyof typeof queryVars.anime)[]
   const randomKey = contentsKey[(contentsKey.length * Math.random()) << 0]
 
   return (
     <>
       <Slider
-        queryVar={queryVars[randomKey]}
-        context={contents[randomKey].text}
+        queryVar={queryVars.anime[randomKey]}
+        context={contents.anime[randomKey].text}
       />
       <NavBar position='sticky' />
       <main className={styles.content}>
-        {Object.keys(queryVars).map(k => {
-          const key = k as keyof Medias
-
-          return (
+        {(['anime', 'manga'] as const).map(type =>
+          Object.keys(queryVars[type]).map(key => (
             <Content
               key={key}
-              content={contents[key]}
-              queryVar={{ ...queryVars[key], perPage: 10 }}
+              content={contents[type][key]}
+              queryVar={{
+                ...queryVars[type][key],
+                perPage: 10,
+                type: MediaTypes[type],
+              }}
             />
-          )
-        })}
+          ))
+        )}
       </main>
       <Footer />
     </>

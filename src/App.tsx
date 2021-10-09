@@ -64,16 +64,14 @@ const App = () => {
       <Router>
         <ScrollToTop />
         <Switch>
+          <Route exact path='/'>
+            <Home fallback={<LoadingSpinner />} />
+          </Route>
           <Route exact path='/media/:id/:tab?'>
             <Media fallback={<LoadingSpinner />} />
           </Route>
-          <Route path='/'>
-            <Route exact path='/'>
-              <Home fallback={<LoadingSpinner />} />
-            </Route>
-            <Route exact path='/search'>
-              <Search fallback={<LoadingSpinner />} />
-            </Route>
+          <Route exact path='/search/:type?'>
+            <Search fallback={<LoadingSpinner />} />
           </Route>
         </Switch>
       </Router>

@@ -11,6 +11,7 @@ query searchResult(
   $searchText: String
   $sortBy: [MediaSort] = [TRENDING_DESC]
   $perPage: Int = 10
+  $type: MediaType = ANIME
 ) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
@@ -30,7 +31,8 @@ query searchResult(
       source: $source
       search: $searchText
       sort: $sortBy
-      format_not_in: [MANGA, NOVEL, ONE_SHOT, MUSIC]
+      format_not_in: [ONE_SHOT, MUSIC]
+      type: $type
     ) {
       id
       title {
@@ -53,6 +55,14 @@ query searchResult(
       episodes
       duration
       popularity
+      chapters
+      startDate {
+        year
+      }
+      endDate {
+        year
+      }
+      type
       studios(isMain: true) {
         nodes {
           name

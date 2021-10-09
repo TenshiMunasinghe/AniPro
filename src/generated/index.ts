@@ -4666,10 +4666,11 @@ export type SearchResultQueryVariables = Exact<{
   searchText?: Maybe<Scalars['String']>;
   sortBy?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
   perPage?: Maybe<Scalars['Int']>;
+  type?: Maybe<MediaType>;
 }>;
 
 
-export type SearchResultQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, media?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, bannerImage?: Maybe<string>, status?: Maybe<MediaStatus>, genres?: Maybe<Array<Maybe<string>>>, description?: Maybe<string>, meanScore?: Maybe<number>, format?: Maybe<MediaFormat>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, episodes?: Maybe<number>, duration?: Maybe<number>, popularity?: Maybe<number>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', extraLarge?: Maybe<string>, large?: Maybe<string>, color?: Maybe<string> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', timeUntilAiring: number, episode: number }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', rank: number, context: string, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }>>> }> };
+export type SearchResultQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, media?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, bannerImage?: Maybe<string>, status?: Maybe<MediaStatus>, genres?: Maybe<Array<Maybe<string>>>, description?: Maybe<string>, meanScore?: Maybe<number>, format?: Maybe<MediaFormat>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, episodes?: Maybe<number>, duration?: Maybe<number>, popularity?: Maybe<number>, chapters?: Maybe<number>, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', extraLarge?: Maybe<string>, large?: Maybe<string>, color?: Maybe<string> }>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, endDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', timeUntilAiring: number, episode: number }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', rank: number, context: string, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }>>> }> };
 
 export const CharactersFragmentDoc = `
     fragment Characters on CharacterConnection {
@@ -5104,7 +5105,7 @@ useWatchQuery.document = WatchDocument;
 useWatchQuery.getKey = (variables: WatchQueryVariables) => ['watch', variables];
 
 export const SearchResultDocument = `
-    query searchResult($page: Int = 1, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort] = [TRENDING_DESC], $perPage: Int = 10) {
+    query searchResult($page: Int = 1, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort] = [TRENDING_DESC], $perPage: Int = 10, $type: MediaType = ANIME) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       currentPage
@@ -5123,7 +5124,8 @@ export const SearchResultDocument = `
       source: $source
       search: $searchText
       sort: $sortBy
-      format_not_in: [MANGA, NOVEL, ONE_SHOT, MUSIC]
+      format_not_in: [ONE_SHOT, MUSIC]
+      type: $type
     ) {
       id
       title {
@@ -5146,6 +5148,14 @@ export const SearchResultDocument = `
       episodes
       duration
       popularity
+      chapters
+      startDate {
+        year
+      }
+      endDate {
+        year
+      }
+      type
       studios(isMain: true) {
         nodes {
           name

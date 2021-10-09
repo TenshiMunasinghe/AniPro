@@ -69,14 +69,14 @@ export const useUpdateUrlParam = () => {
       debounce(
         (queryVars: SearchResultQueryVariables) =>
           history.push(
-            `/search?${nextParam(initialParams, {
+            `${location.pathname}?${nextParam(initialParams, {
               ...queryVars,
               page: 1,
             })}`
           ),
         250
       ),
-    [history, initialParams]
+    [history, initialParams, location.pathname]
   )
 
   const updateFilter = useMemo(
@@ -87,16 +87,18 @@ export const useUpdateUrlParam = () => {
     []
   )
 
-  const applyFilter = useCallback(() => history.push(`/search?${params}`), [
-    history,
-    params,
-  ])
+  const applyFilter = useCallback(
+    () => history.push(`${location.pathname}?${params}`),
+    [history, params, location.pathname]
+  )
 
   const movePage = useCallback(
     (page: number) =>
       !isFetching &&
-      history.push(`/search?${nextParam(initialParams, { page })}`),
-    [history, isFetching, initialParams]
+      history.push(
+        `${location.pathname}?${nextParam(initialParams, { page })}`
+      ),
+    [history, isFetching, initialParams, location.pathname]
   )
 
   return {

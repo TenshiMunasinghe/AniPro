@@ -6,7 +6,7 @@ import {
   useSearchResultQuery,
 } from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
-import { formatQueryVar } from '../../../utils/formatQueryVar'
+import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
 import styles from './Content.module.scss'
 
@@ -23,7 +23,6 @@ interface Props {
 
 const Content = ({ queryVar, content }: Props) => {
   const cardType = content.cardType || 'cover'
-  const { perPage, ...filterQuery } = formatQueryVar(queryVar)
 
   const { data, isLoading, isError } = useSearchResultQuery(
     gqlRequestClient,
@@ -46,7 +45,7 @@ const Content = ({ queryVar, content }: Props) => {
       .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
   }, [data?.Page?.media, content.hasRank])
 
-  const link = `/search?${new URLSearchParams(filterQuery).toString()}`
+  const link = linkToSearchPage(queryVar)
 
   return (
     <section className={styles.content}>
