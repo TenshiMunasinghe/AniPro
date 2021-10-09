@@ -107,6 +107,18 @@
     }
   }
 
+  .manga {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 1.5em;
+
+    & > *:first-child {
+      position: absolute;
+      right: 0;
+    }
+  }
+
   .genres {
     font-size: var(--text-size-300);
     margin-top: var(--space-500);

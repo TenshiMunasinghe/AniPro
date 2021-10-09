@@ -12,18 +12,6 @@ interface Props {
 }
 
 const CardCover = ({ index, rank, media }: Props) => {
-  const {
-    coverImage,
-    format,
-    season,
-    seasonYear,
-    episodes,
-    duration,
-    genres,
-    studios,
-    nextAiringEpisode,
-    meanScore,
-  } = media
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
@@ -36,22 +24,10 @@ const CardCover = ({ index, rank, media }: Props) => {
       onFocus={showPopover}
       onBlur={hidePopover}
       style={createColorVariable(
-        coverImage?.color || 'var(--color-foreground-200)'
+        media.coverImage?.color || 'var(--color-foreground-200)'
       )}>
       <Content rank={rank} media={media} />
-      <Popover
-        index={index}
-        isVisible={isPopoverVisible}
-        genres={genres}
-        nextAiringEpisode={nextAiringEpisode}
-        format={format}
-        season={season}
-        seasonYear={seasonYear}
-        episodes={episodes}
-        duration={duration}
-        studios={studios}
-        meanScore={meanScore}
-      />
+      <Popover index={index} isVisible={isPopoverVisible} media={media} />
     </div>
   )
 }
