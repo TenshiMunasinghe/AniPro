@@ -1,8 +1,8 @@
 import classnames from 'classnames'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useOverviewQuery } from '../../../generated/index'
-import { ParamTypes } from '../../../pages/media/Media'
+import { ParamTypes, TabsType } from '../../../pages/media/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Character from '../Character/Character'
 import Content from '../Content/Content'
@@ -17,7 +17,7 @@ import Status from '../Status/Status'
 import styles from './Overview.module.scss'
 
 const Overview = () => {
-  const { id } = useParams<ParamTypes>()
+  const { id, type } = useParams<ParamTypes>()
   const { data, isLoading } = useOverviewQuery(
     gqlRequestClient,
     {
@@ -29,6 +29,8 @@ const Overview = () => {
   if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 
   if (!data) return null
+
+  const tabLink = (tab: TabsType) => `/media/${type}/${id}/${tab}`
 
   return (
     <div className={styles.container}>
@@ -63,7 +65,7 @@ const Overview = () => {
       )}
 
       {(data.characters?.edges?.length || -1) > 0 && (
-        <Content heading='Characters'>
+        <Content heading={<Link to={tabLink('characters')}>Characters</Link>}>
           <div className={peopleStyles.people}>
             {data.characters?.edges?.map(character => (
               <Character
@@ -76,7 +78,7 @@ const Overview = () => {
       )}
 
       {(data.staff?.edges?.length || -1) > 0 && (
-        <Content heading='Staff'>
+        <Content heading={<Link to={tabLink('staff')}>Staff</Link>}>
           <div className={peopleStyles.people}>
             {data.staff?.edges?.map(staff => (
               <Person
@@ -106,7 +108,7 @@ const Overview = () => {
       )}
 
       {(data.streamingEpisodes?.length || -1) > 0 && (
-        <Content heading='Watch'>
+        <Content heading={<Link to={tabLink('watch')}>Watch</Link>}>
           <div className={styles.watch}>
             {data.streamingEpisodes?.slice(0, 4).map(episode => (
               <Episode key={'overview' + episode?.url} episode={episode} />
@@ -131,7 +133,7 @@ const Overview = () => {
       )}
 
       {(data.reviews?.nodes?.length || -1) > 0 && (
-        <Content heading='Reviews'>
+        <Content heading={<Link to={tabLink('reviews')}>Reviews</Link>}>
           <div className={styles.reviews}>
             {data.reviews?.nodes?.map(review => (
               <Review key={'overview review' + review?.id} review={review} />
