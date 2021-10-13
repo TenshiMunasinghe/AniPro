@@ -36,7 +36,7 @@ const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
     gqlRequestClient,
     {
       ...queryVars,
-      perPage: 20,
+      perPage: 24,
       type: type ? MediaTypes[type] : null,
     }
   )

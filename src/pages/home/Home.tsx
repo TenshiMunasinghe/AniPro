@@ -42,7 +42,7 @@ const queryVars: HomeContents<SearchResultQueryVariables> = {
 
     popularAllTime: { sortBy: MediaSort.PopularityDesc },
 
-    topRated: { sortBy: MediaSort.ScoreDesc },
+    topRated: { sortBy: MediaSort.ScoreDesc, perPage: 10 },
   },
   manga: {
     trending: { sortBy: MediaSort.TrendingDesc },
@@ -51,6 +51,7 @@ const queryVars: HomeContents<SearchResultQueryVariables> = {
     },
     topRated: {
       sortBy: MediaSort.ScoreDesc,
+      perPage: 10,
     },
   },
 }
@@ -121,7 +122,7 @@ const Home = () => {
               content={contents[type][key]}
               queryVar={{
                 ...queryVars[type][key],
-                perPage: 10,
+                perPage: queryVars[type][key].perPage || 6,
                 type: MediaTypes[type],
               }}
             />
