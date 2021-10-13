@@ -92,7 +92,11 @@ const Popover = ({ isVisible, media }: Props) => {
 
       {type === 'MANGA' && (
         <div className={styles.manga}>
-          {meanScore && <Score score={meanScore} />}
+          {meanScore && (
+            <div className={styles.score}>
+              <Score score={meanScore} />
+            </div>
+          )}
           {startDate?.year && (
             <div>
               {endDate?.year
