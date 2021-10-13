@@ -95,6 +95,8 @@ const Home = () => {
       },
       topRated: {
         text: 'Top Manga',
+        cardType: windowWidth >= 600 ? 'table' : 'cover',
+        hasRank: true,
       },
     },
   }
