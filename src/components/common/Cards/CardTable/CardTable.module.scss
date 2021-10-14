@@ -66,11 +66,12 @@
   }
 
   .header {
-    margin-bottom: var(--space-300);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     a {
       display: inline-block;
-      margin-bottom: var(--space-300);
       max-width: 100%;
       white-space: nowrap;
       overflow: hidden;
