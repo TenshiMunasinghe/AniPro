@@ -48,7 +48,7 @@ const CardTable = ({
   } as React.CSSProperties
 
   return (
-    <article className={styles.wrapper} style={_style}>
+    <article className={styles.container} style={_style}>
       {rank && (
         <div className={styles.rank}>
           <Rank rank={rank} />

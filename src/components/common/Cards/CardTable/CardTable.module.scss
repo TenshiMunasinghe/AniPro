@@ -1,110 +1,84 @@
 @use '../../../../css/config.scss' as *;
 
-.wrapper {
+.container {
   position: relative;
+  display: flex;
   overflow: hidden;
   --padding: var(--space-400);
 
-  @include mq(above, sm) {
-    display: flex;
+  .rank {
+    position: absolute;
+    right: var(--padding);
+    top: var(--padding);
+    width: 3rem;
   }
 
-  @include mq(below, sm) {
-    font-size: var(--text-size-300);
-  }
-}
-
-.rank {
-  position: absolute;
-  right: var(--padding);
-  top: var(--padding);
-  width: 3rem;
-}
-
-.card {
-  background-color: var(--color-foreground-100);
-  @include padding-vertical(var(--padding));
-
-  @mixin background-image {
-    background-image: var(--banner-image);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 50% 50%;
-
-    &:before {
-      display: block;
-      position: absolute;
-      background: var(--color-foreground-100);
-      content: '';
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      opacity: 0.85;
-    }
-  }
-
-  @include on-non-hoverable-devices {
-    @include background-image;
-  }
-
-  @include on-hoverable-devices {
-    background-image: none;
-    &:before {
-      display: none;
-    }
-    &:hover,
-    &:focus-within {
-      @include background-image;
-    }
-  }
-
-  @include mq(above, sm) {
+  .card {
     flex: 1;
     max-width: 100%;
     position: relative;
     display: grid;
-    grid-template-columns: calc(3rem + 5%) 1fr;
+    grid-template-columns: 3.5rem 1fr;
     font-size: var(--text-size-400);
     border-radius: 0.1em;
-    @include padding-horizontal(var(--padding));
-  }
+    padding: var(--padding);
+    background-color: var(--color-foreground-100);
 
-  @include mq(below, sm) {
-    & > a {
-      display: none;
+    @mixin background-image {
+      background-image: var(--banner-image);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: 50% 50%;
+
+      &:before {
+        display: block;
+        position: absolute;
+        background: var(--color-foreground-100);
+        content: '';
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0.85;
+      }
+    }
+
+    @include on-hoverable-devices {
+      background-image: none;
+      &:before {
+        display: none;
+      }
+      &:hover,
+      &:focus-within {
+        @include background-image;
+      }
     }
   }
-}
 
-.content {
-  overflow: hidden;
-  position: relative;
-  z-index: 999;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  max-width: 100%;
-  @include padding-horizontal(var(--space-500));
+  .content {
+    position: relative;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6rem 6rem 12rem;
+    column-gap: var(--space-500);
+    padding-left: var(--space-500);
+    z-index: 999;
+  }
 
   .header {
-    font-size: var(--text-size-500);
-    max-width: 100%;
-    width: 100%;
-    overflow: hidden;
     margin-bottom: var(--space-300);
 
     a {
+      display: inline-block;
       margin-bottom: var(--space-300);
-      width: fit-content;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
   .genres {
-    font-size: var(--text-size-300);
-
-    @include mq(below, sm) {
-      font-size: var(--text-size-200);
-    }
+    font-size: var(--text-size-200);
   }
 }
