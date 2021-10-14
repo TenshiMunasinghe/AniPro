@@ -1,3 +1,5 @@
+@use '../../../css/config.scss' as *;
+
 .button {
   display: flex;
   align-items: center;
@@ -15,6 +17,12 @@
   &.active {
     * {
       color: var(--color-foreground-accent-200);
+    }
+  }
+
+  &.table {
+    @include mq(below, sm) {
+      display: none;
     }
   }
 }
