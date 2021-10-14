@@ -1,3 +1,4 @@
+import range from 'lodash/range'
 import { memo } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { CardType } from '../../../../pages/search/Search'
@@ -64,25 +65,14 @@ const CardLoading = ({ type }: Props) => {
                   <Skeleton className={styles.genre} />
                 </div>
               </div>
-
-              <div className={styles.row}>
-                <Skeleton className={styles.rowContent} />
-                <div className={styles.subRow}>
-                  <Skeleton className={styles.subRowContent} />
+              {range(0, 3).map((_, i) => (
+                <div className={styles.row} key={'loading table' + i}>
+                  <Skeleton className={styles.rowContent} />
+                  <div className={styles.subRow}>
+                    <Skeleton className={styles.subRowContent} />
+                  </div>
                 </div>
-              </div>
-              <div className={styles.row}>
-                <Skeleton className={styles.rowContent} />
-                <div className={styles.subRow}>
-                  <Skeleton className={styles.subRowContent} />
-                </div>
-              </div>
-              <div className={styles.row}>
-                <Skeleton className={styles.rowContent} />
-                <div className={styles.subRow}>
-                  <Skeleton className={styles.subRowContent} />
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </SkeletonTheme>
