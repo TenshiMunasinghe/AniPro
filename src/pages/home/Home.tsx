@@ -8,6 +8,7 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
 import Slider from '../../components/home/Slider/Slider'
+import breakpoints from '../../css/breakpoints.module.scss'
 import { MediaTypes } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated'
 import { SearchResultQueryVariables } from '../../generated/index'
@@ -61,6 +62,8 @@ const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 const Home = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
+  const isLargeScreen = windowWidth >= parseInt(breakpoints.sm)
+
   const contents: HomeContents<{
     text: string
     cardType?: CardType
@@ -85,7 +88,7 @@ const Home = () => {
 
       topRated: {
         text: 'Top Animes',
-        cardType: windowWidth >= 600 ? 'table' : 'cover',
+        cardType: isLargeScreen ? 'table' : 'cover',
         hasRank: true,
       },
     },
@@ -96,7 +99,7 @@ const Home = () => {
       },
       topRated: {
         text: 'Top Manga',
-        cardType: windowWidth >= 600 ? 'table' : 'cover',
+        cardType: isLargeScreen ? 'table' : 'cover',
         hasRank: true,
       },
     },
