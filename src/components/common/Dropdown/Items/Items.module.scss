@@ -52,11 +52,10 @@
     var(--color-foreground-400),
     bg
   );
-  @include on-hoverable-devices {
-    &:hover {
-      span {
-        color: var(--color-text-accent-100);
-      }
+
+  &:hover {
+    span {
+      color: var(--color-text-accent-100);
     }
   }
 }

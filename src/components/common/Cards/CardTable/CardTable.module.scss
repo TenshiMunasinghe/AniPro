@@ -43,15 +43,13 @@
       }
     }
 
-    @include on-hoverable-devices {
-      background-image: none;
-      &:before {
-        display: none;
-      }
-      &:hover,
-      &:focus-within {
-        @include background-image;
-      }
+    background-image: none;
+    &:before {
+      display: none;
+    }
+    &:hover,
+    &:focus-within {
+      @include background-image;
     }
   }
 
