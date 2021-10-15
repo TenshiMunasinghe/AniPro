@@ -125,7 +125,8 @@ const Home = () => {
               content={contents[type][key]}
               queryVar={{
                 ...queryVars[type][key],
-                perPage: queryVars[type][key].perPage || 6,
+                perPage:
+                  queryVars[type][key].perPage || (isLargeScreen ? 6 : 10),
                 type: MediaTypes[type],
               }}
             />
