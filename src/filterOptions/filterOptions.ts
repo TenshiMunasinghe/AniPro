@@ -100,8 +100,6 @@ export const allowedURLParams = [
   ...Object.keys(filterOptions),
   'searchText',
   'page',
-  'perPage',
-  'type',
 ]
 
 export const sortByOptions = filterOptions.sortBy.options.map(s => ({
