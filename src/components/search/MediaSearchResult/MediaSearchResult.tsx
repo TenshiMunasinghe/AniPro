@@ -5,9 +5,7 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
-import { MediaTypes } from '../../../filterOptions/filterOptions'
 import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
@@ -31,13 +29,11 @@ export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
 )
 
 const MediaSearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
-  const { type } = useParams<{ type?: keyof typeof MediaTypes }>()
   const { data, isLoading, isError, isFetching } = useMediaSearchQuery(
     gqlRequestClient,
     {
       ...queryVars,
       perPage: 24,
-      type: type ? MediaTypes[type] : null,
     }
   )
   const { movePage } = useUpdateUrlParam()

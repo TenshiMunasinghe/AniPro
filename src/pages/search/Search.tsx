@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../components/common/Dropdown/Dropdown'
 import NavBar from '../../components/common/NavBar/NavBar'
@@ -7,8 +8,8 @@ import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import FilterOptions from '../../components/search/FilterOptions/FilterOptions'
 import MediaSearchResult from '../../components/search/MediaSearchResult/MediaSearchResult'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import { sortByOptions } from '../../filterOptions/filterOptions'
-import { MediaSort } from '../../generated/index'
+import { MediaTypes, sortByOptions } from '../../filterOptions/filterOptions'
+import { MediaSort, MediaType } from '../../generated/index'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
 import styles from './Search.module.scss'
@@ -20,6 +21,8 @@ const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
 const cardTypes = addKey(CARD_TYPES)
 
 const Search = () => {
+  const { type } = useParams<{ type?: keyof typeof MediaTypes }>()
+
   const [cardType, setCardType] = useState<CardType>('chart')
 
   const { updateUrl, queryVars } = useUpdateUrlParam()
@@ -59,9 +62,11 @@ const Search = () => {
 
         <main className={styles.mainContent}>
           <FilterOptions />
-
           <MediaSearchResult
-            queryVars={queryVars.initial}
+            queryVars={{
+              ...queryVars.initial,
+              type: type ? MediaTypes[type] : MediaType.Anime,
+            }}
             cardType={cardType}
           />
           <ScrollButton />
