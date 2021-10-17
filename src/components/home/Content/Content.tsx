@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import {
-  SearchResultQueryVariables,
-  useSearchResultQuery,
+  MediaSearchQueryVariables,
+  useMediaSearchQuery,
 } from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
 import { linkToSearchPage } from '../../../utils/linkToSearchPage'
@@ -17,14 +17,14 @@ export type _Content = {
 }
 
 interface Props {
-  queryVar: SearchResultQueryVariables
+  queryVar: MediaSearchQueryVariables
   content: _Content
 }
 
 const Content = ({ queryVar, content }: Props) => {
   const cardType = content.cardType || 'cover'
 
-  const { data, isLoading, isError } = useSearchResultQuery(
+  const { data, isLoading, isError } = useMediaSearchQuery(
     gqlRequestClient,
     queryVar
   )

@@ -4,8 +4,8 @@ import { FaCaretLeft, FaCaretRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import {
-  SearchResultQueryVariables,
-  useSearchResultQuery,
+  MediaSearchQueryVariables,
+  useMediaSearchQuery,
 } from '../../../generated/index'
 import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
@@ -13,12 +13,12 @@ import Slide from '../Slide/Slide'
 import styles from './Slider.module.scss'
 
 interface Props {
-  queryVar: SearchResultQueryVariables
+  queryVar: MediaSearchQueryVariables
   context: string
 }
 
 const Slider = ({ queryVar, context }: Props) => {
-  const { data, isLoading } = useSearchResultQuery(gqlRequestClient, {
+  const { data, isLoading } = useMediaSearchQuery(gqlRequestClient, {
     ...queryVar,
     perPage: 5,
   })

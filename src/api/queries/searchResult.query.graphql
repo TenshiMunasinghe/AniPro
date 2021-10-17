@@ -1,4 +1,4 @@
-query searchResult(
+query mediaSearch(
   $page: Int = 1
   $genres: [String]
   $tags: [String]

@@ -3,12 +3,12 @@ import { v4 } from 'uuid'
 import { currentYear } from '../api/queries'
 import {
   MediaFormat,
+  MediaSearchQueryVariables,
   MediaSeason,
   MediaSort,
   MediaSource,
   MediaStatus,
   MediaType,
-  SearchResultQueryVariables,
 } from '../generated/index'
 import { formatLabel } from '../utils/formatLabel'
 import { toStartCase } from '../utils/toStartCase'
@@ -118,7 +118,7 @@ export const filters = Object.entries(filterOptionTypes.default)
   .filter(([key]) => key !== 'sortBy')
   .map(([key, value]) => ({
     key: v4(),
-    name: key as keyof SearchResultQueryVariables,
+    name: key as keyof MediaSearchQueryVariables,
     isMulti: value.isMulti,
     options: value.options.map(o => ({
       value: o,

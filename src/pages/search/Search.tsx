@@ -5,8 +5,8 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
 import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
 import FilterOptions from '../../components/search/FilterOptions/FilterOptions'
+import MediaSearchResult from '../../components/search/MediaSearchResult/MediaSearchResult'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import SearchResult from '../../components/search/SearchResult/SearchResult'
 import { sortByOptions } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated/index'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
@@ -60,7 +60,10 @@ const Search = () => {
         <main className={styles.mainContent}>
           <FilterOptions />
 
-          <SearchResult queryVars={queryVars.initial} cardType={cardType} />
+          <MediaSearchResult
+            queryVars={queryVars.initial}
+            cardType={cardType}
+          />
           <ScrollButton />
         </main>
       </div>

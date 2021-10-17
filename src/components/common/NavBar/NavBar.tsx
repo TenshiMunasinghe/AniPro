@@ -29,7 +29,6 @@ const NavBar = ({ position = 'static' }: Props) => {
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
-      <SearchBar />
       <Switch
         onChange={onChange}
         On={FaSun}
@@ -37,6 +36,9 @@ const NavBar = ({ position = 'static' }: Props) => {
         isOn={theme === 'dark'}
         label='switch theme'
       />
+      <div className={styles.searchBar}>
+        <SearchBar />
+      </div>
     </nav>
   )
 }

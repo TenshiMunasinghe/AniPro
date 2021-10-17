@@ -11,7 +11,7 @@ import Slider from '../../components/home/Slider/Slider'
 import breakpoints from '../../css/breakpoints.module.scss'
 import { MediaTypes } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated'
-import { SearchResultQueryVariables } from '../../generated/index'
+import { MediaSearchQueryVariables } from '../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
 import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
@@ -25,7 +25,7 @@ type HomeContents<T> = {
   }
 }
 
-const queryVars: HomeContents<SearchResultQueryVariables> = {
+const queryVars: HomeContents<MediaSearchQueryVariables> = {
   anime: {
     trending: { sortBy: MediaSort.TrendingDesc },
 

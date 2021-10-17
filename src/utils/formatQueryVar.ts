@@ -1,8 +1,8 @@
 import { allowedURLParams } from '../filterOptions/filterOptions'
-import { SearchResultQueryVariables } from '../generated/index'
+import { MediaSearchQueryVariables } from '../generated/index'
 
 //filter out query variables which are not one of filter options and stringify all the values
-export const formatQueryVar = (queryVar: SearchResultQueryVariables) =>
+export const formatQueryVar = (queryVar: MediaSearchQueryVariables) =>
   Object.fromEntries(
     Object.entries(queryVar)
       .filter(([k]) => allowedURLParams.includes(k))

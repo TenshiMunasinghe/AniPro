@@ -6,7 +6,7 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { Maybe, SearchResultQuery } from '../../../generated/index'
+import { Maybe, MediaSearchQuery } from '../../../generated/index'
 import { CardType } from '../../../pages/search/Search'
 import CardChart from '../Cards/CardChart/CardChart'
 import CardCover from '../Cards/CardCover/CardCover'
@@ -16,7 +16,7 @@ import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 
 export type Media = NonNullable<
-  NonNullable<NonNullable<SearchResultQuery['Page']>['media']>[number]
+  NonNullable<NonNullable<MediaSearchQuery['Page']>['media']>[number]
 >
 
 export interface MediaWithRank extends Media {

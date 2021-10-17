@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
 import { filters } from '../../../../filterOptions/filterOptions'
-import { SearchResultQueryVariables } from '../../../../generated/index'
+import { MediaSearchQueryVariables } from '../../../../generated/index'
 import { nextParam, NextParamArgs } from '../../../../utils/nextParam'
 import { toStartCase } from '../../../../utils/toStartCase'
 import Option from '../../Option/Option'
@@ -12,7 +12,7 @@ import styles from './Fullview.module.scss'
 interface Props {
   setActiveFilterOption: (activeFilterOption: string) => void
   activeFilterOption: string
-  updateFilter: DebouncedFunc<(queryVars: SearchResultQueryVariables) => void>
+  updateFilter: DebouncedFunc<(queryVars: MediaSearchQueryVariables) => void>
   applyFilter: () => void
   currentParams: URLSearchParams
 }

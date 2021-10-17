@@ -1,8 +1,8 @@
-import { MediaType, SearchResultQueryVariables } from '../generated/index'
+import { MediaSearchQueryVariables, MediaType } from '../generated/index'
 import { formatQueryVar } from './formatQueryVar'
 
 export const linkToSearchPage = (
-  queryVar: SearchResultQueryVariables | string,
+  queryVar: MediaSearchQueryVariables | string,
   type?: MediaType
 ) => {
   if (typeof queryVar === 'string') {

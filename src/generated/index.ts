@@ -4653,7 +4653,7 @@ export type WatchQueryVariables = Exact<{
 
 export type WatchQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> }> };
 
-export type SearchResultQueryVariables = Exact<{
+export type MediaSearchQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   genres?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
   tags?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
@@ -4670,7 +4670,7 @@ export type SearchResultQueryVariables = Exact<{
 }>;
 
 
-export type SearchResultQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, media?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, bannerImage?: Maybe<string>, status?: Maybe<MediaStatus>, genres?: Maybe<Array<Maybe<string>>>, description?: Maybe<string>, meanScore?: Maybe<number>, format?: Maybe<MediaFormat>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, episodes?: Maybe<number>, duration?: Maybe<number>, popularity?: Maybe<number>, chapters?: Maybe<number>, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', extraLarge?: Maybe<string>, large?: Maybe<string>, color?: Maybe<string> }>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, endDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', timeUntilAiring: number, episode: number }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', rank: number, context: string, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }>>> }> };
+export type MediaSearchQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, media?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, bannerImage?: Maybe<string>, status?: Maybe<MediaStatus>, genres?: Maybe<Array<Maybe<string>>>, description?: Maybe<string>, meanScore?: Maybe<number>, format?: Maybe<MediaFormat>, season?: Maybe<MediaSeason>, seasonYear?: Maybe<number>, episodes?: Maybe<number>, duration?: Maybe<number>, popularity?: Maybe<number>, chapters?: Maybe<number>, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string>, english?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', extraLarge?: Maybe<string>, large?: Maybe<string>, color?: Maybe<string> }>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, endDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, studios?: Maybe<{ __typename?: 'StudioConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Studio', name: string }>>> }>, nextAiringEpisode?: Maybe<{ __typename?: 'AiringSchedule', timeUntilAiring: number, episode: number }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', rank: number, context: string, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>> }>>> }> };
 
 export const CharactersFragmentDoc = `
     fragment Characters on CharacterConnection {
@@ -5106,8 +5106,8 @@ useWatchQuery.document = WatchDocument;
 
 useWatchQuery.getKey = (variables: WatchQueryVariables) => ['watch', variables];
 
-export const SearchResultDocument = `
-    query searchResult($page: Int = 1, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort] = [TRENDING_DESC], $perPage: Int = 10, $type: MediaType = ANIME) {
+export const MediaSearchDocument = `
+    query mediaSearch($page: Int = 1, $genres: [String], $tags: [String], $year: Int, $season: MediaSeason, $format: [MediaFormat], $status: MediaStatus, $country: CountryCode, $source: MediaSource, $searchText: String, $sortBy: [MediaSort] = [TRENDING_DESC], $perPage: Int = 10, $type: MediaType = ANIME) {
   Page(page: $page, perPage: $perPage) {
     pageInfo {
       currentPage
@@ -5178,22 +5178,22 @@ export const SearchResultDocument = `
   }
 }
     `;
-export const useSearchResultQuery = <
-      TData = SearchResultQuery,
+export const useMediaSearchQuery = <
+      TData = MediaSearchQuery,
       TError = unknown
     >(
       client: GraphQLClient, 
-      variables?: SearchResultQueryVariables, 
-      options?: UseQueryOptions<SearchResultQuery, TError, TData>
+      variables?: MediaSearchQueryVariables, 
+      options?: UseQueryOptions<MediaSearchQuery, TError, TData>
     ) => 
-    useQuery<SearchResultQuery, TError, TData>(
-      ['searchResult', variables],
-      fetcher<SearchResultQuery, SearchResultQueryVariables>(client, SearchResultDocument, variables),
+    useQuery<MediaSearchQuery, TError, TData>(
+      ['mediaSearch', variables],
+      fetcher<MediaSearchQuery, MediaSearchQueryVariables>(client, MediaSearchDocument, variables),
       options
     );
-useSearchResultQuery.document = SearchResultDocument;
+useMediaSearchQuery.document = MediaSearchDocument;
 
-useSearchResultQuery.getKey = (variables?: SearchResultQueryVariables) => ['searchResult', variables];
+useMediaSearchQuery.getKey = (variables?: MediaSearchQueryVariables) => ['mediaSearch', variables];
 
 
       export interface PossibleTypesResultData {

@@ -9,18 +9,18 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { MediaTypes } from '../../../filterOptions/filterOptions'
 import {
-  SearchResultQueryVariables,
-  useSearchResultQuery,
+  MediaSearchQueryVariables,
+  useMediaSearchQuery,
 } from '../../../generated/index'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { CardType } from '../../../pages/search/Search'
 import CardGrid from '../../common/CardGrid/CardGrid'
 import LinearLoading from '../../common/LinearLoading/LinearLoading'
 import NotFound from '../../common/NotFound/NotFound'
-import styles from './SearchResult.module.scss'
+import styles from './MediaSearchResult.module.scss'
 
 interface Props extends LazyComponentProps {
-  queryVars: SearchResultQueryVariables
+  queryVars: MediaSearchQueryVariables
   cardType: CardType
 }
 
@@ -30,9 +30,9 @@ export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
   undefined
 )
 
-const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
+const MediaSearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
   const { type } = useParams<{ type?: keyof typeof MediaTypes }>()
-  const { data, isLoading, isError, isFetching } = useSearchResultQuery(
+  const { data, isLoading, isError, isFetching } = useMediaSearchQuery(
     gqlRequestClient,
     {
       ...queryVars,
@@ -101,4 +101,4 @@ const SearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
   )
 }
 
-export default trackWindowScroll(SearchResult)
+export default trackWindowScroll(MediaSearchResult)

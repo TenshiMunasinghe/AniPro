@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useIsFetching } from 'react-query'
 import { useHistory, useLocation } from 'react-router-dom'
 import { allowedURLParams } from '../filterOptions/filterOptions'
-import { SearchResultQueryVariables } from '../generated/index'
+import { MediaSearchQueryVariables } from '../generated/index'
 
 type setParamArg = {
   params: URLSearchParams
@@ -20,7 +20,7 @@ const paramToObj = (params: URLSearchParams) =>
       const value = params.get(key)
       return [key, value?.includes(',') ? value.split(',') : value]
     })
-  ) as SearchResultQueryVariables
+  ) as MediaSearchQueryVariables
 
 const addParam = ({ params, value, key }: setParamArg) => {
   String(value).length !== 0
@@ -30,7 +30,7 @@ const addParam = ({ params, value, key }: setParamArg) => {
 
 const nextParam = (
   paramStr: string,
-  queryVars: Partial<SearchResultQueryVariables>
+  queryVars: Partial<MediaSearchQueryVariables>
 ) => {
   const params = new URLSearchParams(paramStr)
 
@@ -67,7 +67,7 @@ export const useUpdateUrlParam = () => {
   const updateUrl = useMemo(
     () =>
       debounce(
-        (queryVars: SearchResultQueryVariables) =>
+        (queryVars: MediaSearchQueryVariables) =>
           history.push(
             `${location.pathname}?${nextParam(initialParams, {
               ...queryVars,
@@ -81,7 +81,7 @@ export const useUpdateUrlParam = () => {
 
   const updateFilter = useMemo(
     () =>
-      debounce((queryVars: SearchResultQueryVariables) => {
+      debounce((queryVars: MediaSearchQueryVariables) => {
         setParams(prev => nextParam(prev, queryVars || {}))
       }, 250),
     []
