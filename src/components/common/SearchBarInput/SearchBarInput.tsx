@@ -2,15 +2,10 @@ import { FormEvent, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
-import { MediaTypes } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import styles from './SearchBar.module.scss'
+import styles from './SearchBarInput.module.scss'
 
-interface Props {
-  type: keyof typeof MediaTypes | 'staff' | 'character'
-}
-
-const SearchBar = () => {
+const SearchBarInput = () => {
   const history = useHistory()
   const { handleSubmit, register, formState } = useForm<{
     ['searchText']: string
@@ -55,4 +50,4 @@ const SearchBar = () => {
   )
 }
 
-export default SearchBar
+export default SearchBarInput
