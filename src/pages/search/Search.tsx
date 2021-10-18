@@ -1,84 +1,39 @@
-import { useCallback, useState } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
-import Dropdown from '../../components/common/Dropdown/Dropdown'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
-import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
-import FilterOptions from '../../components/search/FilterOptions/FilterOptions'
-import MediaSearchResult from '../../components/search/MediaSearchResult/MediaSearchResult'
+import CharactersSearchResult from '../../components/search/CharactersSearchResult/CharactersSearchResult'
+import Media from '../../components/search/Media/Media'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import { sortByOptions } from '../../filterOptions/filterOptions'
-import { MediaSort, MediaType } from '../../generated/index'
-import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { addKey } from '../../utils/addKey'
-import styles from './Search.module.scss'
+import StaffSearchResult from '../../components/search/StaffSearchResult/StaffSearchResult'
+import { MediaTypes } from '../../filterOptions/filterOptions'
+import { MediaType } from '../../generated'
 
-export type CardType = 'chart' | 'cover' | 'table'
-
-const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
-
-const cardTypes = addKey(CARD_TYPES)
+export type SearchSlugs =
+  | keyof typeof MediaTypes
+  | 'characters'
+  | 'staff'
+  | 'reviews'
+  | 'recommendations'
 
 const Search = () => {
-  const [cardType, setCardType] = useState<CardType>('chart')
-
-  const { updateUrl, queryVars } = useUpdateUrlParam()
-
-  const sortByOnChange = useCallback(
-    (value: string | string[]) => {
-      updateUrl({ sortBy: value as MediaSort | MediaSort[] })
-    },
-    [updateUrl]
-  )
-
   return (
     <>
       <NavBar />
-      <div className={styles.container}>
-        <div className={styles.upperSection}>
-          <ActiveFilters />
-          <section className={styles.extraOptions}>
-            <section className={styles.gridType}>
-              {cardTypes.map(c => (
-                <CardTypeButton
-                  key={c.key}
-                  cardType={c.value as CardType}
-                  setCardType={setCardType}
-                  isActive={c.value === cardType}
-                />
-              ))}
-            </section>
-            <Dropdown
-              onChange={sortByOnChange}
-              isMulti={false}
-              options={sortByOptions}
-              selected={queryVars.initial.sortBy || MediaSort.TrendingDesc}
-            />
-          </section>
-        </div>
-
-        <main className={styles.mainContent}>
-          <Switch>
-            <Route exact path={`/search/anime`}>
-              <FilterOptions />
-              <MediaSearchResult
-                queryVars={{ ...queryVars.initial, type: MediaType.Anime }}
-                cardType={cardType}
-              />
-            </Route>
-            <Route exact path={`/search/manga`}>
-              <FilterOptions />
-              <MediaSearchResult
-                queryVars={{ ...queryVars.initial, type: MediaType.Manga }}
-                cardType={cardType}
-              />
-            </Route>
-          </Switch>
-
-          <ScrollButton />
-        </main>
-      </div>
+      <Switch>
+        <Route exact path={`/search/anime`}>
+          <Media type={MediaType.Anime} />
+        </Route>
+        <Route exact path={`/search/manga`}>
+          <Media type={MediaType.Manga} />
+        </Route>
+        <Route exact path={`/search/staff/:option?`}>
+          <StaffSearchResult />
+        </Route>
+        <Route exact path={`/search/characters`}>
+          <CharactersSearchResult />
+        </Route>
+      </Switch>
+      <ScrollButton />
       <Footer />
     </>
   )

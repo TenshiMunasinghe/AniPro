@@ -5,16 +5,16 @@ import {
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import gqlRequestClient from '../../../api/graphqlClient'
+import gqlRequestClient from '../../../../api/graphqlClient'
 import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
-} from '../../../generated/index'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { CardType } from '../../../pages/search/Search'
-import CardGrid from '../../common/CardGrid/CardGrid'
-import LinearLoading from '../../common/LinearLoading/LinearLoading'
-import NotFound from '../../common/NotFound/NotFound'
+} from '../../../../generated/index'
+import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
+import CardGrid from '../../../common/CardGrid/CardGrid'
+import LinearLoading from '../../../common/LinearLoading/LinearLoading'
+import NotFound from '../../../common/NotFound/NotFound'
+import { CardType } from '../Media'
 import styles from './MediaSearchResult.module.scss'
 
 interface Props extends LazyComponentProps {

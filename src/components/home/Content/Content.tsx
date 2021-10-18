@@ -5,9 +5,9 @@ import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
 } from '../../../generated/index'
-import { CardType } from '../../../pages/search/Search'
 import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
+import { CardType } from '../../search/Media/Media'
 import styles from './Content.module.scss'
 
 export type _Content = {

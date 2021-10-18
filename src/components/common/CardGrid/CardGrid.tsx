@@ -7,7 +7,7 @@ import {
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
 import { Maybe, MediaSearchQuery } from '../../../generated/index'
-import { CardType } from '../../../pages/search/Search'
+import { CardType } from '../../search/Media/Media'
 import CardChart from '../Cards/CardChart/CardChart'
 import CardCover from '../Cards/CardCover/CardCover'
 import CardLoading from '../Cards/CardLoading/CardLoading'

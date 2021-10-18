@@ -8,12 +8,12 @@ import NavBar from '../../components/common/NavBar/NavBar'
 import Content from '../../components/home/Content/Content'
 import Footer from '../../components/home/Footer/Footer'
 import Slider from '../../components/home/Slider/Slider'
+import { CardType } from '../../components/search/Media/Media'
 import breakpoints from '../../css/breakpoints.module.scss'
 import { MediaTypes } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated'
 import { MediaSearchQueryVariables } from '../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../zustand/stores'
-import { CardType } from '../search/Search'
 import styles from './Home.module.scss'
 
 type HomeContents<T> = {
