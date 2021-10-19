@@ -3,9 +3,14 @@ import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
 import { useHistory } from 'react-router-dom'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { SearchSlugs } from '../../../pages/search/Search'
 import styles from './SearchBarInput.module.scss'
 
-const SearchBarInput = () => {
+interface Props {
+  type?: SearchSlugs
+}
+
+const SearchBarInput = ({ type }: Props) => {
   const history = useHistory()
   const { handleSubmit, register, formState } = useForm<{
     ['searchText']: string
@@ -19,12 +24,12 @@ const SearchBarInput = () => {
         e.preventDefault()
         history.push(
           values.searchText
-            ? `/search?searchText=${values.searchText}`
-            : '/search'
+            ? `/${type}?searchText=${values.searchText}`
+            : `/${type}`
         )
       })()
     },
-    [history, handleSubmit]
+    [history, handleSubmit, type]
   )
 
   return (
