@@ -24,8 +24,8 @@ const SearchBarInput = ({ type }: Props) => {
         e.preventDefault()
         history.push(
           values.searchText
-            ? `/${type}?searchText=${values.searchText}`
-            : `/${type}`
+            ? `/search/${type}?searchText=${values.searchText}`
+            : `/search/${type}`
         )
       })()
     },
