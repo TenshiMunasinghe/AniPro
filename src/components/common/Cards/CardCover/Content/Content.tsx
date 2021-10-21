@@ -1,5 +1,7 @@
 import { memo, useContext } from 'react'
 import { NO_IMAGE_URL } from '../../../../../api/queries'
+import { linkToMediaPage } from '../../../../../App'
+import { MediaType } from '../../../../../generated'
 import { ImageSizeContext, Media } from '../../../CardGrid/CardGrid'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
@@ -22,7 +24,7 @@ const Content = ({ media: { id, coverImage, title, type }, rank }: Props) => {
         </div>
       )}
       <CoverImage
-        id={id}
+        link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no title'}
         type={type || null}

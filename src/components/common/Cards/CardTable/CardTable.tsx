@@ -1,5 +1,7 @@
 import { memo, useContext } from 'react'
 import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
+import { linkToMediaPage } from '../../../../App'
+import { MediaType } from '../../../../generated'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
@@ -56,7 +58,7 @@ const CardTable = ({
       )}
       <div className={styles.card}>
         <CoverImage
-          id={id}
+          link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
           type={type || null}

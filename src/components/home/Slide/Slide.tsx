@@ -1,7 +1,8 @@
 import { CSSProperties, forwardRef, memo, useCallback } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../api/queries'
-import { Media } from '../../../generated'
+import { linkToMediaPage } from '../../../App'
+import { Media, MediaType } from '../../../generated'
 import { adjustColor } from '../../../utils/adjustColor'
 import { createColorVariable } from '../../../utils/createColorVariable'
 import CoverImage from '../../common/CoverImage/CoverImage'
@@ -64,7 +65,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
           </div>
           <div className={styles.image}>
             <CoverImage
-              id={media.id}
+              link={linkToMediaPage(media.id, MediaType.Anime)}
               title={media?.title?.romaji || 'no title'}
               src={media?.coverImage?.extraLarge || NO_IMAGE_URL}
               type={media.type || null}

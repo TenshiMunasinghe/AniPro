@@ -1,5 +1,7 @@
 import { memo, useContext } from 'react'
 import { NO_IMAGE_URL } from '../../../../api/queries'
+import { linkToMediaPage } from '../../../../App'
+import { MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
@@ -25,7 +27,7 @@ const CardChart = ({
         coverImage?.color || 'var(--color-foreground-200)'
       )}>
       <CoverImage
-        id={id}
+        link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
         type={type || null}

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { DeepPartial } from 'react-hook-form'
+import { linkToMediaPage } from '../../../App'
 import breakpoints from '../../../css/breakpoints.module.scss'
-import { RecommendationConnection } from '../../../generated/index'
+import { MediaType, RecommendationConnection } from '../../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import CoverImage from '../../common/CoverImage/CoverImage'
 import Title from '../../common/Title/Title'
@@ -45,7 +46,7 @@ const Recommendations = ({ recommendations }: Props) => {
           return (
             <div className={styles.cardCover} key={'recommendations' + m.id}>
               <CoverImage
-                id={m.id}
+                link={linkToMediaPage(m.id, m.type || MediaType.Anime)}
                 src={m.coverImage?.large}
                 title={m.title?.romaji}
                 type={m.type || null}
