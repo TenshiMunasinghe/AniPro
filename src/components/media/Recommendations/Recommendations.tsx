@@ -49,7 +49,6 @@ const Recommendations = ({ recommendations }: Props) => {
                 link={linkToMediaPage(m.id, m.type || MediaType.Anime)}
                 src={m.coverImage?.large}
                 title={m.title?.romaji}
-                type={m.type || null}
               />
               <Title
                 id={m.id}

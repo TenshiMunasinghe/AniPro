@@ -68,7 +68,6 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
               link={linkToMediaPage(media.id, MediaType.Anime)}
               title={media?.title?.romaji || 'no title'}
               src={media?.coverImage?.extraLarge || NO_IMAGE_URL}
-              type={media.type || null}
             />
           </div>
         </div>

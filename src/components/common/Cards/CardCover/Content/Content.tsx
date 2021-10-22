@@ -27,7 +27,6 @@ const Content = ({ media: { id, coverImage, title, type }, rank }: Props) => {
         link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no title'}
-        type={type || null}
       />
       <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
     </article>

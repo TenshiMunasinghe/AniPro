@@ -30,7 +30,6 @@ const CardChart = ({
         link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
-        type={type || null}
       />
       <section className={styles.content}>
         <section className={styles.cardBody}>

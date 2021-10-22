@@ -61,7 +61,6 @@ const CardTable = ({
           link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
-          type={type || null}
         />
         <div className={styles.content}>
           <div className={styles.header}>
