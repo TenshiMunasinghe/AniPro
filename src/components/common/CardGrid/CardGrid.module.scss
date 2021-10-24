@@ -11,14 +11,16 @@
 
   &.cover {
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: var(--space-600);
+    grid-gap: var(--space-400);
 
     @include mq(above, sm) {
       grid-template-columns: repeat(3, 1fr);
+      grid-gap: var(--space-500);
     }
 
     @include mq(above, lg) {
       grid-template-columns: repeat(6, 1fr);
+      grid-gap: var(--space-600);
     }
   }
 
