@@ -3,11 +3,4 @@
   grid-template-rows: min-content auto;
   row-gap: var(--space-300);
   cursor: pointer;
-
-  &:hover,
-  &:focus-within {
-    .title {
-      color: var(--color-adjusted);
-    }
-  }
 }
