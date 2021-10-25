@@ -1,5 +1,17 @@
 @use '../../css/config.scss' as *;
 
 .container {
-  @include padding-horizontal(var(--space-500));
+  padding: var(--space-600) var(--space-300);
+
+  @include mq(above, sm) {
+    @include padding-horizontal(var(--space-500));
+  }
+
+  @include mq(above, md) {
+    @include padding-horizontal(var(--space-600));
+  }
+
+  @include mq(above, lg) {
+    @include padding-horizontal(var(--space-800));
+  }
 }
