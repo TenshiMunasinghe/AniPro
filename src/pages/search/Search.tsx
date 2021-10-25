@@ -21,8 +21,8 @@ const Search = () => {
   return (
     <>
       <NavBar />
-      <Switch>
-        <main className={styles.container}>
+      <main className={styles.container}>
+        <Switch>
           <Route exact path={`/search/anime`}>
             <Media type={MediaType.Anime} />
           </Route>
@@ -42,8 +42,8 @@ const Search = () => {
           <Route exact path={`/search/characters`}>
             <CharactersSearchResult />
           </Route>
-        </main>
-      </Switch>
+        </Switch>
+      </main>
       <ScrollButton />
       <Footer />
     </>
