@@ -73,7 +73,7 @@ const App = () => {
             <Media fallback={<LoadingSpinner />} />
           </Route>
 
-          <Route exact path='/search/:type?'>
+          <Route path='/search/:type?'>
             <Search fallback={<LoadingSpinner />} />
           </Route>
         </Switch>
