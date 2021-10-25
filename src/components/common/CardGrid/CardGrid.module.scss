@@ -10,11 +10,11 @@
   width: 100%;
 
   &.cover {
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: var(--space-400);
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-300);
+    row-gap: var(--space-500);
 
     @include mq(above, sm) {
-      grid-template-columns: repeat(3, 1fr);
       grid-gap: var(--space-500);
     }
 
