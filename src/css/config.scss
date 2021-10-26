@@ -214,4 +214,8 @@
   @include mq(above, lg) {
     @include padding-horizontal(var(--space-800));
   }
+
+  @include mq(above, xl) {
+    @include padding-horizontal(var(--space-900));
+  }
 }
