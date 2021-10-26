@@ -7,8 +7,8 @@
     display: grid;
     height: min-content;
     row-gap: var(--space-500);
-    padding: var(--space-300) var(--space-400);
     padding-right: var(--space-600);
+    @include padding-vertical(var(--space-300));
     border-right: solid 1px var(--color-border-200);
     font-size: var(--text-size-300);
   }
