@@ -75,7 +75,9 @@
   }
 
   .contents {
-    max-width: 1069px;
+    @include page-padding;
+    padding-top: var(--space-400);
+    padding-bottom: 0;
 
     @include mq(above, md) {
       width: 100%;
@@ -83,7 +85,6 @@
       grid-template-columns: min-content 1fr;
       grid-template-rows: 1fr auto;
       column-gap: var(--space-600);
-      padding-top: var(--space-400);
 
       & > *:last-child {
         grid-column: 2/-1;
