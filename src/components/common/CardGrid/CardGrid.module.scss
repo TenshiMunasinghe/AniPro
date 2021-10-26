@@ -21,7 +21,6 @@
     @include mq(above, lg) {
       grid-template-columns: repeat(6, 1fr);
       grid-gap: var(--space-400);
-      font-size: var(--text-size-300);
     }
   }
 
