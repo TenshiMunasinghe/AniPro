@@ -14,13 +14,12 @@
     grid-gap: var(--space-400);
 
     @include mq(above, sm) {
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: var(--space-500);
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: var(--space-300);
     }
 
     @include mq(above, lg) {
-      grid-template-columns: repeat(6, 1fr);
-      grid-gap: var(--space-400);
+      grid-gap: var(--space-500);
     }
   }
 

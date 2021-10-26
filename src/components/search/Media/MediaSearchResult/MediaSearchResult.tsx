@@ -24,6 +24,8 @@ interface Props extends LazyComponentProps {
 
 const PAGES = [-2, -1, 0, 1, 2]
 
+const perPage = 20
+
 export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
   undefined
 )
@@ -33,7 +35,7 @@ const MediaSearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
     gqlRequestClient,
     {
       ...queryVars,
-      perPage: 24,
+      perPage,
     }
   )
   const { movePage } = useUpdateUrlParam()
