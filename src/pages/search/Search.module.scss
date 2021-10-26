@@ -2,5 +2,5 @@
 
 .container {
   @include page-padding;
-  @include gap($column: var(--space-400));
+  @include gap($column: var(--space-500));
 }
