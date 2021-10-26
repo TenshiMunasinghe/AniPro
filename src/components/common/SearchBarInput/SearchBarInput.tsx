@@ -40,7 +40,7 @@ const SearchBarInput = ({ type }: Props) => {
         id={'searchText'}
         ref={register}
         type='text'
-        placeholder='search'
+        placeholder={`search${type ? ' ' + type : ''}`}
         aria-label='searchbar'
         defaultValue={queryVars.initial.searchText || ''}
       />
