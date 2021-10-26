@@ -47,7 +47,7 @@ const CardGrid = ({
   isError,
   cardType,
   imageSize = 'large',
-  loadingCount = 8,
+  loadingCount = medias?.length || 0,
   sideScroll = false,
   scrollPosition,
 }: Props) => {
