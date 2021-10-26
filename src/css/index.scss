@@ -8,7 +8,15 @@
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
-  font-size: clamp(14px, calc(0.2rem + 1.3vw), 16px);
+  font-size: 80%;
+
+  @include config.mq(above, sm) {
+    font-size: 90%;
+  }
+
+  @include config.mq(above, md) {
+    font-size: 100%;
+  }
 }
 
 * {
