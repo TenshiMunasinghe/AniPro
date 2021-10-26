@@ -3,6 +3,8 @@
 .wrapper {
   background-color: var(--color-original, var(--color-foreground-300));
   @include aspect-ratio(var(--image-aspect-ratio));
+  overflow: hidden;
+  border-radius: 0.2rem;
 
   img {
     height: 100%;
