@@ -2,9 +2,5 @@
 
 .content {
   position: relative;
-  padding: var(--space-500);
-
-  @include mq(above, lg) {
-    padding: var(--space-500) var(--space-700);
-  }
+  @include page-padding;
 }
