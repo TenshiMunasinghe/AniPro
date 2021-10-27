@@ -1,0 +1,23 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  display: grid;
+  grid-template-rows: min-content auto;
+  row-gap: var(--space-100);
+  cursor: pointer;
+
+  &:focus-within,
+  &:hover {
+    .name {
+      color: var(--color-text-accent-100);
+    }
+  }
+
+  .name {
+    @include add-ellipsis(2);
+
+    @include mq(below, sm) {
+      font-size: var(--text-size-300);
+    }
+  }
+}

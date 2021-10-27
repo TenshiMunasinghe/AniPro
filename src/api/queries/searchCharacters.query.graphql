@@ -1,0 +1,21 @@
+query searchCharacters(
+  $isBirthday: Boolean = false
+  $page: Int = 1
+  $search: String
+) {
+  Page(perPage: 30, page: $page) {
+    characters(
+      isBirthday: $isBirthday
+      sort: [FAVOURITES_DESC, ROLE_DESC, ID]
+      search: $search
+    ) {
+      id
+      name {
+        full
+      }
+      image {
+        large
+      }
+    }
+  }
+}

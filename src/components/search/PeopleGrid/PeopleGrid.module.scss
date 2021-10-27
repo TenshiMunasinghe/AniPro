@@ -1,0 +1,27 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  .heading {
+    display: block;
+    margin-bottom: var(--space-300);
+    font-size: var(--text-size-500);
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      color: var(--color-text-accent-100);
+    }
+  }
+
+  .people {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-300);
+    row-gap: var(--space-400);
+
+    @include mq(above, lg) {
+      grid-template-columns: repeat(6, 1fr);
+      grid-gap: var(--space-500);
+    }
+  }
+}

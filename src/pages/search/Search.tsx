@@ -1,8 +1,8 @@
 import { Route, Switch } from 'react-router-dom'
 import NavBar from '../../components/common/NavBar/NavBar'
-import SearchBarInput from '../../components/common/SearchBarInput/SearchBarInput'
 import Footer from '../../components/home/Footer/Footer'
 import Media from '../../components/search/Media/Media'
+import PeopleHeader from '../../components/search/PeopleHeader/PeopleHeader'
 import CharactersSearchResult from '../../components/search/PeopleSearchResult/CharactersSearchResult'
 import StaffSearchResult from '../../components/search/PeopleSearchResult/StaffSearchResult'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
@@ -23,24 +23,60 @@ const Search = () => {
       <NavBar />
       <main className={styles.container}>
         <Switch>
-          <Route exact path={`/search/anime`}>
+          <Route exact path='/search/anime'>
             <Media type={MediaType.Anime} />
           </Route>
-          <Route exact path={`/search/manga`}>
+          <Route exact path='/search/manga'>
             <Media type={MediaType.Manga} />
           </Route>
-          <Route exact path={`/search/staff/:option?`}>
+          <Route path='/search/staff/'>
             <Route exact path='/search/staff'>
-              <h5>Search Staff</h5>
-              <SearchBarInput type='staff' />
-              <StaffSearchResult isBirthday={true} heading='Birthdays' />
-              <StaffSearchResult heading='Most Favourited Staff' />
+              <PeopleHeader heading='Search Staff' />
+              <StaffSearchResult
+                isBirthday={true}
+                heading={{ text: 'Birthdays', link: '/search/staff/birthday' }}
+              />
+              <StaffSearchResult
+                heading={{
+                  text: 'Most Favourited Staff',
+                  link: '/search/staff/favourite',
+                }}
+              />
             </Route>
-            <Route exact path='/search/staff/birthday'></Route>
-            <Route exact path='/search/staff/favourite'></Route>
+            <Route exact path='/search/staff/birthday'>
+              <PeopleHeader heading='Birthday Staff' />
+              <StaffSearchResult isBirthday={true} />
+            </Route>
+            <Route exact path='/search/staff/favourite'>
+              <PeopleHeader heading='Most Favourited Staff' />
+              <StaffSearchResult />
+            </Route>
           </Route>
-          <Route exact path={`/search/characters`}>
-            <CharactersSearchResult />
+          <Route path='/search/characters'>
+            <Route exact path='/search/characters'>
+              <PeopleHeader heading='Search Characters' />
+              <CharactersSearchResult
+                isBirthday={true}
+                heading={{
+                  text: 'Birthdays',
+                  link: '/search/characters/birthday',
+                }}
+              />
+              <CharactersSearchResult
+                heading={{
+                  text: 'Most Favourited Characters',
+                  link: '/search/characters/favourite',
+                }}
+              />
+            </Route>
+            <Route exact path='/search/characters/birthday'>
+              <PeopleHeader heading='Birthday Characters' />
+              <CharactersSearchResult isBirthday={true} />
+            </Route>
+            <Route exact path='/search/characters/favourite'>
+              <PeopleHeader heading='Most Favourited Characters' />
+              <CharactersSearchResult />
+            </Route>
           </Route>
         </Switch>
       </main>

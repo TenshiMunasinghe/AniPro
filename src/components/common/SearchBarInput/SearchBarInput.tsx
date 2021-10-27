@@ -1,17 +1,18 @@
 import { FormEvent, useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 import { FaSearch } from 'react-icons/fa'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { SearchSlugs } from '../../../pages/search/Search'
 import styles from './SearchBarInput.module.scss'
 
 interface Props {
-  type?: SearchSlugs
+  link?: string
+  placeholder?: string
 }
 
-const SearchBarInput = ({ type }: Props) => {
+const SearchBarInput = ({ link, placeholder = 'search' }: Props) => {
   const history = useHistory()
+  const location = useLocation()
   const { handleSubmit, register, formState } = useForm<{
     ['searchText']: string
   }>()
@@ -22,14 +23,19 @@ const SearchBarInput = ({ type }: Props) => {
     (e: FormEvent) => {
       handleSubmit(values => {
         e.preventDefault()
-        history.push(
-          values.searchText
-            ? `/search/${type}?searchText=${values.searchText}`
-            : `/search/${type}`
-        )
+
+        const url = link ? link : location.pathname
+        const search = `?searchText=${values.searchText}`
+
+        if (link || search !== location.search) {
+          history.push({
+            pathname: url,
+            search,
+          })
+        }
       })()
     },
-    [history, handleSubmit, type]
+    [history, handleSubmit, link, location]
   )
 
   return (
@@ -40,7 +46,7 @@ const SearchBarInput = ({ type }: Props) => {
         id={'searchText'}
         ref={register}
         type='text'
-        placeholder={`search${type ? ' ' + type : ''}`}
+        placeholder={placeholder}
         aria-label='searchbar'
         defaultValue={queryVars.initial.searchText || ''}
       />
