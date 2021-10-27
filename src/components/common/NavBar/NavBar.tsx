@@ -2,7 +2,6 @@ import { CSSProperties, useCallback } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
-import SearchBarInput from '../SearchBarInput/SearchBarInput'
 import styles from './NavBar.module.scss'
 import Switch from './Switch/Switch'
 
@@ -36,9 +35,6 @@ const NavBar = ({ position = 'static' }: Props) => {
         isOn={theme === 'dark'}
         label='switch theme'
       />
-      <div className={styles.searchBar}>
-        <SearchBarInput />
-      </div>
     </nav>
   )
 }

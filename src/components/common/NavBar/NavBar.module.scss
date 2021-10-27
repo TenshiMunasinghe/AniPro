@@ -11,23 +11,10 @@
   top: 0;
   width: 100vw;
   display: flex;
+  justify-content: space-between;
   padding: var(--space-200) var(--margin);
-  align-items: center;
   background: var(--color-foreground-100);
   z-index: 9999;
-
-  form {
-    flex-basis: 45rem;
-  }
-
-  label {
-    margin-left: var(--margin);
-    flex-shrink: 0;
-
-    @include mq(above, sm) {
-      margin-left: auto;
-    }
-  }
 }
 
 .heading {
