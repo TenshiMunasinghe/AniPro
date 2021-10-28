@@ -41,7 +41,7 @@ const Media = ({ type }: Props) => {
             {cardTypes.map(c => (
               <CardTypeButton
                 key={c.key}
-                cardType={c.value as CardType}
+                cardType={c.value}
                 setCardType={setCardType}
                 isActive={c.value === cardType}
               />
