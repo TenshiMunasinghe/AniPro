@@ -85,6 +85,7 @@ const MediaSearchResult = ({ type }: Props) => {
             isLoading={isLoading}
             isError={isError}
             cardType={cardType}
+            loadingCount={perPage}
             imageSize='large'
           />
           {!isError && !isLoading && (
