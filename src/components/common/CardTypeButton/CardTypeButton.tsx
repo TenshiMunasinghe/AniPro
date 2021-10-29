@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { Dispatch, SetStateAction } from 'react'
-import { CardType } from '../../search/Media/Media'
+import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import styles from './CardTypeButton.module.scss'
 import GridIcon from './GridIcon/GridIcon'
 

@@ -1,7 +1,7 @@
 import range from 'lodash/range'
 import { memo } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import { CardType } from '../../../search/Media/Media'
+import { CardType } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
 import styles from './CardLoading.module.scss'
 
 interface Props {

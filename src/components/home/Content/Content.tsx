@@ -7,7 +7,7 @@ import {
 } from '../../../generated/index'
 import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
-import { CardType } from '../../search/Media/Media'
+import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import styles from './Content.module.scss'
 
 export type _Content = {
