@@ -1,10 +1,4 @@
 import classnames from 'classnames'
-import { createContext } from 'react'
-import {
-  LazyComponentProps,
-  ScrollPosition,
-  trackWindowScroll,
-} from 'react-lazy-load-image-component'
 import gqlRequestClient from '../../../../api/graphqlClient'
 import {
   MediaSearchQueryVariables,
@@ -17,7 +11,7 @@ import NotFound from '../../../common/NotFound/NotFound'
 import { CardType } from '../Media'
 import styles from './MediaSearchResult.module.scss'
 
-interface Props extends LazyComponentProps {
+interface Props {
   queryVars: MediaSearchQueryVariables
   cardType: CardType
 }
@@ -26,11 +20,7 @@ const PAGES = [-2, -1, 0, 1, 2]
 
 const perPage = 20
 
-export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
-  undefined
-)
-
-const MediaSearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
+const MediaSearchResult = ({ queryVars, cardType }: Props) => {
   const { data, isLoading, isError, isFetching } = useMediaSearchQuery(
     gqlRequestClient,
     {
@@ -48,55 +38,53 @@ const MediaSearchResult = ({ queryVars, cardType, scrollPosition }: Props) => {
   }
 
   return (
-    <ScrollPositionContext.Provider value={scrollPosition}>
-      <div className={styles.container}>
-        <CardGrid
-          medias={medias}
-          isLoading={isLoading}
-          isError={isError}
-          cardType={cardType}
-          imageSize='large'
-        />
-        {!isError && !isLoading && (
-          <section className={styles.pages}>
-            {pageInfo?.currentPage !== 1 && (
-              <button className={styles.page} onClick={() => movePage(1)}>
-                {'<<'}
-              </button>
-            )}
-            {PAGES.map(p => {
-              const page = (pageInfo?.currentPage || 0) + p
+    <div className={styles.container}>
+      <CardGrid
+        medias={medias}
+        isLoading={isLoading}
+        isError={isError}
+        cardType={cardType}
+        imageSize='large'
+      />
+      {!isError && !isLoading && (
+        <section className={styles.pages}>
+          {pageInfo?.currentPage !== 1 && (
+            <button className={styles.page} onClick={() => movePage(1)}>
+              {'<<'}
+            </button>
+          )}
+          {PAGES.map(p => {
+            const page = (pageInfo?.currentPage || 0) + p
 
-              if (!pageInfo?.lastPage || page <= 0 || page > pageInfo.lastPage)
-                return null
+            if (!pageInfo?.lastPage || page <= 0 || page > pageInfo.lastPage)
+              return null
 
-              return (
-                <button
-                  key={page}
-                  className={classnames(
-                    { [styles.current]: pageInfo?.currentPage === page },
-                    styles.page
-                  )}
-                  onClick={() => movePage(page)}>
-                  {page}
-                </button>
-              )
-            })}
-            {pageInfo?.currentPage !== pageInfo?.lastPage && (
+            return (
               <button
-                className={styles.page}
-                onClick={() =>
-                  pageInfo?.lastPage && movePage(pageInfo?.lastPage)
-                }>
-                {'>>'}
+                key={page}
+                className={classnames(
+                  { [styles.current]: pageInfo?.currentPage === page },
+                  styles.page
+                )}
+                onClick={() => movePage(page)}>
+                {page}
               </button>
-            )}
-          </section>
-        )}
-        {!isLoading && isFetching && <LinearLoading />}
-      </div>
-    </ScrollPositionContext.Provider>
+            )
+          })}
+          {pageInfo?.currentPage !== pageInfo?.lastPage && (
+            <button
+              className={styles.page}
+              onClick={() =>
+                pageInfo?.lastPage && movePage(pageInfo?.lastPage)
+              }>
+              {'>>'}
+            </button>
+          )}
+        </section>
+      )}
+      {!isLoading && isFetching && <LinearLoading />}
+    </div>
   )
 }
 
-export default trackWindowScroll(MediaSearchResult)
+export default MediaSearchResult
