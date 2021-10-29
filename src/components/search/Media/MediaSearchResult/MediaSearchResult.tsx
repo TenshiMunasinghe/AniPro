@@ -39,8 +39,9 @@ const MediaSearchResult = ({ type }: Props) => {
   const { data, isLoading, isError, isFetching } = useMediaSearchQuery(
     gqlRequestClient,
     {
-      ...queryVars,
+      ...queryVars.initial,
       perPage,
+      type,
     }
   )
   const sortByOnChange = useCallback(
