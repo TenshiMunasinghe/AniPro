@@ -3,8 +3,7 @@
 .form,
 .searchBar,
 .submitButton {
-  --height: 2.5rem;
-  height: var(--height);
+  height: 3rem;
 }
 
 .form {
@@ -33,7 +32,8 @@
   background: var(--color-foreground-200);
   align-items: center;
   justify-content: center;
-  width: var(--height);
+  width: 10%;
+  min-width: 3rem;
 
   * {
     height: 100%;
