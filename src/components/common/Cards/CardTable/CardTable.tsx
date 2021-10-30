@@ -20,9 +20,6 @@ interface Props {
   rank?: number | null
 }
 
-const mapStatus = (status: Media['status']) =>
-  status === 'RELEASING' ? 'Airing' : toStartCase(status || '')
-
 const CardTable = ({
   media: {
     title,
@@ -39,6 +36,9 @@ const CardTable = ({
     format,
     episodes,
     type,
+    chapters,
+    startDate,
+    endDate,
   },
   rank,
 }: Props) => {
@@ -84,19 +84,49 @@ const CardTable = ({
             }
           />
 
-          <Info
-            main={() => formatLabel(format || '')}
-            sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
-          />
+          {type === MediaType.Anime && (
+            <>
+              <Info
+                main={() => formatLabel(format || '')}
+                sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
+              />
 
-          <Info
-            main={() =>
-              status === 'RELEASING' && seasonYear !== currentYear
-                ? `Airing Since ${seasonYear}`
-                : mapStatus(status)
-            }
-            sub={() => airingInfo({ nextAiringEpisode, season, seasonYear })}
-          />
+              <Info
+                main={() =>
+                  status === 'RELEASING' && seasonYear !== currentYear
+                    ? `Airing Since ${seasonYear}`
+                    : status === 'RELEASING'
+                    ? 'Airing'
+                    : toStartCase(status || '')
+                }
+                sub={() =>
+                  airingInfo({ nextAiringEpisode, season, seasonYear })
+                }
+              />
+            </>
+          )}
+
+          {type === MediaType.Manga && (
+            <>
+              <Info
+                main={() => formatLabel(format || '')}
+                sub={() => (chapters ? pluralize(chapters, 'chapter') : null)}
+              />
+
+              <Info
+                main={() =>
+                  status === 'RELEASING'
+                    ? `Publishing`
+                    : toStartCase(status || '')
+                }
+                sub={() =>
+                  status === 'RELEASING'
+                    ? `Since ${startDate?.year}`
+                    : `From ${startDate?.year} to ${endDate?.year}`
+                }
+              />
+            </>
+          )}
         </div>
       </div>
     </article>
