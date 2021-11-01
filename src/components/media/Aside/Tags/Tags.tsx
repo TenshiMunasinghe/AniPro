@@ -37,7 +37,7 @@ const Tags = ({ tags }: Props) => {
               })}>
               <Link
                 to={linkToSearchPage(
-                  { tags: [tag.name.replace(' ', '+')] },
+                  { tags: [tag.name] },
                   MediaTypes[type] || MediaType.Anime
                 )}>
                 <span
