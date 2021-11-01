@@ -1,16 +1,14 @@
-import { memo, useCallback } from 'react'
+import { memo, useCallback, useContext } from 'react'
 import { filters } from '../../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
 import { nextParam, NextParamArgs } from '../../../../utils/nextParam'
 import { toStartCase } from '../../../../utils/toStartCase'
+import { ActiveFilterContext } from '../../Media/Media'
 import Option from '../../Option/Option'
 import styles from './Sidebar.module.scss'
 
-interface Props {
-  setActiveFilterOption: (activeFilterOption: string) => void
-}
-
-const Sidebar = ({ setActiveFilterOption }: Props) => {
+const Sidebar = () => {
+  const { setActiveFilterOption } = useContext(ActiveFilterContext)
   const { params, updateUrl } = useUpdateUrlParam()
 
   const changeUrl = useCallback(

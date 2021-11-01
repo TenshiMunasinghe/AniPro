@@ -1,29 +1,20 @@
-import { DebouncedFunc } from 'lodash'
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
 import { filters } from '../../../../filterOptions/filterOptions'
-import { MediaSearchQueryVariables } from '../../../../generated/index'
+import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
 import { nextParam, NextParamArgs } from '../../../../utils/nextParam'
 import { toStartCase } from '../../../../utils/toStartCase'
+import { ActiveFilterContext } from '../../Media/Media'
 import Option from '../../Option/Option'
 import styles from './Fullview.module.scss'
 
-interface Props {
-  setActiveFilterOption: (activeFilterOption: string) => void
-  activeFilterOption: string
-  updateFilter: DebouncedFunc<(queryVars: MediaSearchQueryVariables) => void>
-  applyFilter: () => void
-  currentParams: URLSearchParams
-}
+const Fullview = () => {
+  const { activeFilterOption, setActiveFilterOption } = useContext(
+    ActiveFilterContext
+  )
+  const { updateFilter, applyFilter, params } = useUpdateUrlParam()
 
-const Fullview = ({
-  setActiveFilterOption,
-  activeFilterOption,
-  updateFilter,
-  applyFilter,
-  currentParams,
-}: Props) => {
   const changeFilter = useCallback(
     (args: NextParamArgs) => {
       const next = nextParam(args)
@@ -43,7 +34,7 @@ const Fullview = ({
 
   if (!activeFilter) return null
 
-  const selected = currentParams.get(activeFilterOption)?.split(',') || []
+  const selected = params.current.get(activeFilterOption)?.split(',') || []
 
   const isAllSelected = activeFilter.options.length === selected.length
 
