@@ -92,17 +92,18 @@
     flex-shrink: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background: var(--color-foreground-50);
     padding: var(--space-300) var(--space-500);
+    @include gap($row: var(--space-400));
   }
 
-  .applyFilter {
+  .button {
     background-color: var(--color-foreground-100);
     padding: var(--space-200) var(--space-400);
   }
 
   .close {
+    margin-left: auto;
     vertical-align: middle;
   }
 }
