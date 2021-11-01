@@ -13,7 +13,7 @@ const Fullview = () => {
   const { activeFilterOption, setActiveFilterOption } = useContext(
     ActiveFilterContext
   )
-  const { updateFilter, applyFilter, params } = useUpdateUrlParam()
+  const { updateFilter, applyFilter, params, resetParams } = useUpdateUrlParam()
 
   const changeFilter = useCallback(
     (args: NextParamArgs) => {
@@ -100,8 +100,11 @@ const Fullview = () => {
           </div>
         </section>
         <footer className={styles.footer}>
-          <button className={styles.applyFilter} onClick={onApply}>
+          <button className={styles.button} onClick={onApply}>
             Apply
+          </button>
+          <button className={styles.button} onClick={resetParams}>
+            Reset
           </button>
           <button className={styles.close} onClick={closeFilterOptions}>
             <FaAngleDoubleUp />
