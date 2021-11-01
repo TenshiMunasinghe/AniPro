@@ -1,4 +1,5 @@
 import React, { createContext, Dispatch, useEffect, useState } from 'react'
+import { filters } from '../../../filterOptions/filterOptions'
 import { MediaType } from '../../../generated/index'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import SearchBarInput from '../../common/SearchBarInput/SearchBarInput'
@@ -27,10 +28,15 @@ const Media = ({ type }: Props) => {
     }
   }, [activeFilterOption])
 
+  const openFilterOptions = () => setActiveFilterOption(filters[0].name)
+
   return (
     <ActiveFilterContext.Provider
       value={{ activeFilterOption, setActiveFilterOption }}>
       <SearchBarInput link={`/search/${type.toLowerCase()}`} />
+      <div className={styles.advancedFilters}>
+        <button onClick={openFilterOptions}>Advanced Filters</button>
+      </div>
       {Object.keys(queryVars.initial).length === 0 ? (
         <Home type={type} />
       ) : (
