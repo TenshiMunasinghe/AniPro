@@ -102,8 +102,8 @@ export const useUpdateUrlParam = () => {
   )
 
   const resetParams = useCallback(() => {
-    history.push(location.pathname)
-  }, [location.pathname, history])
+    setParams('')
+  }, [])
 
   return {
     updateUrl,
