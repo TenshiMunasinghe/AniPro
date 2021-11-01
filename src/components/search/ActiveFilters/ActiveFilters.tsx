@@ -1,12 +1,16 @@
 import { memo } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import { filterOptionTypes } from '../../../filterOptions/filterOptions'
+import { MediaSort } from '../../../generated'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../../utils/formatLabel'
 import styles from './ActiveFilters.module.scss'
 import Filter from './Filter/Filter'
 
 const ActiveFilters = () => {
-  const { updateUrl, params, resetParams } = useUpdateUrlParam()
+  const history = useHistory()
+  const { pathname } = useLocation()
+  const { updateUrl, params } = useUpdateUrlParam()
 
   const paramArr = Array.from(params.initial.keys())
     .filter(key => Object.keys(filterOptionTypes.default).includes(key))
@@ -31,6 +35,12 @@ const ActiveFilters = () => {
     })
   }
 
+  const clearFilters = () =>
+    history.push({
+      pathname,
+      search: `sortBy=${MediaSort.TrendingDesc}`,
+    })
+
   return (
     <section className={styles.wrapper}>
       {paramArr.map(({ key, values }) =>
@@ -46,7 +56,7 @@ const ActiveFilters = () => {
         ))
       )}
       {paramArr.length > 0 && (
-        <Filter onClick={resetParams} text='Clear All' variant='secondary' />
+        <Filter onClick={clearFilters} text='Clear All' variant='secondary' />
       )}
     </section>
   )
