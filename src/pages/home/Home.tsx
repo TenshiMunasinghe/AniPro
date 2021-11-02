@@ -1,4 +1,5 @@
 import NavBar from '../../components/common/NavBar/NavBar'
+import Footer from '../../components/home/Footer/Footer'
 import Slider from '../../components/home/Slider/Slider'
 import MediaHome from '../../components/search/Media/Home'
 import { MediaType } from '../../generated'
@@ -24,6 +25,7 @@ const Home = () => {
         <MediaHome type={MediaType.Anime} />
         <MediaHome type={MediaType.Manga} />
       </main>
+      <Footer />
     </>
   )
 }
