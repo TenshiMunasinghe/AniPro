@@ -132,12 +132,12 @@
       }
 
       .text {
-        color: var(--white-600);
+        color: var(--black-300);
         margin-right: var(--space-200);
       }
 
       svg {
-        fill: var(--white-600);
+        fill: var(--black-300);
       }
 
       @include mq(above, md) {
