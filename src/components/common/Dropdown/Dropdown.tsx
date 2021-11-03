@@ -1,5 +1,5 @@
 import { memo, RefObject } from 'react'
-import { FaSort } from 'react-icons/fa'
+import { FaAngleDown } from 'react-icons/fa'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
 import styles from './Dropdown.module.scss'
 import Items from './Items/Items'
@@ -40,10 +40,10 @@ const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
       ref={ref as RefObject<HTMLDivElement>}
       tabIndex={0}>
       <button className={styles.dropdownHeader} tabIndex={-1}>
-        <FaSort aria-label='sort' />
         <div className={styles.selected}>
           {options.find(o => o.value === selected)?.label}
         </div>
+        <FaAngleDown aria-label='toggle dropdown' />
       </button>
       <Items
         isVisible={isFocused}
