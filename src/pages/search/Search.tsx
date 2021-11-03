@@ -9,7 +9,7 @@ import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
 import { MediaType } from '../../generated'
 import styles from './Search.module.scss'
 
-const SEARCH_SLUGS = [
+export const SEARCH_SLUGS = [
   'anime',
   'manga',
   'staff',
