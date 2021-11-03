@@ -6,16 +6,18 @@ import PeopleHeader from '../../components/search/PeopleHeader/PeopleHeader'
 import CharactersSearchResult from '../../components/search/PeopleSearchResult/CharactersSearchResult'
 import StaffSearchResult from '../../components/search/PeopleSearchResult/StaffSearchResult'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import { MediaTypes } from '../../filterOptions/filterOptions'
 import { MediaType } from '../../generated'
 import styles from './Search.module.scss'
 
-export type SearchSlugs =
-  | keyof typeof MediaTypes
-  | 'characters'
-  | 'staff'
-  | 'reviews'
-  | 'recommendations'
+const SEARCH_SLUGS = [
+  'anime',
+  'manga',
+  'staff',
+  'reviews',
+  'recommendations',
+] as const
+
+export type SearchSlugs = typeof SEARCH_SLUGS[number]
 
 const Search = () => {
   return (
