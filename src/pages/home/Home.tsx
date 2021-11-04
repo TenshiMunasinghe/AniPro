@@ -21,10 +21,10 @@ const Home = () => {
         context={contents.ANIME[randomKey].text}
       />
       <NavBar position='sticky' />
-      <main className={styles.content}>
+      <div className={styles.content}>
         <MediaHome type={MediaType.Anime} />
         <MediaHome type={MediaType.Manga} />
-      </main>
+      </div>
       <Footer />
     </>
   )
