@@ -1,3 +1,4 @@
+import classnames from 'classnames'
 import { memo, RefObject } from 'react'
 import { FaAngleDown } from 'react-icons/fa'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
@@ -12,8 +13,15 @@ interface Props {
     value: string
   }[]
   selected: string | (string | null)[]
+  placeholder?: string
 }
-const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
+const Dropdown = ({
+  onChange,
+  isMulti = false,
+  options,
+  selected,
+  placeholder,
+}: Props) => {
   const { ref, isFocused } = useFocusedWithin()
 
   const handleChange = (value: string) => {
@@ -32,6 +40,8 @@ const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
     onChange(next)
   }
 
+  const selectedLabel = options.find(o => o.value === selected)?.label
+
   return (
     <div
       className={styles.wrapper}
@@ -40,8 +50,11 @@ const Dropdown = ({ onChange, isMulti = false, options, selected }: Props) => {
       ref={ref as RefObject<HTMLDivElement>}
       tabIndex={0}>
       <button className={styles.dropdownHeader} tabIndex={-1}>
-        <div className={styles.selected}>
-          {options.find(o => o.value === selected)?.label}
+        <div
+          className={classnames(styles.selected, {
+            [styles.empty]: !selectedLabel,
+          })}>
+          {selectedLabel || placeholder || ''}
         </div>
         <FaAngleDown aria-label='toggle dropdown' />
       </button>

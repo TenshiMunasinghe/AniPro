@@ -22,6 +22,11 @@
   cursor: pointer;
   font-weight: inherit;
   @include gap($row: var(--space-200));
+
+  .empty {
+    color: var(--color-text-500);
+  }
+
   * {
     color: var(--color-text-300);
   }
