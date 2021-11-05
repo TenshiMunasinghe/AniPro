@@ -13,6 +13,7 @@ export const SEARCH_SLUGS = [
   'anime',
   'manga',
   'staff',
+  'characters',
   'reviews',
   'recommendations',
 ] as const
