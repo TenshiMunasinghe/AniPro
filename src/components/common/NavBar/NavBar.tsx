@@ -2,6 +2,7 @@ import { CSSProperties, useCallback } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { ThemeStore, useThemeStore } from '../../../zustand/stores'
+import BrowseOptions from '../BrowseOptions/BrowseOptions'
 import styles from './NavBar.module.scss'
 import Switch from './Switch/Switch'
 
@@ -28,6 +29,7 @@ const NavBar = ({ position = 'static' }: Props) => {
       <h1 className={styles.heading}>
         <Link to='/'>AniPro</Link>
       </h1>
+      <BrowseOptions />
       <Switch
         onChange={onChange}
         On={FaSun}
