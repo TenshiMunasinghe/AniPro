@@ -1,15 +1,16 @@
 import { memo, useContext } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../../../api/queries'
 import { linkToMediaPage } from '../../../../../App'
-import { MediaType } from '../../../../../generated'
-import { ImageSizeContext, Media } from '../../../CardGrid/CardGrid'
+import { Media, MediaType } from '../../../../../generated'
+import { ImageSizeContext } from '../../../CardGrid/CardGrid'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
 import Rank from '../../components/Rank/Rank'
 import styles from './Content.module.scss'
 
 interface Props {
-  media: Media
+  media: DeepPartial<Media>
   rank?: number | null
 }
 

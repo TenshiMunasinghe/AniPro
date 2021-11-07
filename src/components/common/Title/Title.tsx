@@ -4,12 +4,14 @@ import { MediaType } from '../../../generated/index'
 import styles from './Title.module.scss'
 
 interface Props {
-  id: number
+  id?: number
   text: string
   type: MediaType | null
 }
 
 const Title = ({ id, text, type }: Props) => {
+  if (!id) return null
+
   return (
     <Link
       to={linkToMediaPage(id, type || MediaType.Anime)}

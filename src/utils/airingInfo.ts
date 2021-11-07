@@ -1,4 +1,5 @@
-import { Media } from '../components/common/CardGrid/CardGrid'
+import { DeepPartial } from 'react-hook-form'
+import { Media } from '../generated'
 import { convertTime } from './convertTIme'
 import { pluralize } from './pluralize'
 import { timeToArr } from './timeToArr'
@@ -9,16 +10,16 @@ export const airingInfo = ({
   season,
   seasonYear,
 }: {
-  nextAiringEpisode: Media['nextAiringEpisode']
-  season: Media['season']
-  seasonYear: Media['seasonYear']
+  nextAiringEpisode: DeepPartial<Media>['nextAiringEpisode']
+  season: DeepPartial<Media>['season']
+  seasonYear: DeepPartial<Media>['seasonYear']
 }) => {
   if (!nextAiringEpisode && season && seasonYear) {
     return `${toStartCase(season)} ${seasonYear}`
   } else if (nextAiringEpisode) {
     const timeUntilAiring = timeToArr(
       convertTime({
-        num: nextAiringEpisode.timeUntilAiring,
+        num: nextAiringEpisode.timeUntilAiring || 0,
         input: 'seconds',
         output: ['weeks', 'days', 'hours', 'minutes'],
       })

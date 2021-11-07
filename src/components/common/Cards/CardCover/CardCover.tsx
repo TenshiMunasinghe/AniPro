@@ -1,6 +1,7 @@
 import { memo, useState } from 'react'
+import { DeepPartial } from 'react-hook-form'
+import { Media } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { Media } from '../../CardGrid/CardGrid'
 import styles from './CardCover.module.scss'
 import Content from './Content/Content'
 import Popover from './Popover/Popover'
@@ -8,10 +9,11 @@ import Popover from './Popover/Popover'
 interface Props {
   index: number
   rank?: number | null
-  media: Media
+  media: DeepPartial<Media>
+  hasPopover?: boolean
 }
 
-const CardCover = ({ index, rank, media }: Props) => {
+const CardCover = ({ index, rank, media, hasPopover = true }: Props) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
@@ -27,7 +29,9 @@ const CardCover = ({ index, rank, media }: Props) => {
         media.coverImage?.color || 'var(--color-foreground-200)'
       )}>
       <Content rank={rank} media={media} />
-      <Popover index={index} isVisible={isPopoverVisible} media={media} />
+      {hasPopover && (
+        <Popover index={index} isVisible={isPopoverVisible} media={media} />
+      )}
     </div>
   )
 }

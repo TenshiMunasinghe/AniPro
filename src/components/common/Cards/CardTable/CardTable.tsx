@@ -1,13 +1,14 @@
 import { memo, useContext } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
-import { MediaType } from '../../../../generated'
+import { Media, MediaType } from '../../../../generated'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
+import { ImageSizeContext } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
@@ -15,8 +16,9 @@ import Title from '../../Title/Title'
 import Rank from '../components/Rank/Rank'
 import styles from './CardTable.module.scss'
 import Info from './Info/Info'
+
 interface Props {
-  media: Media
+  media: DeepPartial<Media>
   rank?: number | null
 }
 

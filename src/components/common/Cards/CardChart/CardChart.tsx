@@ -1,9 +1,10 @@
 import { memo, useContext } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
-import { MediaType } from '../../../../generated'
+import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
+import { ImageSizeContext } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
 import Genres from '../../Genres/Genres'
@@ -12,7 +13,7 @@ import Title from '../../Title/Title'
 import styles from './CardChart.module.scss'
 
 interface Props {
-  media: Media
+  media: DeepPartial<Media>
 }
 
 const CardChart = ({

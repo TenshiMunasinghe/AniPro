@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import { linkToMediaPage } from '../../../App'
 import breakpoints from '../../../css/breakpoints.module.scss'
-import { MediaType, RecommendationConnection } from '../../../generated/index'
+import { RecommendationConnection } from '../../../generated/index'
 import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
-import CoverImage from '../../common/CoverImage/CoverImage'
-import Title from '../../common/Title/Title'
+import CardCover from '../../common/Cards/CardCover/CardCover'
 import Content from '../Content/Content'
 import styles from './Recommendations.module.scss'
 
@@ -39,23 +37,17 @@ const Recommendations = ({ recommendations }: Props) => {
         {(showAll || windowWidth < parseInt(breakpoints.md)
           ? recommendations
           : recommendations.slice(0, 5)
-        ).map(node => {
+        ).map((node, index) => {
           if (!node) return null
           const { mediaRecommendation: m } = node
           if (!m || !m.id) return null
           return (
-            <div className={styles.cardCover} key={'recommendations' + m.id}>
-              <CoverImage
-                link={linkToMediaPage(m.id, m.type || MediaType.Anime)}
-                src={m.coverImage?.large}
-                title={m.title?.romaji}
-              />
-              <Title
-                id={m.id}
-                text={m.title?.romaji || 'no title'}
-                type={m.type || null}
-              />
-            </div>
+            <CardCover
+              index={index}
+              media={m}
+              hasPopover={false}
+              key={'recommendations' + m.id}
+            />
           )
         })}
       </div>

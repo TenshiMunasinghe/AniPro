@@ -1,12 +1,13 @@
 import classnames from 'classnames'
 import range from 'lodash/range'
 import { createContext } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import {
   LazyComponentProps,
   ScrollPosition,
   trackWindowScroll,
 } from 'react-lazy-load-image-component'
-import { Maybe, MediaSearchQuery } from '../../../generated/index'
+import { Maybe, Media } from '../../../generated/index'
 import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import CardChart from '../Cards/CardChart/CardChart'
 import CardCover from '../Cards/CardCover/CardCover'
@@ -15,11 +16,11 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 
-export type Media = NonNullable<
-  NonNullable<NonNullable<MediaSearchQuery['Page']>['media']>[number]
->
+// export type Media = NonNullable<
+//   NonNullable<NonNullable<MediaSearchQuery['Page']>['media']>[number]
+// >
 
-export interface MediaWithRank extends Media {
+export interface MediaWithRank extends DeepPartial<Media> {
   rank?: number | null
 }
 

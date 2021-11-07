@@ -1,5 +1,7 @@
 import classnames from 'classnames'
 import { memo } from 'react'
+import { DeepPartial } from 'react-hook-form'
+import { Media } from '../../../../../generated'
 import { useOverflow } from '../../../../../hooks/useOverflow'
 import { airingInfo } from '../../../../../utils/airingInfo'
 import { convertTime } from '../../../../../utils/convertTIme'
@@ -7,7 +9,6 @@ import { formatLabel } from '../../../../../utils/formatLabel'
 import { pluralize } from '../../../../../utils/pluralize'
 import { timeToArr } from '../../../../../utils/timeToArr'
 import { timeToStr } from '../../../../../utils/timeToStr'
-import { Media } from '../../../CardGrid/CardGrid'
 import Genres from '../../../Genres/Genres'
 import Score from '../../../Score/Score'
 import styles from './Popover.module.scss'
@@ -15,7 +16,7 @@ import styles from './Popover.module.scss'
 interface Props {
   index: number // for repositioning when order changes
   isVisible: boolean
-  media: Media
+  media: DeepPartial<Media>
 }
 
 const Popover = ({ isVisible, media }: Props) => {

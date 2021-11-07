@@ -25,8 +25,8 @@ const queryClient = new QueryClient()
 
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
-export const linkToMediaPage = (id: number, type: MediaType) =>
-  `/media/${type.toLowerCase()}/${id}`
+export const linkToMediaPage = (id: number | undefined, type: MediaType) =>
+  id ? `/media/${type.toLowerCase()}/${id}` : ''
 
 const ScrollToTop = () => {
   const { pathname, search } = useLocation()
