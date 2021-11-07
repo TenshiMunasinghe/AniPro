@@ -46,7 +46,7 @@ const Recommendations = ({ recommendations }: Props) => {
               index={index}
               media={m}
               hasPopover={false}
-              key={'recommendations' + m.id}
+              key={node.id}
             />
           )
         })}

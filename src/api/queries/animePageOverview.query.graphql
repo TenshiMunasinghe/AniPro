@@ -38,6 +38,7 @@ query overview($id: Int!) {
     }
     recommendations {
       nodes {
+        id
         mediaRecommendation {
           id
           title {
