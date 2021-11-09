@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import React, { useCallback, useState } from 'react'
+import { FaSort } from 'react-icons/fa'
 import gqlRequestClient from '../../../../api/graphqlClient'
 import { sortByOptions } from '../../../../filterOptions/filterOptions'
 import {
@@ -74,6 +75,7 @@ const MediaSearchResult = ({ type }: Props) => {
             isMulti={false}
             options={sortByOptions}
             selected={queryVars.initial.sortBy || MediaSort.TrendingDesc}
+            icon={{ type: FaSort, isLeft: false }}
           />
         </section>
       </div>
