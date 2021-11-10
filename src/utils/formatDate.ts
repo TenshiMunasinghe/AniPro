@@ -13,7 +13,7 @@ export const formatDate = ({
   month?: number | null
   day?: number | null
 }) => {
-  const string = new Date(year || 0, month || -1, day || 0)
+  const string = new Date(year || 0, (month || 0) - 1, day || 0)
     .toLocaleDateString('en-US', dateFormat)
     .replaceAll(',', '')
 
