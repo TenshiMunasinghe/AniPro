@@ -1,6 +1,7 @@
 import { CommonQuery } from '../../../generated/index'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
+import { formatDate } from '../../../utils/formatDate'
 import { formatLabel } from '../../../utils/formatLabel'
 import { timeToArr } from '../../../utils/timeToArr'
 import { timeToStr } from '../../../utils/timeToStr'
@@ -12,12 +13,6 @@ import Tags from './Tags/Tags'
 
 interface Props {
   data: CommonQuery['Media']
-}
-
-const dateFormat = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
 }
 
 const Aside = ({ data }: Props) => {
@@ -73,23 +68,11 @@ const Aside = ({ data }: Props) => {
         <Item label='Status'>{toStartCase(data.status || '')}</Item>
 
         <Item label='Start Date'>
-          {data.startDate?.year
-            ? new Date(
-                data.startDate.year,
-                data.startDate.month || 0 - 1,
-                data.startDate.day || 0
-              ).toLocaleDateString('en-US', dateFormat)
-            : ''}
+          {data.startDate ? formatDate(data.startDate) : ''}
         </Item>
 
         <Item label='End Date'>
-          {data.endDate?.year
-            ? new Date(
-                data.endDate.year,
-                data.endDate?.month || 0 - 1,
-                data.endDate?.day || 0
-              ).toLocaleDateString('en-US', dateFormat)
-            : ''}
+          {data.endDate ? formatDate(data.endDate) : ''}
         </Item>
 
         <Item label='Season'>
