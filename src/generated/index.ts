@@ -620,6 +620,7 @@ export type InternalPage = {
   revisionHistory?: Maybe<Array<Maybe<RevisionHistory>>>;
   reports?: Maybe<Array<Maybe<Report>>>;
   modActions?: Maybe<Array<Maybe<ModAction>>>;
+  userBlockSearch?: Maybe<Array<Maybe<User>>>;
   /** The pagination information */
   pageInfo?: Maybe<PageInfo>;
   users?: Maybe<Array<Maybe<User>>>;
@@ -696,6 +697,12 @@ export type InternalPageReportsArgs = {
 export type InternalPageModActionsArgs = {
   userId?: Maybe<Scalars['Int']>;
   modId?: Maybe<Scalars['Int']>;
+};
+
+
+/** Page of data (Used for internal use only) */
+export type InternalPageUserBlockSearchArgs = {
+  search?: Maybe<Scalars['String']>;
 };
 
 
@@ -4589,6 +4596,8 @@ export type YearStats = {
   meanScore?: Maybe<Scalars['Int']>;
 };
 
+export type CardCoverInfoFragment = { __typename?: 'Media', type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> };
+
 export type CharactersFragment = { __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> };
 
 export type EpisodesFragment = { __typename?: 'Media', streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> };
@@ -4621,7 +4630,7 @@ export type OverviewQueryVariables = Exact<{
 }>;
 
 
-export type OverviewQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, relations?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, relationType?: Maybe<MediaRelation>, node?: Maybe<{ __typename?: 'Media', id: number, format?: Maybe<MediaFormat>, status?: Maybe<MediaStatus>, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string> }> }> }>>> }>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', role?: Maybe<string>, node?: Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }> }>>> }>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number, summary?: Maybe<string>, rating?: Maybe<number>, ratingAmount?: Maybe<number>, score?: Maybe<number>, user?: Maybe<{ __typename?: 'User', name: string, avatar?: Maybe<{ __typename?: 'UserAvatar', medium?: Maybe<string> }> }> }>>> }>, trailer?: Maybe<{ __typename?: 'MediaTrailer', id?: Maybe<string>, site?: Maybe<string>, thumbnail?: Maybe<string> }>, recommendations?: Maybe<{ __typename?: 'RecommendationConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Recommendation', mediaRecommendation?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> }> };
+export type OverviewQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', status?: Maybe<MediaStatus>, relations?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, relationType?: Maybe<MediaRelation>, node?: Maybe<{ __typename?: 'Media', id: number, format?: Maybe<MediaFormat>, status?: Maybe<MediaStatus>, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string> }> }> }>>> }>, characters?: Maybe<{ __typename?: 'CharacterConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'CharacterEdge', role?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }>, staff?: Maybe<{ __typename?: 'StaffConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'StaffEdge', role?: Maybe<string>, node?: Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }> }>>> }>, reviews?: Maybe<{ __typename?: 'ReviewConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Review', id: number, summary?: Maybe<string>, rating?: Maybe<number>, ratingAmount?: Maybe<number>, score?: Maybe<number>, user?: Maybe<{ __typename?: 'User', name: string, avatar?: Maybe<{ __typename?: 'UserAvatar', medium?: Maybe<string> }> }> }>>> }>, trailer?: Maybe<{ __typename?: 'MediaTrailer', id?: Maybe<string>, site?: Maybe<string>, thumbnail?: Maybe<string> }>, recommendations?: Maybe<{ __typename?: 'RecommendationConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Recommendation', id: number, mediaRecommendation?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }>, rankings?: Maybe<Array<Maybe<{ __typename?: 'MediaRank', id: number, rank: number, context: string, type: MediaRankType, year?: Maybe<number>, season?: Maybe<MediaSeason>, allTime?: Maybe<boolean> }>>>, stats?: Maybe<{ __typename?: 'MediaStats', scoreDistribution?: Maybe<Array<Maybe<{ __typename?: 'ScoreDistribution', score?: Maybe<number>, amount?: Maybe<number> }>>>, statusDistribution?: Maybe<Array<Maybe<{ __typename?: 'StatusDistribution', status?: Maybe<MediaListStatus>, amount?: Maybe<number> }>>> }>, streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> }> };
 
 export type ReviewsQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -4652,6 +4661,21 @@ export type WatchQueryVariables = Exact<{
 
 
 export type WatchQuery = { __typename?: 'Query', Media?: Maybe<{ __typename?: 'Media', streamingEpisodes?: Maybe<Array<Maybe<{ __typename?: 'MediaStreamingEpisode', url?: Maybe<string>, title?: Maybe<string>, thumbnail?: Maybe<string> }>>> }> };
+
+export type CharacterInfoQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type CharacterInfoQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', description?: Maybe<string>, gender?: Maybe<string>, age?: Maybe<string>, bloodType?: Maybe<string>, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string>, native?: Maybe<string>, alternative?: Maybe<Array<Maybe<string>>>, alternativeSpoiler?: Maybe<Array<Maybe<string>>> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }>, dateOfBirth?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }> }> };
+
+export type CharacterMediaQueryVariables = Exact<{
+  id: Scalars['Int'];
+  sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+}>;
+
+
+export type CharacterMediaQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', media?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', node?: Maybe<{ __typename?: 'Media', type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
 export type SearchCharactersQueryVariables = Exact<{
   isBirthday?: Maybe<Scalars['Boolean']>;
@@ -4690,6 +4714,33 @@ export type SearchStaffQueryVariables = Exact<{
 
 export type SearchStaffQuery = { __typename?: 'Query', Page?: Maybe<{ __typename?: 'Page', staff?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }> };
 
+export type StaffInfoQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type StaffInfoQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', description?: Maybe<string>, gender?: Maybe<string>, age?: Maybe<number>, yearsActive?: Maybe<Array<Maybe<number>>>, homeTown?: Maybe<string>, bloodType?: Maybe<string>, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string>, native?: Maybe<string>, alternative?: Maybe<Array<Maybe<string>>> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }>, dateOfBirth?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, dateOfDeath?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }> }> };
+
+export type StaffRoleQueryVariables = Exact<{
+  id: Scalars['Int'];
+  sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+}>;
+
+
+export type StaffRoleQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Media', type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>>> }>, characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, node?: Maybe<{ __typename?: 'Media', type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+
+export const CardCoverInfoFragmentDoc = `
+    fragment cardCoverInfo on Media {
+  title {
+    romaji
+  }
+  type
+  coverImage {
+    large
+    color
+  }
+}
+    `;
 export const CharactersFragmentDoc = `
     fragment Characters on CharacterConnection {
   edges {
@@ -4961,6 +5012,7 @@ export const OverviewDocument = `
     }
     recommendations {
       nodes {
+        id
         mediaRecommendation {
           id
           title {
@@ -5124,6 +5176,86 @@ useWatchQuery.document = WatchDocument;
 
 useWatchQuery.getKey = (variables: WatchQueryVariables) => ['watch', variables];
 
+export const CharacterInfoDocument = `
+    query characterInfo($id: Int!) {
+  Character(id: $id) {
+    name {
+      full
+      native
+      alternative
+      alternativeSpoiler
+    }
+    image {
+      large
+    }
+    description
+    gender
+    dateOfBirth {
+      year
+      month
+      day
+    }
+    age
+    bloodType
+  }
+}
+    `;
+export const useCharacterInfoQuery = <
+      TData = CharacterInfoQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: CharacterInfoQueryVariables, 
+      options?: UseQueryOptions<CharacterInfoQuery, TError, TData>
+    ) => 
+    useQuery<CharacterInfoQuery, TError, TData>(
+      ['characterInfo', variables],
+      fetcher<CharacterInfoQuery, CharacterInfoQueryVariables>(client, CharacterInfoDocument, variables),
+      options
+    );
+useCharacterInfoQuery.document = CharacterInfoDocument;
+
+useCharacterInfoQuery.getKey = (variables: CharacterInfoQueryVariables) => ['characterInfo', variables];
+
+export const CharacterMediaDocument = `
+    query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  Character(id: $id) {
+    media(sort: [START_DATE_DESC]) {
+      edges {
+        node {
+          ...cardCoverInfo
+        }
+        voiceActors(language: JAPANESE, sort: [FAVOURITES_DESC]) {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}
+    ${CardCoverInfoFragmentDoc}`;
+export const useCharacterMediaQuery = <
+      TData = CharacterMediaQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: CharacterMediaQueryVariables, 
+      options?: UseQueryOptions<CharacterMediaQuery, TError, TData>
+    ) => 
+    useQuery<CharacterMediaQuery, TError, TData>(
+      ['characterMedia', variables],
+      fetcher<CharacterMediaQuery, CharacterMediaQueryVariables>(client, CharacterMediaDocument, variables),
+      options
+    );
+useCharacterMediaQuery.document = CharacterMediaDocument;
+
+useCharacterMediaQuery.getKey = (variables: CharacterMediaQueryVariables) => ['characterMedia', variables];
+
 export const SearchCharactersDocument = `
     query searchCharacters($isBirthday: Boolean = false, $page: Int = 1, $search: String) {
   Page(perPage: 30, page: $page) {
@@ -5284,6 +5416,98 @@ export const useSearchStaffQuery = <
 useSearchStaffQuery.document = SearchStaffDocument;
 
 useSearchStaffQuery.getKey = (variables?: SearchStaffQueryVariables) => ['searchStaff', variables];
+
+export const StaffInfoDocument = `
+    query staffInfo($id: Int!) {
+  Staff(id: $id) {
+    name {
+      full
+      native
+      alternative
+    }
+    image {
+      large
+    }
+    description(asHtml: true)
+    gender
+    dateOfBirth {
+      year
+      month
+      day
+    }
+    dateOfDeath {
+      year
+      month
+      day
+    }
+    age
+    yearsActive
+    homeTown
+    bloodType
+  }
+}
+    `;
+export const useStaffInfoQuery = <
+      TData = StaffInfoQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: StaffInfoQueryVariables, 
+      options?: UseQueryOptions<StaffInfoQuery, TError, TData>
+    ) => 
+    useQuery<StaffInfoQuery, TError, TData>(
+      ['staffInfo', variables],
+      fetcher<StaffInfoQuery, StaffInfoQueryVariables>(client, StaffInfoDocument, variables),
+      options
+    );
+useStaffInfoQuery.document = StaffInfoDocument;
+
+useStaffInfoQuery.getKey = (variables: StaffInfoQueryVariables) => ['staffInfo', variables];
+
+export const StaffRoleDocument = `
+    query staffRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  Staff(id: $id) {
+    staffMedia(sort: $sort) {
+      nodes {
+        ...cardCoverInfo
+      }
+    }
+    characterMedia(sort: $sort) {
+      edges {
+        id
+        node {
+          ...cardCoverInfo
+        }
+        characters {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}
+    ${CardCoverInfoFragmentDoc}`;
+export const useStaffRoleQuery = <
+      TData = StaffRoleQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: StaffRoleQueryVariables, 
+      options?: UseQueryOptions<StaffRoleQuery, TError, TData>
+    ) => 
+    useQuery<StaffRoleQuery, TError, TData>(
+      ['staffRole', variables],
+      fetcher<StaffRoleQuery, StaffRoleQueryVariables>(client, StaffRoleDocument, variables),
+      options
+    );
+useStaffRoleQuery.document = StaffRoleDocument;
+
+useStaffRoleQuery.getKey = (variables: StaffRoleQueryVariables) => ['staffRole', variables];
 
 
       export interface PossibleTypesResultData {

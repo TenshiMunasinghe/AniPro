@@ -1,0 +1,72 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  --top-padding: var(--space-700);
+  --row-gap: var(--space-500);
+  display: grid;
+  row-gap: var(--row-gap);
+
+  @include mq(above, lg) {
+    grid-template-areas:
+      'cover names names'
+      'cover      bio   bio'
+      '.      bio   bio';
+    column-gap: var(--space-600);
+
+    .names {
+      grid-area: names;
+    }
+
+    .image {
+      grid-area: cover;
+    }
+
+    .bio {
+      grid-area: bio;
+    }
+  }
+
+  .names {
+    position: relative;
+    padding-bottom: var(--row-gap);
+    padding-top: var(--top-padding);
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -100vw;
+      width: 200vw;
+      background: var(--color-foreground-50);
+      z-index: -1;
+    }
+
+    @include mq(below, lg) {
+      text-align: center;
+    }
+
+    .mainName {
+      font-size: var(--text-size-900);
+      letter-spacing: 0.08em;
+
+      @include mq(above, lg) {
+        font-size: var(--text-size-600);
+      }
+    }
+
+    .otherNames {
+      @include gap($row: var(--space-200));
+    }
+  }
+
+  .image {
+    max-width: 17rem;
+    margin: 0 auto;
+    border-radius: 0.25rem;
+
+    @include mq(above, lg) {
+      padding-top: var(--top-padding);
+    }
+  }
+}

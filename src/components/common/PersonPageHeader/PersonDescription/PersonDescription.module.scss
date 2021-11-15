@@ -1,0 +1,33 @@
+@use '../../../../css/config.scss' as *;
+
+.container {
+  @include gap($column: var(--space-400));
+
+  .spoiler {
+    position: relative;
+    cursor: pointer;
+    width: fit-content;
+    color: hsl(0, 69%, var(--lightness));
+
+    & > span {
+      display: none;
+    }
+
+    &:after {
+      content: 'Spoiler, click to view';
+      display: block;
+      color: var(--color-text-accent-100);
+    }
+
+    &.showSpoiler {
+      &:after {
+        content: '';
+        display: none;
+      }
+
+      & > span {
+        display: inline;
+      }
+    }
+  }
+}

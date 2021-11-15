@@ -20,6 +20,7 @@ import {
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Media = loadable(() => import('./pages/media/Media'))
+const Character = loadable(() => import('./pages/Character/Character'))
 
 const queryClient = new QueryClient()
 
@@ -69,12 +70,17 @@ const App = () => {
           <Route exact path='/'>
             <Home fallback={<LoadingSpinner />} />
           </Route>
+
           <Route exact path='/media/:type/:id/:tab?'>
             <Media fallback={<LoadingSpinner />} />
           </Route>
 
           <Route path='/search/:type?'>
             <Search fallback={<LoadingSpinner />} />
+          </Route>
+
+          <Route path='/character/:id'>
+            <Character fallback={<LoadingSpinner />} />
           </Route>
         </Switch>
       </Router>

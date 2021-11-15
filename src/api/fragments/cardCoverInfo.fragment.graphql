@@ -1,0 +1,10 @@
+fragment cardCoverInfo on Media {
+  title {
+    romaji
+  }
+  type
+  coverImage {
+    large
+    color
+  }
+}

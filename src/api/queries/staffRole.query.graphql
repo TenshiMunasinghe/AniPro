@@ -1,0 +1,26 @@
+query staffRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  Staff(id: $id) {
+    staffMedia(sort: $sort) {
+      nodes {
+        ...cardCoverInfo
+      }
+    }
+    characterMedia(sort: $sort) {
+      edges {
+        id
+        node {
+          ...cardCoverInfo
+        }
+        characters {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}
