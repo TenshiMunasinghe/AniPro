@@ -1,21 +1,22 @@
 import { memo, useContext } from 'react'
-import { DeepPartial } from 'react-hook-form'
-import { NO_IMAGE_URL } from '../../../../../api/queries'
 import { linkToMediaPage } from '../../../../../App'
-import { Media, MediaType } from '../../../../../generated'
+import { MediaType } from '../../../../../generated'
 import { ImageSizeContext } from '../../../CardGrid/CardGrid'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
 import Rank from '../../components/Rank/Rank'
+import { CardCoverProps } from '../CardCover'
 import styles from './Content.module.scss'
 
-interface Props {
-  media: DeepPartial<Media>
-  rank?: number | null
-}
-
-const Content = ({ media: { id, coverImage, title, type }, rank }: Props) => {
+const Content = ({
+  media,
+  rank,
+}: Omit<CardCoverProps, 'index' | 'hadPopover'>) => {
   const imageSize = useContext(ImageSizeContext)
+
+  if (!media) return null
+
+  const { id, coverImage, title, type } = media
 
   return (
     <article className={styles.container}>
@@ -24,11 +25,13 @@ const Content = ({ media: { id, coverImage, title, type }, rank }: Props) => {
           <Rank rank={rank} />
         </div>
       )}
-      <CoverImage
-        link={linkToMediaPage(id, type || MediaType.Anime)}
-        src={coverImage?.[imageSize] || NO_IMAGE_URL}
-        title={title?.romaji || 'no title'}
-      />
+      <div className={styles.image}>
+        <CoverImage
+          link={linkToMediaPage(id, type || MediaType.Anime)}
+          src={coverImage?.[imageSize]}
+          title={title?.romaji || 'no title'}
+        />
+      </div>
       <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
     </article>
   )

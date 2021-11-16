@@ -6,17 +6,24 @@ import styles from './CardCover.module.scss'
 import Content from './Content/Content'
 import Popover from './Popover/Popover'
 
-interface Props {
+export interface CardCoverProps {
   index: number
   rank?: number | null
-  media: DeepPartial<Media>
+  media: DeepPartial<Media> | null | undefined
   hasPopover?: boolean
 }
 
-const CardCover = ({ index, rank, media, hasPopover = true }: Props) => {
+const CardCover = ({
+  index,
+  rank,
+  media,
+  hasPopover = true,
+}: CardCoverProps) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
+
+  if (!media) return null
 
   return (
     <div
