@@ -1,7 +1,6 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
 import { linkToMediaPage } from '../../../../../App'
 import { MediaType } from '../../../../../generated'
-import { ImageSizeContext } from '../../../CardGrid/CardGrid'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
 import Rank from '../../components/Rank/Rank'
@@ -11,9 +10,8 @@ import styles from './Content.module.scss'
 const Content = ({
   media,
   rank,
+  imageSize,
 }: Omit<CardCoverProps, 'index' | 'hadPopover'>) => {
-  const imageSize = useContext(ImageSizeContext)
-
   if (!media) return null
 
   const { id, coverImage, title, type } = media

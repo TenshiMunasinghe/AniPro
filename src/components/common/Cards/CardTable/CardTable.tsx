@@ -1,4 +1,4 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
@@ -8,7 +8,7 @@ import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import { ImageSizeContext } from '../../CardGrid/CardGrid'
+import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
@@ -19,6 +19,7 @@ import Info from './Info/Info'
 
 interface Props {
   media: DeepPartial<Media>
+  imageSize: ImageSize
   rank?: number | null
 }
 
@@ -43,9 +44,8 @@ const CardTable = ({
     endDate,
   },
   rank,
+  imageSize,
 }: Props) => {
-  const imageSize = useContext(ImageSizeContext)
-
   const _style = {
     ...createColorVariable(coverImage?.color || 'var(--color-foreground-200)'),
     '--banner-image': `url(${bannerImage})`,

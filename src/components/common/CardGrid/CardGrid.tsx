@@ -16,15 +16,11 @@ import CardTable from '../Cards/CardTable/CardTable'
 import NotFound from '../NotFound/NotFound'
 import styles from './CardGrid.module.scss'
 
-// export type Media = NonNullable<
-//   NonNullable<NonNullable<MediaSearchQuery['Page']>['media']>[number]
-// >
-
 export interface MediaWithRank extends DeepPartial<Media> {
   rank?: number | null
 }
 
-type ImageSize = 'large' | 'extraLarge'
+export type ImageSize = 'large' | 'extraLarge'
 
 interface Props extends LazyComponentProps {
   medias?: Maybe<MediaWithRank>[] | null
@@ -39,8 +35,6 @@ interface Props extends LazyComponentProps {
 export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
   undefined
 )
-
-export const ImageSizeContext = createContext<ImageSize>('large')
 
 const CardGrid = ({
   medias,
@@ -57,39 +51,50 @@ const CardGrid = ({
   }
 
   return (
-    <ImageSizeContext.Provider value={imageSize}>
-      <ScrollPositionContext.Provider value={scrollPosition}>
-        <section
-          className={classnames(styles.slider, styles[cardType], {
-            [styles.sideScroll]: sideScroll,
-          })}>
-          {isLoading &&
-            range(0, loadingCount).map((_, i) => (
-              <CardLoading type={cardType} key={i} />
-            ))}
-          {medias &&
-            medias.map((m, i) => {
-              if (!m) return null
+    <ScrollPositionContext.Provider value={scrollPosition}>
+      <section
+        className={classnames(styles.slider, styles[cardType], {
+          [styles.sideScroll]: sideScroll,
+        })}>
+        {isLoading &&
+          range(0, loadingCount).map((_, i) => (
+            <CardLoading type={cardType} key={i} />
+          ))}
+        {medias &&
+          medias.map((m, i) => {
+            if (!m) return null
 
-              switch (cardType) {
-                case 'cover':
-                  return (
-                    <CardCover key={m.id} index={i} rank={m.rank} media={m} />
-                  )
+            switch (cardType) {
+              case 'cover':
+                return (
+                  <CardCover
+                    key={m.id}
+                    index={i}
+                    rank={m.rank}
+                    media={m}
+                    imageSize={imageSize}
+                  />
+                )
 
-                case 'table':
-                  return <CardTable key={m.id} media={m} rank={m.rank} />
+              case 'table':
+                return (
+                  <CardTable
+                    key={m.id}
+                    media={m}
+                    rank={m.rank}
+                    imageSize={imageSize}
+                  />
+                )
 
-                case 'chart':
-                  return <CardChart key={m.id} media={m} />
+              case 'chart':
+                return <CardChart key={m.id} media={m} imageSize={imageSize} />
 
-                default:
-                  return null
-              }
-            })}
-        </section>
-      </ScrollPositionContext.Provider>
-    </ImageSizeContext.Provider>
+              default:
+                return null
+            }
+          })}
+      </section>
+    </ScrollPositionContext.Provider>
   )
 }
 

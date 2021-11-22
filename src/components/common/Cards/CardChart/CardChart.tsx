@@ -1,10 +1,10 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext } from '../../CardGrid/CardGrid'
+import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
 import Genres from '../../Genres/Genres'
@@ -14,13 +14,13 @@ import styles from './CardChart.module.scss'
 
 interface Props {
   media: DeepPartial<Media>
+  imageSize: ImageSize
 }
 
 const CardChart = ({
   media: { id, title, coverImage, genres, meanScore, description, type },
+  imageSize,
 }: Props) => {
-  const imageSize = useContext(ImageSizeContext)
-
   return (
     <article
       className={styles.wrapper}

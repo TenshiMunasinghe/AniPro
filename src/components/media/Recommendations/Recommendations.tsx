@@ -47,6 +47,7 @@ const Recommendations = ({ recommendations }: Props) => {
               media={m}
               hasPopover={false}
               key={node.id}
+              imageSize='large'
             />
           )
         })}
