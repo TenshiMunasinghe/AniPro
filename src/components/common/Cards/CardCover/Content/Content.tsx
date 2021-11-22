@@ -23,13 +23,11 @@ const Content = ({
           <Rank rank={rank} />
         </div>
       )}
-      <div className={styles.image}>
-        <CoverImage
-          link={linkToMediaPage(id, type || MediaType.Anime)}
-          src={coverImage?.[imageSize]}
-          title={title?.romaji || 'no title'}
-        />
-      </div>
+      <CoverImage
+        link={linkToMediaPage(id, type || MediaType.Anime)}
+        src={coverImage?.[imageSize]}
+        title={title?.romaji || 'no title'}
+      />
       <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
     </article>
   )
