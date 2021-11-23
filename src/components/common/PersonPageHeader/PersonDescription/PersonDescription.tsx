@@ -31,12 +31,15 @@ const PersonDescription = ({ description }: Props) => {
   if (!description) return null
 
   const htmlString = renderToString(
-    <ReactMarkdown>{description}</ReactMarkdown>
+    <ReactMarkdown>
+      {description.replaceAll('~!', `#$`).replaceAll('!~', '$#')}
+    </ReactMarkdown>
   )
 
   const formattedDescription = htmlString
-    .replaceAll('~!', `<p class='${styles.spoiler}'><span>`)
-    .replaceAll('!~', '</span></p>')
+    .replaceAll('#$', `<p class='${styles.spoiler}'><span>`)
+    .replaceAll('$#', '</span></p>')
+    .replaceAll('https://anilist.co', '')
 
   return (
     <div className={styles.container} ref={ref}>
