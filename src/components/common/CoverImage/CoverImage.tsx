@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { Link, useLocation } from 'react-router-dom'
 import { NO_IMAGE_URL } from '../../../api/queries'
-import { ScrollPositionContext } from '../CardGrid/CardGrid'
+import { ScrollPositionContext } from '../../../App'
 import styles from './CoverImage.module.scss'
 
 interface Props {

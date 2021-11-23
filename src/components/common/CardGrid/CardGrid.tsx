@@ -1,12 +1,6 @@
 import classnames from 'classnames'
 import range from 'lodash/range'
-import { createContext } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import {
-  LazyComponentProps,
-  ScrollPosition,
-  trackWindowScroll,
-} from 'react-lazy-load-image-component'
 import { Maybe, Media } from '../../../generated/index'
 import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import CardChart from '../Cards/CardChart/CardChart'
@@ -22,7 +16,7 @@ export interface MediaWithRank extends DeepPartial<Media> {
 
 export type ImageSize = 'large' | 'extraLarge'
 
-interface Props extends LazyComponentProps {
+interface Props {
   medias?: Maybe<MediaWithRank>[] | null
   isLoading: boolean
   isError: boolean
@@ -32,10 +26,6 @@ interface Props extends LazyComponentProps {
   sideScroll?: boolean
 }
 
-export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
-  undefined
-)
-
 const CardGrid = ({
   medias,
   isLoading,
@@ -44,58 +34,55 @@ const CardGrid = ({
   imageSize = 'large',
   loadingCount = 10,
   sideScroll = false,
-  scrollPosition,
 }: Props) => {
   if (!isLoading && (isError || medias?.length === 0)) {
     return <NotFound />
   }
 
   return (
-    <ScrollPositionContext.Provider value={scrollPosition}>
-      <section
-        className={classnames(styles.slider, styles[cardType], {
-          [styles.sideScroll]: sideScroll,
-        })}>
-        {isLoading &&
-          range(0, loadingCount).map((_, i) => (
-            <CardLoading type={cardType} key={i} />
-          ))}
-        {medias &&
-          medias.map((m, i) => {
-            if (!m) return null
+    <section
+      className={classnames(styles.slider, styles[cardType], {
+        [styles.sideScroll]: sideScroll,
+      })}>
+      {isLoading &&
+        range(0, loadingCount).map((_, i) => (
+          <CardLoading type={cardType} key={i} />
+        ))}
+      {medias &&
+        medias.map((m, i) => {
+          if (!m) return null
 
-            switch (cardType) {
-              case 'cover':
-                return (
-                  <CardCover
-                    key={m.id}
-                    index={i}
-                    rank={m.rank}
-                    media={m}
-                    imageSize={imageSize}
-                  />
-                )
+          switch (cardType) {
+            case 'cover':
+              return (
+                <CardCover
+                  key={m.id}
+                  index={i}
+                  rank={m.rank}
+                  media={m}
+                  imageSize={imageSize}
+                />
+              )
 
-              case 'table':
-                return (
-                  <CardTable
-                    key={m.id}
-                    media={m}
-                    rank={m.rank}
-                    imageSize={imageSize}
-                  />
-                )
+            case 'table':
+              return (
+                <CardTable
+                  key={m.id}
+                  media={m}
+                  rank={m.rank}
+                  imageSize={imageSize}
+                />
+              )
 
-              case 'chart':
-                return <CardChart key={m.id} media={m} imageSize={imageSize} />
+            case 'chart':
+              return <CardChart key={m.id} media={m} imageSize={imageSize} />
 
-              default:
-                return null
-            }
-          })}
-      </section>
-    </ScrollPositionContext.Provider>
+            default:
+              return null
+          }
+        })}
+    </section>
   )
 }
 
-export default trackWindowScroll(CardGrid)
+export default CardGrid
