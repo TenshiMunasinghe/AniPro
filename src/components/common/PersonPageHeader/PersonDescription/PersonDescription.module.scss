@@ -21,8 +21,17 @@
 
     &.showSpoiler {
       &:after {
-        content: '';
-        display: none;
+        --icon-size: 1.25rem;
+        content: '\00d7';
+        position: absolute;
+        display: grid;
+        place-content: center;
+        left: calc(-1 * var(--icon-size));
+        top: calc((-0.5 * var(--icon-size)));
+        width: var(--icon-size);
+        height: var(--icon-size);
+        border-radius: calc(var(--icon-size) / 2);
+        background: var(--color-foreground-200);
       }
 
       & > span {

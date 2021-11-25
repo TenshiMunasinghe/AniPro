@@ -16,11 +16,6 @@ const PersonDescription = ({ description }: Props) => {
 
     const toggleSpoiler = (node: Element) => {
       node.classList.toggle(styles.showSpoiler)
-      if (node.getAttribute('title')) {
-        node.removeAttribute('title')
-      } else {
-        node.setAttribute('title', 'Hide spoiler')
-      }
     }
 
     spoilers?.forEach(node => {
