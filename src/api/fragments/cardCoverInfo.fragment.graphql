@@ -1,4 +1,5 @@
 fragment cardCoverInfo on Media {
+  id
   title {
     romaji
   }
