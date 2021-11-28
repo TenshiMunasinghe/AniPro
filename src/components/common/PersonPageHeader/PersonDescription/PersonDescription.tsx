@@ -1,5 +1,6 @@
+import classnames from 'classnames'
 import htmr from 'htmr'
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { renderToString } from 'react-dom/server'
 import ReactMarkdown from 'react-markdown'
 import styles from './PersonDescription.module.scss'
@@ -9,7 +10,11 @@ interface Props {
 }
 
 const PersonDescription = ({ description }: Props) => {
-  const ref = useRef<HTMLDivElement | null>(null)
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [isOverflow, setIsOverflow] = useState(true)
+  const ref = useRef<HTMLDivElement>(null)
+
+  const toggleExpansion = () => setIsExpanded(prev => !prev)
 
   useEffect(() => {
     const spoilers = ref.current?.querySelectorAll('.' + styles.spoiler)
@@ -23,6 +28,15 @@ const PersonDescription = ({ description }: Props) => {
     })
   }, [])
 
+  useLayoutEffect(() => {
+    const isOverflow =
+      ref.current &&
+      ref.current.parentElement &&
+      ref.current?.clientHeight > ref.current?.parentElement?.clientHeight
+
+    setIsOverflow(isOverflow || false)
+  }, [])
+
   if (!description) return null
 
   const htmlString = renderToString(
@@ -34,11 +48,22 @@ const PersonDescription = ({ description }: Props) => {
   const formattedDescription = htmlString
     .replaceAll('#$', `<p class='${styles.spoiler}'><span>`)
     .replaceAll('$#', '</span></p>')
+    .replaceAll('\n', '<br/>')
     .replaceAll('https://anilist.co', '')
 
   return (
-    <div className={styles.container} ref={ref}>
-      {htmr(formattedDescription)}
+    <div
+      className={classnames(styles.container, {
+        [styles.expanded]: isExpanded || !isOverflow,
+      })}>
+      <div className={styles.description} ref={ref}>
+        {htmr(formattedDescription)}
+      </div>
+      {isOverflow && (
+        <button onClick={toggleExpansion} className={styles.toggleExpansion}>
+          Show {isExpanded ? 'less' : 'more'}
+        </button>
+      )}
     </div>
   )
 }
