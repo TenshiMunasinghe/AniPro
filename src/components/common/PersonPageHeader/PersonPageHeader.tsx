@@ -34,9 +34,10 @@ const PersonPageHeader = ({ data }: Props) => {
         className={styles.image}
       />
       <div className={styles.bio}>
-        {infos.dateOfBirth && (
-          <Item label='Date of Birth' value={formatDate(infos.dateOfBirth)} />
-        )}
+        {infos.dateOfBirth &&
+          Object.values(infos.dateOfBirth).every(val => val !== null) && (
+            <Item label='Date of Birth' value={formatDate(infos.dateOfBirth)} />
+          )}
 
         {infos.age && <Item label='Age' value={infos.age.toString()} />}
 
