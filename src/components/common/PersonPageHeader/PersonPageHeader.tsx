@@ -39,7 +39,15 @@ const PersonPageHeader = ({ data }: Props) => {
             <Item label='Date of Birth' value={formatDate(infos.dateOfBirth)} />
           )}
 
-        {infos.age && <Item label='Age' value={infos.age.toString()} />}
+        {infos.age &&
+          (infos.age.toString().slice(-1) === '-' ? (
+            <Item
+              label='Initial Age'
+              value={infos.age.toString().slice(0, -1)}
+            />
+          ) : (
+            <Item label='Age' value={infos.age.toString()} />
+          ))}
 
         {infos.gender && <Item label='Gender' value={infos.gender} />}
 
