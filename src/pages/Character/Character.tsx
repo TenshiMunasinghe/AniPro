@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
+import Medias from '../../components/character/Medias/Medias'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
 import PersonPageHeader from '../../components/common/PersonPageHeader/PersonPageHeader'
@@ -21,6 +22,7 @@ const Character = () => {
       <NavBar />
       <div className={styles.container}>
         <PersonPageHeader data={data?.Character} />
+        <Medias />
       </div>
     </>
   )

@@ -1,0 +1,9 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  .dropdowns {
+    display: flex;
+    justify-content: flex-end;
+    @include gap($row: var(--space-500));
+  }
+}
