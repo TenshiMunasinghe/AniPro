@@ -1,9 +1,8 @@
 @use '../css/config.scss' as *;
 
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  place-content: center;
   @include page-padding;
   padding-top: 0;
 }
