@@ -41,6 +41,9 @@ export const linkToMediaPage = (id: number | undefined, type: MediaType) =>
 export const linkToCharacterPage = (id: number | undefined) =>
   id ? `/character/${id}` : ''
 
+export const linkToStaffPage = (id: number | undefined) =>
+  id ? `/staff/${id}` : ''
+
 const ScrollToTop = () => {
   const { pathname, search } = useLocation()
 
