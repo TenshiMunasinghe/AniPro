@@ -19,8 +19,8 @@
     width: 100%;
     text-align: center;
     background: linear-gradient(to top, var(--color-background), transparent);
-    line-height: 3.25;
     transition: color ease-in-out 0.1s;
+    padding: var(--space-400);
 
     @include mq(above, md) {
       color: transparent;
@@ -39,7 +39,6 @@
     .toggleExpansion {
       position: static;
       color: var(--color-text-accent-200);
-      margin-top: var(--space-400);
     }
   }
 
