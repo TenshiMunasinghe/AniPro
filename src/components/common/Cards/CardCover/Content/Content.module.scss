@@ -10,4 +10,31 @@
     top: calc(-1 * var(--space-200));
     width: 2.75rem;
   }
+
+  .images {
+    position: relative;
+    height: fit-content;
+  }
+
+  .cover,
+  .voiceActor {
+    display: flex;
+
+    & > a {
+      width: 100%;
+    }
+  }
+
+  .voiceActor {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+
+    & > a {
+      border: solid var(--black-400);
+      border-bottom: 0.5px;
+      border-right: 0.5px;
+    }
+  }
 }

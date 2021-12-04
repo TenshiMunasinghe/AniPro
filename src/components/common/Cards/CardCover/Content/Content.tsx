@@ -1,5 +1,5 @@
-import { memo } from 'react'
-import { linkToMediaPage } from '../../../../../App'
+import React, { memo } from 'react'
+import { linkToMediaPage, linkToStaffPage } from '../../../../../App'
 import { MediaType } from '../../../../../generated'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
@@ -11,6 +11,7 @@ const Content = ({
   media,
   rank,
   imageSize,
+  voiceActor,
 }: Omit<CardCoverProps, 'index' | 'hadPopover'>) => {
   if (!media) return null
 
@@ -23,11 +24,24 @@ const Content = ({
           <Rank rank={rank} />
         </div>
       )}
-      <CoverImage
-        link={linkToMediaPage(id, type || MediaType.Anime)}
-        src={coverImage?.[imageSize]}
-        title={title?.romaji || 'no title'}
-      />
+      <div className={styles.images}>
+        <figure className={styles.cover}>
+          <CoverImage
+            link={linkToMediaPage(id, type || MediaType.Anime)}
+            src={coverImage?.[imageSize]}
+            title={title?.romaji || 'no title'}
+          />
+        </figure>
+        {voiceActor && (
+          <figure className={styles.voiceActor}>
+            <CoverImage
+              link={linkToStaffPage(voiceActor.id)}
+              src={voiceActor.image?.large}
+              title={voiceActor.name?.full || 'no name'}
+            />
+          </figure>
+        )}
+      </div>
       <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
     </article>
   )
