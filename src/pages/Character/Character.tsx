@@ -4,7 +4,7 @@ import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinne
 import NavBar from '../../components/common/NavBar/NavBar'
 import PersonPageHeader from '../../components/common/PersonPageHeader/PersonPageHeader'
 import { useCharacterInfoQuery } from '../../generated/index'
-import styles from './Character.module.scss'
+import styles from '../personPage.module.scss'
 
 const Character = () => {
   const { id } = useParams<{ id: string }>()
