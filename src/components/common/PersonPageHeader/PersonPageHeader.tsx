@@ -28,11 +28,12 @@ const PersonPageHeader = ({ data }: Props) => {
           )}
         </div>
       </div>
-      <img
-        src={image?.large || NO_IMAGE_URL}
-        alt={name?.full || 'no image'}
-        className={styles.image}
-      />
+      <figure className={styles.image}>
+        <img
+          src={image?.large || NO_IMAGE_URL}
+          alt={name?.full || 'no image'}
+        />
+      </figure>
       <div className={styles.bio}>
         {infos.dateOfBirth &&
           Object.values(infos.dateOfBirth).every(val => val !== null) && (
