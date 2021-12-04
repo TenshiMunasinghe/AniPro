@@ -74,6 +74,7 @@ const Medias = () => {
                   index={parseInt(x.toString() + y.toString())}
                   key={m.node?.id.toString() + voiceActor.id.toString()}
                   imageSize='large'
+                  hasPopover={false}
                 />
               ) : null
             )
