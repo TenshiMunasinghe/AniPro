@@ -4,6 +4,7 @@ import Medias from '../../components/character/Medias/Medias'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
 import PersonPageHeader from '../../components/common/PersonPageHeader/PersonPageHeader'
+import Footer from '../../components/home/Footer/Footer'
 import { useCharacterInfoQuery } from '../../generated/index'
 import styles from '../personPage.module.scss'
 
@@ -24,6 +25,7 @@ const Character = () => {
         <PersonPageHeader data={data?.Character} />
         <Medias />
       </div>
+      <Footer />
     </>
   )
 }
