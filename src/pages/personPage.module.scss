@@ -1,9 +1,7 @@
 @use '../css/config.scss' as *;
 
 .container {
-  display: grid;
-  place-content: center;
-  row-gap: var(--space-600);
   @include page-padding;
   padding-top: 0;
+  @include gap($row: var(--space-600));
 }
