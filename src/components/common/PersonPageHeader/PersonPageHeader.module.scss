@@ -9,8 +9,7 @@
   @include mq(above, lg) {
     grid-template-areas:
       'cover names names'
-      'cover      bio   bio'
-      '.      bio   bio';
+      'cover bio bio';
     column-gap: var(--space-600);
 
     .names {
