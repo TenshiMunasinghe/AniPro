@@ -62,25 +62,28 @@ const Medias = () => {
           icon={{ type: FaSort, isLeft: true }}
         />
       </div>
-      {isLoading && <LoadingSpinner />}
-      {!isLoading && medias?.length && (
-        <div className={classnames(gridStyles.slider, gridStyles.cover)}>
-          {medias?.map((m, x) =>
-            m?.voiceActors?.map((voiceActor, y) =>
-              voiceActor ? (
-                <CardCover
-                  media={m?.node}
-                  voiceActor={voiceActor}
-                  index={parseInt(x.toString() + y.toString())}
-                  key={m.node?.id.toString() + voiceActor.id.toString()}
-                  imageSize='large'
-                  hasPopover={false}
-                />
-              ) : null
-            )
-          )}
-        </div>
-      )}
+      <div className={classnames(styles.cardContainer)}>
+        {isLoading && <LoadingSpinner />}
+
+        {!isLoading && medias?.length && (
+          <div className={classnames(gridStyles.slider, gridStyles.cover)}>
+            {medias?.map((m, x) =>
+              m?.voiceActors?.map((voiceActor, y) =>
+                voiceActor ? (
+                  <CardCover
+                    media={m?.node}
+                    voiceActor={voiceActor}
+                    index={parseInt(x.toString() + y.toString())}
+                    key={m.node?.id.toString() + voiceActor.id.toString()}
+                    imageSize='large'
+                    hasPopover={false}
+                  />
+                ) : null
+              )
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
