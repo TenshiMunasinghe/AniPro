@@ -8,7 +8,7 @@ query staffInfo($id: Int!) {
     image {
       large
     }
-    description(asHtml: true)
+    description
     gender
     dateOfBirth {
       year

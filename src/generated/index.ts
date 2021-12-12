@@ -1159,6 +1159,8 @@ export type Media = {
   studios?: Maybe<StudioConnection>;
   /** If the media is marked as favourite by the current authenticated user */
   isFavourite: Scalars['Boolean'];
+  /** If the media is blocked from being added to favourites */
+  isFavouriteBlocked: Scalars['Boolean'];
   /** If the media is intended only for 18+ adult audiences */
   isAdult?: Maybe<Scalars['Boolean']>;
   /** The media's next episode airing schedule */
@@ -2409,6 +2411,7 @@ export type MutationSaveThreadCommentArgs = {
   threadId?: Maybe<Scalars['Int']>;
   parentCommentId?: Maybe<Scalars['Int']>;
   comment?: Maybe<Scalars['String']>;
+  locked?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4011,6 +4014,8 @@ export type ThreadComment = {
   likes?: Maybe<Array<Maybe<User>>>;
   /** The comment's child reply comments */
   childComments?: Maybe<Scalars['Json']>;
+  /** If the comment tree is locked and may not receive replies or edits */
+  isLocked?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5430,7 +5435,7 @@ export const StaffInfoDocument = `
     image {
       large
     }
-    description(asHtml: true)
+    description
     gender
     dateOfBirth {
       year
