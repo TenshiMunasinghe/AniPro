@@ -38,9 +38,8 @@ const CardChart = ({
             <header className={styles.cardHeader}>
               <div className={styles.title}>
                 <Title
-                  id={id}
+                  link={linkToMediaPage(id, type || MediaType.Anime)}
                   text={title?.romaji || 'no title'}
-                  type={type || null}
                 />
                 <h4 className={styles.secondaryTitle}>
                   {title?.english || title?.romaji || 'no title'}

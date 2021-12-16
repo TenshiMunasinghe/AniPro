@@ -67,9 +67,8 @@ const CardTable = ({
         <div className={styles.content}>
           <div className={styles.header}>
             <Title
-              id={id}
+              link={linkToMediaPage(id, type || MediaType.Anime)}
               text={title?.romaji || 'no title'}
-              type={type || null}
             />
             <Genres
               as='section'

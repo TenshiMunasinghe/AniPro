@@ -42,7 +42,10 @@ const Content = ({
           </figure>
         )}
       </div>
-      <Title id={id} text={title?.romaji || 'no title'} type={type || null} />
+      <Title
+        link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
+        text={title?.romaji || 'no title'}
+      />
     </article>
   )
 }

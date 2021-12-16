@@ -55,9 +55,8 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         <div className={styles.content}>
           <div>
             <Title
-              id={media.id}
+              link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
               text={media?.title?.romaji || 'no title'}
-              type={media.type || null}
             />
             <div className={styles.description}>
               <Description description={media.description} />
