@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react'
 import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
+import { linkToStaffPage } from '../../../App'
 import { sortByOptions } from '../../../filterOptions/filterOptions'
 import {
   MediaSort,
@@ -72,11 +73,15 @@ const Medias = () => {
                 voiceActor ? (
                   <CardCover
                     media={m?.node}
-                    voiceActor={voiceActor}
                     index={parseInt(x.toString() + y.toString())}
                     key={m.node?.id.toString() + voiceActor.id.toString()}
                     imageSize='large'
                     hasPopover={false}
+                    subContent={{
+                      link: linkToStaffPage(voiceActor.id),
+                      image: voiceActor.image?.large,
+                      title: voiceActor.name?.full,
+                    }}
                   />
                 ) : null
               )

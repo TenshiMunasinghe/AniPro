@@ -17,7 +17,7 @@
   }
 
   .cover,
-  .voiceActor {
+  .subContent {
     display: flex;
 
     & > a {
@@ -25,7 +25,7 @@
     }
   }
 
-  .voiceActor {
+  .subContent {
     position: absolute;
     bottom: 0;
     right: 0;

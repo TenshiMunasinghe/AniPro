@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { linkToMediaPage, linkToStaffPage } from '../../../../../App'
+import { linkToMediaPage } from '../../../../../App'
 import { MediaType } from '../../../../../generated'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
@@ -11,7 +11,7 @@ const Content = ({
   media,
   rank,
   imageSize,
-  voiceActor,
+  subContent,
 }: Omit<CardCoverProps, 'index' | 'hadPopover'>) => {
   if (!media) return null
 
@@ -32,12 +32,12 @@ const Content = ({
             title={title?.romaji || 'no title'}
           />
         </figure>
-        {voiceActor && (
-          <figure className={styles.voiceActor}>
+        {subContent && (
+          <figure className={styles.subContent}>
             <CoverImage
-              link={linkToStaffPage(voiceActor.id)}
-              src={voiceActor.image?.large}
-              title={voiceActor.name?.full || 'no name'}
+              link={subContent.link}
+              src={subContent.image}
+              title={subContent.title || 'no name'}
             />
           </figure>
         )}
