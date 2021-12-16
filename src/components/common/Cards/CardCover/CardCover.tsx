@@ -1,12 +1,19 @@
 import { memo, useState } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { imageSize } from '../../../../api/queries'
-import { Media } from '../../../../generated'
+import { linkToMediaPage } from '../../../../App'
+import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { ImageSize } from '../../CardGrid/CardGrid'
 import styles from './CardCover.module.scss'
 import Content from './Content/Content'
 import Popover from './Popover/Popover'
+
+export interface CardCoverContent {
+  link?: string
+  image?: string | null
+  title?: string | null
+}
 
 export interface CardCoverProps {
   index: number
@@ -42,9 +49,12 @@ const CardCover = ({
       )}>
       <Content
         rank={rank}
-        media={media}
-        imageSize={imageSize}
-        subContent={subContent}
+        main={{
+          link: linkToMediaPage(media.id, media.type || MediaType.Anime),
+          title: media.title?.romaji,
+          image: media.coverImage?.[imageSize],
+        }}
+        sub={subContent}
       />
       {hasPopover && (
         <Popover index={index} isVisible={isPopoverVisible} media={media} />

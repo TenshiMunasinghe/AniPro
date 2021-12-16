@@ -1,22 +1,17 @@
 import React, { memo } from 'react'
-import { linkToMediaPage } from '../../../../../App'
-import { MediaType } from '../../../../../generated'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title/Title'
 import Rank from '../../components/Rank/Rank'
-import { CardCoverProps } from '../CardCover'
+import { CardCoverContent } from '../CardCover'
 import styles from './Content.module.scss'
 
-const Content = ({
-  media,
-  rank,
-  imageSize,
-  subContent,
-}: Omit<CardCoverProps, 'index' | 'hadPopover'>) => {
-  if (!media) return null
+interface Props {
+  main: CardCoverContent
+  sub?: CardCoverContent
+  rank?: number | null
+}
 
-  const { id, coverImage, title, type } = media
-
+const Content = ({ main, sub, rank }: Props) => {
   return (
     <article className={styles.container}>
       {rank && (
@@ -27,25 +22,22 @@ const Content = ({
       <div className={styles.images}>
         <figure className={styles.cover}>
           <CoverImage
-            link={linkToMediaPage(id, type || MediaType.Anime)}
-            src={coverImage?.[imageSize]}
-            title={title?.romaji || 'no title'}
+            link={main.link}
+            src={main.image}
+            title={main.title || 'no title'}
           />
         </figure>
-        {subContent && (
+        {sub && (
           <figure className={styles.subContent}>
             <CoverImage
-              link={subContent.link}
-              src={subContent.image}
-              title={subContent.title || 'no name'}
+              link={sub.link}
+              src={sub.image}
+              title={sub.title || 'no name'}
             />
           </figure>
         )}
       </div>
-      <Title
-        link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
-        text={title?.romaji || 'no title'}
-      />
+      <Title link={main.link} text={main.title || 'no title'} />
     </article>
   )
 }
