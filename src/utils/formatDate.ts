@@ -19,8 +19,6 @@ export const formatDate = ({
 
   const arr = string.split(' ')
 
-  console.log(string, year, month, day)
-
   if (!month) {
     arr[0] = ''
   }
