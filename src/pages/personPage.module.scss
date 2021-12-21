@@ -3,5 +3,5 @@
 .container {
   @include page-padding;
   padding-top: 0;
-  @include gap($row: var(--space-600));
+  @include gap($column: var(--space-600));
 }
