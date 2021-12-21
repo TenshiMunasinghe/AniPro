@@ -13,16 +13,18 @@ export const formatDate = ({
   month?: number | null
   day?: number | null
 }) => {
-  const string = new Date(year || 0, (month || 0) - 1, day || 0)
+  const string = new Date(year || 0, month || 0, day || 0)
     .toLocaleDateString('en-US', dateFormat)
     .replaceAll(',', '')
 
   const arr = string.split(' ')
 
-  if (!day) {
+  console.log(string, year, month, day)
+
+  if (!month) {
     arr[0] = ''
   }
-  if (!month) {
+  if (!day) {
     arr[1] = ''
   }
   if (!year) {
