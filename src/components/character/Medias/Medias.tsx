@@ -1,16 +1,13 @@
 import classnames from 'classnames'
-import { useCallback, useState } from 'react'
 import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { languageOptions } from '../../../api/queries'
 import { linkToStaffPage } from '../../../App'
 import { sortByOptions } from '../../../filterOptions/filterOptions'
-import {
-  MediaSort,
-  StaffLanguage,
-  useCharacterMediaQuery,
-} from '../../../generated/index'
+import { useCharacterMediaQuery } from '../../../generated/index'
+import { useSortMedia } from '../../../hooks/useSortMedia'
+import { useVALanguage } from '../../../hooks/useVALanguage'
 import gridStyles from '../../common/CardGrid/CardGrid.module.scss'
 import CardCover from '../../common/Cards/CardCover/CardCover'
 import Dropdown from '../../common/Dropdown/Dropdown'
@@ -19,27 +16,15 @@ import styles from './Medias.module.scss'
 
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
-  const [sortBy, setSortBy] = useState<MediaSort | MediaSort[]>(
-    MediaSort.PopularityDesc
-  )
 
-  const [language, setLanguage] = useState<StaffLanguage>(
-    StaffLanguage.Japanese
-  )
+  const { sortBy, sortByOnChange } = useSortMedia()
+  const { language, languageOnChange } = useVALanguage()
 
   const { data, isLoading } = useCharacterMediaQuery(gqlRequestClient, {
     sort: sortBy,
     id: parseInt(id),
     language,
   })
-
-  const sortByOnChange = useCallback((value: string | string[]) => {
-    setSortBy(value as MediaSort | MediaSort[])
-  }, [])
-
-  const languageOnChange = useCallback((value: string | string[]) => {
-    setLanguage(value as StaffLanguage)
-  }, [])
 
   const medias = data?.Character?.media?.edges
 
