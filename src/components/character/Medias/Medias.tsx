@@ -3,13 +3,13 @@ import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { languageOptions } from '../../../api/queries'
-import { linkToStaffPage } from '../../../App'
+import { linkToMediaPage, linkToStaffPage } from '../../../App'
 import { sortByOptions } from '../../../filterOptions/filterOptions'
-import { useCharacterMediaQuery } from '../../../generated/index'
+import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import gridStyles from '../../common/CardGrid/CardGrid.module.scss'
-import CardCover from '../../common/Cards/CardCover/CardCover'
+import Card from '../../common/Cards/CardCover/Content/Content'
 import Dropdown from '../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import styles from './Medias.module.scss'
@@ -49,23 +49,28 @@ const Medias = () => {
 
         {!isLoading && edges?.length && (
           <div className={classnames(gridStyles.slider, gridStyles.cover)}>
-            {edges?.map((edge, x) =>
-              edge?.voiceActors?.map((voiceActor, y) =>
-                voiceActor ? (
-                  <CardCover
-                    media={edge?.node}
-                    index={parseInt(x.toString() + y.toString())}
-                    key={edge.id}
-                    imageSize='large'
-                    hasPopover={false}
-                    subContent={{
+            {edges?.map(edge =>
+              edge?.voiceActors?.map(voiceActor => {
+                const media = edge.node
+                return voiceActor ? (
+                  <Card
+                    key={edge.id?.toString() + voiceActor.id.toString()}
+                    main={{
+                      link: linkToMediaPage(
+                        media?.id,
+                        media?.type || MediaType.Anime
+                      ),
+                      image: media?.coverImage?.large,
+                      title: media?.title?.romaji,
+                    }}
+                    sub={{
                       link: linkToStaffPage(voiceActor.id),
                       image: voiceActor.image?.large,
                       title: voiceActor.name?.full,
                     }}
                   />
                 ) : null
-              )
+              })
             )}
           </div>
         )}
