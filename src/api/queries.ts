@@ -1,5 +1,5 @@
 import _ky from 'ky'
-import { MediaSeason } from '../generated/index'
+import { MediaSeason, StaffLanguage } from '../generated/index'
 
 const dateNow = new Date()
 const dateNext = new Date(
@@ -42,3 +42,10 @@ export const imageSize = 'large'
 
 export const NO_IMAGE_URL =
   'https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/default.jpg'
+
+export const languageOptions = Object.entries(StaffLanguage).map(
+  ([key, value]) => ({
+    label: key,
+    value,
+  })
+)

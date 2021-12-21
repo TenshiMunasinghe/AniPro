@@ -3,6 +3,7 @@ import { useCallback, useState } from 'react'
 import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
+import { languageOptions } from '../../../api/queries'
 import { linkToStaffPage } from '../../../App'
 import { sortByOptions } from '../../../filterOptions/filterOptions'
 import {
@@ -15,11 +16,6 @@ import CardCover from '../../common/Cards/CardCover/CardCover'
 import Dropdown from '../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import styles from './Medias.module.scss'
-
-const languageOptions = Object.entries(StaffLanguage).map(([key, value]) => ({
-  label: key,
-  value,
-}))
 
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
