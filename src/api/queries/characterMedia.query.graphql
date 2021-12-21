@@ -6,6 +6,7 @@ query characterMedia(
   Character(id: $id) {
     media(sort: $sort) {
       edges {
+        id
         node {
           ...cardCoverInfo
         }

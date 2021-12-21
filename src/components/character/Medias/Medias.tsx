@@ -26,7 +26,7 @@ const Medias = () => {
     language,
   })
 
-  const medias = data?.Character?.media?.edges
+  const edges = data?.Character?.media?.edges
 
   return (
     <div className={styles.container}>
@@ -47,15 +47,15 @@ const Medias = () => {
       <div className={classnames(styles.cardContainer)}>
         {isLoading && <LoadingSpinner />}
 
-        {!isLoading && medias?.length && (
+        {!isLoading && edges?.length && (
           <div className={classnames(gridStyles.slider, gridStyles.cover)}>
-            {medias?.map((m, x) =>
-              m?.voiceActors?.map((voiceActor, y) =>
+            {edges?.map((edge, x) =>
+              edge?.voiceActors?.map((voiceActor, y) =>
                 voiceActor ? (
                   <CardCover
-                    media={m?.node}
+                    media={edge?.node}
                     index={parseInt(x.toString() + y.toString())}
-                    key={m.node?.id.toString() + voiceActor.id.toString()}
+                    key={edge.id}
                     imageSize='large'
                     hasPopover={false}
                     subContent={{

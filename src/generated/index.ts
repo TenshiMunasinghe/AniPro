@@ -4681,7 +4681,7 @@ export type CharacterMediaQueryVariables = Exact<{
 }>;
 
 
-export type CharacterMediaQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', media?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+export type CharacterMediaQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', media?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
 export type SearchCharactersQueryVariables = Exact<{
   isBirthday?: Maybe<Scalars['Boolean']>;
@@ -4726,6 +4726,22 @@ export type StaffInfoQueryVariables = Exact<{
 
 
 export type StaffInfoQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', description?: Maybe<string>, gender?: Maybe<string>, age?: Maybe<number>, yearsActive?: Maybe<Array<Maybe<number>>>, homeTown?: Maybe<string>, bloodType?: Maybe<string>, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string>, native?: Maybe<string>, alternative?: Maybe<Array<Maybe<string>>> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }>, dateOfBirth?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }>, dateOfDeath?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number>, month?: Maybe<number>, day?: Maybe<number> }> }> };
+
+export type StaffMediaCharacterQueryVariables = Exact<{
+  id: Scalars['Int'];
+  sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+}>;
+
+
+export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, characterRole?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+
+export type StaffMediaRoleQueryVariables = Exact<{
+  id: Scalars['Int'];
+  sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+}>;
+
+
+export type StaffMediaRoleQuery = { __typename?: 'Query', anime?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }>, manga?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
 
 export type StaffRoleQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -5229,6 +5245,7 @@ export const CharacterMediaDocument = `
   Character(id: $id) {
     media(sort: $sort) {
       edges {
+        id
         node {
           ...cardCoverInfo
         }
@@ -5470,6 +5487,90 @@ export const useStaffInfoQuery = <
 useStaffInfoQuery.document = StaffInfoDocument;
 
 useStaffInfoQuery.getKey = (variables: StaffInfoQueryVariables) => ['staffInfo', variables];
+
+export const StaffMediaCharacterDocument = `
+    query staffMediaCharacter($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  Staff(id: $id) {
+    characterMedia(sort: $sort) {
+      edges {
+        id
+        node {
+          ...cardCoverInfo
+        }
+        characterRole
+        characters {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}
+    ${CardCoverInfoFragmentDoc}`;
+export const useStaffMediaCharacterQuery = <
+      TData = StaffMediaCharacterQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: StaffMediaCharacterQueryVariables, 
+      options?: UseQueryOptions<StaffMediaCharacterQuery, TError, TData>
+    ) => 
+    useQuery<StaffMediaCharacterQuery, TError, TData>(
+      ['staffMediaCharacter', variables],
+      fetcher<StaffMediaCharacterQuery, StaffMediaCharacterQueryVariables>(client, StaffMediaCharacterDocument, variables),
+      options
+    );
+useStaffMediaCharacterQuery.document = StaffMediaCharacterDocument;
+
+useStaffMediaCharacterQuery.getKey = (variables: StaffMediaCharacterQueryVariables) => ['staffMediaCharacter', variables];
+
+export const StaffMediaRoleDocument = `
+    query staffMediaRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  anime: Staff(id: $id) {
+    staffMedia(sort: $sort, type: ANIME) {
+      edges {
+        id
+        staffRole
+        node {
+          ...cardCoverInfo
+        }
+      }
+    }
+  }
+  manga: Staff(id: $id) {
+    staffMedia(sort: $sort, type: MANGA) {
+      edges {
+        id
+        staffRole
+        node {
+          ...cardCoverInfo
+        }
+      }
+    }
+  }
+}
+    ${CardCoverInfoFragmentDoc}`;
+export const useStaffMediaRoleQuery = <
+      TData = StaffMediaRoleQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: StaffMediaRoleQueryVariables, 
+      options?: UseQueryOptions<StaffMediaRoleQuery, TError, TData>
+    ) => 
+    useQuery<StaffMediaRoleQuery, TError, TData>(
+      ['staffMediaRole', variables],
+      fetcher<StaffMediaRoleQuery, StaffMediaRoleQueryVariables>(client, StaffMediaRoleDocument, variables),
+      options
+    );
+useStaffMediaRoleQuery.document = StaffMediaRoleDocument;
+
+useStaffMediaRoleQuery.getKey = (variables: StaffMediaRoleQueryVariables) => ['staffMediaRole', variables];
 
 export const StaffRoleDocument = `
     query staffRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
