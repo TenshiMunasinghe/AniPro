@@ -20,14 +20,14 @@ export const formatDate = ({
   const arr = string.split(' ')
 
   if (!day) {
-    arr.splice(0, 1)
+    arr[0] = ''
   }
   if (!month) {
-    arr.splice(1, 1)
+    arr[1] = ''
   }
   if (!year) {
-    arr.splice(2, 1)
+    arr[2] = ''
   }
 
-  return arr.join(' ')
+  return arr.filter(item => item).join(' ')
 }
