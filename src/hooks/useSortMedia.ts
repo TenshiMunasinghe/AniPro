@@ -5,7 +5,7 @@ type SortParameter = MediaSort | MediaSort[]
 
 export const useSortMedia = (defaultSort?: SortParameter) => {
   const [sortBy, setSortBy] = useState<SortParameter>(
-    defaultSort || MediaSort.PopularityDesc
+    defaultSort || MediaSort.StartDateDesc
   )
 
   const sortByOnChange = useCallback((value: string | string[]) => {
