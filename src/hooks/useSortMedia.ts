@@ -1,13 +1,15 @@
 import { useCallback, useState } from 'react'
 import { MediaSort } from '../generated'
 
-export const useSortMedia = () => {
-  const [sortBy, setSortBy] = useState<MediaSort | MediaSort[]>(
-    MediaSort.PopularityDesc
+type SortParameter = MediaSort | MediaSort[]
+
+export const useSortMedia = (defaultSort?: SortParameter) => {
+  const [sortBy, setSortBy] = useState<SortParameter>(
+    defaultSort || MediaSort.PopularityDesc
   )
 
   const sortByOnChange = useCallback((value: string | string[]) => {
-    setSortBy(value as MediaSort | MediaSort[])
+    setSortBy(value as SortParameter)
   }, [])
 
   return { sortBy, sortByOnChange }
