@@ -1,7 +1,11 @@
 import styles from './NotFound.module.scss'
 
-const NotFound = () => {
-  return <div className={styles.wrapper}>Not Found {'><'}</div>
+interface Props {
+  text?: string
+}
+
+const NotFound = ({ text = 'Not Found ><' }: Props) => {
+  return <div className={styles.wrapper}>{text}</div>
 }
 
 export default NotFound
