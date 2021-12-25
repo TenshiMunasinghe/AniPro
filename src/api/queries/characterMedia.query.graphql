@@ -1,8 +1,4 @@
-query characterMedia(
-  $id: Int!
-  $sort: [MediaSort] = [START_DATE_DESC]
-  $language: StaffLanguage = JAPANESE
-) {
+query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
   Character(id: $id) {
     media(sort: $sort) {
       edges {
@@ -10,7 +6,7 @@ query characterMedia(
         node {
           ...cardCoverInfo
         }
-        voiceActors(language: $language, sort: [FAVOURITES_DESC]) {
+        voiceActors(sort: [FAVOURITES_DESC]) {
           id
           name {
             full
@@ -18,6 +14,7 @@ query characterMedia(
           image {
             large
           }
+          languageV2
         }
       }
     }

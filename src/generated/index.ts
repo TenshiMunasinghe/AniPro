@@ -4677,11 +4677,10 @@ export type CharacterInfoQuery = { __typename?: 'Query', Character?: Maybe<{ __t
 export type CharacterMediaQueryVariables = Exact<{
   id: Scalars['Int'];
   sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
-  language?: Maybe<StaffLanguage>;
 }>;
 
 
-export type CharacterMediaQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', media?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+export type CharacterMediaQuery = { __typename?: 'Query', Character?: Maybe<{ __typename?: 'Character', media?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, voiceActors?: Maybe<Array<Maybe<{ __typename?: 'Staff', id: number, languageV2?: Maybe<string>, name?: Maybe<{ __typename?: 'StaffName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'StaffImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
 export type SearchCharactersQueryVariables = Exact<{
   isBirthday?: Maybe<Scalars['Boolean']>;
@@ -5241,7 +5240,7 @@ useCharacterInfoQuery.document = CharacterInfoDocument;
 useCharacterInfoQuery.getKey = (variables: CharacterInfoQueryVariables) => ['characterInfo', variables];
 
 export const CharacterMediaDocument = `
-    query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC], $language: StaffLanguage = JAPANESE) {
+    query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
   Character(id: $id) {
     media(sort: $sort) {
       edges {
@@ -5249,7 +5248,7 @@ export const CharacterMediaDocument = `
         node {
           ...cardCoverInfo
         }
-        voiceActors(language: $language, sort: [FAVOURITES_DESC]) {
+        voiceActors(sort: [FAVOURITES_DESC]) {
           id
           name {
             full
@@ -5257,6 +5256,7 @@ export const CharacterMediaDocument = `
           image {
             large
           }
+          languageV2
         }
       }
     }

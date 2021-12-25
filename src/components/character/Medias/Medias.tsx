@@ -1,8 +1,10 @@
 import classnames from 'classnames'
+import toUpper from 'lodash/toUpper'
+import uniq from 'lodash/uniq'
+import { useMemo } from 'react'
 import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
-import { languageOptions } from '../../../api/queries'
 import { linkToMediaPage, linkToStaffPage } from '../../../App'
 import { sortByOptions } from '../../../filterOptions/filterOptions'
 import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
@@ -23,10 +25,27 @@ const Medias = () => {
   const { data, isLoading } = useCharacterMediaQuery(gqlRequestClient, {
     sort: sortBy,
     id: parseInt(id),
-    language,
   })
 
-  const edges = data?.Character?.media?.edges
+  const languageOptions = useMemo(() => {
+    const languages = uniq(
+      data?.Character?.media?.edges?.flatMap(media =>
+        media?.voiceActors?.flatMap(va => va?.languageV2)
+      )
+    )
+
+    return languages.map(value => ({
+      label: value || '',
+      value: toUpper(value || ''),
+    }))
+  }, [data])
+
+  const edges = data?.Character?.media?.edges?.map(media => ({
+    ...media,
+    voiceActors: media?.voiceActors?.filter(
+      va => toUpper(va?.languageV2 || '') === language
+    ),
+  }))
 
   return (
     <div className={styles.container}>
@@ -49,10 +68,30 @@ const Medias = () => {
 
         {!isLoading && edges?.length && (
           <div className={classnames(gridStyles.slider, gridStyles.cover)}>
-            {edges?.map(edge =>
-              edge?.voiceActors?.map(voiceActor => {
-                const media = edge.node
-                return voiceActor ? (
+            {edges?.map(edge => {
+              const media = edge.node
+              const voiceActors = edge?.voiceActors
+
+              //display media without voice actor/actress if there are't any
+              if (voiceActors?.length === 0) {
+                return (
+                  <Card
+                    key={edge.id?.toString()}
+                    main={{
+                      link: linkToMediaPage(
+                        media?.id,
+                        media?.type || MediaType.Anime
+                      ),
+                      image: media?.coverImage?.large,
+                      title: media?.title?.romaji,
+                    }}
+                  />
+                )
+              }
+
+              return edge?.voiceActors?.map(voiceActor => {
+                if (!voiceActor) return null
+                return (
                   <Card
                     key={edge.id?.toString() + voiceActor.id.toString()}
                     main={{
@@ -63,15 +102,19 @@ const Medias = () => {
                       image: media?.coverImage?.large,
                       title: media?.title?.romaji,
                     }}
-                    sub={{
-                      link: linkToStaffPage(voiceActor.id),
-                      image: voiceActor.image?.large,
-                      title: voiceActor.name?.full,
-                    }}
+                    sub={
+                      voiceActor
+                        ? {
+                            link: linkToStaffPage(voiceActor.id),
+                            image: voiceActor.image?.large,
+                            title: voiceActor.name?.full,
+                          }
+                        : undefined
+                    }
                   />
-                ) : null
+                )
               })
-            )}
+            })}
           </div>
         )}
       </div>
