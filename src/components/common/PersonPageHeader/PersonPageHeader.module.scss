@@ -11,6 +11,7 @@
       'cover names names'
       'cover bio bio';
     column-gap: var(--space-600);
+    justify-content: flex-start;
 
     .names {
       grid-area: names;
