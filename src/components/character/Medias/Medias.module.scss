@@ -1,6 +1,8 @@
 @use '../../../css/config.scss' as *;
 
 .container {
+  @include gap($column: var(--space-500));
+
   .dropdowns {
     display: flex;
     justify-content: flex-end;
@@ -9,5 +11,6 @@
 
   .cardContainer {
     min-height: 800px;
+    @include gap($column: var(--space-500));
   }
 }
