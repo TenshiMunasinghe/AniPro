@@ -4732,7 +4732,7 @@ export type StaffMediaCharacterQueryVariables = Exact<{
 }>;
 
 
-export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, characterRole?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, characterRole?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
 export type StaffMediaRoleQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -4740,7 +4740,7 @@ export type StaffMediaRoleQueryVariables = Exact<{
 }>;
 
 
-export type StaffMediaRoleQuery = { __typename?: 'Query', anime?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }>, manga?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
+export type StaffMediaRoleQuery = { __typename?: 'Query', anime?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }>, manga?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
 
 export type StaffRoleQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -5496,6 +5496,9 @@ export const StaffMediaCharacterDocument = `
         id
         node {
           ...cardCoverInfo
+          startDate {
+            year
+          }
         }
         characterRole
         characters {
@@ -5538,6 +5541,9 @@ export const StaffMediaRoleDocument = `
         staffRole
         node {
           ...cardCoverInfo
+          startDate {
+            year
+          }
         }
       }
     }
@@ -5549,6 +5555,9 @@ export const StaffMediaRoleDocument = `
         staffRole
         node {
           ...cardCoverInfo
+          startDate {
+            year
+          }
         }
       }
     }

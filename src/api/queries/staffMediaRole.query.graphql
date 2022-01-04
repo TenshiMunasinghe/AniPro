@@ -1,0 +1,31 @@
+query staffMediaRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  anime: Staff(id: $id) {
+    staffMedia(sort: $sort, type: ANIME) {
+      edges {
+        id
+        staffRole
+        node {
+          ...cardCoverInfo
+          startDate {
+            year
+          }
+        }
+      }
+    }
+  }
+
+  manga: Staff(id: $id) {
+    staffMedia(sort: $sort, type: MANGA) {
+      edges {
+        id
+        staffRole
+        node {
+          ...cardCoverInfo
+          startDate {
+            year
+          }
+        }
+      }
+    }
+  }
+}
