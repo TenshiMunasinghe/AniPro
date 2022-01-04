@@ -6,8 +6,11 @@ import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { linkToMediaPage, linkToStaffPage } from '../../../App'
-import { sortByOptions } from '../../../filterOptions/filterOptions'
-import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
+import {
+  MediaSort,
+  MediaType,
+  useCharacterMediaQuery,
+} from '../../../generated/index'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import gridStyles from '../../common/CardGrid/CardGrid.module.scss'
@@ -16,6 +19,14 @@ import Dropdown from '../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import styles from './Medias.module.scss'
 
+export const sortByOptions = [
+  { label: 'Popularity', value: MediaSort.PopularityDesc },
+  { label: 'Average Score', value: MediaSort.ScoreDesc },
+  { label: 'Favourites', value: MediaSort.FavouritesDesc },
+  { label: 'Newest', value: MediaSort.StartDateDesc },
+  { label: 'Oldest', value: MediaSort.StartDate },
+  { label: 'Title', value: MediaSort.TitleRomaji },
+]
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
 

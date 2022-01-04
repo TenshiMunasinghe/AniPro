@@ -2,7 +2,6 @@ import classnames from 'classnames'
 import React, { useCallback, useState } from 'react'
 import { FaSort } from 'react-icons/fa'
 import gqlRequestClient from '../../../../api/graphqlClient'
-import { sortByOptions } from '../../../../filterOptions/filterOptions'
 import {
   MediaSort,
   MediaType,
@@ -31,6 +30,14 @@ export type CardType = 'chart' | 'cover' | 'table'
 const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
 
 const cardTypes = addKey(CARD_TYPES)
+
+export const sortByOptions = [
+  { label: 'Trending', value: MediaSort.TrendingDesc },
+  { label: 'Popularity', value: MediaSort.PopularityDesc },
+  { label: 'Average Score', value: MediaSort.ScoreDesc },
+  { label: 'Favourites', value: MediaSort.FavouritesDesc },
+  { label: 'Newest', value: MediaSort.StartDateDesc },
+]
 
 const MediaSearchResult = ({ type }: Props) => {
   const [cardType, setCardType] = useState<CardType>('chart')
