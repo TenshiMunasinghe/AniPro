@@ -20,7 +20,11 @@ const PersonPageHeader = ({ data }: Props) => {
       <div className={styles.names}>
         <h5 className={styles.mainName}>{name?.full}</h5>
         <div className={styles.otherNames}>
-          <span>{[name.native, ...(name.alternative || [])].join(', ')}</span>
+          <span>
+            {[name.native, ...(name.alternative || [])]
+              .filter(name => name)
+              .join(', ')}
+          </span>
           {Object.values(spoilerNames).map(alterNativeSpoiler =>
             alterNativeSpoiler.map((name: string) => (
               <SpoilerName key={name} name={name} />
