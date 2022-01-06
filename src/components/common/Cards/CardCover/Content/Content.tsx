@@ -37,7 +37,10 @@ const Content = ({ main, sub, rank }: Props) => {
           </figure>
         )}
       </div>
-      <Title link={main.link} text={main.title || 'no title'} />
+      <div className={styles.text}>
+        <Title link={main.link} text={main.title || 'no title'} />
+        <Title link={sub?.link} text={sub?.title || ''} />
+      </div>
     </article>
   )
 }

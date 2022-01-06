@@ -16,6 +16,13 @@
     height: fit-content;
   }
 
+  .text {
+    & > *:last-child {
+      font-size: var(--text-size-300);
+      color: var(--color-text-500);
+    }
+  }
+
   .cover,
   .subContent {
     display: flex;
