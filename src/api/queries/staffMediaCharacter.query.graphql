@@ -1,6 +1,14 @@
-query staffMediaCharacter($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+query staffMediaCharacter(
+  $id: Int!
+  $sort: [MediaSort] = [START_DATE_DESC]
+  $page: Int!
+) {
   Staff(id: $id) {
-    characterMedia(sort: $sort) {
+    characterMedia(sort: $sort, page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
       edges {
         id
         node {

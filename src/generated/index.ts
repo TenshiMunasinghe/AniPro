@@ -4729,10 +4729,11 @@ export type StaffInfoQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?
 export type StaffMediaCharacterQueryVariables = Exact<{
   id: Scalars['Int'];
   sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+  page: Scalars['Int'];
 }>;
 
 
-export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, characterRole?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
+export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean> }>, edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, characterRole?: Maybe<CharacterRole>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
 export type StaffMediaRoleQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -5489,9 +5490,13 @@ useStaffInfoQuery.document = StaffInfoDocument;
 useStaffInfoQuery.getKey = (variables: StaffInfoQueryVariables) => ['staffInfo', variables];
 
 export const StaffMediaCharacterDocument = `
-    query staffMediaCharacter($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+    query staffMediaCharacter($id: Int!, $sort: [MediaSort] = [START_DATE_DESC], $page: Int!) {
   Staff(id: $id) {
-    characterMedia(sort: $sort) {
+    characterMedia(sort: $sort, page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
       edges {
         id
         node {
