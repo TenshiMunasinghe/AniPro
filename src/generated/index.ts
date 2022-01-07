@@ -4751,6 +4751,13 @@ export type StaffRoleQueryVariables = Exact<{
 
 export type StaffRoleQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>>> }>, characterMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }>, characters?: Maybe<Array<Maybe<{ __typename?: 'Character', id: number, name?: Maybe<{ __typename?: 'CharacterName', full?: Maybe<string> }>, image?: Maybe<{ __typename?: 'CharacterImage', large?: Maybe<string> }> }>>> }>>> }> }> };
 
+export type StaffRoleCountsQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type StaffRoleCountsQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', characterMedia?: Maybe<{ __typename?: 'MediaConnection', pageInfo?: Maybe<{ __typename?: 'PageInfo', total?: Maybe<number> }> }>, staffMedia?: Maybe<{ __typename?: 'MediaConnection', pageInfo?: Maybe<{ __typename?: 'PageInfo', total?: Maybe<number> }> }> }> };
+
 export const CardCoverInfoFragmentDoc = `
     fragment cardCoverInfo on Media {
   id
@@ -5630,6 +5637,39 @@ export const useStaffRoleQuery = <
 useStaffRoleQuery.document = StaffRoleDocument;
 
 useStaffRoleQuery.getKey = (variables: StaffRoleQueryVariables) => ['staffRole', variables];
+
+export const StaffRoleCountsDocument = `
+    query staffRoleCounts($id: Int!) {
+  Staff(id: $id) {
+    characterMedia {
+      pageInfo {
+        total
+      }
+    }
+    staffMedia {
+      pageInfo {
+        total
+      }
+    }
+  }
+}
+    `;
+export const useStaffRoleCountsQuery = <
+      TData = StaffRoleCountsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: StaffRoleCountsQueryVariables, 
+      options?: UseQueryOptions<StaffRoleCountsQuery, TError, TData>
+    ) => 
+    useQuery<StaffRoleCountsQuery, TError, TData>(
+      ['staffRoleCounts', variables],
+      fetcher<StaffRoleCountsQuery, StaffRoleCountsQueryVariables>(client, StaffRoleCountsDocument, variables),
+      options
+    );
+useStaffRoleCountsQuery.document = StaffRoleCountsDocument;
+
+useStaffRoleCountsQuery.getKey = (variables: StaffRoleCountsQueryVariables) => ['staffRoleCounts', variables];
 
 
       export interface PossibleTypesResultData {

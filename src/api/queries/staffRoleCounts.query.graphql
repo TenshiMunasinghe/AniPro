@@ -1,0 +1,14 @@
+query staffRoleCounts($id: Int!) {
+  Staff(id: $id) {
+    characterMedia {
+      pageInfo {
+        total
+      }
+    }
+    staffMedia {
+      pageInfo {
+        total
+      }
+    }
+  }
+}
