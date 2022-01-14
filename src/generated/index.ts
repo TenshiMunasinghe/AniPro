@@ -2833,7 +2833,7 @@ export type PageLikesArgs = {
 
 export type PageInfo = {
   __typename?: 'PageInfo';
-  /** The total number of items */
+  /** The total number of items. Note: This value is not guaranteed to be accurate, do not rely on this for logic */
   total?: Maybe<Scalars['Int']>;
   /** The count on a page */
   perPage?: Maybe<Scalars['Int']>;
@@ -4738,10 +4738,12 @@ export type StaffMediaCharacterQuery = { __typename?: 'Query', Staff?: Maybe<{ _
 export type StaffMediaRoleQueryVariables = Exact<{
   id: Scalars['Int'];
   sort?: Maybe<Array<Maybe<MediaSort>> | Maybe<MediaSort>>;
+  page: Scalars['Int'];
+  type?: Maybe<MediaType>;
 }>;
 
 
-export type StaffMediaRoleQuery = { __typename?: 'Query', anime?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }>, manga?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
+export type StaffMediaRoleQuery = { __typename?: 'Query', Staff?: Maybe<{ __typename?: 'Staff', staffMedia?: Maybe<{ __typename?: 'MediaConnection', pageInfo?: Maybe<{ __typename?: 'PageInfo', currentPage?: Maybe<number>, hasNextPage?: Maybe<boolean>, lastPage?: Maybe<number> }>, edges?: Maybe<Array<Maybe<{ __typename?: 'MediaEdge', id?: Maybe<number>, staffRole?: Maybe<string>, node?: Maybe<{ __typename?: 'Media', id: number, type?: Maybe<MediaType>, startDate?: Maybe<{ __typename?: 'FuzzyDate', year?: Maybe<number> }>, title?: Maybe<{ __typename?: 'MediaTitle', romaji?: Maybe<string> }>, coverImage?: Maybe<{ __typename?: 'MediaCoverImage', large?: Maybe<string>, color?: Maybe<string> }> }> }>>> }> }> };
 
 export type StaffRoleQueryVariables = Exact<{
   id: Scalars['Int'];
@@ -5545,23 +5547,14 @@ useStaffMediaCharacterQuery.document = StaffMediaCharacterDocument;
 useStaffMediaCharacterQuery.getKey = (variables: StaffMediaCharacterQueryVariables) => ['staffMediaCharacter', variables];
 
 export const StaffMediaRoleDocument = `
-    query staffMediaRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
-  anime: Staff(id: $id) {
-    staffMedia(sort: $sort, type: ANIME) {
-      edges {
-        id
-        staffRole
-        node {
-          ...cardCoverInfo
-          startDate {
-            year
-          }
-        }
+    query staffMediaRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC], $page: Int!, $type: MediaType = ANIME) {
+  Staff(id: $id) {
+    staffMedia(sort: $sort, type: $type) {
+      pageInfo {
+        currentPage
+        hasNextPage
+        lastPage
       }
-    }
-  }
-  manga: Staff(id: $id) {
-    staffMedia(sort: $sort, type: MANGA) {
       edges {
         id
         staffRole
