@@ -13,6 +13,7 @@ import styles from '../../../character/Medias/Medias.module.scss'
 import Dropdown from '../../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
+import Year from '../Year/Year'
 import Cards from './Cards/Cards'
 
 const Characters = () => {
@@ -60,7 +61,7 @@ const Characters = () => {
   const Tba = () =>
     TBA?.length ? (
       <div>
-        <h6 className={styles.year}>TBA</h6>
+        <Year year='TBA' />
         <Cards edges={TBA} />
       </div>
     ) : null
@@ -90,7 +91,7 @@ const Characters = () => {
                 )
                 .map(([year, edges]) => (
                   <div key={String(year) + String(id)}>
-                    <h6 className={styles.year}>{year}</h6>
+                    <Year year={year} />
                     <Cards edges={edges} />
                   </div>
                 ))}
