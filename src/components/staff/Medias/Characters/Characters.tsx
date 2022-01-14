@@ -14,7 +14,6 @@ import Dropdown from '../../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
 import Cards from './Cards/Cards'
-import localStyles from './Characters.module.scss'
 
 const Characters = () => {
   const { id } = useParams<{ id: string }>()
@@ -61,7 +60,7 @@ const Characters = () => {
   const Tba = () =>
     TBA?.length ? (
       <div>
-        <h6 className={localStyles.year}>TBA</h6>
+        <h6 className={styles.year}>TBA</h6>
         <Cards edges={TBA} />
       </div>
     ) : null
@@ -91,7 +90,7 @@ const Characters = () => {
                 )
                 .map(([year, edges]) => (
                   <div key={String(year) + String(id)}>
-                    <h6 className={localStyles.year}>{year}</h6>
+                    <h6 className={styles.year}>{year}</h6>
                     <Cards edges={edges} />
                   </div>
                 ))}
