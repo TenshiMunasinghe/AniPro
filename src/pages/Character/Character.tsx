@@ -3,8 +3,8 @@ import gqlRequestClient from '../../api/graphqlClient'
 import Medias from '../../components/character/Medias/Medias'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
-import PersonPageHeader from '../../components/common/PersonPageHeader/PersonPageHeader'
 import Footer from '../../components/home/Footer/Footer'
+import Header from '../../components/person/PersonPageHeader/PersonPageHeader'
 import { useCharacterInfoQuery } from '../../generated/index'
 import styles from '../personPage.module.scss'
 
@@ -22,7 +22,7 @@ const Character = () => {
     <>
       <NavBar />
       <div className={styles.container}>
-        <PersonPageHeader data={data?.Character} />
+        <Header data={data?.Character} />
         <Medias />
       </div>
       <Footer />

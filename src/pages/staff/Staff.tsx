@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
-import PersonPageHeader from '../../components/common/PersonPageHeader/PersonPageHeader'
 import Footer from '../../components/home/Footer/Footer'
+import Header from '../../components/person/PersonPageHeader/PersonPageHeader'
 import Medias from '../../components/staff/Medias/Medias'
 import { useStaffInfoQuery } from '../../generated/index'
 import styles from '../personPage.module.scss'
@@ -23,7 +23,7 @@ const Staff = () => {
     <>
       <NavBar />
       <div className={styles.container}>
-        <PersonPageHeader data={data?.Staff} />
+        <Header data={data?.Staff} />
         <Medias />
       </div>
       <Footer />
