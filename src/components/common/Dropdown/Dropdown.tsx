@@ -6,7 +6,7 @@ import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
 import styles from './Dropdown.module.scss'
 import Items from './Items/Items'
 
-interface Props {
+export interface DropdownProps {
   onChange: (state: string | string[]) => void
   isMulti?: boolean
   options: {
@@ -24,7 +24,7 @@ const Dropdown = ({
   selected,
   placeholder,
   icon,
-}: Props) => {
+}: DropdownProps) => {
   const { ref, isFocused } = useFocusedWithin()
 
   const handleChange = (value: string) => {
