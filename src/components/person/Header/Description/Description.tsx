@@ -3,13 +3,13 @@ import htmr from 'htmr'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { renderToString } from 'react-dom/server'
 import ReactMarkdown from 'react-markdown'
-import styles from './PersonDescription.module.scss'
+import styles from './Description.module.scss'
 
 interface Props {
   description: string | null | undefined
 }
 
-const PersonDescription = ({ description }: Props) => {
+const Description = ({ description }: Props) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [isOverflow, setIsOverflow] = useState(true)
   const ref = useRef<HTMLDivElement>(null)
@@ -68,4 +68,4 @@ const PersonDescription = ({ description }: Props) => {
   )
 }
 
-export default PersonDescription
+export default Description

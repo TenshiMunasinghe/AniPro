@@ -2,13 +2,13 @@ import { NO_IMAGE_URL } from '../../../api/queries'
 import { CharacterInfoQuery, StaffInfoQuery } from '../../../generated/index'
 import { formatDate } from '../../../utils/formatDate'
 import SpoilerName from '../../character/SpoilerName/SpoilerName'
+import Description from './Description/Description'
+import styles from './Header.module.scss'
 import Item from './Item/Item'
-import PersonDescription from './PersonDescription/PersonDescription'
-import styles from './PersonPageHeader.module.scss'
 
 type Props = { data: CharacterInfoQuery['Character'] | StaffInfoQuery['Staff'] }
 
-const PersonPageHeader = ({ data }: Props) => {
+const Header = ({ data }: Props) => {
   if (!data || !data.name) return null
 
   const { name, image, description, ...infos } = data
@@ -58,10 +58,10 @@ const PersonPageHeader = ({ data }: Props) => {
 
         {infos.bloodType && <Item label='Blood Type' value={infos.bloodType} />}
 
-        <PersonDescription description={description} />
+        <Description description={description} />
       </div>
     </header>
   )
 }
 
-export default PersonPageHeader
+export default Header
