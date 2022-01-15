@@ -1,17 +1,16 @@
-import classnames from 'classnames'
 import React from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { linkToCharacterPage, linkToMediaPage } from '../../../../../App'
 import { MediaEdge, MediaType } from '../../../../../generated'
-import styles from '../../../../common/CardGrid/CardGrid.module.scss'
 import Card from '../../../../common/Cards/CardCover/Content/Content'
+import CardGrid from '../../../../person/CardGrid/CardGrid'
 
 interface Props {
   edges: (DeepPartial<MediaEdge> | null | undefined)[] | null | undefined
 }
 
 const Cards = ({ edges }: Props) => (
-  <div className={classnames(styles.slider, styles.cover)}>
+  <CardGrid>
     {edges?.map(edge =>
       edge?.characters?.map(character => {
         const media = edge.node
@@ -32,7 +31,7 @@ const Cards = ({ edges }: Props) => (
         ) : null
       })
     )}
-  </div>
+  </CardGrid>
 )
 
 export default Cards

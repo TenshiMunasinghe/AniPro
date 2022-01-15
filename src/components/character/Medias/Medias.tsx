@@ -13,9 +13,9 @@ import {
 } from '../../../generated/index'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
-import gridStyles from '../../common/CardGrid/CardGrid.module.scss'
 import Card from '../../common/Cards/CardCover/Content/Content'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import CardGrid from '../../person/CardGrid/CardGrid'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
 import styles from './Medias.module.scss'
 
@@ -80,7 +80,7 @@ const Medias = () => {
         {isLoading && <LoadingSpinner />}
 
         {!isLoading && edges?.length && (
-          <div className={classnames(gridStyles.slider, gridStyles.cover)}>
+          <CardGrid>
             {edges?.map(edge => {
               const media = edge.node
               const voiceActors = edge?.voiceActors
@@ -128,7 +128,7 @@ const Medias = () => {
                 )
               })
             })}
-          </div>
+          </CardGrid>
         )}
       </div>
     </div>
