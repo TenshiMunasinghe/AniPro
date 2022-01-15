@@ -7,9 +7,9 @@ import { MediaSort, useStaffMediaRoleQuery } from '../../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../../hooks/useSortMedia'
 import styles from '../../../character/Medias/Medias.module.scss'
-import Dropdown from '../../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
+import Dropdowns from '../../../person/Dropdowns/Dropdowns'
 import { sortByOptions } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
 import Cards from '../Characters/Cards/Cards'
 import Year from '../Year/Year'
@@ -68,14 +68,16 @@ const Roles = (props: Props) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dropdowns}>
-        <Dropdown
-          selected={sortBy}
-          onChange={sortByOnChange}
-          options={sortByOptions}
-          icon={{ type: FaSort, isLeft: true }}
-        />
-      </div>
+      <Dropdowns
+        dropdowns={[
+          {
+            selected: sortBy,
+            onChange: sortByOnChange,
+            options: sortByOptions,
+            icon: { type: FaSort, isLeft: true },
+          },
+        ]}
+      />
       <div className={classnames(styles.cardContainer)}>
         {isLoading && <LoadingSpinner />}
 
