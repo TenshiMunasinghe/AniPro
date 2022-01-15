@@ -4,7 +4,7 @@ import Medias from '../../components/character/Medias/Medias'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
-import Header from '../../components/person/PersonPageHeader/PersonPageHeader'
+import Header from '../../components/person/Header/Header'
 import { useCharacterInfoQuery } from '../../generated/index'
 import styles from '../personPage.module.scss'
 
