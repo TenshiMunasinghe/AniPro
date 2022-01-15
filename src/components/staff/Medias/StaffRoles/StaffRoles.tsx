@@ -6,12 +6,13 @@ import { useParams } from 'react-router-dom'
 import { MediaSort, useStaffMediaRoleQuery } from '../../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../../hooks/useSortMedia'
+import styles from '../../../character/Medias/Medias.module.scss'
 import Dropdown from '../../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
 import { sortByOptions } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
 import Cards from '../Characters/Cards/Cards'
-import styles from './StaffRoles.module.scss'
+import Year from '../Year/Year'
 
 interface Props {}
 
@@ -60,7 +61,7 @@ const Roles = (props: Props) => {
   const Tba = () =>
     TBA?.length ? (
       <div>
-        <h6 className={styles.year}>TBA</h6>
+        <Year year='TBA' />
         <Cards edges={TBA} />
       </div>
     ) : null
@@ -90,7 +91,7 @@ const Roles = (props: Props) => {
                 )
                 .map(([year, edges]) => (
                   <div key={String(year) + String(id)}>
-                    <h6 className={styles.year}>{year}</h6>
+                    <Year year={year} />
                     <Cards edges={edges} />
                   </div>
                 ))}

@@ -15,8 +15,8 @@ import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import gridStyles from '../../common/CardGrid/CardGrid.module.scss'
 import Card from '../../common/Cards/CardCover/Content/Content'
-import Dropdown from '../../common/Dropdown/Dropdown'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import Dropdowns from '../../person/Dropdowns/Dropdowns'
 import styles from './Medias.module.scss'
 
 export const sortByOptions = [
@@ -60,20 +60,22 @@ const Medias = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.dropdowns}>
-        <Dropdown
-          selected={language}
-          onChange={languageOnChange}
-          options={languageOptions}
-          icon={{ type: FaGlobeEurope, isLeft: true }}
-        />
-        <Dropdown
-          selected={sortBy}
-          onChange={sortByOnChange}
-          options={sortByOptions}
-          icon={{ type: FaSort, isLeft: true }}
-        />
-      </div>
+      <Dropdowns
+        dropdowns={[
+          {
+            selected: language,
+            onChange: languageOnChange,
+            options: languageOptions,
+            icon: { type: FaGlobeEurope, isLeft: true },
+          },
+          {
+            selected: sortBy,
+            onChange: sortByOnChange,
+            options: sortByOptions,
+            icon: { type: FaSort, isLeft: true },
+          },
+        ]}
+      />
       <div className={classnames(styles.cardContainer)}>
         {isLoading && <LoadingSpinner />}
 
