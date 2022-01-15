@@ -27,7 +27,7 @@ const Content = ({ main, sub, rank }: Props) => {
             title={main.title || 'no title'}
           />
         </figure>
-        {sub && (
+        {sub && sub.image !== undefined && (
           <figure className={styles.subContent}>
             <CoverImage
               link={sub.link}
@@ -39,7 +39,7 @@ const Content = ({ main, sub, rank }: Props) => {
       </div>
       <div className={styles.text}>
         <Title link={main.link} text={main.title || 'no title'} />
-        <Title link={sub?.link} text={sub?.title || ''} />
+        <Title link={sub?.link || main.link} text={sub?.title || ''} />
       </div>
     </article>
   )
