@@ -9,8 +9,8 @@ import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQue
 import { useSortMedia } from '../../../../hooks/useSortMedia'
 import { sortByOptions } from '../../../character/Medias/Medias'
 import styles from '../../../character/Medias/Medias.module.scss'
-import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
+import CardContainer from '../../../person/CardContainer/CardContainer'
 import Dropdowns from '../../../person/Dropdowns/Dropdowns'
 import Year from '../Year/Year'
 import Cards from './Cards/Cards'
@@ -77,30 +77,27 @@ const Characters = () => {
           },
         ]}
       />
-      <div className={styles.cardContainer}>
-        {isLoading && <LoadingSpinner />}
-
-        {!isLoading &&
-          ([MediaSort.StartDate, MediaSort.StartDateDesc].includes(sortBy) ? (
-            <>
-              {sortBy === MediaSort.StartDateDesc && <Tba />}
-              {Object.entries(edgesWithYears)
-                .sort(([_a], [_b]) => {
-                  const [a, b] = [parseInt(_a), parseInt(_b)]
-                  return sortBy === MediaSort.StartDateDesc ? b - a : a - b
-                })
-                .map(([year, edges]) => (
-                  <div key={String(year) + String(id)}>
-                    <Year year={year} />
-                    <Cards edges={edges} />
-                  </div>
-                ))}
-              {sortBy === MediaSort.StartDate && <Tba />}
-            </>
-          ) : (
-            <Cards edges={edges} />
-          ))}
-      </div>
+      <CardContainer isLoading={isLoading}>
+        {[MediaSort.StartDate, MediaSort.StartDateDesc].includes(sortBy) ? (
+          <>
+            {sortBy === MediaSort.StartDateDesc && <Tba />}
+            {Object.entries(edgesWithYears)
+              .sort(([_a], [_b]) => {
+                const [a, b] = [parseInt(_a), parseInt(_b)]
+                return sortBy === MediaSort.StartDateDesc ? b - a : a - b
+              })
+              .map(([year, edges]) => (
+                <div key={String(year) + String(id)}>
+                  <Year year={year} />
+                  <Cards edges={edges} />
+                </div>
+              ))}
+            {sortBy === MediaSort.StartDate && <Tba />}
+          </>
+        ) : (
+          <Cards edges={edges} />
+        )}
+      </CardContainer>
       <LoadMore
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage || false}

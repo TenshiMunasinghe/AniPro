@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import { groupBy } from 'lodash'
 import React from 'react'
 import { FaSort } from 'react-icons/fa'
@@ -7,8 +6,8 @@ import { MediaSort, useStaffMediaRoleQuery } from '../../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../../hooks/useSortMedia'
 import styles from '../../../character/Medias/Medias.module.scss'
-import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
+import CardContainer from '../../../person/CardContainer/CardContainer'
 import Dropdowns from '../../../person/Dropdowns/Dropdowns'
 import { sortByOptions } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
 import Year from '../Year/Year'
@@ -76,31 +75,28 @@ const StaffRoles = () => {
           },
         ]}
       />
-      <div className={classnames(styles.cardContainer)}>
-        {isLoading && <LoadingSpinner />}
-
-        {!isLoading &&
-          ([MediaSort.StartDate, MediaSort.StartDateDesc].includes(sortBy) ? (
-            <>
-              {sortBy === MediaSort.StartDateDesc && <Tba />}
-              {Object.entries(edgesWithYears)
-                .sort(([a], [b]) =>
-                  sortBy === MediaSort.StartDateDesc
-                    ? parseInt(b) - parseInt(a)
-                    : parseInt(a) - parseInt(b)
-                )
-                .map(([year, edges]) => (
-                  <div key={String(year) + String(id)}>
-                    <Year year={year} />
-                    <Cards edges={edges} />
-                  </div>
-                ))}
-              {sortBy === MediaSort.StartDate && <Tba />}
-            </>
-          ) : (
-            <Cards edges={edges} />
-          ))}
-      </div>
+      <CardContainer isLoading={isLoading}>
+        {[MediaSort.StartDate, MediaSort.StartDateDesc].includes(sortBy) ? (
+          <>
+            {sortBy === MediaSort.StartDateDesc && <Tba />}
+            {Object.entries(edgesWithYears)
+              .sort(([a], [b]) =>
+                sortBy === MediaSort.StartDateDesc
+                  ? parseInt(b) - parseInt(a)
+                  : parseInt(a) - parseInt(b)
+              )
+              .map(([year, edges]) => (
+                <div key={String(year) + String(id)}>
+                  <Year year={year} />
+                  <Cards edges={edges} />
+                </div>
+              ))}
+            {sortBy === MediaSort.StartDate && <Tba />}
+          </>
+        ) : (
+          <Cards edges={edges} />
+        )}
+      </CardContainer>
       <LoadMore
         isFetchingNextPage={isFetchingNextPage}
         hasNextPage={hasNextPage || false}

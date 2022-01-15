@@ -1,4 +1,3 @@
-import classnames from 'classnames'
 import toUpper from 'lodash/toUpper'
 import uniq from 'lodash/uniq'
 import { useMemo } from 'react'
@@ -14,7 +13,7 @@ import {
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import Card from '../../common/Cards/CardCover/Content/Content'
-import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import CardContainer from '../../person/CardContainer/CardContainer'
 import CardGrid from '../../person/CardGrid/CardGrid'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
 import styles from './Medias.module.scss'
@@ -76,10 +75,8 @@ const Medias = () => {
           },
         ]}
       />
-      <div className={classnames(styles.cardContainer)}>
-        {isLoading && <LoadingSpinner />}
-
-        {!isLoading && edges?.length && (
+      <CardContainer isLoading={isLoading}>
+        {edges?.length && (
           <CardGrid>
             {edges?.map(edge => {
               const media = edge.node
@@ -130,7 +127,7 @@ const Medias = () => {
             })}
           </CardGrid>
         )}
-      </div>
+      </CardContainer>
     </div>
   )
 }
