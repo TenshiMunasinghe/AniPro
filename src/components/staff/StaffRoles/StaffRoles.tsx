@@ -1,21 +1,18 @@
-import groupBy from 'lodash/groupBy'
+import { groupBy } from 'lodash'
+import React from 'react'
 import { FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
-import {
-  MediaSort,
-  useStaffMediaCharacterQuery,
-} from '../../../../generated/index'
-import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
-import { useSortMedia } from '../../../../hooks/useSortMedia'
-import { sortByOptions } from '../../../character/Medias/Medias'
-import styles from '../../../character/Medias/Medias.module.scss'
-import LoadMore from '../../../common/LoadMore/LoadMore'
-import CardContainer from '../../../person/CardContainer/CardContainer'
-import Dropdowns from '../../../person/Dropdowns/Dropdowns'
+import { MediaSort, useStaffMediaRoleQuery } from '../../../generated'
+import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
+import { useSortMedia } from '../../../hooks/useSortMedia'
+import LoadMore from '../../common/LoadMore/LoadMore'
+import CardContainer from '../../person/CardContainer/CardContainer'
+import Dropdowns from '../../person/Dropdowns/Dropdowns'
+import { sortByOptions } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import Year from '../Year/Year'
 import Cards from './Cards/Cards'
 
-const Characters = () => {
+const StaffRoles = () => {
   const { id } = useParams<{ id: string }>()
 
   const { sortBy, sortByOnChange } = useSortMedia()
@@ -27,7 +24,7 @@ const Characters = () => {
     hasNextPage,
     fetchNextPage,
   } = useInfiniteGraphQLQuery(
-    useStaffMediaCharacterQuery,
+    useStaffMediaRoleQuery,
     ({ pageParam = 1 }) => ({
       id: parseInt(id),
       page: pageParam,
@@ -35,10 +32,10 @@ const Characters = () => {
     }),
     {
       getNextPageParam: ({ Staff }) => {
-        if (!Staff?.characterMedia?.pageInfo?.currentPage) return
+        if (!Staff?.staffMedia?.pageInfo?.currentPage) return
 
         const {
-          characterMedia: { pageInfo },
+          staffMedia: { pageInfo },
         } = Staff
 
         return pageInfo.hasNextPage
@@ -48,7 +45,7 @@ const Characters = () => {
     }
   )
 
-  const edges = data?.pages.flatMap(page => page.Staff?.characterMedia?.edges)
+  const edges = data?.pages.flatMap(page => page.Staff?.staffMedia?.edges)
 
   const groupedEdges = groupBy(
     edges,
@@ -66,7 +63,7 @@ const Characters = () => {
     ) : null
 
   return (
-    <div className={styles.container}>
+    <>
       <Dropdowns
         dropdowns={[
           {
@@ -82,10 +79,11 @@ const Characters = () => {
           <>
             {sortBy === MediaSort.StartDateDesc && <Tba />}
             {Object.entries(edgesWithYears)
-              .sort(([_a], [_b]) => {
-                const [a, b] = [parseInt(_a), parseInt(_b)]
-                return sortBy === MediaSort.StartDateDesc ? b - a : a - b
-              })
+              .sort(([a], [b]) =>
+                sortBy === MediaSort.StartDateDesc
+                  ? parseInt(b) - parseInt(a)
+                  : parseInt(a) - parseInt(b)
+              )
               .map(([year, edges]) => (
                 <div key={String(year) + String(id)}>
                   <Year year={year} />
@@ -103,8 +101,8 @@ const Characters = () => {
         hasNextPage={hasNextPage || false}
         onClick={() => fetchNextPage()}
       />
-    </div>
+    </>
   )
 }
 
-export default Characters
+export default StaffRoles

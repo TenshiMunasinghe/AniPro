@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useStaffRoleCountsQuery } from '../../../generated/index'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
-import Characters from './Characters/Characters'
+import Characters from '../Characters/Characters'
+import StaffRoles from '../StaffRoles/StaffRoles'
 import styles from './Medias.module.scss'
-import StaffRoles from './StaffRoles/StaffRoles'
 
 const Medias = () => {
   const { id } = useParams<{ id: string }>()

@@ -1,8 +1,8 @@
 import { DeepPartial } from 'react-hook-form'
-import { linkToMediaPage } from '../../../../../App'
-import { MediaEdge, MediaType } from '../../../../../generated'
-import Card from '../../../../common/Cards/CardCover/Content/Content'
-import CardGrid from '../../../../person/CardGrid/CardGrid'
+import { linkToMediaPage } from '../../../../App'
+import { MediaEdge, MediaType } from '../../../../generated'
+import Card from '../../../common/Cards/CardCover/Content/Content'
+import CardGrid from '../../../person/CardGrid/CardGrid'
 
 interface Props {
   edges: (DeepPartial<MediaEdge> | null | undefined)[] | null | undefined
