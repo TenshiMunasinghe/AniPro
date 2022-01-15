@@ -5549,7 +5549,7 @@ useStaffMediaCharacterQuery.getKey = (variables: StaffMediaCharacterQueryVariabl
 export const StaffMediaRoleDocument = `
     query staffMediaRole($id: Int!, $sort: [MediaSort] = [START_DATE_DESC], $page: Int!, $type: MediaType = ANIME) {
   Staff(id: $id) {
-    staffMedia(sort: $sort, type: $type) {
+    staffMedia(sort: $sort, type: $type, page: $page) {
       pageInfo {
         currentPage
         hasNextPage

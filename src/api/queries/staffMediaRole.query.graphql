@@ -5,7 +5,7 @@ query staffMediaRole(
   $type: MediaType = ANIME
 ) {
   Staff(id: $id) {
-    staffMedia(sort: $sort, type: $type) {
+    staffMedia(sort: $sort, type: $type, page: $page) {
       pageInfo {
         currentPage
         hasNextPage
