@@ -14,9 +14,7 @@ import { sortByOptions } from '../../../search/Media/MediaSearchResult/MediaSear
 import Cards from '../Characters/Cards/Cards'
 import Year from '../Year/Year'
 
-interface Props {}
-
-const Roles = (props: Props) => {
+const StaffRoles = () => {
   const { id } = useParams<{ id: string }>()
 
   const { sortBy, sortByOnChange } = useSortMedia()
@@ -112,4 +110,4 @@ const Roles = (props: Props) => {
   )
 }
 
-export default Roles
+export default StaffRoles
