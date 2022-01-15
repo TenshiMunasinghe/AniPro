@@ -5,9 +5,4 @@
   flex-direction: column;
   justify-content: center;
   @include gap($column: var(--space-500));
-
-  .cardContainer {
-    min-height: 800px;
-    @include gap($column: var(--space-500));
-  }
 }
