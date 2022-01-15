@@ -11,8 +11,8 @@ import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
 import Dropdowns from '../../../person/Dropdowns/Dropdowns'
 import { sortByOptions } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
-import Cards from '../Characters/Cards/Cards'
 import Year from '../Year/Year'
+import Cards from './Cards/Cards'
 
 const StaffRoles = () => {
   const { id } = useParams<{ id: string }>()
