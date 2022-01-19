@@ -35,7 +35,7 @@ const Medias = () => {
 
   return (
     <>
-      {characterCount && staffCount && (
+      {!!characterCount && !!staffCount && (
         <div
           className={classnames(styles.roles, {
             [styles.vaActive]: role === 'voiceActor',
