@@ -50,6 +50,8 @@ const Description = ({ description }: Props) => {
     .replaceAll('$#', '</span></p>')
     .replaceAll('\n', '<br/>')
     .replaceAll('https://anilist.co', '')
+    .replaceAll('/anime/', '/media/anime/')
+    .replaceAll('/manga/', '/media/manga/')
 
   return (
     <div
