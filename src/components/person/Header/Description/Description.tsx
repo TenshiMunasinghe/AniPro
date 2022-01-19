@@ -15,16 +15,14 @@ const Description = ({ description }: Props) => {
   const toggleExpansion = () => setIsExpanded(prev => !prev)
 
   useEffect(() => {
-    const spoilers = ref.current?.querySelectorAll('.markdown_spoiler')
+    const spoilers = ref.current?.querySelectorAll('.' + styles.spoiler)
 
     const toggleSpoiler = (element: Element) => {
       element.classList.toggle(styles.showSpoiler)
     }
 
-    spoilers?.forEach(node => {
-      const parent = node.parentElement
-      parent?.classList.add(styles.spoiler)
-      parent?.addEventListener('click', () => toggleSpoiler(parent))
+    spoilers?.forEach(element => {
+      element?.addEventListener('click', () => toggleSpoiler(element))
     })
   }, [])
 
@@ -42,7 +40,8 @@ const Description = ({ description }: Props) => {
       description
         ?.replaceAll('https://anilist.co', '')
         .replaceAll('/anime/', '/media/anime/')
-        .replaceAll('/manga/', '/media/manga/'),
+        .replaceAll('/manga/', '/media/manga/')
+        .replaceAll('markdown_spoiler', styles.spoiler),
     [description]
   )
 
