@@ -79,6 +79,7 @@ export const allowedURLParams = [
   ...Object.keys(filterOptions),
   'searchText',
   'page',
+  'sortBy',
 ]
 
 export const filters = Object.entries(filterOptions)
