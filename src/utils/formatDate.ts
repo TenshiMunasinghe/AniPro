@@ -1,9 +1,3 @@
-const dateFormat = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-}
-
 export const formatDate = ({
   year,
   month,
@@ -14,7 +8,11 @@ export const formatDate = ({
   day?: number | null
 }) => {
   const string = new Date(year || 0, month || 0, day || 0)
-    .toLocaleDateString('en-US', dateFormat)
+    .toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
     .replaceAll(',', '')
 
   const arr = string.split(' ')
