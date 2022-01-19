@@ -7,10 +7,10 @@ import {
 } from '../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../hooks/useSortMedia'
-import { sortByOptions } from '../../character/Medias/Medias'
 import LoadMore from '../../common/LoadMore/LoadMore'
 import CardContainer from '../../person/CardContainer/CardContainer'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
+import { sortByOptions } from '../../staff/Medias/Medias'
 import Year from '../Year/Year'
 import Cards from './Cards/Cards'
 

@@ -5,26 +5,15 @@ import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { linkToMediaPage, linkToStaffPage } from '../../../App'
-import {
-  MediaSort,
-  MediaType,
-  useCharacterMediaQuery,
-} from '../../../generated/index'
+import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import Card from '../../common/Cards/CardCover/Content/Content'
 import CardContainer from '../../person/CardContainer/CardContainer'
 import CardGrid from '../../person/CardGrid/CardGrid'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
+import { sortByOptions } from '../../staff/Medias/Medias'
 
-export const sortByOptions = [
-  { label: 'Popularity', value: MediaSort.PopularityDesc },
-  { label: 'Average Score', value: MediaSort.ScoreDesc },
-  { label: 'Favourites', value: MediaSort.FavouritesDesc },
-  { label: 'Newest', value: MediaSort.StartDateDesc },
-  { label: 'Oldest', value: MediaSort.StartDate },
-  { label: 'Title', value: MediaSort.TitleRomaji },
-]
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
 
