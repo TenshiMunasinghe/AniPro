@@ -10,18 +10,24 @@ interface Props {
 }
 
 const Character = ({ character }: Props) => {
+  const characterNode = character?.node
+  const voiceActor = character?.voiceActors?.[0]
   return (
     <div className={styles.container}>
       <Person
-        image={character?.node?.image?.large || NO_IMAGE_URL}
-        name={character?.node?.name?.full || 'no name'}
+        id={characterNode?.id}
+        image={characterNode?.image?.large || NO_IMAGE_URL}
+        name={characterNode?.name?.full || 'no name'}
         info={character?.role}
+        type='Character'
       />
       {character?.voiceActors?.length ? (
         <Person
-          image={character?.voiceActors?.[0]?.image?.large || NO_IMAGE_URL}
-          name={character?.voiceActors?.[0]?.name?.full || 'no name'}
+          id={voiceActor?.id}
+          image={voiceActor?.image?.large || NO_IMAGE_URL}
+          name={voiceActor?.name?.full || 'no name'}
           info='Japanese'
+          type='Staff'
           isReversed
         />
       ) : null}

@@ -50,6 +50,7 @@ const Staff = () => {
               image={staff?.node?.image?.large}
               info={staff?.role}
               key={'staff' + staff?.node?.id + staff?.role}
+              type='Staff'
             />
           ))
         )}

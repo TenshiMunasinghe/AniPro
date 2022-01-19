@@ -85,6 +85,7 @@ const Overview = () => {
                 name={staff?.node?.name?.full}
                 image={staff?.node?.image?.large}
                 info={staff?.role}
+                type='Staff'
                 key={'overview staff' + staff?.node?.id + staff?.role}
               />
             ))}
