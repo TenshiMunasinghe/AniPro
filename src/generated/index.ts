@@ -5220,7 +5220,7 @@ export const CharacterInfoDocument = `
     image {
       large
     }
-    description
+    description(asHtml: true)
     gender
     dateOfBirth {
       year
@@ -5462,7 +5462,7 @@ export const StaffInfoDocument = `
     image {
       large
     }
-    description
+    description(asHtml: true)
     gender
     dateOfBirth {
       year

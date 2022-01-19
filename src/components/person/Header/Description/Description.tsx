@@ -1,8 +1,6 @@
 import classnames from 'classnames'
 import htmr from 'htmr'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { renderToString } from 'react-dom/server'
-import ReactMarkdown from 'react-markdown'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import styles from './Description.module.scss'
 
 interface Props {
@@ -17,14 +15,16 @@ const Description = ({ description }: Props) => {
   const toggleExpansion = () => setIsExpanded(prev => !prev)
 
   useEffect(() => {
-    const spoilers = ref.current?.querySelectorAll('.' + styles.spoiler)
+    const spoilers = ref.current?.querySelectorAll('.markdown_spoiler')
 
-    const toggleSpoiler = (node: Element) => {
-      node.classList.toggle(styles.showSpoiler)
+    const toggleSpoiler = (element: Element) => {
+      element.classList.toggle(styles.showSpoiler)
     }
 
     spoilers?.forEach(node => {
-      node.addEventListener('click', () => toggleSpoiler(node))
+      const parent = node.parentElement
+      parent?.classList.add(styles.spoiler)
+      parent?.addEventListener('click', () => toggleSpoiler(parent))
     })
   }, [])
 
@@ -37,21 +37,14 @@ const Description = ({ description }: Props) => {
     setIsOverflow(isOverflow || false)
   }, [])
 
-  if (!description) return null
-
-  const htmlString = renderToString(
-    <ReactMarkdown>
-      {description.replaceAll('~!', `#$`).replaceAll('!~', '$#')}
-    </ReactMarkdown>
+  const formattedDescription = useMemo(
+    () =>
+      description
+        ?.replaceAll('https://anilist.co', '')
+        .replaceAll('/anime/', '/media/anime/')
+        .replaceAll('/manga/', '/media/manga/'),
+    [description]
   )
-
-  const formattedDescription = htmlString
-    .replaceAll('#$', `<p class='${styles.spoiler}'><span>`)
-    .replaceAll('$#', '</span></p>')
-    .replaceAll('\n', '<br/>')
-    .replaceAll('https://anilist.co', '')
-    .replaceAll('/anime/', '/media/anime/')
-    .replaceAll('/manga/', '/media/manga/')
 
   return (
     <div
@@ -59,7 +52,7 @@ const Description = ({ description }: Props) => {
         [styles.expanded]: isExpanded || !isOverflow,
       })}>
       <div className={styles.description} ref={ref}>
-        {htmr(formattedDescription)}
+        {htmr(formattedDescription || '<i>no description</i>')}
       </div>
       {isOverflow && (
         <button onClick={toggleExpansion} className={styles.toggleExpansion}>
