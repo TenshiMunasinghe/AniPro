@@ -1,9 +1,9 @@
+import { linkToCharacterPage, linkToStaffPage } from '../../../App'
 import {
   SearchCharactersQuery,
   SearchStaffQuery,
 } from '../../../generated/index'
-import CoverImage from '../../common/CoverImage/CoverImage'
-import styles from './Person.module.scss'
+import Card from '../../common/Cards/CardCover/Content/Content'
 
 type Props =
   | NonNullable<NonNullable<SearchStaffQuery['Page']>['staff']>[number]
@@ -14,14 +14,14 @@ type Props =
 const Person = (props: Props) => {
   if (!props) return null
 
-  const { name, image } = props
+  const { name, image, id } = props
 
-  return (
-    <div className={styles.container}>
-      <CoverImage src={image?.large} title={name?.full} />
-      <div className={styles.name}>{name?.full}</div>
-    </div>
-  )
+  const link =
+    props.__typename === 'Character'
+      ? linkToCharacterPage(id)
+      : linkToStaffPage(id)
+
+  return <Card main={{ title: name?.full, image: image?.large, link }} />
 }
 
 export default Person
