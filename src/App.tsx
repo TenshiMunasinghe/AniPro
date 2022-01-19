@@ -25,7 +25,7 @@ import {
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Media = loadable(() => import('./pages/media/Media'))
-const Character = loadable(() => import('./pages/chara/Character'))
+const Character = loadable(() => import('./pages/character/Character'))
 const Staff = loadable(() => import('./pages/staff/Staff'))
 
 const queryClient = new QueryClient()
