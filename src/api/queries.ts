@@ -1,4 +1,3 @@
-import _ky from 'ky'
 import { MediaSeason, StaffLanguage } from '../generated/index'
 
 const dateNow = new Date()
@@ -29,8 +28,6 @@ export const currentSeason = current ? MediaSeason[current.name] : null
 export const nextSeason = next ? MediaSeason[next.name] : null
 
 export const nextYear = dateNext.getFullYear()
-
-export const ky = _ky.create({ prefixUrl: 'https://graphql.anilist.co' })
 
 // const connection =
 //   navigator.connection ||
