@@ -2,6 +2,7 @@
 @use './colors.scss';
 @use './spacing.scss';
 @use './typography.scss';
+@use 'sass:math';
 
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 
@@ -107,7 +108,7 @@ body {
     --lightness: 32%;
   }
 
-  --image-aspect-ratio: (2/3);
+  --image-aspect-ratio: #{math.div(2, 3)};
 
   font-size: var(--text-size-400);
   width: 100vw;
