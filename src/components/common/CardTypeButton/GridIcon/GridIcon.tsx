@@ -1,5 +1,5 @@
 import { FaTh, FaThLarge, FaThList } from 'react-icons/fa'
-import { CardType } from '../../../../pages/search/Search'
+import { CardType } from '../../../search/Media/MediaSearchResult/MediaSearchResult'
 
 interface Props {
   cardType: CardType

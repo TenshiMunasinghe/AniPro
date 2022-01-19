@@ -1,41 +1,41 @@
-import { memo, useContext, useState } from 'react'
-import { NO_IMAGE_URL } from '../../../../api/queries'
+import { memo, useState } from 'react'
+import { DeepPartial } from 'react-hook-form'
+import { imageSize } from '../../../../api/queries'
+import { linkToMediaPage } from '../../../../App'
+import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
-import CoverImage from '../../CoverImage/CoverImage'
-import Title from '../../Title/Title'
-import Rank from '../components/Rank/Rank'
+import { ImageSize } from '../../CardGrid/CardGrid'
 import styles from './CardCover.module.scss'
+import Content from './Content/Content'
 import Popover from './Popover/Popover'
 
-interface Props {
+export interface CardCoverContent {
+  link?: string
+  image?: string | null
+  title?: string | null
+}
+
+export interface CardCoverProps {
   index: number
   rank?: number | null
-  media: Media
+  media: DeepPartial<Media> | null | undefined
+  hasPopover?: boolean
+  imageSize: ImageSize
+  subContent?: { link?: string; image?: string | null; title?: string | null }
 }
 
 const CardCover = ({
   index,
   rank,
-  media: {
-    coverImage,
-    title,
-    id,
-    format,
-    season,
-    seasonYear,
-    episodes,
-    duration,
-    genres,
-    studios,
-    nextAiringEpisode,
-    meanScore,
-  },
-}: Props) => {
-  const imageSize = useContext(ImageSizeContext)
+  media,
+  hasPopover = true,
+  subContent,
+}: CardCoverProps) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
+
+  if (!media) return null
 
   return (
     <div
@@ -45,35 +45,20 @@ const CardCover = ({
       onFocus={showPopover}
       onBlur={hidePopover}
       style={createColorVariable(
-        coverImage?.color || 'var(--color-foreground-200)'
+        media.coverImage?.color || 'var(--color-foreground-200)'
       )}>
-      <article className={styles.container}>
-        {rank && (
-          <div className={styles.rank}>
-            <Rank rank={rank} />
-          </div>
-        )}
-        <CoverImage
-          id={id}
-          src={coverImage?.[imageSize] || NO_IMAGE_URL}
-          title={title?.romaji || 'no title'}
-        />
-        <Title id={id} text={title?.romaji || 'no title'} />
-      </article>
-
-      <Popover
-        index={index}
-        isVisible={isPopoverVisible}
-        genres={genres}
-        nextAiringEpisode={nextAiringEpisode}
-        format={format}
-        season={season}
-        seasonYear={seasonYear}
-        episodes={episodes}
-        duration={duration}
-        studios={studios}
-        meanScore={meanScore}
+      <Content
+        rank={rank}
+        main={{
+          link: linkToMediaPage(media.id, media.type || MediaType.Anime),
+          title: media.title?.romaji,
+          image: media.coverImage?.[imageSize],
+        }}
+        sub={subContent}
       />
+      {hasPopover && (
+        <Popover index={index} isVisible={isPopoverVisible} media={media} />
+      )}
     </div>
   )
 }

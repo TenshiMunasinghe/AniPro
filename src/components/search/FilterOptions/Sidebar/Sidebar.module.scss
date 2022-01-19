@@ -1,0 +1,39 @@
+@use '../../../../css/config.scss' as *;
+
+.container {
+  display: none;
+
+  @include mq(above, md) {
+    display: grid;
+    height: min-content;
+    row-gap: var(--space-500);
+    padding-right: var(--space-600);
+    @include padding-vertical(var(--space-300));
+    border-right: solid 1px var(--color-border-200);
+  }
+
+  .labels {
+    margin-bottom: var(--space-300);
+
+    @include mouse-effects(
+      var(--color-text-accent-100),
+      var(--color-text-accent-200),
+      txt
+    );
+  }
+
+  .options {
+    display: grid;
+    row-gap: var(--space-300);
+    font-size: var(--text-size-300);
+  }
+
+  .showMore {
+    margin-top: var(--space-400);
+    font-size: var(--text-size-300);
+    color: var(--color-text-accent-200);
+    width: fit-content;
+
+    @include mouse-effects(underline, var(--color-text-accent-100), txt);
+  }
+}

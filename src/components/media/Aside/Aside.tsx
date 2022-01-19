@@ -1,6 +1,7 @@
 import { CommonQuery } from '../../../generated/index'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
+import { formatDate } from '../../../utils/formatDate'
 import { formatLabel } from '../../../utils/formatLabel'
 import { timeToArr } from '../../../utils/timeToArr'
 import { timeToStr } from '../../../utils/timeToStr'
@@ -14,23 +15,17 @@ interface Props {
   data: CommonQuery['Media']
 }
 
-const dateFormat = {
-  year: 'numeric',
-  month: 'short',
-  day: 'numeric',
-}
-
 const Aside = ({ data }: Props) => {
   if (!data) return null
 
   return (
     <aside className={styles.container}>
-      {data.rankings?.length && (
+      {!!data.rankings?.length && (
         <section className={styles.rankings}>
           {data.rankings
             .filter(ranking => ranking?.allTime)
             .map(ranking => (
-              <Ranking ranking={ranking} />
+              <Ranking key={'common' + ranking?.id} ranking={ranking} />
             ))}
         </section>
       )}
@@ -48,6 +43,10 @@ const Aside = ({ data }: Props) => {
         <Item label='Format'>{formatLabel(data.format || '')}</Item>
 
         <Item label='Episodes'>{data.episodes?.toString() || ''}</Item>
+
+        <Item label='Chapters'>{data.chapters?.toString() || ''}</Item>
+
+        <Item label='Volumes'>{data.volumes?.toString() || ''}</Item>
 
         <Item label='Episode Duration'>
           {data.duration
@@ -69,23 +68,11 @@ const Aside = ({ data }: Props) => {
         <Item label='Status'>{toStartCase(data.status || '')}</Item>
 
         <Item label='Start Date'>
-          {data.startDate?.year
-            ? new Date(
-                data.startDate.year,
-                data.startDate.month || 0 - 1,
-                data.startDate.day || 0
-              ).toLocaleDateString('en-US', dateFormat)
-            : ''}
+          {data.startDate ? formatDate(data.startDate) : ''}
         </Item>
 
         <Item label='End Date'>
-          {data.endDate?.year
-            ? new Date(
-                data.endDate.year,
-                data.endDate?.month || 0 - 1,
-                data.endDate?.day || 0
-              ).toLocaleDateString('en-US', dateFormat)
-            : ''}
+          {data.endDate ? formatDate(data.endDate) : ''}
         </Item>
 
         <Item label='Season'>
@@ -119,7 +106,7 @@ const Aside = ({ data }: Props) => {
         <Item label='Synonyms'>{data.synonyms?.join(' ') || ''}</Item>
       </section>
 
-      {data?.tags?.length && (
+      {!!data?.tags?.length && (
         <div className={styles.tags}>
           <Tags tags={data.tags} />
         </div>

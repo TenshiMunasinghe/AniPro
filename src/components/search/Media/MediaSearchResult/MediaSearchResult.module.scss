@@ -1,0 +1,70 @@
+@use '../../../../css/config.scss' as *;
+
+.container {
+  .upperSection {
+    padding-bottom: var(--space-500);
+    flex-basis: 100%;
+  }
+
+  .extraOptions {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    justify-content: flex-end;
+
+    .gridType {
+      display: flex;
+      padding: 0 calc(var(--space-200) * -1);
+      padding-right: var(--space-300);
+      margin-right: var(--space-300);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-right: solid 1px var(--color-border-200);
+    }
+  }
+
+  .mainContent {
+    @include mq(above, md) {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      column-gap: var(--space-500);
+    }
+  }
+
+  .searchResult {
+    display: grid;
+    height: fit-content;
+    justify-items: center;
+    position: relative;
+  }
+
+  .pages {
+    display: flex;
+    margin: var(--space-700) 0;
+  }
+
+  .page {
+    background: var(--color-foreground-200);
+    font-weight: 500;
+    padding: var(--space-300) var(--space-400);
+    margin-right: var(--space-400);
+    transition: 0.05s all ease-in-out;
+    border-radius: 0.1em;
+
+    @include mouse-effects(
+      var(--color-foreground-300),
+      var(--color-foreground-400),
+      bg
+    );
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.current {
+      background: var(--color-foreground-400);
+      color: var(--colo-text-300);
+    }
+  }
+}

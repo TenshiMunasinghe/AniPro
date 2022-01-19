@@ -1,48 +1,29 @@
 @use '../../../css/config.scss' as *;
 
 .container {
-  --margin: var(--space-300);
-
-  @include mq(above, sm) {
-    --margin: var(--space-500);
-  }
-
   position: var(--position);
   top: 0;
   width: 100vw;
   display: flex;
-  padding: var(--space-200) var(--margin);
   align-items: center;
+  @include padding-vertical(var(--space-200));
+  @include padding-horizontal(var(--space-300));
   background: var(--color-foreground-100);
   z-index: 9999;
+  @include gap($row: var(--space-500));
 
-  form {
-    flex-basis: 45rem;
-  }
-
-  label {
-    margin-left: var(--margin);
-    flex-shrink: 0;
-
-    @include mq(above, sm) {
-      margin-left: auto;
-    }
+  @include mq(above, sm) {
+    @include padding-horizontal(var(--space-500));
   }
 }
 
 .heading {
-  margin-right: var(--margin);
+  margin-right: auto;
   @include mq(above, sm) {
     font-size: var(--text-size-500);
   }
 
   &:hover {
-    a {
-      color: var(--color-text-accent-200);
-    }
-  }
-
-  a {
-    text-decoration: none;
+    color: var(--color-text-accent-200);
   }
 }

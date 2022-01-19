@@ -1,0 +1,33 @@
+query staffMediaCharacter(
+  $id: Int!
+  $sort: [MediaSort] = [START_DATE_DESC]
+  $page: Int!
+) {
+  Staff(id: $id) {
+    characterMedia(sort: $sort, page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
+      edges {
+        id
+        node {
+          ...cardCoverInfo
+          startDate {
+            year
+          }
+        }
+        characterRole
+        characters {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+        }
+      }
+    }
+  }
+}

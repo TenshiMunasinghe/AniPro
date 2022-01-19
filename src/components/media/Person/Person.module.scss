@@ -15,13 +15,18 @@
     flex-direction: column;
     justify-content: center;
     padding: var(--space-400);
-    background-color: var(--color-foreground-100);
+    background-color: var(--color-foreground-50);
     font-size: var(--text-size-300);
   }
 
   .name {
     font-weight: 600;
     flex: 1;
+
+    &:hover,
+    &:focus {
+      color: var(--color-text-accent-100);
+    }
   }
 
   .info {

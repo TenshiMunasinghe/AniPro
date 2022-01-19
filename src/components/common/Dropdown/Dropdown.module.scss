@@ -1,3 +1,5 @@
+@use '../../../css/config.scss' as *;
+
 .wrapper {
   position: relative;
 
@@ -19,12 +21,13 @@
   align-items: center;
   cursor: pointer;
   font-weight: inherit;
+  @include gap($row: var(--space-200));
+
+  .empty {
+    color: var(--color-text-500);
+  }
 
   * {
     color: var(--color-text-300);
   }
-}
-
-.selected {
-  padding-left: var(--space-200);
 }

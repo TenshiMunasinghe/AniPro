@@ -1,0 +1,26 @@
+query staffMediaRole(
+  $id: Int!
+  $sort: [MediaSort] = [START_DATE_DESC]
+  $page: Int!
+  $type: MediaType = ANIME
+) {
+  Staff(id: $id) {
+    staffMedia(sort: $sort, type: $type, page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+        lastPage
+      }
+      edges {
+        id
+        staffRole
+        node {
+          ...cardCoverInfo
+          startDate {
+            year
+          }
+        }
+      }
+    }
+  }
+}

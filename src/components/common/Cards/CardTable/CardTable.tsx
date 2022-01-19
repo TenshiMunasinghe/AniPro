@@ -1,11 +1,14 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
+import { linkToMediaPage } from '../../../../App'
+import { Media, MediaType } from '../../../../generated'
 import { airingInfo } from '../../../../utils/airingInfo'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
+import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
@@ -13,13 +16,12 @@ import Title from '../../Title/Title'
 import Rank from '../components/Rank/Rank'
 import styles from './CardTable.module.scss'
 import Info from './Info/Info'
+
 interface Props {
-  media: Media
+  media: DeepPartial<Media>
+  imageSize: ImageSize
   rank?: number | null
 }
-
-const mapStatus = (status: Media['status']) =>
-  status === 'RELEASING' ? 'Airing' : toStartCase(status || '')
 
 const CardTable = ({
   media: {
@@ -36,18 +38,21 @@ const CardTable = ({
     nextAiringEpisode,
     format,
     episodes,
+    type,
+    chapters,
+    startDate,
+    endDate,
   },
   rank,
+  imageSize,
 }: Props) => {
-  const imageSize = useContext(ImageSizeContext)
-
   const _style = {
     ...createColorVariable(coverImage?.color || 'var(--color-foreground-200)'),
     '--banner-image': `url(${bannerImage})`,
   } as React.CSSProperties
 
   return (
-    <article className={styles.wrapper} style={_style}>
+    <article className={styles.container} style={_style}>
       {rank && (
         <div className={styles.rank}>
           <Rank rank={rank} />
@@ -55,13 +60,16 @@ const CardTable = ({
       )}
       <div className={styles.card}>
         <CoverImage
-          id={id}
+          link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
         />
         <div className={styles.content}>
           <div className={styles.header}>
-            <Title id={id} text={title?.romaji || 'no title'} />
+            <Title
+              link={linkToMediaPage(id, type || MediaType.Anime)}
+              text={title?.romaji || 'no title'}
+            />
             <Genres
               as='section'
               genres={genres}
@@ -77,19 +85,49 @@ const CardTable = ({
             }
           />
 
-          <Info
-            main={() => formatLabel(format || '')}
-            sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
-          />
+          {type === MediaType.Anime && (
+            <>
+              <Info
+                main={() => formatLabel(format || '')}
+                sub={() => (episodes ? pluralize(episodes, 'episode') : null)}
+              />
 
-          <Info
-            main={() =>
-              status === 'RELEASING' && seasonYear !== currentYear
-                ? `Airing Since ${seasonYear}`
-                : mapStatus(status)
-            }
-            sub={() => airingInfo({ nextAiringEpisode, season, seasonYear })}
-          />
+              <Info
+                main={() =>
+                  status === 'RELEASING' && seasonYear !== currentYear
+                    ? `Airing Since ${seasonYear}`
+                    : status === 'RELEASING'
+                    ? 'Airing'
+                    : toStartCase(status || '')
+                }
+                sub={() =>
+                  airingInfo({ nextAiringEpisode, season, seasonYear })
+                }
+              />
+            </>
+          )}
+
+          {type === MediaType.Manga && (
+            <>
+              <Info
+                main={() => formatLabel(format || '')}
+                sub={() => (chapters ? pluralize(chapters, 'chapter') : null)}
+              />
+
+              <Info
+                main={() =>
+                  status === 'RELEASING'
+                    ? `Publishing`
+                    : toStartCase(status || '')
+                }
+                sub={() =>
+                  status === 'RELEASING'
+                    ? `Since ${startDate?.year}`
+                    : `From ${startDate?.year} to ${endDate?.year}`
+                }
+              />
+            </>
+          )}
         </div>
       </div>
     </article>

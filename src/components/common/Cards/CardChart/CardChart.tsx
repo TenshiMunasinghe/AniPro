@@ -1,7 +1,10 @@
-import { memo, useContext } from 'react'
+import { memo } from 'react'
+import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../../api/queries'
+import { linkToMediaPage } from '../../../../App'
+import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
-import { ImageSizeContext, Media } from '../../CardGrid/CardGrid'
+import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
 import Genres from '../../Genres/Genres'
@@ -10,14 +13,14 @@ import Title from '../../Title/Title'
 import styles from './CardChart.module.scss'
 
 interface Props {
-  media: Media
+  media: DeepPartial<Media>
+  imageSize: ImageSize
 }
 
 const CardChart = ({
-  media: { id, title, coverImage, genres, meanScore, description },
+  media: { id, title, coverImage, genres, meanScore, description, type },
+  imageSize,
 }: Props) => {
-  const imageSize = useContext(ImageSizeContext)
-
   return (
     <article
       className={styles.wrapper}
@@ -25,7 +28,7 @@ const CardChart = ({
         coverImage?.color || 'var(--color-foreground-200)'
       )}>
       <CoverImage
-        id={id}
+        link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
       />
@@ -34,16 +37,15 @@ const CardChart = ({
           <div className={styles.scrollWrapper}>
             <header className={styles.cardHeader}>
               <div className={styles.title}>
-                <Title id={id} text={title?.romaji || 'no title'} />
+                <Title
+                  link={linkToMediaPage(id, type || MediaType.Anime)}
+                  text={title?.romaji || 'no title'}
+                />
                 <h4 className={styles.secondaryTitle}>
                   {title?.english || title?.romaji || 'no title'}
                 </h4>
               </div>
-              {meanScore && (
-                <div className={styles.score}>
-                  <Score score={meanScore} />
-                </div>
-              )}
+              {meanScore && <Score score={meanScore} />}
             </header>
 
             <p className={styles.description} tabIndex={0}>
@@ -54,7 +56,7 @@ const CardChart = ({
         <Genres
           as='footer'
           genres={genres}
-          canInteract={true}
+          canInteract
           className={styles.genres}
         />
       </section>

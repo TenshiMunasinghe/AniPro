@@ -1,0 +1,22 @@
+query characterInfo($id: Int!) {
+  Character(id: $id) {
+    name {
+      full
+      native
+      alternative
+      alternativeSpoiler
+    }
+    image {
+      large
+    }
+    description(asHtml: true)
+    gender
+    dateOfBirth {
+      year
+      month
+      day
+    }
+    age
+    bloodType
+  }
+}

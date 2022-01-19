@@ -1,15 +1,14 @@
 import { Link } from 'react-router-dom'
-import { linkToMediaPage } from '../../../App'
 import styles from './Title.module.scss'
 
 interface Props {
-  id: number
+  link?: string | null
   text: string
 }
 
-const Title = ({ id, text }: Props) => {
+const Title = ({ link, text }: Props) => {
   return (
-    <Link to={linkToMediaPage(id)} className={styles.link}>
+    <Link to={link || '#'} className={styles.link}>
       {text}
     </Link>
   )

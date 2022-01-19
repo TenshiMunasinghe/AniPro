@@ -3,8 +3,8 @@ import { CharacterEdge, useCharactersQuery } from '../../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
 import { ParamTypes } from '../../../../pages/media/Media'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
+import LoadMore from '../../../common/LoadMore/LoadMore'
 import Character from '../../Character/Character'
-import LoadMore from '../../LoadMore/LoadMore'
 import styles from '../People.module.scss'
 
 const Characters = () => {

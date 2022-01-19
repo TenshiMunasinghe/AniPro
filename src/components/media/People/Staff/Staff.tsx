@@ -3,7 +3,7 @@ import { useStaffQuery } from '../../../../generated'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
 import { ParamTypes } from '../../../../pages/media/Media'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
-import LoadMore from '../../LoadMore/LoadMore'
+import LoadMore from '../../../common/LoadMore/LoadMore'
 import Person from '../../Person/Person'
 import styles from '../People.module.scss'
 
@@ -50,6 +50,7 @@ const Staff = () => {
               image={staff?.node?.image?.large}
               info={staff?.role}
               key={'staff' + staff?.node?.id + staff?.role}
+              type='Staff'
             />
           ))
         )}

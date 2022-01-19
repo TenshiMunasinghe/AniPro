@@ -13,6 +13,7 @@ query overview($id: Int!) {
           }
           format
           status
+          type
         }
         id
         relationType
@@ -37,6 +38,7 @@ query overview($id: Int!) {
     }
     recommendations {
       nodes {
+        id
         mediaRecommendation {
           id
           title {
@@ -46,6 +48,7 @@ query overview($id: Int!) {
             large
             color
           }
+          type
         }
       }
     }

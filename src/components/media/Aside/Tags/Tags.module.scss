@@ -21,15 +21,10 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      text-decoration: none;
     }
 
     &.spoiler {
-      a {
-        span {
-          color: rgb(204, 99, 99);
-        }
-      }
+      color: hsl(0, 69%, var(--lightness));
     }
   }
 

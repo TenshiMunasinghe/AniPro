@@ -1,0 +1,22 @@
+.container {
+  position: relative;
+  cursor: pointer;
+
+  &.hidden {
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: var(--black-600);
+      border-radius: 0.25rem;
+    }
+  }
+
+  .tooltip {
+    font-size: var(--text-size-300);
+  }
+}

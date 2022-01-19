@@ -1,6 +1,11 @@
 import loadable from '@loadable/component'
 import debounce from 'lodash/debounce'
-import { useEffect, useLayoutEffect, useMemo } from 'react'
+import { createContext, useEffect, useLayoutEffect, useMemo } from 'react'
+import {
+  LazyComponentProps,
+  ScrollPosition,
+  trackWindowScroll,
+} from 'react-lazy-load-image-component'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import {
   BrowserRouter as Router,
@@ -9,6 +14,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner'
+import { MediaType } from './generated/index'
 import {
   Theme,
   useThemeStore,
@@ -19,12 +25,25 @@ import {
 const Home = loadable(() => import('./pages/home/Home'))
 const Search = loadable(() => import('./pages/search/Search'))
 const Media = loadable(() => import('./pages/media/Media'))
+const Character = loadable(() => import('./pages/character/Character'))
+const Staff = loadable(() => import('./pages/staff/Staff'))
 
 const queryClient = new QueryClient()
 
+export const ScrollPositionContext = createContext<ScrollPosition | undefined>(
+  undefined
+)
+
 const windowSizeSelector = (state: WindowSizeStore) => state.set
 
-export const linkToMediaPage = (id: number) => `/media/${id}`
+export const linkToMediaPage = (id: number | undefined, type: MediaType) =>
+  id ? `/media/${type.toLowerCase()}/${id}` : ''
+
+export const linkToCharacterPage = (id: number | undefined) =>
+  id ? `/character/${id}` : ''
+
+export const linkToStaffPage = (id: number | undefined) =>
+  id ? `/staff/${id}` : ''
 
 const ScrollToTop = () => {
   const { pathname, search } = useLocation()
@@ -36,7 +55,7 @@ const ScrollToTop = () => {
   return null
 }
 
-const App = () => {
+const App = ({ scrollPosition }: LazyComponentProps) => {
   const setSize = useWindowSizeStore(windowSizeSelector)
   const updateSize = useMemo(
     () =>
@@ -61,24 +80,34 @@ const App = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Router>
-        <ScrollToTop />
-        <Switch>
-          <Route exact path='/media/:id/:tab?'>
-            <Media fallback={<LoadingSpinner />} />
-          </Route>
-          <Route path='/'>
+      <ScrollPositionContext.Provider value={scrollPosition}>
+        <Router>
+          <ScrollToTop />
+          <Switch>
             <Route exact path='/'>
               <Home fallback={<LoadingSpinner />} />
             </Route>
-            <Route exact path='/search'>
+
+            <Route exact path='/media/:type/:id/:tab?'>
+              <Media fallback={<LoadingSpinner />} />
+            </Route>
+
+            <Route path='/search/:type?'>
               <Search fallback={<LoadingSpinner />} />
             </Route>
-          </Route>
-        </Switch>
-      </Router>
+
+            <Route path='/character/:id'>
+              <Character fallback={<LoadingSpinner />} />
+            </Route>
+
+            <Route path='/staff/:id'>
+              <Staff fallback={<LoadingSpinner />} />
+            </Route>
+          </Switch>
+        </Router>
+      </ScrollPositionContext.Provider>
     </QueryClientProvider>
   )
 }
 
-export default App
+export default trackWindowScroll(App)

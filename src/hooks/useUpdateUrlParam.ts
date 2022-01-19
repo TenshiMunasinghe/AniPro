@@ -1,10 +1,10 @@
 import debounce from 'lodash/debounce'
 import uniq from 'lodash/uniq'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useIsFetching } from 'react-query'
 import { useHistory, useLocation } from 'react-router-dom'
 import { allowedURLParams } from '../filterOptions/filterOptions'
-import { SearchResultQueryVariables } from '../generated/index'
+import { MediaSearchQueryVariables } from '../generated/index'
 
 type setParamArg = {
   params: URLSearchParams
@@ -20,7 +20,7 @@ const paramToObj = (params: URLSearchParams) =>
       const value = params.get(key)
       return [key, value?.includes(',') ? value.split(',') : value]
     })
-  ) as SearchResultQueryVariables
+  ) as MediaSearchQueryVariables
 
 const addParam = ({ params, value, key }: setParamArg) => {
   String(value).length !== 0
@@ -30,7 +30,7 @@ const addParam = ({ params, value, key }: setParamArg) => {
 
 const nextParam = (
   paramStr: string,
-  queryVars: Partial<SearchResultQueryVariables>
+  queryVars: Partial<MediaSearchQueryVariables>
 ) => {
   const params = new URLSearchParams(paramStr)
 
@@ -64,31 +64,53 @@ export const useUpdateUrlParam = () => {
     setParams(initialParams)
   }, [initialParams])
 
-  const updateUrl = debounce(
-    (queryVars: SearchResultQueryVariables) =>
-      history.push(
-        `/search?${nextParam(initialParams, {
-          ...queryVars,
-          page: 1,
-        })}`
+  const updateUrl = useMemo(
+    () =>
+      debounce(
+        (queryVars: MediaSearchQueryVariables) =>
+          history.push(
+            `${location.pathname}?${nextParam(initialParams, {
+              ...queryVars,
+              page: 1,
+            })}`
+          ),
+        250
       ),
-    250
+    [history, initialParams, location.pathname]
   )
 
-  const updateFilter = debounce((queryVars: SearchResultQueryVariables) => {
-    setParams(prev => nextParam(prev, queryVars || {}))
-  }, 250)
+  const updateFilter = useMemo(
+    () =>
+      debounce((queryVars: MediaSearchQueryVariables) => {
+        setParams(prev => nextParam(prev, queryVars || {}))
+      }, 250),
+    []
+  )
 
-  const applyFilter = () => history.push(`/search?${params}`)
+  const applyFilter = useCallback(
+    () => history.push(`${location.pathname}?${params}`),
+    [history, params, location.pathname]
+  )
 
-  const movePage = (page: number) =>
-    !isFetching && history.push(`/search?${nextParam(initialParams, { page })}`)
+  const movePage = useCallback(
+    (page: number) =>
+      !isFetching &&
+      history.push(
+        `${location.pathname}?${nextParam(initialParams, { page })}`
+      ),
+    [history, isFetching, initialParams, location.pathname]
+  )
+
+  const resetParams = useCallback(() => {
+    setParams('')
+  }, [])
 
   return {
     updateUrl,
     updateFilter,
     applyFilter,
     movePage,
+    resetParams,
     queryVars: {
       current: paramToObj(new URLSearchParams(params)),
       initial: paramToObj(new URLSearchParams(initialParams)),

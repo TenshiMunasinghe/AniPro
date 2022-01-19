@@ -1,13 +1,71 @@
+@use '../../../css/config.scss' as *;
+
 .container {
-  position: relative;
   display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  align-items: center;
+  position: relative;
+  background: var(--black-100);
   min-width: 100vw;
   height: 100vh;
 
-  & > * {
-    flex-shrink: 0;
-    scroll-snap-align: start;
+  .header {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: var(--space-600);
+    z-index: 2;
+  }
+
+  .context {
+    font-size: var(--text-size-300);
+  }
+
+  .slides {
+    display: flex;
+    z-index: 1;
+    overflow: hidden;
+
+    & > * {
+      flex-shrink: 0;
+    }
+  }
+
+  .footer {
+    position: absolute;
+    right: var(--space-600);
+    bottom: var(--space-600);
+    z-index: 2;
+    color: var(--primary-700);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .buttons {
+    position: absolute;
+    left: 50%;
+    bottom: var(--space-500);
+    transform: translateX(-50%);
+    z-index: 1;
+
+    @include mq(below, md) {
+      left: var(--space-500);
+      transform: translateX(0%);
+    }
+
+    button.disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    button:not(.disabled) {
+      &:hover,
+      &:focus {
+        color: var(--primary-600);
+      }
+    }
   }
 }

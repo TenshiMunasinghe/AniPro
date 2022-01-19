@@ -1,0 +1,22 @@
+query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+  Character(id: $id) {
+    media(sort: $sort) {
+      edges {
+        id
+        node {
+          ...cardCoverInfo
+        }
+        voiceActors(sort: [FAVOURITES_DESC]) {
+          id
+          name {
+            full
+          }
+          image {
+            large
+          }
+          languageV2
+        }
+      }
+    }
+  }
+}

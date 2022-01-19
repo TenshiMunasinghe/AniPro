@@ -4,7 +4,7 @@
 .wrapper {
   @include card-config.card-wrapper;
 
-  a {
+  & > a:first-child {
     max-width: 11rem;
     flex: 0 0 42.5%;
   }
@@ -46,19 +46,6 @@
     overflow: hidden;
   }
 
-  .score {
-    @include mq(below, sm) {
-      display: none;
-    }
-  }
-
-  @include mq(above, sm) {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    column-gap: var(--space-400);
-    place-items: start;
-  }
-
   .secondaryTitle {
     font-weight: 400;
     font-size: var(--text-size-200);
@@ -67,6 +54,18 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
+
+  @include mq(below, sm) {
+    & > *:nth-child(2) {
+      display: none;
+    }
+  }
+  @include mq(above, sm) {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: var(--space-400);
+    place-items: start;
   }
 }
 

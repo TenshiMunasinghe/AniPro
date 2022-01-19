@@ -30,17 +30,14 @@
 
 @mixin description($lines: 1) {
   @include add-ellipsis($lines);
-  @include on-non-hoverable-devices {
-    &:focus,
-    &:focus-within {
-      @include show-description;
-    }
+
+  &:focus,
+  &:focus-within {
+    @include show-description;
   }
 
-  @include on-hoverable-devices {
-    &:hover {
-      @include show-description;
-    }
+  &:hover {
+    @include show-description;
   }
 }
 
@@ -61,16 +58,15 @@
     txt: 'color',
     bg: 'background-color',
   );
-  @include on-hoverable-devices {
-    &:hover,
-    &:focus {
-      @if ($hover == 'underline') {
-        text-decoration: underline;
-      } @else {
-        #{map.get($things-to-change, $change)}: $hover;
-      }
+  &:hover,
+  &:focus {
+    @if ($hover == 'underline') {
+      text-decoration: underline;
+    } @else {
+      #{map.get($things-to-change, $change)}: $hover;
     }
   }
+
   &:active {
     @if ($active == 'underline') {
       text-decoration: underline;
@@ -201,5 +197,25 @@
     img {
       transform: scale(1.1);
     }
+  }
+}
+
+@mixin page-padding {
+  padding: var(--space-700) var(--space-300);
+
+  @include mq(above, sm) {
+    @include padding-horizontal(var(--space-500));
+  }
+
+  @include mq(above, md) {
+    @include padding-horizontal(var(--space-600));
+  }
+
+  @include mq(above, lg) {
+    @include padding-horizontal(var(--space-800));
+  }
+
+  @include mq(above, xl) {
+    @include padding-horizontal(var(--space-900));
   }
 }

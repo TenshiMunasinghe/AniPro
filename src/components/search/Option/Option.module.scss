@@ -7,15 +7,12 @@
   grid-template-columns: 0 auto 1fr;
   width: fit-content;
   cursor: pointer;
+  padding: var(--space-300);
+  border-radius: 0.2rem;
 
-  &:focus-within {
-    .checkMark {
-      border-color: var(--color-text-accent-100);
-    }
-
-    .option {
-      color: var(--color-text-accent-100);
-    }
+  &:focus-within,
+  &:hover {
+    background-color: var(--color-foreground-100);
   }
 }
 

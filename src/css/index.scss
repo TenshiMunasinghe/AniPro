@@ -8,11 +8,19 @@
 html {
   font-family: 'Sora', sans-serif;
   font-weight: normal;
-  font-size: clamp(14px, calc(0.2rem + 1.3vw), 16px);
+  font-size: 80%;
+
+  @include config.mq(above, sm) {
+    font-size: 90%;
+  }
+
+  @include config.mq(above, md) {
+    font-size: 100%;
+  }
 }
 
 * {
-  color: var(--color-text-200);
+  color: inherit;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -34,6 +42,10 @@ button {
   text-align: left;
 }
 
+a {
+  text-decoration: none;
+}
+
 body {
   &.dark {
     --color-background: var(--black-100);
@@ -48,6 +60,8 @@ body {
     --color-text-100: var(--white-700);
     --color-text-200: var(--white-600);
     --color-text-300: var(--white-500);
+    --color-text-400: var(--white-400);
+    --color-text-500: var(--white-300);
     --color-text-invert-100: var(--black-100);
     --color-text-invert-200: var(--black-200);
     --color-text-invert-300: var(--black-300);
@@ -59,8 +73,8 @@ body {
     --color-underline-100: var(--black-900);
     --highlight-100: 120%;
     --highlight-200: 140%;
-    --color-shadow: var(--black-200);
-    --lightness: 75%;
+    --color-shadow: var(--black-600);
+    --lightness: 80%;
   }
 
   &.light {
@@ -76,6 +90,8 @@ body {
     --color-text-100: var(--black-100);
     --color-text-200: var(--black-200);
     --color-text-300: var(--black-300);
+    --color-text-400: var(--black-200);
+    --color-text-500: var(--black-100);
     --color-text-invert-100: var(--white-600);
     --color-text-invert-200: var(--white-500);
     --color-text-invert-300: var(--white-400);
@@ -84,7 +100,7 @@ body {
     --color-text-accent-300: var(--primary-600);
     --color-border-100: var(--black-800);
     --color-border-200: var(--black-900);
-    --color-underline-100: var(--white-600);
+    --color-underline-100: var(--white-100);
     --highlight-100: 90%;
     --highlight-200: 80%;
     --color-shadow: var(--black-900);
@@ -105,6 +121,7 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  color: var(--color-text-200);
 }
 
 .ct-labels {

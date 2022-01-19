@@ -4,7 +4,7 @@ import { useReviewsQuery } from '../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { ParamTypes } from '../../../pages/media/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
-import LoadMore from '../LoadMore/LoadMore'
+import LoadMore from '../../common/LoadMore/LoadMore'
 import Review from '../Review/Review'
 import styles from './Reviews.module.scss'
 

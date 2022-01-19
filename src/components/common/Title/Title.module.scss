@@ -2,7 +2,8 @@
 
 .link {
   color: var(--color-text-200);
-  text-decoration-color: var(--black-600);
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-underline-100);
   text-underline-offset: var(--space-100);
   @include add-ellipsis(2);
   font-weight: 550;
@@ -13,7 +14,7 @@
   &:hover,
   &:focus {
     color: var(--color-adjusted, --color-text-100) !important;
-    text-decoration: underline !important;
-    text-decoration-color: inherit !important;
+    text-decoration-line: underline;
+    text-decoration-color: inherit;
   }
 }

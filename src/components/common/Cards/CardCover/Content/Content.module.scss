@@ -1,0 +1,47 @@
+@use '../../../../../css/config.scss' as *;
+@use '../cardCoverTemplate.module.scss' as template;
+
+.container {
+  @include template.card-cover;
+
+  .rank {
+    position: absolute;
+    left: calc(-1 * var(--space-200));
+    top: calc(-1 * var(--space-200));
+    width: 2.75rem;
+  }
+
+  .images {
+    position: relative;
+    height: fit-content;
+  }
+
+  .text {
+    & > *:last-child {
+      font-size: var(--text-size-300);
+      color: var(--color-text-500);
+    }
+  }
+
+  .cover,
+  .subContent {
+    display: flex;
+
+    & > a {
+      width: 100%;
+    }
+  }
+
+  .subContent {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40%;
+
+    & > a {
+      border: solid var(--black-400);
+      border-bottom: 0.5px;
+      border-right: 0.5px;
+    }
+  }
+}

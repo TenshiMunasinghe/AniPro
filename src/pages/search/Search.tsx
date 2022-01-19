@@ -1,69 +1,89 @@
-import { useCallback, useState } from 'react'
-import CardTypeButton from '../../components/common/CardTypeButton/CardTypeButton'
-import Dropdown from '../../components/common/Dropdown/Dropdown'
+import { Route, Switch } from 'react-router-dom'
 import NavBar from '../../components/common/NavBar/NavBar'
 import Footer from '../../components/home/Footer/Footer'
-import ActiveFilters from '../../components/search/ActiveFilters/ActiveFilters'
+import Media from '../../components/search/Media/Media'
+import PeopleHeader from '../../components/search/PeopleHeader/PeopleHeader'
+import CharactersSearchResult from '../../components/search/PeopleSearchResult/CharactersSearchResult'
+import StaffSearchResult from '../../components/search/PeopleSearchResult/StaffSearchResult'
 import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import SearchOptions from '../../components/search/SearchOptions/SearchOptions'
-import SearchResult from '../../components/search/SearchResult/SearchResult'
-import { sortByOptions } from '../../filterOptions/filterOptions'
-import { MediaSort } from '../../generated/index'
-import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { addKey } from '../../utils/addKey'
+import { MediaType } from '../../generated'
 import styles from './Search.module.scss'
 
-export type CardType = 'chart' | 'cover' | 'table'
+export const SEARCH_SLUGS = [
+  'anime',
+  'manga',
+  'staff',
+  'characters',
+  'reviews',
+  'recommendations',
+] as const
 
-const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
-
-const cardTypes = addKey(CARD_TYPES)
+export type SearchSlugs = typeof SEARCH_SLUGS[number]
 
 const Search = () => {
-  const [cardType, setCardType] = useState<CardType>('chart')
-
-  const { updateUrl, queryVars } = useUpdateUrlParam()
-
-  const sortByOnChange = useCallback(
-    (value: string | string[]) => {
-      updateUrl({ sortBy: value as MediaSort | MediaSort[] })
-    },
-    [updateUrl]
-  )
-
   return (
     <>
       <NavBar />
-      <div className={styles.container}>
-        <div className={styles.upperSection}>
-          <ActiveFilters />
-          <section className={styles.extraOptions}>
-            <section className={styles.gridType}>
-              {cardTypes.map(c => (
-                <CardTypeButton
-                  key={c.key}
-                  cardType={c.value as CardType}
-                  setCardType={setCardType}
-                  isActive={c.value === cardType}
-                />
-              ))}
-            </section>
-            <Dropdown
-              onChange={sortByOnChange}
-              isMulti={false}
-              options={sortByOptions}
-              selected={queryVars.initial.sortBy || MediaSort.TrendingDesc}
-            />
-          </section>
-        </div>
-
-        <main className={styles.mainContent}>
-          <SearchOptions />
-
-          <SearchResult queryVars={queryVars.initial} cardType={cardType} />
-          <ScrollButton />
-        </main>
-      </div>
+      <main className={styles.container}>
+        <Switch>
+          <Route exact path='/search/anime'>
+            <Media type={MediaType.Anime} />
+          </Route>
+          <Route exact path='/search/manga'>
+            <Media type={MediaType.Manga} />
+          </Route>
+          <Route path='/search/staff/'>
+            <Route exact path='/search/staff'>
+              <PeopleHeader heading='Search Staff' />
+              <StaffSearchResult
+                isBirthday={true}
+                heading={{ text: 'Birthdays', link: '/search/staff/birthday' }}
+              />
+              <StaffSearchResult
+                heading={{
+                  text: 'Most Favourited Staff',
+                  link: '/search/staff/favourite',
+                }}
+              />
+            </Route>
+            <Route exact path='/search/staff/birthday'>
+              <PeopleHeader heading='Birthday Staff' />
+              <StaffSearchResult isBirthday={true} />
+            </Route>
+            <Route exact path='/search/staff/favourite'>
+              <PeopleHeader heading='Most Favourited Staff' />
+              <StaffSearchResult />
+            </Route>
+          </Route>
+          <Route path='/search/characters'>
+            <Route exact path='/search/characters'>
+              <PeopleHeader heading='Search Characters' />
+              <CharactersSearchResult
+                isBirthday={true}
+                heading={{
+                  text: 'Birthdays',
+                  link: '/search/characters/birthday',
+                }}
+              />
+              <CharactersSearchResult
+                heading={{
+                  text: 'Most Favourited Characters',
+                  link: '/search/characters/favourite',
+                }}
+              />
+            </Route>
+            <Route exact path='/search/characters/birthday'>
+              <PeopleHeader heading='Birthday Characters' />
+              <CharactersSearchResult isBirthday={true} />
+            </Route>
+            <Route exact path='/search/characters/favourite'>
+              <PeopleHeader heading='Most Favourited Characters' />
+              <CharactersSearchResult />
+            </Route>
+          </Route>
+        </Switch>
+      </main>
+      <ScrollButton />
       <Footer />
     </>
   )

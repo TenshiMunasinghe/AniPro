@@ -110,43 +110,39 @@
 }
 
 .table {
-  display: block;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  column-gap: var(--space-300);
   padding: var(--space-400);
   font-size: var(--text-size-400);
   border-radius: 0.2em;
   background: var(--color-foreground-100);
 
-  @include mq(above, sm) {
-    display: grid;
-    grid-template-columns: calc(3rem + 7%) 1fr;
-    column-gap: var(--space-300);
-  }
-
   .content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 6rem 6rem 12rem;
+    column-gap: var(--space-500);
+    padding-left: var(--space-500);
   }
 
   .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     flex: 1 0 auto;
   }
 
   .title {
-    width: 60%;
-    height: min-content;
+    width: 70%;
     margin: 0;
-    margin-bottom: var(--space-300);
   }
 
   .genres {
     display: flex;
     flex-wrap: wrap;
     overflow: hidden;
-    font-size: var(--text-size-300);
-    margin-bottom: var(--space-400);
+    font-size: var(--text-size-200);
 
     .genre {
       width: 6em;
@@ -163,10 +159,6 @@
     padding-top: calc(100% / var(--image-aspect-ratio));
     border-radius: 0.15rem;
     overflow: hidden;
-
-    @include mq(below, sm) {
-      display: none;
-    }
   }
 
   .image {
@@ -179,10 +171,9 @@
   }
 
   .row {
-    flex-basis: 7rem;
-    max-width: 25%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     margin: 0;
   }
 

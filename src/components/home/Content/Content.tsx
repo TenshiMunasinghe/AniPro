@@ -1,35 +1,30 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
-import { allowedURLParams } from '../../../filterOptions/filterOptions'
 import {
-  SearchResultQueryVariables,
-  useSearchResultQuery,
+  MediaSearchQueryVariables,
+  useMediaSearchQuery,
 } from '../../../generated/index'
-import { CardType } from '../../../pages/search/Search'
+import { linkToSearchPage } from '../../../utils/linkToSearchPage'
 import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
+import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
 import styles from './Content.module.scss'
 
 export type _Content = {
   text: string
-  cardType: CardType
+  cardType?: CardType
   hasRank?: boolean
 }
 
 interface Props {
-  queryVar: SearchResultQueryVariables
+  queryVar: MediaSearchQueryVariables
   content: _Content
 }
 
 const Content = ({ queryVar, content }: Props) => {
-  const { perPage, ...filterQuery } = Object.fromEntries(
-    Object.entries(queryVar).filter(([k]) =>
-      //filter out the query variable which is not a filter option
-      allowedURLParams.includes(k)
-    )
-  )
+  const cardType = content.cardType || 'cover'
 
-  const { data, isLoading, isError } = useSearchResultQuery(
+  const { data, isLoading, isError } = useMediaSearchQuery(
     gqlRequestClient,
     queryVar
   )
@@ -50,7 +45,7 @@ const Content = ({ queryVar, content }: Props) => {
       .sort((a, b) => (a.rank && b.rank ? a.rank - b.rank : 0))
   }, [data?.Page?.media, content.hasRank])
 
-  const link = `/search?${new URLSearchParams(filterQuery).toString()}`
+  const link = linkToSearchPage(queryVar)
 
   return (
     <section className={styles.content}>
@@ -66,9 +61,10 @@ const Content = ({ queryVar, content }: Props) => {
         medias={medias}
         isLoading={isLoading}
         isError={isError}
-        cardType={content.cardType}
-        imageSize={content.cardType === 'table' ? 'large' : 'extraLarge'}
-        sideScroll={content.cardType === 'cover'}
+        loadingCount={queryVar.perPage || undefined}
+        cardType={cardType}
+        imageSize={cardType === 'table' ? 'large' : 'extraLarge'}
+        sideScroll={cardType === 'cover'}
       />
     </section>
   )

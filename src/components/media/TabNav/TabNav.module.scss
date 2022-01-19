@@ -19,6 +19,15 @@
     position: relative;
     padding: var(--space-100) var(--space-300);
 
+    &.active {
+      color: var(--color-text-accent-100);
+
+      &:before,
+      &:after {
+        background-color: var(--color-text-accent-100);
+      }
+    }
+
     &:before,
     &:after {
       content: '';

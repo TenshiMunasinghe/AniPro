@@ -39,7 +39,7 @@
     height: 100%;
     position: absolute;
     background-color: var(--primary-300);
-    animation: progress-before infinite 2s ease-out;
+    animation: progress-before infinite 4s ease-out;
   }
 
   &::after {
@@ -49,6 +49,6 @@
     height: 100%;
     position: absolute;
     background-color: var(--primary-300);
-    animation: progress-after infinite 2s ease-in;
+    animation: progress-after infinite 4s ease-in;
   }
 }
