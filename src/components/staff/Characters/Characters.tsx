@@ -14,10 +14,11 @@ import Dropdowns from '../../person/Dropdowns/Dropdowns'
 import Year from '../Year/Year'
 import Cards from './Cards/Cards'
 
-const Characters = () => {
+const Characters = ({
+  sortBy,
+  sortByOnChange,
+}: ReturnType<typeof useSortMedia>) => {
   const { id } = useParams<{ id: string }>()
-
-  const { sortBy, sortByOnChange } = useSortMedia()
 
   const {
     data,

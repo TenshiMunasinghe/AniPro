@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useStaffRoleCountsQuery } from '../../../generated/index'
+import { useSortMedia } from '../../../hooks/useSortMedia'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Characters from '../Characters/Characters'
 import StaffRoles from '../StaffRoles/StaffRoles'
@@ -10,6 +11,7 @@ import styles from './Medias.module.scss'
 
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
+  const sortProps = useSortMedia()
   const { data, isLoading } = useStaffRoleCountsQuery(gqlRequestClient, {
     id: parseInt(id),
   })
@@ -36,8 +38,8 @@ const Medias = () => {
           <button onClick={() => setRole('staff')}>Staff Roles</button>
         </div>
       )}
-      {role === 'voiceActor' && <Characters />}
-      {role === 'staff' && <StaffRoles />}
+      {role === 'voiceActor' && <Characters {...sortProps} />}
+      {role === 'staff' && <StaffRoles {...sortProps} />}
     </>
   )
 }
