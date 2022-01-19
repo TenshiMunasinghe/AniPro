@@ -1,7 +1,0 @@
-@use '../css/config.scss' as *;
-
-.container {
-  @include page-padding;
-  padding-top: 0;
-  @include gap($column: var(--space-600));
-}

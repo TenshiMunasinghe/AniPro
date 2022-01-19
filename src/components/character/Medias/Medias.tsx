@@ -16,7 +16,6 @@ import Card from '../../common/Cards/CardCover/Content/Content'
 import CardContainer from '../../person/CardContainer/CardContainer'
 import CardGrid from '../../person/CardGrid/CardGrid'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
-import styles from './Medias.module.scss'
 
 export const sortByOptions = [
   { label: 'Popularity', value: MediaSort.PopularityDesc },
@@ -58,7 +57,7 @@ const Medias = () => {
   }))
 
   return (
-    <div className={styles.container}>
+    <>
       <Dropdowns
         dropdowns={[
           {
@@ -128,7 +127,7 @@ const Medias = () => {
           </CardGrid>
         )}
       </CardContainer>
-    </div>
+    </>
   )
 }
 

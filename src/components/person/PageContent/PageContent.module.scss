@@ -1,0 +1,14 @@
+@use '../../../css/config.scss' as *;
+
+.container {
+  @include page-padding;
+  padding-top: 0;
+  @include gap($column: var(--space-600));
+
+  .main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    @include gap($column: var(--space-500));
+  }
+}

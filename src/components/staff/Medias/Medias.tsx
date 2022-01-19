@@ -23,7 +23,7 @@ const Medias = () => {
   if (isLoading) return <LoadingSpinner />
 
   return (
-    <div className={styles.container}>
+    <>
       {characterCount && staffCount && (
         <div
           className={classnames(styles.roles, {
@@ -38,7 +38,7 @@ const Medias = () => {
       )}
       {role === 'voiceActor' && <Characters />}
       {role === 'staff' && <StaffRoles />}
-    </div>
+    </>
   )
 }
 

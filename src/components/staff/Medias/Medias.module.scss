@@ -1,43 +1,41 @@
 @use '../../../css/config.scss' as *;
 
-.container {
-  .roles {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-content: center;
-    width: 100%;
-    position: relative;
-    margin-bottom: var(--space-400);
+.roles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-content: center;
+  width: 100%;
+  position: relative;
+  margin-bottom: var(--space-400);
 
+  &::after {
+    content: '';
+    height: 1px;
+    width: 50%;
+    position: absolute;
+    bottom: 0;
+    background-color: var(--color-text-200);
+    transition: left 0.1s ease-in-out;
+  }
+
+  &.vaActive {
     &::after {
-      content: '';
-      height: 1px;
-      width: 50%;
-      position: absolute;
-      bottom: 0;
-      background-color: var(--color-text-200);
-      transition: left 0.1s ease-in-out;
+      left: 0;
     }
+  }
 
-    &.vaActive {
-      &::after {
-        left: 0;
-      }
+  &.staffActive {
+    &::after {
+      left: 50%;
     }
+  }
 
-    &.staffActive {
-      &::after {
-        left: 50%;
-      }
-    }
+  button {
+    text-align: center;
+    @include padding-vertical(var(--space-200));
 
-    button {
-      text-align: center;
-      @include padding-vertical(var(--space-200));
-
-      &:hover {
-        color: var(--color-text-accent-100);
-      }
+    &:hover {
+      color: var(--color-text-accent-100);
     }
   }
 }

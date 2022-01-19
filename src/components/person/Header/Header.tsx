@@ -6,7 +6,11 @@ import Description from './Description/Description'
 import styles from './Header.module.scss'
 import Item from './Item/Item'
 
-type Props = { data: CharacterInfoQuery['Character'] | StaffInfoQuery['Staff'] }
+export type PersonPageHeaderData =
+  | CharacterInfoQuery['Character']
+  | StaffInfoQuery['Staff']
+
+type Props = { data: PersonPageHeaderData }
 
 const Header = ({ data }: Props) => {
   if (!data || !data.name) return null

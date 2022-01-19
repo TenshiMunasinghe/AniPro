@@ -2,11 +2,8 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import Medias from '../../components/character/Medias/Medias'
 import LoadingSpinner from '../../components/common/LoadingSpinner/LoadingSpinner'
-import NavBar from '../../components/common/NavBar/NavBar'
-import Footer from '../../components/home/Footer/Footer'
-import Header from '../../components/person/Header/Header'
+import PageContent from '../../components/person/PageContent/PageContent'
 import { useCharacterInfoQuery } from '../../generated/index'
-import styles from '../personPage.module.scss'
 
 const Character = () => {
   const { id } = useParams<{ id: string }>()
@@ -19,14 +16,11 @@ const Character = () => {
   if (!data || !data.Character) return null
 
   return (
-    <>
-      <NavBar />
-      <div className={styles.container}>
-        <Header data={data?.Character} />
-        <Medias />
-      </div>
-      <Footer />
-    </>
+    <PageContent
+      isLoading={isLoading}
+      headerContent={data?.Character}
+      MainContent={() => <Medias />}
+    />
   )
 }
 
