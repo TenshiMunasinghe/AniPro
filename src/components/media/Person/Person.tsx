@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { linkToCharacterPage, linkToStaffPage } from '../../../App'
 import { StaffImage, StaffName } from '../../../generated/index'
-import { context } from '../../../pages/media/Media'
+import { context } from '../../../pages/Media'
 import { toStartCase } from '../../../utils/toStartCase'
 import styles from './Person.module.scss'
 

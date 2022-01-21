@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useStaffQuery } from '../../../../generated'
 import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQuery'
-import { ParamTypes } from '../../../../pages/media/Media'
+import { ParamTypes } from '../../../../pages/Media'
 import LoadingSpinner from '../../../common/LoadingSpinner/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
 import Person from '../../Person/Person'
@@ -10,29 +10,24 @@ import styles from '../People.module.scss'
 const Staff = () => {
   const { id } = useParams<ParamTypes>()
 
-  const {
-    data,
-    isLoading,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteGraphQLQuery(
-    useStaffQuery,
-    ({ pageParam = 1 }) => ({ id: parseInt(id), page: pageParam }),
-    {
-      getNextPageParam: ({ Media }) => {
-        if (!Media?.staff?.pageInfo?.currentPage) return
+  const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useInfiniteGraphQLQuery(
+      useStaffQuery,
+      ({ pageParam = 1 }) => ({ id: parseInt(id), page: pageParam }),
+      {
+        getNextPageParam: ({ Media }) => {
+          if (!Media?.staff?.pageInfo?.currentPage) return
 
-        const {
-          staff: { pageInfo },
-        } = Media
+          const {
+            staff: { pageInfo },
+          } = Media
 
-        return pageInfo.hasNextPage
-          ? (pageInfo?.currentPage || 0) + 1
-          : undefined
-      },
-    }
-  )
+          return pageInfo.hasNextPage
+            ? (pageInfo?.currentPage || 0) + 1
+            : undefined
+        },
+      }
+    )
 
   if (isLoading) return <LoadingSpinner isCenter={{ x: true, y: false }} />
 

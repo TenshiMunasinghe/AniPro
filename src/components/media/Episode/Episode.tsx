@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { MediaStreamingEpisode } from '../../../generated'
-import { context } from '../../../pages/media/Media'
+import { context } from '../../../pages/Media'
 import styles from './Episode.module.scss'
 
 interface Props {

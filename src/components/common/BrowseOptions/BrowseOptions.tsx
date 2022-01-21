@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
-import { SEARCH_SLUGS } from '../../../pages/search/Search'
+import { SEARCH_SLUGS } from '../../../pages/Search'
 import Dropdown from '../Dropdown/Dropdown'
 import styles from './BrowseOptions.module.scss'
 

@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --media-page-image-width: clamp(8rem, 8rem + 7vw, 15rem);
+}

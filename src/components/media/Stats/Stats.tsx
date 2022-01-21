@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useStatsQuery } from '../../../generated/index'
-import { ParamTypes } from '../../../pages/media/Media'
+import { ParamTypes } from '../../../pages/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Content from '../../media/Content/Content'
 import LineChart from '../LineChart/LineChart'

@@ -22,11 +22,11 @@ import {
   WindowSizeStore,
 } from './zustand/stores'
 
-const Home = loadable(() => import('./pages/home/Home'))
-const Search = loadable(() => import('./pages/search/Search'))
-const Media = loadable(() => import('./pages/media/Media'))
-const Character = loadable(() => import('./pages/character/Character'))
-const Staff = loadable(() => import('./pages/staff/Staff'))
+const Home = loadable(() => import('./pages/Home'))
+const Search = loadable(() => import('./pages/Search'))
+const Media = loadable(() => import('./pages/Media'))
+const Character = loadable(() => import('./pages/Character'))
+const Staff = loadable(() => import('./pages/Staff'))
 
 const queryClient = new QueryClient()
 

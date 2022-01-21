@@ -12,7 +12,7 @@ import {
   MediaType,
 } from '../../../generated/index'
 import { useOverflow } from '../../../hooks/useOverflow'
-import { context } from '../../../pages/media/Media'
+import { context } from '../../../pages/Media'
 import styles from './Relation.module.scss'
 
 // const UNSUPPORTED_FORMAT: (MediaFormat | undefined | null)[] = [

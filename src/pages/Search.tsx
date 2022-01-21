@@ -1,13 +1,13 @@
 import { Route, Switch } from 'react-router-dom'
-import NavBar from '../../components/common/NavBar/NavBar'
-import Footer from '../../components/home/Footer/Footer'
-import Media from '../../components/search/Media/Media'
-import PeopleHeader from '../../components/search/PeopleHeader/PeopleHeader'
-import CharactersSearchResult from '../../components/search/PeopleSearchResult/CharactersSearchResult'
-import StaffSearchResult from '../../components/search/PeopleSearchResult/StaffSearchResult'
-import ScrollButton from '../../components/search/ScrollButton/ScrollButton'
-import { MediaType } from '../../generated'
-import styles from './Search.module.scss'
+import NavBar from '../components/common/NavBar/NavBar'
+import PageWrapper from '../components/common/PageWrapper'
+import Footer from '../components/home/Footer/Footer'
+import Media from '../components/search/Media/Media'
+import PeopleHeader from '../components/search/PeopleHeader/PeopleHeader'
+import CharactersSearchResult from '../components/search/PeopleSearchResult/CharactersSearchResult'
+import StaffSearchResult from '../components/search/PeopleSearchResult/StaffSearchResult'
+import ScrollButton from '../components/search/ScrollButton/ScrollButton'
+import { MediaType } from '../generated'
 
 export const SEARCH_SLUGS = [
   'anime',
@@ -24,7 +24,7 @@ const Search = () => {
   return (
     <>
       <NavBar />
-      <main className={styles.container}>
+      <PageWrapper className='gap-y-6'>
         <Switch>
           <Route exact path='/search/anime'>
             <Media type={MediaType.Anime} />
@@ -82,7 +82,7 @@ const Search = () => {
             </Route>
           </Route>
         </Switch>
-      </main>
+      </PageWrapper>
       <ScrollButton />
       <Footer />
     </>

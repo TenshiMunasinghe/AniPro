@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../../api/graphqlClient'
 import { useWatchQuery } from '../../../generated'
-import { ParamTypes } from '../../../pages/media/Media'
+import { ParamTypes } from '../../../pages/Media'
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import Episode from '../Episode/Episode'
 import styles from './Episodes.module.scss'

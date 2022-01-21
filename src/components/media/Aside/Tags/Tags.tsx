@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom'
 import ReactTooltip from 'react-tooltip'
 import { MediaTypes } from '../../../../filterOptions/filterOptions'
 import { MediaTag, MediaType } from '../../../../generated/index'
-import { ParamTypes } from '../../../../pages/media/Media'
+import { ParamTypes } from '../../../../pages/Media'
 import { linkToSearchPage } from '../../../../utils/linkToSearchPage'
 import styles from './Tags.module.scss'
 

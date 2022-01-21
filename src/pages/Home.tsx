@@ -1,10 +1,10 @@
-import NavBar from '../../components/common/NavBar/NavBar'
-import Footer from '../../components/home/Footer/Footer'
-import Slider from '../../components/home/Slider/Slider'
-import MediaHome from '../../components/search/Media/Home'
-import { MediaType } from '../../generated'
-import { useMediaHomeContent } from '../../hooks/useMediaHomeContent'
-import styles from './Home.module.scss'
+import NavBar from '../components/common/NavBar/NavBar'
+import PageWrapper from '../components/common/PageWrapper'
+import Footer from '../components/home/Footer/Footer'
+import Slider from '../components/home/Slider/Slider'
+import MediaHome from '../components/search/Media/Home'
+import { MediaType } from '../generated'
+import { useMediaHomeContent } from '../hooks/useMediaHomeContent'
 
 const Home = () => {
   const { contents } = useMediaHomeContent()
@@ -21,10 +21,10 @@ const Home = () => {
         context={contents.ANIME[randomKey].text}
       />
       <NavBar position='sticky' />
-      <div className={styles.content}>
+      <PageWrapper className='relative'>
         <MediaHome type={MediaType.Anime} />
         <MediaHome type={MediaType.Manga} />
-      </div>
+      </PageWrapper>
       <Footer />
     </>
   )

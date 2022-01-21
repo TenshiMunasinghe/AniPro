@@ -18,7 +18,7 @@ const PageContent = ({ headerContent, isLoading, MainContent }: Props) => {
   return (
     <>
       <NavBar />
-      <PageWrapper className='gap-y-4'>
+      <PageWrapper className='space-y-4'>
         <Header data={headerContent} />
         <main className={styles.main}>
           <MainContent />

@@ -1,12 +1,12 @@
 /// <reference types="@welldone-software/why-did-you-render" />
-import './wdyr.ts'
+import 'chartist/dist/chartist.min.css'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import './css/reset.css'
-import 'chartist/dist/chartist.min.css'
 import './css/index.scss'
+import './index.css'
 import * as serviceWorker from './serviceWorker'
+import './wdyr.ts'
 
 ReactDOM.render(
   <StrictMode>

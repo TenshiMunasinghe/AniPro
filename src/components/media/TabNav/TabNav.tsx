@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { Link, useParams } from 'react-router-dom'
-import { ParamTypes, TabsType } from '../../../pages/media/Media'
+import { ParamTypes, TabsType } from '../../../pages/Media'
 import { toStartCase } from '../../../utils/toStartCase'
 import styles from './TabNav.module.scss'
 
