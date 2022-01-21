@@ -30,6 +30,7 @@ const StaffSearchResult = (props: Props) => {
         heading && { text: heading.text, link: heading.link + location.search }
       }
       isLoading={isLoading}
+      type='staff'
     />
   )
 }

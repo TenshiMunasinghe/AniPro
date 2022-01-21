@@ -5,21 +5,22 @@ import {
 } from '../../../generated/index'
 import Card from '../../common/Cards/CardCover/Content/Content'
 
-type Props =
-  | NonNullable<NonNullable<SearchStaffQuery['Page']>['staff']>[number]
-  | NonNullable<
-      NonNullable<SearchCharactersQuery['Page']>['characters']
-    >[number]
+type Props = {
+  person:
+    | NonNullable<NonNullable<SearchStaffQuery['Page']>['staff']>[number]
+    | NonNullable<
+        NonNullable<SearchCharactersQuery['Page']>['characters']
+      >[number]
+  type: 'character' | 'staff'
+}
 
-const Person = (props: Props) => {
-  if (!props) return null
+const Person = ({ person, type }: Props) => {
+  if (!person) return null
 
-  const { name, image, id } = props
+  const { name, image, id } = person
 
   const link =
-    props.__typename === 'Character'
-      ? linkToCharacterPage(id)
-      : linkToStaffPage(id)
+    type === 'character' ? linkToCharacterPage(id) : linkToStaffPage(id)
 
   return <Card main={{ title: name?.full, image: image?.large, link }} />
 }

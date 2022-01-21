@@ -1,5 +1,6 @@
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
 import NavBar from '../../common/NavBar/NavBar'
+import PageWrapper from '../../common/PageWrapper'
 import Header, { PersonPageHeaderData } from '../Header/Header'
 import styles from './PageContent.module.scss'
 
@@ -17,12 +18,12 @@ const PageContent = ({ headerContent, isLoading, MainContent }: Props) => {
   return (
     <>
       <NavBar />
-      <div className={styles.container}>
+      <PageWrapper className='gap-y-4'>
         <Header data={headerContent} />
         <main className={styles.main}>
           <MainContent />
         </main>
-      </div>
+      </PageWrapper>
     </>
   )
 }

@@ -20,9 +20,10 @@ interface Props {
   people?: PersonType[] | null
   heading?: PeopleHeading
   isLoading: boolean
+  type: 'character' | 'staff'
 }
 
-const PeopleGrid = ({ people, heading, isLoading }: Props) => {
+const PeopleGrid = ({ people, heading, isLoading, type }: Props) => {
   return (
     <div className={styles.container}>
       {heading && (
@@ -35,7 +36,8 @@ const PeopleGrid = ({ people, heading, isLoading }: Props) => {
       ) : people?.length ? (
         <div className={styles.people}>
           {people.map(
-            person => person && <Person key={person.id} {...person} />
+            person =>
+              person && <Person key={person.id} person={person} type={type} />
           )}
         </div>
       ) : (
