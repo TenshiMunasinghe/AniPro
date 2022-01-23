@@ -10,9 +10,7 @@ import './wdyr.ts'
 
 ReactDOM.render(
   <StrictMode>
-    <div className='text-zinc-800 dark:text-zinc-300'>
-      <App />
-    </div>
+    <App />
   </StrictMode>,
   document.getElementById('anipro')
 )
