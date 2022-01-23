@@ -1,8 +1,10 @@
 import React, { createContext, Dispatch, useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { filters } from '../../../filterOptions/filterOptions'
 import { MediaType } from '../../../generated/index'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import SearchBarInput from '../../common/SearchBarInput/SearchBarInput'
+import Fullview from '../FilterOptions/Fullview/Fullview'
 import Home from './Home'
 import styles from './Media.module.scss'
 import MediaSearchResult from './MediaSearchResult/MediaSearchResult'
@@ -17,6 +19,7 @@ export const ActiveFilterContext = createContext<{
 }>({ activeFilterOption: '', setActiveFilterOption: () => {} })
 
 const Media = ({ type }: Props) => {
+  const location = useLocation()
   const { queryVars } = useUpdateUrlParam()
   const [activeFilterOption, setActiveFilterOption] = useState('')
 
@@ -26,7 +29,15 @@ const Media = ({ type }: Props) => {
     } else {
       document.body.classList.remove(styles['search-options-open'])
     }
+
+    return () => {
+      document.body.classList.remove(styles['search-options-open'])
+    }
   }, [activeFilterOption])
+
+  useEffect(() => {
+    setActiveFilterOption('')
+  }, [location])
 
   const openFilterOptions = () => setActiveFilterOption(filters[0].name)
 
@@ -38,7 +49,10 @@ const Media = ({ type }: Props) => {
         <button onClick={openFilterOptions}>Advanced Filters</button>
       </div>
       {Object.keys(queryVars.initial).length === 0 ? (
-        <Home type={type} />
+        <>
+          <Fullview />
+          <Home type={type} />
+        </>
       ) : (
         <MediaSearchResult type={type} />
       )}
