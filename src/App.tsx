@@ -92,15 +92,15 @@ const App = ({ scrollPosition }: LazyComponentProps) => {
               <Media fallback={<LoadingSpinner />} />
             </Route>
 
-            <Route path='/search/:type?'>
+            <Route exact path='/search/:type?'>
               <Search fallback={<LoadingSpinner />} />
             </Route>
 
-            <Route path='/character/:id'>
+            <Route exact path='/character/:id'>
               <Character fallback={<LoadingSpinner />} />
             </Route>
 
-            <Route path='/staff/:id'>
+            <Route exact path='/staff/:id'>
               <Staff fallback={<LoadingSpinner />} />
             </Route>
           </Switch>
