@@ -10,9 +10,11 @@ import './wdyr.ts'
 
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <div className='text-zinc-800 dark:text-zinc-300'>
+      <App />
+    </div>
   </StrictMode>,
-  document.getElementById('root')
+  document.body
 )
 
 // If you want your app to work offline and load faster, you can change
