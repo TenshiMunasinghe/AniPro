@@ -65,7 +65,7 @@ const Slider = ({ queryVar, context }: Props) => {
 
   return (
     <section
-      className='flex items-center relative bg-gray-800 min-w-full h-screen'
+      className='flex items-center relative bg-zinc-800 min-w-full h-screen'
       tabIndex={-1}
       onKeyDown={onKeyPress}>
       {isLoading && <LoadingSpinner />}
