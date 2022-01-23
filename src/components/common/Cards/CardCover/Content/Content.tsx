@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
 import CoverImage from '../../../CoverImage/CoverImage'
-import Title from '../../../Title/Title'
+import Title from '../../../Title'
 import Rank from '../../components/Rank/Rank'
 import { CardCoverContent } from '../CardCover'
 import styles from './Content.module.scss'

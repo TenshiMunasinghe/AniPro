@@ -9,7 +9,7 @@ import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
-import Title from '../../Title/Title'
+import Title from '../../Title'
 import styles from './CardChart.module.scss'
 
 interface Props {

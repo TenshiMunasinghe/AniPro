@@ -1,15 +1,14 @@
 import { CSSProperties, forwardRef, memo, useCallback } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import { NO_IMAGE_URL } from '../../../api/queries'
-import { linkToMediaPage } from '../../../App'
-import { Media, MediaType } from '../../../generated'
-import { adjustColor } from '../../../utils/adjustColor'
-import { createColorVariable } from '../../../utils/createColorVariable'
-import CoverImage from '../../common/CoverImage/CoverImage'
-import Description from '../../common/Description/Description'
-import Genres from '../../common/Genres/Genres'
-import Title from '../../common/Title/Title'
-import styles from './Slide.module.scss'
+import { NO_IMAGE_URL } from '../../api/queries'
+import { linkToMediaPage } from '../../App'
+import { Media, MediaType } from '../../generated'
+import { adjustColor } from '../../utils/adjustColor'
+import { createColorVariable } from '../../utils/createColorVariable'
+import CoverImage from '../common/CoverImage/CoverImage'
+import Description from '../common/Description/Description'
+import Genres from '../common/Genres/Genres'
+import Title from '../common/Title'
 
 interface Props {
   media?: DeepPartial<Media> | null
@@ -42,7 +41,9 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
 
     return (
       <div
-        className={styles.container}
+        className={
+          'relative shrink-0 w-full h-screen flex flex-col justify-center p-4 sm:py-5 sm:px-8'
+        }
         style={style}
         ref={el =>
           typeof ref !== 'function' && el && ref.current
@@ -51,18 +52,21 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         }
         tabIndex={0}
         onFocus={onFocus}>
-        <div className={styles.coverImage} />
-        <div className={styles.content}>
-          <div>
+        <div
+          className={`absolute inset-0 bg-gray-700 bg-[${media?.coverImage?.color}] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md brightness-50`}
+        />
+        <div className='grid mb-6 overflow-y-hidden text-gray-100 md:grid-cols-[1fr_17.5rem] justify-between gap-x-8'>
+          <div className='space-y-6'>
             <Title
               link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
               text={media?.title?.romaji || 'no title'}
+              size='3xl'
             />
-            <div className={styles.description}>
+            <div className='line-clamp-8 lg:line-clamp-12'>
               <Description description={media.description} />
             </div>
           </div>
-          <div className={styles.image}>
+          <div className='hidden lg:grid'>
             <CoverImage
               link={linkToMediaPage(media.id, MediaType.Anime)}
               title={media?.title?.romaji || 'no title'}

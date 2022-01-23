@@ -1,7 +1,7 @@
 import NavBar from '../components/common/NavBar/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Footer from '../components/home/Footer/Footer'
-import Slider from '../components/home/Slider/Slider'
+import Slider from '../components/home/Slider'
 import MediaHome from '../components/search/Media/Home'
 import { MediaType } from '../generated'
 import { useMediaHomeContent } from '../hooks/useMediaHomeContent'
