@@ -18,14 +18,14 @@ const sizes = {
 interface Props {
   link?: string | null
   text: string
-  size?: keyof typeof sizes
+  size?: `${string}text-${string}`
 }
 
-const Title = ({ link, text, size = 'lg' }: Props) => {
+const Title = ({ link, text, size = 'text-lg' }: Props) => {
   return (
     <Link
       to={link || '#'}
-      className={`underline line-clamp-2 ${sizes[size]} transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
+      className={`line-clamp-2 ${size} transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
       {text}
     </Link>
   )
