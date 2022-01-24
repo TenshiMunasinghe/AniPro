@@ -1,7 +1,6 @@
-import Content from '../../../components/home/Content/Content'
-import { MediaType } from '../../../generated'
-import { useMediaHomeContent } from '../../../hooks/useMediaHomeContent'
-import styles from './Home.module.scss'
+import { MediaType } from '../../generated'
+import { useMediaHomeContent } from '../../hooks/useMediaHomeContent'
+import Content from './Content'
 
 interface Props {
   type: MediaType
@@ -11,7 +10,7 @@ const Home = ({ type }: Props) => {
   const { contents, isLargeScreen } = useMediaHomeContent()
 
   return (
-    <main className={styles.container}>
+    <main className='space-y-5'>
       {Object.keys(contents[type]).map(key => {
         const content = contents[type][key]
         const { queryVars } = content

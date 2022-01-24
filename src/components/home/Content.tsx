@@ -1,14 +1,13 @@
 import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import gqlRequestClient from '../../../api/graphqlClient'
+import gqlRequestClient from '../../api/graphqlClient'
 import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
-} from '../../../generated/index'
-import { linkToSearchPage } from '../../../utils/linkToSearchPage'
-import CardGrid, { MediaWithRank } from '../../common/CardGrid/CardGrid'
-import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
-import styles from './Content.module.scss'
+} from '../../generated/index'
+import { linkToSearchPage } from '../../utils/linkToSearchPage'
+import CardGrid, { MediaWithRank } from '../common/CardGrid/CardGrid'
+import { CardType } from '../search/Media/MediaSearchResult/MediaSearchResult'
 
 export type _Content = {
   text: string
@@ -48,12 +47,14 @@ const Content = ({ queryVar, content }: Props) => {
   const link = linkToSearchPage(queryVar)
 
   return (
-    <section className={styles.content}>
-      <div className={styles.title}>
-        <Link to={link} className={styles.contentTitle}>
+    <section className='space-y-2'>
+      <div className='flex justify-between items-end w-full'>
+        <Link
+          to={link}
+          className='cursor-pointer font-bold hocus:text-teal-400'>
           {content.text}
         </Link>
-        <Link to={link} className={styles.viewAll}>
+        <Link to={link} className='cursor-pointer text-xs hocus:underline'>
           View All
         </Link>
       </div>
