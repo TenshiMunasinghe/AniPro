@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-import NavBar from '../components/common/NavBar/NavBar'
+import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Footer from '../components/home/Footer/Footer'
 import Media from '../components/search/Media/Media'

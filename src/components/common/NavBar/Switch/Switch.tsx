@@ -1,6 +1,5 @@
 import { ChangeEvent, memo } from 'react'
 import { IconType } from 'react-icons'
-import styles from './Switch.module.scss'
 
 interface Props {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -10,19 +9,26 @@ interface Props {
   label: string
 }
 
+const ICON_SIZE = '1.5rem'
+
 const Switch = ({ onChange, On, Off, isOn, label }: Props) => {
   return (
     <label
-      htmlFor={styles.checkbox}
-      className={styles.switch}
+      htmlFor='toggleTheme'
+      className='flex justify-center items-center rounded-full cursor-pointer hover:bg-gray'
       aria-label={label}>
       <input
         type='checkbox'
         onChange={onChange}
-        id={styles.checkbox}
+        id='toggleTheme'
+        className='hidden'
         checked={isOn}
       />
-      {isOn ? <On aria-label='off switch' /> : <Off aria-label='on switch' />}
+      {isOn ? (
+        <On size={ICON_SIZE} aria-label='off switch' />
+      ) : (
+        <Off size={ICON_SIZE} aria-label='on switch' />
+      )}
     </label>
   )
 }

@@ -1,5 +1,5 @@
 import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
-import NavBar from '../../common/NavBar/NavBar'
+import NavBar from '../../common/NavBar'
 import PageWrapper from '../../common/PageWrapper'
 import Header, { PersonPageHeaderData } from '../Header/Header'
 import styles from './PageContent.module.scss'

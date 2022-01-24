@@ -1,10 +1,9 @@
-import { CSSProperties, useCallback } from 'react'
+import { useCallback } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
-import { ThemeStore, useThemeStore } from '../../../zustand/stores'
-import BrowseOptions from '../BrowseOptions/BrowseOptions'
-import styles from './NavBar.module.scss'
-import Switch from './Switch/Switch'
+import { ThemeStore, useThemeStore } from '../../zustand/stores'
+import BrowseOptions from './BrowseOptions/BrowseOptions'
+import Switch from './NavBar/Switch/Switch'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 
@@ -22,11 +21,10 @@ const NavBar = ({ position = 'static' }: Props) => {
     [setTheme]
   )
 
-  const style = { '--position': position } as CSSProperties
-
   return (
-    <nav className={styles.container} style={style}>
-      <h1 className={styles.heading}>
+    <nav
+      className={`${position} top-0 w-full flex items-center bg-zinc-700 py-2 px-4 sm:px-6 space-x-4 sm:space-x-6 z-50`}>
+      <h1 className='mr-auto sm:text-lg hover:text-teal-400 focus:text-teal-400'>
         <Link to='/'>AniPro</Link>
       </h1>
       <BrowseOptions />

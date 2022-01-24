@@ -1,4 +1,4 @@
-import NavBar from '../components/common/NavBar/NavBar'
+import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Footer from '../components/home/Footer/Footer'
 import Slider from '../components/home/Slider'

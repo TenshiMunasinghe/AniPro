@@ -8,7 +8,7 @@ import {
 import { Route, Switch, useParams } from 'react-router-dom'
 import gqlRequestClient from '../api/graphqlClient'
 import LoadingSpinner from '../components/common/LoadingSpinner/LoadingSpinner'
-import NavBar from '../components/common/NavBar/NavBar'
+import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Footer from '../components/home/Footer/Footer'
 import Aside from '../components/media/Aside/Aside'
