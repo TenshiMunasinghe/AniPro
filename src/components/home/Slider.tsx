@@ -60,7 +60,7 @@ const Slider = ({ queryVar, context }: Props) => {
 
   const buttonStyle = {
     disabled: 'cursor-default opacity-40',
-    active: 'hover:text-emerald-400 focus:text-emerald-400',
+    active: 'hocus:text-emerald-400',
   }
 
   return (
