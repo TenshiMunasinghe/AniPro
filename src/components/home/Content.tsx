@@ -47,11 +47,11 @@ const Content = ({ queryVar, content }: Props) => {
   const link = linkToSearchPage(queryVar)
 
   return (
-    <section className='space-y-2'>
+    <section className='space-y-3'>
       <div className='flex justify-between items-end w-full'>
         <Link
           to={link}
-          className='cursor-pointer font-bold hocus:text-teal-400'>
+          className='cursor-pointer font-bold text-lg lg:text-3xl hocus:text-teal-400'>
           {content.text}
         </Link>
         <Link to={link} className='cursor-pointer text-xs hocus:underline'>
