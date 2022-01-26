@@ -17,7 +17,10 @@ const Home = () => {
   return (
     <>
       <Slider
-        queryVar={contents.ANIME[randomKey].queryVars}
+        queryVar={{
+          ...contents.ANIME[randomKey].queryVars,
+          type: MediaType.Anime,
+        }}
         context={contents.ANIME[randomKey].text}
       />
       <NavBar position='sticky' />
