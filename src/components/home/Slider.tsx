@@ -73,7 +73,9 @@ const Slider = ({ queryVar, context }: Props) => {
         <>
           <header className='absolute top-0 flex justify-between w-full p-6 z-20'>
             <Link to='/'>AniPro</Link>
-            <div className='text-sm'>{context}</div>
+            <Link to={linkToSearchPage(queryVar)} className='text-sm'>
+              {context}
+            </Link>
           </header>
 
           {slideCount && (
