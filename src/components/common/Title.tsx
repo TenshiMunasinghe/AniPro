@@ -10,7 +10,7 @@ const Title = ({ link, text, size = 'text-lg' }: Props) => {
   return (
     <Link
       to={link || '#'}
-      className={`line-clamp-2 ${size} transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
+      className={`line-clamp-2 ${size} pb-2 transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
       {text}
     </Link>
   )
