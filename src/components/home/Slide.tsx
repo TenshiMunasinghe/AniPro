@@ -53,7 +53,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         tabIndex={0}
         onFocus={onFocus}>
         <div
-          className={`absolute inset-0 bg-zinc-700 bg-[${media?.coverImage?.color}] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md brightness-50`}
+          className={`absolute inset-0 bg-zinc-700 bg-[color:var(--color-original)] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md brightness-50`}
         />
         <div className='grid mb-6 overflow-y-hidden text-zinc-100 md:grid-cols-[1fr_17.5rem] justify-between gap-x-8'>
           <div className='space-y-6'>
