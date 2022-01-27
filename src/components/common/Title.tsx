@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom'
 interface Props {
   link?: string | null
   text: string | null
-  size?: `${string}text-${string}`
-  lineHeight?: `leading-${string}`
+  size?: `${string}text-${string}`[]
+  lineHeight?: `${string}leading-${string}`[]
 }
 
-const Title = ({ link, text, size = 'text-lg', lineHeight }: Props) => {
+const Title = ({ link, text, size = ['text-lg'], lineHeight }: Props) => {
   if (!text) return null
   return (
     <Link
       to={link || '#'}
-      className={`line-clamp-2 ${size} ${
-        lineHeight || ''
+      className={`line-clamp-2 ${size.join(' ')} ${
+        lineHeight?.length ? lineHeight.join(' ') : ''
       } transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
       {text}
     </Link>

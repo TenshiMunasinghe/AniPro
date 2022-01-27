@@ -42,7 +42,7 @@ const Content = ({ main, sub, rank }: Props) => {
         <Title
           link={sub?.link || main.link}
           text={sub?.title || ''}
-          size='text-sm'
+          size={['text-sm']}
         />
       </div>
     </Container>
