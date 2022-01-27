@@ -61,6 +61,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
               link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
               text={media?.title?.romaji || 'no title'}
               size='text-xl lg:text-6xl'
+              lineHeight='lg:leading-tight'
             />
             <div className='line-clamp-8 lg:line-clamp-12'>
               <Description description={media.description} />
