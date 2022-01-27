@@ -42,7 +42,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
     return (
       <div
         className={
-          'relative shrink-0 w-full h-screen flex flex-col justify-center p-4 sm:py-5 sm:px-8'
+          'relative shrink-0 w-full h-screen flex flex-col justify-center p-4 sm:p-6 lg:px-20'
         }
         style={style}
         ref={el =>

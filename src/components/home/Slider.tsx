@@ -71,7 +71,7 @@ const Slider = ({ queryVar, context }: Props) => {
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <>
-          <header className='absolute top-0 flex justify-between w-full p-6 z-20'>
+          <header className='absolute top-0 flex justify-between w-full p-4 sm:p-6 lg:py-10 lg:px-14 z-20'>
             <Link to='/'>AniPro</Link>
             <Link to={linkToSearchPage(queryVar)} className='text-sm'>
               {context}
@@ -92,11 +92,11 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-5 bottom-5 z-20 text-teal-400 hover:underline'>
+          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 text-teal-400 hover:underline'>
             <Link to={link}>View All</Link>
           </footer>
 
-          <div className='absolute left-4 bottom-4 z-10 md:left-1/2 md:-translate-x-1/2'>
+          <div className='absolute left-4 bottom-4 z-10 md:left-1/2 md:-translate-x-1/2 sm:bottom-6'>
             <button
               onClick={toPrevSlide}
               className={classnames({
