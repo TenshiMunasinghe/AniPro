@@ -3,7 +3,7 @@ import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title'
 import Rank from '../../components/Rank/Rank'
 import { CardCoverContent } from '../CardCover'
-import styles from './Content.module.scss'
+import Container from '../Container'
 
 interface Props {
   main: CardCoverContent
@@ -13,14 +13,14 @@ interface Props {
 
 const Content = ({ main, sub, rank }: Props) => {
   return (
-    <article className={styles.container}>
+    <Container>
       {rank && (
-        <div className={styles.rank}>
+        <div className='absolute -left-2 -top-2 w-11'>
           <Rank rank={rank} />
         </div>
       )}
-      <div className={styles.images}>
-        <figure className={styles.cover}>
+      <div className='relative h-fit'>
+        <figure className='grid'>
           <CoverImage
             link={main.link}
             src={main.image}
@@ -28,7 +28,7 @@ const Content = ({ main, sub, rank }: Props) => {
           />
         </figure>
         {sub && sub.image !== undefined && (
-          <figure className={styles.subContent}>
+          <figure className='grid absolute bottom-0 right-0 w-2/5'>
             <CoverImage
               link={sub.link}
               src={sub.image}
@@ -37,11 +37,15 @@ const Content = ({ main, sub, rank }: Props) => {
           </figure>
         )}
       </div>
-      <div className={styles.text}>
+      <div>
         <Title link={main.link} text={main.title || 'no title'} />
-        <Title link={sub?.link || main.link} text={sub?.title || ''} />
+        <Title
+          link={sub?.link || main.link}
+          text={sub?.title || ''}
+          size='text-sm'
+        />
       </div>
-    </article>
+    </Container>
   )
 }
 

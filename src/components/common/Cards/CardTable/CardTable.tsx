@@ -70,12 +70,7 @@ const CardTable = ({
               link={linkToMediaPage(id, type || MediaType.Anime)}
               text={title?.romaji || 'no title'}
             />
-            <Genres
-              as='section'
-              genres={genres}
-              canInteract={false}
-              className={styles.genres}
-            />
+            <Genres as='section' genres={genres} canInteract={false} />
           </div>
 
           <Info

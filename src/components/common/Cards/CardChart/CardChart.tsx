@@ -53,12 +53,7 @@ const CardChart = ({
             </p>
           </div>
         </section>
-        <Genres
-          as='footer'
-          genres={genres}
-          canInteract
-          className={styles.genres}
-        />
+        <Genres as='footer' genres={genres} canInteract />
       </section>
     </article>
   )

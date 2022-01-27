@@ -108,12 +108,7 @@ const Popover = ({ isVisible, media }: Props) => {
           {chapters && <div>{pluralize(chapters, 'chapter')}</div>}
         </div>
       )}
-      <Genres
-        as='footer'
-        genres={genres}
-        canInteract={false}
-        className={styles.genres}
-      />
+      <Genres as='footer' genres={genres} canInteract={false} />
     </aside>
   )
 }

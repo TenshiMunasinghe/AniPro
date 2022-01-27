@@ -5,7 +5,6 @@ import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
 import { createColorVariable } from '../../../../utils/createColorVariable'
 import { ImageSize } from '../../CardGrid/CardGrid'
-import styles from './CardCover.module.scss'
 import Content from './Content/Content'
 import Popover from './Popover/Popover'
 
@@ -39,7 +38,7 @@ const CardCover = ({
 
   return (
     <div
-      className={styles.popoverWrapper}
+      className='relative'
       onMouseOver={showPopover}
       onMouseLeave={hidePopover}
       onFocus={showPopover}
