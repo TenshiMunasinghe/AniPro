@@ -47,7 +47,7 @@ const Content = ({ queryVar, content }: Props) => {
   const link = linkToSearchPage(queryVar)
 
   return (
-    <section className='space-y-3'>
+    <section className='space-y-5 lg:space-y-10'>
       <div className='flex justify-between items-end w-full'>
         <Link
           to={link}

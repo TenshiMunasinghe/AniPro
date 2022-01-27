@@ -10,7 +10,7 @@ const Home = ({ type }: Props) => {
   const { contents, isLargeScreen } = useMediaHomeContent()
 
   return (
-    <main className='space-y-5'>
+    <main className='space-y-10 lg:space-y-20'>
       {Object.keys(contents[type]).map(key => {
         const content = contents[type][key]
         const { queryVars } = content
