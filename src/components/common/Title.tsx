@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 
 interface Props {
   link?: string | null
-  text: string
+  text: string | null
   size?: `${string}text-${string}`
 }
 
 const Title = ({ link, text, size = 'text-lg' }: Props) => {
+  if (!text) return null
   return (
     <Link
       to={link || '#'}
