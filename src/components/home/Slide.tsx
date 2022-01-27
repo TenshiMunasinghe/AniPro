@@ -55,15 +55,15 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         <div
           className={`absolute inset-0 bg-zinc-700 bg-[color:var(--color-original)] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md brightness-50`}
         />
-        <div className='grid mb-6 overflow-y-hidden text-zinc-100 md:grid-cols-[1fr_17.5rem] justify-between gap-x-8'>
+        <div className='grid mb-6 overflow-y-hidden text-zinc-100 md:grid-cols-[1fr_20rem] justify-between gap-x-10'>
           <div className='space-y-6'>
             <Title
               link={linkToMediaPage(media.id, media.type || MediaType.Anime)}
               text={media?.title?.romaji || 'no title'}
-              size={['text-xl lg:text-6xl']}
+              size={['text-2xl lg:text-6xl']}
               lineHeight={['lg:leading-tight']}
             />
-            <div className='line-clamp-8 lg:line-clamp-12'>
+            <div className='line-clamp-8 lg:line-clamp-10 md:text-lg'>
               <Description description={media.description} />
             </div>
           </div>
