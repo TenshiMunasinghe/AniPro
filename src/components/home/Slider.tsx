@@ -72,7 +72,9 @@ const Slider = ({ queryVar, context }: Props) => {
       {!isLoading && (
         <>
           <header className='absolute top-0 flex justify-between w-full p-4 sm:p-6 lg:py-10 lg:px-14 z-20'>
-            <Link to='/'>AniPro</Link>
+            <Link to='/' className='font-bold text-lg lg:text-2xl'>
+              AniPro
+            </Link>
             <Link to={linkToSearchPage(queryVar)} className='text-sm'>
               {context}
             </Link>
