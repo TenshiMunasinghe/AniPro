@@ -60,7 +60,7 @@ const Slider = ({ queryVar, context }: Props) => {
 
   const buttonStyle = {
     disabled: 'cursor-default opacity-40',
-    active: 'hocus:text-emerald-400',
+    active: 'hocus:text-teal-700 dark:hocus:text-teal-400',
   }
 
   return (
@@ -94,7 +94,7 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 text-teal-400 hover:underline'>
+          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 text-teal-600 dark:text-teal-400 hover:underline'>
             <Link to={link}>View All</Link>
           </footer>
 
