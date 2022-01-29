@@ -23,8 +23,8 @@ const NavBar = ({ position = 'static' }: Props) => {
 
   return (
     <nav
-      className={`${position} top-0 w-full flex items-center bg-zinc-700 py-2 px-4 sm:px-6 space-x-4 sm:space-x-6 z-50`}>
-      <h1 className='mr-auto sm:text-lg hocus:text-teal-400'>
+      className={`${position} top-0 w-full flex items-center bg-zinc-200 dark:bg-zinc-700 py-2 px-4 sm:px-6 space-x-4 sm:space-x-6 z-50`}>
+      <h1 className='mr-auto sm:text-lg hocus:text-teal-700 dark:hocus:text-teal-400'>
         <Link to='/'>AniPro</Link>
       </h1>
       <BrowseOptions />
