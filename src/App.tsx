@@ -73,7 +73,7 @@ const App = ({ scrollPosition }: LazyComponentProps) => {
 
   useEffect(() => {
     useThemeStore.subscribe(
-      (state: Theme) => (document.body.className = state),
+      (state: Theme) => (document.documentElement.className = state),
       state => state.theme
     )
   }, [])

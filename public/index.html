@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -15,11 +15,13 @@
     />
     <title>AniPro</title>
   </head>
-  <body class="dark font-[Jost]">
+  <body
+    class="font-[Jost] text-zinc-700 dark:text-zinc-400 bg-white dark:bg-zinc-900 min-h-screen [--lightness:32%] dark:[--lightness:69%]"
+  >
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div
       id="anipro"
-      class="flex flex-col overflow-x-hidden text-zinc-700 dark:text-zinc-400 bg-white dark:bg-zinc-900 min-h-screen [--lightness:32%] dark:[--lightness:69%]"
+      class="flex flex-col overflow-x-hidden min-h-full bg-inherit"
     ></div>
   </body>
 </html>
