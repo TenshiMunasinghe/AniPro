@@ -52,7 +52,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
         }
         tabIndex={0}
         onFocus={onFocus}>
-        <div className='absolute inset-0 bg-zinc-700 bg-[color:var(--color-original)] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md brightness-[0.35]' />
+        <div className='absolute inset-0 bg-zinc-700 bg-[color:var(--color-original)] bg-[image:var(--cover-image)] bg-no-repeat bg-cover bg-center -z-10 blur-md after:content-[""] after:absolute after:inset-0 after:bg-zinc-900/80' />
         <div className='grid mb-6 overflow-y-hidden text-zinc-100 md:grid-cols-[1fr_20rem] justify-between gap-x-10'>
           <div className='space-y-6'>
             <Title
