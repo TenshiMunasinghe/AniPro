@@ -9,16 +9,13 @@ interface Props {
 
 const LoadingSpinner = ({ isCenter = { x: true, y: true } }: Props) => {
   return (
-    <div
-      className={classnames(
-        'animate-spin text-3xl pointer-events-none h-min ',
-        {
-          'text-center': isCenter.x,
-          'm-auto': isCenter.y,
-        }
-      )}>
+    <span
+      className={classnames('animate-spin text-3xl pointer-events-none h-min', {
+        'mx-auto': isCenter.x,
+        'my-auto': isCenter.y,
+      })}>
       A
-    </div>
+    </span>
   )
 }
 
