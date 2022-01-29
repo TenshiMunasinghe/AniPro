@@ -14,8 +14,8 @@ export const SEARCH_SLUGS = [
   'manga',
   'staff',
   'characters',
-  'reviews',
-  'recommendations',
+  // 'reviews',
+  // 'recommendations',
 ] as const
 
 export type SearchSlugs = typeof SEARCH_SLUGS[number]
