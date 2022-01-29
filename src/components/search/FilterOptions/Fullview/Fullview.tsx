@@ -10,9 +10,8 @@ import Option from '../../Option/Option'
 import styles from './Fullview.module.scss'
 
 const Fullview = () => {
-  const { activeFilterOption, setActiveFilterOption } = useContext(
-    ActiveFilterContext
-  )
+  const { activeFilterOption, setActiveFilterOption } =
+    useContext(ActiveFilterContext)
   const { updateFilter, applyFilter, params, resetParams } = useUpdateUrlParam()
 
   const changeFilter = useCallback(
@@ -112,7 +111,7 @@ const Fullview = () => {
         </footer>
       </section>
     ),
-    document.getElementById('root') || document.body
+    document.getElementById('anipro') || document.body
   )
 }
 
