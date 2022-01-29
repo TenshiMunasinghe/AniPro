@@ -60,7 +60,7 @@ const Slider = ({ queryVar, context }: Props) => {
 
   const buttonStyle = {
     disabled: 'cursor-default opacity-40',
-    active: 'hocus:text-teal-700 dark:hocus:text-teal-400',
+    active: 'hocus:text-zinc-900 dark:hocus:text-zinc-300',
   }
 
   return (
@@ -72,10 +72,12 @@ const Slider = ({ queryVar, context }: Props) => {
       {!isLoading && (
         <>
           <header className='absolute top-0 flex justify-between items-center w-full p-4 sm:p-6 lg:py-10 lg:px-14 z-20'>
-            <Link to='/' className='font-bold text-lg lg:text-2xl'>
+            <Link
+              to='/'
+              className='font-bold text-lg lg:text-2xl text-zinc-800 dark:text-zinc-200'>
               AniPro
             </Link>
-            <Link to={linkToSearchPage(queryVar)} className='text-sm'>
+            <Link to={link} className='text-sm dark:text-zinc-300'>
               {context}
             </Link>
           </header>
@@ -94,7 +96,7 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 text-teal-600 dark:text-teal-400 hover:underline'>
+          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 font-semibold hocus:underline hocus:text-zinc-800 hocus:dark:text-zinc-300'>
             <Link to={link}>View All</Link>
           </footer>
 
