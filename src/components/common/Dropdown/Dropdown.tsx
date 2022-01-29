@@ -3,7 +3,6 @@ import { memo, RefObject } from 'react'
 import { IconType } from 'react-icons'
 import { FaAngleDown } from 'react-icons/fa'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import styles from './Dropdown.module.scss'
 import Items from './Items/Items'
 
 export interface DropdownProps {
@@ -49,16 +48,18 @@ const Dropdown = ({
 
   return (
     <div
-      className={styles.wrapper}
+      className='relative text-sm group'
       aria-haspopup='true'
       aria-expanded={isFocused}
       ref={ref as RefObject<HTMLDivElement>}
       tabIndex={0}>
-      <button className={styles.dropdownHeader} tabIndex={-1}>
+      <button
+        className='flex items-center cursor-pointer space-x-2'
+        tabIndex={-1}>
         {icon?.isLeft && <Icon aria-label='toggle dropdown' />}
         <div
-          className={classnames(styles.selected, {
-            [styles.empty]: !selectedLabel,
+          className={classnames({
+            'text-zinc-500 dark:text-zinc-400': !selectedLabel,
           })}>
           {selectedLabel || placeholder || ''}
         </div>
