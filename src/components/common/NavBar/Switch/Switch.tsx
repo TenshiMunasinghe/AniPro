@@ -15,7 +15,7 @@ const Switch = ({ onChange, On, Off, isOn, label }: Props) => {
   return (
     <label
       htmlFor='toggleTheme'
-      className='flex justify-center items-center rounded-full cursor-pointer hover:bg-gray'
+      className='flex justify-center items-center rounded-full cursor-pointer hover:bg-zinc'
       aria-label={label}>
       <input
         type='checkbox'

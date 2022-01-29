@@ -98,7 +98,7 @@ const Slider = ({ queryVar, context }: Props) => {
             <Link to={link}>View All</Link>
           </footer>
 
-          <div className='absolute left-4 bottom-4 z-10 md:left-1/2 md:-translate-x-1/2 sm:bottom-6'>
+          <div className='absolute left-4 bottom-4 z-10 md:left-1/2 md:-tranzinc-x-1/2 sm:bottom-6'>
             <button
               onClick={toPrevSlide}
               className={classnames({
