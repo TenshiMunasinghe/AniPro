@@ -47,17 +47,12 @@ const Content = ({ queryVar, content }: Props) => {
   const link = linkToSearchPage(queryVar)
 
   return (
-    <section className='space-y-5 lg:space-y-10'>
-      <div className='flex justify-between items-end w-full'>
-        <Link
-          to={link}
-          className='cursor-pointer font-bold text-lg lg:text-3xl text-zinc-800 dark:text-zinc-200 hocus:text-teal-500 dark:hocus:text-teal-400'>
-          {content.text}
-        </Link>
-        <Link to={link} className='cursor-pointer text-xs hocus:underline'>
-          View All
-        </Link>
-      </div>
+    <section className='flex flex-col'>
+      <Link
+        to={link}
+        className='cursor-pointer mb-5 lg:mb-10 font-bold text-lg lg:text-3xl text-zinc-800 dark:text-zinc-200 hocus:text-teal-500 dark:hocus:text-teal-400'>
+        {content.text}
+      </Link>
       <CardGrid
         medias={medias}
         isLoading={isLoading}
@@ -67,6 +62,11 @@ const Content = ({ queryVar, content }: Props) => {
         imageSize={cardType === 'table' ? 'large' : 'extraLarge'}
         sideScroll={cardType === 'cover'}
       />
+      <Link
+        to={link}
+        className='ml-auto mt-3 lg:mt-6 cursor-pointer text-sm font-medium underline hocus:text-zinc-900 dark:hocus:text-zinc-300'>
+        View All
+      </Link>
     </section>
   )
 }
