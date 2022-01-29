@@ -1,20 +1,21 @@
+import classnames from 'classnames'
 import { Link } from 'react-router-dom'
 
 interface Props {
   link?: string | null
   text: string | null
-  size?: `${string}text-${string}`[]
-  lineHeight?: `${string}leading-${string}`[]
+  className?: string
 }
 
-const Title = ({ link, text, size = ['text-lg'], lineHeight }: Props) => {
+const Title = ({ link, text, className }: Props) => {
   if (!text) return null
   return (
     <Link
       to={link || '#'}
-      className={`line-clamp-2 ${size.join(' ')} ${
-        lineHeight?.length ? lineHeight.join(' ') : ''
-      } transition-all font-semibold hover:text-[color:var(--color-adjusted)]`}>
+      className={classnames(
+        'line-clamp-2 transition-all font-semibold text-lg hover:text-[color:var(--color-adjusted)]',
+        className
+      )}>
       {text}
     </Link>
   )
