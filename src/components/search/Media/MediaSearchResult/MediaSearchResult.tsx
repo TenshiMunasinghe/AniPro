@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import React, { useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FaSort } from 'react-icons/fa'
 import gqlRequestClient from '../../../../api/graphqlClient'
 import {

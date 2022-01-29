@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, useEffect, useState } from 'react'
+import { createContext, Dispatch, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { filters } from '../../../filterOptions/filterOptions'
 import { MediaType } from '../../../generated/index'

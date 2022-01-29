@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import CoverImage from '../../../CoverImage/CoverImage'
 import Title from '../../../Title'
 import Rank from '../../components/Rank/Rank'

@@ -1,5 +1,4 @@
 import { groupBy } from 'lodash'
-import React from 'react'
 import { FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 import { MediaSort, useStaffMediaRoleQuery } from '../../../generated'
@@ -18,33 +17,28 @@ const StaffRoles = ({
 }: ReturnType<typeof useSortMedia>) => {
   const { id } = useParams<{ id: string }>()
 
-  const {
-    data,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useInfiniteGraphQLQuery(
-    useStaffMediaRoleQuery,
-    ({ pageParam = 1 }) => ({
-      id: parseInt(id),
-      page: pageParam,
-      sort: sortBy,
-    }),
-    {
-      getNextPageParam: ({ Staff }) => {
-        if (!Staff?.staffMedia?.pageInfo?.currentPage) return
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteGraphQLQuery(
+      useStaffMediaRoleQuery,
+      ({ pageParam = 1 }) => ({
+        id: parseInt(id),
+        page: pageParam,
+        sort: sortBy,
+      }),
+      {
+        getNextPageParam: ({ Staff }) => {
+          if (!Staff?.staffMedia?.pageInfo?.currentPage) return
 
-        const {
-          staffMedia: { pageInfo },
-        } = Staff
+          const {
+            staffMedia: { pageInfo },
+          } = Staff
 
-        return pageInfo.hasNextPage
-          ? (pageInfo?.currentPage || 0) + 1
-          : undefined
-      },
-    }
-  )
+          return pageInfo.hasNextPage
+            ? (pageInfo?.currentPage || 0) + 1
+            : undefined
+        },
+      }
+    )
 
   const edges = data?.pages.flatMap(page => page.Staff?.staffMedia?.edges)
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { linkToCharacterPage, linkToMediaPage } from '../../../../App'
 import { MediaEdge, MediaType } from '../../../../generated'
