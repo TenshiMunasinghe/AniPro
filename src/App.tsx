@@ -13,7 +13,7 @@ import {
   Switch,
   useLocation,
 } from 'react-router-dom'
-import LoadingSpinner from './components/common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from './components/common/LoadingSpinner'
 import { MediaType } from './generated/index'
 import {
   Theme,

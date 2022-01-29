@@ -8,7 +8,7 @@ import {
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
-import LoadingSpinner from '../common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../common/LoadingSpinner'
 import Slide from './Slide'
 
 interface Props {

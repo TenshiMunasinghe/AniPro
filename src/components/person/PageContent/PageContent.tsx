@@ -1,4 +1,4 @@
-import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../../common/LoadingSpinner'
 import NavBar from '../../common/NavBar'
 import PageWrapper from '../../common/PageWrapper'
 import Header, { PersonPageHeaderData } from '../Header/Header'

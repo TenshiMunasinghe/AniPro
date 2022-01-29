@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../../common/LoadingSpinner'
 import styles from './CardContainer.module.scss'
 
 interface Props {

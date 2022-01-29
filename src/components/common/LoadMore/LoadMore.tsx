@@ -1,4 +1,4 @@
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../LoadingSpinner'
 import styles from './LoadMore.module.scss'
 
 interface Props {

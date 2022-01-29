@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import styles from './LoadingSpinner.module.scss'
 
 interface Props {
   isCenter?: {
@@ -11,10 +10,13 @@ interface Props {
 const LoadingSpinner = ({ isCenter = { x: true, y: true } }: Props) => {
   return (
     <div
-      className={classnames(styles.container, {
-        [styles.centerX]: isCenter.x,
-        [styles.centerY]: isCenter.y,
-      })}>
+      className={classnames(
+        'animate-spin text-3xl pointer-events-none h-min ',
+        {
+          'text-center': isCenter.x,
+          'm-auto': isCenter.y,
+        }
+      )}>
       A
     </div>
   )

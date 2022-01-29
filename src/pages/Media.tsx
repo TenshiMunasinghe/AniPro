@@ -7,7 +7,7 @@ import {
 } from 'react-lazy-load-image-component'
 import { Route, Switch, useParams } from 'react-router-dom'
 import gqlRequestClient from '../api/graphqlClient'
-import LoadingSpinner from '../components/common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../components/common/LoadingSpinner'
 import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Footer from '../components/home/Footer/Footer'

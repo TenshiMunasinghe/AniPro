@@ -4,7 +4,7 @@ import {
   SearchCharactersQuery,
   SearchStaffQuery,
 } from '../../../generated/index'
-import LoadingSpinner from '../../common/LoadingSpinner/LoadingSpinner'
+import LoadingSpinner from '../../common/LoadingSpinner'
 import NotFound from '../../common/NotFound/NotFound'
 import { PeopleHeading } from '../PeopleSearchResult/StaffSearchResult'
 import Person from '../Person/Person'
