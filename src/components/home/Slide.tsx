@@ -57,7 +57,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
               <Description description={media.description} />
             </div>
           </div>
-          <div className='hidden lg:grid'>
+          <div className='hidden lg:grid overflow-hidden rounded shadow shadow-zinc-300 dark:shadow-zinc-900'>
             <CoverImage
               link={linkToMediaPage(media.id, MediaType.Anime)}
               title={media?.title?.romaji || 'no title'}
