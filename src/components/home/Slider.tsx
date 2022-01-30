@@ -74,10 +74,12 @@ const Slider = ({ queryVar, context }: Props) => {
           <header className='absolute top-0 flex justify-between items-center w-full p-4 sm:p-6 lg:py-10 lg:px-14 z-20'>
             <Link
               to='/'
-              className='font-bold text-lg lg:text-2xl text-zinc-800 dark:text-zinc-200'>
+              className='text-lg lg:text-2xl text-zinc-900 dark:text-zinc-300'>
               AniPro
             </Link>
-            <Link to={link} className='text-sm dark:text-zinc-300'>
+            <Link
+              to={link}
+              className='text-sm hocus:text-zinc-800 dark:hocus:text-zinc-200'>
               {context}
             </Link>
           </header>
@@ -96,7 +98,7 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 font-semibold hocus:underline hocus:text-zinc-800 hocus:dark:text-zinc-300'>
+          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 dark:text-zinc-200 hocus:text-teal-600 hocus:dark:text-teal-300'>
             <Link to={link}>View All</Link>
           </footer>
 
