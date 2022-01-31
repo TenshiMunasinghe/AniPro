@@ -64,7 +64,7 @@ const Content = ({ queryVar, content }: Props) => {
       />
       <Link
         to={link}
-        className='ml-auto mt-3 lg:mt-6 cursor-pointer text-sm font-medium underline hocus:text-zinc-900 dark:hocus:text-zinc-300'>
+        className='ml-auto mt-3 lg:mt-6 cursor-pointer text-sm font-medium hocus:text-zinc-900 dark:hocus:text-zinc-300'>
         View All
       </Link>
     </section>
