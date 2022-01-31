@@ -59,8 +59,9 @@ const Slider = ({ queryVar, context }: Props) => {
   )
 
   const buttonStyle = {
-    disabled: 'cursor-default opacity-40',
-    active: 'hocus:text-zinc-900 dark:hocus:text-zinc-300',
+    disabled: 'cursor-default opacity-30',
+    active:
+      'text-zinc-500 dark:text-zinc-400 hocus:text-zinc-900 dark:hocus:text-zinc-300',
   }
 
   return (
