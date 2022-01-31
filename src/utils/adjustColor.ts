@@ -43,8 +43,6 @@ export const adjustColor = (
   hex: string | null | undefined,
   lightness: `${string}%` | `var(--${string})`
 ) => {
-  if (!hex) return ''
-
-  const hsl = hexToHsl(hex)
+  const hsl = hexToHsl(hex || '#000')
   return `hsl(${hsl.h}, ${hsl.s}%, ${lightness})`
 }
