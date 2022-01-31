@@ -5,8 +5,8 @@ import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
 import { useColorVariable } from '../../../../hooks/useColorVariable'
 import { ImageSize } from '../../CardGrid/CardGrid'
-import Content from './Content/Content'
-import Popover from './Popover/Popover'
+import Content from './Content'
+import Popover from './Popover'
 
 export interface CardCoverContent {
   link?: string

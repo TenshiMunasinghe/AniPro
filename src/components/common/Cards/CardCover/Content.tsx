@@ -1,9 +1,9 @@
 import { memo } from 'react'
-import CoverImage from '../../../CoverImage/CoverImage'
-import Title from '../../../Title'
-import Rank from '../../components/Rank/Rank'
-import { CardCoverContent } from '../CardCover'
-import Container from '../Container'
+import CoverImage from '../../CoverImage/CoverImage'
+import Title from '../../Title'
+import Rank from '../components/Rank/Rank'
+import { CardCoverContent } from './CardCover'
+import Container from './Container'
 
 interface Props {
   main: CardCoverContent

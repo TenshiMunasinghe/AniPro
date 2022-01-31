@@ -1,7 +1,7 @@
 import { DeepPartial } from 'react-hook-form'
 import { linkToMediaPage } from '../../../../App'
 import { MediaEdge, MediaType } from '../../../../generated'
-import Card from '../../../common/Cards/CardCover/Content/Content'
+import Card from '../../../common/Cards/CardCover/Content'
 import CardGrid from '../../../person/CardGrid/CardGrid'
 
 interface Props {

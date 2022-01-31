@@ -3,7 +3,7 @@ import {
   SearchCharactersQuery,
   SearchStaffQuery,
 } from '../../../generated/index'
-import Card from '../../common/Cards/CardCover/Content/Content'
+import Card from '../../common/Cards/CardCover/Content'
 
 type Props = {
   person:
