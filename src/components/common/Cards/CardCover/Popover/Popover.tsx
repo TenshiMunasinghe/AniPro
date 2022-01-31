@@ -11,15 +11,13 @@ import { timeToArr } from '../../../../../utils/timeToArr'
 import { timeToStr } from '../../../../../utils/timeToStr'
 import Genres from '../../../Genres/Genres'
 import Score from '../../../Score/Score'
-import styles from './Popover.module.scss'
 
 interface Props {
   index: number // for repositioning when order changes
-  isVisible: boolean
   media: DeepPartial<Media>
 }
 
-const Popover = ({ isVisible, media }: Props) => {
+const Popover = ({ media }: Props) => {
   const { isLeft, isRight, wrapperRef } = useOverflow()
 
   if (!media.type) return null
@@ -48,39 +46,42 @@ const Popover = ({ isVisible, media }: Props) => {
     })
   ).slice(0, 2)
 
-  const isHidden = (!isLeft && !isRight) || !isVisible
+  const isHidden = !isLeft && !isRight
 
   return (
     <aside
-      className={classnames(styles.wrapper, styles[isLeft ? 'left' : 'right'], {
-        [styles.hide]: isHidden,
-      })}
+      className={classnames(
+        'pointer-events-none absolute block top-0 bg-zinc-50 dark:bg-zinc-700 min-w-[23rem] max-w-[23rem] p-5 rounded shadow-md shadow-zinc-700 dark:shadow-zinc-900 z-20 transition-all scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within::scale-100 group-focus-within:opacity-100',
+        isLeft ? 'left-auto right-full mr-3' : 'right-auto left-full ml-3',
+        {
+          '': isHidden,
+        }
+      )}
       ref={wrapperRef}>
       {type === 'ANIME' && (
         <>
           {(nextAiringEpisode || season || seasonYear || meanScore) && (
-            <header className={styles.header}>
-              <div className={styles.airingInfo}>
-                {airingInfo({ nextAiringEpisode, season, seasonYear })}
-              </div>
-
+            <header className='grid grid-cols-[1fr_auto] items-center gap-x-4 mb-4 whitespace-nowrap'>
+              <div>{airingInfo({ nextAiringEpisode, season, seasonYear })}</div>
               {meanScore && <Score score={meanScore} />}
             </header>
           )}
           <>
             {studios?.nodes?.[0]?.name && (
-              <div className={styles.studio}>{studios?.nodes?.[0]?.name}</div>
+              <div className='text-[color:var(--color-adjusted)]'>
+                {studios?.nodes?.[0]?.name}
+              </div>
             )}
-            <div className={styles.info}>
+            <div className='mt-3'>
               {formatLabel(format || '')}
               {format === 'MOVIE' && _duration.length > 0 ? (
                 <>
-                  <span className={styles.separator}>•</span>
+                  <span className='m-2'>•</span>
                   {timeToStr(_duration)}
                 </>
               ) : format !== 'MOVIE' && episodes ? (
                 <>
-                  <span className={styles.separator}>•</span>
+                  <span className='m-2'>•</span>
                   {pluralize(episodes, 'Episode')}
                 </>
               ) : (
@@ -92,9 +93,9 @@ const Popover = ({ isVisible, media }: Props) => {
       )}
 
       {type === 'MANGA' && (
-        <div className={styles.manga}>
+        <div className='flex flex-col relative'>
           {meanScore && (
-            <div className={styles.score}>
+            <div className='absolute right-0'>
               <Score score={meanScore} />
             </div>
           )}
@@ -108,7 +109,12 @@ const Popover = ({ isVisible, media }: Props) => {
           {chapters && <div>{pluralize(chapters, 'chapter')}</div>}
         </div>
       )}
-      <Genres as='footer' genres={genres} canInteract={false} />
+      <Genres
+        as='footer'
+        genres={genres}
+        canInteract={false}
+        className='text-sm mt-5'
+      />
     </aside>
   )
 }

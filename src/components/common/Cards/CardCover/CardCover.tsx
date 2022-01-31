@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { imageSize } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
@@ -30,22 +30,12 @@ const CardCover = ({
   hasPopover = true,
   subContent,
 }: CardCoverProps) => {
-  const [isPopoverVisible, setIsPopoverVisible] = useState(false)
-  const showPopover = () => setIsPopoverVisible(true)
-  const hidePopover = () => setIsPopoverVisible(false)
-
   const colors = useColorVariable(media?.coverImage?.color)
 
   if (!media) return null
 
   return (
-    <div
-      className='relative'
-      onMouseOver={showPopover}
-      onMouseLeave={hidePopover}
-      onFocus={showPopover}
-      onBlur={hidePopover}
-      style={colors}>
+    <div className='relative group' style={colors}>
       <Content
         rank={rank}
         main={{
@@ -55,9 +45,7 @@ const CardCover = ({
         }}
         sub={subContent}
       />
-      {hasPopover && (
-        <Popover index={index} isVisible={isPopoverVisible} media={media} />
-      )}
+      {hasPopover && <Popover index={index} media={media} />}
     </div>
   )
 }
