@@ -31,7 +31,7 @@ const Items = ({
   return (
     <div
       className={classnames(
-        'z-50 absolute transition-all translate-y-3 max-h-60 min-w-fit max-w-full overflow-y-auto overflow-x-hidden bg-zinc-100 dark:bg-zinc-700 rounded shadow-md shadow-zinc-500 dark:shadow-zinc-900 divide-y-2 divide-zinc-400 dark:divide-zinc-500',
+        'z-50 absolute transition-all translate-y-3 max-h-60 min-w-fit max-w-full overflow-y-auto overflow-x-hidden bg-zinc-100 dark:bg-zinc-700 rounded shadow-md shadow-zinc-500 dark:shadow-zinc-900 divide-y-[1px] divide-zinc-400 dark:divide-zinc-500',
         {
           'opacity-0 pointer-events-none': !isVisible,
           'left-0': position === 'left',
