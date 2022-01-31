@@ -8,7 +8,10 @@ interface Props {
 const PageWrapper: FC<Props> = ({ className, children }) => {
   return (
     <div
-      className={classnames('pt-10 px-6 sm:px-8 md:px-10 lg:px-12', className)}>
+      className={classnames(
+        'pt-10 lg:pt-14 px-6 sm:px-8 md:px-10 lg:px-12',
+        className
+      )}>
       {children}
     </div>
   )
