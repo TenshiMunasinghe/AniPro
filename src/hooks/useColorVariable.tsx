@@ -2,7 +2,7 @@ import * as d3 from 'd3-color'
 import { CSSProperties } from 'react'
 import { ThemeStore, useThemeStore } from '../zustand/stores'
 
-const LIGHTNESS = { light: 32, dark: 69 }
+const LIGHTNESS = { light: 35, dark: 75 }
 
 const themeStoreSelector = ({ theme }: ThemeStore) => theme
 
