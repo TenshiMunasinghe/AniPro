@@ -3,7 +3,7 @@ import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../api/queries'
 import { linkToMediaPage } from '../../App'
 import { Media, MediaType } from '../../generated'
-import { createColorVariable } from '../../utils/createColorVariable'
+import { useColorVariable } from '../../hooks/useColorVariable'
 import CoverImage from '../common/CoverImage/CoverImage'
 import Description from '../common/Description/Description'
 import Genres from '../common/Genres/Genres'
@@ -17,6 +17,8 @@ interface Props {
 
 const Slide = forwardRef<HTMLDivElement[], Props>(
   ({ media, setSlide, index }, ref) => {
+    const colors = useColorVariable(media?.coverImage?.color)
+
     const onFocus = useCallback(
       e => {
         if (!e.currentTarget.contains(e.relatedTarget?.parentNode))
@@ -29,7 +31,7 @@ const Slide = forwardRef<HTMLDivElement[], Props>(
 
     const style = {
       '--cover-image': `url(${media?.coverImage?.extraLarge || NO_IMAGE_URL})`,
-      ...createColorVariable(media?.coverImage?.color),
+      ...colors,
     } as CSSProperties
 
     return (

@@ -3,8 +3,8 @@ import { DeepPartial } from 'react-hook-form'
 import { currentYear, NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
+import { useColorVariable } from '../../../../hooks/useColorVariable'
 import { airingInfo } from '../../../../utils/airingInfo'
-import { createColorVariable } from '../../../../utils/createColorVariable'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
@@ -46,8 +46,10 @@ const CardTable = ({
   rank,
   imageSize,
 }: Props) => {
+  const colors = useColorVariable(coverImage?.color)
+
   const _style = {
-    ...createColorVariable(coverImage?.color || 'var(--color-foreground-200)'),
+    ...colors,
     '--banner-image': `url(${bannerImage})`,
   } as React.CSSProperties
 

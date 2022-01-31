@@ -3,7 +3,7 @@ import { DeepPartial } from 'react-hook-form'
 import { NO_IMAGE_URL } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
-import { createColorVariable } from '../../../../utils/createColorVariable'
+import { useColorVariable } from '../../../../hooks/useColorVariable'
 import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Description from '../../Description/Description'
@@ -21,12 +21,10 @@ const CardChart = ({
   media: { id, title, coverImage, genres, meanScore, description, type },
   imageSize,
 }: Props) => {
+  const colors = useColorVariable(coverImage?.color)
+
   return (
-    <article
-      className={styles.wrapper}
-      style={createColorVariable(
-        coverImage?.color || 'var(--color-foreground-200)'
-      )}>
+    <article className={styles.wrapper} style={colors}>
       <CoverImage
         link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}

@@ -3,7 +3,7 @@ import { DeepPartial } from 'react-hook-form'
 import { imageSize } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
-import { createColorVariable } from '../../../../utils/createColorVariable'
+import { useColorVariable } from '../../../../hooks/useColorVariable'
 import { ImageSize } from '../../CardGrid/CardGrid'
 import Content from './Content/Content'
 import Popover from './Popover/Popover'
@@ -34,6 +34,8 @@ const CardCover = ({
   const showPopover = () => setIsPopoverVisible(true)
   const hidePopover = () => setIsPopoverVisible(false)
 
+  const colors = useColorVariable(media?.coverImage?.color)
+
   if (!media) return null
 
   return (
@@ -43,7 +45,7 @@ const CardCover = ({
       onMouseLeave={hidePopover}
       onFocus={showPopover}
       onBlur={hidePopover}
-      style={createColorVariable(media.coverImage?.color)}>
+      style={colors}>
       <Content
         rank={rank}
         main={{
