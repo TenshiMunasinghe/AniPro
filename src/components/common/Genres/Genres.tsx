@@ -9,14 +9,14 @@ interface Props {
   as: 'section' | 'footer'
   genres: Media['genres']
   canInteract: boolean
-  size?: `${string}text-${string}`
+  className?: string
 }
 
 const Genres = ({
   as: Tag,
   genres: allGenres,
   canInteract,
-  size = 'text-sm',
+  className,
 }: Props) => {
   const { ref, state: genres } = useFitContent(allGenres || [])
 
@@ -28,7 +28,7 @@ const Genres = ({
     children: _genres.map(({ value, key }) =>
       value ? <Genre key={key} genre={value} canInteract={canInteract} /> : null
     ),
-    className: classnames('flex overflow-hidden space-x-3', size),
+    className: classnames('flex overflow-hidden space-x-3', className),
     ref,
   })
 }
