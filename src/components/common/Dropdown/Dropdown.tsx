@@ -3,7 +3,7 @@ import { memo, RefObject } from 'react'
 import { IconType } from 'react-icons'
 import { FaAngleDown } from 'react-icons/fa'
 import { useFocusedWithin } from '../../../hooks/useFocusedWithin'
-import Items from './Items/Items'
+import Items from './Items'
 
 export interface DropdownProps {
   onChange: (state: string | string[]) => void
