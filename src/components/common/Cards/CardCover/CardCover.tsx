@@ -43,9 +43,7 @@ const CardCover = ({
       onMouseLeave={hidePopover}
       onFocus={showPopover}
       onBlur={hidePopover}
-      style={createColorVariable(
-        media.coverImage?.color || 'var(--color-foreground-200)'
-      )}>
+      style={createColorVariable(media.coverImage?.color)}>
       <Content
         rank={rank}
         main={{
