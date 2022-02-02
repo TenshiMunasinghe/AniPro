@@ -8,14 +8,14 @@ import { airingInfo } from '../../../../utils/airingInfo'
 import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { toStartCase } from '../../../../utils/toStartCase'
+import BackgroundImage from '../../BackgroundImage'
 import { ImageSize } from '../../CardGrid/CardGrid'
 import CoverImage from '../../CoverImage/CoverImage'
 import Genres from '../../Genres/Genres'
 import Score from '../../Score/Score'
 import Title from '../../Title'
-import Rank from '../components/Rank/Rank'
-import styles from './CardTable.module.scss'
-import Info from './Info/Info'
+import Rank from '../components/Rank'
+import Info from './Info'
 
 interface Props {
   media: DeepPartial<Media>
@@ -48,31 +48,34 @@ const CardTable = ({
 }: Props) => {
   const colors = useColorVariable(coverImage?.color)
 
-  const _style = {
-    ...colors,
-    '--banner-image': `url(${bannerImage})`,
-  } as React.CSSProperties
-
   return (
-    <article className={styles.container} style={_style}>
+    <article
+      className='group relative flex overflow-hidden bg-zinc-100 dark:bg-zinc-700'
+      style={colors}>
       {rank && (
-        <div className={styles.rank}>
+        <div className='absolute right-2 top-2 md:right-4 md:top-4 w-12'>
           <Rank rank={rank} />
         </div>
       )}
-      <div className={styles.card}>
+      <BackgroundImage src={bannerImage} blur='blur-none' onlyOnHover />
+      <div className='flex-1 relative grid grid-cols-[4rem_1fr] items-center p-2 md:p-4 text-lg rounded'>
         <CoverImage
           link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
         />
-        <div className={styles.content}>
-          <div className={styles.header}>
+        <div className='relative grid gap-y-1 md:gap-y-0 md:grid-cols-[minmax(0,1fr)_6rem_6rem_12rem] gap-x-5 text-zinc-700 dark:text-zinc-300 pl-5 h-full'>
+          <div className='flex flex-col justify-around h-full'>
             <Title
               link={linkToMediaPage(id, type || MediaType.Anime)}
               text={title?.romaji || 'no title'}
             />
-            <Genres as='section' genres={genres} canInteract={false} />
+            <Genres
+              className='hidden md:flex text-sm'
+              as='section'
+              genres={genres}
+              canInteract={false}
+            />
           </div>
 
           <Info

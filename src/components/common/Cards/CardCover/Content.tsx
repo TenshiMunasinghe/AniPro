@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import CoverImage from '../../CoverImage/CoverImage'
 import Title from '../../Title'
-import Rank from '../components/Rank/Rank'
+import Rank from '../components/Rank'
 import { CardCoverContent } from './CardCover'
 import Container from './Container'
 
