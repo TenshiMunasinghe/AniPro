@@ -1,38 +1,23 @@
-import { ThemeStore, useThemeStore } from '../../../zustand/stores'
-import styles from './Footer.module.scss'
-
-const themeSelector = ({ set }: ThemeStore) => set
+import Anchor from '../../common/Anchor'
+import ThemeButton from '../../common/ThemeButton'
 
 const Footer = () => {
-  const setTheme = useThemeStore(themeSelector)
-
   return (
-    <footer className={styles.footer}>
-      <div className={styles.upperSection}>
-        <section className={styles.theme}>
-          <button
-            className={styles.light}
-            aria-label='light theme'
-            title='light'
-            onClick={() => setTheme({ theme: 'light' })}>
-            A
-          </button>
-          <button
-            className={styles.dark}
-            aria-label='dark theme'
-            title='dark'
-            onClick={() => setTheme({ theme: 'dark' })}>
-            A
-          </button>
+    <footer className='w-full !mt-24 md:!mt-32'>
+      <div className='flex items-end'>
+        <section className='mr-auto flex space-x-6'>
+          <ThemeButton theme='light' />
+          <ThemeButton theme='dark' />
         </section>
-
-        <section className={styles.info}>
-          <a href='https://github.com/TenshiMunasinghe/AniPro'>GitHub</a>
-        </section>
+        <Anchor
+          text='GitHub'
+          href='https://github.com/TenshiMunasinghe/AniPro'
+        />
       </div>
 
-      <section className={styles.disclaimer}>
-        This site is a clone of <a href='https://anilist.co/'>AniList.co</a>
+      <section className='mt-6 text-right'>
+        This site is a clone of{' '}
+        <Anchor text='AniList.co' href='https://anilist.co/' />
       </section>
     </footer>
   )
