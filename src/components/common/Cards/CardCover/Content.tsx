@@ -15,7 +15,7 @@ const Content = ({ main, sub, rank }: Props) => {
   return (
     <Container>
       {rank && (
-        <div className='absolute -left-2 -top-2 w-11'>
+        <div className='absolute -left-3 -top-3 w-10 z-10'>
           <Rank rank={rank} />
         </div>
       )}
