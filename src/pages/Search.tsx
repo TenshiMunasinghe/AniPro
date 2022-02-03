@@ -1,7 +1,6 @@
 import { Route, Switch } from 'react-router-dom'
 import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
-import Footer from '../components/home/Footer/Footer'
 import Media from '../components/search/Media/Media'
 import PeopleHeader from '../components/search/PeopleHeader/PeopleHeader'
 import CharactersSearchResult from '../components/search/PeopleSearchResult/CharactersSearchResult'
@@ -84,7 +83,6 @@ const Search = () => {
         </Switch>
       </PageWrapper>
       <ScrollButton />
-      <Footer />
     </>
   )
 }

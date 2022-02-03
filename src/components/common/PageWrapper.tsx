@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import { FC } from 'react'
+import Footer from '../home/Footer/Footer'
 
 interface Props {
   className?: string
@@ -13,6 +14,7 @@ const PageWrapper: FC<Props> = ({ className, children }) => {
         className
       )}>
       {children}
+      <Footer />
     </div>
   )
 }

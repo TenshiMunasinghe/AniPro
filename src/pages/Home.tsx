@@ -1,6 +1,5 @@
 import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
-import Footer from '../components/home/Footer/Footer'
 import MediaHome from '../components/home/Home'
 import Slider from '../components/home/Slider'
 import { MediaType } from '../generated'
@@ -28,7 +27,6 @@ const Home = () => {
         <MediaHome type={MediaType.Anime} />
         <MediaHome type={MediaType.Manga} />
       </PageWrapper>
-      <Footer />
     </>
   )
 }
