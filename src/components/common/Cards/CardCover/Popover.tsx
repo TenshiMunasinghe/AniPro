@@ -51,7 +51,7 @@ const Popover = ({ media }: Props) => {
   return (
     <aside
       className={classnames(
-        'pointer-events-none absolute block top-0 bg-zinc-50 dark:bg-zinc-700 min-w-[23rem] max-w-[23rem] p-5 rounded shadow-md shadow-zinc-700 dark:shadow-zinc-900 z-20 transition-all scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-focus-within::scale-100 group-focus-within:opacity-100',
+        'group-focus-within::scale-100 pointer-events-none absolute top-0 z-20 block min-w-[23rem] max-w-[23rem] scale-95 rounded bg-zinc-50 p-5 opacity-0 shadow-md shadow-zinc-700 transition-all group-focus-within:opacity-100 group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-700 dark:shadow-zinc-900',
         isLeft ? 'left-auto right-full mr-3' : 'right-auto left-full ml-3',
         {
           '': isHidden,
@@ -61,7 +61,7 @@ const Popover = ({ media }: Props) => {
       {type === 'ANIME' && (
         <>
           {(nextAiringEpisode || season || seasonYear || meanScore) && (
-            <header className='grid grid-cols-[1fr_auto] items-center gap-x-4 mb-4 whitespace-nowrap'>
+            <header className='mb-4 grid grid-cols-[1fr_auto] items-center gap-x-4 whitespace-nowrap'>
               <div>{airingInfo({ nextAiringEpisode, season, seasonYear })}</div>
               {meanScore && <Score score={meanScore} />}
             </header>
@@ -93,7 +93,7 @@ const Popover = ({ media }: Props) => {
       )}
 
       {type === 'MANGA' && (
-        <div className='flex flex-col relative'>
+        <div className='relative flex flex-col'>
           {meanScore && (
             <div className='absolute right-0'>
               <Score score={meanScore} />
@@ -113,7 +113,7 @@ const Popover = ({ media }: Props) => {
         as='footer'
         genres={genres}
         canInteract={false}
-        className='text-sm mt-5'
+        className='mt-5 text-sm'
       />
     </aside>
   )

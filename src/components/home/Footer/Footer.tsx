@@ -3,7 +3,7 @@ import ThemeButton from '../../common/ThemeButton'
 
 const Footer = () => {
   return (
-    <footer className='w-full !mt-24 md:!mt-32'>
+    <footer className='!mt-24 w-full md:!mt-32'>
       <div className='flex items-end'>
         <section className='mr-auto flex space-x-6'>
           <ThemeButton theme='light' />

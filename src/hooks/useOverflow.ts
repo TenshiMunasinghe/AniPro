@@ -21,7 +21,8 @@ export const useOverflow = () => {
       if (!wrapperRef.current || !wrapperRef.current.parentElement) return prev
 
       const rect = wrapperRef.current.getBoundingClientRect()
-      const parentRect = wrapperRef.current.parentElement.getBoundingClientRect()
+      const parentRect =
+        wrapperRef.current.parentElement.getBoundingClientRect()
       const { offsetLeft } = wrapperRef.current
 
       const isRight =

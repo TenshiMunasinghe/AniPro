@@ -96,7 +96,7 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         tabs={filterTabs(media)}
       />
       <PageWrapper
-        className={`grid justify-center gap-8 grid-cols-[var(--media-page-image-width)_1fr]`}>
+        className={`grid grid-cols-[var(--media-page-image-width)_1fr] justify-center gap-8`}>
         <Aside data={media} />
         <Switch>
           <Route exact path='/media/:type/:id'>

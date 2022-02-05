@@ -35,7 +35,7 @@ const CardCover = ({
   if (!media) return null
 
   return (
-    <div className='relative group' style={colors}>
+    <div className='group relative' style={colors}>
       <Content
         rank={rank}
         main={{

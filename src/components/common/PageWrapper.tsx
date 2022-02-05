@@ -10,7 +10,7 @@ const PageWrapper: FC<Props> = ({ className, children }) => {
   return (
     <div
       className={classnames(
-        'py-10 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-28',
+        'py-10 px-6 sm:px-8 md:px-12 lg:py-24 lg:px-28',
         className
       )}>
       {children}

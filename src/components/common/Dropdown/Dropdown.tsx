@@ -48,13 +48,13 @@ const Dropdown = ({
 
   return (
     <div
-      className='relative text-sm group'
+      className='group relative text-sm'
       aria-haspopup='true'
       aria-expanded={isFocused}
       ref={ref as RefObject<HTMLDivElement>}
       tabIndex={0}>
       <button
-        className='flex items-center cursor-pointer space-x-2'
+        className='flex cursor-pointer items-center space-x-2'
         tabIndex={-1}>
         {icon?.isLeft && <Icon aria-label='toggle dropdown' />}
         <div

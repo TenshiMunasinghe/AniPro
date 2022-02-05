@@ -15,11 +15,11 @@ const Content = ({ main, sub, rank }: Props) => {
   return (
     <Container>
       {rank && (
-        <div className='absolute -left-3 -top-3 w-10 z-10'>
+        <div className='absolute -left-3 -top-3 z-10 w-10'>
           <Rank rank={rank} />
         </div>
       )}
-      <div className='relative h-fit rounded overflow-hidden shadow shadow-zinc-700 dark:shadow-zinc-900'>
+      <div className='relative h-fit overflow-hidden rounded shadow shadow-zinc-700 dark:shadow-zinc-900'>
         <figure className='grid'>
           <CoverImage
             link={main.link}
@@ -28,7 +28,7 @@ const Content = ({ main, sub, rank }: Props) => {
           />
         </figure>
         {sub && sub.image !== undefined && (
-          <figure className='grid absolute bottom-0 right-0 w-2/5 rounded-sm ring ring-zinc-800'>
+          <figure className='absolute bottom-0 right-0 grid w-2/5 rounded-sm ring ring-zinc-800'>
             <CoverImage
               link={sub.link}
               src={sub.image}

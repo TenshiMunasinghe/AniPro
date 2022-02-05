@@ -31,9 +31,9 @@ const Items = ({
   return (
     <div
       className={classnames(
-        'z-50 absolute transition-all translate-y-3 max-h-60 min-w-fit max-w-full overflow-y-auto overflow-x-hidden bg-zinc-100 dark:bg-zinc-700 rounded shadow-md shadow-zinc-500 dark:shadow-zinc-900 divide-y-[1px] divide-zinc-400 dark:divide-zinc-500',
+        'absolute z-50 max-h-60 min-w-fit max-w-full translate-y-3 divide-y-[1px] divide-zinc-400 overflow-y-auto overflow-x-hidden rounded bg-zinc-100 shadow-md shadow-zinc-500 transition-all dark:divide-zinc-500 dark:bg-zinc-700 dark:shadow-zinc-900',
         {
-          'opacity-0 pointer-events-none': !isVisible,
+          'pointer-events-none opacity-0': !isVisible,
           'left-0': position === 'left',
           'right-0': position === 'right',
         }
@@ -44,12 +44,12 @@ const Items = ({
             handleChange(o.value)
           }}
           key={o.key}
-          className='w-full flex items-center justify-start p-3 hocus:bg-zinc-200 dark:hocus:bg-zinc-600 whitespace-nowrap cursor-pointer transition-all z-50'>
+          className='z-50 flex w-full cursor-pointer items-center justify-start whitespace-nowrap p-3 transition-all hocus:bg-zinc-200 dark:hocus:bg-zinc-600'>
           <span>{o.label}</span>
           <AiOutlineCheck
             aria-label='check'
             className={classnames(
-              'inline-block align-middle ml-2 fill-teal-400',
+              'ml-2 inline-block fill-teal-400 align-middle',
               { 'opacity-0': !isSelected(o.value) }
             )}
           />

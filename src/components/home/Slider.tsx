@@ -66,16 +66,16 @@ const Slider = ({ queryVar, context }: Props) => {
 
   return (
     <section
-      className='flex items-center relative min-w-full h-screen'
+      className='relative flex h-screen min-w-full items-center'
       tabIndex={-1}
       onKeyDown={onKeyPress}>
       {isLoading && <LoadingSpinner />}
       {!isLoading && (
         <>
-          <header className='absolute top-0 flex justify-between items-center w-full p-4 sm:p-6 lg:py-10 lg:px-14 z-20'>
+          <header className='absolute top-0 z-20 flex w-full items-center justify-between p-4 sm:p-6 lg:py-10 lg:px-14'>
             <Link
               to='/'
-              className='text-lg lg:text-2xl text-zinc-900 dark:text-zinc-300'>
+              className='text-lg text-zinc-900 dark:text-zinc-300 lg:text-2xl'>
               AniPro
             </Link>
             <Link
@@ -86,7 +86,7 @@ const Slider = ({ queryVar, context }: Props) => {
           </header>
 
           {slideCount && (
-            <section className='flex z-10 overflow-hidden'>
+            <section className='z-10 flex overflow-hidden'>
               {data?.Page?.media?.map((media, idx) => (
                 <Slide
                   media={media}
@@ -99,11 +99,11 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-4 bottom-4 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20 z-20 dark:text-zinc-200 hocus:text-teal-600 hocus:dark:text-teal-300'>
+          <footer className='absolute right-4 bottom-4 z-20 hocus:text-teal-600 dark:text-zinc-200 hocus:dark:text-teal-300 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20'>
             <Link to={link}>View All</Link>
           </footer>
 
-          <div className='absolute left-4 bottom-4 z-10 md:left-1/2 md:-tranzinc-x-1/2 sm:bottom-6'>
+          <div className='md:-tranzinc-x-1/2 absolute left-4 bottom-4 z-10 sm:bottom-6 md:left-1/2'>
             <button
               onClick={toPrevSlide}
               className={classnames({

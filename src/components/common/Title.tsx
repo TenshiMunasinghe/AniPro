@@ -13,7 +13,7 @@ const Title = ({ link, text, className }: Props) => {
     <Link
       to={link || '#'}
       className={classnames(
-        'line-clamp-2 transition-all text-lg hocus:text-[color:var(--color-adjusted)] dark:hocus:text-[color:var(--color-adjusted)]',
+        'text-lg transition-all line-clamp-2 hocus:text-[color:var(--color-adjusted)] dark:hocus:text-[color:var(--color-adjusted)]',
         className
       )}>
       {text}

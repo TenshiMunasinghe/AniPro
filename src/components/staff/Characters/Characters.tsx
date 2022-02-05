@@ -20,33 +20,28 @@ const Characters = ({
 }: ReturnType<typeof useSortMedia>) => {
   const { id } = useParams<{ id: string }>()
 
-  const {
-    data,
-    isLoading,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = useInfiniteGraphQLQuery(
-    useStaffMediaCharacterQuery,
-    ({ pageParam = 1 }) => ({
-      id: parseInt(id),
-      page: pageParam,
-      sort: sortBy,
-    }),
-    {
-      getNextPageParam: ({ Staff }) => {
-        if (!Staff?.characterMedia?.pageInfo?.currentPage) return
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteGraphQLQuery(
+      useStaffMediaCharacterQuery,
+      ({ pageParam = 1 }) => ({
+        id: parseInt(id),
+        page: pageParam,
+        sort: sortBy,
+      }),
+      {
+        getNextPageParam: ({ Staff }) => {
+          if (!Staff?.characterMedia?.pageInfo?.currentPage) return
 
-        const {
-          characterMedia: { pageInfo },
-        } = Staff
+          const {
+            characterMedia: { pageInfo },
+          } = Staff
 
-        return pageInfo.hasNextPage
-          ? (pageInfo?.currentPage || 0) + 1
-          : undefined
-      },
-    }
-  )
+          return pageInfo.hasNextPage
+            ? (pageInfo?.currentPage || 0) + 1
+            : undefined
+        },
+      }
+    )
 
   const edges = data?.pages.flatMap(page => page.Staff?.characterMedia?.edges)
 

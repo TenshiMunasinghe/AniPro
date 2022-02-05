@@ -18,13 +18,13 @@ const CoverImage = ({ link, title, src }: Props) => {
     <Link
       to={link || pathname + search}
       aria-label={title || 'no title'}
-      className='relative grid grid-cols-1 bg-zinc-500 bg-[color:var(--color-original)] overflow-hidden aspect-[2/3] before:content-[""] before:absolute before:block before:w-full before:h-full before:bg-[color:var(--color-adjusted)] before:opacity-0 before:pointer-events-none before:z-20 before:transition-all hocus:before:opacity-10'>
+      className='relative grid aspect-[2/3] grid-cols-1 overflow-hidden bg-zinc-500 bg-[color:var(--color-original)] before:pointer-events-none before:absolute before:z-20 before:block before:h-full before:w-full before:bg-[color:var(--color-adjusted)] before:opacity-0 before:transition-all before:content-[""] hocus:before:opacity-10'>
       <LazyLoadImage
         src={src || NO_IMAGE_URL}
         alt={title || 'no title'}
         scrollPosition={scrollPosition}
         effect='opacity'
-        className='w-full h-full object-cover'
+        className='h-full w-full object-cover'
       />
     </Link>
   )

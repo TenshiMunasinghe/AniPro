@@ -18,7 +18,7 @@ const ThemeButton = ({ theme }: Props) => {
   return (
     <button
       className={classnames(
-        'relative w-9 h-9 rounded-sm border-2 border-solid border-zinc-400 hocus:border-teal-400 transition-all',
+        'relative h-9 w-9 rounded-sm border-2 border-solid border-zinc-400 transition-all hocus:border-teal-400',
         STYLES[theme]
       )}
       aria-label={`${theme} theme`}

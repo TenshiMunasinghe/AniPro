@@ -50,7 +50,7 @@ const Content = ({ queryVar, content }: Props) => {
     <section className='flex flex-col'>
       <Link
         to={link}
-        className='cursor-pointer mb-5 lg:mb-8 font-bold text-lg lg:text-3xl text-zinc-800 dark:text-zinc-200 hocus:text-teal-500 dark:hocus:text-teal-400'>
+        className='mb-5 cursor-pointer text-lg font-bold text-zinc-800 hocus:text-teal-500 dark:text-zinc-200 dark:hocus:text-teal-400 lg:mb-8 lg:text-3xl'>
         {content.text}
       </Link>
       <CardGrid
@@ -64,7 +64,7 @@ const Content = ({ queryVar, content }: Props) => {
       />
       <Link
         to={link}
-        className='ml-auto mt-3 lg:mt-6 cursor-pointer text-sm font-medium hocus:text-zinc-900 dark:hocus:text-zinc-300'>
+        className='ml-auto mt-3 cursor-pointer text-sm font-medium hocus:text-zinc-900 dark:hocus:text-zinc-300 lg:mt-6'>
         View All
       </Link>
     </section>

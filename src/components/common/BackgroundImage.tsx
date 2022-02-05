@@ -20,8 +20,8 @@ const BackgroundImage = ({
     <div
       style={style}
       className={classnames(
-        'absolute inset-0 bg-white dark:bg-zinc-700 bg-[color:var(--color-original)] bg-[image:var(--image-url)] bg-no-repeat bg-cover bg-center blur after:content-[""] after:absolute after:inset-0 after:bg-white/80 dark:after:bg-zinc-900/80',
-        { 'hidden group-hover:block group-focus-within:block': onlyOnHover },
+        'absolute inset-0 bg-white bg-[color:var(--color-original)] bg-[image:var(--image-url)] bg-cover bg-center bg-no-repeat blur after:absolute after:inset-0 after:bg-white/80 after:content-[""] dark:bg-zinc-700 dark:after:bg-zinc-900/80',
+        { 'hidden group-focus-within:block group-hover:block': onlyOnHover },
         blur
       )}
     />
