@@ -5,11 +5,6 @@ interface Props {
   theme: Theme
 }
 
-const STYLES = {
-  light: 'bg-white text-zinc-700',
-  dark: 'bg-zinc-800 text-zinc-300',
-}
-
 const themeSelector = ({ set }: ThemeStore) => set
 
 const ThemeButton = ({ theme }: Props) => {
@@ -19,7 +14,10 @@ const ThemeButton = ({ theme }: Props) => {
     <button
       className={classnames(
         'relative h-9 w-9 rounded-sm border-2 border-solid border-zinc-400 transition-all hocus:border-teal-400',
-        STYLES[theme]
+        {
+          light: 'bg-white text-zinc-700',
+          dark: 'bg-zinc-800 text-zinc-300',
+        }[theme]
       )}
       aria-label={`${theme} theme`}
       title={theme}
