@@ -9,7 +9,7 @@ import {
 } from '../../../../generated/index'
 import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
 import { addKey } from '../../../../utils/addKey'
-import CardGrid from '../../../common/CardGrid/CardGrid'
+import CardGrid from '../../../common/CardGrid'
 import CardTypeButton from '../../../common/CardTypeButton/CardTypeButton'
 import Dropdown from '../../../common/Dropdown/Dropdown'
 import LinearLoading from '../../../common/LinearLoading/LinearLoading'

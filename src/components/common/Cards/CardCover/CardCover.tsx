@@ -4,7 +4,7 @@ import { imageSize } from '../../../../api/queries'
 import { linkToMediaPage } from '../../../../App'
 import { Media, MediaType } from '../../../../generated'
 import { useColorVariable } from '../../../../hooks/useColorVariable'
-import { ImageSize } from '../../CardGrid/CardGrid'
+import { ImageSize } from '../../CardGrid'
 import Content from './Content'
 import Popover from './Popover'
 

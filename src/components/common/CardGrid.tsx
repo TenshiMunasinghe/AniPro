@@ -1,14 +1,13 @@
-import classnames from 'classnames'
 import range from 'lodash/range'
 import { DeepPartial } from 'react-hook-form'
-import { Maybe, Media } from '../../../generated/index'
-import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
-import CardChart from '../Cards/CardChart/CardChart'
-import CardCover from '../Cards/CardCover/CardCover'
-import CardLoading from '../Cards/CardLoading/CardLoading'
-import CardTable from '../Cards/CardTable/CardTable'
-import NotFound from '../NotFound/NotFound'
-import styles from './CardGrid.module.scss'
+import { Maybe, Media } from '../../generated/index'
+import { CardType } from '../search/Media/MediaSearchResult/MediaSearchResult'
+import CardGridContainer from './CardGridContainer'
+import CardChart from './Cards/CardChart/CardChart'
+import CardCover from './Cards/CardCover/CardCover'
+import CardLoading from './Cards/CardLoading/CardLoading'
+import CardTable from './Cards/CardTable/CardTable'
+import NotFound from './NotFound/NotFound'
 
 export interface MediaWithRank extends DeepPartial<Media> {
   rank?: number | null
@@ -40,10 +39,7 @@ const CardGrid = ({
   }
 
   return (
-    <section
-      className={classnames(styles.slider, styles[cardType], {
-        [styles.sideScroll]: sideScroll,
-      })}>
+    <CardGridContainer cardType={cardType} sideScroll={sideScroll}>
       {isLoading &&
         range(0, loadingCount).map((_, i) => (
           <CardLoading type={cardType} key={i} />
@@ -81,7 +77,7 @@ const CardGrid = ({
               return null
           }
         })}
-    </section>
+    </CardGridContainer>
   )
 }
 

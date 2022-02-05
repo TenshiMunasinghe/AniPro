@@ -6,7 +6,7 @@ import {
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
-import CardGrid, { MediaWithRank } from '../common/CardGrid/CardGrid'
+import CardGrid, { MediaWithRank } from '../common/CardGrid'
 import { CardType } from '../search/Media/MediaSearchResult/MediaSearchResult'
 
 export type _Content = {
