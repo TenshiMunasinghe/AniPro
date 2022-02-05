@@ -1,15 +1,15 @@
 import { DeepPartial } from 'react-hook-form'
 import { linkToMediaPage } from '../../../../App'
 import { MediaEdge, MediaType } from '../../../../generated'
+import Grid from '../../../common/CardGridContainer'
 import Card from '../../../common/Cards/CardCover/Content'
-import CardGrid from '../../../person/CardGrid/CardGrid'
 
 interface Props {
   edges: (DeepPartial<MediaEdge> | null | undefined)[] | null | undefined
 }
 
 const Cards = ({ edges }: Props) => (
-  <CardGrid>
+  <Grid cardType='cover'>
     {edges?.map(edge => {
       const media = edge?.node
       return edge ? (
@@ -26,7 +26,7 @@ const Cards = ({ edges }: Props) => (
         />
       ) : null
     })}
-  </CardGrid>
+  </Grid>
 )
 
 export default Cards

@@ -8,9 +8,9 @@ import { linkToMediaPage, linkToStaffPage } from '../../../App'
 import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
+import Grid from '../../common/CardGridContainer'
 import Card from '../../common/Cards/CardCover/Content'
 import CardContainer from '../../person/CardContainer/CardContainer'
-import CardGrid from '../../person/CardGrid/CardGrid'
 import Dropdowns from '../../person/Dropdowns/Dropdowns'
 import { sortByOptions } from '../../staff/Medias/Medias'
 
@@ -65,7 +65,7 @@ const Medias = () => {
       />
       <CardContainer isLoading={isLoading}>
         {edges?.length && (
-          <CardGrid>
+          <Grid cardType='cover'>
             {edges?.map(edge => {
               const media = edge.node
               const voiceActors = edge?.voiceActors
@@ -113,7 +113,7 @@ const Medias = () => {
                 )
               })
             })}
-          </CardGrid>
+          </Grid>
         )}
       </CardContainer>
     </>
