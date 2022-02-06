@@ -22,7 +22,7 @@ export type SearchSlugs = typeof SEARCH_SLUGS[number]
 const Search = () => {
   return (
     <>
-      <NavBar />
+      <NavBar position='fixed' />
       <PageWrapper className='gap-y-6'>
         <Switch>
           <Route exact path='/search/anime'>

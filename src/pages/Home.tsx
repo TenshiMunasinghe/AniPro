@@ -22,7 +22,7 @@ const Home = () => {
         }}
         context={contents.ANIME[randomKey].text}
       />
-      <NavBar position='sticky' />
+      <NavBar />
       <PageWrapper className='relative'>
         <MediaHome type={MediaType.Anime} />
         <MediaHome type={MediaType.Manga} />
