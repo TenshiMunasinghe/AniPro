@@ -19,7 +19,7 @@ const CardGridContainer: FC<Props> = ({ cardType, sideScroll, children }) => {
           table: 'grid-cols-1 gap-y-5',
         }[cardType],
         {
-          'auto-cols-[47.5vw] grid-flow-col grid-cols-[repeat(auto-fit,47.5vw)] gap-y-0 gap-x-5 overflow-x-auto overflow-y-hidden sm:grid-flow-row sm:overflow-hidden':
+          'auto-cols-[60%] grid-flow-col gap-y-0 gap-x-5 overflow-x-auto sm:grid-flow-row sm:overflow-hidden':
             sideScroll && cardType === 'cover',
         }
       )}>
