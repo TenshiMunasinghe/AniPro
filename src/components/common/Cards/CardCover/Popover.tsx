@@ -81,7 +81,7 @@ const Popover = ({ media }: Props) => {
                 </>
               ) : format !== 'MOVIE' && episodes ? (
                 <>
-                  <span className='m-2'>•</span>
+                  <span className='m-2 align-middle'>•</span>
                   {pluralize(episodes, 'Episode')}
                 </>
               ) : (
