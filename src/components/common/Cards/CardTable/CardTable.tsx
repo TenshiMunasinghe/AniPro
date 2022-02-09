@@ -50,7 +50,7 @@ const CardTable = ({
 
   return (
     <article
-      className='group relative flex overflow-hidden bg-zinc-100 dark:bg-zinc-700'
+      className='group relative flex overflow-hidden rounded-sm bg-zinc-100 dark:bg-zinc-700'
       style={colors}>
       {rank && (
         <div className='absolute right-2 top-2 z-10 w-12 md:right-4 md:top-4'>
