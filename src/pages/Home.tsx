@@ -23,11 +23,9 @@ const Home = () => {
         context={contents.ANIME[randomKey].text}
       />
       <NavBar />
-      <PageWrapper className='relative'>
-        <div className='space-y-12 lg:space-y-24'>
-          <MediaHome type={MediaType.Anime} />
-          <MediaHome type={MediaType.Manga} />
-        </div>
+      <PageWrapper className='relative space-y-12 lg:space-y-24'>
+        <MediaHome type={MediaType.Anime} />
+        <MediaHome type={MediaType.Manga} />
       </PageWrapper>
     </>
   )
