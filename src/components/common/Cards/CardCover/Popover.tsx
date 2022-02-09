@@ -46,15 +46,13 @@ const Popover = ({ media }: Props) => {
     })
   ).slice(0, 2)
 
-  const isHidden = !isLeft && !isRight
-
   return (
     <aside
       className={classnames(
-        'group-focus-within::scale-100 pointer-events-none absolute top-0 z-20 block min-w-[23rem] max-w-[23rem] scale-95 rounded bg-zinc-50 p-5 opacity-0 shadow-md shadow-zinc-700 transition-all group-focus-within:opacity-100 group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-700 dark:shadow-zinc-900',
-        isLeft ? 'left-auto right-full mr-3' : 'right-auto left-full ml-3',
+        'pointer-events-none absolute top-0 z-20 block min-w-[23rem] max-w-[23rem] scale-95 rounded bg-zinc-50 p-5 opacity-0 shadow-md shadow-zinc-700 transition-all group-focus-within:scale-100 group-focus-within:opacity-100 group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-700 dark:shadow-zinc-900',
         {
-          '': isHidden,
+          'left-auto right-full mr-3': isLeft,
+          'right-auto left-full ml-3': isRight,
         }
       )}
       ref={wrapperRef}>
