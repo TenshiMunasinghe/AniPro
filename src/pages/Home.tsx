@@ -24,8 +24,10 @@ const Home = () => {
       />
       <NavBar />
       <PageWrapper className='relative'>
-        <MediaHome type={MediaType.Anime} />
-        <MediaHome type={MediaType.Manga} />
+        <div className='space-y-12 lg:space-y-24'>
+          <MediaHome type={MediaType.Anime} />
+          <MediaHome type={MediaType.Manga} />
+        </div>
       </PageWrapper>
     </>
   )
