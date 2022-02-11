@@ -4,6 +4,8 @@ import { SEARCH_SLUGS } from '../../../pages/Search'
 import Dropdown from '../Dropdown/Dropdown'
 import styles from './BrowseOptions.module.scss'
 
+//TODO: do something better
+
 const BrowseOptions = () => {
   const history = useHistory()
   const { pathname } = useLocation()
