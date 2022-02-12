@@ -17,6 +17,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/forms'),
     plugin(({ addVariant }) => {
       addVariant('hocus', ['&:hover', '&:focus'])
       addVariant('hocus-within', ['&:hover', '&:focus-within'])
