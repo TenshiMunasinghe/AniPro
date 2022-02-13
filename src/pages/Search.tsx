@@ -5,7 +5,7 @@ import Media from '../components/search/Media/Media'
 import PeopleHeader from '../components/search/PeopleHeader/PeopleHeader'
 import CharactersSearchResult from '../components/search/PeopleSearchResult/CharactersSearchResult'
 import StaffSearchResult from '../components/search/PeopleSearchResult/StaffSearchResult'
-import ScrollButton from '../components/search/ScrollButton/ScrollButton'
+import ScrollButton from '../components/search/ScrollButton'
 import { MediaType } from '../generated'
 
 export const SEARCH_SLUGS = [
