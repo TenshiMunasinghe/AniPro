@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import CoverImage from '../../CoverImage/CoverImage'
+import CoverImage from '../../CoverImage'
 import Title from '../../Title'
 import Rank from '../components/Rank'
 import { CardCoverContent } from './CardCover'

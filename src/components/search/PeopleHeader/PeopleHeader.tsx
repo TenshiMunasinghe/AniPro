@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import SearchBarInput from '../../common/SearchBarInput/SearchBarInput'
+import SearchBarInput from '../../common/SearchBarInput'
 import styles from './PeopleHeader.module.scss'
 
 interface Props {

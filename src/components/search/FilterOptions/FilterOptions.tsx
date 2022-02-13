@@ -1,5 +1,5 @@
-import Fullview from './Fullview/Fullview'
-import Sidebar from './Sidebar/Sidebar'
+import Sidebar from '../Sidebar'
+import Fullview from './Fullview'
 
 const FilterOptions = () => {
   return (

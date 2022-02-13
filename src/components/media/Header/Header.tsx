@@ -4,7 +4,7 @@ import { FaExternalLinkAlt, FaPlay } from 'react-icons/fa'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { MediaCoverImage, MediaFormat } from '../../../generated/index'
 import { TabsType } from '../../../pages/Media'
-import Description from '../../common/Description/Description'
+import Description from '../../Description'
 import TabNav from '../TabNav/TabNav'
 import styles from './Header.module.scss'
 

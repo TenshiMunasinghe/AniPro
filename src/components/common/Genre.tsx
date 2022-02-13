@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { linkToSearchPage } from '../../../../utils/linkToSearchPage'
+import { linkToSearchPage } from '../../utils/linkToSearchPage'
 
 interface Props {
   genre: string

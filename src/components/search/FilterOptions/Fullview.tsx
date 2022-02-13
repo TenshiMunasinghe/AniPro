@@ -1,13 +1,13 @@
 import { useCallback, useContext } from 'react'
 import { createPortal } from 'react-dom'
 import { FaAngleDoubleUp, FaAngleDown } from 'react-icons/fa'
-import { filters } from '../../../../filterOptions/filterOptions'
-import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
-import { nextParam, NextParamArgs } from '../../../../utils/nextParam'
-import { toStartCase } from '../../../../utils/toStartCase'
-import { ActiveFilterContext } from '../../Media/Media'
-import Option from '../../Option/Option'
-import styles from './Fullview.module.scss'
+import { filters } from '../../../filterOptions/filterOptions'
+import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
+import { nextParam, NextParamArgs } from '../../../utils/nextParam'
+import { toStartCase } from '../../../utils/toStartCase'
+import Button from '../../common/Button'
+import { ActiveFilterContext } from '../Media'
+import Option from '../Option'
 
 const Fullview = () => {
   const { activeFilterOption, setActiveFilterOption } =
@@ -50,27 +50,29 @@ const Fullview = () => {
 
   return createPortal(
     !activeFilterOption ? null : (
-      <section className={styles.container}>
-        <nav className={styles.filters}>
+      <section className='fixed inset-0 z-50 flex flex-col space-y-5 bg-white px-3 py-7 dark:bg-zinc-800 md:px-7 lg:space-y-8 lg:px-14'>
+        <nav className='flex shrink-0 space-x-4 overflow-x-auto'>
           {filters.map(f => (
-            <button
+            <Button
               key={f.key + 'nav'}
-              className={styles.label}
-              onClick={() => setActiveFilterOption(f.name)}>
-              <span className={styles.text}>{toStartCase(f.name)}</span>
-              <FaAngleDown />
-            </button>
+              text={toStartCase(f.name)}
+              onClick={() => setActiveFilterOption(f.name)}
+              icon={FaAngleDown}
+              size='sm'
+            />
           ))}
         </nav>
-        <section className={styles.optionsContainer}>
-          <div className={styles.scrollWrapper}>
+        <section className='flex flex-1 flex-col overflow-hidden'>
+          <div className='basis-full space-y-5 overflow-y-auto bg-zinc-100 px-2 py-4 dark:bg-zinc-700 lg:p-7'>
             {activeFilter.isMulti && (
-              <button className={styles.selectAll} onClick={toggleAll}>
+              <button
+                className='text-teal-400 hocus:text-teal-500 dark:hocus:text-teal-300'
+                onClick={toggleAll}>
                 {isAllSelected ? 'Deselect' : 'Select'} All
               </button>
             )}
 
-            <div className={styles.options}>
+            <div className='grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4'>
               {activeFilter.options.map(({ value, label }) => {
                 const key = activeFilter.key + label
                 return (
@@ -98,14 +100,12 @@ const Fullview = () => {
             </div>
           </div>
         </section>
-        <footer className={styles.footer}>
-          <button className={styles.button} onClick={onApply}>
-            Apply
-          </button>
-          <button className={styles.button} onClick={resetParams}>
-            Reset
-          </button>
-          <button className={styles.close} onClick={closeFilterOptions}>
+        <footer className='flex shrink-0 items-center justify-end gap-x-4'>
+          <Button text='Apply' onClick={onApply} />
+
+          <Button text='Reset' onClick={resetParams} />
+
+          <button className='hover:text-teal-400' onClick={closeFilterOptions}>
             <FaAngleDoubleUp />
           </button>
         </footer>

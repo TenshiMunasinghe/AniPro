@@ -1,7 +1,7 @@
 import range from 'lodash/range'
 import { DeepPartial } from 'react-hook-form'
 import { Maybe, Media } from '../../generated/index'
-import { CardType } from '../search/Media/MediaSearchResult/MediaSearchResult'
+import { CardType } from '../search/MediaSearchResult'
 import CardGridContainer from './CardGridContainer'
 import CardChart from './Cards/CardChart/CardChart'
 import CardCover from './Cards/CardCover/CardCover'

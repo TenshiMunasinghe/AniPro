@@ -1,21 +1,20 @@
-import classnames from 'classnames'
 import { useCallback, useState } from 'react'
 import { FaSort } from 'react-icons/fa'
-import gqlRequestClient from '../../../../api/graphqlClient'
+import gqlRequestClient from '../../api/graphqlClient'
 import {
   MediaSort,
   MediaType,
   useMediaSearchQuery,
-} from '../../../../generated/index'
-import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
-import { addKey } from '../../../../utils/addKey'
-import CardGrid from '../../../common/CardGrid'
-import CardTypeButton from '../../../common/CardTypeButton/CardTypeButton'
-import Dropdown from '../../../common/Dropdown/Dropdown'
-import LinearLoading from '../../../common/LinearLoading/LinearLoading'
-import ActiveFilters from '../../ActiveFilters/ActiveFilters'
-import FilterOptions from '../../FilterOptions/FilterOptions'
-import styles from './MediaSearchResult.module.scss'
+} from '../../generated/index'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { addKey } from '../../utils/addKey'
+import CardGrid from '../common/CardGrid'
+import CardTypeButton from '../common/CardTypeButton'
+import Dropdown from '../common/Dropdown/Dropdown'
+import LinearLoading from '../common/LinearLoading/LinearLoading'
+import ActiveFilters from './ActiveFilters'
+import FilterOptions from './FilterOptions/FilterOptions'
+import PageNavigation from './PageNavigation'
 
 interface Props {
   type: MediaType
@@ -63,11 +62,11 @@ const MediaSearchResult = ({ type }: Props) => {
   const pageInfo = data?.Page?.pageInfo
 
   return (
-    <div className={styles.container}>
-      <div className={styles.upperSection}>
+    <section>
+      <div className='w-full space-y-7 pb-5'>
         <ActiveFilters />
-        <section className={styles.extraOptions}>
-          <section className={styles.gridType}>
+        <section className='flex items-center justify-end'>
+          <section className='mr-3 flex items-center space-x-2 border-r-2 border-zinc-400 py-1 pr-3'>
             {cardTypes.map(c => (
               <CardTypeButton
                 key={c.key}
@@ -86,9 +85,9 @@ const MediaSearchResult = ({ type }: Props) => {
           />
         </section>
       </div>
-      <main className={styles.mainContent}>
+      <main className='grid-cols-[auto_1fr] gap-x-16 lg:grid'>
         <FilterOptions />
-        <div className={styles.searchResult}>
+        <div className='grid h-fit justify-items-center space-y-7'>
           <CardGrid
             medias={medias}
             isLoading={isLoading}
@@ -98,12 +97,11 @@ const MediaSearchResult = ({ type }: Props) => {
             imageSize='large'
           />
           {!isError && !isLoading && (
-            <section className={styles.pages}>
+            <section className='flex space-x-4'>
               {pageInfo?.currentPage !== 1 && (
-                <button className={styles.page} onClick={() => movePage(1)}>
-                  {'<<'}
-                </button>
+                <PageNavigation page={1} text='<<' />
               )}
+
               {PAGES.map(p => {
                 const page = (pageInfo?.currentPage || 0) + p
 
@@ -115,32 +113,24 @@ const MediaSearchResult = ({ type }: Props) => {
                   return null
 
                 return (
-                  <button
-                    key={page}
-                    className={classnames(
-                      { [styles.current]: pageInfo?.currentPage === page },
-                      styles.page
-                    )}
-                    onClick={() => movePage(page)}>
-                    {page}
-                  </button>
+                  <PageNavigation
+                    page={page}
+                    text={page.toString()}
+                    isCurrent={pageInfo?.currentPage === page}
+                  />
                 )
               })}
-              {pageInfo?.currentPage !== pageInfo?.lastPage && (
-                <button
-                  className={styles.page}
-                  onClick={() =>
-                    pageInfo?.lastPage && movePage(pageInfo?.lastPage)
-                  }>
-                  {'>>'}
-                </button>
-              )}
+
+              {pageInfo?.lastPage &&
+                pageInfo?.currentPage !== pageInfo.lastPage && (
+                  <PageNavigation page={pageInfo?.lastPage} text='>>' />
+                )}
             </section>
           )}
           {!isLoading && isFetching && <LinearLoading />}
         </div>
       </main>
-    </div>
+    </section>
   )
 }
 

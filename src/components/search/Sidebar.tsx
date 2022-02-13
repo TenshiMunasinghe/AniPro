@@ -1,11 +1,10 @@
 import { memo, useCallback, useContext } from 'react'
-import { filters } from '../../../../filterOptions/filterOptions'
-import { useUpdateUrlParam } from '../../../../hooks/useUpdateUrlParam'
-import { nextParam, NextParamArgs } from '../../../../utils/nextParam'
-import { toStartCase } from '../../../../utils/toStartCase'
-import { ActiveFilterContext } from '../../Media/Media'
-import Option from '../../Option/Option'
-import styles from './Sidebar.module.scss'
+import { filters } from '../../filterOptions/filterOptions'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { nextParam, NextParamArgs } from '../../utils/nextParam'
+import { toStartCase } from '../../utils/toStartCase'
+import { ActiveFilterContext } from './Media'
+import Option from './Option'
 
 const Sidebar = () => {
   const { setActiveFilterOption } = useContext(ActiveFilterContext)
@@ -20,15 +19,15 @@ const Sidebar = () => {
   )
 
   return (
-    <aside className={styles.container}>
+    <aside className='hidden h-min gap-y-6 lg:grid'>
       {filters.map(f => (
-        <div key={f.key + 'sidebar'}>
+        <div key={f.key + 'sidebar'} className='space-y-3'>
           <button
-            className={styles.labels}
+            className='hocus:text-teal-400'
             onClick={() => setActiveFilterOption(f.name)}>
             {toStartCase(f.name)}
           </button>
-          <div className={styles.options}>
+          <div className='grid gap-y-4 text-sm'>
             {f.options.slice(0, 5).map(({ value, label }) => {
               const selected = params.initial.get(f.name)?.split(',') || []
               const key = f.key + f.name + label + 'aside'
@@ -54,9 +53,9 @@ const Sidebar = () => {
             })}
             {f.options.length > 5 && (
               <button
-                className={styles.showMore}
+                className='text-left text-sm text-teal-400 hocus:underline'
                 onClick={() => setActiveFilterOption(f.name)}>
-                {'>'} Show More
+                Show More
               </button>
             )}
           </div>

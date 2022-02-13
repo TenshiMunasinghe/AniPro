@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom'
 import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
-import Media from '../components/search/Media/Media'
+import Media from '../components/search/Media'
 import PeopleHeader from '../components/search/PeopleHeader/PeopleHeader'
 import CharactersSearchResult from '../components/search/PeopleSearchResult/CharactersSearchResult'
 import StaffSearchResult from '../components/search/PeopleSearchResult/StaffSearchResult'

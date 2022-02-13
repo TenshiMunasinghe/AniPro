@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import { FC } from 'react'
-import Footer from '../home/Footer/Footer'
+import Footer from './Footer'
 
 interface Props {
   className?: string

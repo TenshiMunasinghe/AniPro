@@ -7,7 +7,7 @@ import {
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
 import CardGrid, { MediaWithRank } from '../common/CardGrid'
-import { CardType } from '../search/Media/MediaSearchResult/MediaSearchResult'
+import { CardType } from '../search/MediaSearchResult'
 
 export type _Content = {
   text: string

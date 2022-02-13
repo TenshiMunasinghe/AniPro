@@ -14,3 +14,5 @@ const Anchor = ({ text, href }: Props) => {
 }
 
 export default Anchor
+
+//TODO: add variants

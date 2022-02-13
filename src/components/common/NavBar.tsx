@@ -3,7 +3,7 @@ import { FaMoon, FaSun } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { ThemeStore, useThemeStore } from '../../zustand/stores'
 import BrowseOptions from './BrowseOptions/BrowseOptions'
-import Switch from './NavBar/Switch/Switch'
+import Switch from './Switch'
 
 const themeSelector = ({ theme, set }: ThemeStore) => ({ theme, setTheme: set })
 

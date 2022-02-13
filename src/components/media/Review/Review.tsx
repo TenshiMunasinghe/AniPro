@@ -5,7 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { NO_IMAGE_URL } from '../../../api/queries'
 import { Review as ReviewType } from '../../../generated/index'
 import { context } from '../../../pages/Media'
-import Score from '../../common/Score/Score'
+import Score from '../../common/Score'
 import styles from './Review.module.scss'
 
 interface Props {

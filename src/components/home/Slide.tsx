@@ -5,10 +5,10 @@ import { linkToMediaPage } from '../../App'
 import { Media, MediaType } from '../../generated'
 import { useColorVariable } from '../../hooks/useColorVariable'
 import BackgroundImage from '../common/BackgroundImage'
-import CoverImage from '../common/CoverImage/CoverImage'
-import Description from '../common/Description/Description'
-import Genres from '../common/Genres/Genres'
+import CoverImage from '../common/CoverImage'
+import Genres from '../common/Genres'
 import Title from '../common/Title'
+import Description from '../Description'
 
 interface Props {
   media?: DeepPartial<Media> | null

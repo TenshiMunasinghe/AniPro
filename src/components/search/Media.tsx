@@ -1,13 +1,14 @@
 import { createContext, Dispatch, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { filters } from '../../../filterOptions/filterOptions'
-import { MediaType } from '../../../generated/index'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import SearchBarInput from '../../common/SearchBarInput/SearchBarInput'
-import Home from '../../home/Home'
-import Fullview from '../FilterOptions/Fullview/Fullview'
-import styles from './Media.module.scss'
-import MediaSearchResult from './MediaSearchResult/MediaSearchResult'
+import { filters } from '../../filterOptions/filterOptions'
+import { MediaType } from '../../generated/index'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import SearchBarInput from '../common/SearchBarInput'
+import Home from '../home/Home'
+import Fullview from './FilterOptions/Fullview'
+import MediaSearchResult from './MediaSearchResult'
+
+const BODY_CLASS = ['overflow-y-hidden', 'h-screen', 'fixed']
 
 interface Props {
   type: MediaType
@@ -25,13 +26,13 @@ const Media = ({ type }: Props) => {
 
   useEffect(() => {
     if (activeFilterOption) {
-      document.body.classList.add(styles['search-options-open'])
+      document.body.classList.add(...BODY_CLASS)
     } else {
-      document.body.classList.remove(styles['search-options-open'])
+      document.body.classList.remove(...BODY_CLASS)
     }
 
     return () => {
-      document.body.classList.remove(styles['search-options-open'])
+      document.body.classList.remove(...BODY_CLASS)
     }
   }, [activeFilterOption])
 
@@ -44,9 +45,13 @@ const Media = ({ type }: Props) => {
   return (
     <ActiveFilterContext.Provider
       value={{ activeFilterOption, setActiveFilterOption }}>
-      <SearchBarInput link={`/search/${type.toLowerCase()}`} />
-      <div className={styles.advancedFilters}>
-        <button onClick={openFilterOptions}>Advanced Filters</button>
+      <div className='mb-6 flex flex-col items-center space-y-3'>
+        <SearchBarInput link={`/search/${type.toLowerCase()}`} />
+        <button
+          onClick={openFilterOptions}
+          className='ml-auto hocus:text-teal-500 hocus:underline hocus:underline-offset-1 dark:hocus:text-teal-400'>
+          Advanced Filters
+        </button>
       </div>
       {Object.keys(queryVars.initial).length === 0 ? (
         <>

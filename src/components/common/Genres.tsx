@@ -1,9 +1,9 @@
 import classnames from 'classnames'
 import { createElement, memo, useMemo } from 'react'
-import { Media } from '../../../generated'
-import { useFitContent } from '../../../hooks/useFitContent'
-import { addKey } from '../../../utils/addKey'
-import Genre from './Genre/Genre'
+import { Media } from '../../generated'
+import { useFitContent } from '../../hooks/useFitContent'
+import { addKey } from '../../utils/addKey'
+import Genre from './Genre'
 
 interface Props {
   as: 'section' | 'footer'

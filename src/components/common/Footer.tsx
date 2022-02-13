@@ -1,5 +1,5 @@
-import Anchor from '../../common/Anchor'
-import ThemeButton from '../../common/ThemeButton'
+import Anchor from './Anchor'
+import ThemeButton from './ThemeButton'
 
 const Footer = () => {
   return (

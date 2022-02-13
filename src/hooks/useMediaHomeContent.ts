@@ -5,7 +5,7 @@ import {
   nextSeason,
   nextYear,
 } from '../api/queries'
-import { CardType } from '../components/search/Media/MediaSearchResult/MediaSearchResult'
+import { CardType } from '../components/search/MediaSearchResult'
 import breakpoints from '../css/breakpoints.module.scss'
 import { MediaSearchQueryVariables, MediaSort, MediaType } from '../generated'
 import { useWindowSizeStore, WindowSizeStore } from '../zustand/stores'

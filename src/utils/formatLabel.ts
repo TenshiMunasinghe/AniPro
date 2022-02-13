@@ -1,4 +1,4 @@
-import { sortByOptions } from '../components/search/Media/MediaSearchResult/MediaSearchResult'
+import { sortByOptions } from '../components/search/MediaSearchResult'
 import { toStartCase } from './toStartCase'
 
 export const formatLabel = (str: string) => {

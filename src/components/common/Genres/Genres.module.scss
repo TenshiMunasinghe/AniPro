@@ -1,7 +1,0 @@
-@use '../../../css/config.scss' as *;
-
-.wrapper {
-  display: flex;
-  overflow: hidden;
-  @include gap($row: var(--space-300));
-}

@@ -9,8 +9,8 @@ import { formatLabel } from '../../../../utils/formatLabel'
 import { pluralize } from '../../../../utils/pluralize'
 import { timeToArr } from '../../../../utils/timeToArr'
 import { timeToStr } from '../../../../utils/timeToStr'
-import Genres from '../../Genres/Genres'
-import Score from '../../Score/Score'
+import Genres from '../../Genres'
+import Score from '../../Score'
 
 interface Props {
   index: number // for repositioning when order changes

@@ -1,8 +1,7 @@
 import classnames from 'classnames'
 import { Dispatch, SetStateAction } from 'react'
-import { CardType } from '../../search/Media/MediaSearchResult/MediaSearchResult'
-import styles from './CardTypeButton.module.scss'
-import GridIcon from './GridIcon/GridIcon'
+import { CardType } from '../search/MediaSearchResult'
+import GridIcon from './GridIcon'
 
 interface Props {
   cardType: CardType
@@ -14,7 +13,10 @@ const CardTypeButton = ({ cardType, isActive, setCardType }: Props) => {
   return (
     <button
       onClick={() => setCardType(cardType)}
-      className={classnames(styles.button, { [styles.active]: isActive })}>
+      className={classnames(
+        'center flex p-1 transition-all hocus:text-zinc-500 dark:hocus:text-zinc-100',
+        { 'text-teal-500': isActive }
+      )}>
       <GridIcon cardType={cardType} />
     </button>
   )

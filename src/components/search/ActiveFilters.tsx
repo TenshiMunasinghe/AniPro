@@ -1,11 +1,11 @@
 import { memo } from 'react'
+import { FaTimes } from 'react-icons/fa'
 import { useHistory, useLocation } from 'react-router-dom'
-import { filterOptions } from '../../../filterOptions/filterOptions'
-import { MediaSort } from '../../../generated'
-import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
-import { formatLabel } from '../../../utils/formatLabel'
-import styles from './ActiveFilters.module.scss'
-import Filter from './Filter/Filter'
+import { filterOptions } from '../../filterOptions/filterOptions'
+import { MediaSort } from '../../generated'
+import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import { formatLabel } from '../../utils/formatLabel'
+import Button from '../common/Button'
 
 const ActiveFilters = () => {
   const history = useHistory()
@@ -39,21 +39,29 @@ const ActiveFilters = () => {
     })
 
   return (
-    <section className={styles.wrapper}>
+    <section className='flex gap-x-5 overflow-x-auto'>
       {paramArr.map(({ key, values }) =>
         values?.map(value => (
-          <Filter
+          <Button
             key={value}
             onClick={() =>
               removeParam(key as keyof typeof filterOptions, value)
             }
             text={formatLabel(value)}
             variant='primary'
+            icon={FaTimes}
+            size='sm'
           />
         ))
       )}
       {paramArr.length > 0 && (
-        <Filter onClick={clearFilters} text='Clear All' variant='secondary' />
+        <Button
+          onClick={clearFilters}
+          text='Clear All'
+          variant='secondary'
+          icon={FaTimes}
+          size='sm'
+        />
       )}
     </section>
   )
