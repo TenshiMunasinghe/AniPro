@@ -38,6 +38,7 @@ const CardChart = ({
                 <Title
                   link={linkToMediaPage(id, type || MediaType.Anime)}
                   text={title?.romaji || 'no title'}
+                  className='sm:text-lg'
                 />
                 {meanScore && <Score score={meanScore} />}
                 <h4 className='hidden text-xs text-zinc-400 md:line-clamp-1'>
@@ -47,7 +48,7 @@ const CardChart = ({
             </header>
 
             <p
-              className='text-sm line-clamp-4 hocus:line-clamp-none'
+              className='text-sm line-clamp-3 hocus:line-clamp-none sm:line-clamp-5 lg:line-clamp-4'
               tabIndex={0}>
               <Description description={description} />
             </p>
@@ -56,7 +57,7 @@ const CardChart = ({
         <Genres
           as='footer'
           genres={genres}
-          className='bg-zinc-200 py-2 px-3 text-sm dark:bg-zinc-600'
+          className='bg-zinc-200 py-1 px-3 text-xs dark:bg-zinc-600 md:py-2 md:text-sm'
           canInteract
         />
       </section>
