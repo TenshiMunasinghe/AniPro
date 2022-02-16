@@ -114,6 +114,7 @@ const MediaSearchResult = ({ type }: Props) => {
 
                 return (
                   <PageNavigation
+                    key={page + 'page-navigation'}
                     page={page}
                     text={page.toString()}
                     isCurrent={pageInfo?.currentPage === page}
