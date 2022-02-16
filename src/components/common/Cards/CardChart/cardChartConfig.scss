@@ -1,8 +1,0 @@
-@use '../../../../css/config.scss';
-
-@mixin card-wrapper {
-  display: flex;
-  background: var(--color-foreground-100);
-  border-radius: 0.1rem;
-  overflow: hidden;
-}

@@ -11,6 +11,7 @@ import Genres from '../../Genres'
 import Score from '../../Score'
 import Title from '../../Title'
 import Container from './Container'
+import Content from './Content'
 
 interface Props {
   media: DeepPartial<Media>
@@ -30,10 +31,10 @@ const CardChart = ({
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
       />
-      <section className='grid min-h-0 grid-rows-[1fr_auto]'>
+      <Content>
         <section className='relative flex flex-col overflow-y-auto'>
-          <div className='absolute inset-x-0 p-5'>
-            <header className='mb-5'>
+          <div className='absolute inset-x-0 space-y-5 p-5'>
+            <header>
               <div className='grid w-full grid-cols-[1fr_auto] items-start gap-x-3 gap-y-1 overflow-hidden'>
                 <Title
                   link={linkToMediaPage(id, type || MediaType.Anime)}
@@ -60,7 +61,7 @@ const CardChart = ({
           className='bg-zinc-200 py-1 px-3 text-xs dark:bg-zinc-600 md:py-2 md:text-sm'
           canInteract
         />
-      </section>
+      </Content>
     </Container>
   )
 }

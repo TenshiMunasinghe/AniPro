@@ -15,6 +15,9 @@ import Genres from '../../Genres'
 import Score from '../../Score'
 import Title from '../../Title'
 import Rank from '../components/Rank'
+import Container from './Container'
+import Content from './Content'
+import Grid from './Grid'
 import Info from './Info'
 
 interface Props {
@@ -49,22 +52,20 @@ const CardTable = ({
   const colors = useColorVariable(coverImage?.color)
 
   return (
-    <article
-      className='group relative flex overflow-hidden rounded-sm bg-zinc-100 dark:bg-zinc-700'
-      style={colors}>
+    <Container className='group relative' style={colors}>
       {rank && (
         <div className='absolute right-2 top-2 z-10 w-12 md:right-4 md:top-4'>
           <Rank rank={rank} />
         </div>
       )}
       <BackgroundImage src={bannerImage} blur='blur-none' onlyOnHover />
-      <div className='relative grid flex-1 grid-cols-[4rem_1fr] items-center rounded p-2 text-lg md:p-4'>
+      <Content className='relative'>
         <CoverImage
           link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
         />
-        <div className='relative grid h-full gap-y-1 gap-x-5 pl-5 text-zinc-700 dark:text-zinc-300 md:grid-cols-[minmax(0,1fr)_6rem_6rem_12rem] md:gap-y-0'>
+        <Grid className='relative text-zinc-700 dark:text-zinc-300 '>
           <div className='flex h-full flex-col justify-around'>
             <Title
               link={linkToMediaPage(id, type || MediaType.Anime)}
@@ -75,6 +76,7 @@ const CardTable = ({
               as='section'
               genres={genres}
               canInteract={false}
+              count={{ default: 1, md: 2, lg: 0, xl: 3, '2xl': 3 }}
             />
           </div>
 
@@ -128,9 +130,9 @@ const CardTable = ({
               />
             </>
           )}
-        </div>
-      </div>
-    </article>
+        </Grid>
+      </Content>
+    </Container>
   )
 }
 

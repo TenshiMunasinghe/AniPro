@@ -1,84 +1,84 @@
 import range from 'lodash/range'
 import { memo } from 'react'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { CardType } from '../../../search/MediaSearchResult'
-import styles from './CardLoading.module.scss'
+import CardChartContainer from '../CardChart/Container'
+import CardChartContent from '../CardChart/Content'
+import CardCoverContainer from '../CardCover/Container'
+import CardTableContainer from '../CardTable/Container'
+import CardTableContent from '../CardTable/Content'
+import CardTableGrid from '../CardTable/Grid'
+import Info from '../CardTable/Info'
+import Skeleton from '../Skeleton'
+import Genre from './Genre'
+import Image from './Image'
 
 interface Props {
   type: CardType
 }
 
-const color = 'var(--color-foreground-300)'
-const highlightColor = 'var(--color-foreground-400)'
-
 const CardLoading = ({ type }: Props) => {
   switch (type) {
     case 'cover':
       return (
-        <SkeletonTheme color={color} highlightColor={highlightColor}>
-          <div className={styles.cover}>
-            <div className={styles.imageWrapper}>
-              <Skeleton className={styles.image} />
-            </div>
-            <Skeleton className={styles.title} />
-          </div>
-        </SkeletonTheme>
+        <CardCoverContainer>
+          <Image />
+          <Skeleton className='h-4 w-full' />
+        </CardCoverContainer>
       )
     case 'chart':
       return (
-        <SkeletonTheme color={color} highlightColor={highlightColor}>
-          <div className={styles.chart}>
-            <div className={styles.imageWrapper}>
-              <Skeleton className={styles.image} />
-            </div>
-
-            <div className={styles.content}>
-              <div className={styles.cardBody}>
-                <div className={styles.header}>
-                  <Skeleton className={styles.title} />
-                  <Skeleton className={styles.secondaryTitle} />
-                </div>
-                <Skeleton className={styles.description} count={2} />
+        <CardChartContainer>
+          <Image />
+          <CardChartContent>
+            <div className='space-y-5 p-5'>
+              <div className='space-y-2'>
+                <Skeleton className='h-5 w-4/5' />
+                <Skeleton className='h-3 w-3/5' />
               </div>
-
-              <div className={styles.footer}>
-                <Skeleton className={styles.genre} count={2} />
+              <div className='space-y-2'>
+                {range(0, 3).map((_, i) => (
+                  <Skeleton
+                    className='h-3 w-11/12'
+                    key={i + 'chart-description'}
+                  />
+                ))}
               </div>
             </div>
-          </div>
-        </SkeletonTheme>
+            <div className='flex space-x-3 bg-zinc-200 p-2'>
+              {range(0, 2).map((_, i) => (
+                <Genre className='w-2/5' key={i + 'chart-genre'} />
+              ))}
+            </div>
+          </CardChartContent>
+        </CardChartContainer>
       )
     case 'table':
       return (
-        <SkeletonTheme color={color} highlightColor={highlightColor}>
-          <div className={styles.table}>
-            <div className={styles.imageWrapper}>
-              <Skeleton className={styles.image} />
-            </div>
-
-            <div className={styles.content}>
-              <div className={styles.header}>
-                <Skeleton className={styles.title} />
-                <div className={styles.genres}>
-                  <Skeleton className={styles.genre} />
-                  <Skeleton className={styles.genre} />
-                  <Skeleton className={styles.genre} />
+        <CardTableContainer>
+          <CardTableContent>
+            <Image />
+            <CardTableGrid>
+              <div className='flex h-full flex-col justify-around'>
+                <Skeleton className='h-4 w-3/5' />
+                <div className='hidden space-x-3 text-sm md:flex'>
+                  {range(0, 3).map((_, i) => (
+                    <Genre className='w-20' key={i + 'table-genre'} />
+                  ))}
                 </div>
               </div>
               {range(0, 3).map((_, i) => (
-                <div className={styles.row} key={'loading table' + i}>
-                  <Skeleton className={styles.rowContent} />
-                  <div className={styles.subRow}>
-                    <Skeleton className={styles.subRowContent} />
-                  </div>
-                </div>
+                <Info
+                  key={i + 'table-info'}
+                  main={() => <Skeleton className='h-4 w-16' />}
+                  sub={() => <Skeleton className='h-2 w-20' />}
+                />
               ))}
-            </div>
-          </div>
-        </SkeletonTheme>
+            </CardTableGrid>
+          </CardTableContent>
+        </CardTableContainer>
       )
     default:
-      return <></>
+      return null
   }
 }
 

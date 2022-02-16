@@ -40,10 +40,11 @@ const CardGrid = ({
 
   return (
     <CardGridContainer cardType={cardType} sideScroll={sideScroll}>
-      {isLoading &&
-        range(0, loadingCount).map((_, i) => (
-          <CardLoading type={cardType} key={i} />
+      {true &&
+        range(0, 2).map((_, i) => (
+          <CardLoading type={cardType} key={i + 'loading'} />
         ))}
+
       {medias &&
         medias.map((m, i) => {
           if (!m) return null

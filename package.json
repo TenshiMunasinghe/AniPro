@@ -72,6 +72,7 @@
     ]
   },
   "devDependencies": {
+    "@gradin/tailwindcss-skeleton-screen": "^1.0.2",
     "@graphql-codegen/cli": "^2.0.1",
     "@graphql-codegen/introspection": "2.0.0",
     "@graphql-codegen/typescript": "2.0.0",
