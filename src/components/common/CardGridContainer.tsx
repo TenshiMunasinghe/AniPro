@@ -11,7 +11,7 @@ const CardGridContainer: FC<Props> = ({ cardType, sideScroll, children }) => {
   return (
     <section
       className={classnames(
-        'grid',
+        'grid w-full',
         {
           cover:
             'sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5',
