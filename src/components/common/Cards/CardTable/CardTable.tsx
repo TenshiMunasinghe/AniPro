@@ -70,7 +70,7 @@ const CardTable = ({
             <Title
               link={linkToMediaPage(id, type || MediaType.Anime)}
               text={title?.romaji || 'no title'}
-              className='xl:text-lg'
+              className='xl:text-lg msm:line-clamp-1'
             />
             <Genres
               className='hidden text-sm md:flex'
