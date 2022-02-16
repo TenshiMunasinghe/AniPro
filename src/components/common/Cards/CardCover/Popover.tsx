@@ -112,6 +112,7 @@ const Popover = ({ media }: Props) => {
         genres={genres}
         canInteract={false}
         className='mt-5 text-sm'
+        count={{ md: 2, lg: 2, xl: 3, '2xl': 3 }}
       />
     </aside>
   )
