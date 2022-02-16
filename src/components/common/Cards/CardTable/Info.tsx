@@ -5,9 +5,15 @@ interface Props {
 
 const Info = ({ main, sub }: Props) => {
   return (
-    <section className='flex items-center space-x-3 md:flex-col md:items-start md:justify-center md:space-x-0'>
-      <div className='text-sm md:text-base'>{main()}</div>
-      <div className='text-xs font-light md:text-sm'>{sub()}</div>
+    <section className='flex content-center items-start space-x-3 md:flex-col md:items-start md:justify-center md:space-y-3 md:space-x-0'>
+      {main() ? (
+        <div className='text-sm !leading-none md:text-base'>{main()}</div>
+      ) : null}
+      {sub() ? (
+        <div className='text-xs font-light !leading-none md:text-sm'>
+          {sub()}
+        </div>
+      ) : null}
     </section>
   )
 }
