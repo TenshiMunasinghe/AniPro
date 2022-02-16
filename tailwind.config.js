@@ -12,6 +12,12 @@ module.exports = {
         duration: '1s',
         timing: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
       },
+      dark: {
+        baseColor: colors.zinc[500],
+        movingColor: `linear-gradient(to right, transparent 0%, ${colors.zinc[400]} 50%, transparent 100%)`,
+        duration: '1s',
+        timing: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
+      },
     }),
     extend: {
       lineClamp: {

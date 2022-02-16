@@ -44,7 +44,7 @@ const CardLoading = ({ type }: Props) => {
                 ))}
               </div>
             </div>
-            <div className='flex space-x-3 bg-zinc-200 p-2'>
+            <div className='flex space-x-3 bg-zinc-200 p-2 dark:bg-zinc-600'>
               {range(0, 2).map((_, i) => (
                 <Genre className='w-2/5' key={i + 'chart-genre'} />
               ))}
