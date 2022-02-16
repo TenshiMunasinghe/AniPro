@@ -8,7 +8,7 @@ import Home from '../home/Home'
 import Fullview from './FilterOptions/Fullview'
 import MediaSearchResult from './MediaSearchResult'
 
-const BODY_CLASS = ['overflow-y-hidden', 'h-screen', 'fixed']
+const BODY_CLASS = ['overflow-y-hidden', 'h-screen']
 
 interface Props {
   type: MediaType
