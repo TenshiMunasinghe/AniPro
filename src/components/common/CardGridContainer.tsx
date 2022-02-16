@@ -14,7 +14,7 @@ const CardGridContainer: FC<Props> = ({ cardType, sideScroll, children }) => {
         'grid w-full',
         {
           cover:
-            'sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-5 xl:grid-cols-5',
+            'grid-cols-2 gap-x-3 gap-y-7 md:grid-cols-3 md:gap-x-4 lg:grid-cols-4 lg:gap-x-5 xl:grid-cols-5 xl:gap-x-7',
           chart: 'grid-cols-1 gap-5 xl:grid-cols-2',
           table: 'grid-cols-1 gap-y-5',
         }[cardType],
