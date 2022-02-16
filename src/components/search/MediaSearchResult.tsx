@@ -41,7 +41,7 @@ export const sortByOptions = [
 const MediaSearchResult = ({ type }: Props) => {
   const [cardType, setCardType] = useState<CardType>('chart')
 
-  const { updateUrl, queryVars, movePage } = useUpdateUrlParam()
+  const { updateUrl, queryVars } = useUpdateUrlParam()
 
   const { data, isLoading, isError, isFetching } = useMediaSearchQuery(
     gqlRequestClient,
