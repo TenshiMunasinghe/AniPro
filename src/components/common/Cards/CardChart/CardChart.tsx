@@ -42,7 +42,7 @@ const CardChart = ({
                   className='sm:text-lg'
                 />
                 {meanScore && <Score score={meanScore} />}
-                <h4 className='hidden text-xs text-zinc-400 md:line-clamp-1'>
+                <h4 className='col-span-2 hidden text-xs text-zinc-400 md:line-clamp-1'>
                   {title?.english || title?.romaji || 'no title'}
                 </h4>
               </div>
