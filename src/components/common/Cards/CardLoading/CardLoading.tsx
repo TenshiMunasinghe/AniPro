@@ -1,12 +1,6 @@
 import range from 'lodash/range'
 import { memo } from 'react'
 import { CardType } from '../../../search/MediaSearchResult'
-import CardChartContainer from '../CardChart/Container'
-import CardChartContent from '../CardChart/Content'
-import CardCoverContainer from '../CardCover/Container'
-import CardTableContainer from '../CardTable/Container'
-import CardTableContent from '../CardTable/Content'
-import CardTableGrid from '../CardTable/Grid'
 import Info from '../CardTable/Info'
 import Skeleton from '../Skeleton'
 import Genre from './Genre'
@@ -20,16 +14,16 @@ const CardLoading = ({ type }: Props) => {
   switch (type) {
     case 'cover':
       return (
-        <CardCoverContainer>
+        <div className='card-cover--container'>
           <Image />
           <Skeleton className='h-4 w-full' />
-        </CardCoverContainer>
+        </div>
       )
     case 'chart':
       return (
-        <CardChartContainer>
+        <div className='card-chart--container'>
           <Image />
-          <CardChartContent>
+          <div className='card-chart--content'>
             <div className='space-y-5 p-5'>
               <div className='space-y-2'>
                 <Skeleton className='h-5 w-4/5' />
@@ -49,15 +43,15 @@ const CardLoading = ({ type }: Props) => {
                 <Genre className='w-2/5' key={i + 'chart-genre'} />
               ))}
             </div>
-          </CardChartContent>
-        </CardChartContainer>
+          </div>
+        </div>
       )
     case 'table':
       return (
-        <CardTableContainer>
-          <CardTableContent>
+        <div className='card-table--container'>
+          <div className='card-table--content'>
             <Image />
-            <CardTableGrid>
+            <div className='card-table--grid'>
               <div className='flex h-full flex-col justify-around'>
                 <Skeleton className='h-4 w-3/5' />
                 <div className='hidden space-x-3 text-sm md:flex'>
@@ -73,9 +67,9 @@ const CardLoading = ({ type }: Props) => {
                   sub={() => <Skeleton className='h-2 w-20' />}
                 />
               ))}
-            </CardTableGrid>
-          </CardTableContent>
-        </CardTableContainer>
+            </div>
+          </div>
+        </div>
       )
     default:
       return null

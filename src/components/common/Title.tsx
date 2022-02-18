@@ -7,6 +7,19 @@ interface Props {
   className?: string
 }
 
+const className = {
+  textSizes: {
+    sm: 'text-sm',
+    md: 'text-md',
+    lg: 'text-lg',
+    xl: 'text-xl',
+  },
+  textContrast: {
+    regular: 'hocus:text-zinc-700 dark:hocus:text-zinc-200',
+    high: 'text-zinc-700 dark:text-zinc-300 hocus:text-zinc-900 dark:hocus:text-zinc-100',
+  },
+}
+
 const Title = ({ link, text, className }: Props) => {
   if (!text) return null
   return (

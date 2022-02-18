@@ -1,17 +1,15 @@
 import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import { NO_IMAGE_URL } from '../../../../api/queries'
-import { linkToMediaPage } from '../../../../App'
-import { Media, MediaType } from '../../../../generated'
-import { useColorVariable } from '../../../../hooks/useColorVariable'
-import Description from '../../../Description'
-import { ImageSize } from '../../CardGrid'
-import CoverImage from '../../CoverImage'
-import Genres from '../../Genres'
-import Score from '../../Score'
-import Title from '../../Title'
-import Container from './Container'
-import Content from './Content'
+import { NO_IMAGE_URL } from '../../../api/queries'
+import { linkToMediaPage } from '../../../App'
+import { Media, MediaType } from '../../../generated'
+import { useColorVariable } from '../../../hooks/useColorVariable'
+import Description from '../../Description'
+import { ImageSize } from '../CardGrid'
+import CoverImage from '../CoverImage'
+import Genres from '../Genres'
+import Score from '../Score'
+import Title from '../Title'
 
 interface Props {
   media: DeepPartial<Media>
@@ -25,13 +23,13 @@ const CardChart = ({
   const colors = useColorVariable(coverImage?.color)
 
   return (
-    <Container colors={colors}>
+    <article className='card-chart--container' style={colors}>
       <CoverImage
         link={linkToMediaPage(id, type || MediaType.Anime)}
         src={coverImage?.[imageSize] || NO_IMAGE_URL}
         title={title?.romaji || 'no image'}
       />
-      <Content>
+      <section className='card-chart--content'>
         <section className='relative flex flex-col overflow-y-auto'>
           <div className='absolute inset-x-0 space-y-5 p-5'>
             <header>
@@ -61,8 +59,8 @@ const CardChart = ({
           className='bg-zinc-200 py-1 px-3 text-xs dark:bg-zinc-600 md:py-2 md:text-sm'
           canInteract
         />
-      </Content>
-    </Container>
+      </section>
+    </article>
   )
 }
 

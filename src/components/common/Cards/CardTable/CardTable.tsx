@@ -15,9 +15,6 @@ import Genres from '../../Genres'
 import Score from '../../Score'
 import Title from '../../Title'
 import Rank from '../components/Rank'
-import Container from './Container'
-import Content from './Content'
-import Grid from './Grid'
 import Info from './Info'
 
 interface Props {
@@ -52,20 +49,20 @@ const CardTable = ({
   const colors = useColorVariable(coverImage?.color)
 
   return (
-    <Container className='group relative' style={colors}>
+    <article className='group card-table--container relative' style={colors}>
       {rank && (
         <div className='absolute right-2 top-2 z-10 w-12 md:right-4 md:top-4'>
           <Rank rank={rank} />
         </div>
       )}
       <BackgroundImage src={bannerImage} blur='blur-none' onlyOnHover />
-      <Content className='relative'>
+      <section className='card-table--content relative'>
         <CoverImage
           link={linkToMediaPage(id, type || MediaType.Anime)}
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
         />
-        <Grid className='relative text-zinc-700 dark:text-zinc-300 '>
+        <div className='card-table--content relative text-zinc-700 dark:text-zinc-300'>
           <div className='flex h-full flex-col justify-around'>
             <Title
               link={linkToMediaPage(id, type || MediaType.Anime)}
@@ -131,9 +128,9 @@ const CardTable = ({
               />
             </>
           )}
-        </Grid>
-      </Content>
-    </Container>
+        </div>
+      </section>
+    </article>
   )
 }
 

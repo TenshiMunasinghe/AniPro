@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .card-chart--container {
+    @apply grid grid-cols-[clamp(6rem,40%,11rem)_1fr] overflow-hidden rounded bg-zinc-100 dark:bg-zinc-700;
+  }
+
+  .card-chart--content {
+    @apply grid grid-rows-[1fr_auto];
+  }
+
+  .card-cover--container {
+    @apply grid cursor-pointer grid-rows-[min-content_auto] gap-y-2;
+  }
+
+  .card-table--container {
+    @apply flex overflow-hidden rounded-sm bg-zinc-100 dark:bg-zinc-700;
+  }
+
+  .card-table--content {
+    @apply grid flex-1 grid-cols-[4rem_1fr] items-center gap-x-5 rounded p-2 pr-4 md:p-4;
+  }
+
+  .card-table--grid {
+    @apply grid h-full gap-x-5 gap-y-1 md:grid-cols-[minmax(0,1fr)_6rem_6rem_12rem] md:gap-y-0;
+  }
+}

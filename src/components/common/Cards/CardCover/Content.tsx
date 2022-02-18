@@ -3,7 +3,6 @@ import CoverImage from '../../CoverImage'
 import Title from '../../Title'
 import Rank from '../components/Rank'
 import { CardCoverContent } from './CardCover'
-import Container from './Container'
 
 interface Props {
   main: CardCoverContent
@@ -13,7 +12,7 @@ interface Props {
 
 const Content = ({ main, sub, rank }: Props) => {
   return (
-    <Container>
+    <article className='card-cover--container'>
       {rank && (
         <div className='absolute -left-3 -top-3 z-10 w-10'>
           <Rank rank={rank} />
@@ -45,7 +44,7 @@ const Content = ({ main, sub, rank }: Props) => {
           className='text-sm'
         />
       </div>
-    </Container>
+    </article>
   )
 }
 
