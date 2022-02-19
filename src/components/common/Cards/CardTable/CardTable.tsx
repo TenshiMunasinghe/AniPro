@@ -62,7 +62,7 @@ const CardTable = ({
           title={title?.romaji || 'no title'}
           src={coverImage?.[imageSize] || NO_IMAGE_URL}
         />
-        <div className='card-table--content relative text-zinc-700 dark:text-zinc-300'>
+        <div className='card-table--grid relative text-zinc-700 dark:text-zinc-300'>
           <div className='flex h-full flex-col justify-around'>
             <Title
               link={linkToMediaPage(id, type || MediaType.Anime)}
