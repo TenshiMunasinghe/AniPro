@@ -10,14 +10,18 @@ const Footer = () => {
           <ThemeButton theme='dark' />
         </section>
         <Anchor
-          text='GitHub'
-          href='https://github.com/TenshiMunasinghe/AniPro'
-        />
+          to='https://github.com/TenshiMunasinghe/AniPro'
+          variant='secondary'
+          toExternalSite>
+          GitHub
+        </Anchor>
       </div>
 
       <section className='mt-6 text-right'>
         This site is a clone of{' '}
-        <Anchor text='AniList.co' href='https://anilist.co/' />
+        <Anchor to='https://anilist.co/' variant='secondary' toExternalSite>
+          AniList.co
+        </Anchor>
       </section>
     </footer>
   )

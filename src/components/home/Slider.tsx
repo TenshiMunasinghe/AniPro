@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
+import Anchor from '../common/Anchor'
 import LoadingSpinner from '../common/LoadingSpinner'
 import Slide from './Slide'
 
@@ -37,16 +37,12 @@ const Slider = ({ queryVar, context }: Props) => {
       {!isLoading && (
         <>
           <header className='absolute top-0 z-20 flex w-full items-center justify-between p-4 sm:p-6 lg:py-10 lg:px-14'>
-            <Link
-              to='/'
-              className='text-lg text-zinc-900 dark:text-zinc-300 lg:text-2xl'>
+            <Anchor to='/' className='text-lg lg:text-2xl'>
               AniPro
-            </Link>
-            <Link
-              to={link}
-              className='text-sm hocus:text-zinc-800 dark:hocus:text-zinc-200'>
+            </Anchor>
+            <Anchor to={link} className='text-sm'>
               {context}
-            </Link>
+            </Anchor>
           </header>
 
           {!!data?.Page?.media?.length && (
@@ -57,8 +53,8 @@ const Slider = ({ queryVar, context }: Props) => {
             </section>
           )}
 
-          <footer className='absolute right-4 bottom-4 z-20 hocus:text-teal-600 dark:text-zinc-200 hocus:dark:text-teal-300 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20'>
-            <Link to={link}>View All</Link>
+          <footer className='absolute right-4 bottom-4 z-20 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20'>
+            <Anchor to={link}>View All</Anchor>
           </footer>
         </>
       )}

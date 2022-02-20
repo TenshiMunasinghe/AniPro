@@ -6,6 +6,7 @@ import {
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
+import Anchor from '../common/Anchor'
 import CardGrid, { MediaWithRank } from '../common/CardGrid'
 import { CardType } from '../search/MediaSearchResult'
 
@@ -62,11 +63,9 @@ const Content = ({ queryVar, content }: Props) => {
         imageSize={cardType === 'table' ? 'large' : 'extraLarge'}
         sideScroll={cardType === 'cover'}
       />
-      <Link
-        to={link}
-        className='ml-auto mt-3 cursor-pointer text-sm font-medium hocus:text-zinc-900 dark:hocus:text-zinc-100 lg:mt-6'>
+      <Anchor to={link} className='ml-auto mt-3 text-sm lg:mt-6'>
         View All
-      </Link>
+      </Anchor>
     </section>
   )
 }
