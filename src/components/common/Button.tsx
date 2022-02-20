@@ -1,7 +1,7 @@
 import classnames from 'classnames'
 import { IconType } from 'react-icons'
 
-const className = {
+const CLASS_NAME = {
   variant: {
     primary:
       'bg-zinc-100 dark:bg-zinc-700 hocus:bg-zinc-200 dark:hocus:bg-zinc-600',
@@ -17,9 +17,9 @@ const className = {
 interface Props {
   text?: string
   onClick: () => void
-  variant?: keyof typeof className.variant
+  variant?: keyof typeof CLASS_NAME.variant
   icon?: IconType
-  size?: keyof typeof className.size
+  size?: keyof typeof CLASS_NAME.size
 }
 
 const Filter = ({
@@ -33,8 +33,8 @@ const Filter = ({
     <button
       className={classnames(
         'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
-        className.variant[variant],
-        className.size[size]
+        CLASS_NAME.variant[variant],
+        CLASS_NAME.size[size]
       )}
       onClick={onClick}>
       <span>{text}</span>
