@@ -22,7 +22,7 @@ const CLASS_NAME = {
     primary:
       'bg-zinc-100 dark:bg-zinc-700 hocus:bg-zinc-200 dark:hocus:bg-zinc-600',
     secondary:
-      'bg-teal-700 dark:bg-teal-400 text-white dark:text-zinc-800 hocus:bg-teal-900 dark:hocus:bg-teal-300',
+      'bg-teal-600 dark:bg-teal-400 text-white dark:text-zinc-800 hocus:bg-teal-700 dark:hocus:bg-teal-300',
   },
   size: {
     sm: 'text-sm p-3',
