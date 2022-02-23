@@ -5,7 +5,7 @@ import { filterOptions } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { formatLabel } from '../../utils/formatLabel'
-import Button from '../common/Button'
+import Button from '../common/Button/Button'
 
 const ActiveFilters = () => {
   const history = useHistory()

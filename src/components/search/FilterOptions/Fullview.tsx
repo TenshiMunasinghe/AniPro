@@ -5,7 +5,7 @@ import { filters } from '../../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../../hooks/useUpdateUrlParam'
 import { nextParam, NextParamArgs } from '../../../utils/nextParam'
 import { toStartCase } from '../../../utils/toStartCase'
-import Button from '../../common/Button'
+import Button from '../../common/Button/Button'
 import { ActiveFilterContext } from '../Media'
 import Option from '../Option'
 
