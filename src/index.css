@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --image-aspect-ratio: 2/3;
+    --media-page-image-width: clamp(8rem, 8rem + 7vw, 15rem);
+  }
+}
+
 @layer components {
+  .page-padding {
+    @apply py-10 px-6 sm:px-8 md:px-12 lg:py-24 lg:px-28;
+  }
+
   .card-chart--container {
     @apply grid grid-cols-[clamp(6rem,40%,11rem)_1fr] overflow-hidden rounded bg-zinc-100 dark:bg-zinc-700;
   }
