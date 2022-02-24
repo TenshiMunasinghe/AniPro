@@ -1,4 +1,4 @@
-import Anchor from './Anchor'
+import Link from './Link/Link'
 import ThemeButton from './ThemeButton'
 
 const Footer = () => {
@@ -9,19 +9,19 @@ const Footer = () => {
           <ThemeButton theme='light' />
           <ThemeButton theme='dark' />
         </section>
-        <Anchor
+        <Link
           to='https://github.com/TenshiMunasinghe/AniPro'
-          variant='secondary'
+          variant='underlined'
           toExternalSite>
           GitHub
-        </Anchor>
+        </Link>
       </div>
 
       <section className='mt-6 text-right'>
         This site is a clone of{' '}
-        <Anchor to='https://anilist.co/' variant='secondary' toExternalSite>
+        <Link to='https://anilist.co/' variant='underlined' toExternalSite>
           AniList.co
-        </Anchor>
+        </Link>
       </section>
     </footer>
   )

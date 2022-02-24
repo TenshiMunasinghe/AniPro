@@ -5,7 +5,7 @@ import {
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
-import Anchor from '../common/Anchor'
+import Link from '../common/Link/Link'
 import LoadingSpinner from '../common/LoadingSpinner'
 import Slide from './Slide'
 
@@ -37,12 +37,12 @@ const Slider = ({ queryVar, context }: Props) => {
       {!isLoading && (
         <>
           <header className='absolute top-0 z-20 flex w-full items-center justify-between p-4 sm:p-6 lg:py-10 lg:px-14'>
-            <Anchor to='/' className='text-lg lg:text-2xl'>
+            <Link to='/' className='text-lg lg:text-2xl'>
               AniPro
-            </Anchor>
-            <Anchor to={link} className='text-sm'>
+            </Link>
+            <Link to={link} className='text-sm'>
               {context}
-            </Anchor>
+            </Link>
           </header>
 
           {!!data?.Page?.media?.length && (
@@ -54,7 +54,7 @@ const Slider = ({ queryVar, context }: Props) => {
           )}
 
           <footer className='absolute right-4 bottom-4 z-20 sm:right-6 sm:bottom-6 lg:bottom-10 lg:right-20'>
-            <Anchor to={link}>View All</Anchor>
+            <Link to={link}>View All</Link>
           </footer>
         </>
       )}

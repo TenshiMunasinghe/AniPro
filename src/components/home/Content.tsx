@@ -1,13 +1,13 @@
 import { useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import {
   MediaSearchQueryVariables,
   useMediaSearchQuery,
 } from '../../generated/index'
 import { linkToSearchPage } from '../../utils/linkToSearchPage'
-import Anchor from '../common/Anchor'
 import CardGrid, { MediaWithRank } from '../common/CardGrid'
+import Link from '../common/Link/Link'
 import { CardType } from '../search/MediaSearchResult'
 
 export type _Content = {
@@ -49,11 +49,11 @@ const Content = ({ queryVar, content }: Props) => {
 
   return (
     <section className='flex flex-col'>
-      <Link
+      <RouterLink
         to={link}
         className='mb-5 cursor-pointer text-lg font-bold text-zinc-800 hocus:text-teal-500 dark:text-zinc-200 dark:hocus:text-teal-400 lg:mb-8 lg:text-3xl'>
         {content.text}
-      </Link>
+      </RouterLink>
       <CardGrid
         medias={medias}
         isLoading={isLoading}
@@ -63,9 +63,9 @@ const Content = ({ queryVar, content }: Props) => {
         imageSize={cardType === 'table' ? 'large' : 'extraLarge'}
         sideScroll={cardType === 'cover'}
       />
-      <Anchor to={link} className='ml-auto mt-3 text-sm lg:mt-6'>
+      <Link to={link} className='ml-auto mt-3 text-sm lg:mt-6'>
         View All
-      </Anchor>
+      </Link>
     </section>
   )
 }
