@@ -1,21 +1,20 @@
 import classnames from 'classnames'
-import { useCallback } from 'react'
-import { IconType } from 'react-icons'
+import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
 export interface ButtonProps {
   variant?: keyof typeof CLASS_NAME.variant
   size?: keyof typeof CLASS_NAME.size
-  text?: string
-  icon?: IconType
 }
 
-interface Props extends ButtonProps {
-  isButton: boolean
+export interface CommonProps {
+  type: 'button' | 'link'
   onClick?: () => void
   to?: string
   toExternalSite?: boolean
 }
+
+interface Props extends ButtonProps, CommonProps {}
 
 const CLASS_NAME = {
   variant: {
@@ -31,36 +30,25 @@ const CLASS_NAME = {
   },
 }
 
-const _ButtonWrapper = ({
+const _ButtonWrapper: FC<Props> = ({
   variant = 'primary',
   size = 'md',
-  text = '',
-  icon: Icon = undefined,
   onClick,
   to,
   toExternalSite,
-  isButton,
-}: Props) => {
+  type,
+  children,
+}) => {
   const className = classnames(
     'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
     CLASS_NAME.variant[variant],
     CLASS_NAME.size[size]
   )
 
-  const Content = useCallback(
-    () => (
-      <>
-        <span>{text}</span>
-        {Icon && <Icon />}
-      </>
-    ),
-    [text, Icon]
-  )
-
-  if (isButton) {
+  if (type === 'button') {
     return (
       <button onClick={onClick} className={className}>
-        <Content />
+        {children}
       </button>
     )
   }
@@ -68,14 +56,14 @@ const _ButtonWrapper = ({
   if (toExternalSite) {
     return (
       <a href={to} target='_blank' rel='noreferrer' className={className}>
-        <Content />
+        {children}
       </a>
     )
   }
 
   return (
     <Link to={to || ''} className={className}>
-      <Content />
+      {children}
     </Link>
   )
 }

@@ -1,3 +1,4 @@
+import { FC } from 'react'
 import ButtonWrapper, { ButtonProps } from './index'
 
 interface Props extends ButtonProps {
@@ -5,8 +6,6 @@ interface Props extends ButtonProps {
   toExternalSite?: boolean
 }
 
-const ButtonLink = (props: Props) => (
-  <ButtonWrapper {...props} isButton={false} />
-)
+const ButtonLink: FC<Props> = props => <ButtonWrapper {...props} type='link' />
 
 export default ButtonLink

@@ -1,9 +1,10 @@
+import { FC } from 'react'
 import ButtonWrapper, { ButtonProps } from './index'
 
 interface Props extends ButtonProps {
   onClick: () => void
 }
 
-const Button = (props: Props) => <ButtonWrapper {...props} isButton={true} />
+const Button: FC<Props> = props => <ButtonWrapper {...props} type='button' />
 
 export default Button

@@ -47,21 +47,18 @@ const ActiveFilters = () => {
             onClick={() =>
               removeParam(key as keyof typeof filterOptions, value)
             }
-            text={formatLabel(value)}
             variant='primary'
-            icon={FaTimes}
-            size='sm'
-          />
+            size='sm'>
+            <span>{formatLabel(value)}</span>
+            <FaTimes />
+          </Button>
         ))
       )}
       {paramArr.length > 0 && (
-        <Button
-          onClick={clearFilters}
-          text='Clear All'
-          variant='secondary'
-          icon={FaTimes}
-          size='sm'
-        />
+        <Button onClick={clearFilters} variant='secondary' size='sm'>
+          <span>Clear All</span>
+          <FaTimes />
+        </Button>
       )}
     </section>
   )
