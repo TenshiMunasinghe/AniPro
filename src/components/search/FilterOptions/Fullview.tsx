@@ -56,7 +56,7 @@ const Fullview = () => {
             <Button
               key={f.key + 'nav'}
               onClick={() => setActiveFilterOption(f.name)}
-              size='sm'>
+              className='p-3 text-sm'>
               <span>{toStartCase(f.name)}</span>
               <FaAngleDown />
             </Button>
@@ -101,9 +101,13 @@ const Fullview = () => {
           </div>
         </section>
         <footer className='flex shrink-0 items-center justify-end gap-x-4'>
-          <Button onClick={onApply}>Apply</Button>
+          <Button onClick={onApply} className='py-3 px-4'>
+            Apply
+          </Button>
 
-          <Button onClick={resetParams}>Reset</Button>
+          <Button onClick={resetParams} className='py-3 px-4'>
+            Reset
+          </Button>
 
           <button className='hover:text-teal-400' onClick={closeFilterOptions}>
             <FaAngleDoubleUp />

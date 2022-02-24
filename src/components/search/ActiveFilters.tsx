@@ -48,14 +48,17 @@ const ActiveFilters = () => {
               removeParam(key as keyof typeof filterOptions, value)
             }
             variant='primary'
-            size='sm'>
+            className='p-3 text-sm'>
             <span>{formatLabel(value)}</span>
             <FaTimes />
           </Button>
         ))
       )}
       {paramArr.length > 0 && (
-        <Button onClick={clearFilters} variant='secondary' size='sm'>
+        <Button
+          onClick={clearFilters}
+          variant='secondary'
+          className='p-3 text-sm'>
           <span>Clear All</span>
           <FaTimes />
         </Button>

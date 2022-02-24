@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export interface ButtonProps {
   variant?: keyof typeof CLASS_NAME.variant
-  size?: keyof typeof CLASS_NAME.size
+  className?: string
 }
 
 export interface CommonProps {
@@ -32,22 +32,22 @@ const CLASS_NAME = {
 
 const _ButtonWrapper: FC<Props> = ({
   variant = 'primary',
-  size = 'md',
+  className,
   onClick,
   to,
   toExternalSite,
   type,
   children,
 }) => {
-  const className = classnames(
+  const _className = classnames(
     'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
     CLASS_NAME.variant[variant],
-    CLASS_NAME.size[size]
+    className
   )
 
   if (type === 'button') {
     return (
-      <button onClick={onClick} className={className}>
+      <button onClick={onClick} className={_className}>
         {children}
       </button>
     )
@@ -55,14 +55,14 @@ const _ButtonWrapper: FC<Props> = ({
 
   if (toExternalSite) {
     return (
-      <a href={to} target='_blank' rel='noreferrer' className={className}>
+      <a href={to} target='_blank' rel='noreferrer' className={_className}>
         {children}
       </a>
     )
   }
 
   return (
-    <Link to={to || ''} className={className}>
+    <Link to={to || ''} className={_className}>
       {children}
     </Link>
   )
