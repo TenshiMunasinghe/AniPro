@@ -10,17 +10,17 @@ interface Props {
 const PageNavigation = ({ page, text, isCurrent = false }: Props) => {
   const { movePage } = useUpdateUrlParam()
 
-  const onClick = !isCurrent ? () => movePage(page) : () => {}
   return (
     <button
       className={classnames(
         'h-12 w-12 rounded-sm bg-zinc-100 transition-all dark:bg-zinc-600',
         {
           'cursor-default opacity-50': isCurrent,
-          ' hocus:bg-zinc-200  dark:hocus:bg-zinc-500': !isCurrent,
+          'hocus:bg-zinc-200  dark:hocus:bg-zinc-500': !isCurrent,
         }
       )}
-      onClick={onClick}>
+      disabled={isCurrent}
+      onClick={() => movePage(page)}>
       {text}
     </button>
   )
