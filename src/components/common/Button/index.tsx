@@ -17,6 +17,8 @@ export interface CommonProps {
 interface Props extends ButtonProps, CommonProps {}
 
 const CLASS_NAME = {
+  common:
+    'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
   variant: {
     primary:
       'bg-zinc-100 dark:bg-zinc-700 hocus:bg-zinc-200 dark:hocus:bg-zinc-600',
@@ -32,22 +34,22 @@ const CLASS_NAME = {
 
 const _ButtonWrapper: FC<Props> = ({
   variant = 'primary',
-  className,
+  className: classNameProp,
   onClick,
   to,
   toExternalSite,
   type,
   children,
 }) => {
-  const _className = classnames(
-    'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
+  const className = classnames(
+    CLASS_NAME.common,
     CLASS_NAME.variant[variant],
-    className
+    classNameProp
   )
 
   if (type === 'button') {
     return (
-      <button onClick={onClick} className={_className}>
+      <button onClick={onClick} className={className}>
         {children}
       </button>
     )
@@ -55,14 +57,14 @@ const _ButtonWrapper: FC<Props> = ({
 
   if (toExternalSite) {
     return (
-      <a href={to} target='_blank' rel='noreferrer' className={_className}>
+      <a href={to} target='_blank' rel='noreferrer' className={className}>
         {children}
       </a>
     )
   }
 
   return (
-    <Link to={to || ''} className={_className}>
+    <Link to={to || ''} className={className}>
       {children}
     </Link>
   )
