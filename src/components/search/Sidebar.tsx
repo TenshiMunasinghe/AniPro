@@ -3,6 +3,7 @@ import { filters } from '../../filterOptions/filterOptions'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { nextParam, NextParamArgs } from '../../utils/nextParam'
 import { toStartCase } from '../../utils/toStartCase'
+import LinkButton from '../common/Link/LinkButton'
 import { ActiveFilterContext } from './Media'
 import Option from './Option'
 
@@ -22,11 +23,9 @@ const Sidebar = () => {
     <aside className='hidden h-min gap-y-6 lg:grid'>
       {filters.map(f => (
         <div key={f.key + 'sidebar'} className='space-y-3'>
-          <button
-            className='hocus:text-teal-400'
-            onClick={() => setActiveFilterOption(f.name)}>
+          <LinkButton onClick={() => setActiveFilterOption(f.name)}>
             {toStartCase(f.name)}
-          </button>
+          </LinkButton>
           <div className='grid gap-y-4 text-sm'>
             {f.options.slice(0, 5).map(({ value, label }) => {
               const selected = params.initial.get(f.name)?.split(',') || []
@@ -52,11 +51,11 @@ const Sidebar = () => {
               )
             })}
             {f.options.length > 5 && (
-              <button
-                className='text-left text-sm text-teal-400 hocus:underline'
+              <LinkButton
+                variant='secondary'
                 onClick={() => setActiveFilterOption(f.name)}>
                 Show More
-              </button>
+              </LinkButton>
             )}
           </div>
         </div>

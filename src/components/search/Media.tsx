@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { filters } from '../../filterOptions/filterOptions'
 import { MediaType } from '../../generated/index'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
+import LinkButton from '../common/Link/LinkButton'
 import SearchBarInput from '../common/SearchBarInput'
 import Home from '../home/Home'
 import Fullview from './FilterOptions/Fullview'
@@ -47,11 +48,9 @@ const Media = ({ type }: Props) => {
       value={{ activeFilterOption, setActiveFilterOption }}>
       <div className='mb-6 flex flex-col items-center space-y-3'>
         <SearchBarInput link={`/search/${type.toLowerCase()}`} />
-        <button
-          onClick={openFilterOptions}
-          className='ml-auto hocus:text-teal-500 hocus:underline hocus:underline-offset-1 dark:hocus:text-teal-400'>
+        <LinkButton onClick={openFilterOptions} className='ml-auto'>
           Advanced Filters
-        </button>
+        </LinkButton>
       </div>
       {Object.keys(queryVars.initial).length === 0 ? (
         <>
