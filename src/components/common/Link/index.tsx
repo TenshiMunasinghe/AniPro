@@ -13,6 +13,8 @@ interface Props extends LinkProps, CommonProps {}
 const CLASS_NAME = {
   variant: {
     primary: 'hocus:text-zinc-800 dark:hocus:text-zinc-100',
+    secondary:
+      'text-teal-600 dark:text-teal-400 hocus:text-teal-500 dark:hocus:text-teal-300',
     underlined: `border-b-[1px] border-teal-400 hocus:border-b-2 hocus:mb-[-1px]`,
     highContrast:
       'text-zinc-700 dark:text-zinc-200 hocus:text-zinc-900 dark:hocus:text-white',
