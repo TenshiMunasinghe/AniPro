@@ -28,7 +28,7 @@ const _LinkWrapper: FC<Props> = ({
   to,
   toExternalSite,
 }) => {
-  const _className = classnames(CLASS_NAME.variant[variant], className)
+  const _className = classnames('w-fit', CLASS_NAME.variant[variant], className)
 
   if (type === 'button') {
     return (
