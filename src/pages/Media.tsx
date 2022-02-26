@@ -11,7 +11,7 @@ import LoadingSpinner from '../components/common/LoadingSpinner'
 import NavBar from '../components/common/NavBar'
 import PageWrapper from '../components/common/PageWrapper'
 import Aside from '../components/media/Aside/Aside'
-import Header from '../components/media/Header/Header'
+import Header from '../components/media/Header'
 import { MediaTypes } from '../filterOptions/filterOptions'
 import { CommonQuery, useCommonQuery } from '../generated/index'
 
