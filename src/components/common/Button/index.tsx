@@ -18,7 +18,7 @@ interface Props extends ButtonProps, CommonProps {}
 
 const CLASS_NAME = {
   common:
-    'flex items-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
+    'flex items-center justify-center space-x-1 whitespace-nowrap rounded text-center leading-none transition-all',
   variant: {
     primary:
       'bg-zinc-100 dark:bg-zinc-700 hocus:bg-zinc-200 dark:hocus:bg-zinc-600',
