@@ -1,7 +1,6 @@
 import { DeepPartial } from 'react-hook-form'
 import { FaHeart, FaStar } from 'react-icons/fa'
 import { MediaRank } from '../../../generated/index'
-import styles from './Ranking.module.scss'
 
 interface Props {
   ranking: DeepPartial<MediaRank> | null
@@ -11,13 +10,13 @@ const Ranking = ({ ranking }: Props) => {
   if (!ranking) return null
 
   return (
-    <div className={styles.container}>
+    <div className='flex items-center rounded bg-zinc-700 px-4 py-2 text-sm capitalize'>
       {ranking.type === 'POPULAR' ? (
-        <FaHeart className={styles.heart} />
+        <FaHeart className='fill-amber-300 ' />
       ) : (
-        <FaStar className={styles.star} />
+        <FaStar className='fill-red-300 ' />
       )}
-      <span className={styles.context}>
+      <span className='ml-auto grow text-center'>
         {`#${ranking.rank} ${ranking.context}`}
         {!ranking.allTime &&
           `${ranking.season ? ' ' + ranking.season.toLowerCase() : ''}${

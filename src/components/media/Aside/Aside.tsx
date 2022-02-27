@@ -7,9 +7,8 @@ import { timeToArr } from '../../../utils/timeToArr'
 import { timeToStr } from '../../../utils/timeToStr'
 import { toStartCase } from '../../../utils/toStartCase'
 import Ranking from '../Ranking/Ranking'
-import styles from './Aside.module.scss'
-import Item from './Item/Item'
-import Tags from './Tags/Tags'
+import Item from './Item'
+import Tags from './Tags'
 
 interface Props {
   data: CommonQuery['Media']
@@ -19,9 +18,9 @@ const Aside = ({ data }: Props) => {
   if (!data) return null
 
   return (
-    <aside className={styles.container}>
+    <aside className='grid gap-y-5'>
       {!!data.rankings?.length && (
-        <section className={styles.rankings}>
+        <section className='hidden space-y-5 xl:block'>
           {data.rankings
             .filter(ranking => ranking?.allTime)
             .map(ranking => (
@@ -29,7 +28,7 @@ const Aside = ({ data }: Props) => {
             ))}
         </section>
       )}
-      <section className={styles.infos}>
+      <section className='flex max-w-full space-x-6 overflow-x-auto bg-zinc-700 py-4 px-5 lg:h-min lg:flex-col lg:space-x-0 lg:space-y-4'>
         <Item label='Airing'>
           {data.nextAiringEpisode
             ? airingInfo({
@@ -107,7 +106,7 @@ const Aside = ({ data }: Props) => {
       </section>
 
       {!!data?.tags?.length && (
-        <div className={styles.tags}>
+        <div className='hidden lg:block'>
           <Tags tags={data.tags} />
         </div>
       )}
