@@ -1,5 +1,5 @@
 import create from 'zustand'
-import { combine } from 'zustand/middleware'
+import { combine, subscribeWithSelector } from 'zustand/middleware'
 
 export const useWindowSizeStore = create(
   combine({ width: window.innerWidth, height: window.innerHeight }, set => ({
@@ -16,7 +16,7 @@ const initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
 export type Theme = typeof initialTheme
 
 export const useThemeStore = create(
-  combine({ theme: initialTheme }, set => ({ set }))
+  subscribeWithSelector(combine({ theme: initialTheme }, set => ({ set })))
 )
 
 export type ThemeStore = ReturnType<typeof useThemeStore.getState>
