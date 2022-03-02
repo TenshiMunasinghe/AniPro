@@ -18,6 +18,8 @@ const Tag = ({ tag }: Props) => {
   return (
     <li
       key={tag.id}
+      data-tip
+      data-for={tag.id.toString()}
       className={classnames('rounded bg-zinc-700 p-3', {
         'text-red-600 dark:text-red-400':
           tag.isGeneralSpoiler || tag.isMediaSpoiler,
@@ -28,10 +30,7 @@ const Tag = ({ tag }: Props) => {
           MediaTypes[type] || MediaType.Anime
         )}
         className='group flex items-center justify-between'>
-        <span
-          className='group-hover:text-teal-600 group-focus:text-teal-600 dark:group-hover:text-teal-400 dark:group-focus:text-teal-400'
-          data-tip
-          data-for={tag.id.toString()}>
+        <span className='group-hover:text-teal-600 group-focus:text-teal-600 dark:group-hover:text-teal-400 dark:group-focus:text-teal-400'>
           {tag.name}
         </span>
         <span>{tag.rank}%</span>
