@@ -11,7 +11,6 @@ export interface LinkProps {
 interface Props extends LinkProps, CommonProps {}
 
 const CLASS_NAME = {
-  common: 'w-fit',
   variant: {
     primary: 'hocus:text-zinc-800 dark:hocus:text-zinc-100',
     secondary:
@@ -31,11 +30,7 @@ const _LinkWrapper: FC<Props> = ({
   to,
   toExternalSite,
 }) => {
-  const className = classnames(
-    CLASS_NAME.common,
-    CLASS_NAME.variant[variant],
-    classNameProp
-  )
+  const className = classnames(CLASS_NAME.variant[variant], classNameProp)
 
   if (type === 'button') {
     return (
