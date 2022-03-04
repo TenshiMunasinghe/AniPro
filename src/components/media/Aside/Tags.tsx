@@ -23,7 +23,7 @@ const Tags = ({ tags }: Props) => {
       <h6 className='text-base'>Tags</h6>
       <ul className='space-y-4'>
         {tagsArr.map(tag => (
-          <Tag tag={tag} />
+          <Tag key={tag?.id} tag={tag} />
         ))}
       </ul>
       {!!spoilerTags.length && (
