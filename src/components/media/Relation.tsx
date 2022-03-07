@@ -50,12 +50,9 @@ const Relation = ({
 
   return (
     <div
-      className={classnames(
-        'flex w-full shrink-0 bg-zinc-100 dark:bg-zinc-700',
-        {
-          'group lg:relative': isCollapsed,
-        }
-      )}>
+      className={classnames('flex w-full shrink-0', {
+        'group lg:relative': isCollapsed,
+      })}>
       <Link
         to={linkUrl}
         className='grid aspect-[var(--image-aspect-ratio)] w-[var(--image-width)] overflow-hidden'>
@@ -69,19 +66,25 @@ const Relation = ({
         <div
           className={classnames(
             'pointer-events-none absolute bottom-0 left-0 right-0 z-10 hidden bg-zinc-700/80 py-3 text-center text-sm capitalize',
-            { 'lg:block': isCollapsed }
+            {
+              'transition-all group-focus-within:opacity-0 group-hover:opacity-0 lg:block':
+                isCollapsed,
+            }
           )}>
           {relationLabel || 'unknown'}
         </div>
       </Link>
 
       <div
-        className={classnames('flex flex-1 flex-col p-4 pl-6', {
-          'lg:pointer-events-none lg:absolute lg:inset-y-0 lg:w-80 lg:opacity-0':
-            isCollapsed,
-          'lg:right-[var(--image-width)]': isLeft,
-          'lg:left-[var(--image-width)]': !isLeft,
-        })}
+        className={classnames(
+          'z-20 flex flex-1 flex-col bg-zinc-100 p-4 px-6 dark:bg-zinc-700',
+          {
+            'transition-all group-focus-within:opacity-100 group-hover:opacity-100 lg:pointer-events-none lg:absolute lg:inset-y-0 lg:w-80 lg:opacity-0':
+              isCollapsed,
+            'lg:right-[var(--image-width)]': isLeft,
+            'lg:left-[var(--image-width)]': !isLeft,
+          }
+        )}
         ref={wrapperRef}>
         <div className='text-sm uppercase text-teal-600 dark:text-teal-400'>
           {relationLabel}
