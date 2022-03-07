@@ -6,7 +6,7 @@ import { formatLabel } from '../../../utils/formatLabel'
 import { timeToArr } from '../../../utils/timeToArr'
 import { timeToStr } from '../../../utils/timeToStr'
 import { toStartCase } from '../../../utils/toStartCase'
-import Ranking from '../Ranking/Ranking'
+import Ranking from '../Ranking'
 import Item from './Item'
 import Tags from './Tags'
 
@@ -18,7 +18,7 @@ const Aside = ({ data }: Props) => {
   if (!data) return null
 
   return (
-    <aside className='grid gap-y-5'>
+    <aside className='flex w-full flex-col space-y-5 overflow-x-hidden'>
       {!!data.rankings?.length && (
         <section className='hidden space-y-5 xl:block'>
           {data.rankings
@@ -28,7 +28,7 @@ const Aside = ({ data }: Props) => {
             ))}
         </section>
       )}
-      <section className='flex max-w-full space-x-6 overflow-x-auto bg-zinc-700 py-4 px-5 lg:h-min lg:flex-col lg:space-x-0 lg:space-y-4'>
+      <section className='flex space-x-6 overflow-x-auto bg-zinc-100 py-4 px-5 dark:bg-zinc-700 lg:h-min lg:flex-col lg:space-x-0 lg:space-y-4'>
         <Item label='Airing'>
           {data.nextAiringEpisode
             ? airingInfo({

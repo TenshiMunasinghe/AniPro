@@ -1,20 +1,15 @@
 import { useState } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import breakpoints from '../../../css/breakpoints.module.scss'
 import { RecommendationConnection } from '../../../generated/index'
-import { useWindowSizeStore, WindowSizeStore } from '../../../zustand/stores'
 import CardCover from '../../common/Cards/CardCover/CardCover'
-import Content from '../Content/Content'
-import styles from './Recommendations.module.scss'
+import LinkButton from '../../common/Link/LinkButton'
+import Content from '../Content'
 
 interface Props {
   recommendations: DeepPartial<RecommendationConnection['nodes']>
 }
 
-const windowSizeSelector = ({ width }: WindowSizeStore) => width
-
 const Recommendations = ({ recommendations }: Props) => {
-  const windowWidth = useWindowSizeStore(windowSizeSelector)
   const [showAll, setShowAll] = useState(false)
 
   if (!recommendations) return null
@@ -24,33 +19,34 @@ const Recommendations = ({ recommendations }: Props) => {
   return (
     <Content
       heading={
-        <div className={styles.heading}>
+        <div className='flex justify-between'>
           Recommendation
-          <button className={styles.showAll} onClick={toggleShowAll}>
-            {showAll
-              ? 'View less'
-              : `View all ${recommendations.length} recommendations`}
-          </button>
+          {recommendations.length > 5 && (
+            <LinkButton className='text-sm' onClick={toggleShowAll}>
+              {showAll
+                ? 'View less'
+                : `View all ${recommendations.length} recommendations`}
+            </LinkButton>
+          )}
         </div>
       }>
-      <div className={styles.container}>
-        {(showAll || windowWidth < parseInt(breakpoints.md)
-          ? recommendations
-          : recommendations.slice(0, 5)
-        ).map((node, index) => {
-          if (!node) return null
-          const { mediaRecommendation: m } = node
-          if (!m || !m.id) return null
-          return (
-            <CardCover
-              index={index}
-              media={m}
-              hasPopover={false}
-              key={node.id}
-              imageSize='large'
-            />
-          )
-        })}
+      <div className='grid w-full auto-cols-[10rem] grid-flow-col grid-cols-none grid-rows-1 gap-x-4 overflow-x-auto lg:grid-flow-row lg:grid-cols-5 lg:gap-5 lg:space-x-0'>
+        {(showAll ? recommendations : recommendations.slice(0, 5)).map(
+          (node, index) => {
+            if (!node) return null
+            const { mediaRecommendation: m } = node
+            if (!m || !m.id) return null
+            return (
+              <CardCover
+                index={index}
+                media={m}
+                hasPopover={false}
+                key={node.id}
+                imageSize='large'
+              />
+            )
+          }
+        )}
       </div>
     </Content>
   )

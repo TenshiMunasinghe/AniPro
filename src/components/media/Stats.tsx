@@ -1,14 +1,13 @@
 import { useParams } from 'react-router-dom'
-import gqlRequestClient from '../../../api/graphqlClient'
-import { useStatsQuery } from '../../../generated/index'
-import { ParamTypes } from '../../../pages/Media'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import Content from '../../media/Content/Content'
-import LineChart from '../LineChart/LineChart'
-import Ranking from '../Ranking/Ranking'
-import Scores from '../Scores/Scores'
-import Status from '../Status/Status'
-import styles from './Stats.module.scss'
+import gqlRequestClient from '../../api/graphqlClient'
+import { useStatsQuery } from '../../generated/index'
+import { ParamTypes } from '../../pages/Media'
+import LoadingSpinner from '../common/LoadingSpinner'
+import Content from './Content'
+import LineChart from './LineChart/LineChart'
+import Ranking from './Ranking'
+import Scores from './Scores'
+import Status from './Status'
 
 const Stats = () => {
   const { id } = useParams<ParamTypes>()
@@ -31,9 +30,9 @@ const Stats = () => {
     .sort((a, b) => (a?.episode && b?.episode ? a.episode - b.episode : 0))
 
   return (
-    <div className={styles.container}>
+    <div className='space-x-6'>
       <Content heading='Rankings'>
-        <div className={styles.rankings}>
+        <div className='space-x-4 lg:grid lg:grid-cols-3 lg:gap-y-4'>
           {data.rankings?.map(ranking => (
             <Ranking key={ranking?.id} ranking={ranking} />
           ))}

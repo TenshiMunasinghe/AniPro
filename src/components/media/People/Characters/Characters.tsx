@@ -4,7 +4,7 @@ import { useInfiniteGraphQLQuery } from '../../../../hooks/useInfiniteGraphQLQue
 import { ParamTypes } from '../../../../pages/Media'
 import LoadingSpinner from '../../../common/LoadingSpinner'
 import LoadMore from '../../../common/LoadMore/LoadMore'
-import Character from '../../Character/Character'
+import Character from '../../Character'
 import styles from '../People.module.scss'
 
 const Characters = () => {

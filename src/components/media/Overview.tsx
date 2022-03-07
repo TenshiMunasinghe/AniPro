@@ -1,20 +1,19 @@
 import classnames from 'classnames'
-import { Link, useParams } from 'react-router-dom'
-import gqlRequestClient from '../../../api/graphqlClient'
-import { useOverviewQuery } from '../../../generated/index'
-import { ParamTypes, TabsType } from '../../../pages/Media'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import Character from '../Character/Character'
-import Content from '../Content/Content'
-import Episode from '../Episode/Episode'
-import peopleStyles from '../People/People.module.scss'
-import Person from '../Person/Person'
-import Recommendations from '../Recommendations/Recommendations'
-import Relation from '../Relation/Relation'
-import Review from '../Review/Review'
-import Scores from '../Scores/Scores'
-import Status from '../Status/Status'
-import styles from './Overview.module.scss'
+import { useParams } from 'react-router-dom'
+import gqlRequestClient from '../../api/graphqlClient'
+import { useOverviewQuery } from '../../generated/index'
+import { ParamTypes, TabsType } from '../../pages/Media'
+import Link from '../common/Link/Link'
+import LoadingSpinner from '../common/LoadingSpinner'
+import Character from './Character'
+import Content from './Content'
+import Episode from './Episode'
+import Person from './Person'
+import Recommendations from './Recommendations/Recommendations'
+import Relation from './Relation'
+import Review from './Review'
+import Scores from './Scores'
+import Status from './Status'
 
 const Overview = () => {
   const { id, type } = useParams<ParamTypes>()
@@ -33,13 +32,17 @@ const Overview = () => {
   const tabLink = (tab: TabsType) => `/media/${type}/${id}/${tab}`
 
   return (
-    <div className={styles.container}>
+    <div className='space-y-6  overflow-x-hidden'>
       {(data.relations?.edges?.length || -1) > 0 && (
         <Content heading='Relations'>
           <div
-            className={classnames(styles.relations, {
-              [styles.collapsed]: (data.relations?.edges?.length || 0) > 4,
-            })}>
+            className={classnames(
+              'grid w-full auto-cols-[85%] grid-flow-col grid-cols-none gap-x-4 overflow-x-auto [--image-width:6.5rem] lg:auto-cols-auto lg:grid-flow-row lg:grid-cols-2 lg:gap-y-4',
+              {
+                'lg:grid-cols-[repeat(auto-fit,var(--image-width))]':
+                  (data.relations?.edges?.length || 0) > 4,
+              }
+            )}>
             {data.relations?.edges &&
               data.relations?.edges?.map(edge => {
                 if (!edge) return null
@@ -65,8 +68,13 @@ const Overview = () => {
       )}
 
       {(data.characters?.edges?.length || -1) > 0 && (
-        <Content heading={<Link to={tabLink('characters')}>Characters</Link>}>
-          <div className={peopleStyles.people}>
+        <Content
+          heading={
+            <Link variant='underlined' to={tabLink('characters')}>
+              Characters
+            </Link>
+          }>
+          <div className='media-people--grid'>
             {data.characters?.edges?.map(character => (
               <Character
                 character={character}
@@ -78,8 +86,13 @@ const Overview = () => {
       )}
 
       {(data.staff?.edges?.length || -1) > 0 && (
-        <Content heading={<Link to={tabLink('staff')}>Staff</Link>}>
-          <div className={peopleStyles.people}>
+        <Content
+          heading={
+            <Link variant='underlined' to={tabLink('staff')}>
+              Staff
+            </Link>
+          }>
+          <div className='media-people--grid'>
             {data.staff?.edges?.map(staff => (
               <Person
                 name={staff?.node?.name?.full}
@@ -94,7 +107,7 @@ const Overview = () => {
       )}
 
       {data.stats && (
-        <div className={styles.stats}>
+        <div className='grid gap-y-6 lg:grid-cols-2 lg:gap-y-0 lg:gap-x-6'>
           <Content heading='Status Distribution'>
             <Status
               viewingStatus={data.stats?.statusDistribution}
@@ -109,8 +122,13 @@ const Overview = () => {
       )}
 
       {(data.streamingEpisodes?.length || -1) > 0 && (
-        <Content heading={<Link to={tabLink('watch')}>Watch</Link>}>
-          <div className={styles.watch}>
+        <Content
+          heading={
+            <Link variant='underlined' to={tabLink('watch')}>
+              Watch
+            </Link>
+          }>
+          <div className='grid gap-y-4 overflow-x-auto lg:grid-cols-4 lg:grid-rows-1 lg:gap-5'>
             {data.streamingEpisodes?.slice(0, 4).map(episode => (
               <Episode key={'overview' + episode?.url} episode={episode} />
             ))}
@@ -120,8 +138,9 @@ const Overview = () => {
 
       {data.trailer && (
         <Content heading='Trailer'>
-          <div className={styles.trailer}>
+          <div className='aspect-video w-full'>
             <iframe
+              className='h-full w-full'
               title='Trailer'
               src={`https://www.${data.trailer?.site}.com/embed/${data.trailer?.id}`}
             />
@@ -134,8 +153,13 @@ const Overview = () => {
       )}
 
       {(data.reviews?.nodes?.length || -1) > 0 && (
-        <Content heading={<Link to={tabLink('reviews')}>Reviews</Link>}>
-          <div className={styles.reviews}>
+        <Content
+          heading={
+            <Link variant='underlined' to={tabLink('reviews')}>
+              Reviews
+            </Link>
+          }>
+          <div className='grid gap-y-4 lg:grid-cols-2 lg:gap-5'>
             {data.reviews?.nodes?.map(review => (
               <Review key={'overview review' + review?.id} review={review} />
             ))}

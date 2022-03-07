@@ -3,7 +3,7 @@ import gqlRequestClient from '../../../api/graphqlClient'
 import { useWatchQuery } from '../../../generated'
 import { ParamTypes } from '../../../pages/Media'
 import LoadingSpinner from '../../common/LoadingSpinner'
-import Episode from '../Episode/Episode'
+import Episode from '../Episode'
 import styles from './Episodes.module.scss'
 
 const Episodes = () => {

@@ -11,7 +11,7 @@ const TabNav = ({ tabs }: Props) => {
   const { id, tab, type } = useParams<ParamTypes>()
 
   return (
-    <nav className='flex space-x-4 sm:justify-evenly sm:overflow-x-auto'>
+    <nav className='flex space-x-4 overflow-x-auto sm:justify-evenly sm:overflow-x-hidden'>
       {tabs.map(t => (
         <Link
           className={classnames(

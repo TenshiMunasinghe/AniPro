@@ -1,5 +1,4 @@
 import { FC, ReactNode } from 'react'
-import styles from './Content.module.scss'
 
 interface Props {
   heading: ReactNode
@@ -7,8 +6,8 @@ interface Props {
 
 const Content: FC<Props> = ({ heading, children }) => {
   return (
-    <section className={styles.container}>
-      <h6>{heading}</h6>
+    <section className='flex flex-col space-y-3'>
+      <h6 className='font-medium'>{heading}</h6>
       {children}
     </section>
   )

@@ -1,9 +1,8 @@
 import { memo } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import { NO_IMAGE_URL } from '../../../api/queries'
-import { CharacterEdge } from '../../../generated/index'
-import Person from '../Person/Person'
-import styles from './Character.module.scss'
+import { NO_IMAGE_URL } from '../../api/queries'
+import { CharacterEdge } from '../../generated/index'
+import Person from './Person'
 
 interface Props {
   character?: DeepPartial<CharacterEdge> | null
@@ -13,7 +12,7 @@ const Character = ({ character }: Props) => {
   const characterNode = character?.node
   const voiceActor = character?.voiceActors?.[0]
   return (
-    <div className={styles.container}>
+    <div className='grid grid-cols-2'>
       <Person
         id={characterNode?.id}
         image={characterNode?.image?.large || NO_IMAGE_URL}

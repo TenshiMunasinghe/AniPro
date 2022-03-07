@@ -15,14 +15,14 @@ import Header from '../components/media/Header'
 import { MediaTypes } from '../filterOptions/filterOptions'
 import { CommonQuery, useCommonQuery } from '../generated/index'
 
-const Overview = loadable(() => import('../components/media/Overview/Overview'))
+const Overview = loadable(() => import('../components/media/Overview'))
 const Episodes = loadable(() => import('../components/media/Episodes/Episodes'))
 const Characters = loadable(
   () => import('../components/media/People/Characters/Characters')
 )
 const Staff = loadable(() => import('../components/media/People/Staff/Staff'))
 const Reviews = loadable(() => import('../components/media/Reviews/Reviews'))
-const Stats = loadable(() => import('../components/media/Stats/Stats'))
+const Stats = loadable(() => import('../components/media/Stats'))
 
 export const TAB = [
   'overview',
@@ -95,41 +95,42 @@ const Media = ({ scrollPosition }: LazyComponentProps) => {
         }
         tabs={filterTabs(media)}
       />
-      <PageWrapper
-        className={`grid gap-8 lg:grid-cols-[var(--media-page-image-width)_1fr] lg:justify-center`}>
-        <Aside data={media} />
-        <Switch>
-          <Route exact path='/media/:type/:id'>
-            <Overview
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-          <Route exact path='/media/:type/:id/watch'>
-            <Episodes
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-          <Route exact path='/media/:type/:id/characters'>
-            <Characters
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-          <Route exact path='/media/:type/:id/staff'>
-            <Staff
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-          <Route exact path='/media/:type/:id/reviews'>
-            <Reviews
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-          <Route exact path='/media/:type/:id/stats'>
-            <Stats
-              fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
-            />
-          </Route>
-        </Switch>
+      <PageWrapper>
+        <div className='grid gap-8 lg:grid-cols-[var(--media-page-image-width)_1fr] lg:justify-center'>
+          <Aside data={media} />
+          <Switch>
+            <Route exact path='/media/:type/:id'>
+              <Overview
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+            <Route exact path='/media/:type/:id/watch'>
+              <Episodes
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+            <Route exact path='/media/:type/:id/characters'>
+              <Characters
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+            <Route exact path='/media/:type/:id/staff'>
+              <Staff
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+            <Route exact path='/media/:type/:id/reviews'>
+              <Reviews
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+            <Route exact path='/media/:type/:id/stats'>
+              <Stats
+                fallback={<LoadingSpinner isCenter={{ x: true, y: false }} />}
+              />
+            </Route>
+          </Switch>
+        </div>
       </PageWrapper>
     </context.Provider>
   )

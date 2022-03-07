@@ -5,7 +5,7 @@ import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { ParamTypes } from '../../../pages/Media'
 import LoadingSpinner from '../../common/LoadingSpinner'
 import LoadMore from '../../common/LoadMore/LoadMore'
-import Review from '../Review/Review'
+import Review from '../Review'
 import styles from './Reviews.module.scss'
 
 const Reviews = () => {

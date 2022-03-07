@@ -20,7 +20,7 @@ const Tag = ({ tag }: Props) => {
       key={tag.id}
       data-tip
       data-for={tag.id.toString()}
-      className={classnames('rounded bg-zinc-700 p-3', {
+      className={classnames('rounded bg-zinc-100 p-3 dark:bg-zinc-700', {
         'text-red-600 dark:text-red-400':
           tag.isGeneralSpoiler || tag.isMediaSpoiler,
       })}>

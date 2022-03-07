@@ -1,29 +1,21 @@
-import { CSSProperties } from 'react'
-import {
-  Maybe,
-  MediaStatus,
-  StatusDistribution,
-} from '../../../generated/index'
-import { toStartCase } from '../../../utils/toStartCase'
-import styles from './Status.module.scss'
+import classnames from 'classnames'
+import { Maybe, MediaStatus, StatusDistribution } from '../../generated/index'
+import { toStartCase } from '../../utils/toStartCase'
 
 interface Props {
   viewingStatus?: Maybe<StatusDistribution>[] | null
   airingStatus?: MediaStatus | null
 }
 
-const COLORS = {
-  COMPLETED: '#70d6ff',
-  CURRENT: '#ff70a6',
-  PLANNING: '#ff9770',
-  PAUSED: '#ffd670',
-  DROPPED: '#e9ff70',
+const CLASS_NAME = {
+  COMPLETED: 'bg-sky-300',
+  CURRENT: 'bg-red-300',
+  PLANNING: 'bg-orange-300',
+  PAUSED: 'bg-amber-300',
+  DROPPED: 'bg-yellow-300',
 }
 
-type ColorKeys = keyof typeof COLORS
-
-const generateStyle = (status: ColorKeys) =>
-  ({ '--color': COLORS[status] } as CSSProperties)
+type StatusType = keyof typeof CLASS_NAME
 
 const Status = ({ viewingStatus, airingStatus }: Props) => {
   const _status =
@@ -41,27 +33,27 @@ const Status = ({ viewingStatus, airingStatus }: Props) => {
   )
 
   return (
-    <div className={styles.container}>
-      <div className={styles.statuses}>
+    <div className='flex flex-1 flex-col overflow-hidden rounded bg-zinc-100 text-sm dark:bg-zinc-700'>
+      <div className='flex flex-1 items-center justify-center gap-x-2 py-4 lg:justify-evenly'>
         {status?.map(item => {
           if (!item) return null
           const { status, amount } = item
           if (!status || !amount) return null
           return (
-            <div
-              key={status}
-              className={styles.status}
-              style={generateStyle(status as ColorKeys)}>
-              <div className={styles.name}>{toStartCase(status)}</div>
-              <div className={styles.amount}>
-                <span className={styles.number}>{amount}</span>
-                <span className={styles.users}>Users</span>
+            <div key={status} className='space-y-3'>
+              <div
+                className={classnames(
+                  'py-1 px-3 text-center text-zinc-600 lg:rounded',
+                  CLASS_NAME[status as StatusType]
+                )}>
+                {toStartCase(status)}
               </div>
+              <div className='text-center'>{amount} Users</div>
             </div>
           )
         })}
       </div>
-      <div className={styles.percentage}>
+      <div className='mt-auto flex h-4'>
         {status?.map(item => {
           if (!item) return null
           const { status, amount } = item
@@ -72,8 +64,8 @@ const Status = ({ viewingStatus, airingStatus }: Props) => {
               key={status}
               style={{
                 width: `${percentage}%`,
-                backgroundColor: COLORS[status as ColorKeys],
               }}
+              className={CLASS_NAME[status as StatusType]}
               aria-label={`${status} ${Math.round(percentage)}%`}
             />
           )
