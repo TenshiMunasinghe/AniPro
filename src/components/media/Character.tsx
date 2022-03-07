@@ -12,7 +12,7 @@ const Character = ({ character }: Props) => {
   const characterNode = character?.node
   const voiceActor = character?.voiceActors?.[0]
   return (
-    <div className='grid grid-cols-2'>
+    <div className='grid auto-cols-fr grid-flow-col'>
       <Person
         id={characterNode?.id}
         image={characterNode?.image?.large || NO_IMAGE_URL}
