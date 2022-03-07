@@ -14,11 +14,11 @@ const Content = ({ main, sub, rank }: Props) => {
   return (
     <article className='card-cover--container'>
       {rank && (
-        <div className='absolute -left-3 -top-3 z-10 w-10'>
+        <div className='absolute left-1 top-1 z-10 w-10'>
           <Rank rank={rank} />
         </div>
       )}
-      <div className='relative h-fit overflow-hidden rounded shadow shadow-zinc-700 dark:shadow-zinc-900'>
+      <div className='relative h-fit rounded shadow shadow-zinc-700 dark:shadow-zinc-900'>
         <figure className='grid'>
           <CoverImage
             link={main.link}
