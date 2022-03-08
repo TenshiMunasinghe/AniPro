@@ -1,12 +1,11 @@
 import { useParams } from 'react-router-dom'
-import { Review as ReviewType } from '../../../generated'
-import { useReviewsQuery } from '../../../generated/index'
-import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
-import { ParamTypes } from '../../../pages/Media'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import LoadMore from '../../common/LoadMore/LoadMore'
-import Review from '../Review'
-import styles from './Reviews.module.scss'
+import { Review as ReviewType } from '../../generated'
+import { useReviewsQuery } from '../../generated/index'
+import { useInfiniteGraphQLQuery } from '../../hooks/useInfiniteGraphQLQuery'
+import { ParamTypes } from '../../pages/Media'
+import LoadingSpinner from '../common/LoadingSpinner'
+import LoadMoreGrid from './LoadMoreGrid'
+import Review from './Review'
 
 const Reviews = () => {
   const { id } = useParams<ParamTypes>()
@@ -33,18 +32,16 @@ const Reviews = () => {
   if (!data) return null
 
   return (
-    <div className={styles.container}>
+    <LoadMoreGrid
+      isFetchingNextPage={isFetchingNextPage}
+      hasNextPage={hasNextPage || false}
+      onClick={() => fetchNextPage()}>
       {data.pages.map(({ Media }) =>
         Media?.reviews?.nodes?.map(review => (
           <Review key={'review' + review?.id} review={review as ReviewType} />
         ))
       )}
-      <LoadMore
-        isFetchingNextPage={isFetchingNextPage}
-        hasNextPage={hasNextPage || false}
-        onClick={() => fetchNextPage()}
-      />
-    </div>
+    </LoadMoreGrid>
   )
 }
 

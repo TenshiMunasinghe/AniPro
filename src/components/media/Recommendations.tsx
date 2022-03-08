@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { DeepPartial } from 'react-hook-form'
-import { RecommendationConnection } from '../../../generated/index'
-import CardCover from '../../common/Cards/CardCover/CardCover'
-import LinkButton from '../../common/Link/LinkButton'
-import Content from '../Content'
+import { RecommendationConnection } from '../../generated/index'
+import CardCover from '../common/Cards/CardCover/CardCover'
+import LinkButton from '../common/Link/LinkButton'
+import Content from './Content'
 
 interface Props {
   recommendations: DeepPartial<RecommendationConnection['nodes']>

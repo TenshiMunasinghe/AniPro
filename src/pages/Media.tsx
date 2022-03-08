@@ -16,12 +16,10 @@ import { MediaTypes } from '../filterOptions/filterOptions'
 import { CommonQuery, useCommonQuery } from '../generated/index'
 
 const Overview = loadable(() => import('../components/media/Overview'))
-const Episodes = loadable(() => import('../components/media/Episodes/Episodes'))
-const Characters = loadable(
-  () => import('../components/media/People/Characters/Characters')
-)
-const Staff = loadable(() => import('../components/media/People/Staff/Staff'))
-const Reviews = loadable(() => import('../components/media/Reviews/Reviews'))
+const Episodes = loadable(() => import('../components/media/Episodes'))
+const Characters = loadable(() => import('../components/media/Characters'))
+const Staff = loadable(() => import('../components/media/Staff'))
+const Reviews = loadable(() => import('../components/media/Reviews'))
 const Stats = loadable(() => import('../components/media/Stats'))
 
 export const TAB = [

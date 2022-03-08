@@ -9,7 +9,7 @@ import Character from './Character'
 import Content from './Content'
 import Episode from './Episode'
 import Person from './Person'
-import Recommendations from './Recommendations/Recommendations'
+import Recommendations from './Recommendations'
 import Relation from './Relation'
 import Review from './Review'
 import Scores from './Scores'
@@ -74,7 +74,7 @@ const Overview = () => {
               Characters
             </Link>
           }>
-          <div className='media-people--grid'>
+          <div className='media-content--grid'>
             {data.characters?.edges?.map(character => (
               <Character
                 character={character}
@@ -92,7 +92,7 @@ const Overview = () => {
               Staff
             </Link>
           }>
-          <div className='media-people--grid'>
+          <div className='media-content--grid'>
             {data.staff?.edges?.map(staff => (
               <Person
                 name={staff?.node?.name?.full}
@@ -159,7 +159,7 @@ const Overview = () => {
               Reviews
             </Link>
           }>
-          <div className='grid gap-y-4 lg:grid-cols-2 lg:gap-5'>
+          <div className='media-content--grid'>
             {data.reviews?.nodes?.map(review => (
               <Review key={'overview review' + review?.id} review={review} />
             ))}
