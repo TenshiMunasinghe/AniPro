@@ -39,7 +39,7 @@
   }
 
   .media-content--grid {
-    @apply grid gap-y-4 lg:grid-cols-2 lg:gap-x-5;
+    @apply grid w-full gap-y-4 lg:grid-cols-2 lg:gap-x-5;
   }
 }
 
