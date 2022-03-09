@@ -49,7 +49,7 @@
 }
 
 .ct-label {
-  @apply self-end fill-zinc-700 text-zinc-700 dark:fill-zinc-300 dark:text-zinc-300;
+  @apply self-end fill-zinc-700 text-[length:inherit] text-zinc-700 dark:fill-zinc-300 dark:text-zinc-300;
 }
 
 .ct-series-a .ct-bar,

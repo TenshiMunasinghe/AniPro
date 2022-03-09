@@ -39,7 +39,7 @@ const Scores = ({ scores }: Props) => {
     <ChartistGraph
       data={data}
       type='Bar'
-      className='w-full bg-zinc-100 p-5 pb-0 pr-0 text-[length:11px] font-medium dark:bg-zinc-700'
+      className='w-full bg-zinc-100 p-5 pb-0 pr-0 text-xs font-medium dark:bg-zinc-700 lg:text-sm'
     />
   )
 }

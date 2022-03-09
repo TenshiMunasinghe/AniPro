@@ -56,7 +56,7 @@ const LineChart = ({
           },
         } as any
       }
-      className='overflow-x-auto whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-[length:11px] dark:bg-zinc-700'
+      className='overflow-x-auto whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-xs dark:bg-zinc-700 lg:text-sm'
     />
   )
 }
