@@ -1,5 +1,5 @@
+import Button from '../Button/Button'
 import LoadingSpinner from '../LoadingSpinner'
-import styles from './LoadMore.module.scss'
 
 export interface LoadMoreProps {
   isFetchingNextPage: boolean
@@ -17,9 +17,9 @@ const LoadMore = ({
   if (!hasNextPage) return null
 
   return (
-    <button className={styles.button} onClick={onClick}>
+    <Button className='w-min p-4' onClick={onClick}>
       Load More!
-    </button>
+    </Button>
   )
 }
 
