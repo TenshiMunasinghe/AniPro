@@ -1,5 +1,4 @@
 import ChartistGraph from 'react-chartist'
-import styles from './LineChart.module.scss'
 const ctPointLabels = require('chartist-plugin-pointlabels')
 
 interface Props {
@@ -27,7 +26,7 @@ const LineChart = ({
     series: [
       {
         data,
-        className: styles.series,
+        className: 'stroke-teal-400',
       },
     ],
   }
@@ -57,7 +56,7 @@ const LineChart = ({
           },
         } as any
       }
-      className={styles.container}
+      className='overflow-x-auto whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-[length:11px] dark:bg-zinc-700'
     />
   )
 }
