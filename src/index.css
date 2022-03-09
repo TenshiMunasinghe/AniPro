@@ -52,6 +52,10 @@
   @apply self-end fill-zinc-700 text-[length:inherit] text-zinc-700 dark:fill-zinc-300 dark:text-zinc-300;
 }
 
+text.ct-label {
+  @apply stroke-zinc-700 font-thin dark:stroke-zinc-300;
+}
+
 .ct-series-a .ct-bar,
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
