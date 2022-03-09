@@ -56,6 +56,11 @@ text.ct-label {
   @apply stroke-zinc-700 font-thin dark:stroke-zinc-300;
 }
 
+svg.ct-chart-bar,
+svg.ct-chart-line {
+  overflow: visible;
+}
+
 .ct-series-a .ct-bar,
 .ct-series-a .ct-line,
 .ct-series-a .ct-point,
