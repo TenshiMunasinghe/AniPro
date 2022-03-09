@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { useContext } from 'react'
 import { DeepPartial } from 'react-hook-form'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { Link } from 'react-router-dom'
+import { Link as RouterLink } from 'react-router-dom'
 import { NO_IMAGE_URL } from '../../api/queries'
 import { linkToMediaPage } from '../../App'
 import {
@@ -13,6 +13,7 @@ import {
 } from '../../generated/index'
 import { useOverflow } from '../../hooks/useOverflow'
 import { context } from '../../pages/Media'
+import Link from '../common/Link/Link'
 
 // const UNSUPPORTED_FORMAT: (MediaFormat | undefined | null)[] = [
 //   MediaFormat.Novel,
@@ -53,7 +54,7 @@ const Relation = ({
       className={classnames('flex w-full shrink-0', {
         'group lg:relative': isCollapsed,
       })}>
-      <Link
+      <RouterLink
         to={linkUrl}
         className='grid aspect-[var(--image-aspect-ratio)] w-[var(--image-width)] overflow-hidden'>
         <LazyLoadImage
@@ -73,7 +74,7 @@ const Relation = ({
           )}>
           {relationLabel || 'unknown'}
         </div>
-      </Link>
+      </RouterLink>
 
       <div
         className={classnames(
