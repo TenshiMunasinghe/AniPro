@@ -26,7 +26,7 @@ const Stats = () => {
   )
 
   const sortedEpisodeTrends = data.episodeTrends?.nodes
-    ?.filter(trend => typeof trend?.episode === 'number')
+    ?.filter(trend => !!trend?.averageScore && !!trend?.episode)
     .sort((a, b) => (a?.episode && b?.episode ? a.episode - b.episode : 0))
 
   return (
