@@ -42,6 +42,7 @@ const Staff = () => {
       {pages.map(page =>
         page?.Media?.staff?.edges?.map(staff => (
           <Person
+            id={staff?.node?.id}
             name={staff?.node?.name?.full}
             image={staff?.node?.image?.large}
             info={staff?.role}

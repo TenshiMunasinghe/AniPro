@@ -95,6 +95,7 @@ const Overview = () => {
           <div className='media-content--grid'>
             {data.staff?.edges?.map(staff => (
               <Person
+                id={staff?.node?.id}
                 name={staff?.node?.name?.full}
                 image={staff?.node?.image?.large}
                 info={staff?.role}

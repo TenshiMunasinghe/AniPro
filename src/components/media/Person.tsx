@@ -10,7 +10,7 @@ import { toStartCase } from '../../utils/toStartCase'
 import Link from '../common/Link/Link'
 
 interface Props {
-  id?: number | null
+  id: number | null | undefined
   image: StaffImage['large']
   name: StaffName['full']
   info: string | null | undefined
@@ -27,7 +27,7 @@ const Person = ({ id, image, name, info, type, isReversed = false }: Props) => {
 
   return (
     <div
-      className={classnames('flex bg-zinc-100 dark:bg-zinc-700', {
+      className={classnames('flex w-full bg-zinc-100 dark:bg-zinc-700', {
         'flex-row-reverse': isReversed,
       })}>
       <RouterLink to={link} className='overflow-hidden'>
