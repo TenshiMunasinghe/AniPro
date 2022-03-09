@@ -8,11 +8,11 @@ interface Props {
 }
 
 const CLASS_NAME = {
-  COMPLETED: 'bg-sky-300',
-  CURRENT: 'bg-red-300',
-  PLANNING: 'bg-orange-300',
-  PAUSED: 'bg-amber-300',
-  DROPPED: 'bg-yellow-300',
+  COMPLETED: 'bg-green-300',
+  CURRENT: 'bg-yellow-300',
+  PLANNING: 'bg-sky-300',
+  PAUSED: 'bg-purple-300',
+  DROPPED: 'bg-red-300',
 }
 
 type StatusType = keyof typeof CLASS_NAME
