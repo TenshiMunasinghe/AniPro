@@ -53,7 +53,11 @@ const Header = ({
       />
       <div className='page-padding relative z-50 py-4 xl:pt-8'>
         <div className='mb-6 grid-rows-[1fr_auto] gap-x-14 lg:grid lg:w-full lg:grid-cols-[auto_1fr] xl:mb-12'>
-          <div className='mt-[calc(var(--btn-size)-(var(--media-page-image-width)/(var(--image-aspect-ratio))))] grid grid-cols-[var(--media-page-image-width)_auto] items-end gap-x-4 lg:w-fit lg:grid-cols-[var(--media-page-image-width)] lg:content-end lg:gap-y-4'>
+          <div
+            className={classnames(
+              'mt-[calc(var(--btn-size)-(var(--media-page-image-width)/(var(--image-aspect-ratio))))] grid grid-cols-[var(--media-page-image-width)_auto] items-end gap-x-4 lg:w-fit lg:grid-cols-[var(--media-page-image-width)] lg:content-end lg:gap-y-4',
+              { 'mt-0': !bannerImg }
+            )}>
             <img
               className='aspect-[var(--image-aspect-ratio)] w-full rounded-sm'
               src={coverImg?.extraLarge || NO_IMAGE_URL}
