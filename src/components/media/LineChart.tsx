@@ -42,11 +42,12 @@ const LineChart = ({
         {
           plugins: hasPointLabel && [ctPointLabels({ textAnchor: 'start' })],
           axisY: {
-            low: Math.floor(
-              Math.floor(min / 10 ** (orderOf(min) - 1)) *
-                10 ** (orderOf(min) - 1) -
-                10 ** (orderOf(min) - 1)
-            ),
+            low:
+              Math.floor(
+                Math.floor(min / 10 ** (orderOf(min) - 1)) *
+                  10 ** (orderOf(min) - 1) -
+                  10 ** (orderOf(min) - 1)
+              ) || 0,
             high: Math.ceil(
               Math.floor(max / 10 ** (orderOf(max) - 1)) *
                 10 ** (orderOf(max) - 1) +
@@ -56,7 +57,7 @@ const LineChart = ({
           },
         } as any
       }
-      className='overflow-x-auto whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-xs dark:bg-zinc-700 lg:text-sm'
+      className='whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-xs dark:bg-zinc-700'
     />
   )
 }
