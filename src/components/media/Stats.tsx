@@ -30,9 +30,9 @@ const Stats = () => {
     .sort((a, b) => (a?.episode && b?.episode ? a.episode - b.episode : 0))
 
   return (
-    <div className='space-x-6'>
+    <div className='space-y-6'>
       <Content heading='Rankings'>
-        <div className='space-x-4 lg:grid lg:grid-cols-3 lg:gap-y-4'>
+        <div className='grid gap-y-4 lg:grid-cols-3 lg:gap-x-4'>
           {data.rankings?.map(ranking => (
             <Ranking key={ranking?.id} ranking={ranking} />
           ))}
