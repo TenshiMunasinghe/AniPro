@@ -54,10 +54,11 @@ const LineChart = ({
                 10 ** (orderOf(max) - 1)
             ),
             onlyInteger: true,
+            offset: 48,
           },
         } as any
       }
-      className='whitespace-nowrap bg-zinc-100 p-4 pb-0 pr-0 text-xs dark:bg-zinc-700'
+      className='whitespace-nowrap bg-zinc-100 px-4 pt-6 text-xs dark:bg-zinc-700'
     />
   )
 }
