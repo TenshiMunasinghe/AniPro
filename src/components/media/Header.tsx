@@ -51,7 +51,7 @@ const Header = ({
           { hidden: !bannerImg }
         )}
       />
-      <div className='page-padding relative z-50 py-4 xl:pt-8'>
+      <div className='page-padding relative z-50 w-full py-4 xl:pt-8'>
         <div className='mb-6 grid-rows-[1fr_auto] gap-x-14 lg:grid lg:w-full lg:grid-cols-[auto_1fr] xl:mb-12'>
           <div
             className={classnames(
