@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { CommonQuery } from '../../../generated/index'
 import { airingInfo } from '../../../utils/airingInfo'
 import { convertTime } from '../../../utils/convertTIme'
@@ -15,17 +16,20 @@ interface Props {
 }
 
 const Aside = ({ data }: Props) => {
+  const rankings = useMemo(
+    () => data?.rankings?.filter(ranking => ranking?.allTime),
+    [data?.rankings]
+  )
+
   if (!data) return null
 
   return (
     <aside className='flex w-full flex-col space-y-5 overflow-x-hidden'>
-      {!!data.rankings?.length && (
+      {!!rankings?.length && (
         <section className='hidden space-y-5 xl:block'>
-          {data.rankings
-            .filter(ranking => ranking?.allTime)
-            .map(ranking => (
-              <Ranking key={'common' + ranking?.id} ranking={ranking} />
-            ))}
+          {rankings.map(ranking => (
+            <Ranking key={'common' + ranking?.id} ranking={ranking} />
+          ))}
         </section>
       )}
       <section className='flex space-x-6 overflow-x-auto bg-zinc-100 py-4 px-5 dark:bg-zinc-700 lg:h-min lg:flex-col lg:space-x-0 lg:space-y-4'>
