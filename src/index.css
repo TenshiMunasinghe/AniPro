@@ -7,6 +7,10 @@
     --image-aspect-ratio: 2/3;
     --media-page-image-width: clamp(8rem, 8rem + 7vw, 15rem);
   }
+
+  img {
+    object-fit: cover;
+  }
 }
 
 @layer components {
