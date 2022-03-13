@@ -3,7 +3,6 @@ import { CharacterInfoQuery, StaffInfoQuery } from '../../../generated/index'
 import { formatDate } from '../../../utils/formatDate'
 import SpoilerName from '../../character/SpoilerName/SpoilerName'
 import Description from './Description/Description'
-import styles from './Header.module.scss'
 import Item from './Item/Item'
 
 export type PersonPageHeaderData =
@@ -20,10 +19,10 @@ const Header = ({ data }: Props) => {
   const { full, native, alternative, ...spoilerNames } = name
 
   return (
-    <header className={styles.container}>
-      <div className={styles.names}>
-        <h5 className={styles.mainName}>{name?.full}</h5>
-        <div className={styles.otherNames}>
+    <header className='grid gap-y-5 lg:justify-start lg:gap-x-5 lg:grid-areas-person-header'>
+      <div className='relative pb-5 pt-7 text-center after:absolute after:inset-y-0 after:-left-[100vw] after:-z-10 after:w-[200vw] after:bg-zinc-50 after:content-[""] after:dark:bg-zinc-700 lg:text-left lg:grid-in-names'>
+        <h5 className='text-4xl'>{name?.full}</h5>
+        <div className='space-x-2'>
           <span>
             {[name.native, ...(name.alternative || [])]
               .filter(name => name)
@@ -36,13 +35,13 @@ const Header = ({ data }: Props) => {
           )}
         </div>
       </div>
-      <figure className={styles.image}>
+      <figure className='m-auto overflow-hidden rounded-sm lg:pt-7 lg:grid-in-image'>
         <img
           src={image?.large || NO_IMAGE_URL}
           alt={name?.full || 'no image'}
         />
       </figure>
-      <div className={styles.bio}>
+      <div className='lg:grid-in-bio'>
         {infos.dateOfBirth &&
           Object.values(infos.dateOfBirth).every(val => val !== null) && (
             <Item label='Date of Birth' value={formatDate(infos.dateOfBirth)} />
