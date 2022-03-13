@@ -18,7 +18,7 @@ const Content = ({ main, sub, rank }: Props) => {
           <Rank rank={rank} />
         </div>
       )}
-      <div className='relative h-fit rounded shadow shadow-zinc-700 dark:shadow-zinc-900'>
+      <div className='relative h-fit overflow-hidden rounded-sm shadow shadow-zinc-700 dark:shadow-zinc-900'>
         <figure className='grid'>
           <CoverImage
             link={main.link}
