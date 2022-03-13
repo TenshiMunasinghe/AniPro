@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../api/graphqlClient'
-import PageContent from '../components/person/PageContent/PageContent'
+import PageContent from '../components/person/PageContent'
 import Medias from '../components/staff/Medias/Medias'
 import { useStaffInfoQuery } from '../generated/index'
 

@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../api/graphqlClient'
 import Medias from '../components/character/Medias/Medias'
 import LoadingSpinner from '../components/common/LoadingSpinner'
-import PageContent from '../components/person/PageContent/PageContent'
+import PageContent from '../components/person/PageContent'
 import { useCharacterInfoQuery } from '../generated/index'
 
 const Character = () => {

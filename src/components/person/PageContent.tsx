@@ -1,8 +1,7 @@
-import LoadingSpinner from '../../common/LoadingSpinner'
-import NavBar from '../../common/NavBar'
-import PageWrapper from '../../common/PageWrapper'
-import Header, { PersonPageHeaderData } from '../Header/Header'
-import styles from './PageContent.module.scss'
+import LoadingSpinner from '../common/LoadingSpinner'
+import NavBar from '../common/NavBar'
+import PageWrapper from '../common/PageWrapper'
+import Header, { PersonPageHeaderData } from './Header/Header'
 
 interface Props {
   headerContent: PersonPageHeaderData
@@ -20,7 +19,7 @@ const PageContent = ({ headerContent, isLoading, MainContent }: Props) => {
       <NavBar />
       <PageWrapper className='space-y-4'>
         <Header data={headerContent} />
-        <main className={styles.main}>
+        <main className='flex flex-col justify-center space-y-5'>
           <MainContent />
         </main>
       </PageWrapper>
