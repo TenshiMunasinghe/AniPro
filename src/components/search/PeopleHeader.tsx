@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import SearchBarInput from '../../common/SearchBarInput'
-import styles from './PeopleHeader.module.scss'
+import SearchBarInput from '../common/SearchBarInput'
 
 interface Props {
   heading: string
@@ -11,8 +10,8 @@ const PeopleHeader = ({ heading, link }: Props) => {
   const location = useLocation()
 
   return (
-    <div className={styles.container}>
-      <h5 className={styles.heading}>{heading}</h5>
+    <div className='space-y-5'>
+      <h5 className='text-xl'>{heading}</h5>
       <SearchBarInput
         link={link}
         placeholder={`search ${location.pathname.split('/')[2]}`}
