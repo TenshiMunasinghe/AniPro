@@ -4,7 +4,7 @@ import {
   SearchStaffQueryVariables,
   useSearchStaffQuery,
 } from '../../../generated'
-import PeopleGrid from '../PeopleGrid/PeopleGrid'
+import PeopleGrid from '../PeopleGrid'
 
 export type PeopleHeading = { text: string; link: string }
 

@@ -4,7 +4,7 @@ import {
   SearchCharactersQueryVariables,
   useSearchCharactersQuery,
 } from '../../../generated/index'
-import PeopleGrid from '../PeopleGrid/PeopleGrid'
+import PeopleGrid from '../PeopleGrid'
 
 export type PeopleHeading = { text: string; link: string }
 

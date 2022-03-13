@@ -1,13 +1,9 @@
-import { Link } from 'react-router-dom'
-import {
-  SearchCharactersQuery,
-  SearchStaffQuery,
-} from '../../../generated/index'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import NotFound from '../../common/NotFound/NotFound'
-import { PeopleHeading } from '../PeopleSearchResult/StaffSearchResult'
-import Person from '../Person/Person'
-import styles from './PeopleGrid.module.scss'
+import { SearchCharactersQuery, SearchStaffQuery } from '../../generated/index'
+import Link from '../common/Link/Link'
+import LoadingSpinner from '../common/LoadingSpinner'
+import NotFound from '../common/NotFound/NotFound'
+import { PeopleHeading } from './PeopleSearchResult/StaffSearchResult'
+import Person from './Person/Person'
 
 type PersonType =
   | NonNullable<NonNullable<SearchStaffQuery['Page']>['staff']>[number]
@@ -24,16 +20,16 @@ interface Props {
 
 const PeopleGrid = ({ people, heading, isLoading, type }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className='space-y-3'>
       {heading && (
-        <Link to={heading.link} className={styles.heading}>
+        <Link to={heading.link} className='block text-lg uppercase'>
           <h6>{heading.text}</h6>
         </Link>
       )}
       {isLoading ? (
         <LoadingSpinner />
       ) : people?.length ? (
-        <div className={styles.people}>
+        <div className='grid grid-cols-3 gap-4 lg:grid-cols-6 lg:gap-5'>
           {people.map(
             person =>
               person && <Person key={person.id} person={person} type={type} />
