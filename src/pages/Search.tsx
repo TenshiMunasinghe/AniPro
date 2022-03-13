@@ -23,7 +23,7 @@ const Search = () => {
   return (
     <>
       <NavBar position='fixed' />
-      <PageWrapper className='space-y-6'>
+      <PageWrapper className='space-y-16'>
         <Switch>
           <Route exact path='/search/anime'>
             <Media type={MediaType.Anime} />
