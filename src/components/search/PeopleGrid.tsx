@@ -22,8 +22,9 @@ const PeopleGrid = ({ people, heading, isLoading, type }: Props) => {
   return (
     <div className='space-y-3'>
       {heading && (
-        <Link to={heading.link} className='block text-lg uppercase'>
-          <h6>{heading.text}</h6>
+        <Link to={heading.link} className='flex justify-between'>
+          <h6 className='text-lg uppercase'>{heading.text}</h6>
+          <span className='text-sm'>View More</span>
         </Link>
       )}
       {isLoading ? (
