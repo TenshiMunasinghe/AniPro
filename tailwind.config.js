@@ -19,6 +19,9 @@ module.exports = {
         timing: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
       },
     }),
+    gridTemplateAreas: {
+      'person-header': ['image names names', 'image bio bio'],
+    },
     extend: {
       lineClamp: {
         7: '7',
@@ -44,6 +47,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/line-clamp'),
     require('@tailwindcss/forms'),
+    require('@savvywombat/tailwindcss-grid-areas'),
     require('@gradin/tailwindcss-skeleton-screen'),
     plugin(({ addVariant }) => {
       addVariant('hocus', ['&:hover', '&:focus'])

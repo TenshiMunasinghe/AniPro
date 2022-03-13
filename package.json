@@ -76,6 +76,7 @@
     "@graphql-codegen/typescript": "2.0.0",
     "@graphql-codegen/typescript-operations": "^2.0.1",
     "@graphql-codegen/typescript-react-query": "^2.0.0",
+    "@savvywombat/tailwindcss-grid-areas": "^2.0.1",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@welldone-software/why-did-you-render": "^6.2.1",
     "autoprefixer": "^10.4.2",

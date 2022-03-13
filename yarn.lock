@@ -1987,6 +1987,13 @@
   dependencies:
     any-observable "^0.3.0"
 
+"@savvywombat/tailwindcss-grid-areas@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@savvywombat/tailwindcss-grid-areas/-/tailwindcss-grid-areas-2.0.1.tgz#33133cdd833da07a311021bc1123a56d0d124d2c"
+  integrity sha512-ZOUC3aykNi02MnK/ShX1GO41c7igK5FG9TjUWjlnfRZg7BURv+3Ik17zmvHjlXoKkBN9oumW18aBIeQCeF/I7Q==
+  dependencies:
+    lodash "^4.17.21"
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
