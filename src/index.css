@@ -15,7 +15,7 @@
 
 @layer components {
   .page-padding {
-    @apply py-10 px-6 sm:px-8 md:px-12 lg:py-24 lg:px-28;
+    @apply py-10 px-4 sm:px-8 md:px-12 lg:py-24 lg:px-28;
   }
 
   .card-chart--container {
