@@ -35,12 +35,11 @@ const Header = ({ data }: Props) => {
           )}
         </div>
       </div>
-      <figure className='m-auto overflow-hidden rounded-sm lg:pt-7 lg:grid-in-image'>
-        <img
-          src={image?.large || NO_IMAGE_URL}
-          alt={name?.full || 'no image'}
-        />
-      </figure>
+      <img
+        src={image?.large || NO_IMAGE_URL}
+        alt={name?.full || 'no image'}
+        className='m-auto rounded-sm lg:pt-7 lg:grid-in-image'
+      />
       <div className='lg:grid-in-bio'>
         {infos.dateOfBirth &&
           Object.values(infos.dateOfBirth).every(val => val !== null) && (
