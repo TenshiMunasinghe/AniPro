@@ -1,5 +1,4 @@
-import Dropdown, { DropdownProps } from '../../common/Dropdown/Dropdown'
-import styles from './Dropdowns.module.scss'
+import Dropdown, { DropdownProps } from '../common/Dropdown/Dropdown'
 
 interface Props {
   dropdowns: DropdownProps[]
@@ -7,7 +6,7 @@ interface Props {
 
 const Dropdowns = ({ dropdowns }: Props) => {
   return (
-    <div className={styles.container}>
+    <div className='flex justify-end space-x-5'>
       {dropdowns.map((prop, idx) => (
         <Dropdown key={idx.toString() + prop.options.toString()} {...prop} />
       ))}
