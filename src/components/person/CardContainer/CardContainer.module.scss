@@ -1,6 +1,0 @@
-@use '../../../css/config.scss' as *;
-
-.container {
-  min-height: 800px;
-  @include gap($column: var(--space-500));
-}

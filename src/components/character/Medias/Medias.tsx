@@ -10,7 +10,7 @@ import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import Grid from '../../common/CardGridContainer'
 import Card from '../../common/Cards/CardCover/Content'
-import CardContainer from '../../person/CardContainer/CardContainer'
+import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
 import { sortByOptions } from '../../staff/Medias/Medias'
 

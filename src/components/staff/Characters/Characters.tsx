@@ -8,7 +8,7 @@ import {
 import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import LoadMore from '../../common/LoadMore/LoadMore'
-import CardContainer from '../../person/CardContainer/CardContainer'
+import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
 import { sortByOptions } from '../../staff/Medias/Medias'
 import Year from '../Year/Year'

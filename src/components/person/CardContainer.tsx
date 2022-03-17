@@ -1,6 +1,5 @@
 import { FC } from 'react'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import styles from './CardContainer.module.scss'
+import LoadingSpinner from '../common/LoadingSpinner'
 
 interface Props {
   isLoading: boolean
@@ -8,7 +7,7 @@ interface Props {
 
 const CardContainer: FC<Props> = ({ isLoading, children }) => {
   if (isLoading) return <LoadingSpinner />
-  return <div className={styles.container}>{children}</div>
+  return <div className='min-h-[800px] space-y-5'>{children}</div>
 }
 
 export default CardContainer
