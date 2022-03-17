@@ -19,10 +19,10 @@ const Header = ({ data }: Props) => {
   const { full, native, alternative, ...spoilerNames } = name
 
   return (
-    <header className='grid gap-y-5 lg:justify-start lg:gap-x-5 lg:grid-areas-person-header'>
-      <div className='relative pb-5 pt-7 text-center after:absolute after:inset-y-0 after:-left-[100vw] after:-z-10 after:w-[200vw] after:bg-zinc-50 after:content-[""] after:dark:bg-zinc-700 lg:text-left lg:grid-in-names'>
-        <h5 className='text-4xl'>{name?.full}</h5>
-        <div className='space-x-2'>
+    <header className='grid gap-y-5 lg:place-items-start lg:gap-x-5 lg:grid-areas-person-header'>
+      <div className='relative space-y-2 pt-16 text-center after:absolute after:inset-y-0 after:-left-[100vw] after:hidden after:w-[200vw] after:bg-zinc-50 after:content-[""] dark:after:bg-zinc-700 lg:py-16 lg:text-left lg:grid-in-names lg:after:block'>
+        <h5 className='relative z-10 text-4xl'>{name?.full}</h5>
+        <div className='relative z-10 space-x-2'>
           <span>
             {[name.native, ...(name.alternative || [])]
               .filter(name => name)
@@ -35,11 +35,13 @@ const Header = ({ data }: Props) => {
           )}
         </div>
       </div>
-      <img
-        src={image?.large || NO_IMAGE_URL}
-        alt={name?.full || 'no image'}
-        className='m-auto rounded-sm lg:pt-7 lg:grid-in-image'
-      />
+      <figure className='z-10 rounded-sm lg:h-full lg:pt-16 lg:grid-in-image'>
+        <img
+          src={image?.large || NO_IMAGE_URL}
+          alt={name?.full || 'no image'}
+          className='m-auto'
+        />
+      </figure>
       <div className='lg:grid-in-bio'>
         {infos.dateOfBirth &&
           Object.values(infos.dateOfBirth).every(val => val !== null) && (
