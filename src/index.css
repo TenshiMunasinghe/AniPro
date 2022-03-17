@@ -45,6 +45,31 @@
   .media-content--grid {
     @apply grid w-full gap-y-4 lg:grid-cols-2 lg:gap-x-5;
   }
+
+  .markdown_spoiler {
+    @apply relative block h-min w-fit cursor-pointer text-red-400;
+  }
+
+  .markdown_spoiler::after {
+    @apply block;
+    content: 'Spoiler, click to view';
+  }
+
+  .markdown_spoiler > span {
+    @apply hidden;
+  }
+
+  .markdown_spoiler br {
+    @apply hidden;
+  }
+
+  .show_spoiler::after {
+    @apply hidden;
+  }
+
+  .show_spoiler > span {
+    @apply inline;
+  }
 }
 
 /* chart styles */
