@@ -42,10 +42,10 @@ const Medias = () => {
       {!!characterCount && !!staffCount && (
         <div
           className={classnames(
-            'relative bottom-0 mb-4 grid w-full grid-cols-2 place-content-center bg-zinc-700 transition-all after:absolute after:h-px after:w-1/2 after:content-[""] dark:bg-zinc-200',
+            'relative mb-4 grid w-full grid-cols-2 place-content-center after:absolute after:bottom-0 after:h-px after:w-1/2 after:bg-zinc-700 after:transition-transform after:content-[""] dark:after:bg-zinc-200',
             {
-              'after:left-0': role === 'voiceActor',
-              'after:left-1/2': role === 'staff',
+              'after:translate-x-0': role === 'voiceActor',
+              'after:translate-x-full': role === 'staff',
             }
           )}>
           {buttonTexts.map(({ role, text }) => (

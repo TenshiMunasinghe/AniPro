@@ -10,7 +10,7 @@ import { useSortMedia } from '../../../hooks/useSortMedia'
 import LoadMore from '../../common/LoadMore/LoadMore'
 import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
-import { sortByOptions } from '../../staff/Medias/Medias'
+import { sortByOptions } from '../Medias'
 import Year from '../Year/Year'
 import Cards from './Cards/Cards'
 

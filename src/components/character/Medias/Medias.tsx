@@ -12,7 +12,7 @@ import Grid from '../../common/CardGridContainer'
 import Card from '../../common/Cards/CardCover/Content'
 import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
-import { sortByOptions } from '../../staff/Medias/Medias'
+import { sortByOptions } from '../../staff/Medias'
 
 const Medias = () => {
   const { id } = useParams<{ id: string }>()
