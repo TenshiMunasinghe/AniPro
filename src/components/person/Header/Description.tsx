@@ -11,17 +11,13 @@ const Description = ({ description }: Props) => {
   const [isOverflow, setIsOverflow] = useState(true)
   const ref = useRef<HTMLDivElement>(null)
 
-  const toggleExpansion = () => setIsExpanded(prev => !prev)
-
   useEffect(() => {
     const spoilers = ref.current?.querySelectorAll('.markdown_spoiler')
 
-    const toggleSpoiler = (element: Element) => {
-      element.classList.toggle('show_spoiler')
-    }
-
     spoilers?.forEach(element => {
-      element?.addEventListener('click', () => toggleSpoiler(element))
+      element?.addEventListener('click', () =>
+        element.classList.toggle('show_spoiler')
+      )
     })
   }, [])
 
@@ -44,6 +40,8 @@ const Description = ({ description }: Props) => {
         .replaceAll('/manga/', '/media/manga/'),
     [description]
   )
+
+  const toggleExpansion = () => setIsExpanded(prev => !prev)
 
   return (
     <div
