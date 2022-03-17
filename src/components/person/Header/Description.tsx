@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import htmr from 'htmr'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import styles from './Description.module.scss'
 
 interface Props {
   description: string | null | undefined
@@ -15,10 +14,10 @@ const Description = ({ description }: Props) => {
   const toggleExpansion = () => setIsExpanded(prev => !prev)
 
   useEffect(() => {
-    const spoilers = ref.current?.querySelectorAll('.' + styles.spoiler)
+    const spoilers = ref.current?.querySelectorAll('.markdown_spoiler')
 
     const toggleSpoiler = (element: Element) => {
-      element.classList.toggle(styles.showSpoiler)
+      element.classList.toggle('show_spoiler')
     }
 
     spoilers?.forEach(element => {
@@ -27,12 +26,14 @@ const Description = ({ description }: Props) => {
   }, [])
 
   useLayoutEffect(() => {
-    const isOverflow =
-      ref.current &&
-      ref.current.parentElement &&
-      ref.current?.clientHeight > ref.current?.parentElement?.clientHeight
+    if (!ref.current || !ref.current.parentElement) {
+      return
+    }
 
-    setIsOverflow(isOverflow || false)
+    const isOverflow =
+      ref.current.clientHeight > ref.current.parentElement.clientHeight
+
+    setIsOverflow(isOverflow)
   }, [])
 
   const formattedDescription = useMemo(
@@ -40,21 +41,28 @@ const Description = ({ description }: Props) => {
       description
         ?.replaceAll('https://anilist.co', '')
         .replaceAll('/anime/', '/media/anime/')
-        .replaceAll('/manga/', '/media/manga/')
-        .replaceAll('markdown_spoiler', styles.spoiler),
+        .replaceAll('/manga/', '/media/manga/'),
     [description]
   )
 
   return (
     <div
-      className={classnames(styles.container, {
-        [styles.expanded]: isExpanded || !isOverflow,
+      className={classnames('group relative space-y-4', {
+        'max-h-80 overflow-hidden': !isExpanded && isOverflow,
       })}>
-      <div className={styles.description} ref={ref}>
+      <div className='space-y-4' ref={ref}>
         {htmr(formattedDescription || '<i>no description</i>')}
       </div>
       {isOverflow && (
-        <button onClick={toggleExpansion} className={styles.toggleExpansion}>
+        <button
+          onClick={toggleExpansion}
+          className={classnames(
+            'w-full py-2 text-center transition-colors hocus:text-teal-600 dark:hocus:text-teal-400',
+            {
+              'absolute bottom-0 bg-gradient-to-t from-white to-transparent dark:from-zinc-800 ':
+                !isExpanded,
+            }
+          )}>
           Show {isExpanded ? 'less' : 'more'}
         </button>
       )}

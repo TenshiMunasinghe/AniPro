@@ -2,7 +2,7 @@ import { NO_IMAGE_URL } from '../../../api/queries'
 import { CharacterInfoQuery, StaffInfoQuery } from '../../../generated/index'
 import { formatDate } from '../../../utils/formatDate'
 import SpoilerName from '../../character/SpoilerName/SpoilerName'
-import Description from './Description/Description'
+import Description from './Description'
 import Item from './Item/Item'
 
 export type PersonPageHeaderData =
