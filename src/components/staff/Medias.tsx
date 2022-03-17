@@ -1,13 +1,12 @@
 import classnames from 'classnames'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import gqlRequestClient from '../../../api/graphqlClient'
-import { MediaSort, useStaffRoleCountsQuery } from '../../../generated/index'
-import { useSortMedia } from '../../../hooks/useSortMedia'
-import LoadingSpinner from '../../common/LoadingSpinner'
-import Characters from '../Characters/Characters'
-import StaffRoles from '../StaffRoles/StaffRoles'
-import styles from './Medias.module.scss'
+import gqlRequestClient from '../../api/graphqlClient'
+import { MediaSort, useStaffRoleCountsQuery } from '../../generated/index'
+import { useSortMedia } from '../../hooks/useSortMedia'
+import LoadingSpinner from '../common/LoadingSpinner'
+import Characters from './Characters/Characters'
+import StaffRoles from './StaffRoles/StaffRoles'
 
 export const sortByOptions = [
   { label: 'Popularity', value: MediaSort.PopularityDesc },
@@ -33,18 +32,29 @@ const Medias = () => {
 
   if (isLoading) return <LoadingSpinner />
 
+  const buttonTexts = [
+    { role: 'voiceActor', text: 'Voice Acting Roles' },
+    { role: 'staff', text: 'Staff Roles' },
+  ] as const
+
   return (
     <>
       {!!characterCount && !!staffCount && (
         <div
-          className={classnames(styles.roles, {
-            [styles.vaActive]: role === 'voiceActor',
-            [styles.staffActive]: role === 'staff',
-          })}>
-          <button onClick={() => setRole('voiceActor')}>
-            Voice Acting Roles
-          </button>
-          <button onClick={() => setRole('staff')}>Staff Roles</button>
+          className={classnames(
+            'relative bottom-0 mb-4 grid w-full grid-cols-2 place-content-center bg-zinc-700 transition-all after:absolute after:h-px after:w-1/2 after:content-[""] dark:bg-zinc-200',
+            {
+              'after:left-0': role === 'voiceActor',
+              'after:left-1/2': role === 'staff',
+            }
+          )}>
+          {buttonTexts.map(({ role, text }) => (
+            <button
+              className='py-2 text-center hocus:text-teal-400'
+              onClick={() => setRole(role)}>
+              {text}
+            </button>
+          ))}
         </div>
       )}
       {role === 'voiceActor' && <Characters {...sortProps} />}
