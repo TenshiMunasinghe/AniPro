@@ -45,9 +45,12 @@ const Description = ({ description }: Props) => {
 
   return (
     <div
-      className={classnames('group relative space-y-4', {
-        'max-h-80 overflow-hidden': !isExpanded && isOverflow,
-      })}>
+      className={classnames(
+        'group relative max-h-80 space-y-4 overflow-hidden',
+        {
+          'max-h-fit': isExpanded || !isOverflow,
+        }
+      )}>
       <div className='space-y-4' ref={ref}>
         {htmr(formattedDescription || '<i>no description</i>')}
       </div>
@@ -57,7 +60,7 @@ const Description = ({ description }: Props) => {
           className={classnames(
             'w-full py-2 text-center transition-colors hocus:text-teal-600 dark:hocus:text-teal-400',
             {
-              'absolute bottom-0 bg-gradient-to-t from-white to-transparent dark:from-zinc-800 ':
+              'absolute bottom-0 bg-gradient-to-t from-white to-transparent dark:from-zinc-800':
                 !isExpanded,
             }
           )}>
