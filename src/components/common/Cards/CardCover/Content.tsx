@@ -27,7 +27,7 @@ const Content = ({ main, sub, rank }: Props) => {
           />
         </figure>
         {sub && sub.image !== undefined && (
-          <figure className='absolute bottom-0 right-0 grid w-2/5 rounded-sm ring ring-zinc-800'>
+          <figure className='absolute bottom-0 right-0 grid w-1/3 rounded-sm ring ring-zinc-800'>
             <CoverImage
               link={sub.link}
               src={sub.image}
