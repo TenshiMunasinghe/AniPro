@@ -37,7 +37,9 @@ const Description = ({ description }: Props) => {
       description
         ?.replaceAll('https://anilist.co', '')
         .replaceAll('/anime/', '/media/anime/')
-        .replaceAll('/manga/', '/media/manga/'),
+        .replaceAll('/manga/', '/media/manga/')
+        .replaceAll('~!', '')
+        .replaceAll('!~', ''),
     [description]
   )
 
