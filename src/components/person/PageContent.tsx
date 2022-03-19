@@ -17,7 +17,7 @@ const PageContent = ({ headerContent, isLoading, MainContent }: Props) => {
   return (
     <>
       <NavBar />
-      <PageWrapper className='space-y-4 overflow-x-hidden pt-0'>
+      <PageWrapper className='space-y-16 overflow-x-hidden pt-0 lg:space-y-24'>
         <Header data={headerContent} />
         <main className='flex flex-col justify-center space-y-5'>
           <MainContent />
