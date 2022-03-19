@@ -47,7 +47,7 @@
   }
 
   .markdown_spoiler {
-    @apply relative block h-min w-fit cursor-pointer text-red-400;
+    @apply relative block h-min w-fit cursor-pointer text-red-700 dark:text-red-300;
   }
 
   .markdown_spoiler::after {
