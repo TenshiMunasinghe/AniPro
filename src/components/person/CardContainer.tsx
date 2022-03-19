@@ -9,7 +9,7 @@ interface Props extends LoadMoreProps {
 const CardContainer: FC<Props> = ({ isLoading, children, ...props }) => {
   if (isLoading) return <LoadingSpinner />
   return (
-    <div className='flex min-h-[800px] flex-col justify-center space-y-5'>
+    <div className='flex min-h-[800px] flex-col items-center space-y-16'>
       {children}
       <LoadMore {...props} />
     </div>
