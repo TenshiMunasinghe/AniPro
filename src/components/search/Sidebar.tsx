@@ -26,7 +26,7 @@ const Sidebar = () => {
           <LinkButton onClick={() => setActiveFilterOption(f.name)}>
             {toStartCase(f.name)}
           </LinkButton>
-          <div className='grid gap-y-4 text-sm'>
+          <div className='grid justify-start gap-y-4 text-sm'>
             {f.options.slice(0, 5).map(({ value, label }) => {
               const selected = params.initial.get(f.name)?.split(',') || []
               const key = f.key + f.name + label + 'aside'
@@ -53,6 +53,7 @@ const Sidebar = () => {
             {f.options.length > 5 && (
               <LinkButton
                 variant='secondary'
+                className='w-fit'
                 onClick={() => setActiveFilterOption(f.name)}>
                 Show More
               </LinkButton>
