@@ -19,7 +19,7 @@ const Header = ({ data }: Props) => {
   const { full, native, alternative, ...spoilerNames } = name
 
   return (
-    <header className='grid gap-y-5 lg:place-items-start lg:gap-x-5 lg:grid-areas-person-header'>
+    <header className='grid gap-y-5 lg:justify-start lg:gap-x-5 lg:grid-areas-person-header'>
       <div className='relative space-y-2 pt-16 text-center after:absolute after:inset-y-0 after:-left-[100vw] after:hidden after:w-[200vw] after:bg-zinc-50 after:content-[""] dark:after:bg-zinc-700 lg:py-16 lg:text-left lg:grid-in-names lg:after:block'>
         <h1 className='relative z-10 text-4xl leading-none'>{name?.full}</h1>
         <div className='relative z-10 space-x-2'>
