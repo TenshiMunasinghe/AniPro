@@ -85,9 +85,9 @@ const Header = ({
           <div className='flex flex-col'>
             <h1 className='my-5 text-3xl font-bold lg:my-0'>{title}</h1>
             <h5 className='lg:hidden'>Description</h5>
-            <div className='leading mt-4 h-[calc(var(--line-height)*var(--lines)*1em+(2*1.25rem))] overflow-y-auto bg-zinc-200 p-5 [--lines:9] [--line-height:1.5] dark:bg-zinc-600 lg:[--lines:6]'>
+            <div className='mt-4 h-[calc(var(--line-height)*var(--lines)*1em+(2*1.25rem))] overflow-y-auto bg-zinc-200 p-5 [--lines:8] [--line-height:1.5] dark:bg-zinc-600'>
               <p
-                className='leading-[var(--line-height)] line-clamp-9 hocus:line-clamp-none lg:line-clamp-6'
+                className='leading-[var(--line-height)] line-clamp-8 hocus:line-clamp-none'
                 tabIndex={0}>
                 <Description description={description} />
               </p>
