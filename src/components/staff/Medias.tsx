@@ -51,7 +51,7 @@ const Medias = () => {
             }
           )}>
           {buttonTexts.map(({ role, text }) => (
-            <h2 className='text-center'>
+            <h2 className='text-center' key={role + '-role-button'}>
               <button
                 className='py-2 hocus:text-teal-400'
                 onClick={() => setRole(role)}>
