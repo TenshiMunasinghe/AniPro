@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import gqlRequestClient from '../../api/graphqlClient'
 import { MediaSort, useStaffRoleCountsQuery } from '../../generated/index'
@@ -26,9 +26,11 @@ const Medias = () => {
   const characterCount = data?.Staff?.characterMedia?.pageInfo?.total
   const staffCount = data?.Staff?.staffMedia?.pageInfo?.total
 
-  const [role, setRole] = useState<'voiceActor' | 'staff'>(
-    (characterCount || 0) >= (staffCount || 0) ? 'voiceActor' : 'staff'
-  )
+  const [role, setRole] = useState<'voiceActor' | 'staff'>('voiceActor')
+
+  useEffect(() => {
+    setRole((characterCount || 0) >= (staffCount || 0) ? 'voiceActor' : 'staff')
+  }, [characterCount, staffCount])
 
   if (isLoading) return <LoadingSpinner />
 
