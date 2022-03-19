@@ -10,7 +10,7 @@ const PeopleHeader = ({ heading, link }: Props) => {
   const location = useLocation()
 
   return (
-    <div className='space-y-5'>
+    <div className='w-full space-y-5 sm:max-w-sm'>
       <h5 className='text-xl'>{heading}</h5>
       <SearchBarInput
         link={link}
