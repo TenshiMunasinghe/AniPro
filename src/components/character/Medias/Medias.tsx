@@ -3,9 +3,9 @@ import uniq from 'lodash/uniq'
 import { useMemo } from 'react'
 import { FaGlobeEurope, FaSort } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
-import gqlRequestClient from '../../../api/graphqlClient'
 import { linkToMediaPage, linkToStaffPage } from '../../../App'
 import { MediaType, useCharacterMediaQuery } from '../../../generated/index'
+import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../hooks/useSortMedia'
 import { useVALanguage } from '../../../hooks/useVALanguage'
 import Grid from '../../common/CardGridContainer'
@@ -20,30 +20,53 @@ const Medias = () => {
   const { sortBy, sortByOnChange } = useSortMedia()
   const { language, languageOnChange } = useVALanguage()
 
-  const { data, isLoading } = useCharacterMediaQuery(gqlRequestClient, {
-    sort: sortBy,
-    id: parseInt(id),
-  })
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useInfiniteGraphQLQuery(
+      useCharacterMediaQuery,
+      ({ pageParam = 1 }) => ({
+        id: parseInt(id),
+        page: pageParam,
+        sort: sortBy,
+      }),
+      {
+        getNextPageParam({ Character }) {
+          if (!Character?.media?.pageInfo?.currentPage) return
+
+          const pageInfo = Character.media.pageInfo
+
+          return pageInfo.hasNextPage
+            ? (pageInfo?.currentPage || 0) + 1
+            : undefined
+        },
+      }
+    )
+
+  const edges = useMemo(
+    () => data?.pages.flatMap(page => page.Character?.media?.edges),
+    [data?.pages]
+  )
 
   const languageOptions = useMemo(() => {
     const languages = uniq(
-      data?.Character?.media?.edges?.flatMap(media =>
-        media?.voiceActors?.flatMap(va => va?.languageV2)
-      )
+      edges?.flatMap(media => media?.voiceActors?.flatMap(va => va?.languageV2))
     )
 
     return languages.map(value => ({
       label: value || '',
       value: toUpper(value || ''),
     }))
-  }, [data])
+  }, [edges])
 
-  const edges = data?.Character?.media?.edges?.map(media => ({
-    ...media,
-    voiceActors: media?.voiceActors?.filter(
-      va => toUpper(va?.languageV2 || '') === language
-    ),
-  }))
+  const filteredEdges = useMemo(
+    () =>
+      edges?.map(media => ({
+        ...media,
+        voiceActors: media?.voiceActors?.filter(
+          va => toUpper(va?.languageV2 || '') === language
+        ),
+      })),
+    [edges, language]
+  )
 
   return (
     <>
@@ -63,10 +86,14 @@ const Medias = () => {
           },
         ]}
       />
-      <CardContainer isLoading={isLoading}>
+      <CardContainer
+        isLoading={isLoading}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage || false}
+        onClick={() => fetchNextPage()}>
         {edges?.length && (
           <Grid cardType='cover'>
-            {edges?.map(edge => {
+            {filteredEdges?.map(edge => {
               const media = edge.node
               const voiceActors = edge?.voiceActors
 

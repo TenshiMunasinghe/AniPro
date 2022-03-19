@@ -7,7 +7,6 @@ import {
 } from '../../../generated/index'
 import { useInfiniteGraphQLQuery } from '../../../hooks/useInfiniteGraphQLQuery'
 import { useSortMedia } from '../../../hooks/useSortMedia'
-import LoadMore from '../../common/LoadMore/LoadMore'
 import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
 import { sortByOptions } from '../Medias'
@@ -72,7 +71,11 @@ const Characters = ({
           },
         ]}
       />
-      <CardContainer isLoading={isLoading}>
+      <CardContainer
+        isLoading={isLoading}
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage || false}
+        onClick={() => fetchNextPage()}>
         {[MediaSort.StartDate, MediaSort.StartDateDesc].includes(sortBy) ? (
           <>
             {sortBy === MediaSort.StartDateDesc && <Tba />}
@@ -93,11 +96,6 @@ const Characters = ({
           <Cards edges={edges} />
         )}
       </CardContainer>
-      <LoadMore
-        isFetchingNextPage={isFetchingNextPage}
-        hasNextPage={hasNextPage || false}
-        onClick={() => fetchNextPage()}
-      />
     </>
   )
 }

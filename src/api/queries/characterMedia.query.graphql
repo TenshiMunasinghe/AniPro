@@ -1,6 +1,14 @@
-query characterMedia($id: Int!, $sort: [MediaSort] = [START_DATE_DESC]) {
+query characterMedia(
+  $id: Int!
+  $page: Int!
+  $sort: [MediaSort] = [START_DATE_DESC]
+) {
   Character(id: $id) {
-    media(sort: $sort) {
+    media(sort: $sort, page: $page) {
+      pageInfo {
+        currentPage
+        hasNextPage
+      }
       edges {
         id
         node {
