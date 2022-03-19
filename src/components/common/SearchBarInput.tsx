@@ -42,7 +42,7 @@ const SearchBarInput = ({ link, placeholder = 'search' }: Props) => {
     <form
       onSubmit={onSubmit}
       autoComplete='off'
-      className='[--height: 3rem] grid h-[var(--height)] w-full max-w-xl grid-cols-[1fr_auto] items-center rounded-full bg-zinc-100 ring-1 ring-zinc-500 focus-within:ring-teal-500 dark:bg-zinc-700'>
+      className='grid w-full max-w-xl grid-cols-[1fr_auto] items-center rounded-full bg-zinc-100 ring-1 ring-zinc-500 focus-within:ring-teal-500 dark:bg-zinc-700'>
       <input
         className='!border-0 bg-transparent py-3 px-6 !ring-0'
         name='searchText'
