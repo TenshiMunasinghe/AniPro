@@ -52,7 +52,7 @@ const Medias = () => {
             <button
               className='py-2 text-center hocus:text-teal-400'
               onClick={() => setRole(role)}>
-              {text}
+              <h2>{text}</h2>
             </button>
           ))}
         </div>
