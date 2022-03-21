@@ -53,7 +53,9 @@ const Description = ({ description }: Props) => {
           'max-h-fit': isExpanded || !isOverflow,
         }
       )}>
-      <div className='space-y-4' ref={ref}>
+      <div
+        className='prose prose-zinc prose-a:text-teal-600 dark:prose-invert dark:prose-a:text-teal-400'
+        ref={ref}>
         {htmr(formattedDescription || '<i>no description</i>')}
       </div>
       {isOverflow && (

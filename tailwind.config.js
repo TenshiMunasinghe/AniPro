@@ -49,6 +49,7 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@savvywombat/tailwindcss-grid-areas'),
     require('@gradin/tailwindcss-skeleton-screen'),
+    require('@tailwindcss/typography'),
     plugin(({ addVariant }) => {
       addVariant('hocus', ['&:hover', '&:focus'])
       addVariant('hocus-within', ['&:hover', '&:focus-within'])
