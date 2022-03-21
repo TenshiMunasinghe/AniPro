@@ -21,7 +21,9 @@ const Header = ({ data }: Props) => {
   return (
     <header className='grid gap-y-5 lg:justify-start lg:gap-x-16 lg:grid-areas-person-header'>
       <div className='relative space-y-2 pt-20 text-center after:absolute after:inset-y-0 after:-left-[100vw] after:hidden after:w-[200vw] after:bg-zinc-50 after:content-[""] dark:after:bg-zinc-700 lg:pt-20 lg:pb-10 lg:text-left lg:grid-in-names lg:after:block'>
-        <h1 className='relative z-10 text-4xl leading-none'>{name?.full}</h1>
+        <h1 className='relative z-10 text-4xl leading-none xl:text-5xl'>
+          {name?.full}
+        </h1>
         <div className='relative z-10 space-x-2'>
           <span>
             {[name.native, ...(name.alternative || [])]
