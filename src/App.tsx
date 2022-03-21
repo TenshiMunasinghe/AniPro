@@ -96,11 +96,11 @@ const App = ({ scrollPosition }: LazyComponentProps) => {
               <Search fallback={<LoadingSpinner />} />
             </Route>
 
-            <Route exact path='/character/:id'>
+            <Route exact path='/character/:id/:name?'>
               <Character fallback={<LoadingSpinner />} />
             </Route>
 
-            <Route exact path='/staff/:id'>
+            <Route exact path='/staff/:id/:name?'>
               <Staff fallback={<LoadingSpinner />} />
             </Route>
           </Switch>
