@@ -5,7 +5,6 @@ import Media from '../components/search/Media'
 import PeopleHeader from '../components/search/PeopleHeader'
 import CharactersSearchResult from '../components/search/PeopleSearchResult/CharactersSearchResult'
 import StaffSearchResult from '../components/search/PeopleSearchResult/StaffSearchResult'
-import ScrollButton from '../components/search/ScrollButton'
 import { MediaType } from '../generated'
 
 export const SEARCH_SLUGS = [
@@ -82,7 +81,6 @@ const Search = () => {
           </Route>
         </Switch>
       </PageWrapper>
-      <ScrollButton />
     </>
   )
 }
