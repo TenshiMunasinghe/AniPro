@@ -1,5 +1,3 @@
-import styles from './Item.module.scss'
-
 interface Props {
   label: string
   value: string
@@ -7,8 +5,10 @@ interface Props {
 
 const Item = ({ label, value }: Props) => {
   return (
-    <div className={styles.container}>
-      <span className={styles.label}>{label}: </span>
+    <div>
+      <span className='font-semibold text-zinc-900 dark:text-white'>
+        {label}:{' '}
+      </span>
       {value}
     </div>
   )

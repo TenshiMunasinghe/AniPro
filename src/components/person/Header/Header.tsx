@@ -3,7 +3,7 @@ import { CharacterInfoQuery, StaffInfoQuery } from '../../../generated/index'
 import { formatDate } from '../../../utils/formatDate'
 import SpoilerName from '../../character/SpoilerName'
 import Description from './Description'
-import Item from './Item/Item'
+import Item from './Item'
 
 export type PersonPageHeaderData =
   | CharacterInfoQuery['Character']
