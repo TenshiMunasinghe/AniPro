@@ -1,7 +1,6 @@
 import classnames from 'classnames'
 import { useState } from 'react'
 import ReactTooltip from 'react-tooltip'
-import styles from './SpoilerName.module.scss'
 
 interface Props {
   name: string
@@ -14,15 +13,16 @@ const SpoilerName = ({ name }: Props) => {
 
   return (
     <span
-      className={classnames(styles.container, { [styles.hidden]: isHidden })}
+      className={classnames('relative cursor-pointer whitespace-nowrap', {
+        'rounded-sm before:absolute before:inset-0 before:block before:bg-zinc-600 before:content-[""]':
+          isHidden,
+      })}
       onClick={onClick}
       data-tip
       data-for={name}>
       {name}
       <ReactTooltip id={name} effect='solid'>
-        <span
-          className={styles.tooltip}
-          style={{ maxWidth: '55ch', color: 'var(--white-600)' }}>
+        <span className='max-w-[55ch] text-sm text-zinc-200'>
           Spoiler names, click to {isHidden ? 'show' : 'hide'}
         </span>
       </ReactTooltip>
