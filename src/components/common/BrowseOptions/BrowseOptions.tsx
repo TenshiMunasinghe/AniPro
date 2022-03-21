@@ -1,45 +1,49 @@
-import { useCallback, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
-import { SEARCH_SLUGS } from '../../../pages/Search'
-import Dropdown from '../Dropdown/Dropdown'
-import styles from './BrowseOptions.module.scss'
-
-//TODO: do something better
+import { FaBook, FaPlay, FaUserAstronaut, FaUserTie } from 'react-icons/fa'
+import Category from './Category'
+import IconLink from './IconLink'
 
 const BrowseOptions = () => {
-  const history = useHistory()
-  const { pathname } = useLocation()
-
-  const onChange = useCallback(
-    (state: string | string[]) => {
-      if (typeof state === 'string') {
-        history.push(`/search/${state}`)
-      }
-    },
-    [history]
-  )
-
-  const pathArr = pathname.split('/')
-  const current = pathArr[1] === 'search' ? pathArr[2] : ''
-
-  const options = useMemo(
-    () =>
-      SEARCH_SLUGS.map(slug => ({
-        label: slug,
-        value: slug,
-      })),
-    []
-  )
-
   return (
-    <div className={styles.container}>
-      <span>Browse</span>
-      <Dropdown
-        options={options}
-        onChange={onChange}
-        selected={current}
-        placeholder='something'
-      />
+    <div className='group relative'>
+      <button>Browse</button>
+      <div className='absolute bottom-full right-0 hidden flex-col overflow-hidden rounded shadow shadow-zinc-400 group-focus-within:flex group-hover:flex dark:shadow-zinc-900 lg:top-full lg:bottom-auto'>
+        <div className='flex flex-col space-y-3 bg-zinc-100 p-4 dark:bg-zinc-700'>
+          <Category
+            Icon={FaPlay}
+            title={{ to: '/search/anime', text: 'Anime' }}
+            links={[
+              { to: '/search/anime?sortBy=SCORE_DESC', text: 'Top Anime' },
+              { to: '/search/anime?sortBy=TRENDING_DESC', text: 'Trending' },
+              {
+                to: '/search/anime?sortBy=SCORE_DESC&FORMAT=MOVIE',
+                text: 'Top Movies',
+              },
+            ]}
+          />
+          <Category
+            Icon={FaBook}
+            title={{ to: '/search/manga', text: 'Manga' }}
+            links={[
+              { to: '/search/manga?sortBy=SCORE_DESC', text: 'Top Manga' },
+              { to: '/search/manga?sortBy=TRENDING_DESC', text: 'Trending' },
+              {
+                to: '/search/manga?sortBy=SCORE_DESC&country=KR',
+                text: 'Top Manhwa',
+              },
+            ]}
+          />
+        </div>
+        <div className='flex space-x-4 bg-zinc-50 p-4 dark:bg-zinc-800'>
+          <IconLink to='/search/staff'>
+            <FaUserTie />
+            <span>Staff</span>
+          </IconLink>
+          <IconLink to='/search/characters'>
+            <FaUserAstronaut />
+            <span>Characters</span>
+          </IconLink>
+        </div>
+      </div>
     </div>
   )
 }
