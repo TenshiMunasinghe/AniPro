@@ -1,10 +1,9 @@
 import { memo } from 'react'
 import { FaTimes } from 'react-icons/fa'
 import { useHistory, useLocation } from 'react-router-dom'
-import { filterOptions } from '../../filterOptions/filterOptions'
+import { filterOptions, filters } from '../../filterOptions/filterOptions'
 import { MediaSort } from '../../generated'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
-import { formatLabel } from '../../utils/formatLabel'
 import Button from '../common/Button/Button'
 
 const ActiveFilters = () => {
@@ -49,7 +48,11 @@ const ActiveFilters = () => {
             }
             variant='primary'
             className='p-3 text-sm'>
-            <span>{formatLabel(value)}</span>
+            <span>
+              {filters
+                .find(({ name }) => name === key)
+                ?.options.find(option => option.value === value)?.label || ''}
+            </span>
             <FaTimes />
           </Button>
         ))
