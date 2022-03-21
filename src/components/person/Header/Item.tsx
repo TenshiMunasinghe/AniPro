@@ -5,8 +5,8 @@ interface Props {
 
 const Item = ({ label, value }: Props) => {
   return (
-    <div>
-      <span className='font-semibold text-zinc-900 dark:text-white lg:text-lg xl:text-xl'>
+    <div className='lg:text-lg xl:text-xl'>
+      <span className='font-semibold text-zinc-900 dark:text-white '>
         {label}:{' '}
       </span>
       {value}
