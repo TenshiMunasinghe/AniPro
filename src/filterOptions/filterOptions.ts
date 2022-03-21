@@ -10,6 +10,7 @@ import {
   MediaType,
 } from '../generated/index'
 import { formatLabel } from '../utils/formatLabel'
+import { countryCode } from './countryCode'
 import { tags } from './tags'
 
 export const filterOptions = {
@@ -65,7 +66,10 @@ export const filterOptions = {
   },
 
   country: {
-    options: ['Japan', 'South Korea', 'China', 'Taiwan'],
+    options: Object.entries(countryCode).map(([key, value]) => ({
+      label: key,
+      value,
+    })),
     isMulti: false,
   },
 
@@ -88,10 +92,15 @@ export const filters = Object.entries(filterOptions)
     key: v4(),
     name: key as keyof MediaSearchQueryVariables,
     isMulti: value.isMulti,
-    options: value.options.map(o => ({
-      value: o,
-      label: formatLabel(o),
-    })),
+    options: value.options.map(o => {
+      if (typeof o === 'object') {
+        return o
+      }
+      return {
+        label: formatLabel(o),
+        value: o,
+      }
+    }),
   }))
 
 export type Filters = typeof filters
