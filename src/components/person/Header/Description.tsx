@@ -54,7 +54,7 @@ const Description = ({ description }: Props) => {
         }
       )}>
       <div
-        className='prose prose-zinc prose-a:text-teal-600 dark:prose-invert dark:prose-a:text-teal-400'
+        className='prose prose-zinc prose-a:text-teal-600 dark:prose-invert dark:prose-a:text-teal-400 lg:prose-lg xl:prose-xl'
         ref={ref}>
         {htmr(formattedDescription || '<i>no description</i>')}
       </div>
