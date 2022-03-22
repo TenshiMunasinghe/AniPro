@@ -14,7 +14,7 @@ interface Props {
 
 const Category = ({ Icon, title, links }: Props) => {
   return (
-    <div className='grid grid-cols-[auto_1fr] grid-rows-2 items-center gap-1'>
+    <div className='grid grid-cols-[auto_1fr] grid-rows-2 items-center gap-x-2'>
       <Link to={title.to}>
         <Icon />
       </Link>
