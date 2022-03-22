@@ -6,7 +6,7 @@ const BrowseOptions = () => {
   return (
     <div className='group relative'>
       <button>Browse</button>
-      <div className='absolute bottom-full right-0 hidden flex-col overflow-hidden rounded shadow shadow-zinc-400 group-focus-within:flex group-hover:flex dark:shadow-zinc-900 lg:top-full lg:bottom-auto'>
+      <div className='pointer-events-none absolute bottom-full right-0 flex flex-col overflow-hidden rounded opacity-0 shadow shadow-zinc-400 transition-opacity group-focus-within:pointer-events-auto group-focus-within:opacity-100 group-hover:pointer-events-auto group-hover:opacity-100 dark:shadow-zinc-900 lg:top-full lg:bottom-auto'>
         <div className='flex flex-col space-y-3 bg-zinc-100 p-4 dark:bg-zinc-700'>
           <Category
             Icon={FaPlay}
