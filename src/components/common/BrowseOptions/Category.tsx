@@ -15,8 +15,12 @@ interface Props {
 const Category = ({ Icon, title, links }: Props) => {
   return (
     <div className='grid grid-cols-[auto_1fr] grid-rows-2 items-center gap-1'>
-      <Icon />
-      <Link to={title.to}>{title.text}</Link>
+      <Link to={title.to}>
+        <Icon />
+      </Link>
+      <Link to={title.to} className='w-min'>
+        {title.text}
+      </Link>
       <div className='col-start-2 flex space-x-2 whitespace-nowrap text-xs'>
         {links.map(({ to, text }) => (
           <Link to={to} key={to + text}>
