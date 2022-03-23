@@ -1,5 +1,5 @@
-import Button from '../Button/Button'
-import LoadingSpinner from '../LoadingSpinner'
+import Button from './Button/Button'
+import LoadingSpinner from './LoadingSpinner'
 
 export interface LoadMoreProps {
   isFetchingNextPage: boolean

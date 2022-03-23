@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import LoadingSpinner from '../common/LoadingSpinner'
-import LoadMore, { LoadMoreProps } from '../common/LoadMore/LoadMore'
+import LoadMore, { LoadMoreProps } from '../common/LoadMore'
 
 interface Props extends LoadMoreProps {
   isLoading: boolean

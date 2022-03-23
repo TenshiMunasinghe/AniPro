@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import LoadMore, { LoadMoreProps } from '../common/LoadMore/LoadMore'
+import LoadMore, { LoadMoreProps } from '../common/LoadMore'
 
 const LoadMoreGrid: FC<LoadMoreProps> = ({ children, ...props }) => {
   return (
