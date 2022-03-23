@@ -7,7 +7,7 @@ import CardChart from './Cards/CardChart'
 import CardCover from './Cards/CardCover/CardCover'
 import CardLoading from './Cards/CardLoading/CardLoading'
 import CardTable from './Cards/CardTable/CardTable'
-import NotFound from './NotFound/NotFound'
+import NotFound from './NotFound'
 
 export interface MediaWithRank extends DeepPartial<Media> {
   rank?: number | null

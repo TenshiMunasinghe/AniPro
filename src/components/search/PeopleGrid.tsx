@@ -2,7 +2,7 @@ import range from 'lodash/range'
 import { SearchCharactersQuery, SearchStaffQuery } from '../../generated/index'
 import CardLoading from '../common/Cards/CardLoading/CardLoading'
 import Link from '../common/Link/Link'
-import NotFound from '../common/NotFound/NotFound'
+import NotFound from '../common/NotFound'
 import { PeopleHeading } from './PeopleSearchResult/StaffSearchResult'
 import Person from './Person/Person'
 
