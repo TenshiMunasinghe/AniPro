@@ -6,7 +6,6 @@ import {
   nextYear,
 } from '../api/queries'
 import { CardType } from '../components/search/MediaSearchResult'
-import breakpoints from '../css/breakpoints.module.scss'
 import { MediaSearchQueryVariables, MediaSort, MediaType } from '../generated'
 import { useWindowSizeStore, WindowSizeStore } from '../zustand/stores'
 
@@ -27,7 +26,7 @@ const windowSizeStoreSelector = ({ width }: WindowSizeStore) => width
 export const useMediaHomeContent = () => {
   const windowWidth = useWindowSizeStore(windowSizeStoreSelector)
 
-  const isLargeScreen = windowWidth >= parseInt(breakpoints.sm)
+  const isLargeScreen = windowWidth >= 640
 
   const contents: HomeContents = useMemo(
     () => ({
