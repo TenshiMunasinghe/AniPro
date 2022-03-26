@@ -1,7 +1,0 @@
-@use 'sass:math';
-
-:root {
-  @for $i from 1 to 10 {
-    --space-#{$i * 100}: #{math.pow(math.cos(36deg) * 2, $i - 4)}em;
-  }
-}
