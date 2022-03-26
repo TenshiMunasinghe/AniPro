@@ -1,6 +1,0 @@
-@mixin card-cover {
-  display: grid;
-  grid-template-rows: min-content auto;
-  row-gap: var(--space-200);
-  cursor: pointer;
-}
