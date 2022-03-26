@@ -7,7 +7,7 @@ import { useSortMedia } from '../../../hooks/useSortMedia'
 import CardContainer from '../../person/CardContainer'
 import Dropdowns from '../../person/Dropdowns'
 import { sortByOptions } from '../Medias'
-import Year from '../Year/Year'
+import Year from '../Year'
 import Cards from './Cards/Cards'
 
 const StaffRoles = ({
