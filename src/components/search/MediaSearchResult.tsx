@@ -8,6 +8,7 @@ import {
 } from '../../generated/index'
 import { useUpdateUrlParam } from '../../hooks/useUpdateUrlParam'
 import { addKey } from '../../utils/addKey'
+import { formatLabel } from '../../utils/formatLabel'
 import CardGrid from '../common/CardGrid'
 import CardTypeButton from '../common/CardTypeButton'
 import Dropdown from '../common/Dropdown/Dropdown'
@@ -31,12 +32,12 @@ const CARD_TYPES: CardType[] = ['chart', 'cover', 'table']
 const cardTypes = addKey(CARD_TYPES)
 
 export const sortByOptions = [
-  { label: 'Trending', value: MediaSort.TrendingDesc },
-  { label: 'Popularity', value: MediaSort.PopularityDesc },
-  { label: 'Average Score', value: MediaSort.ScoreDesc },
-  { label: 'Favourites', value: MediaSort.FavouritesDesc },
-  { label: 'Newest', value: MediaSort.StartDateDesc },
-]
+  MediaSort.TrendingDesc,
+  MediaSort.PopularityDesc,
+  MediaSort.ScoreDesc,
+  MediaSort.FavouritesDesc,
+  MediaSort.StartDateDesc,
+].map(option => ({ label: formatLabel(option), value: option }))
 
 const MediaSearchResult = ({ type }: Props) => {
   const [cardType, setCardType] = useState<CardType>('chart')
