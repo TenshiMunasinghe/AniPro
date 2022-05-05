@@ -7,7 +7,7 @@ export const formatDate = ({
   month?: number | null
   day?: number | null
 }) => {
-  const string = new Date(year || 0, month || 0, day || 0)
+  const string = new Date(year || 0, month ? month - 1 : 0, day || 0)
     .toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'short',
